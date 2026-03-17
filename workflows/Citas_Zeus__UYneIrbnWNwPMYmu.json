@@ -1,0 +1,730 @@
+{
+  "updatedAt": "2026-02-04T20:18:02.056Z",
+  "createdAt": "2026-02-03T19:27:15.446Z",
+  "id": "UYneIrbnWNwPMYmu",
+  "name": "Citas Zeus",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=RECIBO: {{ $json.mensaje }}\n\nFLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos\n",
+        "options": {
+          "systemMessage": "=FLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -1200,
+        -128
+      ],
+      "id": "5f69ae6d-40b7-40c0-982a-61a7d549f078",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -1424,
+        96
+      ],
+      "id": "e43b5679-e145-4400-856e-67ff790ed1ca",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.Identificacion }}",
+        "sessionTTL": 3600,
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        -1824,
+        192
+      ],
+      "id": "f5052aa7-c659-4756-90d2-dae20a08ed13",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "Vas a mostrar las disponibilidad de un medico en una determinada fecha. Quiero que me muestre las 3 primeras disponibilidades (Organizadas por fecha y hora)",
+        "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/GetProgramacionDisponible",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "fecha",
+              "value": "={{ $now.plus('1','days').format('yyyy-MM-dd') }}"
+            },
+            {
+              "name": "medico",
+              "value": "142"
+            },
+            {
+              "name": "idSede",
+              "value": "1"
+            },
+            {
+              "name": "asunto",
+              "value": "274"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        -896,
+        128
+      ],
+      "id": "56527596-09ad-4339-be61-d66c85b9672f",
+      "name": "Disponibilidad",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"fecha\": \"2026/03/02\",\n  \"medico\": \"142\",\n  \"idSede\": 1,\n  \"idProgramacionMedicoDetalle\": \"40362431\",\n  \"paciente\": \"197211\",\n  \"hora\": \"07:00\",\n  \"meridiano\": \"am\",\n  \"asunto\": \"274\",\n  \"codEmpresa\": 57,\n  \"contrato\": \"172\",\n  \"email\": \"jrueda@sersocial.org\",\n  \"telefono\": \"3205943893\",\n  \"nivel\": \"string\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        -720,
+        128
+      ],
+      "id": "3f43008d-50f5-4bd1-80a0-188df1a6392d",
+      "name": "Agendar Cita",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.NumeroIdentificacion }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -1248,
+        96
+      ],
+      "id": "29b2e70c-053e-46cd-9a24-174b9db16845",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "obtener_paciente_pendiente'",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1840,
+        -320
+      ],
+      "id": "9a6e9cb8-abbd-402b-b8ee-d5563320d9b7",
+      "name": "Webhook",
+      "webhookId": "6bf0d717-6523-427c-bb11-eab92f04d81e",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "=https://zeussalud_test.sersocial.org:8022/api/SisDeta/GetDatosBasicosPaciente",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "NumeroIdentificacion",
+              "value": "={{ $json.NumeroIdentificacion }}"
+            },
+            {
+              "name": "TipoIdentificacion",
+              "value": "={{ $json.TipoIdentificacion }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        -1056,
+        128
+      ],
+      "id": "c429648c-7a6b-46e3-a5c2-56d999fa54c5",
+      "name": "Obtener_datos_paciente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "NumeroIdentificacion"
+            },
+            {
+              "name": "TipoIdentificacion"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1408,
+        -128
+      ],
+      "id": "d8a036af-172e-4fa1-84bd-5852d673ea6a",
+      "name": "flujo_padre"
+    }
+  ],
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        []
+      ]
+    },
+    "Disponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendar Cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "Obtener_datos_paciente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "flujo_padre": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "78ecb031-b1e4-46bf-9b5e-9edb9f74222e",
+  "activeVersionId": "78ecb031-b1e4-46bf-9b5e-9edb9f74222e",
+  "versionCounter": 62,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-02-03T19:27:15.446Z",
+      "createdAt": "2026-02-03T19:27:15.446Z",
+      "role": "workflow:owner",
+      "workflowId": "UYneIrbnWNwPMYmu",
+      "projectId": "EBZGwgHNf54my5Ji",
+      "project": {
+        "updatedAt": "2026-01-22T19:43:29.746Z",
+        "createdAt": "2026-01-22T19:42:30.105Z",
+        "id": "EBZGwgHNf54my5Ji",
+        "name": "Neyla Polo <npolov@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:42:30.105Z",
+            "createdAt": "2026-01-22T19:42:30.105Z",
+            "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+            "projectId": "EBZGwgHNf54my5Ji",
+            "user": {
+              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "createdAt": "2026-01-22T19:42:30.105Z",
+              "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+              "email": "npolov@sersocial.org",
+              "firstName": "Neyla",
+              "lastName": "Polo",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:43:34.370Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "4lmOH2EOOrd3Nwno",
+                "userActivated": true,
+                "userActivatedAt": 1769195420470,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1770846671088
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-05",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-04T20:00:13.089Z",
+    "createdAt": "2026-02-04T20:00:13.089Z",
+    "versionId": "78ecb031-b1e4-46bf-9b5e-9edb9f74222e",
+    "workflowId": "UYneIrbnWNwPMYmu",
+    "nodes": [
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "=RECIBO: {{ $json.mensaje }}\n\nFLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos\n",
+          "options": {
+            "systemMessage": "=FLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3,
+        "position": [
+          -1200,
+          -128
+        ],
+        "id": "5f69ae6d-40b7-40c0-982a-61a7d549f078",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gpt-4.1-mini"
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          -1424,
+          96
+        ],
+        "id": "e43b5679-e145-4400-856e-67ff790ed1ca",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "dNAey8tcxmUMRffx",
+            "name": "OpenAi account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.Identificacion }}",
+          "sessionTTL": 3600,
+          "contextWindowLength": 20
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+        "typeVersion": 1.5,
+        "position": [
+          -1824,
+          192
+        ],
+        "id": "f5052aa7-c659-4756-90d2-dae20a08ed13",
+        "name": "Redis Chat Memory",
+        "credentials": {
+          "redis": {
+            "id": "3XA5T4Gby6gagH8B",
+            "name": "Redis account 2"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "toolDescription": "Vas a mostrar las disponibilidad de un medico en una determinada fecha. Quiero que me muestre las 3 primeras disponibilidades (Organizadas por fecha y hora)",
+          "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/GetProgramacionDisponible",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBearerAuth",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "fecha",
+                "value": "={{ $now.plus('1','days').format('yyyy-MM-dd') }}"
+              },
+              {
+                "name": "medico",
+                "value": "142"
+              },
+              {
+                "name": "idSede",
+                "value": "1"
+              },
+              {
+                "name": "asunto",
+                "value": "274"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.3,
+        "position": [
+          -896,
+          128
+        ],
+        "id": "56527596-09ad-4339-be61-d66c85b9672f",
+        "name": "Disponibilidad",
+        "credentials": {
+          "httpBearerAuth": {
+            "id": "5NF42pqAyUFzvVGh",
+            "name": "API ZEUS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBearerAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "{\n  \"fecha\": \"2026/03/02\",\n  \"medico\": \"142\",\n  \"idSede\": 1,\n  \"idProgramacionMedicoDetalle\": \"40362431\",\n  \"paciente\": \"197211\",\n  \"hora\": \"07:00\",\n  \"meridiano\": \"am\",\n  \"asunto\": \"274\",\n  \"codEmpresa\": 57,\n  \"contrato\": \"172\",\n  \"email\": \"jrueda@sersocial.org\",\n  \"telefono\": \"3205943893\",\n  \"nivel\": \"string\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.3,
+        "position": [
+          -720,
+          128
+        ],
+        "id": "3f43008d-50f5-4bd1-80a0-188df1a6392d",
+        "name": "Agendar Cita",
+        "credentials": {
+          "httpBearerAuth": {
+            "id": "5NF42pqAyUFzvVGh",
+            "name": "API ZEUS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.NumeroIdentificacion }}",
+          "contextWindowLength": 10
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+        "typeVersion": 1.3,
+        "position": [
+          -1248,
+          96
+        ],
+        "id": "29b2e70c-053e-46cd-9a24-174b9db16845",
+        "name": "Postgres Chat Memory",
+        "credentials": {
+          "postgres": {
+            "id": "cffLg1U8OTnicsUa",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "obtener_paciente_pendiente'",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -1840,
+          -320
+        ],
+        "id": "9a6e9cb8-abbd-402b-b8ee-d5563320d9b7",
+        "name": "Webhook",
+        "webhookId": "6bf0d717-6523-427c-bb11-eab92f04d81e",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "url": "=https://zeussalud_test.sersocial.org:8022/api/SisDeta/GetDatosBasicosPaciente",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpBearerAuth",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "NumeroIdentificacion",
+                "value": "={{ $json.NumeroIdentificacion }}"
+              },
+              {
+                "name": "TipoIdentificacion",
+                "value": "={{ $json.TipoIdentificacion }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequestTool",
+        "typeVersion": 4.3,
+        "position": [
+          -1056,
+          128
+        ],
+        "id": "c429648c-7a6b-46e3-a5c2-56d999fa54c5",
+        "name": "Obtener_datos_paciente",
+        "credentials": {
+          "httpBearerAuth": {
+            "id": "5NF42pqAyUFzvVGh",
+            "name": "API ZEUS"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "NumeroIdentificacion"
+              },
+              {
+                "name": "TipoIdentificacion"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -1408,
+          -128
+        ],
+        "id": "d8a036af-172e-4fa1-84bd-5852d673ea6a",
+        "name": "flujo_padre"
+      }
+    ],
+    "connections": {
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Redis Chat Memory": {
+        "ai_memory": [
+          []
+        ]
+      },
+      "Disponibilidad": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agendar Cita": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Postgres Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          []
+        ]
+      },
+      "Obtener_datos_paciente": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "AI Agent": {
+        "main": [
+          []
+        ]
+      },
+      "flujo_padre": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-04T20:18:02.056Z",
+        "id": 7,
+        "workflowId": "UYneIrbnWNwPMYmu",
+        "versionId": "78ecb031-b1e4-46bf-9b5e-9edb9f74222e",
+        "event": "activated",
+        "userId": null
+      }
+    ]
+  }
+}
