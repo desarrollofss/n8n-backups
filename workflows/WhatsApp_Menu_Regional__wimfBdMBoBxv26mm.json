@@ -1,0 +1,603 @@
+{
+  "updatedAt": "2026-01-14T15:57:26.000Z",
+  "createdAt": "2026-01-14T14:07:08.252Z",
+  "id": "wimfBdMBoBxv26mm",
+  "name": "WhatsApp Menu Regional",
+  "description": null,
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "path": "whatsapp-incoming",
+        "options": {}
+      },
+      "name": "Webhook WhatsApp",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -784,
+        -32
+      ],
+      "webhookId": "whatsapp-incoming",
+      "id": "99732402-e2b4-429b-9051-2d26365abefc",
+      "notes": "Recibe mensajes entrantes de WhatsApp"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.message.toLowerCase() }}",
+              "operation": "regex",
+              "value2": "hola|hello|hi|buenos dias|buenas tardes|buenas noches|inicio"
+            }
+          ]
+        }
+      },
+      "name": "¿Es Saludo Inicial?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        -32
+      ],
+      "id": "30e037da-9204-49b2-b3bc-085aef8c7116",
+      "notes": "Detecta si el mensaje es un saludo para mostrar menú principal"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.message }}",
+              "operation": "equal",
+              "value2": 1
+            }
+          ]
+        }
+      },
+      "name": "¿Opción 1: Canales Regional?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -128
+      ],
+      "id": "09ed6c34-d74b-4c02-a9c1-24d34c066c57",
+      "notes": "Usuario seleccionó Canales de Comunicación"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.message }}",
+              "operation": "equal",
+              "value2": 2
+            }
+          ]
+        }
+      },
+      "name": "¿Opción 2: Citas?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        32
+      ],
+      "id": "2cac677d-86b5-47f6-babe-0008d4e20824",
+      "notes": "Usuario seleccionó Citas (preparado para futuro)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.message }}",
+              "operation": "equal",
+              "value2": 3
+            }
+          ]
+        }
+      },
+      "name": "¿Opción 3: Información?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        176
+      ],
+      "id": "5b0120c2-ed2d-4b3a-908b-5133030bb1e9",
+      "notes": "Usuario seleccionó Información (preparado para futuro)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WHATSAPP_API_URL }}/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.body.from }}"
+            },
+            {
+              "name": "type",
+              "value": "text"
+            },
+            {
+              "name": "text",
+              "value": "={\"body\": \"¡Hola! 👋 Bienvenido a nuestro servicio de atención.\\n\\nPor favor selecciona una opción:\\n\\n1️⃣ Canales de Comunicación por Regional\\n2️⃣ Citas\\n3️⃣ Información\\n\\nResponde con el número de la opción que deseas.\"}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Enviar Menú Principal",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -384,
+        -224
+      ],
+      "id": "a3802b15-e173-465c-9e7b-ac7a9805e92d",
+      "notes": "Muestra las 3 opciones principales"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WHATSAPP_API_URL }}/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.body.from }}"
+            },
+            {
+              "name": "type",
+              "value": "text"
+            },
+            {
+              "name": "text",
+              "value": "={\"body\": \"📍 Selecciona tu regional:\\n\\n1️⃣ Cartagena\\n2️⃣ Barranquilla\\n3️⃣ Sincelejo\\n\\nResponde con el número de tu regional.\"}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Enviar Menú Regionales",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -192,
+        -128
+      ],
+      "id": "3d85924c-3663-431f-afe0-c6375d112bfa",
+      "notes": "Muestra las opciones de regionales"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.message }}",
+              "operation": "equal",
+              "value2": 1
+            }
+          ]
+        }
+      },
+      "name": "¿Cartagena?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        16,
+        -224
+      ],
+      "id": "147cd9a0-f7d1-44f6-9d77-c281c12a895f"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.message }}",
+              "operation": "equal",
+              "value2": 2
+            }
+          ]
+        }
+      },
+      "name": "¿Barranquilla?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        16,
+        -80
+      ],
+      "id": "dd7f9474-17ee-4c25-be9c-70ef1c7686f0"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.body.message }}",
+              "operation": "equal",
+              "value2": 3
+            }
+          ]
+        }
+      },
+      "name": "¿Sincelejo?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        16,
+        80
+      ],
+      "id": "9af6a4fc-c4ba-4b44-9bdf-88fa2f6dce3c"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WHATSAPP_API_URL }}/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.body.from }}"
+            },
+            {
+              "name": "type",
+              "value": "text"
+            },
+            {
+              "name": "text",
+              "value": "={\"body\": \"📍 *CARTAGENA*\\n\\n📧 Dirección: Calle de la Factoria #36-66, Centro Histórico, Cartagena\\n☎️ Teléfono: +57 (5) 664-2000\\n\\n¿Necesitas algo más? Escribe *MENU* para volver al inicio.\"}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Info Cartagena",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        224,
+        -224
+      ],
+      "id": "58060afb-e32a-4415-a1e4-2bc4c072f981"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WHATSAPP_API_URL }}/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.body.from }}"
+            },
+            {
+              "name": "type",
+              "value": "text"
+            },
+            {
+              "name": "text",
+              "value": "={\"body\": \"📍 *BARRANQUILLA*\\n\\n📧 Dirección: Calle 72 #57-47, Barrio El Prado, Barranquilla\\n☎️ Teléfono: +57 (5) 368-5000\\n\\n¿Necesitas algo más? Escribe *MENU* para volver al inicio.\"}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Info Barranquilla",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        224,
+        -80
+      ],
+      "id": "c94c2932-f637-4558-a0fd-bf7233751784"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WHATSAPP_API_URL }}/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.body.from }}"
+            },
+            {
+              "name": "type",
+              "value": "text"
+            },
+            {
+              "name": "text",
+              "value": "={\"body\": \"📍 *SINCELEJO*\\n\\n📧 Dirección: Carrera 20 #25-34, Centro, Sincelejo\\n☎️ Teléfono: +57 (5) 282-4000\\n\\n¿Necesitas algo más? Escribe *MENU* para volver al inicio.\"}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Info Sincelejo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        224,
+        80
+      ],
+      "id": "20c05c51-d46d-4879-8827-df0d799e3cc6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.WHATSAPP_API_URL }}/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "messaging_product",
+              "value": "whatsapp"
+            },
+            {
+              "name": "to",
+              "value": "={{ $json.body.from }}"
+            },
+            {
+              "name": "type",
+              "value": "text"
+            },
+            {
+              "name": "text",
+              "value": "={\"body\": \"⏳ Esta opción estará disponible próximamente.\\n\\nEscribe *MENU* para volver al inicio.\"}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Opción No Disponible",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        -192,
+        128
+      ],
+      "id": "137cf9b0-e568-49de-9ed5-2d71c9221089",
+      "notes": "Para las opciones 2 y 3 que aún no están implementadas"
+    }
+  ],
+  "connections": {
+    "Webhook WhatsApp": {
+      "main": [
+        [
+          {
+            "node": "¿Es Saludo Inicial?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es Saludo Inicial?": {
+      "main": [
+        [
+          {
+            "node": "Enviar Menú Principal",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Opción 1: Canales Regional?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Opción 2: Citas?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Opción 3: Información?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Opción 1: Canales Regional?": {
+      "main": [
+        [
+          {
+            "node": "Enviar Menú Regionales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Opción 2: Citas?": {
+      "main": [
+        [
+          {
+            "node": "Opción No Disponible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Opción 3: Información?": {
+      "main": [
+        [
+          {
+            "node": "Opción No Disponible",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Menú Regionales": {
+      "main": [
+        [
+          {
+            "node": "¿Cartagena?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Barranquilla?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "¿Sincelejo?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Cartagena?": {
+      "main": [
+        [
+          {
+            "node": "Info Cartagena",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Barranquilla?": {
+      "main": [
+        [
+          {
+            "node": "Info Barranquilla",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Sincelejo?": {
+      "main": [
+        [
+          {
+            "node": "Info Sincelejo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "b4fa54df-9510-4e91-af35-786778ea3578",
+  "activeVersionId": null,
+  "versionCounter": 2,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "wimfBdMBoBxv26mm",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
