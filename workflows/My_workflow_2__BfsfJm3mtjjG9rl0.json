@@ -1,0 +1,295 @@
+{
+  "updatedAt": "2025-12-05T21:36:06.000Z",
+  "createdAt": "2025-12-05T21:22:58.238Z",
+  "id": "BfsfJm3mtjjG9rl0",
+  "name": "My workflow 2",
+  "description": null,
+  "active": true,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// --- Configuration ---\nconst REMOVE_EMPTY_VALUES = true; // Omit empty tags\n\n// Newline configuration (number of '\\n')\nconst NEWLINES_TOP_LEVEL = 2;         // Between top-level elements (e.g., 2 for \\n\\n)\nconst NEWLINES_ARRAY_ITEMS = 2;       // Between <0>, <1>... elements of a complex array\nconst NEWLINES_OBJECT_PROPERTIES = 1; // Between <key1>, <key2>... properties of an object\nconst NEWLINES_WITHIN_TAGS = 1;       // Between opening/closing tag and its content (0, 1, 2...)\n\n// --- Input Retrieval ---\nconst inputJson = $input.item.json;\n\n// --- Utility Functions ---\n\n/**\n * Generates a string containing the specified number of newlines.\n * @param {number} count The desired number of newlines.\n * @returns {string} The newline string (e.g., \"\\n\", \"\\n\\n\").\n */\nfunction generateNewlines(count) {\n  return '\\n'.repeat(Math.max(0, count)); // Ensures a non-negative count\n}\n\n/**\n * Attempts to detect and format a value into a readable date (YYYY-MM-DD HH:mm:ss).\n * @param {any} value The value to check and format.\n * @returns {string|any} The formatted date if detected, otherwise the original value.\n */\nfunction formatIfDate(value) {\n  const originalValue = value;\n  let date = null;\n  try {\n    if (value instanceof Date && !isNaN(value.getTime())) {\n      date = value;\n    }\n    /* // Numeric timestamp detection (COMMENTED OUT)\n    else if (typeof value === 'number') { ... } */\n    else if (typeof value === 'string') {\n      // Basic check for string length and presence of digits/date separators\n      if (value.length >= 8 && /[0-9]/.test(value) && /[-/T:.\\s]/.test(value)) {\n        const parsedDate = new Date(value);\n        if (!isNaN(parsedDate.getTime())) {\n          date = parsedDate;\n        }\n      }\n    }\n    if (date instanceof Date && !isNaN(date.getTime())) {\n      const year = date.getFullYear();\n      const month = String(date.getMonth() + 1).padStart(2, '0');\n      const day = String(date.getDate()).padStart(2, '0');\n      const hours = String(date.getHours()).padStart(2, '0');\n      const minutes = String(date.getMinutes()).padStart(2, '0');\n      const seconds = String(date.getSeconds()).padStart(2, '0');\n      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;\n    }\n  } catch (e) {\n    console.warn(`Error formatting date: ${value}`, e);\n    return originalValue;\n  }\n  return originalValue;\n}\n\n\n/**\n * Finds a safe delimiter to join elements of a primitive array.\n * @param {Array<any>} arr The array whose elements will be joined.\n * @returns {string} The found delimiter.\n */\nfunction findArrayDelimiter(arr) {\n  const stringElements = arr.map(el => String(el === null || el === undefined ? '' : el));\n  let delimiters = [',', '|'];\n  // Try common delimiters first\n  for (const d of delimiters) {\n    if (!stringElements.some(s => s.includes(d))) {\n      return d;\n    }\n  }\n  // If common delimiters are found in elements, create a unique one\n  let currentDelimiter = '||';\n  while (stringElements.some(s => s.includes(currentDelimiter))) {\n    currentDelimiter += '|';\n    if (currentDelimiter.length > 20) {\n      console.warn(\"Long delimiter used:\", arr);\n      return currentDelimiter; // Prevent infinite loop for extremely complex cases\n    }\n  }\n  return currentDelimiter;\n}\n\n/**\n * Checks if a value is a primitive (string, number, boolean, null, undefined).\n * @param {any} value The value to check.\n * @returns {boolean} True if it's a primitive.\n */\nfunction isPrimitive(value) {\n  const type = typeof value;\n  return value === null || type === 'undefined' || type === 'string' || type === 'number' || type === 'boolean';\n}\n\n\n/**\n * Recursive function to convert a JSON value into an XML fragment.\n * Uses configuration parameters for newlines.\n * Does NOT use XML escaping.\n * @param {any} value The JSON value to convert.\n * @param {string} tagName The XML tag name.\n * @returns {string} The generated XML fragment, or an empty string if the value is empty and should be omitted.\n */\nfunction jsonToXmlRecursive(value, tagName) {\n  const openTag = `<${tagName}>`;\n  const closeTag = `</${tagName}>`;\n\n  let processedValue = value;\n\n  // 1. Attempt to parse JSON/Array strings\n  if (typeof value === 'string') {\n    const trimmedValue = value.trim();\n    if (trimmedValue.startsWith('{') || trimmedValue.startsWith('[')) {\n      try {\n        processedValue = JSON.parse(trimmedValue);\n        console.log(`String parsed for tag: '${tagName}'.`);\n      } catch (e) {\n        processedValue = value; // Keep the original string if parsing fails\n        console.warn(`Parsing failed for tag: '${tagName}'. Error: ${e.message}`);\n      }\n    } else {\n      processedValue = trimmedValue; // Use the trimmed version for further processing\n    }\n  }\n\n  // 2. Initial check for null/undefined values\n  if (processedValue === null || processedValue === undefined) {\n    return REMOVE_EMPTY_VALUES ? '' : `${openTag}${closeTag}`;\n  }\n\n  // 3. Process based on type and calculate innerContent\n  let innerContent = '';\n  const nlArrayItemSep = generateNewlines(NEWLINES_ARRAY_ITEMS);\n  const nlObjectPropSep = generateNewlines(NEWLINES_OBJECT_PROPERTIES);\n\n  if (Array.isArray(processedValue)) {\n    if (processedValue.length === 0) {\n      return REMOVE_EMPTY_VALUES ? '' : `${openTag}${closeTag}`;\n    }\n\n    const elementsAfterDateFormatting = processedValue.map(el => formatIfDate(el));\n    const allPrimitives = elementsAfterDateFormatting.every(el => isPrimitive(el));\n\n    if (allPrimitives) { // Array of primitives -> join\n      const delimiter = findArrayDelimiter(elementsAfterDateFormatting);\n      const joinedString = elementsAfterDateFormatting\n        .map(el => String(el === null || el === undefined ? '' : el))\n        .join(delimiter)\n        .trim();\n      if (REMOVE_EMPTY_VALUES && joinedString === '') return '';\n      innerContent = joinedString;\n    } else { // Complex/mixed array -> iterate and join with configured separator\n      const innerParts = [];\n      processedValue.forEach((item, index) => {\n        const itemXml = jsonToXmlRecursive(item, String(index)); // Use index as tag name for array items\n        if (itemXml !== '') innerParts.push(itemXml);\n      });\n      if (REMOVE_EMPTY_VALUES && innerParts.length === 0) return '';\n      innerContent = innerParts.join(nlArrayItemSep); // Uses array item separator\n    }\n  } else if (typeof processedValue === 'object') {\n    if (Object.keys(processedValue).length === 0) {\n      return REMOVE_EMPTY_VALUES ? '' : `${openTag}${closeTag}`;\n    }\n    // Object -> iterate and join with configured separator\n    const innerParts = [];\n    for (const key in processedValue) {\n      if (Object.prototype.hasOwnProperty.call(processedValue, key)) {\n        const propertyXml = jsonToXmlRecursive(processedValue[key], key);\n        if (propertyXml !== '') innerParts.push(propertyXml);\n      }\n    }\n    if (REMOVE_EMPTY_VALUES && innerParts.length === 0) return '';\n    innerContent = innerParts.join(nlObjectPropSep); // Uses object property separator\n  } else { // Primitive\n    const finalValue = formatIfDate(processedValue);\n    const stringValue = String(finalValue === null || finalValue === undefined ? '' : finalValue).trim();\n    if (REMOVE_EMPTY_VALUES && stringValue === '') return '';\n    innerContent = stringValue;\n  }\n\n  // 4. Construct the final XML for this value WITH configured newlines\n  const nlWithin = generateNewlines(NEWLINES_WITHIN_TAGS);\n  if (innerContent === '') {\n    // If content is empty, no internal newlines\n    return `${openTag}${closeTag}`;\n  } else {\n    // If there is content, add the configured internal newlines\n    return `${openTag}${nlWithin}${innerContent}${nlWithin}${closeTag}`;\n  }\n}\n\n// --- Main Conversion Logic ---\n\nlet finalXmlParts = [];\nconst nlTopLevelSep = generateNewlines(NEWLINES_TOP_LEVEL); // Separator for level 1\n\nif (inputJson && typeof inputJson === 'object' && !Array.isArray(inputJson)) {\n  // If the input is a direct object, iterate its properties as top-level elements\n  for (const topLevelKey in inputJson) {\n    if (Object.prototype.hasOwnProperty.call(inputJson, topLevelKey)) {\n      const part = jsonToXmlRecursive(inputJson[topLevelKey], topLevelKey);\n      if (part !== '') finalXmlParts.push(part);\n    }\n  }\n} else if (inputJson !== null && inputJson !== undefined) {\n  // If the input is a primitive or an array, wrap it in a <root> tag\n  console.warn(\"Non-object input. Encapsulating in <root>.\");\n  const part = jsonToXmlRecursive(inputJson, \"root\");\n  if (part !== '') {\n    finalXmlParts.push(part);\n  } else {\n    console.warn(\"Entire input is empty and omitted.\");\n  }\n} else {\n  console.warn(\"Empty/invalid JSON input.\");\n}\n\n// Join the top-level XML fragments with the configured separator\nconst finalXmlString = finalXmlParts.join(nlTopLevelSep);\n\n// --- Output Preparation ---\nreturn {\n  xml: finalXmlString\n};"
+      },
+      "id": "29a8fbe1-9ceb-4810-9974-60ae499d2ae1",
+      "name": "Convert JSON to XML",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -304,
+        640
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "c346c3a7-c2af-40a4-aa56-25b7d4bf9acd",
+      "name": "JSON to XML",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -576,
+        640
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "content": "## Conversor de JSON a XML (Nodo de Código)\n\nEste flujo de trabajo utiliza un nodo de Código personalizado para transformar una entrada JSON en una estructura XML. Ofrece flexibilidad en el formato y la gestión de valores vacíos.\n\n### Características principales:\n* **Conversión recursiva** de JSON a XML.\n* **Gestión de matrices:**\n* Las matrices primitivas se **unen con un delimitador seguro** (p. ej., `val1,val2`).\n* Las matrices complejas se convierten en etiquetas `<0>`, `<1>`, etc.\n* **Detección y formato de fecha** (AAAA-MM-DD HH:mm:ss).\n* **Intento de análisis** de cadenas JSON/matriz contenidas en valores.\n* **Encapsula la entrada no objeto** dentro de una etiqueta `<root>`.\n\n---\n\n### Entrada:\n\n* Un solo elemento (procesa cada elemento en el subflujo de trabajo).\n\n### Salida:\n\n* Un objeto con una propiedad `xml` que contiene la cadena XML generada, muy útil para indicaciones de IA.",
+        "height": 600,
+        "width": 880,
+        "color": 6
+      },
+      "id": "cac1b001-700e-4cc0-bffe-ec34563b09ea",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1568,
+        208
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Configuración (dentro del código):\n\n* **`REMOVE_EMPTY_VALUES`** (booleano): Omite las etiquetas XML si su contenido está vacío (valor predeterminado: `true`).\n* **Nuevas líneas configurables** (`NEWLINES_TOP_LEVEL`, `NEWLINES_ARRAY_ITEMS`, `NEWLINES_OBJECT_PROPERTIES`, `NEWLINES_WITHIN_TAGS`): Controla la sangría y la legibilidad del XML generado.\n\n---\n\n### ⚠️ IMPORTANTE/NOTA ⚠️:\n\n* **No se permite el escape XML para caracteres especiales** (p. ej., <, >, &, ', \"). Si su JSON contiene estos caracteres en valores, se insertarán tal cual en el XML, lo que podría invalidarlo o hacerlo vulnerable. Si esto supone un problema, podría ser necesario un escape manual.\n* Este nodo es un script personalizado. Cualquier modificación o mantenimiento debe realizarse directamente en el código.",
+        "height": 680,
+        "width": 400,
+        "color": 5
+      },
+      "id": "f1bfdd7f-cf26-474a-b1d6-6b4a9ee7b4bc",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -448,
+        128
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## ¿Te resultó útil? ¡Avísame!\n\nEspero que esta plantilla te haya ayudado a usar los datos de forma más eficiente. Tus comentarios son muy valiosos y me ayudan a crear mejores recursos para la comunidad n8n.\n\n### **Comparte tus ideas**\n\nSi tienes alguna sugerencia, has encontrado un error tipográfico o simplemente quieres agradecernos, ¡me encantaría saber de ti!\nAquí tienes un formulario n8n sencillo creado para este propósito:\n\n#### ➡️ **[Haz clic aquí para enviar comentarios](https://api.ia2s.app/form/templates/feedback?template=JSON%20to%20XML)**\n\n### **¿Listo para crear algo grande?**\n\nSi buscas llevar tus habilidades en n8n o la automatización empresarial al siguiente nivel, puedo ayudarte.\n\n**🎓 Coaching n8n:** ¿Quieres convertirte en un experto en n8n? Ofrezco sesiones de coaching individuales para ayudarte a dominar flujos de trabajo, abordar problemas específicos y construir con confianza.\n#### ➡️ **[Reserva una sesión de coaching](https://api.ia2s.app/form/templates/coaching?template=JSON%20to%20XML)**\n\n**💼 n8n Consulting:** ¿Tienes un proyecto complejo, un reto de integración o necesitas un flujo de trabajo personalizado para tu negocio? Trabajemos juntos para crear una potente solución de automatización.\n#### ➡️ **[Consulta sobre servicios de consultoría](https://api.ia2s.app/form/templates/consulting?template=JSON%20to%20XML)**\n\n---\n\n¡Feliz automatización!\nLucas Peyrin",
+        "height": 800,
+        "width": 540,
+        "color": 4
+      },
+      "id": "f62ae033-cb75-413c-a0f8-4687a854d467",
+      "name": "Sticky Note12",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "connections": {
+    "JSON to XML": {
+      "main": [
+        [
+          {
+            "node": "Convert JSON to XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {
+    "JSON to XML": [
+      {
+        "json": {
+          "aField": "a string",
+          "aNumber": 123,
+          "anArray": [],
+          "thisFieldAcceptsAnyType": null
+        }
+      }
+    ]
+  },
+  "versionId": "6a31665a-0ade-419d-8fa5-61fd577d9627",
+  "activeVersionId": "6a31665a-0ade-419d-8fa5-61fd577d9627",
+  "versionCounter": 23,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "BfsfJm3mtjjG9rl0",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-10T18:47:41.353Z",
+    "createdAt": "2026-02-10T18:47:41.353Z",
+    "versionId": "6a31665a-0ade-419d-8fa5-61fd577d9627",
+    "workflowId": "BfsfJm3mtjjG9rl0",
+    "nodes": [
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "// --- Configuration ---\nconst REMOVE_EMPTY_VALUES = true; // Omit empty tags\n\n// Newline configuration (number of '\\n')\nconst NEWLINES_TOP_LEVEL = 2;         // Between top-level elements (e.g., 2 for \\n\\n)\nconst NEWLINES_ARRAY_ITEMS = 2;       // Between <0>, <1>... elements of a complex array\nconst NEWLINES_OBJECT_PROPERTIES = 1; // Between <key1>, <key2>... properties of an object\nconst NEWLINES_WITHIN_TAGS = 1;       // Between opening/closing tag and its content (0, 1, 2...)\n\n// --- Input Retrieval ---\nconst inputJson = $input.item.json;\n\n// --- Utility Functions ---\n\n/**\n * Generates a string containing the specified number of newlines.\n * @param {number} count The desired number of newlines.\n * @returns {string} The newline string (e.g., \"\\n\", \"\\n\\n\").\n */\nfunction generateNewlines(count) {\n  return '\\n'.repeat(Math.max(0, count)); // Ensures a non-negative count\n}\n\n/**\n * Attempts to detect and format a value into a readable date (YYYY-MM-DD HH:mm:ss).\n * @param {any} value The value to check and format.\n * @returns {string|any} The formatted date if detected, otherwise the original value.\n */\nfunction formatIfDate(value) {\n  const originalValue = value;\n  let date = null;\n  try {\n    if (value instanceof Date && !isNaN(value.getTime())) {\n      date = value;\n    }\n    /* // Numeric timestamp detection (COMMENTED OUT)\n    else if (typeof value === 'number') { ... } */\n    else if (typeof value === 'string') {\n      // Basic check for string length and presence of digits/date separators\n      if (value.length >= 8 && /[0-9]/.test(value) && /[-/T:.\\s]/.test(value)) {\n        const parsedDate = new Date(value);\n        if (!isNaN(parsedDate.getTime())) {\n          date = parsedDate;\n        }\n      }\n    }\n    if (date instanceof Date && !isNaN(date.getTime())) {\n      const year = date.getFullYear();\n      const month = String(date.getMonth() + 1).padStart(2, '0');\n      const day = String(date.getDate()).padStart(2, '0');\n      const hours = String(date.getHours()).padStart(2, '0');\n      const minutes = String(date.getMinutes()).padStart(2, '0');\n      const seconds = String(date.getSeconds()).padStart(2, '0');\n      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;\n    }\n  } catch (e) {\n    console.warn(`Error formatting date: ${value}`, e);\n    return originalValue;\n  }\n  return originalValue;\n}\n\n\n/**\n * Finds a safe delimiter to join elements of a primitive array.\n * @param {Array<any>} arr The array whose elements will be joined.\n * @returns {string} The found delimiter.\n */\nfunction findArrayDelimiter(arr) {\n  const stringElements = arr.map(el => String(el === null || el === undefined ? '' : el));\n  let delimiters = [',', '|'];\n  // Try common delimiters first\n  for (const d of delimiters) {\n    if (!stringElements.some(s => s.includes(d))) {\n      return d;\n    }\n  }\n  // If common delimiters are found in elements, create a unique one\n  let currentDelimiter = '||';\n  while (stringElements.some(s => s.includes(currentDelimiter))) {\n    currentDelimiter += '|';\n    if (currentDelimiter.length > 20) {\n      console.warn(\"Long delimiter used:\", arr);\n      return currentDelimiter; // Prevent infinite loop for extremely complex cases\n    }\n  }\n  return currentDelimiter;\n}\n\n/**\n * Checks if a value is a primitive (string, number, boolean, null, undefined).\n * @param {any} value The value to check.\n * @returns {boolean} True if it's a primitive.\n */\nfunction isPrimitive(value) {\n  const type = typeof value;\n  return value === null || type === 'undefined' || type === 'string' || type === 'number' || type === 'boolean';\n}\n\n\n/**\n * Recursive function to convert a JSON value into an XML fragment.\n * Uses configuration parameters for newlines.\n * Does NOT use XML escaping.\n * @param {any} value The JSON value to convert.\n * @param {string} tagName The XML tag name.\n * @returns {string} The generated XML fragment, or an empty string if the value is empty and should be omitted.\n */\nfunction jsonToXmlRecursive(value, tagName) {\n  const openTag = `<${tagName}>`;\n  const closeTag = `</${tagName}>`;\n\n  let processedValue = value;\n\n  // 1. Attempt to parse JSON/Array strings\n  if (typeof value === 'string') {\n    const trimmedValue = value.trim();\n    if (trimmedValue.startsWith('{') || trimmedValue.startsWith('[')) {\n      try {\n        processedValue = JSON.parse(trimmedValue);\n        console.log(`String parsed for tag: '${tagName}'.`);\n      } catch (e) {\n        processedValue = value; // Keep the original string if parsing fails\n        console.warn(`Parsing failed for tag: '${tagName}'. Error: ${e.message}`);\n      }\n    } else {\n      processedValue = trimmedValue; // Use the trimmed version for further processing\n    }\n  }\n\n  // 2. Initial check for null/undefined values\n  if (processedValue === null || processedValue === undefined) {\n    return REMOVE_EMPTY_VALUES ? '' : `${openTag}${closeTag}`;\n  }\n\n  // 3. Process based on type and calculate innerContent\n  let innerContent = '';\n  const nlArrayItemSep = generateNewlines(NEWLINES_ARRAY_ITEMS);\n  const nlObjectPropSep = generateNewlines(NEWLINES_OBJECT_PROPERTIES);\n\n  if (Array.isArray(processedValue)) {\n    if (processedValue.length === 0) {\n      return REMOVE_EMPTY_VALUES ? '' : `${openTag}${closeTag}`;\n    }\n\n    const elementsAfterDateFormatting = processedValue.map(el => formatIfDate(el));\n    const allPrimitives = elementsAfterDateFormatting.every(el => isPrimitive(el));\n\n    if (allPrimitives) { // Array of primitives -> join\n      const delimiter = findArrayDelimiter(elementsAfterDateFormatting);\n      const joinedString = elementsAfterDateFormatting\n        .map(el => String(el === null || el === undefined ? '' : el))\n        .join(delimiter)\n        .trim();\n      if (REMOVE_EMPTY_VALUES && joinedString === '') return '';\n      innerContent = joinedString;\n    } else { // Complex/mixed array -> iterate and join with configured separator\n      const innerParts = [];\n      processedValue.forEach((item, index) => {\n        const itemXml = jsonToXmlRecursive(item, String(index)); // Use index as tag name for array items\n        if (itemXml !== '') innerParts.push(itemXml);\n      });\n      if (REMOVE_EMPTY_VALUES && innerParts.length === 0) return '';\n      innerContent = innerParts.join(nlArrayItemSep); // Uses array item separator\n    }\n  } else if (typeof processedValue === 'object') {\n    if (Object.keys(processedValue).length === 0) {\n      return REMOVE_EMPTY_VALUES ? '' : `${openTag}${closeTag}`;\n    }\n    // Object -> iterate and join with configured separator\n    const innerParts = [];\n    for (const key in processedValue) {\n      if (Object.prototype.hasOwnProperty.call(processedValue, key)) {\n        const propertyXml = jsonToXmlRecursive(processedValue[key], key);\n        if (propertyXml !== '') innerParts.push(propertyXml);\n      }\n    }\n    if (REMOVE_EMPTY_VALUES && innerParts.length === 0) return '';\n    innerContent = innerParts.join(nlObjectPropSep); // Uses object property separator\n  } else { // Primitive\n    const finalValue = formatIfDate(processedValue);\n    const stringValue = String(finalValue === null || finalValue === undefined ? '' : finalValue).trim();\n    if (REMOVE_EMPTY_VALUES && stringValue === '') return '';\n    innerContent = stringValue;\n  }\n\n  // 4. Construct the final XML for this value WITH configured newlines\n  const nlWithin = generateNewlines(NEWLINES_WITHIN_TAGS);\n  if (innerContent === '') {\n    // If content is empty, no internal newlines\n    return `${openTag}${closeTag}`;\n  } else {\n    // If there is content, add the configured internal newlines\n    return `${openTag}${nlWithin}${innerContent}${nlWithin}${closeTag}`;\n  }\n}\n\n// --- Main Conversion Logic ---\n\nlet finalXmlParts = [];\nconst nlTopLevelSep = generateNewlines(NEWLINES_TOP_LEVEL); // Separator for level 1\n\nif (inputJson && typeof inputJson === 'object' && !Array.isArray(inputJson)) {\n  // If the input is a direct object, iterate its properties as top-level elements\n  for (const topLevelKey in inputJson) {\n    if (Object.prototype.hasOwnProperty.call(inputJson, topLevelKey)) {\n      const part = jsonToXmlRecursive(inputJson[topLevelKey], topLevelKey);\n      if (part !== '') finalXmlParts.push(part);\n    }\n  }\n} else if (inputJson !== null && inputJson !== undefined) {\n  // If the input is a primitive or an array, wrap it in a <root> tag\n  console.warn(\"Non-object input. Encapsulating in <root>.\");\n  const part = jsonToXmlRecursive(inputJson, \"root\");\n  if (part !== '') {\n    finalXmlParts.push(part);\n  } else {\n    console.warn(\"Entire input is empty and omitted.\");\n  }\n} else {\n  console.warn(\"Empty/invalid JSON input.\");\n}\n\n// Join the top-level XML fragments with the configured separator\nconst finalXmlString = finalXmlParts.join(nlTopLevelSep);\n\n// --- Output Preparation ---\nreturn {\n  xml: finalXmlString\n};"
+        },
+        "id": "29a8fbe1-9ceb-4810-9974-60ae499d2ae1",
+        "name": "Convert JSON to XML",
+        "type": "n8n-nodes-base.code",
+        "position": [
+          -304,
+          640
+        ],
+        "typeVersion": 2
+      },
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "id": "c346c3a7-c2af-40a4-aa56-25b7d4bf9acd",
+        "name": "JSON to XML",
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "position": [
+          -576,
+          640
+        ],
+        "typeVersion": 1.1
+      },
+      {
+        "parameters": {
+          "content": "## Conversor de JSON a XML (Nodo de Código)\n\nEste flujo de trabajo utiliza un nodo de Código personalizado para transformar una entrada JSON en una estructura XML. Ofrece flexibilidad en el formato y la gestión de valores vacíos.\n\n### Características principales:\n* **Conversión recursiva** de JSON a XML.\n* **Gestión de matrices:**\n* Las matrices primitivas se **unen con un delimitador seguro** (p. ej., `val1,val2`).\n* Las matrices complejas se convierten en etiquetas `<0>`, `<1>`, etc.\n* **Detección y formato de fecha** (AAAA-MM-DD HH:mm:ss).\n* **Intento de análisis** de cadenas JSON/matriz contenidas en valores.\n* **Encapsula la entrada no objeto** dentro de una etiqueta `<root>`.\n\n---\n\n### Entrada:\n\n* Un solo elemento (procesa cada elemento en el subflujo de trabajo).\n\n### Salida:\n\n* Un objeto con una propiedad `xml` que contiene la cadena XML generada, muy útil para indicaciones de IA.",
+          "height": 600,
+          "width": 880,
+          "color": 6
+        },
+        "id": "cac1b001-700e-4cc0-bffe-ec34563b09ea",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -1568,
+          208
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "content": "### Configuración (dentro del código):\n\n* **`REMOVE_EMPTY_VALUES`** (booleano): Omite las etiquetas XML si su contenido está vacío (valor predeterminado: `true`).\n* **Nuevas líneas configurables** (`NEWLINES_TOP_LEVEL`, `NEWLINES_ARRAY_ITEMS`, `NEWLINES_OBJECT_PROPERTIES`, `NEWLINES_WITHIN_TAGS`): Controla la sangría y la legibilidad del XML generado.\n\n---\n\n### ⚠️ IMPORTANTE/NOTA ⚠️:\n\n* **No se permite el escape XML para caracteres especiales** (p. ej., <, >, &, ', \"). Si su JSON contiene estos caracteres en valores, se insertarán tal cual en el XML, lo que podría invalidarlo o hacerlo vulnerable. Si esto supone un problema, podría ser necesario un escape manual.\n* Este nodo es un script personalizado. Cualquier modificación o mantenimiento debe realizarse directamente en el código.",
+          "height": 680,
+          "width": 400,
+          "color": 5
+        },
+        "id": "f1bfdd7f-cf26-474a-b1d6-6b4a9ee7b4bc",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          -448,
+          128
+        ],
+        "typeVersion": 1
+      },
+      {
+        "parameters": {
+          "content": "## ¿Te resultó útil? ¡Avísame!\n\nEspero que esta plantilla te haya ayudado a usar los datos de forma más eficiente. Tus comentarios son muy valiosos y me ayudan a crear mejores recursos para la comunidad n8n.\n\n### **Comparte tus ideas**\n\nSi tienes alguna sugerencia, has encontrado un error tipográfico o simplemente quieres agradecernos, ¡me encantaría saber de ti!\nAquí tienes un formulario n8n sencillo creado para este propósito:\n\n#### ➡️ **[Haz clic aquí para enviar comentarios](https://api.ia2s.app/form/templates/feedback?template=JSON%20to%20XML)**\n\n### **¿Listo para crear algo grande?**\n\nSi buscas llevar tus habilidades en n8n o la automatización empresarial al siguiente nivel, puedo ayudarte.\n\n**🎓 Coaching n8n:** ¿Quieres convertirte en un experto en n8n? Ofrezco sesiones de coaching individuales para ayudarte a dominar flujos de trabajo, abordar problemas específicos y construir con confianza.\n#### ➡️ **[Reserva una sesión de coaching](https://api.ia2s.app/form/templates/coaching?template=JSON%20to%20XML)**\n\n**💼 n8n Consulting:** ¿Tienes un proyecto complejo, un reto de integración o necesitas un flujo de trabajo personalizado para tu negocio? Trabajemos juntos para crear una potente solución de automatización.\n#### ➡️ **[Consulta sobre servicios de consultoría](https://api.ia2s.app/form/templates/consulting?template=JSON%20to%20XML)**\n\n---\n\n¡Feliz automatización!\nLucas Peyrin",
+          "height": 800,
+          "width": 540,
+          "color": 4
+        },
+        "id": "f62ae033-cb75-413c-a0f8-4687a854d467",
+        "name": "Sticky Note12",
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          0,
+          0
+        ],
+        "typeVersion": 1
+      }
+    ],
+    "connections": {
+      "JSON to XML": {
+        "main": [
+          [
+            {
+              "node": "Convert JSON to XML",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2025-12-05T21:36:06.000Z",
+        "id": 1,
+        "workflowId": "BfsfJm3mtjjG9rl0",
+        "versionId": "6a31665a-0ade-419d-8fa5-61fd577d9627",
+        "event": "activated",
+        "userId": null
+      }
+    ]
+  }
+}
