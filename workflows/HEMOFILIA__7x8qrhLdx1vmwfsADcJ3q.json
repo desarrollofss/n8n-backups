@@ -1,0 +1,1398 @@
+{
+  "updatedAt": "2026-03-12T15:04:00.520Z",
+  "createdAt": "2026-03-12T15:03:13.588Z",
+  "id": "7x8qrhLdx1vmwfsADcJ3q",
+  "name": "HEMOFILIA",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {},
+        "options": {
+          "downloadAttachments": true
+        }
+      },
+      "id": "26583fee-d2c1-47bc-83a7-de4c8122ff4a",
+      "name": "📧 Nuevo Email con Adjunto",
+      "type": "n8n-nodes-base.microsoftOutlookTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2432,
+        -112
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener datos del correo\nconst email = $input.first().json;\n\n// Convertir zona horaria a SA Pacific Standard Time (UTC-5)\nconst receivedDate = new Date(email.receivedDateTime);\nconst options = { timeZone: 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: true };\nconst formattedDate = new Intl.DateTimeFormat('es-CO', options).format(receivedDate);\n\n// Formatear timestamp para nombre de archivo\nconst now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' }));\nconst pad = (n) => String(n).padStart(2, '0');\nconst hour = now.getHours();\nconst ampm = hour >= 12 ? 'PM' : 'AM';\nconst hour12 = hour % 12 || 12;\nconst filePrefix = `${pad(now.getDate())}_${pad(now.getMonth()+1)}_${now.getFullYear()}_${pad(hour12)}_${pad(now.getMinutes())}_${ampm}`;\n\n// Variables principales\nconst ASUNTO = (email.subject || '').toUpperCase();\nconst ASUNTO_SIN_ESPACIOS = ASUNTO.replace(/ /g, '');\nconst BODY = email.bodyPreview || email.body?.content || '';\nconst BODY_UPPER = BODY.toUpperCase();\n\n// Retornar datos procesados para cada adjunto\nconst attachments = email.attachments || [];\n\nreturn attachments.map(attachment => ({\n  json: {\n    // Datos del correo\n    emailFrom: email.from?.emailAddress?.address || email.from,\n    emailSubject: email.subject,\n    emailBody: BODY,\n    emailBodyUpper: BODY_UPPER,\n    emailDate: formattedDate,\n    emailReceivedDateTime: email.receivedDateTime,\n    // Variables procesadas\n    ASUNTO,\n    ASUNTO_SIN_ESPACIOS,\n    BODY_UPPER,\n    filePrefix,\n    // Datos del adjunto\n    attachmentName: attachment.name,\n    attachmentContent: attachment.contentBytes,\n    attachmentContentType: attachment.contentType\n  }\n}));"
+      },
+      "id": "de39adb5-934c-4861-b713-70f474804477",
+      "name": "🔧 Inicializar Variables",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2208,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond1",
+              "leftValue": "={{ $json.ASUNTO_SIN_ESPACIOS }}",
+              "rightValue": "HEMOFILIA",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "cond2",
+              "leftValue": "={{ $json.attachmentName }}",
+              "rightValue": ".xlsx",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "fd1fa18c-3103-4330-9f76-b7c1894622d5",
+      "name": "🔀 ¿HEMOFILIA + .xlsx?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1984,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $json.filePrefix + '_' + $json.attachmentName }}",
+        "parentId": "/ALTO COSTO/HEMOFILIA/BORRADOR",
+        "fileContent": "={{ $json.attachmentContent }}"
+      },
+      "id": "a0ac2eac-9ceb-475a-984a-8377f2fe893d",
+      "name": "📤 Subir a BORRADOR",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        -208
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "errCheck",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d83d5994-60c5-4d8e-a7da-e20928600f72",
+      "name": "🔀 ¿Subida exitosa?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1536,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getRows"
+      },
+      "id": "4efc88cc-df7c-405f-a9b2-50fee70b1c1e",
+      "name": "📊 Leer Tabla2 (Pacientes)",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -1312,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all();\nconst filtered = rows.filter(item => item.json['IDENTIFICACION'] && item.json['IDENTIFICACION'].toString().trim() !== '');\n\n// Pasar también los datos del correo hacia adelante\nreturn filtered.map(item => ({\n  json: {\n    ...item.json,\n    emailFrom: $('🔧 Inicializar Variables').item.json.emailFrom,\n    emailSubject: $('🔧 Inicializar Variables').item.json.emailSubject,\n    emailBody: $('🔧 Inicializar Variables').item.json.emailBody,\n    emailDate: $('🔧 Inicializar Variables').item.json.emailDate,\n    filePrefix: $('🔧 Inicializar Variables').item.json.filePrefix,\n    attachmentName: $('🔧 Inicializar Variables').item.json.attachmentName,\n    borradorFileName: $('📤 Subir a BORRADOR').item.json.name\n  }\n}));"
+      },
+      "id": "927425b7-88d6-40a3-b721-bf49e1bac4a4",
+      "name": "🔍 Filtrar IDENTIFICACION vacía",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getRows"
+      },
+      "id": "749cef00-4b1d-4201-831d-603115c45a93",
+      "name": "📊 Leer CONSOLIDADO actual",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener IDs del consolidado\nconst consolidadoItems = $('📊 Leer CONSOLIDADO actual').all();\nconst idUnicosConsolidado = consolidadoItems.map(i => i.json['IDUNICO']);\n\n// Verificar si el item actual es duplicado\nconst currentRow = $input.item.json;\nconst idEncontrado = idUnicosConsolidado.includes(currentRow['IDUNICO']);\n\nreturn [{\n  json: {\n    ...currentRow,\n    idEncontrado,\n    idUnicosConsolidado\n  }\n}];"
+      },
+      "id": "761d4f20-5671-4449-89bf-af716b7861d8",
+      "name": "🔁 Verificar Duplicados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -864,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "dupCheck",
+              "leftValue": "={{ $json.idEncontrado }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "04d5b9e3-4b55-4344-8b84-dad0a06cf648",
+      "name": "🔀 ¿Es Duplicado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -640,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "addRow"
+      },
+      "id": "9a9d42e4-1464-48b4-aacf-db57d48e9fda",
+      "name": "📋 Agregar a DUPLICADO.xlsx",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -416,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "addRow"
+      },
+      "id": "c636c419-aa1c-4d59-b28c-7a5a4f54bf1a",
+      "name": "✅ Agregar a CONSOLIDADO.xlsx",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -416,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "getRows"
+      },
+      "id": "46da495b-f90e-4f4b-a95a-caf5fa8511a3",
+      "name": "📊 Leer Tabla1 (Validación)",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -2432,
+        1168
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "herramienta",
+              "leftValue": "={{ $json['HERRAMIENTA'] }}",
+              "rightValue": "FOR-REPORTE-SOSPECHOSO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "registro",
+              "leftValue": "={{ $json['N° REGISTRO'] }}",
+              "rightValue": "SI",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f01b46d6-ea1f-4816-a42a-4dccd108dcd2",
+      "name": "🔀 ¿N° REGISTRO = SI?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -2208,
+        1168
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $('🔧 Inicializar Variables').item.json.filePrefix + '_' + $('🔧 Inicializar Variables').item.json.attachmentName }}",
+        "parentId": "/SOSPECHA_CANCER/PROSTATA/DOCUMENTOS DIARIOS",
+        "fileContent": "={{ $('🔧 Inicializar Variables').item.json.attachmentContent }}"
+      },
+      "id": "bd47c176-cfdf-4f78-bdf0-fdb9e8bf65ac",
+      "name": "📤 Subir a DOCUMENTOS DIARIOS",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -1984,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "addRow"
+      },
+      "id": "47773f0c-d3de-41c4-b12d-bc5387eb4fea",
+      "name": "📝 Registrar en ADJUNTOS",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -1760,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "cc09139f-2c4a-4f07-9c78-85b2591aacb1",
+      "name": "✉️ Notificar Cargue Exitoso",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -1536,
+        976
+      ],
+      "webhookId": "7c24182b-71c4-4dd7-b997-009380c637f1",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "herramienta2",
+              "leftValue": "={{ $json['HERRAMIENTA'] }}",
+              "rightValue": "FOR-REPORTE-SOSPECHOSO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "registroNO",
+              "leftValue": "={{ $json['N° REGISTRO'] }}",
+              "rightValue": "NO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "2da20c24-f65d-4cd3-8c28-fec107414902",
+      "name": "🔀 ¿N° REGISTRO = NO?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1984,
+        1264
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "addRow"
+      },
+      "id": "41e5cffb-0249-40f7-9397-da91512822b5",
+      "name": "📝 Registrar Reporte Nulo",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -1760,
+        1168
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "02f4cec3-100b-4395-a8ad-8b41f69382d4",
+      "name": "✉️ Notificar Sin Registros",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -1536,
+        1168
+      ],
+      "webhookId": "d75f53c1-14d2-4d68-acb4-ff4f6b7698a0",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addRow"
+      },
+      "id": "2a7ca7e9-b472-4bab-9518-e8e9962d92ac",
+      "name": "📝 Registrar Formato Incorrecto",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -1760,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJC4TOCKK5QWFHI2CRA7VT5NKRZ"
+      },
+      "id": "474a70e5-ca69-4770-b089-80c73de67b10",
+      "name": "📥 Obtener FORMATO_HEMOFILIA.xlsx",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJUZC5XKRA2ARE3E7NUM6XBISB4"
+      },
+      "id": "6a57f617-cf7e-42cb-b8b5-05e3f907e91b",
+      "name": "📥 Obtener INSTRUCTIVO_HEMOFILIA.pdf",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -1312,
+        1360
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "b6310794-3203-494f-845f-b28b6b26b5f2",
+      "name": "✉️ Notificar Error de Formato",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        1360
+      ],
+      "webhookId": "7e0f63db-0ecb-4e62-b6b5-3ba9985c9ffd",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "476f94dd-ad7d-4e2a-b13c-e4f4421dc5b0",
+      "name": "❌ Notificar Nombre Repetido",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -1312,
+        -16
+      ],
+      "webhookId": "72da92cf-3da2-4ae1-9c8d-1b017836a71c",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addRow"
+      },
+      "id": "de410b40-193f-4b6c-ba4c-94a237e31d16",
+      "name": "❌ Registrar Error de Tabla",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -2432,
+        1584
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJC4TOCKK5QWFHI2CRA7VT5NKRZ"
+      },
+      "id": "c21d86f5-a3f6-43f8-933d-3c4c029ad8d1",
+      "name": "📥 Obtener Formato Correcto (Error Tabla)",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -2208,
+        1584
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJUZC5XKRA2ARE3E7NUM6XBISB4"
+      },
+      "id": "d6a289e4-ee1d-45bd-be68-4c085a44d2d4",
+      "name": "📥 Obtener Instructivo (Error Tabla)",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -1984,
+        1584
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "73688fc9-ae6c-4034-891d-1b8691e0b4ca",
+      "name": "✉️ Notificar Formato Incorrecto (Error Tabla)",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -1760,
+        1584
+      ],
+      "webhookId": "807b01ea-c999-4b9b-9052-ffa29e3e21d0",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "hemoCheck",
+              "leftValue": "={{ $json.ASUNTO_SIN_ESPACIOS }}",
+              "rightValue": "HEMO",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "0288f215-61b0-4823-971b-d756ec2352f2",
+      "name": "🔀 ¿Asunto contiene HEMO?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1760,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "jpgCheck",
+              "leftValue": "={{ $json.attachmentName.toLowerCase() }}",
+              "rightValue": ".jpg",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            },
+            {
+              "id": "pngCheck",
+              "leftValue": "={{ $json.attachmentName.toLowerCase() }}",
+              "rightValue": ".png",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "72370f88-13f4-46af-af76-756310c281c4",
+      "name": "🔀 ¿Es imagen? (.jpg / .png)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1536,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "8041a6c1-40b9-4b73-88cd-454a096303d9",
+      "name": "❌ Notificar Archivo No Cargado",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -1312,
+        176
+      ],
+      "webhookId": "f15c4de5-f4d6-445f-a0b8-02af17ce97e8",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "bodyHemo",
+              "leftValue": "={{ $json.BODY_UPPER }}",
+              "rightValue": "HEMOFILIA",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "xlsxCheck2",
+              "leftValue": "={{ $json.attachmentName }}",
+              "rightValue": ".xlsx",
+              "operator": {
+                "type": "string",
+                "operation": "endsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "467fcfb3-aa76-45f3-a381-3b687f742376",
+      "name": "🔀 ¿Body HEMOFILIA + .xlsx?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1536,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $json.filePrefix + '_' + $json.attachmentName }}",
+        "parentId": "/ALTO COSTO/HEMOFILIA/BORRADOR",
+        "fileContent": "={{ $json.attachmentContent }}"
+      },
+      "id": "b75b4465-f76a-4aae-bc79-b95149ffdc25",
+      "name": "📤 Subir a BORRADOR (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -1312,
+        368
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "operation": "getRows"
+      },
+      "id": "89b312b1-562a-4435-9534-723e68eaba93",
+      "name": "📊 Leer Tabla1 (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "addRow"
+      },
+      "id": "508a213c-b714-4159-916f-a6da95c0bf61",
+      "name": "📝 Registrar Formato Incorrecto (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2,
+      "position": [
+        -864,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "herr3",
+              "leftValue": "={{ $json['HERRAMIENTA'] }}",
+              "rightValue": "FOR-REPORTE-SOSPECHOSO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "regSI2",
+              "leftValue": "={{ $json['N° REGISTRO'] }}",
+              "rightValue": "SI",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "757d902b-732c-419f-954c-b0549d4374cf",
+      "name": "🔀 ¿N° REGISTRO = SI? (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -640,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "={{ $('🔧 Inicializar Variables').item.json.filePrefix + '_' + $('🔧 Inicializar Variables').item.json.attachmentName }}",
+        "parentId": "/SOSPECHA_CANCER/PROSTATA/DOCUMENTOS DIARIOS",
+        "fileContent": "={{ $('🔧 Inicializar Variables').item.json.attachmentContent }}"
+      },
+      "id": "0a67d1df-daae-498d-8c3e-bfa1dca629c7",
+      "name": "📤 Subir a DIARIOS (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        368
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "ee7fd1eb-239d-4658-925e-7dddccd8b6ef",
+      "name": "✉️ Notificar Cargue (Advertencia Asunto)",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        368
+      ],
+      "webhookId": "335e96c8-d401-4716-8406-5c99ee83d173",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "herr4",
+              "leftValue": "={{ $json['HERRAMIENTA'] }}",
+              "rightValue": "FOR-REPORTE-SOSPECHOSO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "regNO2",
+              "leftValue": "={{ $json['N° REGISTRO'] }}",
+              "rightValue": "NO",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "2facdd05-d0f8-43a9-8e0c-ae47afd0fac5",
+      "name": "🔀 ¿N° REGISTRO = NO? (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -416,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "92b38a0a-337b-4034-808c-4286e45bbeae",
+      "name": "✉️ Notificar Sin Registros (Advertencia Asunto)",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        560
+      ],
+      "webhookId": "8915c767-8a44-4f57-97f7-38fa1b1e1e5a",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUL6OGWCHWREOVFLYISYVXTPOT3R"
+      },
+      "id": "763beec4-bef7-4699-a64f-bd0095387ffb",
+      "name": "📥 Obtener Formato Correcto (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUMMY47LD3AARZG3PV5JFJJ2AYO2"
+      },
+      "id": "792906bc-62f5-47b5-addf-89b26ebe28ee",
+      "name": "📥 Obtener PDF (Asunto Incorrecto)",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        32,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "sendEmail"
+      },
+      "id": "11553a62-87d6-4b9b-a7da-b7d7da1a1545",
+      "name": "✉️ Notificar Error (Advertencia Asunto)",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        256,
+        752
+      ],
+      "webhookId": "500658f8-b23b-4908-a11f-2c99115092e8",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "📧 Nuevo Email con Adjunto": {
+      "main": [
+        [
+          {
+            "node": "🔧 Inicializar Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔧 Inicializar Variables": {
+      "main": [
+        [
+          {
+            "node": "🔀 ¿HEMOFILIA + .xlsx?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿HEMOFILIA + .xlsx?": {
+      "main": [
+        [
+          {
+            "node": "📤 Subir a BORRADOR",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "🔀 ¿Asunto contiene HEMO?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📤 Subir a BORRADOR": {
+      "main": [
+        [
+          {
+            "node": "🔀 ¿Subida exitosa?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿Subida exitosa?": {
+      "main": [
+        [
+          {
+            "node": "📊 Leer Tabla2 (Pacientes)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "❌ Notificar Nombre Repetido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📊 Leer Tabla2 (Pacientes)": {
+      "main": [
+        [
+          {
+            "node": "🔍 Filtrar IDENTIFICACION vacía",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔍 Filtrar IDENTIFICACION vacía": {
+      "main": [
+        [
+          {
+            "node": "🔁 Verificar Duplicados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📊 Leer CONSOLIDADO actual": {
+      "main": [
+        [
+          {
+            "node": "🔁 Verificar Duplicados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔁 Verificar Duplicados": {
+      "main": [
+        [
+          {
+            "node": "🔀 ¿Es Duplicado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿Es Duplicado?": {
+      "main": [
+        [
+          {
+            "node": "📋 Agregar a DUPLICADO.xlsx",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "✅ Agregar a CONSOLIDADO.xlsx",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📊 Leer Tabla1 (Validación)": {
+      "main": [
+        [
+          {
+            "node": "🔀 ¿N° REGISTRO = SI?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿N° REGISTRO = SI?": {
+      "main": [
+        [
+          {
+            "node": "📤 Subir a DOCUMENTOS DIARIOS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "🔀 ¿N° REGISTRO = NO?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📤 Subir a DOCUMENTOS DIARIOS": {
+      "main": [
+        [
+          {
+            "node": "📝 Registrar en ADJUNTOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📝 Registrar en ADJUNTOS": {
+      "main": [
+        [
+          {
+            "node": "✉️ Notificar Cargue Exitoso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿N° REGISTRO = NO?": {
+      "main": [
+        [
+          {
+            "node": "📝 Registrar Reporte Nulo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "📝 Registrar Formato Incorrecto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📝 Registrar Reporte Nulo": {
+      "main": [
+        [
+          {
+            "node": "✉️ Notificar Sin Registros",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📝 Registrar Formato Incorrecto": {
+      "main": [
+        [
+          {
+            "node": "📥 Obtener FORMATO_HEMOFILIA.xlsx",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📥 Obtener FORMATO_HEMOFILIA.xlsx": {
+      "main": [
+        [
+          {
+            "node": "📥 Obtener INSTRUCTIVO_HEMOFILIA.pdf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📥 Obtener INSTRUCTIVO_HEMOFILIA.pdf": {
+      "main": [
+        [
+          {
+            "node": "✉️ Notificar Error de Formato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "❌ Registrar Error de Tabla": {
+      "main": [
+        [
+          {
+            "node": "📥 Obtener Formato Correcto (Error Tabla)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📥 Obtener Formato Correcto (Error Tabla)": {
+      "main": [
+        [
+          {
+            "node": "📥 Obtener Instructivo (Error Tabla)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📥 Obtener Instructivo (Error Tabla)": {
+      "main": [
+        [
+          {
+            "node": "✉️ Notificar Formato Incorrecto (Error Tabla)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿Asunto contiene HEMO?": {
+      "main": [
+        [
+          {
+            "node": "🔀 ¿Es imagen? (.jpg / .png)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "🔀 ¿Body HEMOFILIA + .xlsx?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿Es imagen? (.jpg / .png)": {
+      "main": [
+        [],
+        [
+          {
+            "node": "❌ Notificar Archivo No Cargado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿Body HEMOFILIA + .xlsx?": {
+      "main": [
+        [
+          {
+            "node": "📤 Subir a BORRADOR (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📤 Subir a BORRADOR (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "📊 Leer Tabla1 (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📊 Leer Tabla1 (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "📝 Registrar Formato Incorrecto (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📝 Registrar Formato Incorrecto (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "🔀 ¿N° REGISTRO = SI? (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿N° REGISTRO = SI? (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "📤 Subir a DIARIOS (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "🔀 ¿N° REGISTRO = NO? (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📤 Subir a DIARIOS (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "✉️ Notificar Cargue (Advertencia Asunto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "🔀 ¿N° REGISTRO = NO? (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "✉️ Notificar Sin Registros (Advertencia Asunto)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "📥 Obtener Formato Correcto (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📥 Obtener Formato Correcto (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "📥 Obtener PDF (Asunto Incorrecto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📥 Obtener PDF (Asunto Incorrecto)": {
+      "main": [
+        [
+          {
+            "node": "✉️ Notificar Error (Advertencia Asunto)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "14d8c4af-1752-4d4e-ab0e-57121622b5f8",
+  "activeVersionId": null,
+  "versionCounter": 3,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-12T15:03:13.588Z",
+      "createdAt": "2026-03-12T15:03:13.588Z",
+      "role": "workflow:owner",
+      "workflowId": "7x8qrhLdx1vmwfsADcJ3q",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-03-12T15:03:11.609Z",
+      "createdAt": "2026-03-12T15:03:11.609Z",
+      "id": "N8GapGXztZoS5I5N",
+      "name": "HEMOFILIA"
+    },
+    {
+      "updatedAt": "2026-03-12T15:03:11.594Z",
+      "createdAt": "2026-03-12T15:03:11.594Z",
+      "id": "F1u7mcmf9Cheq54i",
+      "name": "Alto Costo"
+    }
+  ],
+  "activeVersion": null
+}
