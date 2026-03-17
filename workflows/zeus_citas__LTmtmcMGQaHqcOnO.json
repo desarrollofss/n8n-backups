@@ -456,7 +456,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "={{ $('Call \\'My workflow 9\\'').item.json.token }}"
+              "value": "***REDACTED***"
             }
           ]
         },
