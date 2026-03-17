@@ -1,0 +1,253 @@
+{
+  "updatedAt": "2026-02-04T14:13:35.650Z",
+  "createdAt": "2026-01-27T14:02:04.707Z",
+  "id": "nzVJBy9BXplTh4VU",
+  "name": "Alimentador funcional bajo sospecha prostata 2025",
+  "description": "Flujo 'Alimentador' se encarga de alimentar el procesador: Bajo sospecha colon",
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "BD_BAJO_SOSPECHA_COLON_AFILIADO",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        16,
+        64
+      ],
+      "id": "32138072-2335-4fdb-bf35-132016174163",
+      "name": "Webhook",
+      "webhookId": "5f0a9e11-477b-407f-a224-15967b22f04d"
+    },
+    {
+      "parameters": {
+        "content": "- Desencadenador ->\n- Se crea formulario html quien se encarga de recibir\n el excel con el formato y al subir ejecuta el flujo inicial",
+        "height": 320,
+        "width": 304,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -80
+      ],
+      "id": "9c696eb6-4408-46aa-bbbe-a6a16c30cbb7",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "- Llamando al segundo flujo para que procese el archivo\n\nhttps://kaelyn-roughish-nonpacifically.ngrok-free.dev/workflow/2NmESVhUYoTc7JPj",
+        "height": 320,
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        240,
+        -80
+      ],
+      "id": "0a0e4558-f855-497c-872f-fc5f41ac31e7",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "- Respuesta frente al flujo y validar que el archivo fue enviado",
+        "height": 320,
+        "width": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -80
+      ],
+      "id": "51c31aec-1dc0-440a-9626-136296064b47",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Instrucciones de uso - Flujo inicial BAJO SOSPECHA PROSTATA 2025\n1.  Activar el flujo\n2. Ejecutar\n3. Ir al html y proceder a subir el archivo (preguntar al Ing. Jean Carlos para obtener el html)\n\nNota: En caso de realizar una modificación, duplicar el proyecto y colocar 'Alimentador Test' o dejar hacerlo en este mismo, pero dejar una nota de la modificación hecha con su fecha ",
+        "height": 208,
+        "width": 896,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -304
+      ],
+      "id": "72025d93-9361-4647-b26d-32c4ada94c4f",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Historico de cambios\n\n- Creación del flujo (Estado funcional ) 2025-01-2026 12:17pm\n",
+        "height": 544,
+        "width": 448,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        -304
+      ],
+      "id": "e58a5510-57d0-4302-86cf-fb3d48505a05",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "2NmESVhUYoTc7JPj",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/2NmESVhUYoTc7JPj",
+          "cachedResultName": "PROCESADOR_BAJO_SOSPECHA_PROSTATA"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        64
+      ],
+      "id": "a466e3f3-be87-44cb-962d-48f499e451da",
+      "name": "Call 'PROCESADOR_BAJO_SOSPECHA_COLON'"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        624,
+        64
+      ],
+      "id": "7f2801cd-603a-4ab6-8b25-908ef9180226",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Call 'PROCESADOR_BAJO_SOSPECHA_COLON'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'PROCESADOR_BAJO_SOSPECHA_COLON'": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "22028537-4b12-465a-844c-c25c92576e5c",
+  "activeVersionId": null,
+  "versionCounter": 61,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-27T14:02:04.707Z",
+      "createdAt": "2026-01-27T14:02:04.707Z",
+      "role": "workflow:owner",
+      "workflowId": "nzVJBy9BXplTh4VU",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-02-04T14:12:41.511Z",
+      "createdAt": "2026-02-04T14:12:41.511Z",
+      "id": "dNonRRSKKnvsuO1r",
+      "name": "🔵"
+    },
+    {
+      "updatedAt": "2026-02-04T14:09:42.353Z",
+      "createdAt": "2026-02-04T14:08:26.384Z",
+      "id": "eNCFNRMiSjAOoUma",
+      "name": "terminado en test ✅"
+    }
+  ],
+  "activeVersion": null
+}
