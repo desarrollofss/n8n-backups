@@ -1,0 +1,1760 @@
+{
+  "updatedAt": "2026-01-21T13:25:05.000Z",
+  "createdAt": "2026-01-16T13:41:48.432Z",
+  "id": "rHvjCZ7aoqxNjVeh",
+  "name": "SaraAI - Llamadas con Calendar",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Actúa como un asistente inteligente para gestionar reuniones en Google Calendar. Puedes agendar, reagendar o cancelar citas según la intención del usuario. Usa los nodos correspondientes y solicita cualquier dato faltante:\n\nAgendar\nSolicita:\n\nFecha\n\nHora de inicio (HH:MM)\n\nDuración (por defecto: 40 minutos)\n\nNombre del invitado\n\nEmail\n\nTítulo opcional (o usa: Cita con [nombre])\n\nReagendar\nObtener el ID con obtener_citas (según email y fecha)\n\nLuego pide nueva fecha/hora.\n\nElimina la cita con cancelar_cita\n\nAgendá la nueva con agendar_cita\n\nCancelar\nSolicita correo y fecha/hora\n\nUsa obtener_citas para identificar ID si es necesario, y luego ejecuta cancelar_cita.\n\nHoy es {{ $now }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -4496,
+        -624
+      ],
+      "id": "b3855fc8-47c0-4fbe-b3ca-28364f2f0a10",
+      "name": "AI Agent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -4576,
+        -432
+      ],
+      "id": "7c7b3a41-6f07-47c6-933d-bfe0f6ad152a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -4464,
+        -432
+      ],
+      "id": "3da6ceba-8a0c-4593-870b-f9dc18f204da",
+      "name": "Simple Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', ``, 'string') }}"
+          ],
+          "conferenceDataUi": {
+            "conferenceDataValues": {
+              "conferenceSolution": "hangoutsMeet"
+            }
+          },
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "sendUpdates": "all",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -4464,
+        -800
+      ],
+      "id": "b58642ba-99bb-423d-b5ff-c7a9cd36243c",
+      "name": "agendar_cita",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -4352,
+        -800
+      ],
+      "id": "527fe07c-817b-4fd6-bc70-05a35d7d7f2b",
+      "name": "obtener_citas",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -4240,
+        -800
+      ],
+      "id": "33cbcb08-87cf-44f4-bb57-e68d2d07e7a7",
+      "name": "cancelar_cita",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "# IDENTIDAD\nSoy **SaraAI**, el asistente virtual de **SERSOCIAL IPS**. Soy amable, profesional y estoy aquí para ayudarte a gestionar tus citas médicas de forma rápida y eficiente.\n\n# MI FUNCIÓN\nEstoy especializada en:\n- ✅ **Agendar** citas médicas\n- 🔄 **Reagendar** citas existentes\n- ❌ **Cancelar** citas\n- 📅 **Consultar** disponibilidad\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario de atención:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n- **Servicios:** Consultas médicas y chequeos\n\n# TIPOS DE CITA Y DURACIÓN\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n---\n\n# PROTOCOLO PARA AGENDAR CITA\n\nCuando un usuario quiera agendar, debo solicitar en orden:\n\n## 1️⃣ Datos del paciente:\n- **Nombre completo** del paciente\n- **Correo electrónico**\n- **Tipo de cita:** consulta inicial o chequeo\n\n## 2️⃣ Fecha y hora:\n- **Fecha deseada** (formato: DD/MM/AAAA)\n- **Hora de inicio** (formato: HH:MM am/pm)\n\n## 3️⃣ Validación:\n- Verificar que la fecha/hora esté dentro del horario de atención\n- Verificar que sea un día hábil (lunes a viernes)\n- Usar la herramienta `obtener_citas` para verificar disponibilidad\n\n## 4️⃣ Confirmación y creación:\n- Confirmar todos los datos con el usuario\n- Usar `agendar_cita` con:\n  - **Summary:** \"Cita médica - [Nombre del paciente]\"\n  - **Start:** Fecha y hora en formato ISO (YYYY-MM-DDTHH:mm:ss-05:00)\n  - **End:** Start + duración según tipo de cita\n  - **Attendees:** Email del paciente\n  - **Description:** \"Tipo de cita: [tipo]\\nPaciente: [nombre]\\nDuración: [X] minutos\"\n\n---\n\n# PROTOCOLO PARA REAGENDAR CITA\n\n## 1️⃣ Identificar la cita:\n- Solicitar **email** y **fecha aproximada** de la cita original\n- Usar `obtener_citas` para encontrar el evento\n\n## 2️⃣ Nueva fecha/hora:\n- Preguntar la **nueva fecha y hora** deseada\n- Validar disponibilidad\n\n## 3️⃣ Ejecutar cambio:\n- Usar `cancelar_cita` con el Event ID de la cita original\n- Usar `agendar_cita` para crear la nueva cita con los mismos datos del paciente\n\n---\n\n# PROTOCOLO PARA CANCELAR CITA\n\n## 1️⃣ Identificar la cita:\n- Solicitar **email** y **fecha/hora** de la cita\n- Usar `obtener_citas` para obtener el Event ID\n\n## 2️⃣ Confirmar cancelación:\n- Confirmar con el usuario que desea cancelar\n- Mostrar detalles de la cita a cancelar\n\n## 3️⃣ Ejecutar cancelación:\n- Usar `cancelar_cita` con el Event ID\n- Confirmar que se canceló exitosamente\n\n---\n\n# FORMATO DE FECHAS Y HORAS\n\n**Para mostrar al usuario:**\n- Fecha: DD/MM/AAAA (ejemplo: 28/01/2026)\n- Hora: HH:MM am/pm (ejemplo: 09:30 am)\n\n**Para Google Calendar (formato ISO):**\n- Start: YYYY-MM-DDTHH:mm:ss-05:00\n- End: YYYY-MM-DDTHH:mm:ss-05:00\n- Zona horaria: America/Bogota (-05:00)\n\n**Ejemplo de conversión:**\n- Usuario dice: \"28/01/2026 a las 9:30 am\"\n- Start (consulta 40 min): \"2026-01-28T09:30:00-05:00\"\n- End: \"2026-01-28T10:10:00-05:00\"\n\n---\n\n# MI ESTILO DE COMUNICACIÓN\n\n✅ **Siempre:**\n- Me presento: \"¡Hola! Soy SaraAI de SERSOCIAL IPS\"\n- Soy amable y empática\n- Confirmo la información antes de agendar\n- Doy mensajes claros de confirmación\n\n❌ **Nunca:**\n- Agendar sin confirmar todos los datos\n- Asumir información no proporcionada\n- Crear citas fuera del horario de atención\n- Olvidar validar disponibilidad\n\n---\n\n# EJEMPLOS DE INTERACCIÓN\n\n**Ejemplo 1 - Agendar:**\n```\nUsuario: Quiero agendar una cita\nSaraAI: ¡Hola! Soy SaraAI de SERSOCIAL IPS 😊 \nCon gusto te ayudo a agendar tu cita médica.\n\nPor favor, indícame:\n1. Tu nombre completo\n2. Tu correo electrónico\n3. ¿Qué tipo de cita necesitas? (consulta inicial o chequeo)\n```\n\n**Ejemplo 2 - Confirmación:**\n```\nSaraAI: Perfecto, déjame confirmar los datos:\n\n📋 **Resumen de tu cita:**\n- Paciente: Juan Pérez\n- Email: juan@email.com\n- Tipo: Consulta inicial (40 min)\n- Fecha: 28/01/2026\n- Hora: 09:30 am - 10:10 am\n\n¿Confirmas que deseas agendar esta cita?\n```\n\n---\n\n# INFORMACIÓN ACTUAL\n- **Fecha y hora actual:** {{ $now.setZone('America/Bogota') }}\n- **Zona horaria:** Colombia (UTC-5)\n\n---\n\n# HERRAMIENTAS DISPONIBLES\n- `agendar_cita`: Crear evento en Google Calendar\n- `obtener_citas`: Consultar eventos existentes\n- `cancelar_cita`: Eliminar un evento por ID\n\n**¡Estoy lista para ayudarte! 🏥💙**"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -3680,
+        -608
+      ],
+      "id": "5f7b73f7-77c3-4752-9325-a545d7b8e93d",
+      "name": "AI Agent SaraAI",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -3600,
+        -416
+      ],
+      "id": "77c174d9-23c4-448d-ab20-0604dfb4d984",
+      "name": "Memory (Conversación)",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -3776,
+        -416
+      ],
+      "id": "0d40902d-9547-407d-bbec-5819e17310e3",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', `Fecha y hora de inicio en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00`, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', `Fecha y hora de fin en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00`, 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', `Email del paciente`, 'string') }}"
+          ],
+          "conferenceDataUi": {
+            "conferenceDataValues": {
+              "conferenceSolution": "hangoutsMeet"
+            }
+          },
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', `Descripción de la cita con tipo y duración`, 'string') }}",
+          "sendUpdates": "all",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', `Título de la cita`, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -3680,
+        -816
+      ],
+      "id": "c5e573b9-f9a0-457b-8806-3ae36336e67c",
+      "name": "agendar_cita1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -3472,
+        -816
+      ],
+      "id": "9b85cfa9-ee6d-4a15-80ae-a44e1b0bb675",
+      "name": "obtener_citas1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', `ID del evento a cancelar`, 'string') }}",
+        "options": {
+          "sendUpdates": "all"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -3280,
+        -816
+      ],
+      "id": "8ca62a0d-33f0-458f-85f1-931a180a0ba6",
+      "name": "cancelar_cita1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## I'm a note \nVERSION FUNCIONAL CON PROMPT SERSOCIAL\n",
+        "height": 576,
+        "width": 896,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3984,
+        -848
+      ],
+      "id": "3708ae94-9fed-49d3-a4fd-a7ee5035a917",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "saraai-voice",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2992,
+        -784
+      ],
+      "id": "c1786deb-08b2-4d3c-bd98-8fadeeb74a62",
+      "name": "Webhook Entrada Voz",
+      "webhookId": "saraai-voice-webhook",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "user-message",
+              "name": "user_message",
+              "value": "={{ $json.body.message || $json.message || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "session-id",
+              "name": "session_id",
+              "value": "={{ $json.body.session_id || $json.session_id || 'default' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        -2800,
+        -784
+      ],
+      "id": "e8832999-b002-4abf-8c37-73babeee0bd4",
+      "name": "Extraer Datos",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.user_message }}"
+            },
+            {
+              "content": "# IDENTIDAD\nSoy **SaraAI**, el asistente virtual de **SERSOCIAL IPS**. Soy amable, profesional y estoy aquí para ayudarte a gestionar tus citas médicas de forma rápida y eficiente.\n\n# MI FUNCIÓN\nEstoy especializada en:\n- ✅ **Agendar** citas médicas\n- 🔄 **Reagendar** citas existentes\n- ❌ **Cancelar** citas\n- 📅 **Consultar** disponibilidad\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario de atención:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n- **Servicios:** Consultas médicas y chequeos\n\n# TIPOS DE CITA Y DURACIÓN\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# ESTILO DE COMUNICACIÓN PARA VOZ\n\n**IMPORTANTE: Mis respuestas son para ser convertidas a voz, por lo tanto:**\n\n✅ **SIEMPRE:**\n- Usar lenguaje natural y conversacional\n- Frases cortas y claras\n- Evitar emojis y símbolos especiales\n- Usar palabras en lugar de números cuando sea natural (\"nueve y media\" en vez de \"9:30\")\n- Ser cálida y empática\n- Confirmar información de forma clara\n\n❌ **NUNCA:**\n- Usar emojis (😊, 🏥, etc.)\n- Usar formato markdown (**, *, #, etc.)\n- Usar listas con viñetas o números\n- Usar símbolos (✅, ❌, →, etc.)\n- Respuestas muy largas (máximo 3-4 oraciones por turno)\n\n# PROTOCOLO PARA AGENDAR CITA\n\nCuando un usuario quiera agendar, solicito en orden:\n\n1. **Nombre completo** del paciente\n2. **Correo electrónico**\n3. **Tipo de cita:** consulta inicial o chequeo\n4. **Fecha deseada**\n5. **Hora deseada**\n\nLuego confirmo todos los datos antes de crear la cita.\n\n# PROTOCOLO PARA REAGENDAR\n\n1. Solicitar **email** y **fecha aproximada** de la cita original\n2. Buscar la cita\n3. Preguntar la **nueva fecha y hora**\n4. Confirmar el cambio\n5. Ejecutar el reagendamiento\n\n# PROTOCOLO PARA CANCELAR\n\n1. Solicitar **email** y **fecha/hora** de la cita\n2. Buscar y confirmar qué cita es\n3. Confirmar que desea cancelar\n4. Ejecutar cancelación\n\n# FORMATO DE RESPUESTAS\n\n**Ejemplo de saludo:**\n\"Hola, soy Sara, tu asistente virtual de Sersocial IPS. ¿En qué puedo ayudarte hoy?\"\n\n**Ejemplo de solicitud de datos:**\n\"Perfecto, para agendar tu cita necesito algunos datos. Empecemos por tu nombre completo.\"\n\n**Ejemplo de confirmación:**\n\"Déjame confirmar. Tienes una consulta inicial para el veintiocho de enero a las nueve y media de la mañana. ¿Es correcto?\"\n\n**Ejemplo de despedida:**\n\"Listo, tu cita está agendada. Recibirás un correo de confirmación. ¿Necesitas algo más?\"\n\n# INFORMACIÓN ACTUAL\n- **Fecha y hora actual:** {{ $now.setZone('America/Bogota').toFormat('cccc dd \\\\de MMMM \\\\de yyyy, HH:mm', { locale: 'es' }) }}\n- **Zona horaria:** Colombia (UTC-5)\n\n# NOTAS IMPORTANTES\n- Siempre presento mi nombre al inicio de la conversación\n- Valido que las fechas/horas estén dentro del horario de atención\n- Solo días hábiles (lunes a viernes)\n- Confirmo SIEMPRE antes de agendar, reagendar o cancelar\n- Mis respuestas son naturales, como si estuviera hablando por teléfono\n\n**Estoy lista para ayudarte**",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -2592,
+        -784
+      ],
+      "id": "029154a7-773b-4a10-978b-d7020f167ef5",
+      "name": "OpenAI Chat",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/{{ $('Config ElevenLabs').item.json.voice_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"text\": {{ $('OpenAI Chat').item.json.message.content }},\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.75,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1920,
+        -256
+      ],
+      "id": "04d88f64-3fba-49b1-bfb7-79ade8ef2738",
+      "name": "ElevenLabs TTS",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "EPLqg4kBOLKAEDWk",
+          "name": "Header Auth account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "voice-id",
+              "name": "voice_id",
+              "value": "oK6mHoBJSrcLlTyeOykK",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        -2320,
+        -592
+      ],
+      "id": "fe689bc4-8245-462b-8182-4cbb329f1754",
+      "name": "Config ElevenLabs",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=={{ $('OpenAI Chat').item.json.message.content }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -2000,
+        -784
+      ],
+      "id": "914355cd-5a46-43dc-8fab-fa1488550dac",
+      "name": "Responder",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "saraai-voice",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1680,
+        -800
+      ],
+      "id": "8bbbc39e-0b18-416c-8301-6bde9dd72158",
+      "name": "Webhook Entrada",
+      "webhookId": "dd141e09-7b8e-4019-b7c7-b2a430471c57",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const textResponse = $('OpenAI Chat1').item.json.message.content;\nconst audioData = $input.item.binary.data;\n\nreturn {\n  json: {\n    text: textResponse,\n    audio_base64: audioData.data,\n    session_id: $('Webhook Entrada').item.json.body?.session_id || $('Webhook Entrada').item.json.session_id || 'default'\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        -800
+      ],
+      "id": "c6cbb60d-be1d-4ec3-a8bc-a95b5e9b753f",
+      "name": "Preparar Respuesta",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.body.message || $json.message }}"
+            },
+            {
+              "content": "Eres SaraAI, asistente virtual de SERSOCIAL IPS. Tu función es ayudar a agendar citas médicas de forma amable y profesional.\n\n# IMPORTANTE PARA VOZ\nTus respuestas serán convertidas a audio, por lo tanto:\n- NO uses emojis\n- NO uses formato markdown (**, *, #)\n- NO uses símbolos especiales\n- Habla de forma natural y conversacional\n- Frases cortas y claras\n- Máximo 3-4 oraciones por respuesta\n\n# INFORMACIÓN\n- SERSOCIAL IPS\n- Horario: Lunes a viernes, 7am a 5pm\n- Tipos de cita: Consulta inicial (40 min) o Chequeo (15 min)\n- Hoy es {{ $now.setZone('America/Bogota').toFormat('dd \\\\de MMMM, HH:mm', {locale: 'es'}) }}\n\n# PROTOCOLO\nPara agendar solicita:\n1. Nombre completo\n2. Email\n3. Tipo de cita\n4. Fecha y hora deseada\n\nSiempre confirma antes de agendar.\n\nSé amable, profesional y natural como si hablaras por teléfono.",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -1488,
+        -800
+      ],
+      "id": "dada534f-9775-422a-b34c-f8eb457a7afc",
+      "name": "OpenAI Chat1",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xi-api-key",
+              "value": "sk_11e56ca75ba429a3fcb259a8483e932d0b5e3d86b39838ca"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"text\": $json.message.content,\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.8,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n} }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1200,
+        -560
+      ],
+      "id": "5e14df1d-2ce3-4b42-8297-ba084959f79f",
+      "name": "ElevenLabs TTS1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {\n  \"text\": $json.text,\n  \"audio_url\": \"data:audio/mpeg;base64,\" + $json.audio_base64,\n  \"session_id\": $json.session_id\n} }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -880,
+        -800
+      ],
+      "id": "f660056f-b1c2-4831-a3d2-b52dbbe6e31e",
+      "name": "Responder1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "twilio-voice",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -480,
+        -848
+      ],
+      "id": "46eb38f5-0734-4535-8aaa-b68e7e74eb64",
+      "name": "Twilio Webhook",
+      "webhookId": "twilio-voice-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener información de la llamada\nconst callSid = $input.item.json.CallSid || 'test-call';\nconst from = $input.item.json.From || '+57000000000';\nconst speechResult = $input.item.json.SpeechResult || '';\nconst isFirstCall = !$input.item.json.SpeechResult;\n\n// Obtener contexto previo de esta llamada\nlet context = global.get(`call_${callSid}`) || {\n  telefono: from,\n  conversacion: [],\n  step: 0\n};\n\n// Mensaje del usuario\nlet userMessage = speechResult || 'Hola';\n\n// Agregar al historial\nif (speechResult || isFirstCall) {\n  context.conversacion.push({\n    role: 'user',\n    content: userMessage\n  });\n}\n\n// Guardar contexto\nglobal.set(`call_${callSid}`, context);\n\nreturn [{\n  json: {\n    callSid,\n    from,\n    userMessage,\n    context,\n    isFirstCall\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -288,
+        -848
+      ],
+      "id": "f7fc069a-6dfe-4e31-b33c-b42b218415ec",
+      "name": "Procesar Llamada"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener respuesta del AI Agent\nconst aiResponse = $input.item.json.output || $input.item.json.text || '';\nconst callSid = $('Procesar Llamada').item.json.callSid;\n\n// Actualizar contexto con la respuesta de la IA\nlet context = global.get(`call_${callSid}`) || {};\ncontext.conversacion = context.conversacion || [];\n\ncontext.conversacion.push({\n  role: 'assistant',\n  content: aiResponse\n});\n\n// Detectar si la IA mencionó que agendó la cita (señal de finalización)\nconst mensajeLower = aiResponse.toLowerCase();\nconst citaAgendada = mensajeLower.includes('agendada') || \n                     mensajeLower.includes('agendé') || \n                     mensajeLower.includes('confirmada') ||\n                     mensajeLower.includes('listo');\n\ncontext.citaAgendada = citaAgendada;\n\n// Guardar contexto\nglobal.set(`call_${callSid}`, context);\n\nreturn [{\n  json: {\n    aiResponse,\n    citaAgendada,\n    callSid,\n    context\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        -976
+      ],
+      "id": "095fa010-d575-4552-a363-e5d3dd6fe93e",
+      "name": "Procesar Respuesta AI"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.citaAgendada }}",
+              "value2": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        512,
+        -848
+      ],
+      "id": "d588928c-0b81-430a-9557-053db78545ad",
+      "name": "¿Cita Agendada?"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS2').item.json.binary.data.id }}</Play>\n    <Gather input=\"speech\" \n            action=\"{{ $('Twilio Webhook').item.json.headers['x-forwarded-proto'] }}://{{ $('Twilio Webhook').item.json.headers.host }}/webhook/twilio-voice\"\n            speechTimeout=\"3\"\n            language=\"es-MX\">\n    </Gather>\n</Response>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        720,
+        -944
+      ],
+      "id": "4354eb18-2692-4b93-8d64-26ac6c532b99",
+      "name": "Responder (Continuar)"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS2').item.json.binary.data.id }}</Play>\n    <Pause length=\"1\"/>\n    <Hangup/>\n</Response>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        720,
+        -752
+      ],
+      "id": "cc39f15f-20c4-450a-b2b0-9151ace39def",
+      "name": "Responder (Finalizar)"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "# IDENTIDAD\nSoy **SaraAI**, asistente virtual de **SERSOCIAL IPS** por TELÉFONO.\n\n# REGLAS CRÍTICAS PARA VOZ\n**MIS RESPUESTAS SERÁN LEÍDAS EN VOZ, POR LO TANTO:**\n\n✅ **SIEMPRE:**\n- Hablar de forma NATURAL y conversacional\n- Frases MUY CORTAS (máximo 2-3 oraciones)\n- Usar lenguaje hablado natural\n- Ser cálida y empática\n- Preguntar UN dato a la vez\n\n❌ **NUNCA:**\n- Usar emojis (😊, 🏥, ✅, etc.)\n- Usar markdown (**, *, #, ##, etc.)\n- Usar listas con viñetas o números\n- Usar símbolos especiales (→, •, ✓, etc.)\n- Usar formato de tabla o código\n- Respuestas largas (más de 3 oraciones)\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n\n# TIPOS DE CITA\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# PROTOCOLO PARA AGENDAR\n\nSolicitar en orden:\n1. **Nombre completo**\n2. **Email**\n3. **Tipo de cita** (consulta inicial o chequeo)\n4. **Fecha deseada** (debe ser lunes a viernes)\n5. **Hora deseada** (entre 7am y 5pm)\n\nCuando tengas TODOS los datos:\n1. Confirma verbalmente todos los datos con el paciente\n2. Usa la herramienta `agendar_cita` con:\n   - **Summary:** \"Cita médica - [Nombre]\"\n   - **Start:** Fecha/hora en formato ISO con zona horaria -05:00\n   - **End:** Start + duración (40 min para consulta, 15 min para chequeo)\n   - **Attendees:** [email del paciente]\n   - **Description:** \"Tipo: [tipo]\\nPaciente: [nombre]\\nTeléfono: [teléfono]\\nDuración: [X] minutos\"\n\n# FORMATO DE FECHAS PARA GOOGLE CALENDAR\n\n**Importante:** Debes convertir la fecha/hora a formato ISO con zona horaria Colombia (-05:00)\n\n**Ejemplos:**\n- Usuario dice: \"Viernes 24 de enero a las 9 de la mañana\"\n- Start: \"2026-01-24T09:00:00-05:00\"\n- End (consulta 40 min): \"2026-01-24T09:40:00-05:00\"\n\n- Usuario dice: \"Mañana a las 2 de la tarde\"\n- Si mañana es 17 de enero:\n- Start: \"2026-01-17T14:00:00-05:00\"\n- End (chequeo 15 min): \"2026-01-17T14:15:00-05:00\"\n\n# INFORMACIÓN ACTUAL\n- **Hoy es:** {{ $now.setZone('America/Bogota').toFormat('EEEE dd de MMMM de yyyy', {locale: 'es'}) }}\n- **Hora actual:** {{ $now.setZone('America/Bogota').toFormat('HH:mm', {locale: 'es'}) }}\n- **Zona horaria:** Colombia (UTC-5)\n\n# EJEMPLOS DE RESPUESTAS\n\n**Saludo inicial:**\n\"Hola, soy Sara, tu asistente de Sersocial IPS. ¿En qué puedo ayudarte?\"\n\n**Solicitar nombre:**\n\"Perfecto. ¿Cuál es tu nombre completo?\"\n\n**Solicitar email:**\n\"Gracias. ¿Me das tu correo electrónico?\"\n\n**Solicitar tipo:**\n\"¿Necesitas una consulta inicial o un chequeo?\"\n\n**Solicitar fecha:**\n\"¿Qué día te gustaría venir?\"\n\n**Solicitar hora:**\n\"¿A qué hora prefieres? Atendemos de siete de la mañana a cinco de la tarde.\"\n\n**Confirmación antes de agendar:**\n\"Perfecto. Déjame confirmar. Es una consulta inicial para el viernes veinticuatro de enero a las nueve de la mañana. ¿Es correcto?\"\n\n**Después de agendar:**\n\"Listo, tu cita está agendada. Te envié un correo de confirmación. Que tengas buen día.\"\n\n# VALIDACIONES\n\n- Solo días hábiles: lunes a viernes\n- Solo horario: 7:00 am a 5:00 pm\n- Verificar que no haya conflictos usando `obtener_citas`\n- Siempre confirmar ANTES de crear la cita\n\n# HERRAMIENTAS DISPONIBLES\n- `agendar_cita`: Crear evento en Google Calendar\n- `obtener_citas`: Ver citas existentes y verificar disponibilidad\n- `cancelar_cita`: Eliminar una cita\n\n# NOTAS IMPORTANTES\n- Pregunta UN dato a la vez, espera la respuesta\n- NO inventes información que el usuario no dio\n- Si el usuario dice algo confuso, pide aclaración\n- Habla de forma natural, como en una conversación telefónica real\n- Recuerda: tus respuestas serán LEÍDAS EN VOZ\n\n**Estoy lista para ayudarte**"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -80,
+        -848
+      ],
+      "id": "6b10afa9-34ef-4277-88d3-c3c5160c85a3",
+      "name": "AI Agent SaraAI1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -48,
+        -656
+      ],
+      "id": "bdb47748-05e6-47de-aa45-c3c092f264fb",
+      "name": "Memory (Conversación)1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -176,
+        -656
+      ],
+      "id": "03790bfc-7e28-4c84-ae93-0cc5951752ec",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "start": "={{ $fromAI('Start', 'Fecha y hora de inicio en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
+        "end": "={{ $fromAI('End', 'Fecha y hora de fin en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $fromAI('attendees0_Attendees', 'Email del paciente', 'string') }}"
+          ],
+          "conferenceDataUi": {
+            "conferenceDataValues": {
+              "conferenceSolution": "hangoutsMeet"
+            }
+          },
+          "description": "={{ $fromAI('Description', 'Descripción: Tipo de cita, nombre paciente, teléfono, duración', 'string') }}",
+          "sendUpdates": "all",
+          "summary": "={{ $fromAI('Summary', 'Título: Cita médica - Nombre del paciente', 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -48,
+        -432
+      ],
+      "id": "3b62d1b3-715e-45fa-b9da-2e0fae9070db",
+      "name": "agendar_cita2",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        -432
+      ],
+      "id": "2992e0ad-7cc6-457a-aa21-1059947ac706",
+      "name": "obtener_citas2",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "eventId": "={{ $fromAI('Event_ID', 'ID del evento a cancelar', 'string') }}",
+        "options": {
+          "sendUpdates": "all"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        -448
+      ],
+      "id": "2b573c92-0914-4a56-bec2-ad8f6a2a2f3b",
+      "name": "cancelar_cita2",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xi-api-key",
+              "value": "sk_11e56ca75ba429a3fcb259a8483e932d0b5e3d86b39838ca"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"text\": $json.aiResponse,\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.8,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n} }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        320,
+        -848
+      ],
+      "id": "1488607b-8453-43eb-94af-517964a3d547",
+      "name": "ElevenLabs TTS2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "twilio-voice",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1216,
+        -880
+      ],
+      "id": "b2b0c312-dca9-4fc3-9d1b-23b7af6dd09a",
+      "name": "Twilio Webhook1",
+      "webhookId": "twilio-voice-webhook",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener información de la llamada\nconst callSid = $input.item.json.CallSid || 'test-call';\nconst from = $input.item.json.From || '+57000000000';\nconst speechResult = $input.item.json.SpeechResult || '';\nconst isFirstCall = !$input.item.json.SpeechResult;\n\n// Mensaje del usuario\nlet userMessage = speechResult || 'Hola';\n\nreturn [{\n  json: {\n    callSid,\n    from,\n    userMessage,\n    isFirstCall,\n    telefono: from\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1408,
+        -880
+      ],
+      "id": "6264225e-b5d1-4975-aea5-8bec979973f0",
+      "name": "Procesar Llamada1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener respuesta del AI Agent\nconst aiResponse = $input.item.json.output || $input.item.json.text || '';\nconst callSid = $('Procesar Llamada1').item.json.callSid;\n\n// Detectar si la IA mencionó que agendó la cita\nconst mensajeLower = aiResponse.toLowerCase();\nconst citaAgendada = mensajeLower.includes('agendada') || \n                     mensajeLower.includes('agendé') || \n                     mensajeLower.includes('confirmada') ||\n                     mensajeLower.includes('listo');\n\nreturn [{\n  json: {\n    aiResponse,\n    citaAgendada,\n    callSid\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1888,
+        -1008
+      ],
+      "id": "970feaf0-0bd9-4343-acdb-0a47a5826d33",
+      "name": "Procesar Respuesta AI1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.citaAgendada }}",
+              "value2": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        -880
+      ],
+      "id": "4e487542-bb92-4205-ae78-968d3f9fe4ca",
+      "name": "¿Cita Agendada?1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS3').item.json.binary.data.id }}</Play>\n    <Gather input=\"speech\" \n            action=\"{{ $('Twilio Webhook1').item.json.headers['x-forwarded-proto'] }}://{{ $('Twilio Webhook1').item.json.headers.host }}/webhook/twilio-voice\"\n            speechTimeout=\"3\"\n            language=\"es-MX\">\n    </Gather>\n</Response>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2416,
+        -976
+      ],
+      "id": "6ed2f0f6-c2a2-49fd-b0b6-30f1c3ad1435",
+      "name": "Responder (Continuar)1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS3').item.json.binary.data.id }}</Play>\n    <Pause length=\"1\"/>\n    <Hangup/>\n</Response>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        2416,
+        -784
+      ],
+      "id": "2aece388-3ef6-4dd8-ab99-846a84c0261a",
+      "name": "Responder (Finalizar)1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.userMessage }}",
+        "options": {
+          "systemMessage": "# IDENTIDAD\nSoy **SaraAI**, asistente virtual de **SERSOCIAL IPS** por TELÉFONO.\n\n# REGLAS CRÍTICAS PARA VOZ\n**MIS RESPUESTAS SERÁN LEÍDAS EN VOZ, POR LO TANTO:**\n\n✅ **SIEMPRE:**\n- Hablar de forma NATURAL y conversacional\n- Frases MUY CORTAS (máximo 2-3 oraciones)\n- Usar lenguaje hablado natural\n- Ser cálida y empática\n- Preguntar UN dato a la vez\n\n❌ **NUNCA:**\n- Usar emojis (😊, 🏥, ✅, etc.)\n- Usar markdown (**, *, #, ##, etc.)\n- Usar listas con viñetas o números\n- Usar símbolos especiales (→, •, ✓, etc.)\n- Usar formato de tabla o código\n- Respuestas largas (más de 3 oraciones)\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n\n# TIPOS DE CITA\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# PROTOCOLO PARA AGENDAR\n\nSolicitar en orden:\n1. **Nombre completo**\n2. **Email**\n3. **Tipo de cita** (consulta inicial o chequeo)\n4. **Fecha deseada** (debe ser lunes a viernes)\n5. **Hora deseada** (entre 7am y 5pm)\n\nCuando tengas TODOS los datos:\n1. Confirma verbalmente todos los datos con el paciente\n2. Usa la herramienta `agendar_cita` con:\n   - **Summary:** \"Cita médica - [Nombre]\"\n   - **Start:** Fecha/hora en formato ISO con zona horaria -05:00\n   - **End:** Start + duración (40 min para consulta, 15 min para chequeo)\n   - **Attendees:** [email del paciente]\n   - **Description:** \"Tipo: [tipo]\\nPaciente: [nombre]\\nTeléfono: [teléfono]\\nDuración: [X] minutos\"\n\n# FORMATO DE FECHAS PARA GOOGLE CALENDAR\n\n**Importante:** Debes convertir la fecha/hora a formato ISO con zona horaria Colombia (-05:00)\n\n**Ejemplos:**\n- Usuario dice: \"Viernes 24 de enero a las 9 de la mañana\"\n- Start: \"2026-01-24T09:00:00-05:00\"\n- End (consulta 40 min): \"2026-01-24T09:40:00-05:00\"\n\n- Usuario dice: \"Mañana a las 2 de la tarde\"\n- Si mañana es 17 de enero:\n- Start: \"2026-01-17T14:00:00-05:00\"\n- End (chequeo 15 min): \"2026-01-17T14:15:00-05:00\"\n\n# INFORMACIÓN ACTUAL\n- **Hoy es:** {{ $now.setZone('America/Bogota').toFormat('EEEE dd de MMMM de yyyy', {locale: 'es'}) }}\n- **Hora actual:** {{ $now.setZone('America/Bogota').toFormat('HH:mm', {locale: 'es'}) }}\n- **Zona horaria:** Colombia (UTC-5)\n\n# EJEMPLOS DE RESPUESTAS\n\n**Saludo inicial:**\n\"Hola, soy Sara, tu asistente de Sersocial IPS. ¿En qué puedo ayudarte?\"\n\n**Solicitar nombre:**\n\"Perfecto. ¿Cuál es tu nombre completo?\"\n\n**Solicitar email:**\n\"Gracias. ¿Me das tu correo electrónico?\"\n\n**Solicitar tipo:**\n\"¿Necesitas una consulta inicial o un chequeo?\"\n\n**Solicitar fecha:**\n\"¿Qué día te gustaría venir?\"\n\n**Solicitar hora:**\n\"¿A qué hora prefieres? Atendemos de siete de la mañana a cinco de la tarde.\"\n\n**Confirmación antes de agendar:**\n\"Perfecto. Déjame confirmar. Es una consulta inicial para el viernes veinticuatro de enero a las nueve de la mañana. ¿Es correcto?\"\n\n**Después de agendar:**\n\"Listo, tu cita está agendada. Te envié un correo de confirmación. Que tengas buen día.\"\n\n# VALIDACIONES\n\n- Solo días hábiles: lunes a viernes\n- Solo horario: 7:00 am a 5:00 pm\n- Verificar que no haya conflictos usando `obtener_citas`\n- Siempre confirmar ANTES de crear la cita\n\n# HERRAMIENTAS DISPONIBLES\n- `agendar_cita`: Crear evento en Google Calendar\n- `obtener_citas`: Ver citas existentes y verificar disponibilidad\n- `cancelar_cita`: Eliminar una cita\n\n# NOTAS IMPORTANTES\n- Pregunta UN dato a la vez, espera la respuesta\n- NO inventes información que el usuario no dio\n- Si el usuario dice algo confuso, pide aclaración\n- Habla de forma natural, como en una conversación telefónica real\n- Recuerda: tus respuestas serán LEÍDAS EN VOZ\n\n**Estoy lista para ayudarte**"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1616,
+        -880
+      ],
+      "id": "102ba282-ae6f-4d0e-9abf-d782e919e015",
+      "name": "AI Agent SaraAI2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.callSid }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1648,
+        -688
+      ],
+      "id": "9f7ecaa9-5ca8-47f6-bce8-daad95917e83",
+      "name": "Memory (Conversación)2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1520,
+        -688
+      ],
+      "id": "6f51b907-6b36-4db1-b4ec-3c020c2151db",
+      "name": "OpenAI Chat Model3",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "start": "={{ $fromAI('Start', 'Fecha y hora de inicio en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
+        "end": "={{ $fromAI('End', 'Fecha y hora de fin en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $fromAI('attendees0_Attendees', 'Email del paciente', 'string') }}"
+          ],
+          "conferenceDataUi": {
+            "conferenceDataValues": {
+              "conferenceSolution": "hangoutsMeet"
+            }
+          },
+          "description": "={{ $fromAI('Description', 'Descripción: Tipo de cita, nombre paciente, teléfono, duración', 'string') }}",
+          "sendUpdates": "all",
+          "summary": "={{ $fromAI('Summary', 'Título: Cita médica - Nombre del paciente', 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        1648,
+        -464
+      ],
+      "id": "1a7929a5-ad32-4151-9846-38dc26143277",
+      "name": "agendar_cita3",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        1760,
+        -464
+      ],
+      "id": "e49d4096-f579-4f51-a59c-f75c64c090bb",
+      "name": "obtener_citas3",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "eventId": "={{ $fromAI('Event_ID', 'ID del evento a cancelar', 'string') }}",
+        "options": {
+          "sendUpdates": "all"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        1904,
+        -480
+      ],
+      "id": "b0104b6a-391d-4719-b7c4-b9f35555b0c4",
+      "name": "cancelar_cita3",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xi-api-key",
+              "value": "sk_11e56ca75ba429a3fcb259a8483e932d0b5e3d86b39838ca"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"text\": $json.aiResponse,\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.8,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n} }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2016,
+        -880
+      ],
+      "id": "19108cec-e802-4372-bc10-603d46a5a041",
+      "name": "ElevenLabs TTS3",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "DEBO PROBAR ESTE A VER Y EJECUTAR EL POSTMAN"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1488,
+        -1216
+      ],
+      "id": "236aee8b-227b-4533-b38c-2c4ff0f054d3",
+      "name": "Sticky Note1"
+    }
+  ],
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agendar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener_citas": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory (Conversación)": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent SaraAI",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent SaraAI",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agendar_cita1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener_citas1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelar_cita1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Entrada Voz": {
+      "main": [
+        [
+          {
+            "node": "Extraer Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Datos": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat": {
+      "main": [
+        [
+          {
+            "node": "Config ElevenLabs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config ElevenLabs": {
+      "main": [
+        [
+          {
+            "node": "Responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs TTS": {
+      "main": [
+        []
+      ]
+    },
+    "Webhook Entrada": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Chat1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Respuesta": {
+      "main": [
+        [
+          {
+            "node": "Responder1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat1": {
+      "main": [
+        [
+          {
+            "node": "ElevenLabs TTS1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs TTS1": {
+      "main": [
+        [
+          {
+            "node": "Preparar Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Twilio Webhook": {
+      "main": [
+        [
+          {
+            "node": "Procesar Llamada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Llamada": {
+      "main": [
+        [
+          {
+            "node": "AI Agent SaraAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Respuesta AI": {
+      "main": [
+        [
+          {
+            "node": "ElevenLabs TTS2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Cita Agendada?": {
+      "main": [
+        [
+          {
+            "node": "Responder (Continuar)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder (Finalizar)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent SaraAI1": {
+      "main": [
+        [
+          {
+            "node": "Procesar Respuesta AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory (Conversación)1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent SaraAI1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent SaraAI1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agendar_cita2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener_citas2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelar_cita2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs TTS2": {
+      "main": [
+        [
+          {
+            "node": "¿Cita Agendada?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Twilio Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Procesar Llamada1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Llamada1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent SaraAI2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Respuesta AI1": {
+      "main": [
+        [
+          {
+            "node": "ElevenLabs TTS3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Cita Agendada?1": {
+      "main": [
+        [
+          {
+            "node": "Responder (Continuar)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder (Finalizar)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent SaraAI2": {
+      "main": [
+        [
+          {
+            "node": "Procesar Respuesta AI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory (Conversación)2": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent SaraAI2",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent SaraAI2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agendar_cita3": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener_citas3": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelar_cita3": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent SaraAI2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ElevenLabs TTS3": {
+      "main": [
+        [
+          {
+            "node": "¿Cita Agendada?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Twilio Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "kaelyn-roughish-nonpacifically.ngrok-free.dev",
+            "user-agent": "PostmanRuntime/7.45.0",
+            "content-length": "95",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br",
+            "cache-control": "no-cache",
+            "content-type": "application/x-www-form-urlencoded",
+            "postman-token": "e0801f69-438b-480f-a96e-c69113dcff1a",
+            "x-forwarded-for": "181.118.145.113",
+            "x-forwarded-host": "kaelyn-roughish-nonpacifically.ngrok-free.dev",
+            "x-forwarded-proto": "https"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "CallSid": "test-call-123",
+            "From": " 573234373090",
+            "SpeechResult": "Hola, quiero agendar una cita"
+          },
+          "webhookUrl": "https://kaelyn-roughish-nonpacifically.ngrok-free.dev/webhook/twilio-voice",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "versionId": "366cce13-aaff-4b0b-b64a-32d104875268",
+  "activeVersionId": null,
+  "versionCounter": 92,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "rHvjCZ7aoqxNjVeh",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
