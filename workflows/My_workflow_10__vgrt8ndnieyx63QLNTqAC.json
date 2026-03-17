@@ -1,0 +1,482 @@
+{
+  "updatedAt": "2026-03-16T16:32:19.727Z",
+  "createdAt": "2026-03-16T15:48:42.831Z",
+  "id": "vgrt8ndnieyx63QLNTqAC",
+  "name": "My workflow 10",
+  "description": null,
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"datos_paciente\": {\n    \"tipo_documento\": \"CC\",\n    \"documento\": \"1143331246\",\n    \"id_registro\": \"Q0N8NzIxNDQ0NDl8UFNBfDIwMjUtMDYtMTA=\"\n  }\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -992,
+        112
+      ],
+      "id": "ce57df2d-9706-4265-abcf-a6e374d4fdb5",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "mutual_token",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        112
+      ],
+      "id": "0611f271-65b1-4900-8ed2-f98035e21f10",
+      "name": "Redis GET mutual_token",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const valor = $input.item.json.value;\n\nlet tokenData = null;\ntry {\n  tokenData = valor ? JSON.parse(valor) : null;\n} catch(e) {\n  tokenData = null;\n}\n\nconst ahora = Date.now();\nconst tokenValido = !!(\n  tokenData?.token && \n  tokenData?.expira_en && \n  ahora < tokenData.expira_en\n);\n\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', tokenData?.expira_en \n  ? Math.round((tokenData.expira_en - ahora) / 60000) \n  : 'N/A'\n);\n\nreturn [{ json: { \n  tokenValido,\n  token: tokenData?.token || null,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        112
+      ],
+      "id": "7f10deb2-bf49-447f-8330-6c6a72d7aca5",
+      "name": "Code: evaluar token"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cond-token-valido",
+              "leftValue": "={{ $json.tokenValido }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -272,
+        112
+      ],
+      "id": "df922a06-b2c2-4234-b8c8-d616a1c4c8f5",
+      "name": "IF: ¿token válido?"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: {\n  token: $json.token,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        -64
+      ],
+      "id": "50ddb019-76c4-4305-aa75-d411abba6098",
+      "name": "Code: token existente"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "password"
+            },
+            {
+              "name": "client_id",
+              "value": "right-validation"
+            },
+            {
+              "name": "username",
+              "value": "={{ $env.MUTUAL_USERNAME }}"
+            },
+            {
+              "name": "password",
+              "value": "={{ $env.MUTUAL_PASSWORD }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -32,
+        288
+      ],
+      "id": "e87961ae-676b-4970-af32-4c59a1b98c53",
+      "name": "HTTP: Login Mutual",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "mutual_token",
+        "value": "={{ JSON.stringify({ token: $json.access_token, expira_en: Date.now() + ((parseInt($json.expires_in) - 500) * 1000) }) }}",
+        "expire": true,
+        "ttl": 3100
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        192,
+        224
+      ],
+      "id": "fb5246d9-0567-4159-bc5a-1d630fbd28e3",
+      "name": "Redis SET mutual_token",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: {\n  token: $('HTTP: Login Mutual').item.json.access_token,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        288
+      ],
+      "id": "9e11f08f-438c-4ba3-934d-1cac82ca8619",
+      "name": "Code: nuevo token"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        688,
+        112
+      ],
+      "id": "86e64960-b6f9-4f16-8f1b-9cca3f2427c5",
+      "name": "Merge token"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://guacamayaazul.mutualser.com/validateRights/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Cookie",
+              "value": "JSESSIONID=6AD773EA67E6CCE789FD47A706134B8B"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{ $json.datos_paciente.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{ $json.datos_paciente.documento }}\"\n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        928,
+        112
+      ],
+      "id": "1375db49-0876-48ee-9f0c-686d7f703e67",
+      "name": "Validar derechos de usuario",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const cleanedItems = [];\n\nconst cleanNotFound = (value) => {\n  if (!value) return '';\n  return value.toLowerCase().includes('not found') ? '' : value;\n};\n\nfor (const item of $input.all()) {\n  try {\n    const idRegistro = $('Merge token').all()[\n      $input.all().indexOf(item)\n    ]?.json?.datos_paciente?.id_registro || '';\n\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    cleanedItems.push({ json: {\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n      id_registro: idRegistro,\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n      telefono_fijo: cleanNotFound(patientData.telecom?.find(t => t.use === 'home')?.value),\n      telefono_movil: cleanNotFound(patientData.telecom?.find(t => t.use === 'mobile')?.value),\n      email: cleanNotFound(patientData.telecom?.find(t => t.system === 'email')?.value),\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona,\n      ubicacion,\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod\n    }});\n\n  } catch (error) {\n    cleanedItems.push({ json: { error: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1168,
+        112
+      ],
+      "id": "654d221e-ed01-49a5-866a-4b1d96cbd863",
+      "name": "Limpiar datos Mutual"
+    },
+    {
+      "parameters": {
+        "errorMessage": "Error al validar los derechos de usuario en Mutual"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        1136,
+        352
+      ],
+      "id": "26bfdad1-6afa-49bf-accd-b4be65c2c57c",
+      "name": "Error validar derechos de usuario"
+    },
+    {
+      "parameters": {
+        "errorMessage": "Error al hacer login en Mutual"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        208,
+        448
+      ],
+      "id": "18493c7b-cc44-42a6-9b76-1b17e3d040b8",
+      "name": "Error login Mutual"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Redis GET mutual_token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis GET mutual_token": {
+      "main": [
+        [
+          {
+            "node": "Code: evaluar token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: evaluar token": {
+      "main": [
+        [
+          {
+            "node": "IF: ¿token válido?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF: ¿token válido?": {
+      "main": [
+        [
+          {
+            "node": "Code: token existente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP: Login Mutual",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: token existente": {
+      "main": [
+        [
+          {
+            "node": "Merge token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP: Login Mutual": {
+      "main": [
+        [
+          {
+            "node": "Redis SET mutual_token",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error login Mutual",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis SET mutual_token": {
+      "main": [
+        [
+          {
+            "node": "Code: nuevo token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code: nuevo token": {
+      "main": [
+        [
+          {
+            "node": "Merge token",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge token": {
+      "main": [
+        [
+          {
+            "node": "Validar derechos de usuario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar derechos de usuario": {
+      "main": [
+        [
+          {
+            "node": "Limpiar datos Mutual",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error validar derechos de usuario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "ffd87b1c-1cad-4452-8c73-05fa71f59609",
+  "activeVersionId": null,
+  "versionCounter": 5,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-16T15:48:42.831Z",
+      "createdAt": "2026-03-16T15:48:42.831Z",
+      "role": "workflow:owner",
+      "workflowId": "vgrt8ndnieyx63QLNTqAC",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
