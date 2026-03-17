@@ -1,0 +1,411 @@
+{
+  "updatedAt": "2026-03-17T15:41:02.452Z",
+  "createdAt": "2026-03-16T21:39:41.586Z",
+  "id": "PxgfHZPzzD8B1VCsByqIP",
+  "name": "n8n Workflows → GitHub Backup",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "fba82747-1a61-4204-b391-74ecc785f0ed",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -208
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "6a251cde-65a1-4b56-b412-afe6224f15bc",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -384,
+        48
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "https://vdc.sersocial.org/n8n/api/v1/workflows",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "db40e785-a9c7-46e2-b11a-eb7211627cdd",
+      "name": "GET All Workflows",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -160,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extrae el array de workflows de la respuesta paginada de n8n\nconst data = $input.first().json.data || [];\nif (data.length === 0) {\n  throw new Error('No se encontraron workflows en n8n');\n}\nreturn data.map(w => ({ json: w }));"
+      },
+      "id": "04828363-67f5-492f-bda2-705ecfc19275",
+      "name": "Extraer Lista",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        -112
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f404a9a7-5185-4558-aab7-163489aac069",
+      "name": "Loop por Workflow",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        320,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://vdc.sersocial.org/n8n/api/v1/workflows/{{ $json.id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "539d88fd-9965-4596-a6fe-47bcf96d3f5d",
+      "name": "GET Workflow Detalle",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        512,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const wf = $input.first().json;\n\nif (wf.nodes) {\n  wf.nodes = wf.nodes.map(node => {\n    if (node.parameters?.headerParameters?.parameters) {\n      node.parameters.headerParameters.parameters = \n        node.parameters.headerParameters.parameters.map(h => ({\n          ...h,\n          value: '***REDACTED***'\n        }));\n    }\n    return node;\n  });\n}\n\nconst nombre = wf.name\n  .replace(/[^a-zA-Z0-9_\\-áéíóúÁÉÍÓÚñÑ ]/g, '')\n  .trim()\n  .replace(/\\s+/g, '_') + '__' + wf.id;\n\nconst contenido = Buffer\n  .from(JSON.stringify(wf, null, 2))\n  .toString('base64');\n\nconst ahora = new Date().toISOString();\n\nreturn [{\n  json: {\n    workflow_id: wf.id,\n    workflow_name: wf.name,\n    github_path: `workflows/${nombre}.json`,\n    contenido_base64: contenido,\n    commit_msg: `backup: ${wf.name} [${wf.id}] - ${ahora}`\n  }\n}];"
+      },
+      "id": "9e0f4d35-6917-41d7-9703-121e7f499c45",
+      "name": "Preparar Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/desarrollofss/n8n-backups/contents/{{ $json.github_path }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Accept",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2864318d-bccb-4e51-99ba-7f1ac8cc0ffa",
+      "name": "GET SHA de GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        944,
+        -128
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Si el archivo existe en GitHub, trae el SHA (necesario para actualizarlo)\n// Si no existe (404), sha queda null y GitHub crea el archivo nuevo\nconst ghResponse = $input.first().json;\nconst sha = ghResponse.sha || null;\n\nconst payload = $('Preparar Payload').first().json;\n\nconst body = {\n  message: payload.commit_msg,\n  content: payload.contenido_base64\n};\n\nif (sha) {\n  body.sha = sha;\n}\n\nreturn [{\n  json: {\n    github_path: payload.github_path,\n    workflow_name: payload.workflow_name,\n    es_actualizacion: !!sha,\n    body: body\n  }\n}];"
+      },
+      "id": "64748215-14e9-45d8-8609-5eb7bdc68d50",
+      "name": "Construir Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1168,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/desarrollofss/n8n-backups/contents/{{ $json.github_path }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Accept",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.body) }}",
+        "options": {}
+      },
+      "id": "17b13f93-3eaa-4037-8f7d-615769abbc76",
+      "name": "PUT a GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1392,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Log del resultado para cada workflow\nconst resultado = $input.first().json;\nconst commitUrl = resultado?.commit?.html_url || 'N/A';\nconst action = $('Construir Body').first().json.es_actualizacion ? 'Actualizado' : 'Creado';\nconst nombre = $('Construir Body').first().json.workflow_name;\n\nconsole.log(`✅ ${action}: ${nombre} → ${commitUrl}`);\n\nreturn [{ json: { accion: action, workflow: nombre, commit_url: commitUrl } }];"
+      },
+      "id": "26df5f6f-3fe7-4ba3-8751-a06dc2caa505",
+      "name": "Log Resultado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        -128
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "GET All Workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "GET All Workflows": {
+      "main": [
+        [
+          {
+            "node": "Extraer Lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Lista": {
+      "main": [
+        [
+          {
+            "node": "Loop por Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop por Workflow": {
+      "main": [
+        [],
+        [
+          {
+            "node": "GET Workflow Detalle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Workflow Detalle": {
+      "main": [
+        [
+          {
+            "node": "Preparar Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Payload": {
+      "main": [
+        [
+          {
+            "node": "GET SHA de GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET SHA de GitHub": {
+      "main": [
+        [
+          {
+            "node": "Construir Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construir Body": {
+      "main": [
+        [
+          {
+            "node": "PUT a GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PUT a GitHub": {
+      "main": [
+        [
+          {
+            "node": "Log Resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Resultado": {
+      "main": [
+        [
+          {
+            "node": "Loop por Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "179ba890-3ab1-485a-b189-4d269d1cf84b",
+  "activeVersionId": null,
+  "versionCounter": 22,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-16T21:39:41.586Z",
+      "createdAt": "2026-03-16T21:39:41.586Z",
+      "role": "workflow:owner",
+      "workflowId": "PxgfHZPzzD8B1VCsByqIP",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
