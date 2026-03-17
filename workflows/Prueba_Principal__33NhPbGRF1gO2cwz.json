@@ -1,0 +1,311 @@
+{
+  "updatedAt": "2026-02-04T20:02:31.189Z",
+  "createdAt": "2026-02-04T14:55:56.112Z",
+  "id": "33NhPbGRF1gO2cwz",
+  "name": "Prueba Principal",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "62dd123a-242b-4553-83d9-e90e17f3c4a9",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -352,
+        0
+      ],
+      "id": "a84fd2e5-f291-491d-b159-79ba7ebc11e7",
+      "name": "Webhook",
+      "webhookId": "62dd123a-242b-4553-83d9-e90e17f3c4a9"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Eres Un agente para la gestion de citas.\nguarda los datos {{ $json.body.TipoIndentificacion }} y {{ $json.body.identificacion }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "457c13e9-2a53-4d01-9504-2c306c6c0550",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        208
+      ],
+      "id": "e1b1c14a-822e-4c16-bc34-1bb95a9ddc66",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "UYneIrbnWNwPMYmu",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/UYneIrbnWNwPMYmu",
+          "cachedResultName": "Citas Zeus"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "TipoIdentificacion": "={{ $('Webhook').item.json.body.TipoIndentificacion }}",
+            "NumeroIdentificacion": "={{ $('Webhook').item.json.body.identificacion }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "mensaje",
+              "displayName": "mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "NumeroIdentificacion",
+              "displayName": "NumeroIdentificacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "hora",
+              "displayName": "hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "TipoIdentificacion",
+              "displayName": "TipoIdentificacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        288,
+        0
+      ],
+      "id": "e92b8a40-a480-4689-8886-2d56c0165b1c",
+      "name": "Call 'Citas Zeus'"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.TipoIndentificacion }}_{{ $json.body.identificacion }}",
+        "sessionTTL": 3600,
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        -752,
+        272
+      ],
+      "id": "fb18a8d8-69d0-4446-b6f1-8fdbe9a70208",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.body.TipoIndentificacion }}_{{ $json.body.identificacion }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -112,
+        208
+      ],
+      "id": "3f6d1c43-7a7a-4aa8-a44b-ab5cd4ba001e",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Call 'Citas Zeus'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        []
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "e8877e83-766d-4435-9c14-a903f04e4de6",
+  "activeVersionId": null,
+  "versionCounter": 21,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-04T14:55:56.112Z",
+      "createdAt": "2026-02-04T14:55:56.112Z",
+      "role": "workflow:owner",
+      "workflowId": "33NhPbGRF1gO2cwz",
+      "projectId": "EBZGwgHNf54my5Ji",
+      "project": {
+        "updatedAt": "2026-01-22T19:43:29.746Z",
+        "createdAt": "2026-01-22T19:42:30.105Z",
+        "id": "EBZGwgHNf54my5Ji",
+        "name": "Neyla Polo <npolov@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:42:30.105Z",
+            "createdAt": "2026-01-22T19:42:30.105Z",
+            "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+            "projectId": "EBZGwgHNf54my5Ji",
+            "user": {
+              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "createdAt": "2026-01-22T19:42:30.105Z",
+              "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+              "email": "npolov@sersocial.org",
+              "firstName": "Neyla",
+              "lastName": "Polo",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:43:34.370Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "4lmOH2EOOrd3Nwno",
+                "userActivated": true,
+                "userActivatedAt": 1769195420470,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1770846671088
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-05",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
