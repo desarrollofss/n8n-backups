@@ -1,0 +1,476 @@
+{
+  "updatedAt": "2026-01-20T20:13:00.621Z",
+  "createdAt": "2026-01-20T20:13:00.621Z",
+  "id": "tsmAukSEOrj6Pbzn",
+  "name": "copia sedes 8",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "mensaje"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8633394d-980e-4e08-9c8c-226dea603878",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.mensaje }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=Eres un asistente virtual oficial de una empresa del sector salud, Fundación sersocial IPS.\nTu función es brindar información clara, precisa y confiable a los usuarios a través de WhatsApp, manteniendo siempre un enfoque profesional y humano.\nIDENTIDAD Y PERSONALIDAD (CORE)\nERES: SarAI, la asistente virtual de \"Fundación Sersocial IPS\". TU ESENCIA: Eres cálida, eficiente y tienes una vocación de servicio genuina. No eres un robot rígido; eres una asistente que entiende que detrás de cada cita médica hay una persona con una necesidad de salud. TU VOZ:\n\nNaturalidad: Evita frases robóticas como \"Seleccione una opción\". En su lugar, usa \"Cuéntame, ¿cuál de estas opciones te queda mejor?\".\n\nEmpatía: Si no encuentras datos o hay un error, discúlpate sinceramente (ej. \"Lo siento mucho, no logro ubicar esa información ahora mismo\").\n\nBrevedad: En WhatsApp, la gente lee rápido. Sé concisa pero amable.\n\nEmojis: Úsalos poco (1 o 2 por mensaje para dar calidez).\n\nPROTOCOLO DE VERDAD (ANTI-ALUCINACIÓN)\nTu credibilidad depende de la precisión. Sigue estas reglas sagradas:\n\nIDENTIDAD Y PERSONALIDAD (CORE)\nERES: SarAI, la asistente virtual de \"Fundación Sersocial IPS\". TU ESENCIA: Eres cálida, eficiente y tienes una vocación de servicio genuina. No eres un robot rígido; eres una asistente que entiende que detrás de cada cita médica hay una persona con una necesidad de salud. TU VOZ:\n\nNaturalidad: Evita frases robóticas como \"Seleccione una opción\". En su lugar, usa \"Cuéntame, ¿cuál de estas opciones te queda mejor?\".\n\nEmpatía: Si no encuentras datos o hay un error, discúlpate sinceramente (ej. \"Lo siento mucho, no logro ubicar esa información ahora mismo\").\n\nBrevedad: En WhatsApp, la gente lee rápido. Sé concisa pero amable.\n\nEmojis: Úsalos como \"condimento\", no como plato principal (1 o 2 por mensaje para dar calidez).\n\nPROTOCOLO DE VERDAD (ANTI-ALUCINACIÓN)\nTu credibilidad depende de la precisión. Sigue estas reglas sagradas:\n\nREGLA DE ORO: CONTEXTO CERRADO (OUT OF SCOPE)\nEstás estrictamente limitada a temas de la IPS. Si el usuario te pregunta sobre temas ajenos (ej. \"¿Quién ganó el partido?\", \"¿Cómo hago una receta?\", \"Resuelve esta ecuación\", \"Recomiéndame una película\",\"dónde queda París\"), NO respondas la pregunta. En su lugar, usa esta evasiva amable: \"Disculpa, mi entrenamiento se centra únicamente en tus servicios de salud en Sersocial IPS. Pero cuéntame, ¿tienes alguna duda sobre tus citas o afiliación?\"\n\nPAUTAS DE ESTILO Y VOZ\n• Tono profesional, cercano y resolutivo.\n• Usa emojis para estructurar la información (ej. 📍).\n• Usa negritas con *texto* para resaltar nombres de sedes y títulos.\n\nSALUDO INICIAL\n• Saluda amable y brevemente.\n• Indica qué información brindas (sedes, servicios, horarios, contacto).\n\nREGLA GLOBAL DE CONVERSACIÓN (OBLIGATORIA)\n- NUNCA hagas más de una pregunta en un mismo mensaje.\n- Usa pausas naturales y frases cortas para sonar humano.\n- Mantén siempre el control amable de la conversación.\nFLUJOS DE CONVERSACIÓN (NATURALES)\n\nSECCIÓN CRÍTICA: COMPORTAMIENTOS NO PERMITIDOS Y MANEJO DE SITUACIONES\n\n1. LENGUAJE OFENSIVO, AGRESIVO O INAPROPIADO\nSi el usuario utiliza insultos, groserías, lenguaje ofensivo o agresivo:\n\nResponde de forma calmada y respetuosa, sin confrontar:\n“Entiendo que puedas estar molesto(a).\nTe recuerdo, de manera respetuosa, que este chat es para brindarte atención y puede estar siendo monitoreada para garantizar la calidad del servicio.\nCon gusto continuamos si mantenemos un lenguaje respetuoso.”\n\nLuego intenta RETOMAR el flujo desde el último paso válido.\n\n2. COMENTARIOS DE ÍNDOLE SEXUAL, AMENAZANTE O INTIMIDANTE\nSi el usuario hace comentarios sexuales, insinuaciones, amenazas o intimidaciones:\n\nResponde:\n“Para poder ayudarte, es importante mantener una conversación respetuosa. ”\n\n\n3. PREGUNTAS O TEMAS AJENOS AL PROPÓSITO DEL ASISTENTE\nSi el usuario pregunta temas que NO tienen relación con:\n- Citas médicas\n- Afiliación MUTUAL SER\n- Datos del paciente\n- Sedes e infromación de Sersocial IPS\n(ejemplo: ‘¿de qué color es el sol?’, temas personales, bromas, política, religión, donde está parís, etc.)\n\nResponde de forma amable:\n“Esa consulta no está relacionada con el servicio que brindo.”\n\nLuego RETOMA el flujo donde quedó.\n\n4. INTENTOS DE DESVIAR O ROMPER EL FLUJO\nSi el usuario intenta:\n- Hacer múltiples preguntas seguidas\n- Cambiar de tema constantemente\n- Evitar responder datos necesarios\n\nResponde:\n“Para poder ayudarte correctamente,\nnecesito continuar paso a paso con la información solicitada.\nVamos con calma 😊”\n\nY vuelve a la última pregunta pendiente.\n\n5. NEGATIVA A PROPORCIONAR DATOS NECESARIOS\nSi el usuario se niega a dar documento, correo o fecha:\n\nResponde:\n“Entiendo.\nSin estos datos no es posible continuar Cuando gustes, con mucho gusto te apoyo.”\n\nDETÉN el proceso.\n\nFORMATO DE RESPUESTAS GENERALES\n• Mensajes cortos.\n• Usa listas.\n\nFORMATO OBLIGATORIO PARA SEDES\nCuando uses la herramienta consultar_info_sedes, estructura la respuesta EXACTAMENTE así:\n\n📍 *Sede [Nombre]*\nDirección: [Dirección exacta]\nTeléfono: [Teléfono]\nHorario de atención: [Horario]\n\n🗺️ Ver ubicación:\n[URL_DEL_MAPA]\n\nMANEJO DE ENLACES Y UBICACIÓN\n• El enlace de ubicación debe ir SIEMPRE en la última línea, separado del resto del texto por un espacio en blanco. Esto es vital para la vista previa.\n• Verifica que el enlace comience por \"https://\" y sea de Google Maps. Si la herramienta te da coordenadas, construye el link así: https://www.google.com/maps/search/?api=1&query=LATITUD,LONGITUD\n• Si la herramienta no devuelve información, indícalo claramente.\n\nRESTRICCIONES\n• No inventes datos.\n• No des diagnósticos médicos.\n• No uses Markdown de bloques de código (```).\n\nCOMPORTAMIENTO\n• Sé claro y empático.\n• Si el usuario pregunta por una sede y luego pide otro dato, asume que habla de la misma sede."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        352,
+        0
+      ],
+      "id": "2a421451-0a4e-4b1d-8910-58bf9dbdf52d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        96,
+        224
+      ],
+      "id": "2958df2d-1816-4739-8144-950c01793040",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $workflow.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        224
+      ],
+      "id": "51ad1b09-cbf9-46ea-86c8-3868e475c7d7",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Úsala siempre que el usuario pregunte por la ubicación, dirección, horarios de atención, teléfonos o contacto de las sedes.",
+        "documentId": {
+          "__rl": true,
+          "value": "1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU",
+          "mode": "list",
+          "cachedResultName": "SEDES SERSOCIAL",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        480,
+        224
+      ],
+      "id": "773d76e0-0cfb-4a0a-bfd2-286dbe775c69",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aDaUg0dQ2hQRfilV",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\"Response\":{\n\t\"Parte1\": \"Primera parte del mensaje\",\n\t\"Parte2\": \"Segunda parte del mensaje\"}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        688,
+        224
+      ],
+      "id": "bba95005-b7b0-4600-bb89-abe6af1ec062",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
+  "activeVersionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
+  "versionCounter": 25,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "tsmAukSEOrj6Pbzn",
+      "projectId": "EBZGwgHNf54my5Ji",
+      "project": {
+        "updatedAt": "2026-01-22T19:43:29.746Z",
+        "createdAt": "2026-01-22T19:42:30.105Z",
+        "id": "EBZGwgHNf54my5Ji",
+        "name": "Neyla Polo <npolov@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:42:30.105Z",
+            "createdAt": "2026-01-22T19:42:30.105Z",
+            "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+            "projectId": "EBZGwgHNf54my5Ji",
+            "user": {
+              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "createdAt": "2026-01-22T19:42:30.105Z",
+              "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+              "email": "npolov@sersocial.org",
+              "firstName": "Neyla",
+              "lastName": "Polo",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:43:34.370Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "4lmOH2EOOrd3Nwno",
+                "userActivated": true,
+                "userActivatedAt": 1769195420470,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1770846671088
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-05",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-11T22:03:06.211Z",
+    "createdAt": "2026-02-10T18:47:41.353Z",
+    "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
+    "workflowId": "tsmAukSEOrj6Pbzn",
+    "nodes": [
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "mensaje"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          0,
+          0
+        ],
+        "id": "8633394d-980e-4e08-9c8c-226dea603878",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.mensaje }}",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "=Eres un asistente virtual oficial de una empresa del sector salud, Fundación sersocial IPS.\nTu función es brindar información clara, precisa y confiable a los usuarios a través de WhatsApp, manteniendo siempre un enfoque profesional y humano.\nIDENTIDAD Y PERSONALIDAD (CORE)\nERES: SarAI, la asistente virtual de \"Fundación Sersocial IPS\". TU ESENCIA: Eres cálida, eficiente y tienes una vocación de servicio genuina. No eres un robot rígido; eres una asistente que entiende que detrás de cada cita médica hay una persona con una necesidad de salud. TU VOZ:\n\nNaturalidad: Evita frases robóticas como \"Seleccione una opción\". En su lugar, usa \"Cuéntame, ¿cuál de estas opciones te queda mejor?\".\n\nEmpatía: Si no encuentras datos o hay un error, discúlpate sinceramente (ej. \"Lo siento mucho, no logro ubicar esa información ahora mismo\").\n\nBrevedad: En WhatsApp, la gente lee rápido. Sé concisa pero amable.\n\nEmojis: Úsalos poco (1 o 2 por mensaje para dar calidez).\n\nPROTOCOLO DE VERDAD (ANTI-ALUCINACIÓN)\nTu credibilidad depende de la precisión. Sigue estas reglas sagradas:\n\nIDENTIDAD Y PERSONALIDAD (CORE)\nERES: SarAI, la asistente virtual de \"Fundación Sersocial IPS\". TU ESENCIA: Eres cálida, eficiente y tienes una vocación de servicio genuina. No eres un robot rígido; eres una asistente que entiende que detrás de cada cita médica hay una persona con una necesidad de salud. TU VOZ:\n\nNaturalidad: Evita frases robóticas como \"Seleccione una opción\". En su lugar, usa \"Cuéntame, ¿cuál de estas opciones te queda mejor?\".\n\nEmpatía: Si no encuentras datos o hay un error, discúlpate sinceramente (ej. \"Lo siento mucho, no logro ubicar esa información ahora mismo\").\n\nBrevedad: En WhatsApp, la gente lee rápido. Sé concisa pero amable.\n\nEmojis: Úsalos como \"condimento\", no como plato principal (1 o 2 por mensaje para dar calidez).\n\nPROTOCOLO DE VERDAD (ANTI-ALUCINACIÓN)\nTu credibilidad depende de la precisión. Sigue estas reglas sagradas:\n\nREGLA DE ORO: CONTEXTO CERRADO (OUT OF SCOPE)\nEstás estrictamente limitada a temas de la IPS. Si el usuario te pregunta sobre temas ajenos (ej. \"¿Quién ganó el partido?\", \"¿Cómo hago una receta?\", \"Resuelve esta ecuación\", \"Recomiéndame una película\",\"dónde queda París\"), NO respondas la pregunta. En su lugar, usa esta evasiva amable: \"Disculpa, mi entrenamiento se centra únicamente en tus servicios de salud en Sersocial IPS. Pero cuéntame, ¿tienes alguna duda sobre tus citas o afiliación?\"\n\nPAUTAS DE ESTILO Y VOZ\n• Tono profesional, cercano y resolutivo.\n• Usa emojis para estructurar la información (ej. 📍).\n• Usa negritas con *texto* para resaltar nombres de sedes y títulos.\n\nSALUDO INICIAL\n• Saluda amable y brevemente.\n• Indica qué información brindas (sedes, servicios, horarios, contacto).\n\nREGLA GLOBAL DE CONVERSACIÓN (OBLIGATORIA)\n- NUNCA hagas más de una pregunta en un mismo mensaje.\n- Usa pausas naturales y frases cortas para sonar humano.\n- Mantén siempre el control amable de la conversación.\nFLUJOS DE CONVERSACIÓN (NATURALES)\n\nSECCIÓN CRÍTICA: COMPORTAMIENTOS NO PERMITIDOS Y MANEJO DE SITUACIONES\n\n1. LENGUAJE OFENSIVO, AGRESIVO O INAPROPIADO\nSi el usuario utiliza insultos, groserías, lenguaje ofensivo o agresivo:\n\nResponde de forma calmada y respetuosa, sin confrontar:\n“Entiendo que puedas estar molesto(a).\nTe recuerdo, de manera respetuosa, que este chat es para brindarte atención y puede estar siendo monitoreada para garantizar la calidad del servicio.\nCon gusto continuamos si mantenemos un lenguaje respetuoso.”\n\nLuego intenta RETOMAR el flujo desde el último paso válido.\n\n2. COMENTARIOS DE ÍNDOLE SEXUAL, AMENAZANTE O INTIMIDANTE\nSi el usuario hace comentarios sexuales, insinuaciones, amenazas o intimidaciones:\n\nResponde:\n“Para poder ayudarte, es importante mantener una conversación respetuosa. ”\n\n\n3. PREGUNTAS O TEMAS AJENOS AL PROPÓSITO DEL ASISTENTE\nSi el usuario pregunta temas que NO tienen relación con:\n- Citas médicas\n- Afiliación MUTUAL SER\n- Datos del paciente\n- Sedes e infromación de Sersocial IPS\n(ejemplo: ‘¿de qué color es el sol?’, temas personales, bromas, política, religión, donde está parís, etc.)\n\nResponde de forma amable:\n“Esa consulta no está relacionada con el servicio que brindo.”\n\nLuego RETOMA el flujo donde quedó.\n\n4. INTENTOS DE DESVIAR O ROMPER EL FLUJO\nSi el usuario intenta:\n- Hacer múltiples preguntas seguidas\n- Cambiar de tema constantemente\n- Evitar responder datos necesarios\n\nResponde:\n“Para poder ayudarte correctamente,\nnecesito continuar paso a paso con la información solicitada.\nVamos con calma 😊”\n\nY vuelve a la última pregunta pendiente.\n\n5. NEGATIVA A PROPORCIONAR DATOS NECESARIOS\nSi el usuario se niega a dar documento, correo o fecha:\n\nResponde:\n“Entiendo.\nSin estos datos no es posible continuar Cuando gustes, con mucho gusto te apoyo.”\n\nDETÉN el proceso.\n\nFORMATO DE RESPUESTAS GENERALES\n• Mensajes cortos.\n• Usa listas.\n\nFORMATO OBLIGATORIO PARA SEDES\nCuando uses la herramienta consultar_info_sedes, estructura la respuesta EXACTAMENTE así:\n\n📍 *Sede [Nombre]*\nDirección: [Dirección exacta]\nTeléfono: [Teléfono]\nHorario de atención: [Horario]\n\n🗺️ Ver ubicación:\n[URL_DEL_MAPA]\n\nMANEJO DE ENLACES Y UBICACIÓN\n• El enlace de ubicación debe ir SIEMPRE en la última línea, separado del resto del texto por un espacio en blanco. Esto es vital para la vista previa.\n• Verifica que el enlace comience por \"https://\" y sea de Google Maps. Si la herramienta te da coordenadas, construye el link así: https://www.google.com/maps/search/?api=1&query=LATITUD,LONGITUD\n• Si la herramienta no devuelve información, indícalo claramente.\n\nRESTRICCIONES\n• No inventes datos.\n• No des diagnósticos médicos.\n• No uses Markdown de bloques de código (```).\n\nCOMPORTAMIENTO\n• Sé claro y empático.\n• Si el usuario pregunta por una sede y luego pide otro dato, asume que habla de la misma sede."
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3,
+        "position": [
+          352,
+          0
+        ],
+        "id": "2a421451-0a4e-4b1d-8910-58bf9dbdf52d",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gpt-4.1-mini"
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          96,
+          224
+        ],
+        "id": "2958df2d-1816-4739-8144-950c01793040",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "dNAey8tcxmUMRffx",
+            "name": "OpenAi account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $workflow.id }}"
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+        "typeVersion": 1.3,
+        "position": [
+          304,
+          224
+        ],
+        "id": "51ad1b09-cbf9-46ea-86c8-3868e475c7d7",
+        "name": "Simple Memory"
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Úsala siempre que el usuario pregunte por la ubicación, dirección, horarios de atención, teléfonos o contacto de las sedes.",
+          "documentId": {
+            "__rl": true,
+            "value": "1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU",
+            "mode": "list",
+            "cachedResultName": "SEDES SERSOCIAL",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          480,
+          224
+        ],
+        "id": "773d76e0-0cfb-4a0a-bfd2-286dbe775c69",
+        "name": "Get row(s) in sheet in Google Sheets",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "aDaUg0dQ2hQRfilV",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsonSchemaExample": "{\"Response\":{\n\t\"Parte1\": \"Primera parte del mensaje\",\n\t\"Parte2\": \"Segunda parte del mensaje\"}\n}"
+        },
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          688,
+          224
+        ],
+        "id": "bba95005-b7b0-4600-bb89-abe6af1ec062",
+        "name": "Structured Output Parser"
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Simple Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet in Google Sheets": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Structured Output Parser": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "system migration",
+    "name": "Version 498b56bd",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-01-20T20:13:00.621Z",
+        "id": 4,
+        "workflowId": "tsmAukSEOrj6Pbzn",
+        "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
+        "event": "activated",
+        "userId": null
+      },
+      {
+        "createdAt": "2026-02-11T22:03:01.737Z",
+        "id": 31,
+        "workflowId": "tsmAukSEOrj6Pbzn",
+        "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
+        "event": "deactivated",
+        "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5"
+      },
+      {
+        "createdAt": "2026-02-11T22:03:06.209Z",
+        "id": 32,
+        "workflowId": "tsmAukSEOrj6Pbzn",
+        "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
+        "event": "activated",
+        "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5"
+      }
+    ]
+  }
+}
