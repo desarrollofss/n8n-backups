@@ -1,0 +1,1908 @@
+{
+  "updatedAt": "2026-03-06T19:48:45.222Z",
+  "createdAt": "2026-03-06T16:43:44.065Z",
+  "id": "HX4UEAuyrmw_ocxcGG9oO",
+  "name": "SOSPECHA DE CANCER PROSTATA",
+  "description": null,
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "output": "raw",
+        "filters": {},
+        "options": {}
+      },
+      "id": "cbc413c8-478c-4edf-9a7d-5df12801dfc7",
+      "name": "Outlook - Recibir Correo",
+      "type": "n8n-nodes-base.microsoftOutlookTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2896,
+        464
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.subject }}",
+              "rightValue": "COHORTE | SALUD_MENTAL",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "id": "84c8745c-44ed-4581-9eba-5fee58ba87aa"
+            },
+            {
+              "id": "014a4ce1-02cc-4059-b344-baa30bfac097",
+              "leftValue": "={{ $json.isDraft.toString() }}",
+              "rightValue": "false",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e967ee24-ecea-492a-8445-af149f731fd1",
+      "name": "Verificar Asunto",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -2624,
+        464
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ee4e8d1a-d12e-4728-8e9b-59b21d8e141c",
+      "name": "Ignorar Correo",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -2336,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Datos del remitente\nconst emailMeta   = $('HTTP Request remitente').item.json;\nconst fromAddress = emailMeta.from?.emailAddress?.address || '';\nconst fromName    = emailMeta.from?.emailAddress?.name || fromAddress;\nconst subject     = emailMeta.subject || '';\nconst emailId     = emailMeta.id || '';\n\n// Adjuntos\nconst adjuntosData = $('HTTP Request adjunto').item.json;\nconst adjuntos     = adjuntosData.value || [];\n\nlet xlsxKey  = null;\nlet xlsxName = null;\nconst pdfItems   = [];\nconst binaryData = {};\n\nfor (const adj of adjuntos) {\n  const name     = (adj.name || '').toLowerCase();\n  const mimeType = adj.contentType || '';\n  const b64      = adj.contentBytes || '';\n\n  if (name.endsWith('.xlsx') || mimeType.includes('spreadsheetml')) {\n    if (!xlsxKey) {\n      xlsxKey  = 'xlsx_file';\n      xlsxName = adj.name;\n      binaryData['xlsx_file'] = {\n        data:          b64,\n        mimeType:      mimeType,\n        fileName:      adj.name,\n        fileExtension: 'xlsx'\n      };\n    }\n  } else if (name.endsWith('.pdf') || mimeType.includes('pdf')) {\n    const pdfKey = `pdf_${pdfItems.length}`;\n    pdfItems.push({ key: pdfKey, name: adj.name });\n    binaryData[pdfKey] = {\n      data:          b64,\n      mimeType:      mimeType,\n      fileName:      adj.name,\n      fileExtension: 'pdf'\n    };\n  }\n}\n\n\nconst now  = new Date();\nconst yyyy = String(now.getFullYear());\nconst mm   = String(now.getMonth() + 1).padStart(2, '0');\n\nreturn {\n  json: {\n    emailId,\n    fromAddress,\n    fromName,\n    subject,\n    xlsxKey,\n    xlsxName,\n    pdfKeys:          pdfItems,\n    hasPdfs:          pdfItems.length > 0,\n    yyyy,\n    mm,\n    receivedDateTime: $('Outlook - Recibir Correo').item.json.receivedDateTime || '', \n    fechaCargue:      now.toISOString().split('T')[0]\n  },\n  binary: binaryData\n};"
+      },
+      "id": "b560e9d7-da00-4c1e-b8dc-ff03e6991180",
+      "name": "Procesar Adjuntos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2064,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.tieneValidos }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              },
+              "id": "3e36f576-4dbf-403a-8510-fed5b5c10b80"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1cbe852a-ff91-47f9-8f94-c8bcf291f91b",
+      "name": "¿Tiene Válidos?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1040,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items  = $input.all();\nconst item   = items[0];\nconst json   = item?.json || {};\n\nconst { validRows, fromAddress, fechaCargue, xlsxName, outputName } = json;\n\nif (!validRows || validRows.length === 0) return [];\n\nconst n = (v) => (v === null || v === undefined || v === '') ? null : v;\nconst s = (v) => (v === null || v === undefined) ? null : String(v).trim();\n\nreturn validRows.map(row => ({\n  json: {\n    // Prestador\n    fecha_de_reporte:                 s(row['FECHA_DE_REPORTE']),\n    nit_de_la_ips:                    s(row['NIT_DE_LA_IPS']),\n    codigo_de_habilitacion:           s(row['CÓDIGO_DE_HABILITACIÓN']),\n\n    // Paciente\n    tipo_de_documento:                s(row['TIPO_DE_DOCUMENTO']),\n    numero_de_documento:              s(row['NÚMERO_DE_DOCUMENTO']),\n    primer_nombre:                    s(row['PRIMER_NOMBRE']),\n    segundo_nombre:                   s(row['SEGUNDO_NOMBRE']),\n    primer_apellido:                  s(row['PRIMER_APELLIDO']),\n    segundo_apellido:                 s(row['SEGUNDO_APELLIDO']),\n\n    // Contacto\n    direccion_de_residencia:          s(row['DIRECCIÓN_DE_RESIDENCIA']),\n    telefono_celular_1:               s(row['TELÉFONO_CELULAR_1']),\n    telefono_celular_2:               s(row['TELÉFONO_CELULAR_2']),\n\n    // Sociodemográfico\n    escolaridad:                      n(row['ESCOLARIDAD']),\n    ocupacion:                        n(row['OCUPACIÓN']),\n\n    // Diagnóstico\n    clasificacion_de_caso:            n(row['CLASIFICACIÓN_DE_CASO']),\n    cie10_principal:                  s(row['CIE10_PRINCIPAL']),\n    fecha_de_diagnostico:             s(row['FECHA_DE_DIAGNÓSTICO']),\n    cie10_relacionado:                s(row['CIE10_RELACIONADO']),\n    fecha_ingreso_al_programa:        s(row['FECHA_INGRESO_AL_PROGRAMA']),\n\n    // Clasificación clínica\n    clasificacion_clinica:            s(row['CLASIFICACIÓN_CLÍNICA']),\n    riesgo_patologico:                s(row['RIESGO_PATOLÓGICO']),\n    remitido_a:                       s(row['REMITIDO_A']),\n\n    // Atenciones Psiquiatría adultos\n    atencion_1_psiquiatria:           s(row['ATENCIÓN_1_PSIQUIATRÍA']),\n    atencion_2_psiquiatria:           s(row['ATENCIÓN_2_PSIQUIATRÍA']),\n    atencion_3_psiquiatria:           s(row['ATENCIÓN_3_PSIQUIATRÍA']),\n    atencion_4_psiquiatria:           s(row['ATENCIÓN_4_PSIQUIATRÍA']),\n    atencion_5_psiquiatria:           s(row['ATENCIÓN_5_PSIQUIATRÍA']),\n    atencion_6_psiquiatria:           s(row['ATENCIÓN_6_PSIQUIATRÍA']),\n    atencion_7_psiquiatria:           s(row['ATENCIÓN_7_PSIQUIATRÍA']),\n    atencion_8_psiquiatria:           s(row['ATENCIÓN_8_PSIQUIATRÍA']),\n    obs_psiquiatria:                  s(row['OBSERVACIONES_PSIQUIATRÍA']),\n\n    // Atenciones Psiquiatría Infantil\n    atencion_1_psiq_infantil:         s(row['ATENCIÓN_1_PSIQ._INFANTIL']),\n    atencion_2_psiq_infantil:         s(row['ATENCIÓN_2_PSIQ._INFANTIL']),\n    atencion_3_psiq_infantil:         s(row['ATENCIÓN_3_PSIQ._INFANTIL']),\n    atencion_4_psiq_infantil:         s(row['ATENCIÓN_4_PSIQ._INFANTIL']),\n    atencion_5_psiq_infantil:         s(row['ATENCIÓN_5_PSIQ._INFANTIL']),\n    atencion_6_psiq_infantil:         s(row['ATENCIÓN_6_PSIQ._INFANTIL']),\n    obs_psiq_infantil:                s(row['OBSERVACIONES_PSIQ._INFANTIL']),\n\n    // Trabajo Social\n    atencion_1_trabajo_social:        s(row['ATENCIÓN_1_TRABAJO_SOCIAL']),\n    atencion_2_trabajo_social:        s(row['ATENCIÓN_2_TRABAJO_SOCIAL']),\n    atencion_3_trabajo_social:        s(row['ATENCIÓN_3_TRABAJO_SOCIAL']),\n    atencion_4_trabajo_social:        s(row['ATENCIÓN_4_TRABAJO_SOCIAL']),\n    atencion_5_trabajo_social:        s(row['ATENCIÓN_5_TRABAJO_SOCIAL']),\n    obs_trabajo_social:               s(row['OBSERVACIONES_TRABAJO_SOCIAL']),\n\n    // Medicina Experto\n    atencion_1_med_experto:           s(row['ATENCIÓN_1_MED._EXPERTO']),\n    atencion_2_med_experto:           s(row['ATENCIÓN_2_MED._EXPERTO']),\n    atencion_3_med_experto:           s(row['ATENCIÓN_3_MED._EXPERTO']),\n    atencion_4_med_experto:           s(row['ATENCIÓN_4_MED._EXPERTO']),\n    atencion_5_med_experto:           s(row['ATENCIÓN_5_MED._EXPERTO']),\n    obs_med_experto:                  s(row['OBSERVACIONES_MED._EXPERTO']),\n\n    // Terapia Ocupacional\n    atencion_1_terap_ocupacional:     s(row['ATENCIÓN_1_TERAP._OCUPACIONAL']),\n    atencion_2_terap_ocupacional:     s(row['ATENCIÓN_2_TERAP._OCUPACIONAL']),\n    atencion_3_terap_ocupacional:     s(row['ATENCIÓN_3_TERAP._OCUPACIONAL']),\n    obs_terap_ocupacional:            s(row['OBSERVACIONES_TERAP._OCUP.']),\n\n    // Neuropsicología\n    atencion_1_neuropsicologia:       s(row['ATENCIÓN_1_NEUROPSICOLOGÍA']),\n    atencion_2_neuropsicologia:       s(row['ATENCIÓN_2_NEUROPSICOLOGÍA']),\n    atencion_3_neuropsicologia:       s(row['ATENCIÓN_3_NEUROPSICOLOGÍA']),\n    obs_neuropsicologia:              s(row['OBSERVACIONES_NEUROPSICOLOGÍA']),\n\n    // Visita Domiciliaria\n    atencion_1_visita_domiciliaria:   s(row['ATENCIÓN_1_VISITA_DOMICILIARIA']),\n    atencion_2_visita_domiciliaria:   s(row['ATENCIÓN_2_VISITA_DOMICILIARIA']),\n    obs_visita_domiciliaria:          s(row['OBSERVACIONES_VISITA_DOMICILIARIA']),\n\n    // Unidad de Análisis Integral\n    fecha_unidad_de_analisis_integral: s(row['FECHA_UNIDAD_DE_ANÁLISIS_INTEGRAL']),\n    obs_unidad_de_analisis:            s(row['OBSERVACIONES_UNIDAD_DE_ANÁLISIS']),\n\n    // Trazabilidad\n    correo_remitente:  fromAddress   || null,\n    fecha_cargue:      fechaCargue   || null,\n    archivo_origen:    xlsxName      || null,\n    archivo_validado:  outputName    || null,\n    fila_origen:       row._fila_origen || null\n  }\n}));"
+      },
+      "id": "920b85dc-f96a-4b90-ad9f-5b66380c1a74",
+      "name": "Preparar Registros PG",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        352
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://graph.microsoft.com/v1.0/me/drive/root:/Cohortes/SaludMental/{{ $json.yyyy }}/{{ $json.mm }}/EXCEL/{{ $json.outputName }}:/content",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "validXlsx",
+        "options": {}
+      },
+      "id": "d797b1c3-3f79-4e08-b9e5-43485cd812f3",
+      "name": "Subir Excel OneDrive",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -192,
+        176
+      ],
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items  = $input.all();\nconst item   = items[0];\nconst json   = item?.json   || {};\nconst binary = item?.binary || {};\n\nconst { pdfKeys, yyyy, mm, receivedDateTime } = json;\nconst fromAddress = json.fromAddress \n                 || $('HTTP Request remitente').item.json?.from?.emailAddress?.address \n                 || '';\n\nif (!pdfKeys || pdfKeys.length === 0) return [];\n\n// Usuario: solo la parte antes del @\nconst usuario = (fromAddress || '').split('@')[0].toLowerCase();\n\n// Fecha y hora del correo\nconst fechaCorreo = receivedDateTime ? new Date(receivedDateTime) : new Date();\n\nconst AAAA = fechaCorreo.getFullYear().toString();\nconst MM   = String(fechaCorreo.getMonth() + 1).padStart(2, '0');\nconst DD   = String(fechaCorreo.getDate()).padStart(2, '0');\nconst HHMM = String(fechaCorreo.getHours()).padStart(2, '0') +\n             String(fechaCorreo.getMinutes()).padStart(2, '0');\n\nconst results = [];\n\nfor (const pdf of pdfKeys) {\n  const binData = binary[pdf.key];\n  if (!binData) continue;\n\n  // Formato: 2026_02_27_1808_directortic_NombreOriginal.pdf\n  const nuevoNombre = `${AAAA}_${MM}_${DD}_${HHMM}_${usuario}_${pdf.name}`;\n\n  results.push({\n    json: {\n      fromAddress,\n      yyyy,\n      mm,\n      pdfName:      nuevoNombre,\n      onedrivePath: `/Cohortes/SaludMental/Documentos/${yyyy}-${mm}/${nuevoNombre}`\n    },\n    binary: {\n      data: binData\n    }\n  });\n}\n\nreturn results;"
+      },
+      "id": "8fccb1e8-be87-4084-ba67-c5c55d52fe4a",
+      "name": "Preparar PDFs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        -80
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const JSZip = require('jszip');\nconst items  = $input.all();\nconst item   = items[0];\nconst json   = item?.json   || {};\nconst binary = item?.binary || {};\n\nconst { validRows, invalidRows, yyyy, mm, fechaCargue, xlsxName, fromAddress, xlsxKey } = json;\n\nif (!validRows || validRows.length === 0) {\n  return [{ json: { ...json, outputName: null }, binary }];\n}\n\nconst binEntry = binary[xlsxKey]\n              || $('Validar Token y Estructura').item?.binary?.[xlsxKey]\n              || null;\n\nif (!binEntry?.data) {\n  return [{ json: { ...json, outputName: null, motivoError: 'Binario no disponible' }, binary }];\n}\n\nconst filasInvalidas = new Set((invalidRows || []).map(r => r.fila));\n\nconst buf = Buffer.from(binEntry.data, 'base64');\nconst zip  = await JSZip.loadAsync(buf);\n\nconst workbookXml = await zip.file('xl/workbook.xml').async('string');\nconst sheetMatch  = workbookXml.match(/name=\"SEGUIMIENTO_SM\"[^>]*r:id=\"(rId\\d+)\"/);\nconst rId         = sheetMatch?.[1];\nconst relsXml     = await zip.file('xl/_rels/workbook.xml.rels').async('string');\nconst relMatch    = relsXml.match(new RegExp(`Id=\"${rId}\"[^>]*Target=\"([^\"]+)\"`));\nconst sheetPath   = `xl/${relMatch?.[1]}`;\n\nlet sheetXml = await zip.file(sheetPath).async('string');\n\n// Extraer TODAS las filas del XML\nconst allRows = [...sheetXml.matchAll(/<row\\b[^>]*\\sr=\"(\\d+)\"[^>]*>[\\s\\S]*?<\\/row>/g)];\n\nconst DATA_START = 4; // fila 4 es donde empiezan los datos (1-based)\n\n// Separar cabeceras y datos\nconst headerRows = allRows.filter(m => parseInt(m[1]) < DATA_START);\nconst dataRows   = allRows.filter(m => parseInt(m[1]) >= DATA_START);\n\n// Detectar estilos alternados: capturar s=\"N\" de cada celda en fila 4 y 5\nconst getStyleMap = (rowXml) => {\n  const map = {};\n  const cells = [...rowXml.matchAll(/<c\\s+r=\"([A-Z]+)\\d+\"([^>]*)>/g)];\n  for (const cell of cells) {\n    const col   = cell[1];\n    const attrs = cell[2];\n    const sMatch = attrs.match(/\\bs=\"(\\d+)\"/);\n    map[col] = sMatch ? sMatch[1] : null;\n  }\n  return map;\n};\n\nconst styleOdd  = dataRows[0] ? getStyleMap(dataRows[0][0]) : {}; // fila 4 → impar\nconst styleEven = dataRows[1] ? getStyleMap(dataRows[1][0]) : {}; // fila 5 → par\n\n// Filtrar filas inválidas\nconst validDataRows = dataRows.filter(m => !filasInvalidas.has(parseInt(m[1])));\n\n// Renumerar y corregir estilos alternados\nconst fixedRows = validDataRows.map((match, idx) => {\n  const newRowNum = DATA_START + idx;\n  const esImpar   = idx % 2 === 0; // 0,2,4... → impar visual\n  const styleMap  = esImpar ? styleOdd : styleEven;\n\n  let rowXml = match[0];\n\n  // Renumerar el atributo r de la fila\n  rowXml = rowXml.replace(/(<row\\b[^>]*\\s)r=\"\\d+\"/, `$1r=\"${newRowNum}\"`);\n\n  // Renumerar referencias de celdas (A4 → A_newRowNum, etc.)\n  rowXml = rowXml.replace(/(<c\\s+r=\")([A-Z]+)\\d+\"/g, `$1$2${newRowNum}\"`);\n\n  // Corregir estilo s=\"N\" de cada celda según alternado\n  rowXml = rowXml.replace(/<c\\s+r=\"([A-Z]+)\\d+\"([^>]*)>/g, (match, col, attrs) => {\n    const targetStyle = styleMap[col];\n    if (targetStyle === null || targetStyle === undefined) return match;\n    // Reemplazar o agregar s=\"N\"\n    if (/\\bs=\"\\d+\"/.test(attrs)) {\n      attrs = attrs.replace(/\\bs=\"\\d+\"/, `s=\"${targetStyle}\"`);\n    } else {\n      attrs = ` s=\"${targetStyle}\"` + attrs;\n    }\n    return `<c r=\"${col}${newRowNum}\"${attrs}>`;\n  });\n\n  return rowXml;\n});\n\n// Reconstruir sheetData\nconst allFixedRows = [...headerRows.map(m => m[0]), ...fixedRows].join('');\nsheetXml = sheetXml.replace(/<sheetData>[\\s\\S]*?<\\/sheetData>/, `<sheetData>${allFixedRows}</sheetData>`);\n\nzip.file(sheetPath, sheetXml);\n\nconst outBuf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });\nconst b64    = outBuf.toString('base64');\n\nconst usuario     = (fromAddress || '').split('@')[0].toLowerCase();\nconst nitIps      = validRows[0]?.['NIT_DE_LA_IPS'] || 'SIN_NIT';\nconst fechaUTC    = json.receivedDateTime ? new Date(json.receivedDateTime) : new Date();\nconst offsetMs    = -5 * 60 * 60 * 1000;\nconst fechaCorreo = new Date(fechaUTC.getTime() + offsetMs);\nconst AAAA        = fechaCorreo.getUTCFullYear().toString();\nconst MM          = String(fechaCorreo.getUTCMonth() + 1).padStart(2, '0');\nconst DD          = String(fechaCorreo.getUTCDate()).padStart(2, '0');\nconst horas24     = fechaCorreo.getUTCHours();\nconst minutos     = String(fechaCorreo.getUTCMinutes()).padStart(2, '0');\nconst ampm        = horas24 >= 12 ? 'pm' : 'am';\nconst horas12     = horas24 % 12 || 12;\nconst outputName  = `${AAAA}_${MM}_${DD}_${horas12}_${minutos}_${ampm}_${nitIps}_${usuario}_${xlsxName}`;\n\nconst onedriveFolder = `/Cohortes/SaludMental/${yyyy}/${mm}`;\nconst onedrivePath   = `${onedriveFolder}/${outputName}`;\n\nreturn [{\n  json: { ...json, outputName, onedriveFolder, onedrivePath, nitIps},\n  binary: {\n    ...binary,\n    validXlsx: {\n      data:          b64,\n      mimeType:      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',\n      fileName:      outputName,\n      fileExtension: 'xlsx'\n    }\n  }\n}];"
+      },
+      "id": "78e3257f-a66c-42f2-8df3-53b7b82e3559",
+      "name": "Generar Excel Válidos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "name"
+        },
+        "table": {
+          "__rl": true,
+          "value": "salud_mental_cohorte",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_de_reporte",
+              "displayName": "fecha_de_reporte",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nit_de_la_ips",
+              "displayName": "nit_de_la_ips",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "codigo_de_habilitacion",
+              "displayName": "codigo_de_habilitacion",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo_de_documento",
+              "displayName": "tipo_de_documento",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "numero_de_documento",
+              "displayName": "numero_de_documento",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "primer_nombre",
+              "displayName": "primer_nombre",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "segundo_nombre",
+              "displayName": "segundo_nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "primer_apellido",
+              "displayName": "primer_apellido",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "segundo_apellido",
+              "displayName": "segundo_apellido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "direccion_de_residencia",
+              "displayName": "direccion_de_residencia",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_celular_1",
+              "displayName": "telefono_celular_1",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_celular_2",
+              "displayName": "telefono_celular_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "escolaridad",
+              "displayName": "escolaridad",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ocupacion",
+              "displayName": "ocupacion",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "clasificacion_de_caso",
+              "displayName": "clasificacion_de_caso",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cie10_principal",
+              "displayName": "cie10_principal",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_de_diagnostico",
+              "displayName": "fecha_de_diagnostico",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cie10_relacionado",
+              "displayName": "cie10_relacionado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_ingreso_al_programa",
+              "displayName": "fecha_ingreso_al_programa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "clasificacion_clinica",
+              "displayName": "clasificacion_clinica",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "riesgo_patologico",
+              "displayName": "riesgo_patologico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "remitido_a",
+              "displayName": "remitido_a",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_psiquiatria",
+              "displayName": "atencion_1_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_psiquiatria",
+              "displayName": "atencion_2_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_psiquiatria",
+              "displayName": "atencion_3_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_psiquiatria",
+              "displayName": "atencion_4_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_psiquiatria",
+              "displayName": "atencion_5_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_6_psiquiatria",
+              "displayName": "atencion_6_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_7_psiquiatria",
+              "displayName": "atencion_7_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_8_psiquiatria",
+              "displayName": "atencion_8_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_psiquiatria",
+              "displayName": "obs_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_psiq_infantil",
+              "displayName": "atencion_1_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_psiq_infantil",
+              "displayName": "atencion_2_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_psiq_infantil",
+              "displayName": "atencion_3_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_psiq_infantil",
+              "displayName": "atencion_4_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_psiq_infantil",
+              "displayName": "atencion_5_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_6_psiq_infantil",
+              "displayName": "atencion_6_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_psiq_infantil",
+              "displayName": "obs_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_trabajo_social",
+              "displayName": "atencion_1_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_trabajo_social",
+              "displayName": "atencion_2_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_trabajo_social",
+              "displayName": "atencion_3_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_trabajo_social",
+              "displayName": "atencion_4_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_trabajo_social",
+              "displayName": "atencion_5_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_trabajo_social",
+              "displayName": "obs_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_med_experto",
+              "displayName": "atencion_1_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_med_experto",
+              "displayName": "atencion_2_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_med_experto",
+              "displayName": "atencion_3_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_med_experto",
+              "displayName": "atencion_4_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_med_experto",
+              "displayName": "atencion_5_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_med_experto",
+              "displayName": "obs_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_terap_ocupacional",
+              "displayName": "atencion_1_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_terap_ocupacional",
+              "displayName": "atencion_2_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_terap_ocupacional",
+              "displayName": "atencion_3_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_terap_ocupacional",
+              "displayName": "obs_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_neuropsicologia",
+              "displayName": "atencion_1_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_neuropsicologia",
+              "displayName": "atencion_2_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_neuropsicologia",
+              "displayName": "atencion_3_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_neuropsicologia",
+              "displayName": "obs_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_visita_domiciliaria",
+              "displayName": "atencion_1_visita_domiciliaria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_visita_domiciliaria",
+              "displayName": "atencion_2_visita_domiciliaria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_visita_domiciliaria",
+              "displayName": "obs_visita_domiciliaria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_unidad_de_analisis_integral",
+              "displayName": "fecha_unidad_de_analisis_integral",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_unidad_de_analisis",
+              "displayName": "obs_unidad_de_analisis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "correo_remitente",
+              "displayName": "correo_remitente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_cargue",
+              "displayName": "fecha_cargue",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "archivo_origen",
+              "displayName": "archivo_origen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "archivo_validado",
+              "displayName": "archivo_validado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fila_origen",
+              "displayName": "fila_origen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "skipOnConflict": false
+        }
+      },
+      "id": "af00eb5b-7270-4063-9138-52b68fd1eb4f",
+      "name": "Insertar PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        48,
+        352
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.microsoft.com/v1.0/users/reporte.saludmental@sersocial.org/messages/{{ $('Outlook - Recibir Correo').item.json.id }}?$select=from,sender,subject,hasAttachments",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -2336,
+        496
+      ],
+      "id": "7c3c292c-ec3a-42dc-9113-a974778f9b15",
+      "name": "HTTP Request remitente",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.microsoft.com/v1.0/users/reporte.saludmental@sersocial.org/messages/{{ $json.id }}/attachments",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -2336,
+        336
+      ],
+      "id": "b96015be-c4ee-4483-b732-66450dbd50c3",
+      "name": "HTTP Request adjunto",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const xlsx = require('xlsx');\n\nconst items   = $input.all();\nconst item    = items[0];\nconst json    = item?.json   || {};\nconst binary  = item?.binary || {};\nconst xlsxKey = json.xlsxKey;\n\nif (!xlsxKey) {\n  return [{ json: { ...json, tokenValido: false, xlsxKey: null }, binary }];\n}\n\nif (!binary[xlsxKey]) {\n  return [{\n    json: { ...json, tokenValido: false, motivoRechazo: 'No se encontró el archivo Excel en los adjuntos.' },\n    binary\n  }];\n}\n\nlet workbook;\ntry {\n  const buf = Buffer.from(binary[xlsxKey].data, 'base64');\n  workbook  = xlsx.read(buf, { type: 'buffer', cellDates: true });\n} catch(e) {\n  return [{\n    json: { ...json, tokenValido: false, motivoRechazo: `El archivo no es un Excel válido: ${e.message}` },\n    binary\n  }];\n}\n\n// Verificar hoja _META y token\nif (!workbook.SheetNames.includes('_META')) {\n  return [{\n    json: { ...json, tokenValido: false, motivoRechazo: 'El archivo no es la plantilla oficial (falta hoja _META).' },\n    binary\n  }];\n}\n\nconst metaSheet = workbook.Sheets['_META'];\nconst token     = metaSheet['A1'] ? String(metaSheet['A1'].v).trim() : '';\nconst cohorte   = metaSheet['A2'] ? String(metaSheet['A2'].v).trim() : '';\n\nif (token !== 'SM_v1.0' || cohorte !== 'SALUD_MENTAL') {\n  return [{\n    json: {\n      ...json,\n      tokenValido:   false,\n      motivoRechazo: `Token inválido (encontrado: \"${token}\" / \"${cohorte}\"). Use la plantilla oficial.`\n    },\n    binary\n  }];\n}\n\n// Verificar hoja de datos\nconst HOJA = 'SEGUIMIENTO_SM';\nif (!workbook.SheetNames.includes(HOJA)) {\n  return [{\n    json: { ...json, tokenValido: false, motivoRechazo: `No se encontró la hoja \"${HOJA}\". Use la plantilla oficial.` },\n    binary\n  }];\n}\n\nconst dataSheet = workbook.Sheets[HOJA];\n\n// Leer todas las filas en crudo para procesar encabezados manualmente\nconst rawRows = xlsx.utils.sheet_to_json(dataSheet, { defval: null, header: 1, range: 2 });\n\nif (rawRows.length < 2) {\n  return [{\n    json: { ...json, tokenValido: false, motivoRechazo: 'La hoja SEGUIMIENTO_SM no contiene datos.' },\n    binary\n  }];\n}\n\n// Limpiar encabezados: quitar \\n, ★, espacios extra → NOMBRE_LIMPIO\nconst headersLimpios = (rawRows[0] || []).map(h =>\n  String(h || '')\n    .replace(/\\n/g, ' ')\n    .replace(/★/g, '')\n    .replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ0-9\\s]/g, '')\n    .replace(/\\s+/g, '_')\n    .trim()\n    .toUpperCase()\n    .replace(/_+$/g, '')\n);\n\n// Reconstruir rows con headers limpios, ignorar filas completamente vacías\nconst rows = rawRows.slice(1).map(fila => {\n  const obj = {};\n  headersLimpios.forEach((h, i) => { obj[h] = fila[i] ?? null; });\n  return obj;\n}).filter(r => Object.values(r).some(v => v !== null));\n\nif (rows.length === 0) {\n  return [{\n    json: { ...json, tokenValido: false, motivoRechazo: 'La hoja SEGUIMIENTO_SM no contiene datos.' },\n    binary\n  }];\n}\n\n// Verificar columnas obligatorias con nombres limpios\nconst COLUMNAS_REQUERIDAS = [\n  'FECHA_DE_REPORTE',\n  'NIT_DE_LA_IPS',\n  'CÓDIGO_DE_HABILITACIÓN',\n  'TIPO_DE_DOCUMENTO',\n  'NÚMERO_DE_DOCUMENTO',\n  'PRIMER_NOMBRE',\n  'PRIMER_APELLIDO',\n  'DIRECCIÓN_DE_RESIDENCIA',\n  'TELÉFONO_CELULAR_1',\n  'ESCOLARIDAD',\n  'OCUPACIÓN',\n  'CLASIFICACIÓN_DE_CASO',\n  'CIE10_PRINCIPAL',\n  'FECHA_DE_DIAGNÓSTICO'\n];\n\nconst headers   = Object.keys(rows[0] || {});\nconst faltantes = COLUMNAS_REQUERIDAS.filter(c => !headers.includes(c));\n\nif (faltantes.length > 0) {\n  return [{\n    json: {\n      ...json,\n      tokenValido:      false,\n      motivoRechazo:    `Columnas obligatorias faltantes: ${faltantes.join(', ')}.`,\n      DEBUG_headers:    headers.slice(0, 20)\n    },\n    binary\n  }];\n}\n\nreturn [{\n  json: {\n    emailId:     json.emailId,\n    fromAddress: json.fromAddress,\n    fromName:    json.fromName,\n    subject:     json.subject,\n    xlsxKey:     json.xlsxKey,\n    xlsxName:    json.xlsxName,\n    pdfKeys:     json.pdfKeys,\n    hasPdfs:     json.hasPdfs,\n    yyyy:        json.yyyy,\n    mm:          json.mm,\n    fechaCargue: json.fechaCargue,\n    tokenValido: true,\n    rowCount:    rows.length,\n    rows:        rows,\n    headers:     headersLimpios\n  },\n  binary\n}];"
+      },
+      "id": "6db9581f-d56c-498a-bc3b-f29fac09fd1b",
+      "name": "Validar Token y Estructura",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1888,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://graph.microsoft.com/v1.0/me/drive/root:/Cohortes/SaludMental/{{ $json.yyyy }}/{{ $json.mm }}/PDF/{{ $json.pdfName }}:/content",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        48,
+        -80
+      ],
+      "id": "70e37cff-5ffa-4c75-8585-03abb7066406",
+      "name": "HTTP Request Subir PDFs",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        },
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "=https://graph.microsoft.com/v1.0/users/reporte.saludmental@sersocial.org/messages/{{ $json.id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "isRead",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -2336,
+        192
+      ],
+      "id": "af68fdb7-9757-4f9d-9d50-08238ac2ffb8",
+      "name": "Marcar como Leído",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst item  = items[0] || {};\nconst json  = item.json || {};\n\nconst rows = Array.isArray(json.rows) ? json.rows : [];\n\n// ---------- Helpers ----------\nconst DATE_REGEX = /^\\d{4}-\\d{2}-\\d{2}$/;\n\nconst endOfDay = (d) => {\n  const x = new Date(d);\n  x.setHours(23, 59, 59, 999);\n  return x;\n};\n\nconst parseYMD = (s) => {\n  if (!s || !DATE_REGEX.test(String(s).trim())) return null;\n  const [y, m, d] = String(s).trim().split('-').map(n => parseInt(n, 10));\n  const dt = new Date(y, m - 1, d, 0, 0, 0, 0);\n  return isNaN(dt.getTime()) ? null : dt;\n};\n\nconst normStr = (v) => (v === null || v === undefined) ? '' : String(v).trim();\n\n// ✅ NUEVO: normaliza ISO datetime (2026-05-12T00:00:00.000Z) → YYYY-MM-DD\nconst normalizeFecha = (v) => {\n  const s = normStr(v);\n  const match = s.match(/^(\\d{4}-\\d{2}-\\d{2})(?:T.*)?$/);\n  return match ? match[1] : s;\n};\n\nconst validarFecha = (val, campo, errors, { noFutura = false, maxDate = null, noAnteriorA = null } = {}) => {\n  const s = normStr(val);\n  if (!s) return;\n\n  if (!DATE_REGEX.test(s)) {\n    errors.push(`${campo}: formato inválido (\"${s}\"), debe ser AAAA-MM-DD`);\n    return;\n  }\n\n  const d = parseYMD(s);\n  if (!d) {\n    errors.push(`${campo}: fecha inválida \"${s}\"`);\n    return;\n  }\n\n  if (noFutura && maxDate && d > maxDate) {\n    errors.push(`${campo}: no puede ser posterior a la fecha de cargue`);\n  }\n\n  if (noAnteriorA && d < noAnteriorA) {\n    errors.push(`${campo}: fecha (${s}) no puede ser anterior a FECHA_INGRESO_AL_PROGRAMA`);\n  }\n};\n\nconst fechaCargueStr = normStr(json.fechaCargue);\nconst maxNoFutura = endOfDay(parseYMD(fechaCargueStr) || new Date());\n\n// ---------- Constantes ----------\nconst TIPOS_DOC_VALIDOS = ['RC','TI','CC','CE','PA','MS','AS','CD','SC','PE','PT','CN'];\n\nconst FECHAS_ATENCION = [\n  'ATENCIÓN_1_PSIQUIATRÍA','ATENCIÓN_2_PSIQUIATRÍA','ATENCIÓN_3_PSIQUIATRÍA',\n  'ATENCIÓN_4_PSIQUIATRÍA','ATENCIÓN_5_PSIQUIATRÍA','ATENCIÓN_6_PSIQUIATRÍA',\n  'ATENCIÓN_7_PSIQUIATRÍA','ATENCIÓN_8_PSIQUIATRÍA',\n  'ATENCIÓN_1_PSIQ_INFANTIL','ATENCIÓN_2_PSIQ_INFANTIL','ATENCIÓN_3_PSIQ_INFANTIL',\n  'ATENCIÓN_4_PSIQ_INFANTIL','ATENCIÓN_5_PSIQ_INFANTIL','ATENCIÓN_6_PSIQ_INFANTIL',\n  'ATENCIÓN_1_TRABAJO_SOCIAL','ATENCIÓN_2_TRABAJO_SOCIAL','ATENCIÓN_3_TRABAJO_SOCIAL',\n  'ATENCIÓN_4_TRABAJO_SOCIAL','ATENCIÓN_5_TRABAJO_SOCIAL',\n  'ATENCIÓN_1_MED_EXPERTO','ATENCIÓN_2_MED_EXPERTO','ATENCIÓN_3_MED_EXPERTO',\n  'ATENCIÓN_4_MED_EXPERTO','ATENCIÓN_5_MED_EXPERTO',\n  'ATENCIÓN_1_TERAP_OCUPACIONAL','ATENCIÓN_2_TERAP_OCUPACIONAL','ATENCIÓN_3_TERAP_OCUPACIONAL',\n  'ATENCIÓN_1_NEUROPSICOLOGÍA','ATENCIÓN_2_NEUROPSICOLOGÍA','ATENCIÓN_3_NEUROPSICOLOGÍA',\n  'ATENCIÓN_1_VISITA_DOMICILIARIA','ATENCIÓN_2_VISITA_DOMICILIARIA',\n  'FECHA_UNIDAD_DE_ANÁLISIS_INTEGRAL'\n];\n\nconst OBLIGATORIOS = [\n  'FECHA_DE_REPORTE',\n  'NIT_DE_LA_IPS',\n  'CÓDIGO_DE_HABILITACIÓN',\n  'TIPO_DE_DOCUMENTO',\n  'NÚMERO_DE_DOCUMENTO',\n  'PRIMER_NOMBRE',\n  'PRIMER_APELLIDO',\n  'DIRECCIÓN_DE_RESIDENCIA',\n  'TELÉFONO_CELULAR_1',\n  'ESCOLARIDAD',\n  'OCUPACIÓN',\n  'CLASIFICACIÓN_DE_CASO',\n  'CIE10_PRINCIPAL',\n  'FECHA_DE_DIAGNÓSTICO'\n];\n\n// ---------- Proceso ----------\nconst seen        = new Set();\nconst validRows   = [];\nconst invalidRows = [];\n\nrows.forEach((row, idx) => {\n  const errors = [];\n  const rowNum = idx + 4;\n\n  // Campos obligatorios\n  for (const f of OBLIGATORIOS) {\n    if (!normStr(row?.[f])) errors.push(`Campo obligatorio vacío: ${f}`);\n  }\n\n  // ✅ FECHA_DE_REPORTE (normalizada antes de validar)\n  validarFecha(\n    normalizeFecha(row?.['FECHA_DE_REPORTE']),\n    'FECHA_DE_REPORTE',\n    errors,\n    { noFutura: true, maxDate: maxNoFutura }\n  );\n\n  // NIT: 9 dígitos\n  const nitRaw = normStr(row?.['NIT_DE_LA_IPS']);\n  if (nitRaw) {\n    const nit = nitRaw.replace(/\\D/g, '');\n    if (nit.length !== 9) errors.push(`NIT_DE_LA_IPS: debe tener 9 dígitos (encontrado: ${nit.length})`);\n  }\n\n  // CÓDIGO HABILITACIÓN: 12 dígitos\n  const habRaw = normStr(row?.['CÓDIGO_DE_HABILITACIÓN']);\n  if (habRaw) {\n    const cod = habRaw.replace(/\\D/g, '');\n    if (cod.length !== 12) errors.push(`CÓDIGO_DE_HABILITACIÓN: debe tener 12 dígitos (encontrado: ${cod.length})`);\n  }\n\n  // TIPO_DE_DOCUMENTO: lista cerrada\n  const tdRaw = normStr(row?.['TIPO_DE_DOCUMENTO']);\n  if (tdRaw) {\n    const td = tdRaw.toUpperCase();\n    if (!TIPOS_DOC_VALIDOS.includes(td)) {\n      errors.push(`TIPO_DE_DOCUMENTO: valor \"${td}\" no válido. Opciones: ${TIPOS_DOC_VALIDOS.join(', ')}`);\n    }\n  }\n\n  // NÚMERO_DE_DOCUMENTO: máx 20 chars\n  const ndRaw = normStr(row?.['NÚMERO_DE_DOCUMENTO']);\n  if (ndRaw && ndRaw.length > 20) errors.push('NÚMERO_DE_DOCUMENTO: excede 20 caracteres');\n\n  // TELÉFONOS: 10 dígitos\n  for (const tel of ['TELÉFONO_CELULAR_1','TELÉFONO_CELULAR_2']) {\n    const telRaw = normStr(row?.[tel]);\n    if (telRaw) {\n      const t = telRaw.replace(/\\D/g, '');\n      if (t.length !== 10) errors.push(`${tel}: debe tener 10 dígitos (encontrado: ${t.length})`);\n    }\n  }\n\n  // ESCOLARIDAD y OCUPACIÓN: 1-10\n  for (const camp of ['ESCOLARIDAD','OCUPACIÓN']) {\n    const vRaw = normStr(row?.[camp]);\n    if (vRaw) {\n      const v = parseInt(vRaw, 10);\n      if (Number.isNaN(v) || v < 1 || v > 10) {\n        errors.push(`${camp}: debe ser un número entre 1 y 10 (encontrado: ${vRaw})`);\n      }\n    }\n  }\n\n  // CLASIFICACIÓN_DE_CASO: 1 o 2\n  const ccRaw = normStr(row?.['CLASIFICACIÓN_DE_CASO']);\n  if (ccRaw) {\n    const cc = parseInt(ccRaw, 10);\n    if (![1, 2].includes(cc)) {\n      errors.push(`CLASIFICACIÓN_DE_CASO: debe ser 1 (incidente) o 2 (prevalente) (encontrado: ${ccRaw})`);\n    }\n  }\n\n  // CIE10: 4 caracteres\n  const cieRaw = normStr(row?.['CIE10_PRINCIPAL']);\n  if (cieRaw && cieRaw.length !== 4) {\n    errors.push(`CIE10_PRINCIPAL: debe tener 4 caracteres (encontrado: ${cieRaw.length})`);\n  }\n\n  // ✅ FECHA_DE_DIAGNÓSTICO (normalizada antes de validar)\n  validarFecha(\n    normalizeFecha(row?.['FECHA_DE_DIAGNÓSTICO']),\n    'FECHA_DE_DIAGNÓSTICO',\n    errors,\n    { noFutura: true, maxDate: maxNoFutura }\n  );\n\n  // Listas cerradas opcionales\n  const clinRaw = normStr(row?.['CLASIFICACIÓN_CLÍNICA']);\n  if (clinRaw) {\n    const v = clinRaw.toUpperCase();\n    if (!['MENTAL','FARMACO','DUAL'].includes(v)) errors.push('CLASIFICACIÓN_CLÍNICA: debe ser MENTAL, FARMACO o DUAL');\n  }\n\n  const riesgoRaw = normStr(row?.['RIESGO_PATOLÓGICO']);\n  if (riesgoRaw) {\n    const v = riesgoRaw.toUpperCase();\n    if (!['BAJO','MEDIO','ALTO'].includes(v)) errors.push('RIESGO_PATOLÓGICO: debe ser BAJO, MEDIO o ALTO');\n  }\n\n  const remRaw = normStr(row?.['REMITIDO_A']);\n  if (remRaw) {\n    const v = remRaw.toUpperCase();\n    if (!['HOSPITAL DIA','HOSPITALIZACION'].includes(v)) errors.push('REMITIDO_A: debe ser HOSPITAL DIA u HOSPITALIZACION');\n  }\n\n  // ✅ Fechas de atención (normalizadas antes de validar)\n  const fechaIngresoStr = normalizeFecha(row?.['FECHA_INGRESO_AL_PROGRAMA']);\n  const fechaIngreso = parseYMD(fechaIngresoStr);\n\n  for (const campo of FECHAS_ATENCION) {\n    const val = normalizeFecha(row?.[campo]);\n    if (val) {\n      validarFecha(val, campo, errors, { noFutura: true, maxDate: maxNoFutura, noAnteriorA: fechaIngreso });\n    }\n  }\n\n  // Duplicados\n  const keyDoc   = normStr(row?.['NÚMERO_DE_DOCUMENTO']);\n  const keyFecha = normalizeFecha(row?.['FECHA_DE_REPORTE']);\n  const keyNit   = normStr(row?.['NIT_DE_LA_IPS']);\n\n  if (keyDoc && keyFecha && keyNit) {\n    const dupKey = `${keyDoc}|${keyFecha}|${keyNit}`;\n    if (seen.has(dupKey)) {\n      errors.push(`Registro duplicado (NÚMERO_DE_DOCUMENTO: ${keyDoc}, FECHA_DE_REPORTE: ${keyFecha})`);\n    } else {\n      seen.add(dupKey);\n    }\n  }\n\n  if (errors.length === 0) {\n    validRows.push({ ...row, _fila_origen: rowNum });\n  } else {\n    invalidRows.push({ fila: rowNum, errores: errors });\n  }\n});\n\nreturn [{\n  json: {\n    emailId:      json.emailId,\n    fromAddress:  json.fromAddress,\n    fromName:     json.fromName,\n    subject:      json.subject,\n    xlsxKey:      json.xlsxKey,\n    xlsxName:     json.xlsxName,\n    pdfKeys:      json.pdfKeys,\n    hasPdfs:      json.hasPdfs,\n    yyyy:         json.yyyy,\n    mm:           json.mm,\n    fechaCargue:  json.fechaCargue,\n\n    validRows,\n    invalidRows,\n    totalRows:    rows.length,\n    validCount:   validRows.length,\n    invalidCount: invalidRows.length,\n    tieneValidos: validRows.length > 0\n  },\n  binary: item.binary || {}\n}];"
+      },
+      "id": "36bce566-a808-40da-ba0e-bcf48611f12a",
+      "name": "Validar Registros",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1440,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const JSZip = require('jszip');\nconst items  = $input.all();\nconst item   = items[0];\nconst json   = item?.json   || {};\nconst binary = item?.binary || {};\n\nconst { invalidRows, validRows, xlsxName, fechaCargue, xlsxKey } = json;\n\nif (!invalidRows || invalidRows.length === 0) {\n  return [{ json: { ...json, errorXlsx: null }, binary }];\n}\n\nconst binEntry = binary[xlsxKey]\n              || $('Validar Token y Estructura').item?.binary?.[xlsxKey]\n              || null;\n\nif (!binEntry?.data) {\n  return [{ json: { ...json, errorXlsx: null, motivoSinBinario: 'Binario no disponible' }, binary }];\n}\n\nconst filasInvalidas = new Set(invalidRows.map(r => r.fila));\nconst filasValidas   = new Set((validRows || []).map(r => r._fila_origen).filter(Boolean));\n\nconst buf = Buffer.from(binEntry.data, 'base64');\nconst zip  = await JSZip.loadAsync(buf);\n\nconst workbookXml = await zip.file('xl/workbook.xml').async('string');\nconst sheetMatch  = workbookXml.match(/name=\"SEGUIMIENTO_SM\"[^>]*r:id=\"(rId\\d+)\"/);\nconst rId         = sheetMatch?.[1];\nconst relsXml     = await zip.file('xl/_rels/workbook.xml.rels').async('string');\nconst relMatch    = relsXml.match(new RegExp(`Id=\"${rId}\"[^>]*Target=\"([^\"]+)\"`));\nconst sheetPath   = `xl/${relMatch?.[1]}`;\n\nlet sheetXml = await zip.file(sheetPath).async('string');\n\nconst allRows = [...sheetXml.matchAll(/<row\\b[^>]*\\sr=\"(\\d+)\"[^>]*>[\\s\\S]*?<\\/row>/g)];\n\nconst DATA_START = 4;\n\nconst headerRows      = allRows.filter(m => parseInt(m[1]) < DATA_START);\nconst dataRows        = allRows.filter(m => parseInt(m[1]) >= DATA_START);\nconst invalidDataRows = dataRows.filter(m => filasInvalidas.has(parseInt(m[1])));\n\n// Filas vacías = ni inválidas ni válidas (filas de formato debajo de los datos)\nconst emptyRows = dataRows.filter(m => {\n  const fila = parseInt(m[1]);\n  return !filasInvalidas.has(fila) && !filasValidas.has(fila);\n});\n\nconst getStyleMap = (rowXml) => {\n  const map = {};\n  const cells = [...rowXml.matchAll(/<c\\s+r=\"([A-Z]+)\\d+\"([^>]*)>/g)];\n  for (const cell of cells) {\n    const col    = cell[1];\n    const attrs  = cell[2];\n    const sMatch = attrs.match(/\\bs=\"(\\d+)\"/);\n    map[col] = sMatch ? sMatch[1] : null;\n  }\n  return map;\n};\n\nconst styleOdd  = dataRows[0] ? getStyleMap(dataRows[0][0]) : {};\nconst styleEven = dataRows[1] ? getStyleMap(dataRows[1][0]) : {};\n\nconst colToNum = col => col.split('').reduce((acc, c) => acc * 26 + c.charCodeAt(0) - 64, 0);\nconst numToCol = num => {\n  let s = '';\n  while (num > 0) { num--; s = String.fromCharCode(65 + num % 26) + s; num = Math.floor(num / 26); }\n  return s;\n};\n\nconst allColMatches = [...sheetXml.matchAll(/<c\\s+r=\"([A-Z]+)\\d+\"/g)];\nconst maxColNum     = Math.max(...allColMatches.map(m => colToNum(m[1])));\nconst errorColLet   = numToCol(maxColNum + 1);\nconst lastDataCol   = numToCol(maxColNum);\n\nconst fixRowStyles = (rowXml, newRowNum, styleMap) => {\n  rowXml = rowXml.replace(/(<row\\b[^>]*\\s)r=\"\\d+\"/, `$1r=\"${newRowNum}\"`);\n  rowXml = rowXml.replace(/(<c\\s+r=\")([A-Z]+)\\d+\"/g, `$1$2${newRowNum}\"`);\n  rowXml = rowXml.replace(/<c\\s+r=\"([A-Z]+)\\d+\"([^>]*)>/g, (m, col, attrs) => {\n    const targetStyle = styleMap[col];\n    if (targetStyle === null || targetStyle === undefined) return m;\n    if (/\\bs=\"\\d+\"/.test(attrs)) {\n      attrs = attrs.replace(/\\bs=\"\\d+\"/, `s=\"${targetStyle}\"`);\n    } else {\n      attrs = ` s=\"${targetStyle}\"` + attrs;\n    }\n    return `<c r=\"${col}${newRowNum}\"${attrs}>`;\n  });\n  return rowXml;\n};\n\n// Filas inválidas con columna de errores\nconst fixedRows = invalidDataRows.map((match, idx) => {\n  const newRowNum    = DATA_START + idx;\n  const esImpar      = idx % 2 === 0;\n  const styleMap     = esImpar ? styleOdd : styleEven;\n  const filaOriginal = parseInt(match[1]);\n\n  let rowXml = fixRowStyles(match[0], newRowNum, styleMap);\n\n  const errorEntry = invalidRows.find(r => r.fila === filaOriginal);\n  const errorText  = errorEntry ? errorEntry.errores.join(' | ') : '';\n  const errorStyle = styleMap[lastDataCol] ? ` s=\"${styleMap[lastDataCol]}\"` : '';\n  const errorCell  = `<c r=\"${errorColLet}${newRowNum}\"${errorStyle} t=\"inlineStr\"><is><t>${errorText}</t></is></c>`;\n  rowXml = rowXml.replace(/<\\/row>/, `${errorCell}</row>`);\n\n  return rowXml;\n});\n\n// Filas vacías debajo con alternado correcto\nconst fixedEmptyRows = emptyRows.map((match, idx) => {\n  const newRowNum = DATA_START + invalidDataRows.length + idx;\n  const esImpar   = (invalidDataRows.length + idx) % 2 === 0;\n  const styleMap  = esImpar ? styleOdd : styleEven;\n  return fixRowStyles(match[0], newRowNum, styleMap);\n});\n\n// Encabezado ERRORES_ENCONTRADOS en fila 3\nconst headerRowIdx    = DATA_START - 1;\nconst fixedHeaderRows = headerRows.map(m => {\n  if (parseInt(m[1]) !== headerRowIdx) return m[0];\n  let rowXml = m[0];\n  const errorHeaderCell = `<c r=\"${errorColLet}${headerRowIdx}\" t=\"inlineStr\"><is><t>ERRORES_ENCONTRADOS</t></is></c>`;\n  rowXml = rowXml.replace(/<\\/row>/, `${errorHeaderCell}</row>`);\n  return rowXml;\n});\n\nconst allFixedRows = [...fixedHeaderRows, ...fixedRows, ...fixedEmptyRows].join('');\nsheetXml = sheetXml.replace(/<sheetData>[\\s\\S]*?<\\/sheetData>/, `<sheetData>${allFixedRows}</sheetData>`);\n\nzip.file(sheetPath, sheetXml);\n\nconst outBuf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });\nconst b64    = outBuf.toString('base64');\n\nconst ts         = (fechaCargue || '').replace(/-/g, '');\nconst outputName = `ERRORES_${ts}_${xlsxName || 'reporte.xlsx'}`;\n\nreturn [{\n  json: {\n    ...json,\n    errorXlsx:    outputName,\n    tieneErrores: true\n  },\n  binary: {\n    ...binary,\n    errorXlsx: {\n      data:          b64,\n      mimeType:      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',\n      fileName:      outputName,\n      fileExtension: 'xlsx'\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1248,
+        480
+      ],
+      "id": "303e743d-3754-4616-9b56-ad82916566ff",
+      "name": "Creacion_excel_errores"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.sm_log_cargues \n(correo_remitente, nit_ips, archivo, total_registros, validos, invalidos, estado, detalle, email_id)\nVALUES (\n  '{{ $('body_sin_excel').item.json.fromAddress }}',\n  null,\n  null,\n  0, 0, 0,\n  'RECHAZADO',\n  'Correo recibido sin archivo Excel adjunto.',\n  '{{ $('body_sin_excel').item.json.emailId }}'\n)",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        48,
+        832
+      ],
+      "id": "4a0f5469-2759-4bca-80be-28ccb819a743",
+      "name": "Log - Sin Excel",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.sm_log_cargues \n(correo_remitente, nit_ips, archivo, total_registros, validos, invalidos, estado, detalle, email_id)\nVALUES (\n  '{{ $('Validar Token y Estructura').item.json.fromAddress }}',\n  null,\n  '{{ $('Validar Token y Estructura').item.json.xlsxName }}',\n  0, 0, 0,\n  'RECHAZADO',\n  '{{ $('Validar Token y Estructura').item.json.motivoRechazo || 'Archivo rechazado: token de validación inválido o ausente.' }}',\n  '{{ $('Validar Token y Estructura').item.json.emailId }}'\n)",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        48,
+        640
+      ],
+      "id": "bb5a1057-34fa-40e5-a63a-6955105d3de9",
+      "name": "Log - Formato Incorrecto",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const json = $('Creacion_excel_errores').first().json;\n\nconst nitIps = (json.validRows?.[0]?.NIT_DE_LA_IPS) ||\n               (json.invalidRows?.[0]?.NIT_DE_LA_IPS) ||\n               null;\n\n// Bloques condicionales\nconst bloqueExitosos = json.validCount > 0\n  ? `<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:16px;\"><tr>\n      <td bgcolor=\"#EAF4FB\" style=\"background-color:#EAF4FB;border-left:4px solid #2E86C1;border-radius:0 6px 6px 0;padding:14px 18px;\">\n        <p style=\"margin:0;color:#1A5276;font-size:13px;font-family:Arial,sans-serif;\">&#8505;&#65039; <strong>Los ${json.validCount} registros exitosos ya se encuentran consolidados en el sistema.</strong> Por favor NO los reenv&iacute;e en la pr&oacute;xima entrega.</p>\n      </td></tr></table>` : '';\n\nconst bloqueAccion = json.invalidCount > 0\n  ? `<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:16px;\"><tr>\n      <td bgcolor=\"#FEF9E7\" style=\"background-color:#FEF9E7;border-left:4px solid #F39C12;border-radius:0 6px 6px 0;padding:14px 18px;\">\n        <p style=\"margin:0;color:#7D6608;font-size:13px;font-family:Arial,sans-serif;\">&#9888;&#65039; <strong>Acci&oacute;n requerida:</strong> Corrija &uacute;nicamente los registros indicados a continuaci&oacute;n y reenví&shy;elos en un nuevo archivo.</p>\n      </td></tr></table>` : '';\n\nconst bloqueErrores = json.invalidCount > 0\n  ? `<p style=\"color:#1B2631;font-size:14px;margin:20px 0 10px 0;font-family:Arial,sans-serif;\"><strong>Detalle de errores por fila:</strong></p>\n     <table width=\"100%\" cellpadding=\"8\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;font-size:12px;margin-bottom:20px;\">\n       <tr bgcolor=\"#E74C3C\" style=\"background-color:#E74C3C;\">\n         <td style=\"padding:8px 12px;text-align:center;width:60px;color:#FFFFFF;font-weight:700;font-family:Arial,sans-serif;\">Fila</td>\n         <td style=\"padding:8px 12px;text-align:left;color:#FFFFFF;font-weight:700;font-family:Arial,sans-serif;\">Errores encontrados</td>\n       </tr>\n       ${json.invalidRows.map((r, i) => `\n         <tr bgcolor=\"${i % 2 === 0 ? '#FDF2F8' : '#FFFFFF'}\" style=\"background-color:${i % 2 === 0 ? '#FDF2F8' : '#FFFFFF'};\">\n           <td style=\"padding:8px 12px;text-align:center;font-weight:700;color:#922B21;font-family:Arial,sans-serif;\">${r.fila}</td>\n           <td style=\"padding:8px 12px;color:#1B2631;font-family:Arial,sans-serif;\">${r.errores.join('<br>')}</td>\n         </tr>`).join('')}\n     </table>` : '';\n\nconst bloqueTodos = json.invalidCount === json.totalRows\n  ? `<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:16px;\"><tr>\n      <td bgcolor=\"#FADBD8\" style=\"background-color:#FADBD8;border-left:4px solid #E74C3C;border-radius:0 6px 6px 0;padding:14px 18px;\">\n        <p style=\"margin:0;color:#922B21;font-size:13px;font-family:Arial,sans-serif;\">&#128683; <strong>Ning&uacute;n registro fue cargado.</strong> Por favor corrija todos los errores indicados y reenv&iacute;e el archivo completo.</p>\n      </td></tr></table>` : '';\n\nconst htmlContent = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Resultado cargue</title>\n  <!--[if mso]>\n  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>\n  <![endif]-->\n</head>\n<body style=\"margin:0;padding:0;background-color:#F0F4F8;font-family:Arial,sans-serif;\">\n\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n         bgcolor=\"#F0F4F8\" style=\"background-color:#F0F4F8;margin:0;padding:0;\">\n    <tr>\n      <td align=\"center\" bgcolor=\"#F0F4F8\" style=\"background-color:#F0F4F8;padding:40px 16px;\">\n\n        <!--[if mso]>\n        <table role=\"presentation\" width=\"580\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td>\n        <![endif]-->\n\n        <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:580px;margin:0 auto;\">\n\n          <!-- HEADER -->\n          <tr>\n            <td bgcolor=\"#0D2B4E\" style=\"background-color:#0D2B4E;border-radius:12px 12px 0 0;padding:32px 40px 28px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                <td style=\"vertical-align:top;\">\n                  <p style=\"margin:0 0 6px 0;font-size:10px;font-weight:700;letter-spacing:4px;color:#5DA8E0;text-transform:uppercase;font-family:Arial,sans-serif;\">Fundaci&oacute;n Sersocial</p>\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"border-left:3px solid #5DA8E0;padding-left:12px;\">\n                      <h1 style=\"margin:0;font-size:22px;font-weight:700;color:#FFFFFF;line-height:1.2;font-family:Arial,sans-serif;\">Sistema de Gesti&oacute;n<br/>de Cohortes</h1>\n                    </td>\n                  </tr></table>\n                  <p style=\"margin:10px 0 0 15px;font-size:12px;color:#A8C8E8;letter-spacing:1px;font-family:Arial,sans-serif;\">&#9658; Programa &middot; Salud Mental</p>\n                </td>\n                <td align=\"right\" style=\"vertical-align:top;width:64px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td bgcolor=\"#1A4A7A\" style=\"width:52px;height:52px;border-radius:12px;text-align:center;vertical-align:middle;padding:0;\">\n                      <p style=\"margin:0;font-size:24px;line-height:52px;text-align:center;\">&#129504;</p>\n                    </td>\n                  </tr></table>\n                </td>\n              </tr></table>\n            </td>\n          </tr>\n\n          <!-- ALERT BANNER -->\n          <tr>\n            <td bgcolor=\"#1A6B3A\" style=\"background-color:#1A6B3A;padding:14px 40px;\">\n              <p style=\"margin:0;font-size:13px;font-weight:700;color:#FFFFFF;letter-spacing:0.5px;font-family:Arial,sans-serif;\">&#9989; &nbsp;REPORTE PROCESADO &middot; RESULTADO DE CARGUE</p>\n            </td>\n          </tr>\n\n          <!-- BODY -->\n          <tr>\n            <td bgcolor=\"#FFFFFF\" style=\"background-color:#FFFFFF;padding:36px 40px 32px;border-left:1px solid #E2EAF2;border-right:1px solid #E2EAF2;\">\n\n              <p style=\"margin:0 0 8px 0;font-size:15px;color:#1B2631;line-height:1.6;font-family:Arial,sans-serif;\">Estimado/a <strong>${json.fromName}</strong>,</p>\n              <p style=\"margin:0 0 24px 0;font-size:14px;color:#4A5568;line-height:1.7;font-family:Arial,sans-serif;\">Su archivo <strong>${json.xlsxName}</strong> ha sido procesado. A continuaci&oacute;n el resumen:</p>\n\n              <!-- Tabla resumen -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse;margin-bottom:24px;\">\n                <tr bgcolor=\"#1A3A5C\" style=\"background-color:#1A3A5C;\">\n                  <td style=\"padding:10px 14px;color:#FFFFFF;font-weight:700;font-size:13px;font-family:Arial,sans-serif;\">Concepto</td>\n                  <td style=\"padding:10px 14px;color:#FFFFFF;font-weight:700;font-size:13px;text-align:center;font-family:Arial,sans-serif;\">Cantidad</td>\n                </tr>\n                <tr bgcolor=\"#F2F8FD\" style=\"background-color:#F2F8FD;\">\n                  <td style=\"padding:10px 14px;color:#1B2631;font-size:13px;font-family:Arial,sans-serif;\">&#128203; Total registros recibidos</td>\n                  <td style=\"padding:10px 14px;color:#1B2631;font-weight:700;font-size:13px;text-align:center;font-family:Arial,sans-serif;\">${json.totalRows}</td>\n                </tr>\n                <tr bgcolor=\"#D5F5E3\" style=\"background-color:#D5F5E3;\">\n                  <td style=\"padding:10px 14px;color:#145A32;font-size:13px;font-family:Arial,sans-serif;\">&#9989; Registros cargados exitosamente</td>\n                  <td style=\"padding:10px 14px;color:#145A32;font-weight:700;font-size:13px;text-align:center;font-family:Arial,sans-serif;\">${json.validCount}</td>\n                </tr>\n                <tr bgcolor=\"#FADBD8\" style=\"background-color:#FADBD8;\">\n                  <td style=\"padding:10px 14px;color:#922B21;font-size:13px;font-family:Arial,sans-serif;\">&#10060; Registros con errores (no cargados)</td>\n                  <td style=\"padding:10px 14px;color:#922B21;font-weight:700;font-size:13px;text-align:center;font-family:Arial,sans-serif;\">${json.invalidCount}</td>\n                </tr>\n              </table>\n\n              ${bloqueExitosos}\n              ${bloqueAccion}\n              ${bloqueErrores}\n              ${bloqueTodos}\n\n              <!-- Contacto -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-top:24px;margin-bottom:24px;\">\n                <tr>\n                  <td bgcolor=\"#EAF4FB\" style=\"background-color:#EAF4FB;border-radius:6px;padding:14px 18px;\">\n                    <p style=\"margin:0 0 4px 0;font-size:12px;font-weight:700;color:#2C5282;font-family:Arial,sans-serif;\">&#128231; &nbsp;Contacto gestora del programa:</p>\n                    <a href=\"mailto:Correo_gestora_salud_mental@sersocial.org\" style=\"color:#2E86C1;font-size:13px;font-family:Arial,sans-serif;\">Correo_gestora_salud_mental@sersocial.org</a>\n                  </td>\n                </tr>\n              </table>\n\n              <p style=\"margin:0;font-size:14px;color:#1B2631;line-height:1.7;font-family:Arial,sans-serif;\">\n                Cordialmente,<br/>\n                <strong>Equipo de Gesti&oacute;n de Cohortes</strong><br/>\n                <span style=\"color:#718096;font-size:13px;\">Fundaci&oacute;n Sersocial</span>\n              </p>\n\n            </td>\n          </tr>\n\n          <!-- FOOTER -->\n          <tr>\n            <td bgcolor=\"#1A3A5C\" style=\"background-color:#1A3A5C;border-radius:0 0 12px 12px;padding:18px 40px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                <td style=\"vertical-align:middle;\">\n                  <p style=\"margin:0;font-size:11px;color:#7FA8C9;line-height:1.6;font-family:Arial,sans-serif;\">Este es un mensaje autom&aacute;tico generado por el Sistema de Gesti&oacute;n de Cohortes.<br/>Por favor no responda directamente a este correo.</p>\n                </td>\n                <td align=\"right\" style=\"vertical-align:middle;white-space:nowrap;padding-left:16px;\">\n                  <p style=\"margin:0;font-size:10px;color:#4A6FA5;letter-spacing:1px;font-family:Arial,sans-serif;\">SERSOCIAL &middot; ${json.fechaCargue}</p>\n                </td>\n              </tr></table>\n            </td>\n          </tr>\n\n        </table>\n        <!--[if mso]>\n        </td></tr></table>\n        <![endif]-->\n\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>`;\n\nconst requestBody = JSON.stringify({\n  message: {\n    subject: `Resultado cargue Cohorte Salud Mental - ${json.xlsxName}`,\n    body: { contentType: \"HTML\", content: htmlContent },\n    toRecipients: [{ emailAddress: { address: json.fromAddress } }],\n    attachments: json.invalidCount > 0 ? [\n      {\n        \"@odata.type\": \"#microsoft.graph.fileAttachment\",\n        name: json.errorXlsx,\n        contentType: \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n        contentBytes: $('Creacion_excel_errores').first().binary.errorXlsx.data\n      }\n    ] : []\n  },\n  saveToSentItems: true\n});\n\nreturn [{ json: { ...json, htmlContent, requestBody, nitIps } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        464
+      ],
+      "id": "2f6354bd-304d-48bc-ba64-b4647e7ed4ab",
+      "name": "htmlContent"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.sm_log_cargues\n(correo_remitente, nit_ips, archivo, total_registros, validos, invalidos, estado, detalle, email_id)\nVALUES (\n  '{{ $(\"htmlContent\").first().json.fromAddress }}',\n  '{{ $(\"htmlContent\").first().json.nitIps }}',\n  '{{ $(\"htmlContent\").first().json.xlsxName }}',\n  {{ $(\"htmlContent\").first().json.totalRows }},\n  {{ $(\"htmlContent\").first().json.validCount }},\n  {{ $(\"htmlContent\").first().json.invalidCount }},\n  '{{ $(\"htmlContent\").first().json.validCount === 0 ? \"FALLIDO\" : \"PARCIAL\" }}',\n  '{{ $(\"htmlContent\").first().json.validCount === 0 ? \"Todos los registros presentaron errores de validación.\" : $(\"htmlContent\").first().json.validCount + \" registros cargados. \" + $(\"htmlContent\").first().json.invalidCount + \" omitidos con errores.\" }}',\n  '{{ $(\"htmlContent\").first().json.emailId }}'\n)",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        912,
+        464
+      ],
+      "id": "e27c5814-bf56-48c1-992d-c020aa80dac2",
+      "name": "Log - Inválidos",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.microsoft.com/v1.0/users/reporte.saludmental@sersocial.org/sendMail",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        704,
+        464
+      ],
+      "id": "a9544aa8-6850-4e94-9d51-a51e1a102fcf",
+      "name": "RESUMEN_CON_ERRORES",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        304,
+        464
+      ],
+      "id": "e0b93e9a-3dd2-409e-a50c-30e07fff4688",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.sm_verificacion_cargue \n(correo_remitente, nit_ips, archivo, total_registros, validos, invalidos, estado, detalle, email_id)\nVALUES (\n  '{{ $('Validar Registros').item.json.fromAddress }}',\n  '{{ $json.nit_de_la_ips || $('Validar Registros').item.json.nitIps }}',\n  '{{ $json.outputName }}',\n  {{ $('Validar Registros').item.json.totalRows }},\n  {{ $('Validar Registros').item.json.validCount }},\n  {{ $('Validar Registros').item.json.invalidCount }},\n  '{{ $('Validar Registros').item.json.invalidCount > 0 ? \"PARCIAL\" : \"EXITOSO\" }}',\n  '{{ $('Validar Registros').item.json.validCount + \" registros cargados.\" + ($('Validar Registros').item.json.invalidCount > 0 ? \" \" + $('Validar Registros').item.json.invalidCount + \" omitidos con errores.\" : \"\") }}',\n  '{{ $('Validar Registros').item.json.emailId }}'\n)",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        48,
+        176
+      ],
+      "id": "b14ec32b-497f-4777-831b-4b11eb420dc1",
+      "name": "Log - Cargue Exitoso",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://graph.microsoft.com/v1.0/users/directortic@sersocial.org/drive/items/5C4B130E-5A80-433B-AEFF-B5DD9B4E85D5/content",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1456,
+        656
+      ],
+      "id": "525cf0a5-f632-4c8e-a759-d90aebcf5faf",
+      "name": "HTTP Request — Descargar XLSX",
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        },
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://graph.microsoft.com/v1.0/shares/u!aHR0cHM6Ly9zZXJzb2NpYWwtbXkuc2hhcmVwb2ludC5jb20vOmI6L2cvcGVyc29uYWwvZGlyZWN0b3J0aWNfc2Vyc29jaWFsX29yZy9JUUE2MlZ2VlBZRnlTNTBYLWNXTkFadzBBWUdvVXBxX3JYTzk0Z012R2hUXzB4Yz9lPU9oUHdENg/driveItem/content",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1056,
+        656
+      ],
+      "id": "252e74b6-21f5-4242-9114-9a3a97b57c6b",
+      "name": "HTTP Request — Descargar PDF",
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        },
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const json = $('Validar Token y Estructura').first().json;\nconst plantillaBytes = $('Base64 — XLSX').first().json.xlsxBase64;\nconst pdfBytes = $('Base64 — PDF').first().json.pdfBase64;\n\nconst htmlContent = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Formato incorrecto</title>\n  <!--[if mso]>\n  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>\n  <![endif]-->\n</head>\n<body style=\"margin:0;padding:0;background-color:#F0F4F8;font-family:Arial,sans-serif;\">\n\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n         bgcolor=\"#F0F4F8\" style=\"background-color:#F0F4F8;margin:0;padding:0;\">\n    <tr>\n      <td align=\"center\" bgcolor=\"#F0F4F8\" style=\"background-color:#F0F4F8;padding:40px 16px;\">\n\n        <!--[if mso]>\n        <table role=\"presentation\" width=\"580\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td>\n        <![endif]-->\n\n        <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:580px;margin:0 auto;\">\n\n          <!-- HEADER -->\n          <tr>\n            <td bgcolor=\"#0D2B4E\" style=\"background-color:#0D2B4E;border-radius:12px 12px 0 0;padding:32px 40px 28px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                <td style=\"vertical-align:top;\">\n                  <p style=\"margin:0 0 6px 0;font-size:10px;font-weight:700;letter-spacing:4px;color:#5DA8E0;text-transform:uppercase;font-family:Arial,sans-serif;\">Fundaci&oacute;n Sersocial</p>\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"border-left:3px solid #5DA8E0;padding-left:12px;\">\n                      <h1 style=\"margin:0;font-size:22px;font-weight:700;color:#FFFFFF;line-height:1.2;font-family:Arial,sans-serif;\">Sistema de Gesti&oacute;n<br/>de Cohortes</h1>\n                    </td>\n                  </tr></table>\n                  <p style=\"margin:10px 0 0 15px;font-size:12px;color:#A8C8E8;letter-spacing:1px;font-family:Arial,sans-serif;\">&#9658; Programa &middot; Salud Mental</p>\n                </td>\n                <td align=\"right\" style=\"vertical-align:top;width:64px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td bgcolor=\"#1A4A7A\" style=\"width:52px;height:52px;border-radius:12px;text-align:center;vertical-align:middle;padding:0;\">\n                      <p style=\"margin:0;font-size:24px;line-height:52px;text-align:center;\">&#129504;</p>\n                    </td>\n                  </tr></table>\n                </td>\n              </tr></table>\n            </td>\n          </tr>\n\n          <!-- ALERT BANNER -->\n          <tr>\n            <td bgcolor=\"#7B2D8B\" style=\"background-color:#7B2D8B;padding:14px 40px;\">\n              <p style=\"margin:0;font-size:13px;font-weight:700;color:#FFFFFF;letter-spacing:0.5px;font-family:Arial,sans-serif;\">&#128683; &nbsp;REPORTE NO PROCESADO &middot; PLANTILLA INCORRECTA</p>\n            </td>\n          </tr>\n\n          <!-- BODY -->\n          <tr>\n            <td bgcolor=\"#FFFFFF\" style=\"background-color:#FFFFFF;padding:36px 40px 32px;border-left:1px solid #E2EAF2;border-right:1px solid #E2EAF2;\">\n\n              <p style=\"margin:0 0 20px 0;font-size:15px;color:#1B2631;line-height:1.6;font-family:Arial,sans-serif;\">Estimado/a <strong>${json.fromName}</strong>,</p>\n              <p style=\"margin:0 0 16px 0;font-size:14px;color:#4A5568;line-height:1.7;font-family:Arial,sans-serif;\">Hemos recibido su correo con el asunto:</p>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:24px;\">\n                <tr>\n                  <td bgcolor=\"#F7FAFC\" style=\"background-color:#F7FAFC;border:1px solid #CBD5E0;border-left:4px solid #5DA8E0;border-radius:6px;padding:14px 18px;\">\n                    <p style=\"margin:0;font-family:Courier New,monospace;font-size:13px;color:#2D3748;\">${json.subject}</p>\n                  </td>\n                </tr>\n              </table>\n\n              <p style=\"margin:0 0 24px 0;font-size:14px;color:#4A5568;line-height:1.7;font-family:Arial,sans-serif;\">Sin embargo, <strong style=\"color:#1B2631;\">no fue posible procesarlo</strong> porque el archivo Excel adjunto <strong style=\"color:#1B2631;\">no corresponde a la plantilla oficial</strong> del programa.</p>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:32px;\">\n                <tr>\n                  <td bgcolor=\"#FDF4FF\" style=\"background-color:#FDF4FF;border:1px solid #E9C8F5;border-radius:10px;padding:20px 24px;\">\n                    <p style=\"margin:0 0 8px 0;font-size:13px;font-weight:700;color:#6B21A8;font-family:Arial,sans-serif;\">&#128269; MOTIVO DEL RECHAZO</p>\n                    <p style=\"margin:0;font-size:13px;color:#581C87;line-height:1.6;font-family:Arial,sans-serif;\">El sistema valid&oacute; el archivo recibido y <strong>no coincide con la estructura de la plantilla oficial</strong>. Es posible que est&eacute; usando una versi&oacute;n desactualizada o un archivo diferente.</p>\n                  </td>\n                </tr>\n              </table>\n\n              <p style=\"margin:0 0 16px 0;font-size:14px;font-weight:700;color:#1B2631;font-family:Arial,sans-serif;\">Para que su reporte sea procesado correctamente:</p>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:28px;\">\n                <tr><td style=\"padding-bottom:14px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"vertical-align:top;width:32px;\">\n                      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#0D2B4E\" style=\"width:28px;height:28px;border-radius:50%;text-align:center;vertical-align:middle;font-size:12px;font-weight:700;color:#FFFFFF;font-family:Arial,sans-serif;line-height:28px;\">1</td>\n                      </tr></table>\n                    </td>\n                    <td style=\"padding-left:14px;vertical-align:middle;\"><p style=\"margin:0;font-size:14px;color:#2D3748;font-family:Arial,sans-serif;\"><strong>Descarte</strong> el archivo que intent&oacute; cargar.</p></td>\n                  </tr></table>\n                </td></tr>\n                <tr><td style=\"padding-bottom:14px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"vertical-align:top;width:32px;\">\n                      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#0D2B4E\" style=\"width:28px;height:28px;border-radius:50%;text-align:center;vertical-align:middle;font-size:12px;font-weight:700;color:#FFFFFF;font-family:Arial,sans-serif;line-height:28px;\">2</td>\n                      </tr></table>\n                    </td>\n                    <td style=\"padding-left:14px;vertical-align:middle;\"><p style=\"margin:0;font-size:14px;color:#2D3748;font-family:Arial,sans-serif;\">Descargue la <strong>plantilla oficial vigente</strong> adjunta a este correo.</p></td>\n                  </tr></table>\n                </td></tr>\n                <tr><td style=\"padding-bottom:14px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"vertical-align:top;width:32px;\">\n                      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#0D2B4E\" style=\"width:28px;height:28px;border-radius:50%;text-align:center;vertical-align:middle;font-size:12px;font-weight:700;color:#FFFFFF;font-family:Arial,sans-serif;line-height:28px;\">3</td>\n                      </tr></table>\n                    </td>\n                    <td style=\"padding-left:14px;vertical-align:middle;\"><p style=\"margin:0;font-size:14px;color:#2D3748;font-family:Arial,sans-serif;\">Diligencie la informaci&oacute;n. <strong>No modifique la estructura</strong> de la plantilla.</p></td>\n                  </tr></table>\n                </td></tr>\n                <tr><td>\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"vertical-align:top;width:32px;\">\n                      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#0D2B4E\" style=\"width:28px;height:28px;border-radius:50%;text-align:center;vertical-align:middle;font-size:12px;font-weight:700;color:#FFFFFF;font-family:Arial,sans-serif;line-height:28px;\">4</td>\n                      </tr></table>\n                    </td>\n                    <td style=\"padding-left:14px;vertical-align:top;\">\n                      <p style=\"margin:0 0 8px 0;font-size:14px;color:#2D3748;font-family:Arial,sans-serif;\">Reenví&shy;e el archivo al mismo correo con el asunto:</p>\n                      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#EFF8FF\" style=\"background-color:#EFF8FF;border:1px dashed #90CDF4;border-radius:6px;padding:10px 14px;\">\n                          <p style=\"margin:0;font-family:Courier New,monospace;font-size:12px;color:#1A5276;\">COHORTE | SALUD_MENTAL | {Nombre de su IPS}</p>\n                        </td>\n                      </tr></table>\n                    </td>\n                  </tr></table>\n                </td></tr>\n              </table>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td bgcolor=\"#FFFBEB\" style=\"background-color:#FFFBEB;border:1px solid #FCD34D;border-radius:10px;padding:16px 20px;\">\n                    <p style=\"margin:0;font-size:13px;color:#92400E;line-height:1.6;font-family:Arial,sans-serif;\">&#128161; <strong>Importante:</strong> No elimine ni renombre las hojas del archivo, no agregue columnas adicionales ni cambie el formato de las celdas.</p>\n                  </td>\n                </tr>\n              </table>\n\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td bgcolor=\"#F0F7FF\" style=\"background-color:#F0F7FF;border-radius:10px;padding:18px 22px;\">\n                    <p style=\"margin:0 0 6px 0;font-size:12px;font-weight:700;color:#2C5282;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;\">&iquest;Necesita ayuda?</p>\n                    <p style=\"margin:0 0 12px 0;font-size:13px;color:#4A5568;font-family:Arial,sans-serif;\">Comun&iacute;quese con la gestora del programa:</p>\n                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                      <td bgcolor=\"#0D2B4E\" style=\"border-radius:6px;padding:9px 18px;\">\n                        <a href=\"mailto:Correo_gestora_salud_mental@sersocial.org\" style=\"color:#FFFFFF;text-decoration:none;font-size:13px;font-weight:600;font-family:Arial,sans-serif;\">&#128231; &nbsp;Correo_gestora_salud_mental@sersocial.org</a>\n                      </td>\n                    </tr></table>\n                  </td>\n                </tr>\n              </table>\n\n              <p style=\"margin:0 0 16px 0;font-size:14px;color:#4A5568;line-height:1.7;font-family:Arial,sans-serif;\">Agradecemos su colaboraci&oacute;n y compromiso con el programa.</p>\n              <p style=\"margin:0;font-size:14px;color:#1B2631;line-height:1.7;font-family:Arial,sans-serif;\">\n                Cordialmente,<br/>\n                <strong>Equipo de Gesti&oacute;n de Cohortes</strong><br/>\n                <span style=\"color:#718096;font-size:13px;\">Fundaci&oacute;n Sersocial</span>\n              </p>\n\n            </td>\n          </tr>\n\n          <!-- FOOTER -->\n          <tr>\n            <td bgcolor=\"#1A3A5C\" style=\"background-color:#1A3A5C;border-radius:0 0 12px 12px;padding:18px 40px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                <td style=\"vertical-align:middle;\">\n                  <p style=\"margin:0;font-size:11px;color:#7FA8C9;line-height:1.6;font-family:Arial,sans-serif;\">Este es un mensaje autom&aacute;tico generado por el Sistema de Gesti&oacute;n de Cohortes.<br/>Por favor no responda directamente a este correo.</p>\n                </td>\n                <td align=\"right\" style=\"vertical-align:middle;white-space:nowrap;padding-left:16px;\">\n                  <p style=\"margin:0;font-size:10px;color:#4A6FA5;letter-spacing:1px;font-family:Arial,sans-serif;\">SERSOCIAL &middot; ${json.fechaCargue}</p>\n                </td>\n              </tr></table>\n            </td>\n          </tr>\n\n        </table>\n        <!--[if mso]>\n        </td></tr></table>\n        <![endif]-->\n\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>`;\n\nconst requestBody = JSON.stringify({\n  message: {\n    subject: `Error en cargue Cohorte Salud Mental - Plantilla incorrecta`,\n    body: { contentType: \"HTML\", content: htmlContent },\n    toRecipients: [{ emailAddress: { address: json.fromAddress } }],\n    attachments: [\n      {\n        \"@odata.type\": \"#microsoft.graph.fileAttachment\",\n        name: \"PLANTILLA_COHORTE_SALUD_MENTAL_SM_v1.0.xlsx\",\n        contentType: \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n        contentBytes: plantillaBytes\n      },\n      {\n        \"@odata.type\": \"#microsoft.graph.fileAttachment\",\n        name: \"INSTRUCTIVO_DE_CARGUE_FORMATO_SALUD_MENTAL.pdf\",\n        contentType: \"application/pdf\",\n        contentBytes: pdfBytes\n      }\n    ]\n  },\n  saveToSentItems: true\n});\n\nreturn [{ json: { ...json, requestBody } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        640
+      ],
+      "id": "faae12bd-4d33-4e8b-b511-f9433cfdb0f7",
+      "name": "body_formato_errado"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.microsoft.com/v1.0/users/reporte.saludmental@sersocial.org/sendMail",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        640
+      ],
+      "id": "608dd493-b043-45e6-85cb-c7218d3a26fe",
+      "name": "Notificacion_formato_errado",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "destinationKey": "xlsxBase64",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -1248,
+        656
+      ],
+      "id": "c77085b1-61eb-475c-9648-1e58ecce6639",
+      "name": "Base64 — XLSX"
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "destinationKey": "pdfBase64",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -864,
+        656
+      ],
+      "id": "1881656e-ab47-4e82-b01a-145423f7e4db",
+      "name": "Base64 — PDF"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputJson = $input.first().json;\n\nconst rawEmail = $('Outlook - Recibir Correo').first().json;\n\nconst json = {\n  ...inputJson,\n  fromAddress: rawEmail.from?.emailAddress?.address\n            || rawEmail.sender?.emailAddress?.address\n            || '',\n  fromName:    rawEmail.from?.emailAddress?.name\n            || rawEmail.sender?.emailAddress?.name\n            || rawEmail.from?.emailAddress?.address\n            || '',\n  subject:     rawEmail.subject || '',\n  fechaCargue: new Date().toISOString().split('T')[0],\n};\n\nconst plantillaBytes = $('Base64 — XLSX').first().json.xlsxBase64;\nconst pdfBytes = $('Base64 — PDF').first().json.pdfBase64;\n\nconst htmlContent = `<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Reporte no procesado</title>\n  <!--[if mso]>\n  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>\n  <![endif]-->\n</head>\n<body style=\"margin:0;padding:0;background-color:#F0F4F8;font-family:Arial,sans-serif;\">\n\n  <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"\n         bgcolor=\"#F0F4F8\" style=\"background-color:#F0F4F8;margin:0;padding:0;\">\n    <tr>\n      <td align=\"center\" bgcolor=\"#F0F4F8\" style=\"background-color:#F0F4F8;padding:40px 16px;\">\n\n        <!--[if mso]>\n        <table role=\"presentation\" width=\"580\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr><td>\n        <![endif]-->\n\n        <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"max-width:580px;margin:0 auto;\">\n\n          <!-- HEADER -->\n          <tr>\n            <td bgcolor=\"#0D2B4E\" style=\"background-color:#0D2B4E;border-radius:12px 12px 0 0;padding:32px 40px 28px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                <td style=\"vertical-align:top;\">\n                  <p style=\"margin:0 0 6px 0;font-size:10px;font-weight:700;letter-spacing:4px;color:#5DA8E0;text-transform:uppercase;font-family:Arial,sans-serif;\">Fundaci&oacute;n Sersocial</p>\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"border-left:3px solid #5DA8E0;padding-left:12px;\">\n                      <h1 style=\"margin:0;font-size:22px;font-weight:700;color:#FFFFFF;line-height:1.2;font-family:Arial,sans-serif;\">Sistema de Gesti&oacute;n<br/>de Cohortes</h1>\n                    </td>\n                  </tr></table>\n                  <p style=\"margin:10px 0 0 15px;font-size:12px;color:#A8C8E8;letter-spacing:1px;font-family:Arial,sans-serif;\">&#9658; Programa &middot; Salud Mental</p>\n                </td>\n                <td align=\"right\" style=\"vertical-align:top;width:64px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td bgcolor=\"#1A4A7A\" style=\"width:52px;height:52px;border-radius:12px;text-align:center;vertical-align:middle;padding:0;\">\n                      <p style=\"margin:0;font-size:24px;line-height:52px;text-align:center;\">&#129504;</p>\n                    </td>\n                  </tr></table>\n                </td>\n              </tr></table>\n            </td>\n          </tr>\n\n          <!-- ALERT BANNER -->\n          <tr>\n            <td bgcolor=\"#E8500A\" style=\"background-color:#E8500A;padding:14px 40px;\">\n              <p style=\"margin:0;font-size:13px;font-weight:700;color:#FFFFFF;letter-spacing:0.5px;font-family:Arial,sans-serif;\">&#9888;&#65039; &nbsp;REPORTE NO PROCESADO &middot; ARCHIVO NO ENCONTRADO</p>\n            </td>\n          </tr>\n\n          <!-- BODY -->\n          <tr>\n            <td bgcolor=\"#FFFFFF\" style=\"background-color:#FFFFFF;padding:36px 40px 32px;border-left:1px solid #E2EAF2;border-right:1px solid #E2EAF2;\">\n\n              <p style=\"margin:0 0 20px 0;font-size:15px;color:#1B2631;line-height:1.6;font-family:Arial,sans-serif;\">Estimado/a <strong>${json.fromName}</strong>,</p>\n              <p style=\"margin:0 0 16px 0;font-size:14px;color:#4A5568;line-height:1.7;font-family:Arial,sans-serif;\">Hemos recibido su correo con el asunto:</p>\n\n              <!-- Subject box -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:24px;\">\n                <tr>\n                  <td bgcolor=\"#F7FAFC\" style=\"background-color:#F7FAFC;border:1px solid #CBD5E0;border-left:4px solid #5DA8E0;border-radius:6px;padding:14px 18px;\">\n                    <p style=\"margin:0;font-family:Courier New,monospace;font-size:13px;color:#2D3748;\">${json.subject}</p>\n                  </td>\n                </tr>\n              </table>\n\n              <p style=\"margin:0 0 24px 0;font-size:14px;color:#4A5568;line-height:1.7;font-family:Arial,sans-serif;\">Sin embargo, <strong style=\"color:#1B2631;\">no fue posible procesarlo</strong> porque no se encontr&oacute; un archivo Excel (<strong style=\"background:#FFF5F5;color:#C53030;padding:2px 6px;border-radius:4px;font-size:13px;\">.xlsx</strong>) adjunto al mensaje.</p>\n\n              <!-- Error card -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:32px;\">\n                <tr>\n                  <td bgcolor=\"#FFF8F5\" style=\"background-color:#FFF8F5;border:1px solid #FBD5C0;border-radius:10px;padding:20px 24px;\">\n                    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                      <td style=\"vertical-align:top;width:36px;\">\n                        <p style=\"margin:0;font-size:22px;line-height:1;\">&#128683;</p>\n                      </td>\n                      <td style=\"vertical-align:top;padding-left:12px;\">\n                        <p style=\"margin:0 0 6px 0;font-size:13px;font-weight:700;color:#C05621;font-family:Arial,sans-serif;\">MOTIVO DEL RECHAZO</p>\n                        <p style=\"margin:0;font-size:13px;color:#744210;line-height:1.6;font-family:Arial,sans-serif;\">El reporte debe enviarse usando la <strong>plantilla oficial en formato .xlsx</strong>. No se aceptan otros formatos como PDF, Word, im&aacute;genes u hojas de c&aacute;lculo en otros formatos.</p>\n                      </td>\n                    </tr></table>\n                  </td>\n                </tr>\n              </table>\n\n              <p style=\"margin:0 0 16px 0;font-size:14px;font-weight:700;color:#1B2631;font-family:Arial,sans-serif;\">Para que su reporte sea procesado correctamente:</p>\n\n              <!-- Steps -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:28px;\">\n                <tr><td style=\"padding-bottom:14px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"vertical-align:top;width:32px;\">\n                      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#0D2B4E\" style=\"width:28px;height:28px;border-radius:50%;text-align:center;vertical-align:middle;font-size:12px;font-weight:700;color:#FFFFFF;font-family:Arial,sans-serif;line-height:28px;\">1</td>\n                      </tr></table>\n                    </td>\n                    <td style=\"padding-left:14px;vertical-align:middle;\"><p style=\"margin:0;font-size:14px;color:#2D3748;font-family:Arial,sans-serif;\">Descargue la <strong>plantilla oficial</strong> adjunta a este correo.</p></td>\n                  </tr></table>\n                </td></tr>\n                <tr><td style=\"padding-bottom:14px;\">\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"vertical-align:top;width:32px;\">\n                      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#0D2B4E\" style=\"width:28px;height:28px;border-radius:50%;text-align:center;vertical-align:middle;font-size:12px;font-weight:700;color:#FFFFFF;font-family:Arial,sans-serif;line-height:28px;\">2</td>\n                      </tr></table>\n                    </td>\n                    <td style=\"padding-left:14px;vertical-align:middle;\"><p style=\"margin:0;font-size:14px;color:#2D3748;font-family:Arial,sans-serif;\">Diligencie la informaci&oacute;n siguiendo las instrucciones del <strong>PDF instructivo</strong> tambi&eacute;n adjunto.</p></td>\n                  </tr></table>\n                </td></tr>\n                <tr><td>\n                  <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                    <td style=\"vertical-align:top;width:32px;\">\n                      <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#0D2B4E\" style=\"width:28px;height:28px;border-radius:50%;text-align:center;vertical-align:middle;font-size:12px;font-weight:700;color:#FFFFFF;font-family:Arial,sans-serif;line-height:28px;\">3</td>\n                      </tr></table>\n                    </td>\n                    <td style=\"padding-left:14px;vertical-align:top;\">\n                      <p style=\"margin:0 0 8px 0;font-size:14px;color:#2D3748;font-family:Arial,sans-serif;\">Reenví&shy;e el archivo al mismo correo con el asunto:</p>\n                      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                        <td bgcolor=\"#EFF8FF\" style=\"background-color:#EFF8FF;border:1px dashed #90CDF4;border-radius:6px;padding:10px 14px;\">\n                          <p style=\"margin:0;font-family:Courier New,monospace;font-size:12px;color:#1A5276;\">COHORTE | SALUD_MENTAL | {Nombre de su IPS}</p>\n                        </td>\n                      </tr></table>\n                    </td>\n                  </tr></table>\n                </td></tr>\n              </table>\n\n              <!-- Contacto -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"margin-bottom:28px;\">\n                <tr>\n                  <td bgcolor=\"#F0F7FF\" style=\"background-color:#F0F7FF;border-radius:10px;padding:18px 22px;\">\n                    <p style=\"margin:0 0 6px 0;font-size:12px;font-weight:700;color:#2C5282;letter-spacing:1px;text-transform:uppercase;font-family:Arial,sans-serif;\">&iquest;Necesita ayuda?</p>\n                    <p style=\"margin:0 0 12px 0;font-size:13px;color:#4A5568;font-family:Arial,sans-serif;\">Comun&iacute;quese con la gestora del programa:</p>\n                    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                      <td bgcolor=\"#0D2B4E\" style=\"border-radius:6px;padding:9px 18px;\">\n                        <a href=\"mailto:Correo_gestora_salud_mental@sersocial.org\" style=\"color:#FFFFFF;text-decoration:none;font-size:13px;font-weight:600;font-family:Arial,sans-serif;\">&#128231; &nbsp;Correo_gestora_salud_mental@sersocial.org</a>\n                      </td>\n                    </tr></table>\n                  </td>\n                </tr>\n              </table>\n\n              <p style=\"margin:0 0 16px 0;font-size:14px;color:#4A5568;line-height:1.7;font-family:Arial,sans-serif;\">Agradecemos su colaboraci&oacute;n y compromiso con el programa.</p>\n              <p style=\"margin:0;font-size:14px;color:#1B2631;line-height:1.7;font-family:Arial,sans-serif;\">\n                Cordialmente,<br/>\n                <strong>Equipo de Gesti&oacute;n de Cohortes</strong><br/>\n                <span style=\"color:#718096;font-size:13px;\">Fundaci&oacute;n Sersocial</span>\n              </p>\n\n            </td>\n          </tr>\n\n          <!-- FOOTER -->\n          <tr>\n            <td bgcolor=\"#1A3A5C\" style=\"background-color:#1A3A5C;border-radius:0 0 12px 12px;padding:18px 40px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\"><tr>\n                <td style=\"vertical-align:middle;\">\n                  <p style=\"margin:0;font-size:11px;color:#7FA8C9;line-height:1.6;font-family:Arial,sans-serif;\">Este es un mensaje autom&aacute;tico generado por el Sistema de Gesti&oacute;n de Cohortes.<br/>Por favor no responda directamente a este correo.</p>\n                </td>\n                <td align=\"right\" style=\"vertical-align:middle;white-space:nowrap;padding-left:16px;\">\n                  <p style=\"margin:0;font-size:10px;color:#4A6FA5;letter-spacing:1px;font-family:Arial,sans-serif;\">SERSOCIAL &middot; ${json.fechaCargue}</p>\n                </td>\n              </tr></table>\n            </td>\n          </tr>\n\n        </table>\n        <!--[if mso]>\n        </td></tr></table>\n        <![endif]-->\n\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>`;\n\nconst requestBody = JSON.stringify({\n  message: {\n    subject: `Cohorte Salud Mental · Reporte no procesado - Archivo no encontrado`,\n    body: { contentType: \"HTML\", content: htmlContent },\n    toRecipients: [{ emailAddress: { address: json.fromAddress } }],\n    attachments: [\n      {\n        \"@odata.type\": \"#microsoft.graph.fileAttachment\",\n        name: \"PLANTILLA_COHORTE_SALUD_MENTAL_SM_v1.0.xlsx\",\n        contentType: \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n        contentBytes: plantillaBytes\n      },\n      {\n        \"@odata.type\": \"#microsoft.graph.fileAttachment\",\n        name: \"INSTRUCTIVO_DE_CARGUE_FORMATO_SALUD_MENTAL.pdf\",\n        contentType: \"application/pdf\",\n        contentBytes: pdfBytes\n      }\n    ]\n  },\n  saveToSentItems: true\n});\n\nreturn [{ json: { ...json, requestBody } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        832
+      ],
+      "id": "3fe08f2c-420d-4c6c-866d-1a70cd6d8037",
+      "name": "body_sin_excel"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.microsoft.com/v1.0/users/reporte.saludmental@sersocial.org/sendMail",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -176,
+        832
+      ],
+      "id": "9126afa0-cc18-4cec-bce9-46092f064500",
+      "name": "Rechazo - Sin Excel",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.xlsxKey }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              },
+              "id": "59aa5725-e090-4644-88c0-e2e42455eb2c"
+            },
+            {
+              "id": "ab24695f-e912-4859-b1f4-03ced1e74a90",
+              "leftValue": "={{ $json.tokenValido }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "518853a8-27d7-4ed0-8e76-0dc2348c1f4a",
+      "name": "ARCHIVO_VALIDO",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1696,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "d1fd2218-d822-4eaf-b6ed-8945621e2980",
+              "leftValue": "={{ $('Validar Token y Estructura').first().json.xlsxKey }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "20d12ed8-36bc-4b5f-b16d-6723c5144287",
+      "name": "¿Archivo excel?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -656,
+        656
+      ]
+    }
+  ],
+  "connections": {
+    "Outlook - Recibir Correo": {
+      "main": [
+        [
+          {
+            "node": "Verificar Asunto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Asunto": {
+      "main": [
+        [
+          {
+            "node": "Marcar como Leído",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ignorar Correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Adjuntos": {
+      "main": [
+        [
+          {
+            "node": "Validar Token y Estructura",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Tiene Válidos?": {
+      "main": [
+        [
+          {
+            "node": "Generar Excel Válidos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar PDFs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Preparar Registros PG": {
+      "main": [
+        [
+          {
+            "node": "Insertar PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Subir Excel OneDrive": {
+      "main": [
+        [
+          {
+            "node": "Log - Cargue Exitoso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar PDFs": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request Subir PDFs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar Excel Válidos": {
+      "main": [
+        [
+          {
+            "node": "Subir Excel OneDrive",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar Registros PG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insertar PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request remitente": {
+      "main": [
+        [
+          {
+            "node": "Procesar Adjuntos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request adjunto": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request remitente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Token y Estructura": {
+      "main": [
+        [
+          {
+            "node": "ARCHIVO_VALIDO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar como Leído": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request adjunto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Registros": {
+      "main": [
+        [
+          {
+            "node": "Creacion_excel_errores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Creacion_excel_errores": {
+      "main": [
+        [
+          {
+            "node": "¿Tiene Válidos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "htmlContent": {
+      "main": [
+        [
+          {
+            "node": "RESUMEN_CON_ERRORES",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RESUMEN_CON_ERRORES": {
+      "main": [
+        [
+          {
+            "node": "Log - Inválidos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "htmlContent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request — Descargar XLSX": {
+      "main": [
+        [
+          {
+            "node": "Base64 — XLSX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request — Descargar PDF": {
+      "main": [
+        [
+          {
+            "node": "Base64 — PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body_formato_errado": {
+      "main": [
+        [
+          {
+            "node": "Notificacion_formato_errado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificacion_formato_errado": {
+      "main": [
+        [
+          {
+            "node": "Log - Formato Incorrecto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base64 — XLSX": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request — Descargar PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base64 — PDF": {
+      "main": [
+        [
+          {
+            "node": "¿Archivo excel?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body_sin_excel": {
+      "main": [
+        [
+          {
+            "node": "Rechazo - Sin Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rechazo - Sin Excel": {
+      "main": [
+        [
+          {
+            "node": "Log - Sin Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ARCHIVO_VALIDO": {
+      "main": [
+        [
+          {
+            "node": "Validar Registros",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request — Descargar XLSX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Archivo excel?": {
+      "main": [
+        [
+          {
+            "node": "body_formato_errado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "body_sin_excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "92f126d4-3437-4eab-aef0-4c42ce454efe",
+  "activeVersionId": null,
+  "versionCounter": 3,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-06T16:43:44.065Z",
+      "createdAt": "2026-03-06T16:43:44.065Z",
+      "role": "workflow:owner",
+      "workflowId": "HX4UEAuyrmw_ocxcGG9oO",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
