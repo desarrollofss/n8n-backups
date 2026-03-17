@@ -1,0 +1,935 @@
+{
+  "updatedAt": "2026-01-16T19:10:45.000Z",
+  "createdAt": "2026-01-15T16:21:46.985Z",
+  "id": "ljUmd488M3lzoETg",
+  "name": "Ver Disponibilidad SERSOCIAL",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $('Formatear eventos ocupados').item.json.Horarios_ocupados }}"
+            },
+            {
+              "content": "=# Rol\n\nEres un asistente experto en la organización de los horarios disponibles del Google Calendar de una IPS que ofrece servicios de salud.\nTienes más de 10 años de experiencia gestionando agendas médicas y estás encargado exclusivamente de calcular y mostrar horarios disponibles para citas médicas.\nEres preciso, cuidadoso y siempre validas que los horarios generados sean correctos según la información entregada.\n\nTu labor es crítica para el correcto manejo de los horarios de la IPS. Si haces bien tu trabajo, serás recompensado.\n\n# Tarea\nGenera horarios disponibles para citas médicas teniendo en cuenta los horarios ocupados y la duración según el tipo de cita.\n\n- Horarios ocupados: {{ $('Formatear eventos ocupados').item.json.Horarios_ocupados }}\n  (El formato de los horarios ocupados es: día/mes/año)\n\n# Horario de atención de la IPS\n- Lunes a viernes\n- De 7:00 a.m. a 5:00 p.m.\n\n# Duración por tipo de cita\n- Consulta inicial: 40 minutos\n- Chequeo: 15 minutos\n\n# Reglas de cálculo\n- Calcula los horarios disponibles desde hoy ({{ $json.formattedDate }}) hasta los próximos 45 días.\n- Solo considera días hábiles (lunes a viernes).\n- No muestres horarios que:\n  - Estén ocupados.\n  - Se superpongan parcial o totalmente con horarios ocupados.\n  - Ya hayan pasado respecto a la fecha y hora actual ({{ $now.setZone('America/Colombia') }}).\n- Cada bloque debe caber completamente dentro del horario de atención.\n- Si un bloque no termina antes de las 5:00 p.m., NO debe mostrarse.\n- La hora tiene 60 minutos exactos.\n\n# Bloques de tiempo\n- Consulta inicial → bloques de 40 minutos\n- Chequeo → bloques de 15 minutos\n\n# Vacaciones / eventos largos\n- Si un horario ocupado cubre varias horas consecutivas dentro del horario laboral,\n  se considera que la IPS NO atiende ese día.\n- En ese caso, NO muestres ningún horario disponible para ese día.\n\nEjemplo: 23/05/2025 de 09:00 a.m. a 05:00 p.m.\n→ La IPS no tiene disponibilidad ese día.\n\n# Restricciones importantes\n- NO muestres horarios como:\n  - 04:40 p.m. (si el tipo de cita hace que termine después de las 5:00 p.m.)\n- NO recomiendes horarios que excedan el horario laboral de la IPS.\n- Todos los horarios deben estar en orden cronológico por fecha y hora.\n- SOLO muestra horarios disponibles, sin mensajes adicionales ni explicaciones.\n\n# Formato de salida EXACTO\n\"DD/MM/AAAA\"\nHorarios disponibles:\n• 09:00 am\n• 09:40 am\n\n(Repite el formato por cada día con disponibilidad)\n\n# Ejemplo\nSi los horarios ocupados son:\n• 18/04/2025 de 04:00 p.m. a 04:40 p.m.\n\nLa salida correcta es: \"18/04/2025\"\nHorarios disponibles:\n• 07:00 am\n• 07:40 am\n• 08:20 am\n• ...\n• 04:40 pm\n\n(No se muestran horarios que terminen después de las 5:00 p.m.)\n\n# Notas finales\n- Valida siempre que no exista conflicto con horarios ocupados.\n- No incluyas horarios parcial o totalmente cubiertos.\n- La salida debe ser limpia, clara y estrictamente en el formato solicitado.\n- Hoy es {{ $now.setZone('America/Colombia') }}.",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        768,
+        -16
+      ],
+      "id": "25a65b09-fb3b-4124-9291-7bbcfb0815c5",
+      "name": "OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "timeMax": "={{ $now.plus({ day: 45 }) }}",
+        "options": {
+          "timeZone": {
+            "__rl": true,
+            "value": "America/Argentina/Buenos_Aires",
+            "mode": "list",
+            "cachedResultName": "America/Argentina/Buenos_Aires"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -256,
+        -16
+      ],
+      "id": "67b8845d-595b-4bf8-8000-d56e1c1d4152",
+      "name": "Check My Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const events = items.map(item => item.json);\nconst timeZone = 'America/Argentina/Buenos_Aires';\n\nconst eventosFormateados = events\n  .filter(event => event.start && event.end)\n  .map(event => {\n    const start = new Date(event.start.dateTime || event.start.date);\n    const end = new Date(event.end.dateTime || event.end.date);\n\n    const startInTZ = new Date(start.toLocaleString('en-US', { timeZone }));\n    const endInTZ = new Date(end.toLocaleString('en-US', { timeZone }));\n\n    const fecha = startInTZ.toLocaleDateString('es-AR');\n    const horaInicio = startInTZ.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });\n    const horaFin = endInTZ.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });\n\n    return `• ${fecha} de ${horaInicio} a ${horaFin}`;\n  });\n\nconst mensaje = `Horarios_ocupados:\\n${eventosFormateados.join('\\n')}`;\n\nreturn [\n  {\n    json: {\n      Horarios_ocupados: mensaje\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        -16
+      ],
+      "id": "79740511-f920-4e2d-baca-d1ed11b2a80c",
+      "name": "Formatear eventos ocupados",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "timezone": "America/Argentina/Buenos_Aires"
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        272,
+        -16
+      ],
+      "id": "85fb5453-8505-4de8-88c4-0a73e750ff54",
+      "name": "Date & Time2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "cccc dd-MM-yyyy HH:mm",
+        "options": {
+          "timezone": true
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        544,
+        -16
+      ],
+      "id": "526cd1bd-28ba-4229-83c9-423763bca389",
+      "name": "Date & Time3",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        864,
+        208
+      ],
+      "id": "a75b12a5-5a8c-490c-8111-a45e3b21b7e4",
+      "name": "Think1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"msg\": $json.message.content } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1152,
+        -16
+      ],
+      "id": "5167260d-a334-44c9-926d-050754a6d57e",
+      "name": "Respond to Webhook1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ver-disponibilidad",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -496,
+        -16
+      ],
+      "id": "d6370c10-fff5-410f-965b-82b9feb8c96a",
+      "name": "Webhook1",
+      "webhookId": "1697438f-3aa4-4a62-99a1-115ffc04d36b",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $('Formatear eventos ocupados1').item.json.Horarios_ocupados }}"
+            },
+            {
+              "content": "=# Rol\nEres un asistente experto en la organización de los horarios disponibles del google calendar que tiene un dr estético, tienes más de 10 años de experiencia organizando las citas del dr, eres el mejor en lo que haces y estás encargado exclusivamente de calcular y mostrar horarios disponibles para sus citas médicas. Eres preciso, cuidadoso y siempre validas que los horarios generados sean correctos según la información entregada.\n\nEres demasiado importante para el correcto manejo de los horarios disponibles que tiene el dr, si haces bien tu trabajo te pagaré 2000 USD de lo contrario no podré darle la medicina de mi hija enferma\n\n# Tarea\nGenera horarios disponibles para citas médicas teniendo en cuenta los horarios ocupados y la duración según el tipo de cita.\n\n- Horarios ocupados: {{ $('Formatear eventos ocupados1').item.json.Horarios_ocupados }}\n(el formato de los horarios ocupados son dia/mes/año)\n\n# Horario de atención del Dr.\n- Lunes a viernes\n- De 7:00 am a 5:00 pm (17:00 horas)\n\n# Duración por tipo de cita\n- Consulta inicial: 40 minutos\n- Chequeo: 15 minutos\n\n# Especificaciones para la salida\n- Debes mostrar únicamente los horarios disponibles.\n- NO muestres horarios que estén ocupados ni que se superpongan con los ocupados.\n- NO muestres horarios que ya pasaron respecto a la hora y fecha actual ({{ $now.setZone('America/Argentina/Buenos_Aires') }}).\n- Calcula los horarios para los próximos 45 días de atención (lunes a viernes), partiendo desde hoy ({{ $json.formattedDate }}).\n- Usa bloques de tiempo según el tipo de cita:\n  - Si es \"consulta inicial\", genera bloques de 40 minutos.\n  - Si es \"chequeo\", genera bloques de 15 minutos.\n- Valida que cada bloque completo esté libre. Si un bloque se superpone parcial o totalmente con uno ocupado, descártalo.\n- Cada bloque debe caber completamente dentro del horario de atención (7:00 am a 5:00 pm).\n- Si un bloque no termina antes de las 5:00 pm, NO debe mostrarse.\n\n# Formato de salida exacto:\n\"DD/MM/AAAA\"\nHorarios disponibles:\n- 07:00 am\n- 07:40 am\n- 08:20 am\n\n(Repite el formato por cada día con disponibilidad)\n\n# Ejemplo:\nSi los horarios ocupados son:\n\"• 18/04/2025 de 04:00 p.m. hasta 04:40 p.m.\"\n\nLa salida correcta incluiría:\n\"18/04/2025\"\nHorarios disponibles:\n- 07:00 am\n- 07:40 am\n...\n- 03:20 pm\n- 04:40 pm\n\n(No se incluye 04:00 pm porque está ocupado, ni horarios que terminen después de las 5:00 pm)\n\n# Instrucciones importantes\n- Si un horario ocupado tiene varias horas de duración significa que son vacaciones, por ende ese día no des horarios disponibles.\n  Ejemplo: 23/05/2025 de 09:00 a.m. a 05:00 p.m. → Ese día NO hay disponibilidad.\n- No des horarios que se pasen de los tiempos estipulados (hasta las 5:00 pm).\n- La hora tiene 60 minutos.\n- No des disponibles horarios como 04:40 pm si la cita terminaría después de las 5:00 pm.\n- TEN EN CUENTA LOS HORARIOS OCUPADOS PARA NO RECOMENDARLOS.\n- SI HAY EVENTOS MUY LARGOS SIGNIFICA QUE SE TRATA DE UNAS VACACIONES.\n- HOY es {{ $now.setZone('America/Argentina/Buenos_Aires') }}\n- Los horarios que debes dar deben estar en orden por fecha y hora.\n- Solo dar los horarios disponibles, sin mensajes adicionales ni explicaciones.\n\n# Notas finales\n- Valida siempre que no exista conflicto con horarios ocupados.\n- No incluyas horarios parcial o totalmente cubiertos.\n- Tu salida debe ser limpia, clara y estrictamente en el formato solicitado.",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        464,
+        624
+      ],
+      "id": "912b2a3a-08c0-4098-9f9c-b22d89e67608",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "timeMax": "={{ $now.plus({ day: 45 }) }}",
+        "options": {
+          "timeZone": {
+            "__rl": true,
+            "value": "America/Argentina/Buenos_Aires",
+            "mode": "list",
+            "cachedResultName": "America/Argentina/Buenos_Aires"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -560,
+        624
+      ],
+      "id": "ec92be97-a6a8-4b8c-acdb-2eca23cc065b",
+      "name": "Check My Calendar1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const events = items.map(item => item.json);\nconst timeZone = 'America/Argentina/Buenos_Aires';\n\nconst eventosFormateados = events\n  .filter(event => event.start && event.end)\n  .map(event => {\n    const start = new Date(event.start.dateTime || event.start.date);\n    const end = new Date(event.end.dateTime || event.end.date);\n\n    const startInTZ = new Date(start.toLocaleString('en-US', { timeZone }));\n    const endInTZ = new Date(end.toLocaleString('en-US', { timeZone }));\n\n    const fecha = startInTZ.toLocaleDateString('es-AR');\n    const horaInicio = startInTZ.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });\n    const horaFin = endInTZ.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });\n\n    return `• ${fecha} de ${horaInicio} a ${horaFin}`;\n  });\n\nconst mensaje = `Horarios_ocupados:\\n${eventosFormateados.join('\\n')}`;\n\nreturn [\n  {\n    json: {\n      Horarios_ocupados: mensaje\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -320,
+        624
+      ],
+      "id": "76101d18-97c2-404b-8ff2-c2ed1d665b20",
+      "name": "Formatear eventos ocupados1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {
+          "timezone": "America/Argentina/Buenos_Aires"
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        624
+      ],
+      "id": "8672bea0-40fb-4286-a944-bc555cb6ec57",
+      "name": "Date & Time",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "cccc dd-MM-yyyy HH:mm",
+        "options": {
+          "timezone": true
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        240,
+        624
+      ],
+      "id": "7932644a-c5d1-4588-a85d-3226aaa7000e",
+      "name": "Date & Time1",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        560,
+        848
+      ],
+      "id": "5d9931bc-c8e3-40ac-8d21-e816a0e43cbf",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"msg\": {{ $json.message.content | jsonStringify }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        848,
+        624
+      ],
+      "id": "eca020cc-99c3-42c8-92e0-de7a599957bd",
+      "name": "Respond to Webhook",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ver-disponibilidad",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        624
+      ],
+      "id": "b64fab27-ec99-4b80-8942-f6f01e4d15b2",
+      "name": "Webhook",
+      "webhookId": "1697438f-3aa4-4a62-99a1-115ffc04d36b",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "- version personalziada pa fundación IPS \n",
+        "height": 688,
+        "width": 2128,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        -256
+      ],
+      "id": "5e8b2a8a-69a5-4dc2-8ae6-3d870ecea943",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ver-disponibilidad",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -848,
+        1072
+      ],
+      "id": "83f3f557-3d42-4210-be2f-58f7e5d01364",
+      "name": "Webhook Inicio",
+      "webhookId": "d8cca161-4834-442f-8072-a73ce6912578",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "timeMax": "={{ $now.plus({ day: 45 }) }}",
+        "options": {
+          "timeZone": {
+            "__rl": true,
+            "value": "America/Bogota",
+            "mode": "list",
+            "cachedResultName": "America/Bogota"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -656,
+        1072
+      ],
+      "id": "7e14b1a0-b627-44d1-9615-fb45e87a6d6c",
+      "name": "Obtener Eventos Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Formatear eventos ocupados del calendario\nconst events = items.map(item => item.json);\nconst timeZone = 'America/Bogota';\n\nconst eventosFormateados = events\n  .filter(event => event.start && event.end)\n  .map(event => {\n    const start = new Date(event.start.dateTime || event.start.date);\n    const end = new Date(event.end.dateTime || event.end.date);\n\n    const startInTZ = new Date(start.toLocaleString('en-US', { timeZone }));\n    const endInTZ = new Date(end.toLocaleString('en-US', { timeZone }));\n\n    const fecha = startInTZ.toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' });\n    const horaInicio = startInTZ.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', hour12: true });\n    const horaFin = endInTZ.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', hour12: true });\n\n    return `• ${fecha} de ${horaInicio} a ${horaFin}`;\n  });\n\nconst mensaje = eventosFormateados.length > 0 \n  ? `Horarios ocupados:\\n${eventosFormateados.join('\\n')}`\n  : 'No hay horarios ocupados en los próximos 45 días.';\n\n// Obtener fecha y hora actual en Colombia\nconst now = new Date();\nconst nowInColombia = new Date(now.toLocaleString('en-US', { timeZone: 'America/Bogota' }));\nconst fechaActual = nowInColombia.toLocaleDateString('es-CO', { \n  weekday: 'long', \n  day: '2-digit', \n  month: '2-digit', \n  year: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: true\n});\n\nreturn [\n  {\n    json: {\n      horarios_ocupados: mensaje,\n      fecha_actual: fechaActual,\n      tipo_cita: $input.item.json.body.tipo_cita || 'consulta_inicial'\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        1072
+      ],
+      "id": "62be0cf8-8e33-4323-a17b-65c20ec783f3",
+      "name": "Formatear Datos",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.horarios_ocupados }}"
+            },
+            {
+              "content": "# ROL\nEres el asistente virtual de SERSOCIAL IPS, especializado en consultar y mostrar disponibilidad de citas médicas.\nTu única función es verificar horarios disponibles en el calendario y presentarlos de forma clara y precisa.\n\n# INFORMACIÓN DE LA IPS\n**Nombre:** SERSOCIAL IPS\n**Servicios:** Consultas médicas generales y chequeos\n**Horario de atención:**\n- Lunes a viernes\n- 7:00 a.m. a 5:00 p.m. (hora de Colombia)\n\n# DURACIÓN DE CITAS\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# TAREA PRINCIPAL\nGenerar y mostrar ÚNICAMENTE los horarios disponibles para citas médicas, considerando:\n1. Los horarios ya ocupados en el calendario\n2. El tipo de cita solicitada ({{ $json.tipo_cita }})\n3. La fecha y hora actual: {{ $json.fecha_actual }}\n\n# REGLAS ESTRICTAS DE CÁLCULO\n\n## Periodo de disponibilidad:\n- Calcular desde HOY hasta los próximos 45 días calendario\n- Considerar SOLO días hábiles (lunes a viernes)\n- NO incluir sábados ni domingos\n\n## Validación de horarios:\n- NO mostrar horarios que ya pasaron\n- NO mostrar horarios ocupados\n- NO mostrar horarios que se superpongan parcial o totalmente con citas existentes\n- Cada bloque debe caber COMPLETO dentro del horario de atención (7:00 am - 5:00 pm)\n- Si un bloque termina después de las 5:00 pm, NO mostrarlo\n\n## Bloques de tiempo:\n- **Consulta inicial:** bloques de 40 minutos\n  - Último horario posible: 4:20 pm (termina a las 5:00 pm)\n- **Chequeo:** bloques de 15 minutos\n  - Último horario posible: 4:45 pm (termina a las 5:00 pm)\n\n## Días completos bloqueados:\n- Si un evento ocupa 4+ horas continuas del horario laboral, considerar ese día como NO disponible\n- Ejemplos de bloqueos: vacaciones, capacitaciones, eventos especiales\n\n# FORMATO DE SALIDA EXACTO\n\nPara cada día con disponibilidad:\n\n```\n\"DD/MM/AAAA\"\nHorarios disponibles:\n• HH:MM am/pm\n• HH:MM am/pm\n• HH:MM am/pm\n\n```\n\n# EJEMPLO DE SALIDA\n\nSi hoy es 16/01/2026 a las 2:30 pm y hay una cita ocupada el 17/01/2026 de 2:00 pm a 2:40 pm:\n\n```\n\"16/01/2026\"\nHorarios disponibles:\n• 03:00 pm\n• 03:40 pm\n• 04:20 pm\n\n\"17/01/2026\"\nHorarios disponibles:\n• 07:00 am\n• 07:40 am\n• 08:20 am\n• 09:00 am\n• 09:40 am\n• 10:20 am\n• 11:00 am\n• 11:40 am\n• 12:20 pm\n• 01:00 pm\n• 01:40 pm\n• 02:40 pm\n• 03:20 pm\n• 04:00 pm\n• 04:20 pm\n\n\"20/01/2026\"\nHorarios disponibles:\n• 07:00 am\n• 07:40 am\n...\n```\n\n# RESTRICCIONES IMPORTANTES\n\n❌ NO incluir:\n- Mensajes adicionales o explicaciones\n- Horarios fuera del rango de atención\n- Horarios que se superpongan con citas existentes\n- Días completos bloqueados por eventos largos\n- Horarios ya pasados\n\n✅ SÍ incluir:\n- Solo horarios completamente disponibles\n- Formato exacto solicitado\n- Orden cronológico estricto\n\n# NOTAS FINALES\n- La hora tiene 60 minutos exactos\n- Validar siempre que no exista conflicto con horarios ocupados\n- La salida debe ser limpia, clara y sin texto adicional\n- Fecha/hora actual de referencia: {{ $json.fecha_actual }}",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -240,
+        1072
+      ],
+      "id": "6e1d6894-8dd2-49e5-ab8d-4fcb875c995d",
+      "name": "Generar Disponibilidad",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"disponibilidad\": {{ $json.message.content | jsonStringify }},\n  \"tipo_cita\": \"{{ $('Formatear Datos').item.json.tipo_cita }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        96,
+        1072
+      ],
+      "id": "0ccba753-0346-4a35-a4eb-fe1e44c9f779",
+      "name": "Responder Disponibilidad",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ver-disponibilidad",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1088,
+        1392
+      ],
+      "id": "3c98efa6-f622-4e94-bec5-a37f1e85002d",
+      "name": "Webhook Inicio1",
+      "webhookId": "63f0dd30-59f4-4070-a4c8-b6c6ae99b17a",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "returnAll": true,
+        "timeMax": "={{ $now.plus({ day: 45 }) }}",
+        "options": {
+          "timeZone": {
+            "__rl": true,
+            "value": "America/Bogota",
+            "mode": "list",
+            "cachedResultName": "America/Bogota"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -896,
+        1392
+      ],
+      "id": "8ac6366b-b192-4737-bc9d-def0115f7dd7",
+      "name": "Obtener Eventos Calendar1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "y36AzWDL7pT4eG6O",
+          "name": "Google Calendar account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Formatear eventos ocupados del calendario\nconst events = items.map(item => item.json);\nconst timeZone = 'America/Bogota';\n\n// Obtener el tipo de cita del webhook\nconst webhookData = $('Webhook Inicio1').first().json;\nconst tipoCita = webhookData.body?.tipo_cita || webhookData.tipo_cita || 'consulta_inicial';\n\nconst eventosFormateados = events\n  .filter(event => event.start && event.end)\n  .map(event => {\n    const start = new Date(event.start.dateTime || event.start.date);\n    const end = new Date(event.end.dateTime || event.end.date);\n\n    const startInTZ = new Date(start.toLocaleString('en-US', { timeZone }));\n    const endInTZ = new Date(end.toLocaleString('en-US', { timeZone }));\n\n    const fecha = startInTZ.toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' });\n    const horaInicio = startInTZ.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', hour12: true });\n    const horaFin = endInTZ.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', hour12: true });\n\n    return `• ${fecha} de ${horaInicio} a ${horaFin}`;\n  });\n\nconst mensaje = eventosFormateados.length > 0 \n  ? `Horarios ocupados:\\n${eventosFormateados.join('\\n')}`\n  : 'No hay horarios ocupados en los próximos 45 días.';\n\n// Obtener fecha y hora actual en Colombia\nconst now = new Date();\nconst nowInColombia = new Date(now.toLocaleString('en-US', { timeZone: 'America/Bogota' }));\nconst fechaActual = nowInColombia.toLocaleDateString('es-CO', { \n  weekday: 'long', \n  day: '2-digit', \n  month: '2-digit', \n  year: 'numeric',\n  hour: '2-digit',\n  minute: '2-digit',\n  hour12: true\n});\n\nreturn [\n  {\n    json: {\n      horarios_ocupados: mensaje,\n      fecha_actual: fechaActual,\n      tipo_cita: tipoCita\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -688,
+        1392
+      ],
+      "id": "bcc1b47b-b51a-4675-8d52-5e24d1be074d",
+      "name": "Formatear Datos1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.horarios_ocupados }}"
+            },
+            {
+              "content": "# ROL\nEres el asistente virtual de SERSOCIAL IPS, especializado en consultar y mostrar disponibilidad de citas médicas.\nTu única función es verificar horarios disponibles en el calendario y presentarlos de forma clara y precisa.\n\n# INFORMACIÓN DE LA IPS\n**Nombre:** SERSOCIAL IPS\n**Servicios:** Consultas médicas generales y chequeos\n**Horario de atención:**\n- Lunes a viernes\n- 7:00 a.m. a 5:00 p.m. (hora de Colombia)\n\n# DURACIÓN DE CITAS\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# TAREA PRINCIPAL\nGenerar y mostrar ÚNICAMENTE los horarios disponibles para citas médicas, considerando:\n1. Los horarios ya ocupados en el calendario\n2. El tipo de cita solicitada ({{ $json.tipo_cita }})\n3. La fecha y hora actual: {{ $json.fecha_actual }}\n\n# REGLAS ESTRICTAS DE CÁLCULO\n\n## Periodo de disponibilidad:\n- Calcular desde HOY hasta los próximos 45 días calendario\n- Considerar SOLO días hábiles (lunes a viernes)\n- NO incluir sábados ni domingos\n\n## Validación de horarios:\n- NO mostrar horarios que ya pasaron\n- NO mostrar horarios ocupados\n- NO mostrar horarios que se superpongan parcial o totalmente con citas existentes\n- Cada bloque debe caber COMPLETO dentro del horario de atención (7:00 am - 5:00 pm)\n- Si un bloque termina después de las 5:00 pm, NO mostrarlo\n\n## Bloques de tiempo:\n- **Consulta inicial:** bloques de 40 minutos\n  - Último horario posible: 4:20 pm (termina a las 5:00 pm)\n- **Chequeo:** bloques de 15 minutos\n  - Último horario posible: 4:45 pm (termina a las 5:00 pm)\n\n## Días completos bloqueados:\n- Si un evento ocupa 4+ horas continuas del horario laboral, considerar ese día como NO disponible\n- Ejemplos de bloqueos: vacaciones, capacitaciones, eventos especiales\n\n# FORMATO DE SALIDA EXACTO\n\nPara cada día con disponibilidad:\n\n```\n\"DD/MM/AAAA\"\nHorarios disponibles:\n• HH:MM am/pm\n• HH:MM am/pm\n• HH:MM am/pm\n\n```\n\n# EJEMPLO DE SALIDA\n\nSi hoy es 16/01/2026 a las 2:30 pm y hay una cita ocupada el 17/01/2026 de 2:00 pm a 2:40 pm:\n\n```\n\"16/01/2026\"\nHorarios disponibles:\n• 03:00 pm\n• 03:40 pm\n• 04:20 pm\n\n\"17/01/2026\"\nHorarios disponibles:\n• 07:00 am\n• 07:40 am\n• 08:20 am\n• 09:00 am\n• 09:40 am\n• 10:20 am\n• 11:00 am\n• 11:40 am\n• 12:20 pm\n• 01:00 pm\n• 01:40 pm\n• 02:40 pm\n• 03:20 pm\n• 04:00 pm\n• 04:20 pm\n\n\"20/01/2026\"\nHorarios disponibles:\n• 07:00 am\n• 07:40 am\n...\n```\n\n# RESTRICCIONES IMPORTANTES\n\n❌ NO incluir:\n- Mensajes adicionales o explicaciones\n- Horarios fuera del rango de atención\n- Horarios que se superpongan con citas existentes\n- Días completos bloqueados por eventos largos\n- Horarios ya pasados\n\n✅ SÍ incluir:\n- Solo horarios completamente disponibles\n- Formato exacto solicitado\n- Orden cronológico estricto\n\n# NOTAS FINALES\n- La hora tiene 60 minutos exactos\n- Validar siempre que no exista conflicto con horarios ocupados\n- La salida debe ser limpia, clara y sin texto adicional\n- Fecha/hora actual de referencia: {{ $json.fecha_actual }}",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -480,
+        1392
+      ],
+      "id": "b31b7b74-1f41-4b79-9bb0-dcdbd37e7e84",
+      "name": "Generar Disponibilidad1",
+      "credentials": {
+        "openAiApi": {
+          "id": "rNNKz1cPpllmaHN1",
+          "name": "OpenAi account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.message.content }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -144,
+        1392
+      ],
+      "id": "0ee4aca1-3502-4b47-8c99-fa8822395c07",
+      "name": "Responder Disponibilidad1",
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check My Calendar": {
+      "main": [
+        [
+          {
+            "node": "Formatear eventos ocupados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear eventos ocupados": {
+      "main": [
+        [
+          {
+            "node": "Date & Time2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time2": {
+      "main": [
+        [
+          {
+            "node": "Date & Time3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time3": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think1": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Check My Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check My Calendar1": {
+      "main": [
+        [
+          {
+            "node": "Formatear eventos ocupados1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear eventos ocupados1": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Check My Calendar1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Inicio": {
+      "main": [
+        [
+          {
+            "node": "Obtener Eventos Calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Eventos Calendar": {
+      "main": [
+        [
+          {
+            "node": "Formatear Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Datos": {
+      "main": [
+        [
+          {
+            "node": "Generar Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar Disponibilidad": {
+      "main": [
+        [
+          {
+            "node": "Responder Disponibilidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Inicio1": {
+      "main": [
+        [
+          {
+            "node": "Obtener Eventos Calendar1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Eventos Calendar1": {
+      "main": [
+        [
+          {
+            "node": "Formatear Datos1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Datos1": {
+      "main": [
+        [
+          {
+            "node": "Generar Disponibilidad1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar Disponibilidad1": {
+      "main": [
+        [
+          {
+            "node": "Responder Disponibilidad1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "1b2ddcfc-af9d-416e-9dcb-684b655f9a11",
+  "activeVersionId": null,
+  "versionCounter": 44,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "ljUmd488M3lzoETg",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
