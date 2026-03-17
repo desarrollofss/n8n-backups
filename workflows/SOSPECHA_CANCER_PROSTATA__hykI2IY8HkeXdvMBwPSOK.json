@@ -990,11 +990,11 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.MS_GRAPH_TOKEN }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -1022,11 +1022,11 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.MS_GRAPH_TOKEN }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -1053,11 +1053,11 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $env.MS_GRAPH_TOKEN }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             }
           ]
         },
