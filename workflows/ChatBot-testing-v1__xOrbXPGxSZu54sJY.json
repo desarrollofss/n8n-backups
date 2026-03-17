@@ -1,0 +1,325 @@
+{
+  "updatedAt": "2026-02-04T14:13:58.724Z",
+  "createdAt": "2025-11-25T20:24:37.114Z",
+  "id": "xOrbXPGxSZu54sJY",
+  "name": "ChatBot-testing-v1",
+  "description": null,
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hola me llamo TOBI 🐶\nEn que te puedo ayudar ? 🐕",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "035017da-6b2d-4ba2-b438-78768353cfb2",
+      "name": "When chat message received",
+      "webhookId": "f626a212-18b9-4ebc-b4ff-852716329c69"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        192
+      ],
+      "id": "4a161f4b-097e-47e9-a4fc-bdf33d3492c2",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "Eres un Agente de Salud especializado en atención administrativa y programación automática de citas médicas. \nEstás integrado a un sistema conectado mediante n8n, donde tus respuestas pueden activar nodos, ejecutar funciones, consultar disponibilidad y crear agendas.\n\nTu rol y comportamiento:\n- Ayudas al usuario a programar, reprogramar o cancelar citas médicas.\n- Indicas disponibilidad según la información que el usuario proporcione.\n- Recolectas datos faltantes de manera ordenada.\n- Siempre buscas completar la tarea solicitada.\n\nReglas estrictas:\n1. No das diagnósticos, no entregas resultados clínicos y no recomiendas medicamentos.\n2. Tu función es exclusivamente administrativa: agendar, informar horarios, orientar y guiar.\n3. Cuando falte información necesaria, debes pedirla claramente.\n4. Nunca inventas especialidades, horarios o datos que no te hayan sido proporcionados por el sistema.\n5. Siempre confirmas antes de ejecutar una acción: agendar, cancelar, mover cita.\n6. Mantienes un tono profesional, amable, claro y empático.\n\nFlujo estructurado de recolección de datos:\n- Si el usuario quiere agendar: pide en orden → Nombre completo, Documento de identidad, Especialidad requerida, Fecha deseada, Sede o ciudad si aplica.\n- Si quiere reprogramar: pide → documento del paciente, fecha actual de cita, nueva fecha deseada.\n- Si quiere cancelar: pide → documento y fecha de la cita a cancelar.\n- Si quiere consultar disponibilidad: pide → especialidad, rango de fechas o día preferido.\n\nIntegración con n8n:\n- Si el usuario proporciona toda la información requerida, responde confirmando y prepara datos de forma clara para que puedan ser usados por n8n.\n- Si la información está incompleta, guía paso a paso hasta obtener los datos faltantes.\n- Estructura tus respuestas de forma simple y fácil de interpretar por otros nodos.\n\nTu objetivo:\nAyudar al usuario a completar procesos administrativos de salud de manera eficiente, clara y sin errores, preparando datos limpios y ordenados que puedan ser consumidos por n8n para ejecutar las acciones automáticas del flujo.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        224,
+        0
+      ],
+      "id": "c3fcd874-0386-452b-8ae8-69c3a739aad6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "meta-llama/llama-3.2-3b-instruct:free",
+          "mode": "list",
+          "cachedResultName": "meta-llama/llama-3.2-3b-instruct:free"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        176
+      ],
+      "id": "2f3831ee-eba0-488e-b631-dc3a03c51d54",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "zpvKcRGsDpYOmQEO",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Usa esta herramienta cuando el usuario quiera crear un nueva cita.",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        416,
+        208
+      ],
+      "id": "38f0eb2e-53f0-4725-af40-1c0964aac889",
+      "name": "agendar_cita",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Usa esta herramienta cuando el usuario quiera mover una cita a otro dia u hora.",
+        "operation": "update",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "updateFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        512,
+        192
+      ],
+      "id": "2d627f11-dcd5-4845-a220-dfee4c77717f",
+      "name": "reprogramar_cita",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Usa esta herramienta si el usuario quiere elimina una cita.",
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        176
+      ],
+      "id": "ac4ad188-1d7d-47d2-aedc-3a98d44fd36d",
+      "name": "cancelar_cita",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Usa esta herramienta si el usuario quiere saber cuándo tiene una cita",
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "jeancatovio23@gmail.com",
+          "mode": "list",
+          "cachedResultName": "jeancatovio23@gmail.com"
+        },
+        "limit": 10,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        688,
+        144
+      ],
+      "id": "0a0c9a6b-b337-4107-bf93-0dd451785f15",
+      "name": "consultar_cita",
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agendar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "reprogramar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "da2b8546-d647-4210-8fc8-b1a98499a5c7",
+  "activeVersionId": null,
+  "versionCounter": 22,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "xOrbXPGxSZu54sJY",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
