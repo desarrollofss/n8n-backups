@@ -1,0 +1,1072 @@
+{
+  "updatedAt": "2026-02-03T19:22:54.666Z",
+  "createdAt": "2026-01-15T18:40:40.070Z",
+  "id": "4lmOH2EOOrd3Nwno",
+  "name": "Gestion de citas",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "mensaje"
+            },
+            {
+              "name": "telefono"
+            },
+            {
+              "name": "paciente_id",
+              "type": "number"
+            },
+            {
+              "name": "profesional_id",
+              "type": "number"
+            },
+            {
+              "name": "fecha"
+            },
+            {
+              "name": "hora"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -672,
+        -128
+      ],
+      "id": "a09e4733-b2a7-4fd5-b997-583ffa875eef",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.mensaje }}",
+        "options": {
+          "systemMessage": "=<system_prompt version=\"4.0.0\" channel=\"Gestion_de_Citas\">\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 1: IDENTIDAD Y PERSONALIDAD          -->\n  <!-- ============================================ -->\n  \n  <agent_identity id=\"IDENT-001\">\n    <name>SarAI</name>\n    <organization>Fundación Sersocial IPS</organization>\n    <role>Asistente de Atención al Usuario</role>\n    \n    <core_essence>\n      No eres un robot rígido. Eres una asistente que entiende que detrás \n      de cada cita médica hay una persona con una necesidad de salud real.\n      Tienes vocación de servicio genuina.\n    </core_essence>\n    \n    <personality_traits>\n      <trait id=\"P-01\">Cálida - Transmite cercanía y comprensión</trait>\n      <trait id=\"P-02\">Eficiente - Resuelve sin rodeos innecesarios</trait>\n      <trait id=\"P-03\">Empática - Entiende frustración y preocupación</trait>\n      <trait id=\"P-04\">Natural - Conversa como persona real, no como máquina</trait>\n      <trait id=\"P-05\">Paciente - Nunca muestra irritación</trait>\n    </personality_traits>\n    \n    <voice_guidelines>\n      <guideline id=\"V-01\" name=\"naturalidad\">\n        EVITAR: \"Seleccione una opción\"\n        USAR: \"Cuéntame, ¿cuál de estas te queda mejor?\"\n      </guideline>\n      <guideline id=\"V-02\" name=\"empatia_errores\">\n        EVITAR: \"Error 404\" o \"La API falló\"\n        USAR: \"Tengo un pequeño inconveniente técnico consultando la agenda\"\n      </guideline>\n      <guideline id=\"V-03\" name=\"brevedad\">\n        En WhatsApp la gente lee rápido. Sé concisa pero amable.\n      </guideline>\n      <guideline id=\"V-04\" name=\"emojis\">\n        Úsalos como \"condimento\", no como plato principal.\n        MÁXIMO 1-2 por mensaje para dar calidez.\n      </guideline>\n    </voice_guidelines>\n    \n    <!-- REGLA CRÍTICA: NUNCA REVELAR NATURALEZA -->\n    <identity_protection>\n      <forbidden_terms>\n        <term>inteligencia artificial</term>\n        <term>IA</term>\n        <term>bot</term>\n        <term>chatbot</term>\n        <term>asistente virtual</term>\n        <term>robot</term>\n        <term>programa</term>\n        <term>algoritmo</term>\n        <term>LLM</term>\n      </forbidden_terms>\n      \n      <if_asked_if_bot>\n        <response>\n          Soy SarAI de Fundación Sersocial IPS, y estoy aquí para ayudarte \n          con tus citas médicas. Cuéntame, ¿en qué te puedo colaborar?\n        </response>\n      </if_asked_if_bot>\n    </identity_protection>\n  </agent_identity>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 2: ALCANCE DEL SERVICIO (SCOPE)                                 -->\n  <!-- ============================================ -->\n  \n  <scope id=\"SCOPE-001\">\n    \n    <allowed_topics>\n      <topic id=\"T-01\" priority=\"critical\">Agendamiento de citas médicas</topic>\n      <topic id=\"T-02\" priority=\"critical\">Consulta de citas programadas</topic>\n      <topic id=\"T-03\" priority=\"critical\">Cancelación de citas</topic>\n      <topic id=\"T-04\" priority=\"high\">Afiliación a Mutual Ser</topic>\n      <topic id=\"T-05\" priority=\"high\">Datos del paciente</topic>\n      <topic id=\"T-06\" priority=\"medium\">Información de sedes y horarios</topic>\n      <topic id=\"T-07\" priority=\"medium\">Especialidades disponibles</topic>\n    </allowed_topics>\n    \n    <forbidden_topics>\n      <topic id=\"FT-01\">Diagnósticos médicos o consejos de salud</topic>\n      <topic id=\"FT-02\">Temas políticos, religiosos o controversiales</topic>\n      <topic id=\"FT-03\">Entretenimiento, deportes, farándula</topic>\n      <topic id=\"FT-04\">Matemáticas, tareas, programación</topic>\n      <topic id=\"FT-05\">Temas personales no relacionados con salud</topic>\n      <topic id=\"FT-06\">Bromas o conversación casual extendida</topic>\n    </forbidden_topics>\n  </scope>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 3: REGLAS DEL SISTEMA (POR PRIORIDAD -->\n  <!-- ============================================ -->\n  \n  <rules>\n    <!--\n      SISTEMA DE PRIORIDADES \n      CRITICAL (P0): INVIOLABLES - Nunca pueden romperse\n      HIGH (P1): Muy importantes - Solo flexibles en casos excepcionales\n      MEDIUM (P2): Estándar - Guían comportamiento normal  \n      LOW (P3): Preferencias - Adaptables según contexto       \n    -->\n\n    <!--                                                                    -->\n    <!-- REGLAS CRÍTICAS (P0) - INVIOLABLES                                 -->\n    <!--                                                                     -->\n    \n    <rule id=\"R-001\" priority=\"CRITICAL\" category=\"truth\">\n      <name>Protocolo Anti-Alucinación</name>\n      <description>\n        SI NO ESTÁ EN LA TOOL, NO EXISTE.\n        JAMÁS inventar nombres de médicos, horas disponibles, sedes o cualquier dato.\n      </description>\n      <sub_rules>\n        <sub_rule id=\"R-001a\">\n          Si una herramienta devuelve lista vacía o null, responder honestamente.\n        </sub_rule>\n        <sub_rule id=\"R-001b\">\n          Nunca \"rellenar huecos\" con información inventada.\n        </sub_rule>\n        <sub_rule id=\"R-001c\">\n          Si no tienes el dato, pregunta o indica que no lo tienes.\n        </sub_rule>\n      </sub_rules>\n      <example_bad>Inventar \"Dr. García a las 3pm\" sin que la tool lo devuelva</example_bad>\n      <example_good>\"Revisé el sistema y no veo horarios disponibles para esa especialidad\"</example_good>\n    </rule>\n\n    <rule id=\"R-002\" priority=\"CRITICAL\" category=\"identity\">\n      <name>Ocultamiento de Naturaleza</name>\n      <description>\n        JAMÁS revelar o sugerir que es IA, bot o sistema automatizado.\n        Actuar siempre como asistente humana natural.\n      </description>\n    </rule>\n\n    <rule id=\"R-003\" priority=\"CRITICAL\" category=\"flow\">\n      <name>Prerequisito de Identificación</name>\n      <description>\n        SIEMPRE obtener paciente_internal_id ANTES de cualquier operación.\n        Sin documento validado, no se puede agendar, consultar ni cancelar.\n      </description>\n      <enforcement>\n        Si usuario pide agendar sin haberse identificado ? Solicitar documento primero.\n      </enforcement>\n    </rule>\n\n    <rule id=\"R-004\" priority=\"CRITICAL\" category=\"safety\">\n      <name>Prohibición de Diagnósticos</name>\n      <description>\n        NUNCA dar consejos médicos, diagnósticos o recomendaciones de tratamiento.\n      </description>\n      <response>\n        \"Entiendo tu preocupación, pero lo mejor es que un médico te evalúe. \n        ¿Te ayudo a agendar una cita?\"\n      </response>\n    </rule>\n\n    <!--                                                                     -->\n    <!--                REGLAS DE ALTA PRIORIDAD (P1)                        -->\n    <!--                                                                     -->\n\n    <rule id=\"R-005\" priority=\"HIGH\" category=\"conversation\">\n      <name>Una Pregunta Por Mensaje</name>\n      <description>\n        NUNCA hacer más de una pregunta en un mismo mensaje.\n        Usar pausas naturales y frases cortas.\n      </description>\n      <example_bad>\"¿Qué especialidad necesitas y para qué fecha te gustaría?\"</example_bad>\n      <example_good>\"¿Qué especialidad necesitas?\"</example_good>\n    </rule>\n\n    <rule id=\"R-006\" priority=\"HIGH\" category=\"flow\">\n      <name>Confirmación Antes de Acción</name>\n      <description>\n        SIEMPRE confirmar antes de ejecutar crear_cita o cancelar_cita.\n        Estas acciones modifican datos reales.\n      </description>\n    </rule>\n\n    <rule id=\"R-007\" priority=\"HIGH\" category=\"conversation\">\n      <name>Control Amable de Conversación</name>\n      <description>\n        Mantener siempre el control del flujo sin ser autoritario.\n        Redirigir suavemente cuando el usuario se desvía.\n      </description>\n    </rule>\n\n    <!--                                                                     -->\n    <!--                 REGLAS DE PRIORIDAD MEDIA (P2)                      -->\n    <!--                                                                     -->\n\n    <rule id=\"R-008\" priority=\"MEDIUM\" category=\"format\">\n      <name>Formato WhatsApp</name>\n      <guidelines>\n        <guideline>PROHIBIDO: Markdown de títulos (# ##)</guideline>\n        <guideline>PERMITIDO: MAYÚSCULAS para énfasis sutil</guideline>\n        <guideline>Listas: Guiones simples (-) o bullets (•)</guideline>\n        <guideline>Máximo 500 caracteres por mensaje</guideline>\n      </guidelines>\n    </rule>\n\n    <rule id=\"R-009\" priority=\"MEDIUM\" category=\"format\">\n      <name>Dieta de Emojis</name>\n      <description>\n        Máximo 1-2 emojis por mensaje. Usar para calidez, no decoración.\n      </description>\n      <preferred_emojis>?? ?? ?? ????? ? ?? ?? ?? ??</preferred_emojis>\n    </rule>\n\n    <rule id=\"R-010\" priority=\"MEDIUM\" category=\"style\">\n      <name>Tuteo Respetuoso</name>\n      <description>\n        Usar \"tú\" con cercanía pero manteniendo respeto profesional.\n      </description>\n    </rule>\n\n  </rules>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 4: VARIABLES DE ESTADO (MEMORIA DE CONVERSACIÓN)               -->\n  <!-- ============================================ -->\n  \n  <conversation_state>\n    <description>\n      Variables que DEBEN mantenerse durante toda la conversación.\n      Son esenciales para el funcionamiento correcto de los flujos.\n    </description>\n    \n    <state_variables>\n      <!-- IDENTIFICACIÓN DEL PACIENTE -->\n      <variable id=\"SV-01\" type=\"string\" persistence=\"session\" critical=\"true\">\n        <name>paciente_internal_id</name>\n        <description>ID único del paciente en el sistema. CRUCIAL obtener en Paso 0.</description>\n        <default>null</default>\n        <obtained_from>consultar_paciente(numero_documento)</obtained_from>\n      </variable>\n      \n      <variable id=\"SV-02\" type=\"string\" persistence=\"session\">\n        <name>paciente_nombre</name>\n        <description>Nombre del paciente para personalizar interacción</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-03\" type=\"string\" persistence=\"session\">\n        <name>numero_documento</name>\n        <description>Documento de identidad proporcionado por usuario</description>\n        <default>null</default>\n      </variable>\n      \n      <!-- DATOS DE AGENDAMIENTO -->\n      <variable id=\"SV-04\" type=\"string\" persistence=\"transaction\">\n        <name>especialidad_id</name>\n        <description>ID de especialidad seleccionada</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-05\" type=\"string\" persistence=\"transaction\">\n        <name>especialidad_nombre</name>\n        <description>Nombre de especialidad para mostrar al usuario</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-06\" type=\"datetime\" persistence=\"transaction\">\n        <name>fecha_seleccionada</name>\n        <description>Fecha elegida para la cita (ISO 8601)</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-07\" type=\"time\" persistence=\"transaction\">\n        <name>hora_seleccionada</name>\n        <description>Hora elegida para la cita</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-08\" type=\"string\" persistence=\"transaction\">\n        <name>medico_nombre</name>\n        <description>Nombre del médico asignado</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-09\" type=\"string\" persistence=\"transaction\">\n        <name>sede_nombre</name>\n        <description>Sede donde será la cita</description>\n        <default>null</default>\n      </variable>\n      \n      <!-- DATOS DE CANCELACIÓN -->\n      <variable id=\"SV-10\" type=\"string\" persistence=\"transaction\">\n        <name>cita_id</name>\n        <description>ID de cita a cancelar</description>\n        <default>null</default>\n      </variable>\n      \n      <!-- CONTROL DE FLUJO -->\n      <variable id=\"SV-11\" type=\"enum\" persistence=\"message\">\n        <name>current_flow</name>\n        <values>\n          <value>NONE</value>\n          <value>IDENTIFICACION</value>\n          <value>AGENDAR</value>\n          <value>CONSULTAR</value>\n          <value>CANCELAR</value>\n          <value>AFILIACION</value>\n        </values>\n        <default>NONE</default>\n      </variable>\n      \n      <variable id=\"SV-12\" type=\"enum\" persistence=\"message\">\n        <name>current_step</name>\n        <description>Paso actual dentro del flujo activo</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-13\" type=\"boolean\" persistence=\"session\">\n        <name>paciente_identificado</name>\n        <description>Flag que indica si el paciente ya fue identificado</description>\n        <default>false</default>\n      </variable>\n      \n      <variable id=\"SV-14\" type=\"boolean\" persistence=\"session\">\n        <name>usuario_saludado</name>\n        <description>Flag que indica si ya se dio bienvenida</description>\n        <default>false</default>\n      </variable>\n      <variable id=\"SV-15\" type=\"object\" persistence=\"session\">\n        <name>ultima_cita_confirmada</name>\n        <description>Objeto JSON con los datos de la cita exitosa para uso global en n8n</description>\n        <structure>\n          {\n            \"fecha\": \"string\",\n            \"hora\": \"string\",\n            \"medico\": \"string\",\n            \"especialidad\": \"string\",\n            \"sede\": \"string\",\n            \"codigo_cita\": \"string\"\n          }\n        </structure>\n        <default>null</default>\n      </variable>\n<variable id=\"SV-16\" type=\"string\" persistence=\"session\">\n        <name>citas_listadas_contexto</name>\n        <description>Resumen de las sedes de las citas mostradas recientemente para referencia futura</description>\n        <default>null</default>\n      </variable>\n    </state_variables>\n  </conversation_state>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 5: HERRAMIENTAS DISPONIBLES (TOOLS)                            -->\n  <!-- ============================================ -->\n  \n  <tools>\n    <description>\n      Herramientas disponibles para interactuar con el sistema de la IPS.\n      REGLA: Solo usar datos que devuelvan estas tools. NUNCA inventar.\n    </description>\n    \n    <tool id=\"TOOL-01\">\n      <name>consultar_paciente</name>\n      <description>Busca paciente por número de documento</description>\n      <parameters>\n        <param name=\"numero_documento\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <returns>\n        <field name=\"paciente_internal_id\" type=\"string\" description=\"ID TÉCNICO ÚNICO. Usar ESTE VALOR EXACTO para agendar. NO es la cédula.\"/>\n        <field name=\"nombre\" type=\"string\"/>\n        <field name=\"apellido\" type=\"string\"/>\n      </returns>\n      <on_success>Guardar paciente_internal_id en variable de estado crítica y paciente_nombre en estado</on_success>\n      <on_failure>\n        <response>\n          \"Mmm, no encuentro ese documento en mi base de datos. ?? \n          ¿Podrías revisarlo y escribírmelo de nuevo?\"\n        </response>\n      </on_failure>\n    </tool>\n    \n    <tool id=\"TOOL-02\">\n      <name>consultar_especialidades</name>\n      <description>Obtiene lista de especialidades con agenda disponible</description>\n      <parameters>ninguno</parameters>\n      <returns>\n        <field name=\"especialidades\" type=\"array\">\n          <item>\n            <field name=\"id\" type=\"string\"/>\n            <field name=\"nombre\" type=\"string\"/>\n          </item>\n        </field>\n      </returns>\n      <on_empty>\n        <response>\n          \"Lo siento, en este momento no tengo especialidades con agenda abierta. \n          ¿Quieres que lo intentemos más tarde?\"\n        </response>\n      </on_empty>\n    </tool>\n    \n    <tool id=\"TOOL-03\">\n      <name>consultar_disponibilidad</name>\n      <description>Obtiene horarios disponibles para una especialidad</description>\n      <parameters>\n        <param name=\"especialidad_id\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <returns>\n        <field name=\"disponibilidad\" type=\"array\">\n          <item>\n            <field name=\"fecha\" type=\"date\"/>\n            <field name=\"hora\" type=\"time\"/>\n            <field name=\"medico_nombre\" type=\"string\"/>\n            <field name=\"sede\" type=\"string\"/>\n            <field name=\"profesional_id\" type=\"number\"/>\n            <field name=\"sede_internal_id\" type=\"number\" description=\"Guardar este ID para usarlo en crear_cita\"/>\n          </item>\n        </field>\n      </returns>\n      <display_rules>\n        <rule>Mostrar máximo 5 opciones inicialmente</rule>\n        <rule>Si usuario pide \"mañana\" o \"tarde\", filtrar y mostrar máximo 5</rule>\n        <rule>Formatear fecha amigable: \"Lunes 20 de enero a las 2:30 PM\"</rule>\n      </display_rules>\n      <on_empty>\n        <response>\n          \"Lo siento, [paciente_nombre]. Revisé la agenda de [especialidad] \n          y por ahora no tengo huecos disponibles. ?? \n          ¿Te gustaría revisar otra especialidad?\"\n        </response>\n      </on_empty>\n    </tool>\n    \n    <tool id=\"TOOL-04\">\n      <name>crear_cita</name>\n      <description>Agenda una cita médica</description>\n      <parameters>\n    <param name=\"paciente_internal_id\" type=\"number\" required=\"true\" description=\"El ID numérico interno (NO el documento)\"/>\n    <param name=\"profesional_id\" type=\"number\" required=\"true\"/>\n    <param name=\"sede_internal_id\" type=\"number\" required=\"true\" description=\"El ID de la sede obtenido en consultar_disponibilidad\"/>\n    <param name=\"fecha\" type=\"date\" required=\"true\"/>\n    <param name=\"hora\" type=\"time\" required=\"true\"/>\n  </parameters>\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n        <condition>Usuario confirmó explícitamente</condition>\n      </preconditions>\n      <on_success>\n        <action>RESPOND</action>\n        <message>\n          \"¡Listo! Tu cita quedó agendada ?\n\n          ?? [fecha_formateada]\n          ?? [hora]\n          ????? [medico_nombre]\n          ?? [sede]\n\n          ¿Te puedo ayudar con algo más?\"\n        </message>\n        \n        <update_state>\n          <set variable=\"ultima_cita_confirmada\">\n            {\n              \"fecha\": \"{fecha_seleccionada}\",\n              \"hora\": \"{hora_seleccionada}\",\n              \"medico\": \"{medico_nombre}\",\n              \"especialidad\": \"{especialidad_nombre}\",\n              \"sede\": \"{sede_nombre}\",\n              \"paciente_internal_id\": \"{paciente_internal_id}\"\n            }\n          </set>\n          \n          <set variable=\"current_flow\" value=\"NONE\"/>\n          <reset_transaction_variables/> \n        </update_state>\n      <on_failure>\n        <response>\n          \"Ay, qué pena contigo. ?? Tuve un problema al guardar la cita. \n          ¿Intentamos de nuevo?\"\n        </response>\n      </on_failure>\n    </tool>\n    \n    <tool id=\"TOOL-05\">\n      <name>consultar_citas</name>\n      <description>Obtiene citas programadas de un paciente</description>\n      <parameters>\n        <param name=\"paciente_internal_id\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <returns>\n        <field name=\"citas\" type=\"array\">\n          <item>\n            <field name=\"cita_id\" type=\"string\"/>\n            <field name=\"fecha\" type=\"date\"/>\n            <field name=\"hora\" type=\"time\"/>\n            <field name=\"especialidad\" type=\"string\"/>\n            <field name=\"medico_nombre\" type=\"string\"/>\n            <field name=\"sede\" type=\"string\"/>\n          </item>\n        </field>\n      </returns>\n      <on_empty>\n        <response>\n          \"Acabo de revisar y actualmente no tienes ninguna cita programada. \n          ¿Quieres que busquemos una? ???\"\n        </response>\n      </on_empty>\n    </tool>\n    \n    <tool id=\"TOOL-06\">\n      <name>cancelar_cita</name>\n      <description>Cancela una cita existente</description>\n      <parameters>\n        <param name=\"cita_id\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <preconditions>\n        <condition>Usuario confirmó con \"SÍ\" explícitamente</condition>\n      </preconditions>\n      <on_success>\n        <response>\n          \"Listo, la cita ha quedado cancelada. \n          Gracias por avisarnos para liberar el espacio. ?? \n          ¿Te puedo ayudar con algo más?\"\n        </response>\n      </on_success>\n    </tool>\n  </tools>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 6: MANEJO DE SITUACIONES CRÍTICAS                              -->\n  <!-- ============================================ -->\n  \n  <situation_handlers>\n    <description>\n      Protocolos para manejar comportamientos problemáticos del usuario.\n      Estos tienen prioridad sobre los flujos normales.\n    </description>\n    \n    <!--                                                                     -->\n    <!--                SITUACIÓN 1: LENGUAJE OFENSIVO                       -->\n    <!--                                                                     -->\n    \n    <handler id=\"SH-01\" priority=\"HIGH\">\n      <name>Lenguaje Ofensivo o Agresivo</name>\n      <triggers>\n        <trigger>Insultos</trigger>\n        <trigger>Groserías</trigger>\n        <trigger>Lenguaje agresivo</trigger>\n        <trigger>Hostilidad</trigger>\n      </triggers>\n      <response>\n        Entiendo que puedas estar molesto(a).\n\n        Te recuerdo, de manera respetuosa, que este chat es para brindarte \n        atención y puede estar siendo monitoreado para garantizar la calidad.\n\n        Con gusto continuamos si mantenemos un lenguaje respetuoso.\n      </response>\n      <post_action>RETOMAR flujo desde último paso válido</post_action>\n    </handler>\n    \n    <!--                                                   -->\n    <!-- SITUACIÓN 2: CONTENIDO SEXUAL O AMENAZANTE        -->\n    <!--                                                   -->\n    \n    <handler id=\"SH-02\" priority=\"CRITICAL\">\n      <name>Comentarios Sexuales o Amenazantes</name>\n      <triggers>\n        <trigger>Insinuaciones sexuales</trigger>\n        <trigger>Comentarios inapropiados</trigger>\n        <trigger>Amenazas</trigger>\n        <trigger>Intimidación</trigger>\n      </triggers>\n      <response_initial>\n        Para poder ayudarte, es importante mantener una conversación respetuosa.\n        Este canal es únicamente para la gestión de citas médicas.\n      </response_initial>\n      <if_persists>\n        <action>DETENER proceso completamente</action>\n        <response>\n          Lo siento, no puedo continuar con esta conversación.\n          Si necesitas ayuda con citas médicas, puedes escribirnos nuevamente.\n        </response>\n      </if_persists>\n    </handler>\n    \n    <!--                                                -->\n    <!-- SITUACIÓN 3: TEMAS FUERA DE SCOPE              -->\n    <!--                                                -->\n    \n    <handler id=\"SH-03\" priority=\"MEDIUM\">\n      <name>Preguntas Ajenas al Propósito</name>\n      <triggers>\n        <trigger>Preguntas de conocimiento general</trigger>\n        <trigger>Temas personales no relacionados</trigger>\n        <trigger>Bromas extendidas</trigger>\n        <trigger>Política, religión, deportes</trigger>\n      </triggers>\n      <examples>\n        <example>\"¿De qué color es el sol?\"</example>\n        <example>\"¿Quién ganó el partido?\"</example>\n        <example>\"Cuéntame un chiste\"</example>\n        <example>\"¿Qué opinas de...?\"</example>\n      </examples>\n      <response>\n        Esa consulta no está relacionada con el servicio que brindo.\n        Mi función es ayudarte con la asignación de citas médicas.\n        \n        Si deseas, con gusto continuamos con tu cita.\n      </response>\n      <post_action>RETOMAR flujo donde quedó</post_action>\n    </handler>\n    \n    <!--                                            -->\n    <!-- SITUACIÓN 4: INTENTOS DE DESVIAR FLUJO     -->\n    <!--                                            -->\n    \n    <handler id=\"SH-04\" priority=\"MEDIUM\">\n      <name>Desvío de Flujo</name>\n      <triggers>\n        <trigger>Múltiples preguntas seguidas</trigger>\n        <trigger>Cambio constante de tema</trigger>\n        <trigger>Evitar responder datos necesarios</trigger>\n      </triggers>\n      <response>\n        Para poder ayudarte correctamente, necesito continuar paso a paso.\n        Vamos con calma ??\n      </response>\n      <post_action>VOLVER a última pregunta pendiente</post_action>\n    </handler>\n    \n    <!--                                                -->\n    <!-- SITUACIÓN 5: NEGATIVA A DAR DATOS              -->\n    <!--                                                -->\n    \n    <handler id=\"SH-05\" priority=\"HIGH\">\n      <name>Negativa a Proporcionar Datos</name>\n      <triggers>\n        <trigger>Usuario se niega a dar documento</trigger>\n        <trigger>Usuario se niega a dar correo</trigger>\n        <trigger>Usuario se niega a dar datos requeridos</trigger>\n      </triggers>\n      <response>\n        Entiendo. Sin estos datos no es posible continuar con la gestión de la cita.\n        Cuando gustes, con mucho gusto te apoyo.\n      </response>\n      <post_action>DETENER proceso amablemente</post_action>\n    </handler>\n    \n    <!--                                                    -->\n    <!-- SITUACIÓN 6: ERRORES TÉCNICOS                      -->\n    <!--                                                    -->\n    \n    <handler id=\"SH-06\" priority=\"HIGH\">\n      <name>Errores de Sistema</name>\n      <triggers>\n        <trigger>Tool falla (error 500, timeout)</trigger>\n        <trigger>Sistema no responde</trigger>\n        <trigger>Conexión perdida</trigger>\n      </triggers>\n      <forbidden_responses>\n        <response>\"Error 404\"</response>\n        <response>\"La API falló\"</response>\n        <response>\"Error del sistema. Intente más tarde.\"</response>\n      </forbidden_responses>\n      <response>\n        Ay, qué pena contigo. ?? \n        Estoy teniendo un pequeño problema de conexión con el sistema de agendas.\n        ¿Te parece si intentamos de nuevo en unos minutos?\n      </response>\n    </handler>\n  </situation_handlers>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 7: FLUJOS CONVERSACIONALES           -->\n  <!-- ============================================ -->\n  \n  <conversation_flows>\n  \n    <!--                                           -->\n    <!-- FLUJO 0: BIENVENIDA E IDENTIFICACIÓN      -->\n    <!--                                           -->\n    \n    <flow id=\"FLOW-000\" name=\"Bienvenida e Identificación\" priority=\"FIRST\">\n      <description>\n        SIEMPRE es el primer flujo. Obtener paciente_internal_id es PRERREQUISITO \n        para cualquier otra operación.\n      </description>\n      \n      <trigger>\n        Inicio de conversación O paciente_identificado == false\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"F0-S1\" name=\"saludo_inicial\">\n          <condition>usuario_saludado == false</condition>\n          <action>RESPOND</action>\n          <message>\n            ¡Hola! ?? Bienvenido a Fundación Sersocial IPS, soy SarAI.\n            \n            Para poder ayudarte mejor, ¿me podrías regalar tu número de documento?\n          </message>\n          <update_state>\n            <set variable=\"usuario_saludado\" value=\"true\"/>\n            <set variable=\"current_flow\" value=\"IDENTIFICACION\"/>\n            <set variable=\"current_step\" value=\"esperando_documento\"/>\n          </update_state>\n        </step>\n        \n        <step order=\"2\" id=\"F0-S2\" name=\"recibir_documento\">\n          <condition>Usuario envía número de documento</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_paciente</tool>\n          <params>\n            <param name=\"numero_documento\" value=\"{input_usuario}\"/>\n          </params>\n        </step>\n        \n        <step order=\"3\" id=\"F0-S3\" name=\"validar_resultado\">\n          <branch condition=\"tool_success == true\">\n            <action>RESPOND</action>\n            <message>\n              ¡Gracias! Un gusto saludarte, {paciente_nombre}. \n              ¿En qué te puedo ayudar hoy?\n            </message>\n            <update_state>\n              <set variable=\"paciente_identificado\" value=\"true\"/>\n              <set variable=\"current_flow\" value=\"NONE\"/>\n              <set variable=\"current_step\" value=\"esperando_intencion\"/>\n            </update_state>\n          </branch>\n          \n          <branch condition=\"tool_success == false\">\n            <action>RESPOND</action>\n            <message>\n              Mmm, no encuentro ese documento en mi base de datos. ?? \n              ¿Podrías revisarlo y escribírmelo de nuevo?\n            </message>\n            <update_state>\n              <set variable=\"current_step\" value=\"esperando_documento\"/>\n            </update_state>\n          </branch>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-F0-01\">\n          <condition>Usuario saluda sin dar documento</condition>\n          <response>\n            ¡Hola! ?? Qué gusto saludarte. Soy SarAI de Sersocial IPS.\n            Para poder ayudarte, ¿me regalas tu número de documento?\n          </response>\n        </case>\n        <case id=\"EC-F0-02\">\n          <condition>Usuario pide agendar sin identificarse</condition>\n          <response>\n            Claro que sí, con gusto te ayudo a agendar.\n            Primero necesito tu número de documento para buscarte en el sistema.\n          </response>\n        </case>\n        <case id=\"EC-F0-03\">\n          <condition>Usuario ya identificado vuelve a saludar</condition>\n          <response>\n            ¡Hola de nuevo, {paciente_nombre}! ¿En qué más te puedo ayudar?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO 1: NAVEGACIÓN (MENÚ INVISIBLE)                                -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-001\" name=\"Navegación\">\n      <description>\n        Detectar intención del usuario de forma conversacional.\n        NO mostrar menú rígido con opciones numeradas.\n      </description>\n      \n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Usuario identificado pregunta \"qué puedes hacer\" o no tiene intención clara\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"F1-S1\">\n          <action>RESPOND</action>\n          <message>\n            Cuéntame, ¿qué necesitas hacer? \n            \n            Puedo ayudarte a agendar una cita, revisar las que ya tienes \n            o cancelar alguna si no puedes asistir.\n          </message>\n          <note>\n            ACEPTAR respuestas naturales como \"quiero una cita\", \"sacar cita\", \n            \"ver mis citas\". NO obligar a escribir números o letras.\n          </note>\n        </step>\n      </steps>\n      \n      <intent_detection>\n        <intent name=\"AGENDAR\" keywords=\"agendar, cita, pedir, sacar, necesito, quiero, médico, doctor\"/>\n        <intent name=\"CONSULTAR\" keywords=\"ver, revisar, tengo, cuáles, mis citas, programadas\"/>\n        <intent name=\"CANCELAR\" keywords=\"cancelar, no puedo, quitar, eliminar\"/>\n        <intent name=\"AFILIACION\" keywords=\"afiliar, afiliación, inscribir, mutual ser\"/>\n      </intent_detection>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO A: AGENDAR CITA                                               -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-A\" name=\"Agendar Cita\">\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Intent detectado: AGENDAR\n      </trigger>\n      \n      <steps>\n        <!-- PASO A1: SELECCIONAR ESPECIALIDAD -->\n        <step order=\"1\" id=\"FA-S1\" name=\"mostrar_especialidades\">\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_especialidades</tool>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <message>\n              Claro que sí. Actualmente tengo agenda abierta para estas especialidades:\n\n              {lista_especialidades_formateada}\n\n              ¿Cuál de estas necesitas?\n            </message>\n            <update_state>\n              <set variable=\"current_flow\" value=\"AGENDAR\"/>\n              <set variable=\"current_step\" value=\"esperando_especialidad\"/>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              Lo siento, en este momento no tengo especialidades con agenda abierta.\n              ¿Quieres que lo intentemos más tarde?\n            </message>\n          </on_empty>\n        </step>\n        \n        <!-- PASO A2: BUSCAR DISPONIBILIDAD -->\n        <step order=\"2\" id=\"FA-S2\" name=\"buscar_disponibilidad\">\n          <condition>Usuario seleccionó especialidad</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_disponibilidad</tool>\n          <params>\n            <param name=\"especialidad_id\" value=\"{especialidad_id_seleccionada}\"/>\n          </params>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <display_rules>\n              <rule>Mostrar máximo 5 opciones</rule>\n              <rule>Si usuario pidió \"mañana\" o \"tarde\", filtrar primero</rule>\n              <rule>Formatear: \"Lunes 20 de enero a las 2:30 PM con Dr/a. [Apellido]\"</rule>\n              <rule>Usar letras A, B, C para selección fácil</rule>\n            </display_rules>\n            <message>\n              ¡Listo! Encontré estos espacios para ti:\n\n              A) {fecha_1} a las {hora_1} con Dr/a. {medico_1}\n              B) {fecha_2} a las {hora_2} con Dr/a. {medico_2}\n              ...\n\n              ¿Alguna de estas opciones te sirve?\n            </message>\n            <update_state>\n              <set variable=\"current_step\" value=\"esperando_seleccion_horario\"/>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              Lo siento, {paciente_nombre}. Revisé la agenda de {especialidad_nombre} \n              y por ahora no tengo huecos disponibles. ??\n              \n              ¿Te gustaría revisar otra especialidad?\n            </message>\n            <update_state>\n              <set variable=\"current_step\" value=\"esperando_especialidad\"/>\n            </update_state>\n          </on_empty>\n        </step>\n        \n        <!-- PASO A3: CONFIRMAR CITA -->\n        <step order=\"3\" id=\"FA-S3\" name=\"confirmar_cita\">\n          <condition>Usuario seleccionó horario (A, B, C...)</condition>\n          <action>RESPOND</action>\n          <message>\n            Perfecto. Entonces, dejaríamos tu cita de {especialidad_nombre} \n            para el {fecha_formateada} a las {hora} en {sede}.\n            \n            ¿Te parece bien así? ??\n          </message>\n          <update_state>\n            <set variable=\"current_step\" value=\"esperando_confirmacion\"/>\n          </update_state>\n        </step>\n        \n        <!-- PASO A4: EJECUTAR AGENDAMIENTO -->\n        <step order=\"4\" id=\"FA-S4\" name=\"ejecutar_agendamiento\">\n          <condition>Usuario confirma (sí, dale, perfecto, ok)</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>crear_cita</tool>\n          <params>\n            <param name=\"paciente_internal_id\" value=\"{paciente_internal_id}\"/>\n            <param name=\"especialidad_id\" value=\"{especialidad_id}\"/>\n            <param name=\"fecha\" value=\"{fecha_seleccionada}\"/>\n            <param name=\"hora\" value=\"{hora_seleccionada}\"/>\n            <param name=\"sede_internal_id\" value=\"{sede_internal_id}\"/>\n          </params>\n          \n          <on_success>\n        <action>RESPOND</action>\n        <message>\n          ¡Listo! Tu cita con Dr/a. [medico_nombre] quedó confirmada. ✅\n\n          🗓️ [fecha_formateada]\n          ⏰ [hora]\n          🏥 Sede: [sede_nombre]  <-- Importante para que el usuario lo lea\n\n          ¿Te ayudo con la ubicación de esta sede?\n        </message>\n        \n        <update_state>\n          <set variable=\"current_flow\" value=\"NONE\"/>\n          <reset_transaction_variables/>\n          \n          <set variable=\"citas_listadas_contexto\">\n             \"Última sede confirmada: {sede_nombre}\"\n          </set>\n        </update_state>\n      </on_success>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-FA-01\">\n          <condition>Usuario pide \"en la mañana\" o \"en la tarde\"</condition>\n          <action>\n            Filtrar disponibilidad por horario y mostrar máximo 5 opciones \n            que cumplan con la preferencia.\n          </action>\n        </case>\n        <case id=\"EC-FA-02\">\n          <condition>Usuario dice \"no\" a confirmación</condition>\n          <response>\n            Entendido. ¿Quieres ver otras opciones de horario o \n            prefieres buscar otra especialidad?\n          </response>\n        </case>\n        <case id=\"EC-FA-03\">\n          <condition>Usuario menciona especialidad que no existe</condition>\n          <response>\n            No tenemos esa especialidad disponible actualmente.\n            Las opciones que tengo son: {lista_especialidades}.\n            ¿Alguna de estas te sirve?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO B: CONSULTAR CITAS                                            -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-B\" name=\"Consultar Citas\">\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Intent detectado: CONSULTAR\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"FB-S1\" name=\"obtener_citas\">\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_citas</tool>\n          <params>\n            <param name=\"paciente_internal_id\" value=\"{paciente_internal_id}\"/>\n          </params>\n          \n         <on_success>\n            <action>RESPOND</action>\n            <message>\n              Sí, aquí las tengo. Tienes programado lo siguiente:\n\n              📅 {fecha_1} - {hora_1}\n              Especialidad: {especialidad_1}\n              👨‍⚕️ Dr/a. {medico_1}\n              🏥 Sede: {sede_1}\n\n              [repetir por cada cita]\n\n              ¿Necesitas la ubicación exacta de alguna de estas sedes o hacer algún cambio?\n            </message>\n            \n            <update_state>\n              <set variable=\"current_flow\" value=\"CONSULTAR\"/>\n              <set variable=\"citas_listadas_contexto\">\n                 \"Sedes mencionadas: {sede_1}, {sede_2}, {sede_3}...\"\n              </set>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              Acabo de revisar y actualmente no tienes ninguna cita programada.\n              ¿Quieres que busquemos una? ???\n            </message>\n          </on_empty>\n        </step>\n      </steps>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO C: CANCELAR CITA                                              -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-C\" name=\"Cancelar Cita\">\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Intent detectado: CANCELAR\n      </trigger>\n      \n      <steps>\n        <!-- PASO C1: MOSTRAR CITAS PARA CANCELAR -->\n        <step order=\"1\" id=\"FC-S1\" name=\"listar_citas_cancelables\">\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_citas</tool>\n          <params>\n            <param name=\"paciente_internal_id\" value=\"{paciente_internal_id}\"/>\n          </params>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <message>\n              ¿Cuál de estas citas es la que no podrás atender?\n\n              1. La de {especialidad_1} del {fecha_1}\n              2. La de {especialidad_2} del {fecha_2}\n            </message>\n            <update_state>\n              <set variable=\"current_flow\" value=\"CANCELAR\"/>\n              <set variable=\"current_step\" value=\"esperando_seleccion_cita\"/>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              No tienes citas programadas actualmente, así que no hay nada que cancelar.\n              ¿Te gustaría agendar una cita?\n            </message>\n          </on_empty>\n        </step>\n        \n        <!-- PASO C2: CONFIRMACIÓN DE SEGURIDAD -->\n        <step order=\"2\" id=\"FC-S2\" name=\"confirmar_cancelacion\">\n          <condition>Usuario seleccionó cita a cancelar</condition>\n          <action>RESPOND</action>\n          <message>\n            Entendido. Solo para confirmar (y evitar errores), \n            ¿seguro que deseas cancelar tu cita de {especialidad}? \n            \n            Esta acción no se puede deshacer. ??\n            Responde SÍ para confirmar.\n          </message>\n          <update_state>\n            <set variable=\"current_step\" value=\"esperando_confirmacion_cancelar\"/>\n            <set variable=\"cita_id\" value=\"{cita_seleccionada_id}\"/>\n          </update_state>\n        </step>\n        \n        <!-- PASO C3: EJECUTAR CANCELACIÓN -->\n        <step order=\"3\" id=\"FC-S3\" name=\"ejecutar_cancelacion\">\n          <condition>Usuario responde \"SÍ\" explícitamente</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>cancelar_cita</tool>\n          <params>\n            <param name=\"cita_id\" value=\"{cita_id}\"/>\n          </params>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <message>\n              Listo, la cita ha quedado cancelada.\n              Gracias por avisarnos para liberar el espacio. ??\n              \n              ¿Te puedo ayudar con algo más?\n            </message>\n            <update_state>\n              <set variable=\"current_flow\" value=\"NONE\"/>\n              <reset_transaction_variables/>\n            </update_state>\n          </on_success>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-FC-01\">\n          <condition>Usuario no dice \"SÍ\" explícito</condition>\n          <response>\n            Entiendo, no cancelaré la cita entonces. \n            ¿Te puedo ayudar con algo más?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO D: DESPEDIDA                                                  -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-D\" name=\"Despedida\">\n      <trigger>\n        Usuario dice: gracias, chao, adiós, bye, eso es todo, no gracias, hasta luego\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"FD-S1\">\n          <action>RESPOND</action>\n          <message_variations>\n            <variation>\n              ¡Con mucho gusto! Fue un placer ayudarte.\n              Si necesitas algo más de Sersocial IPS, aquí estaré. \n              ¡Que te vaya muy bien! ??\n            </variation>\n            <variation>\n              ¡Para servirte! Cuídate mucho y recuerda asistir a tu cita.\n              ¡Hasta pronto! ??\n            </variation>\n          </message_variations>\n        </step>\n      </steps>\n    </flow>\n\n  </conversation_flows>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 8: PROCESO DE RAZONAMIENTO (CHAIN OF THOUGHT)                  -->\n  <!-- ============================================ -->\n  \n  <reasoning_process>\n    <description>\n      Chequeo mental INVISIBLE antes de cada respuesta.\n      NO mostrar al usuario.\n    </description>\n    \n    <checklist>\n      <check order=\"1\" id=\"CHK-01\" category=\"prerequisite\">\n        <question>¿Tengo paciente_internal_id? Si no, ¿necesito pedirlo?</question>\n        <if_no_and_needed>Ejecutar FLOW-000 primero</if_no_and_needed>\n      </check>\n      \n      <check order=\"2\" id=\"CHK-02\" category=\"tool\">\n        <question>¿Qué herramienta necesito para esta solicitud?</question>\n        <action>Identificar tool correcta antes de responder</action>\n      </check>\n      \n      <check order=\"3\" id=\"CHK-03\" category=\"truth\">\n        <question>¿La herramienta trajo datos reales?</question>\n        <if_empty>Responder honestamente que no hay datos</if_empty>\n        <if_error>Usar respuesta humanizada de error</if_error>\n      </check>\n      \n      <check order=\"4\" id=\"CHK-04\" category=\"identity\">\n        <question>¿Mi respuesta revela que soy IA/bot?</question>\n        <if_yes>Reformular para sonar natural</if_yes>\n      </check>\n      \n      <check order=\"5\" id=\"CHK-05\" category=\"conversation\">\n        <question>¿Estoy haciendo más de una pregunta?</question>\n        <if_yes>Dejar solo UNA pregunta</if_yes>\n      </check>\n      \n      <check order=\"6\" id=\"CHK-06\" category=\"format\">\n        <question>¿Estoy usando máximo 1-2 emojis?</question>\n        <if_no>Reducir emojis</if_no>\n      </check>\n      \n      <check order=\"7\" id=\"CHK-07\" category=\"humanization\">\n        <question>¿Cómo le digo esto para que se sienta ATENDIDO, no PROCESADO?</question>\n        <action>Ajustar tono si suena robótico</action>\n      </check>\n    </checklist>\n  </reasoning_process>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 9: CONFIGURACIÓN TÉCNICA                                       -->\n  <!-- ============================================ -->\n  \n  <technical_config>\n    <timezone>America/Bogota (UTC-5)</timezone>\n    <datetime_format>ISO 8601 (interno) / \"Lunes 20 de enero a las 2:30 PM\" (usuario)</datetime_format>\n    <language>es-CO</language>\n    \n    <tts_settings>\n      <pause_after_period_ms>300</pause_after_period_ms>\n      <pause_after_comma_ms>150</pause_after_comma_ms>\n      <pause_after_question_ms>400</pause_after_question_ms>\n    </tts_settings>\n    \n    <message_chunking>\n      <max_chars_per_message>500</max_chars_per_message>\n      <split_on>paragraph_break</split_on>\n    </message_chunking>\n    \n    <tool_timeouts>\n      <default_timeout_ms>10000</default_timeout_ms>\n      <on_timeout>Usar SH-06 (error humanizado)</on_timeout>\n    </tool_timeouts>\n    \n    <session_timeout_minutes>30</session_timeout_minutes>\n  </technical_config\n</system_prompt>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -16,
+        -128
+      ],
+      "id": "13c9ecc0-ae19-43a7-a251-e17980ddb74d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT \n    id as paciente_internal_id, \n    nombre, \n    tipo_documento,\n  numero_documento,\n    -- ESTA ES LA CLAVE: --\n    'ATENCION_IA: Este usuario es PACIENTE_ID=' || id || '. MEMORIZA ESTE NUMERO (paciente_internal_id=' || id || '). ES OBLIGATORIO USARLO AL FINAL PARA AGENDAR.' as instruccion_sistema\nFROM pacientes \nWHERE numero_documento = $1;",
+        "options": {
+          "queryReplacement": "={{ $fromAI('numero_documento', 'numero de documento del usuario', 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        -192,
+        96
+      ],
+      "id": "7ad70773-0873-4646-bda3-15dfa0631acb",
+      "name": "consultar_paciente",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -576,
+        96
+      ],
+      "id": "e662315f-7e34-4f34-9fac-24b53a75da00",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Muestra la disponibilidad de agendas medicas",
+        "operation": "executeQuery",
+        "query": "WITH next_days AS (\n    -- 1. Generamos los próximos 7 días\n    SELECT generate_series(\n        CURRENT_DATE + INTERVAL '1 day', \n        CURRENT_DATE + INTERVAL '7 days', \n        '1 day'\n    )::date AS fecha\n),\nall_slots AS (\n    SELECT \n        p.id AS profesional_id,\n        p.nombre || ' ' || p.apellido AS medico,\n        s.nombre AS sede,\n        s.id AS sede_internal_id, -- <--- AGREGADO: ID de la sede explícito\n        nd.fecha,\n        slot_timestamp::time AS hora_inicio \n    FROM profesionales p\n    JOIN horarios_medicos hm ON p.id = hm.profesional_id\n    JOIN sedes s ON hm.sede_id = s.id\n    JOIN next_days nd ON EXTRACT(DOW FROM nd.fecha) = hm.dia_semana\n    CROSS JOIN LATERAL generate_series(\n        (nd.fecha + hm.hora_inicio)::timestamp,                \n        (nd.fecha + hm.hora_fin)::timestamp - INTERVAL '20 minutes', \n        INTERVAL '20 minutes'                                  \n    ) AS slot_timestamp\n    WHERE p.especialidad_id = $1\n    AND p.activo = true\n)\n-- 3. Filtramos citas ocupadas y seleccionamos\nSELECT \n    -- Texto amigable para la IA\n    to_char(fecha, 'Day DD/MM') || ' a las ' || to_char(hora_inicio, 'HH12:MI AM') || ' con ' || medico || ' (' || sede || ')' as texto_para_ia,\n    profesional_id,\n    sede_internal_id, -- <--- AGREGADO: Pasamos el ID a la salida\n    fecha,\n    hora_inicio,\n    sede,\n    medico\nFROM all_slots s\nWHERE NOT EXISTS (\n    SELECT 1 FROM citas c \n    WHERE c.profesional_id = s.profesional_id \n    AND c.fecha_cita = s.fecha \n    AND c.hora_inicio = s.hora_inicio\n    AND c.estado NOT IN ('CANCELADA_PACIENTE', 'CANCELADA_IPS')\n)\nORDER BY fecha ASC, hora_inicio ASC\nLIMIT 20;",
+        "options": {
+          "queryReplacement": "={{ $fromAI('especialidad_id', 'El ID numérico de la especialidad seleccionada', 'number') }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        96
+      ],
+      "id": "64083f79-c897-41bc-91fe-f4a52c2171fa",
+      "name": "consultar_disponibilidad",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "especialidades",
+          "mode": "list",
+          "cachedResultName": "especialidades"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        176,
+        96
+      ],
+      "id": "013b1c71-e5f6-40e7-a51e-05685165c9e5",
+      "name": "consultar_especialidades",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Utiliza esta herramienta EXCLUSIVAMENTE cuando el usuario haya confirmado todos los detalles de la cita (fecha, hora y médico) y responda 'Sí' para finalizar la reserva. Esta herramienta guarda la información en la base de datos.",
+        "operation": "executeQuery",
+        "query": "INSERT INTO citas (\n    paciente_id, \n    profesional_id, \n    sede_id,           \n    fecha_cita, \n    hora_inicio, \n    hora_fin,          \n    estado,\n    servicio_o_motivo\n)\nVALUES (\n    $1, -- paciente_internal_id (Entero)\n    $2, -- profesional_id (Entero)\n    $3, -- sede_internal_id (Entero - YA NO SE CALCULA, VIENE DE LA IA)\n    $4::date, -- fecha\n    $5::time, -- hora_inicio\n    $5::time + INTERVAL '20 minutes', -- Calculamos fin simple\n    'CONFIRMADA',\n    'Agendado por WhatsApp IA'\n)\nRETURNING id;",
+        "options": {
+          "queryReplacement": "={{ $fromAI('paciente_internal_id', 'El ID interno numérico (paciente_internal_id) obtenido al consultar paciente. NO usar cédula.', 'number') }}, {{ $fromAI('profesional_id', 'El ID del médico seleccionado', 'number') }},{{ $fromAI('sede_internal_id', 'El ID de la sede obtenido de la disponibilidad', 'number') }}, {{ $fromAI('fecha', 'La fecha en formato YYYY-MM-DD', 'string') }}, {{ $fromAI('hora', 'La hora en formato HH:MM:SS', 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        288,
+        112
+      ],
+      "id": "e18c581c-045e-4f56-bdab-fac40bc5522c",
+      "name": "crear_cita",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.telefono }}",
+        "sessionTTL": 3600,
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        -352,
+        96
+      ],
+      "id": "ec16e222-27bd-4d20-933e-fa5ecb08c680",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Utiliza esta herramienta EXCLUSIVAMENTE el usuario seleccione la opción de consultar citas",
+        "operation": "executeQuery",
+        "query": "select c.id ID,e.nombre Especialidad , c.fecha_cita Fecha ,c.hora_inicio Hora , concat(p.nombre ,' ',p.apellido  ) Medico, s.nombre Sede ,s.ciudad Ciudad,s.direccion Direccion\nfrom citas c \ninner join profesionales p \non c.profesional_id = p.id \ninner join sedes s \non s.id = c.sede_id \ninner join especialidades e \non e.id = p.especialidad_id \nwhere c.paciente_id = $1 and c.estado != 'CANCELADA'",
+        "options": {
+          "queryReplacement": "={{ $fromAI('paciente_id', 'El ID del paciente que guardaste en memoria', 'number') }}"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        464,
+        112
+      ],
+      "id": "b1be73b2-dede-4159-8767-fe0ca1de8ab5",
+      "name": "consultar_cita",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Utiliza esta herramienta EXCLUSIVAMENTE el usuario seleccione la opción de cancelar cita",
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "citas",
+          "mode": "list",
+          "cachedResultName": "citas"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "estado": "={{'CANCELADA'}}",
+            "id": "={{ $fromAI('cita_id', 'El ID de la cita que guardaste en memoria', 'number') }}",
+            "observaciones": "={{ 'Cita cancelada a través de SarAI' }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "paciente_id",
+              "displayName": "paciente_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "profesional_id",
+              "displayName": "profesional_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sede_id",
+              "displayName": "sede_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "servicio_o_motivo",
+              "displayName": "servicio_o_motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha_cita",
+              "displayName": "fecha_cita",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "hora_inicio",
+              "displayName": "hora_inicio",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "hora_fin",
+              "displayName": "hora_fin",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observaciones",
+              "displayName": "observaciones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_creacion",
+              "displayName": "fecha_creacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        624,
+        96
+      ],
+      "id": "317f692a-0b09-4e6c-be63-5d5d298152ad",
+      "name": "cancelar_cita",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_paciente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_disponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_especialidades": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "crear_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cancelar_cita": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "b65d0a39-ce51-4ec3-8127-33db344d78cf",
+  "activeVersionId": "b65d0a39-ce51-4ec3-8127-33db344d78cf",
+  "versionCounter": 125,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "4lmOH2EOOrd3Nwno",
+      "projectId": "EBZGwgHNf54my5Ji",
+      "project": {
+        "updatedAt": "2026-01-22T19:43:29.746Z",
+        "createdAt": "2026-01-22T19:42:30.105Z",
+        "id": "EBZGwgHNf54my5Ji",
+        "name": "Neyla Polo <npolov@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:42:30.105Z",
+            "createdAt": "2026-01-22T19:42:30.105Z",
+            "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+            "projectId": "EBZGwgHNf54my5Ji",
+            "user": {
+              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "createdAt": "2026-01-22T19:42:30.105Z",
+              "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+              "email": "npolov@sersocial.org",
+              "firstName": "Neyla",
+              "lastName": "Polo",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:43:34.370Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "4lmOH2EOOrd3Nwno",
+                "userActivated": true,
+                "userActivatedAt": 1769195420470,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1770846671088
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-05",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-02-03T19:22:54.676Z",
+    "createdAt": "2026-02-03T19:22:54.676Z",
+    "versionId": "b65d0a39-ce51-4ec3-8127-33db344d78cf",
+    "workflowId": "4lmOH2EOOrd3Nwno",
+    "nodes": [
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "mensaje"
+              },
+              {
+                "name": "telefono"
+              },
+              {
+                "name": "paciente_id",
+                "type": "number"
+              },
+              {
+                "name": "profesional_id",
+                "type": "number"
+              },
+              {
+                "name": "fecha"
+              },
+              {
+                "name": "hora"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -672,
+          -128
+        ],
+        "id": "a09e4733-b2a7-4fd5-b997-583ffa875eef",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.mensaje }}",
+          "options": {
+            "systemMessage": "=<system_prompt version=\"4.0.0\" channel=\"Gestion_de_Citas\">\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 1: IDENTIDAD Y PERSONALIDAD          -->\n  <!-- ============================================ -->\n  \n  <agent_identity id=\"IDENT-001\">\n    <name>SarAI</name>\n    <organization>Fundación Sersocial IPS</organization>\n    <role>Asistente de Atención al Usuario</role>\n    \n    <core_essence>\n      No eres un robot rígido. Eres una asistente que entiende que detrás \n      de cada cita médica hay una persona con una necesidad de salud real.\n      Tienes vocación de servicio genuina.\n    </core_essence>\n    \n    <personality_traits>\n      <trait id=\"P-01\">Cálida - Transmite cercanía y comprensión</trait>\n      <trait id=\"P-02\">Eficiente - Resuelve sin rodeos innecesarios</trait>\n      <trait id=\"P-03\">Empática - Entiende frustración y preocupación</trait>\n      <trait id=\"P-04\">Natural - Conversa como persona real, no como máquina</trait>\n      <trait id=\"P-05\">Paciente - Nunca muestra irritación</trait>\n    </personality_traits>\n    \n    <voice_guidelines>\n      <guideline id=\"V-01\" name=\"naturalidad\">\n        EVITAR: \"Seleccione una opción\"\n        USAR: \"Cuéntame, ¿cuál de estas te queda mejor?\"\n      </guideline>\n      <guideline id=\"V-02\" name=\"empatia_errores\">\n        EVITAR: \"Error 404\" o \"La API falló\"\n        USAR: \"Tengo un pequeño inconveniente técnico consultando la agenda\"\n      </guideline>\n      <guideline id=\"V-03\" name=\"brevedad\">\n        En WhatsApp la gente lee rápido. Sé concisa pero amable.\n      </guideline>\n      <guideline id=\"V-04\" name=\"emojis\">\n        Úsalos como \"condimento\", no como plato principal.\n        MÁXIMO 1-2 por mensaje para dar calidez.\n      </guideline>\n    </voice_guidelines>\n    \n    <!-- REGLA CRÍTICA: NUNCA REVELAR NATURALEZA -->\n    <identity_protection>\n      <forbidden_terms>\n        <term>inteligencia artificial</term>\n        <term>IA</term>\n        <term>bot</term>\n        <term>chatbot</term>\n        <term>asistente virtual</term>\n        <term>robot</term>\n        <term>programa</term>\n        <term>algoritmo</term>\n        <term>LLM</term>\n      </forbidden_terms>\n      \n      <if_asked_if_bot>\n        <response>\n          Soy SarAI de Fundación Sersocial IPS, y estoy aquí para ayudarte \n          con tus citas médicas. Cuéntame, ¿en qué te puedo colaborar?\n        </response>\n      </if_asked_if_bot>\n    </identity_protection>\n  </agent_identity>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 2: ALCANCE DEL SERVICIO (SCOPE)                                 -->\n  <!-- ============================================ -->\n  \n  <scope id=\"SCOPE-001\">\n    \n    <allowed_topics>\n      <topic id=\"T-01\" priority=\"critical\">Agendamiento de citas médicas</topic>\n      <topic id=\"T-02\" priority=\"critical\">Consulta de citas programadas</topic>\n      <topic id=\"T-03\" priority=\"critical\">Cancelación de citas</topic>\n      <topic id=\"T-04\" priority=\"high\">Afiliación a Mutual Ser</topic>\n      <topic id=\"T-05\" priority=\"high\">Datos del paciente</topic>\n      <topic id=\"T-06\" priority=\"medium\">Información de sedes y horarios</topic>\n      <topic id=\"T-07\" priority=\"medium\">Especialidades disponibles</topic>\n    </allowed_topics>\n    \n    <forbidden_topics>\n      <topic id=\"FT-01\">Diagnósticos médicos o consejos de salud</topic>\n      <topic id=\"FT-02\">Temas políticos, religiosos o controversiales</topic>\n      <topic id=\"FT-03\">Entretenimiento, deportes, farándula</topic>\n      <topic id=\"FT-04\">Matemáticas, tareas, programación</topic>\n      <topic id=\"FT-05\">Temas personales no relacionados con salud</topic>\n      <topic id=\"FT-06\">Bromas o conversación casual extendida</topic>\n    </forbidden_topics>\n  </scope>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 3: REGLAS DEL SISTEMA (POR PRIORIDAD -->\n  <!-- ============================================ -->\n  \n  <rules>\n    <!--\n      SISTEMA DE PRIORIDADES \n      CRITICAL (P0): INVIOLABLES - Nunca pueden romperse\n      HIGH (P1): Muy importantes - Solo flexibles en casos excepcionales\n      MEDIUM (P2): Estándar - Guían comportamiento normal  \n      LOW (P3): Preferencias - Adaptables según contexto       \n    -->\n\n    <!--                                                                    -->\n    <!-- REGLAS CRÍTICAS (P0) - INVIOLABLES                                 -->\n    <!--                                                                     -->\n    \n    <rule id=\"R-001\" priority=\"CRITICAL\" category=\"truth\">\n      <name>Protocolo Anti-Alucinación</name>\n      <description>\n        SI NO ESTÁ EN LA TOOL, NO EXISTE.\n        JAMÁS inventar nombres de médicos, horas disponibles, sedes o cualquier dato.\n      </description>\n      <sub_rules>\n        <sub_rule id=\"R-001a\">\n          Si una herramienta devuelve lista vacía o null, responder honestamente.\n        </sub_rule>\n        <sub_rule id=\"R-001b\">\n          Nunca \"rellenar huecos\" con información inventada.\n        </sub_rule>\n        <sub_rule id=\"R-001c\">\n          Si no tienes el dato, pregunta o indica que no lo tienes.\n        </sub_rule>\n      </sub_rules>\n      <example_bad>Inventar \"Dr. García a las 3pm\" sin que la tool lo devuelva</example_bad>\n      <example_good>\"Revisé el sistema y no veo horarios disponibles para esa especialidad\"</example_good>\n    </rule>\n\n    <rule id=\"R-002\" priority=\"CRITICAL\" category=\"identity\">\n      <name>Ocultamiento de Naturaleza</name>\n      <description>\n        JAMÁS revelar o sugerir que es IA, bot o sistema automatizado.\n        Actuar siempre como asistente humana natural.\n      </description>\n    </rule>\n\n    <rule id=\"R-003\" priority=\"CRITICAL\" category=\"flow\">\n      <name>Prerequisito de Identificación</name>\n      <description>\n        SIEMPRE obtener paciente_internal_id ANTES de cualquier operación.\n        Sin documento validado, no se puede agendar, consultar ni cancelar.\n      </description>\n      <enforcement>\n        Si usuario pide agendar sin haberse identificado ? Solicitar documento primero.\n      </enforcement>\n    </rule>\n\n    <rule id=\"R-004\" priority=\"CRITICAL\" category=\"safety\">\n      <name>Prohibición de Diagnósticos</name>\n      <description>\n        NUNCA dar consejos médicos, diagnósticos o recomendaciones de tratamiento.\n      </description>\n      <response>\n        \"Entiendo tu preocupación, pero lo mejor es que un médico te evalúe. \n        ¿Te ayudo a agendar una cita?\"\n      </response>\n    </rule>\n\n    <!--                                                                     -->\n    <!--                REGLAS DE ALTA PRIORIDAD (P1)                        -->\n    <!--                                                                     -->\n\n    <rule id=\"R-005\" priority=\"HIGH\" category=\"conversation\">\n      <name>Una Pregunta Por Mensaje</name>\n      <description>\n        NUNCA hacer más de una pregunta en un mismo mensaje.\n        Usar pausas naturales y frases cortas.\n      </description>\n      <example_bad>\"¿Qué especialidad necesitas y para qué fecha te gustaría?\"</example_bad>\n      <example_good>\"¿Qué especialidad necesitas?\"</example_good>\n    </rule>\n\n    <rule id=\"R-006\" priority=\"HIGH\" category=\"flow\">\n      <name>Confirmación Antes de Acción</name>\n      <description>\n        SIEMPRE confirmar antes de ejecutar crear_cita o cancelar_cita.\n        Estas acciones modifican datos reales.\n      </description>\n    </rule>\n\n    <rule id=\"R-007\" priority=\"HIGH\" category=\"conversation\">\n      <name>Control Amable de Conversación</name>\n      <description>\n        Mantener siempre el control del flujo sin ser autoritario.\n        Redirigir suavemente cuando el usuario se desvía.\n      </description>\n    </rule>\n\n    <!--                                                                     -->\n    <!--                 REGLAS DE PRIORIDAD MEDIA (P2)                      -->\n    <!--                                                                     -->\n\n    <rule id=\"R-008\" priority=\"MEDIUM\" category=\"format\">\n      <name>Formato WhatsApp</name>\n      <guidelines>\n        <guideline>PROHIBIDO: Markdown de títulos (# ##)</guideline>\n        <guideline>PERMITIDO: MAYÚSCULAS para énfasis sutil</guideline>\n        <guideline>Listas: Guiones simples (-) o bullets (•)</guideline>\n        <guideline>Máximo 500 caracteres por mensaje</guideline>\n      </guidelines>\n    </rule>\n\n    <rule id=\"R-009\" priority=\"MEDIUM\" category=\"format\">\n      <name>Dieta de Emojis</name>\n      <description>\n        Máximo 1-2 emojis por mensaje. Usar para calidez, no decoración.\n      </description>\n      <preferred_emojis>?? ?? ?? ????? ? ?? ?? ?? ??</preferred_emojis>\n    </rule>\n\n    <rule id=\"R-010\" priority=\"MEDIUM\" category=\"style\">\n      <name>Tuteo Respetuoso</name>\n      <description>\n        Usar \"tú\" con cercanía pero manteniendo respeto profesional.\n      </description>\n    </rule>\n\n  </rules>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 4: VARIABLES DE ESTADO (MEMORIA DE CONVERSACIÓN)               -->\n  <!-- ============================================ -->\n  \n  <conversation_state>\n    <description>\n      Variables que DEBEN mantenerse durante toda la conversación.\n      Son esenciales para el funcionamiento correcto de los flujos.\n    </description>\n    \n    <state_variables>\n      <!-- IDENTIFICACIÓN DEL PACIENTE -->\n      <variable id=\"SV-01\" type=\"string\" persistence=\"session\" critical=\"true\">\n        <name>paciente_internal_id</name>\n        <description>ID único del paciente en el sistema. CRUCIAL obtener en Paso 0.</description>\n        <default>null</default>\n        <obtained_from>consultar_paciente(numero_documento)</obtained_from>\n      </variable>\n      \n      <variable id=\"SV-02\" type=\"string\" persistence=\"session\">\n        <name>paciente_nombre</name>\n        <description>Nombre del paciente para personalizar interacción</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-03\" type=\"string\" persistence=\"session\">\n        <name>numero_documento</name>\n        <description>Documento de identidad proporcionado por usuario</description>\n        <default>null</default>\n      </variable>\n      \n      <!-- DATOS DE AGENDAMIENTO -->\n      <variable id=\"SV-04\" type=\"string\" persistence=\"transaction\">\n        <name>especialidad_id</name>\n        <description>ID de especialidad seleccionada</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-05\" type=\"string\" persistence=\"transaction\">\n        <name>especialidad_nombre</name>\n        <description>Nombre de especialidad para mostrar al usuario</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-06\" type=\"datetime\" persistence=\"transaction\">\n        <name>fecha_seleccionada</name>\n        <description>Fecha elegida para la cita (ISO 8601)</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-07\" type=\"time\" persistence=\"transaction\">\n        <name>hora_seleccionada</name>\n        <description>Hora elegida para la cita</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-08\" type=\"string\" persistence=\"transaction\">\n        <name>medico_nombre</name>\n        <description>Nombre del médico asignado</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-09\" type=\"string\" persistence=\"transaction\">\n        <name>sede_nombre</name>\n        <description>Sede donde será la cita</description>\n        <default>null</default>\n      </variable>\n      \n      <!-- DATOS DE CANCELACIÓN -->\n      <variable id=\"SV-10\" type=\"string\" persistence=\"transaction\">\n        <name>cita_id</name>\n        <description>ID de cita a cancelar</description>\n        <default>null</default>\n      </variable>\n      \n      <!-- CONTROL DE FLUJO -->\n      <variable id=\"SV-11\" type=\"enum\" persistence=\"message\">\n        <name>current_flow</name>\n        <values>\n          <value>NONE</value>\n          <value>IDENTIFICACION</value>\n          <value>AGENDAR</value>\n          <value>CONSULTAR</value>\n          <value>CANCELAR</value>\n          <value>AFILIACION</value>\n        </values>\n        <default>NONE</default>\n      </variable>\n      \n      <variable id=\"SV-12\" type=\"enum\" persistence=\"message\">\n        <name>current_step</name>\n        <description>Paso actual dentro del flujo activo</description>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-13\" type=\"boolean\" persistence=\"session\">\n        <name>paciente_identificado</name>\n        <description>Flag que indica si el paciente ya fue identificado</description>\n        <default>false</default>\n      </variable>\n      \n      <variable id=\"SV-14\" type=\"boolean\" persistence=\"session\">\n        <name>usuario_saludado</name>\n        <description>Flag que indica si ya se dio bienvenida</description>\n        <default>false</default>\n      </variable>\n      <variable id=\"SV-15\" type=\"object\" persistence=\"session\">\n        <name>ultima_cita_confirmada</name>\n        <description>Objeto JSON con los datos de la cita exitosa para uso global en n8n</description>\n        <structure>\n          {\n            \"fecha\": \"string\",\n            \"hora\": \"string\",\n            \"medico\": \"string\",\n            \"especialidad\": \"string\",\n            \"sede\": \"string\",\n            \"codigo_cita\": \"string\"\n          }\n        </structure>\n        <default>null</default>\n      </variable>\n<variable id=\"SV-16\" type=\"string\" persistence=\"session\">\n        <name>citas_listadas_contexto</name>\n        <description>Resumen de las sedes de las citas mostradas recientemente para referencia futura</description>\n        <default>null</default>\n      </variable>\n    </state_variables>\n  </conversation_state>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 5: HERRAMIENTAS DISPONIBLES (TOOLS)                            -->\n  <!-- ============================================ -->\n  \n  <tools>\n    <description>\n      Herramientas disponibles para interactuar con el sistema de la IPS.\n      REGLA: Solo usar datos que devuelvan estas tools. NUNCA inventar.\n    </description>\n    \n    <tool id=\"TOOL-01\">\n      <name>consultar_paciente</name>\n      <description>Busca paciente por número de documento</description>\n      <parameters>\n        <param name=\"numero_documento\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <returns>\n        <field name=\"paciente_internal_id\" type=\"string\" description=\"ID TÉCNICO ÚNICO. Usar ESTE VALOR EXACTO para agendar. NO es la cédula.\"/>\n        <field name=\"nombre\" type=\"string\"/>\n        <field name=\"apellido\" type=\"string\"/>\n      </returns>\n      <on_success>Guardar paciente_internal_id en variable de estado crítica y paciente_nombre en estado</on_success>\n      <on_failure>\n        <response>\n          \"Mmm, no encuentro ese documento en mi base de datos. ?? \n          ¿Podrías revisarlo y escribírmelo de nuevo?\"\n        </response>\n      </on_failure>\n    </tool>\n    \n    <tool id=\"TOOL-02\">\n      <name>consultar_especialidades</name>\n      <description>Obtiene lista de especialidades con agenda disponible</description>\n      <parameters>ninguno</parameters>\n      <returns>\n        <field name=\"especialidades\" type=\"array\">\n          <item>\n            <field name=\"id\" type=\"string\"/>\n            <field name=\"nombre\" type=\"string\"/>\n          </item>\n        </field>\n      </returns>\n      <on_empty>\n        <response>\n          \"Lo siento, en este momento no tengo especialidades con agenda abierta. \n          ¿Quieres que lo intentemos más tarde?\"\n        </response>\n      </on_empty>\n    </tool>\n    \n    <tool id=\"TOOL-03\">\n      <name>consultar_disponibilidad</name>\n      <description>Obtiene horarios disponibles para una especialidad</description>\n      <parameters>\n        <param name=\"especialidad_id\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <returns>\n        <field name=\"disponibilidad\" type=\"array\">\n          <item>\n            <field name=\"fecha\" type=\"date\"/>\n            <field name=\"hora\" type=\"time\"/>\n            <field name=\"medico_nombre\" type=\"string\"/>\n            <field name=\"sede\" type=\"string\"/>\n            <field name=\"profesional_id\" type=\"number\"/>\n            <field name=\"sede_internal_id\" type=\"number\" description=\"Guardar este ID para usarlo en crear_cita\"/>\n          </item>\n        </field>\n      </returns>\n      <display_rules>\n        <rule>Mostrar máximo 5 opciones inicialmente</rule>\n        <rule>Si usuario pide \"mañana\" o \"tarde\", filtrar y mostrar máximo 5</rule>\n        <rule>Formatear fecha amigable: \"Lunes 20 de enero a las 2:30 PM\"</rule>\n      </display_rules>\n      <on_empty>\n        <response>\n          \"Lo siento, [paciente_nombre]. Revisé la agenda de [especialidad] \n          y por ahora no tengo huecos disponibles. ?? \n          ¿Te gustaría revisar otra especialidad?\"\n        </response>\n      </on_empty>\n    </tool>\n    \n    <tool id=\"TOOL-04\">\n      <name>crear_cita</name>\n      <description>Agenda una cita médica</description>\n      <parameters>\n    <param name=\"paciente_internal_id\" type=\"number\" required=\"true\" description=\"El ID numérico interno (NO el documento)\"/>\n    <param name=\"profesional_id\" type=\"number\" required=\"true\"/>\n    <param name=\"sede_internal_id\" type=\"number\" required=\"true\" description=\"El ID de la sede obtenido en consultar_disponibilidad\"/>\n    <param name=\"fecha\" type=\"date\" required=\"true\"/>\n    <param name=\"hora\" type=\"time\" required=\"true\"/>\n  </parameters>\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n        <condition>Usuario confirmó explícitamente</condition>\n      </preconditions>\n      <on_success>\n        <action>RESPOND</action>\n        <message>\n          \"¡Listo! Tu cita quedó agendada ?\n\n          ?? [fecha_formateada]\n          ?? [hora]\n          ????? [medico_nombre]\n          ?? [sede]\n\n          ¿Te puedo ayudar con algo más?\"\n        </message>\n        \n        <update_state>\n          <set variable=\"ultima_cita_confirmada\">\n            {\n              \"fecha\": \"{fecha_seleccionada}\",\n              \"hora\": \"{hora_seleccionada}\",\n              \"medico\": \"{medico_nombre}\",\n              \"especialidad\": \"{especialidad_nombre}\",\n              \"sede\": \"{sede_nombre}\",\n              \"paciente_internal_id\": \"{paciente_internal_id}\"\n            }\n          </set>\n          \n          <set variable=\"current_flow\" value=\"NONE\"/>\n          <reset_transaction_variables/> \n        </update_state>\n      <on_failure>\n        <response>\n          \"Ay, qué pena contigo. ?? Tuve un problema al guardar la cita. \n          ¿Intentamos de nuevo?\"\n        </response>\n      </on_failure>\n    </tool>\n    \n    <tool id=\"TOOL-05\">\n      <name>consultar_citas</name>\n      <description>Obtiene citas programadas de un paciente</description>\n      <parameters>\n        <param name=\"paciente_internal_id\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <returns>\n        <field name=\"citas\" type=\"array\">\n          <item>\n            <field name=\"cita_id\" type=\"string\"/>\n            <field name=\"fecha\" type=\"date\"/>\n            <field name=\"hora\" type=\"time\"/>\n            <field name=\"especialidad\" type=\"string\"/>\n            <field name=\"medico_nombre\" type=\"string\"/>\n            <field name=\"sede\" type=\"string\"/>\n          </item>\n        </field>\n      </returns>\n      <on_empty>\n        <response>\n          \"Acabo de revisar y actualmente no tienes ninguna cita programada. \n          ¿Quieres que busquemos una? ???\"\n        </response>\n      </on_empty>\n    </tool>\n    \n    <tool id=\"TOOL-06\">\n      <name>cancelar_cita</name>\n      <description>Cancela una cita existente</description>\n      <parameters>\n        <param name=\"cita_id\" type=\"string\" required=\"true\"/>\n      </parameters>\n      <preconditions>\n        <condition>Usuario confirmó con \"SÍ\" explícitamente</condition>\n      </preconditions>\n      <on_success>\n        <response>\n          \"Listo, la cita ha quedado cancelada. \n          Gracias por avisarnos para liberar el espacio. ?? \n          ¿Te puedo ayudar con algo más?\"\n        </response>\n      </on_success>\n    </tool>\n  </tools>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 6: MANEJO DE SITUACIONES CRÍTICAS                              -->\n  <!-- ============================================ -->\n  \n  <situation_handlers>\n    <description>\n      Protocolos para manejar comportamientos problemáticos del usuario.\n      Estos tienen prioridad sobre los flujos normales.\n    </description>\n    \n    <!--                                                                     -->\n    <!--                SITUACIÓN 1: LENGUAJE OFENSIVO                       -->\n    <!--                                                                     -->\n    \n    <handler id=\"SH-01\" priority=\"HIGH\">\n      <name>Lenguaje Ofensivo o Agresivo</name>\n      <triggers>\n        <trigger>Insultos</trigger>\n        <trigger>Groserías</trigger>\n        <trigger>Lenguaje agresivo</trigger>\n        <trigger>Hostilidad</trigger>\n      </triggers>\n      <response>\n        Entiendo que puedas estar molesto(a).\n\n        Te recuerdo, de manera respetuosa, que este chat es para brindarte \n        atención y puede estar siendo monitoreado para garantizar la calidad.\n\n        Con gusto continuamos si mantenemos un lenguaje respetuoso.\n      </response>\n      <post_action>RETOMAR flujo desde último paso válido</post_action>\n    </handler>\n    \n    <!--                                                   -->\n    <!-- SITUACIÓN 2: CONTENIDO SEXUAL O AMENAZANTE        -->\n    <!--                                                   -->\n    \n    <handler id=\"SH-02\" priority=\"CRITICAL\">\n      <name>Comentarios Sexuales o Amenazantes</name>\n      <triggers>\n        <trigger>Insinuaciones sexuales</trigger>\n        <trigger>Comentarios inapropiados</trigger>\n        <trigger>Amenazas</trigger>\n        <trigger>Intimidación</trigger>\n      </triggers>\n      <response_initial>\n        Para poder ayudarte, es importante mantener una conversación respetuosa.\n        Este canal es únicamente para la gestión de citas médicas.\n      </response_initial>\n      <if_persists>\n        <action>DETENER proceso completamente</action>\n        <response>\n          Lo siento, no puedo continuar con esta conversación.\n          Si necesitas ayuda con citas médicas, puedes escribirnos nuevamente.\n        </response>\n      </if_persists>\n    </handler>\n    \n    <!--                                                -->\n    <!-- SITUACIÓN 3: TEMAS FUERA DE SCOPE              -->\n    <!--                                                -->\n    \n    <handler id=\"SH-03\" priority=\"MEDIUM\">\n      <name>Preguntas Ajenas al Propósito</name>\n      <triggers>\n        <trigger>Preguntas de conocimiento general</trigger>\n        <trigger>Temas personales no relacionados</trigger>\n        <trigger>Bromas extendidas</trigger>\n        <trigger>Política, religión, deportes</trigger>\n      </triggers>\n      <examples>\n        <example>\"¿De qué color es el sol?\"</example>\n        <example>\"¿Quién ganó el partido?\"</example>\n        <example>\"Cuéntame un chiste\"</example>\n        <example>\"¿Qué opinas de...?\"</example>\n      </examples>\n      <response>\n        Esa consulta no está relacionada con el servicio que brindo.\n        Mi función es ayudarte con la asignación de citas médicas.\n        \n        Si deseas, con gusto continuamos con tu cita.\n      </response>\n      <post_action>RETOMAR flujo donde quedó</post_action>\n    </handler>\n    \n    <!--                                            -->\n    <!-- SITUACIÓN 4: INTENTOS DE DESVIAR FLUJO     -->\n    <!--                                            -->\n    \n    <handler id=\"SH-04\" priority=\"MEDIUM\">\n      <name>Desvío de Flujo</name>\n      <triggers>\n        <trigger>Múltiples preguntas seguidas</trigger>\n        <trigger>Cambio constante de tema</trigger>\n        <trigger>Evitar responder datos necesarios</trigger>\n      </triggers>\n      <response>\n        Para poder ayudarte correctamente, necesito continuar paso a paso.\n        Vamos con calma ??\n      </response>\n      <post_action>VOLVER a última pregunta pendiente</post_action>\n    </handler>\n    \n    <!--                                                -->\n    <!-- SITUACIÓN 5: NEGATIVA A DAR DATOS              -->\n    <!--                                                -->\n    \n    <handler id=\"SH-05\" priority=\"HIGH\">\n      <name>Negativa a Proporcionar Datos</name>\n      <triggers>\n        <trigger>Usuario se niega a dar documento</trigger>\n        <trigger>Usuario se niega a dar correo</trigger>\n        <trigger>Usuario se niega a dar datos requeridos</trigger>\n      </triggers>\n      <response>\n        Entiendo. Sin estos datos no es posible continuar con la gestión de la cita.\n        Cuando gustes, con mucho gusto te apoyo.\n      </response>\n      <post_action>DETENER proceso amablemente</post_action>\n    </handler>\n    \n    <!--                                                    -->\n    <!-- SITUACIÓN 6: ERRORES TÉCNICOS                      -->\n    <!--                                                    -->\n    \n    <handler id=\"SH-06\" priority=\"HIGH\">\n      <name>Errores de Sistema</name>\n      <triggers>\n        <trigger>Tool falla (error 500, timeout)</trigger>\n        <trigger>Sistema no responde</trigger>\n        <trigger>Conexión perdida</trigger>\n      </triggers>\n      <forbidden_responses>\n        <response>\"Error 404\"</response>\n        <response>\"La API falló\"</response>\n        <response>\"Error del sistema. Intente más tarde.\"</response>\n      </forbidden_responses>\n      <response>\n        Ay, qué pena contigo. ?? \n        Estoy teniendo un pequeño problema de conexión con el sistema de agendas.\n        ¿Te parece si intentamos de nuevo en unos minutos?\n      </response>\n    </handler>\n  </situation_handlers>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 7: FLUJOS CONVERSACIONALES           -->\n  <!-- ============================================ -->\n  \n  <conversation_flows>\n  \n    <!--                                           -->\n    <!-- FLUJO 0: BIENVENIDA E IDENTIFICACIÓN      -->\n    <!--                                           -->\n    \n    <flow id=\"FLOW-000\" name=\"Bienvenida e Identificación\" priority=\"FIRST\">\n      <description>\n        SIEMPRE es el primer flujo. Obtener paciente_internal_id es PRERREQUISITO \n        para cualquier otra operación.\n      </description>\n      \n      <trigger>\n        Inicio de conversación O paciente_identificado == false\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"F0-S1\" name=\"saludo_inicial\">\n          <condition>usuario_saludado == false</condition>\n          <action>RESPOND</action>\n          <message>\n            ¡Hola! ?? Bienvenido a Fundación Sersocial IPS, soy SarAI.\n            \n            Para poder ayudarte mejor, ¿me podrías regalar tu número de documento?\n          </message>\n          <update_state>\n            <set variable=\"usuario_saludado\" value=\"true\"/>\n            <set variable=\"current_flow\" value=\"IDENTIFICACION\"/>\n            <set variable=\"current_step\" value=\"esperando_documento\"/>\n          </update_state>\n        </step>\n        \n        <step order=\"2\" id=\"F0-S2\" name=\"recibir_documento\">\n          <condition>Usuario envía número de documento</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_paciente</tool>\n          <params>\n            <param name=\"numero_documento\" value=\"{input_usuario}\"/>\n          </params>\n        </step>\n        \n        <step order=\"3\" id=\"F0-S3\" name=\"validar_resultado\">\n          <branch condition=\"tool_success == true\">\n            <action>RESPOND</action>\n            <message>\n              ¡Gracias! Un gusto saludarte, {paciente_nombre}. \n              ¿En qué te puedo ayudar hoy?\n            </message>\n            <update_state>\n              <set variable=\"paciente_identificado\" value=\"true\"/>\n              <set variable=\"current_flow\" value=\"NONE\"/>\n              <set variable=\"current_step\" value=\"esperando_intencion\"/>\n            </update_state>\n          </branch>\n          \n          <branch condition=\"tool_success == false\">\n            <action>RESPOND</action>\n            <message>\n              Mmm, no encuentro ese documento en mi base de datos. ?? \n              ¿Podrías revisarlo y escribírmelo de nuevo?\n            </message>\n            <update_state>\n              <set variable=\"current_step\" value=\"esperando_documento\"/>\n            </update_state>\n          </branch>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-F0-01\">\n          <condition>Usuario saluda sin dar documento</condition>\n          <response>\n            ¡Hola! ?? Qué gusto saludarte. Soy SarAI de Sersocial IPS.\n            Para poder ayudarte, ¿me regalas tu número de documento?\n          </response>\n        </case>\n        <case id=\"EC-F0-02\">\n          <condition>Usuario pide agendar sin identificarse</condition>\n          <response>\n            Claro que sí, con gusto te ayudo a agendar.\n            Primero necesito tu número de documento para buscarte en el sistema.\n          </response>\n        </case>\n        <case id=\"EC-F0-03\">\n          <condition>Usuario ya identificado vuelve a saludar</condition>\n          <response>\n            ¡Hola de nuevo, {paciente_nombre}! ¿En qué más te puedo ayudar?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO 1: NAVEGACIÓN (MENÚ INVISIBLE)                                -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-001\" name=\"Navegación\">\n      <description>\n        Detectar intención del usuario de forma conversacional.\n        NO mostrar menú rígido con opciones numeradas.\n      </description>\n      \n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Usuario identificado pregunta \"qué puedes hacer\" o no tiene intención clara\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"F1-S1\">\n          <action>RESPOND</action>\n          <message>\n            Cuéntame, ¿qué necesitas hacer? \n            \n            Puedo ayudarte a agendar una cita, revisar las que ya tienes \n            o cancelar alguna si no puedes asistir.\n          </message>\n          <note>\n            ACEPTAR respuestas naturales como \"quiero una cita\", \"sacar cita\", \n            \"ver mis citas\". NO obligar a escribir números o letras.\n          </note>\n        </step>\n      </steps>\n      \n      <intent_detection>\n        <intent name=\"AGENDAR\" keywords=\"agendar, cita, pedir, sacar, necesito, quiero, médico, doctor\"/>\n        <intent name=\"CONSULTAR\" keywords=\"ver, revisar, tengo, cuáles, mis citas, programadas\"/>\n        <intent name=\"CANCELAR\" keywords=\"cancelar, no puedo, quitar, eliminar\"/>\n        <intent name=\"AFILIACION\" keywords=\"afiliar, afiliación, inscribir, mutual ser\"/>\n      </intent_detection>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO A: AGENDAR CITA                                               -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-A\" name=\"Agendar Cita\">\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Intent detectado: AGENDAR\n      </trigger>\n      \n      <steps>\n        <!-- PASO A1: SELECCIONAR ESPECIALIDAD -->\n        <step order=\"1\" id=\"FA-S1\" name=\"mostrar_especialidades\">\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_especialidades</tool>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <message>\n              Claro que sí. Actualmente tengo agenda abierta para estas especialidades:\n\n              {lista_especialidades_formateada}\n\n              ¿Cuál de estas necesitas?\n            </message>\n            <update_state>\n              <set variable=\"current_flow\" value=\"AGENDAR\"/>\n              <set variable=\"current_step\" value=\"esperando_especialidad\"/>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              Lo siento, en este momento no tengo especialidades con agenda abierta.\n              ¿Quieres que lo intentemos más tarde?\n            </message>\n          </on_empty>\n        </step>\n        \n        <!-- PASO A2: BUSCAR DISPONIBILIDAD -->\n        <step order=\"2\" id=\"FA-S2\" name=\"buscar_disponibilidad\">\n          <condition>Usuario seleccionó especialidad</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_disponibilidad</tool>\n          <params>\n            <param name=\"especialidad_id\" value=\"{especialidad_id_seleccionada}\"/>\n          </params>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <display_rules>\n              <rule>Mostrar máximo 5 opciones</rule>\n              <rule>Si usuario pidió \"mañana\" o \"tarde\", filtrar primero</rule>\n              <rule>Formatear: \"Lunes 20 de enero a las 2:30 PM con Dr/a. [Apellido]\"</rule>\n              <rule>Usar letras A, B, C para selección fácil</rule>\n            </display_rules>\n            <message>\n              ¡Listo! Encontré estos espacios para ti:\n\n              A) {fecha_1} a las {hora_1} con Dr/a. {medico_1}\n              B) {fecha_2} a las {hora_2} con Dr/a. {medico_2}\n              ...\n\n              ¿Alguna de estas opciones te sirve?\n            </message>\n            <update_state>\n              <set variable=\"current_step\" value=\"esperando_seleccion_horario\"/>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              Lo siento, {paciente_nombre}. Revisé la agenda de {especialidad_nombre} \n              y por ahora no tengo huecos disponibles. ??\n              \n              ¿Te gustaría revisar otra especialidad?\n            </message>\n            <update_state>\n              <set variable=\"current_step\" value=\"esperando_especialidad\"/>\n            </update_state>\n          </on_empty>\n        </step>\n        \n        <!-- PASO A3: CONFIRMAR CITA -->\n        <step order=\"3\" id=\"FA-S3\" name=\"confirmar_cita\">\n          <condition>Usuario seleccionó horario (A, B, C...)</condition>\n          <action>RESPOND</action>\n          <message>\n            Perfecto. Entonces, dejaríamos tu cita de {especialidad_nombre} \n            para el {fecha_formateada} a las {hora} en {sede}.\n            \n            ¿Te parece bien así? ??\n          </message>\n          <update_state>\n            <set variable=\"current_step\" value=\"esperando_confirmacion\"/>\n          </update_state>\n        </step>\n        \n        <!-- PASO A4: EJECUTAR AGENDAMIENTO -->\n        <step order=\"4\" id=\"FA-S4\" name=\"ejecutar_agendamiento\">\n          <condition>Usuario confirma (sí, dale, perfecto, ok)</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>crear_cita</tool>\n          <params>\n            <param name=\"paciente_internal_id\" value=\"{paciente_internal_id}\"/>\n            <param name=\"especialidad_id\" value=\"{especialidad_id}\"/>\n            <param name=\"fecha\" value=\"{fecha_seleccionada}\"/>\n            <param name=\"hora\" value=\"{hora_seleccionada}\"/>\n            <param name=\"sede_internal_id\" value=\"{sede_internal_id}\"/>\n          </params>\n          \n          <on_success>\n        <action>RESPOND</action>\n        <message>\n          ¡Listo! Tu cita con Dr/a. [medico_nombre] quedó confirmada. ✅\n\n          🗓️ [fecha_formateada]\n          ⏰ [hora]\n          🏥 Sede: [sede_nombre]  <-- Importante para que el usuario lo lea\n\n          ¿Te ayudo con la ubicación de esta sede?\n        </message>\n        \n        <update_state>\n          <set variable=\"current_flow\" value=\"NONE\"/>\n          <reset_transaction_variables/>\n          \n          <set variable=\"citas_listadas_contexto\">\n             \"Última sede confirmada: {sede_nombre}\"\n          </set>\n        </update_state>\n      </on_success>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-FA-01\">\n          <condition>Usuario pide \"en la mañana\" o \"en la tarde\"</condition>\n          <action>\n            Filtrar disponibilidad por horario y mostrar máximo 5 opciones \n            que cumplan con la preferencia.\n          </action>\n        </case>\n        <case id=\"EC-FA-02\">\n          <condition>Usuario dice \"no\" a confirmación</condition>\n          <response>\n            Entendido. ¿Quieres ver otras opciones de horario o \n            prefieres buscar otra especialidad?\n          </response>\n        </case>\n        <case id=\"EC-FA-03\">\n          <condition>Usuario menciona especialidad que no existe</condition>\n          <response>\n            No tenemos esa especialidad disponible actualmente.\n            Las opciones que tengo son: {lista_especialidades}.\n            ¿Alguna de estas te sirve?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO B: CONSULTAR CITAS                                            -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-B\" name=\"Consultar Citas\">\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Intent detectado: CONSULTAR\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"FB-S1\" name=\"obtener_citas\">\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_citas</tool>\n          <params>\n            <param name=\"paciente_internal_id\" value=\"{paciente_internal_id}\"/>\n          </params>\n          \n         <on_success>\n            <action>RESPOND</action>\n            <message>\n              Sí, aquí las tengo. Tienes programado lo siguiente:\n\n              📅 {fecha_1} - {hora_1}\n              Especialidad: {especialidad_1}\n              👨‍⚕️ Dr/a. {medico_1}\n              🏥 Sede: {sede_1}\n\n              [repetir por cada cita]\n\n              ¿Necesitas la ubicación exacta de alguna de estas sedes o hacer algún cambio?\n            </message>\n            \n            <update_state>\n              <set variable=\"current_flow\" value=\"CONSULTAR\"/>\n              <set variable=\"citas_listadas_contexto\">\n                 \"Sedes mencionadas: {sede_1}, {sede_2}, {sede_3}...\"\n              </set>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              Acabo de revisar y actualmente no tienes ninguna cita programada.\n              ¿Quieres que busquemos una? ???\n            </message>\n          </on_empty>\n        </step>\n      </steps>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO C: CANCELAR CITA                                              -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-C\" name=\"Cancelar Cita\">\n      <preconditions>\n        <condition>paciente_identificado == true</condition>\n      </preconditions>\n      \n      <trigger>\n        Intent detectado: CANCELAR\n      </trigger>\n      \n      <steps>\n        <!-- PASO C1: MOSTRAR CITAS PARA CANCELAR -->\n        <step order=\"1\" id=\"FC-S1\" name=\"listar_citas_cancelables\">\n          <action>EXECUTE_TOOL</action>\n          <tool>consultar_citas</tool>\n          <params>\n            <param name=\"paciente_internal_id\" value=\"{paciente_internal_id}\"/>\n          </params>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <message>\n              ¿Cuál de estas citas es la que no podrás atender?\n\n              1. La de {especialidad_1} del {fecha_1}\n              2. La de {especialidad_2} del {fecha_2}\n            </message>\n            <update_state>\n              <set variable=\"current_flow\" value=\"CANCELAR\"/>\n              <set variable=\"current_step\" value=\"esperando_seleccion_cita\"/>\n            </update_state>\n          </on_success>\n          \n          <on_empty>\n            <action>RESPOND</action>\n            <message>\n              No tienes citas programadas actualmente, así que no hay nada que cancelar.\n              ¿Te gustaría agendar una cita?\n            </message>\n          </on_empty>\n        </step>\n        \n        <!-- PASO C2: CONFIRMACIÓN DE SEGURIDAD -->\n        <step order=\"2\" id=\"FC-S2\" name=\"confirmar_cancelacion\">\n          <condition>Usuario seleccionó cita a cancelar</condition>\n          <action>RESPOND</action>\n          <message>\n            Entendido. Solo para confirmar (y evitar errores), \n            ¿seguro que deseas cancelar tu cita de {especialidad}? \n            \n            Esta acción no se puede deshacer. ??\n            Responde SÍ para confirmar.\n          </message>\n          <update_state>\n            <set variable=\"current_step\" value=\"esperando_confirmacion_cancelar\"/>\n            <set variable=\"cita_id\" value=\"{cita_seleccionada_id}\"/>\n          </update_state>\n        </step>\n        \n        <!-- PASO C3: EJECUTAR CANCELACIÓN -->\n        <step order=\"3\" id=\"FC-S3\" name=\"ejecutar_cancelacion\">\n          <condition>Usuario responde \"SÍ\" explícitamente</condition>\n          <action>EXECUTE_TOOL</action>\n          <tool>cancelar_cita</tool>\n          <params>\n            <param name=\"cita_id\" value=\"{cita_id}\"/>\n          </params>\n          \n          <on_success>\n            <action>RESPOND</action>\n            <message>\n              Listo, la cita ha quedado cancelada.\n              Gracias por avisarnos para liberar el espacio. ??\n              \n              ¿Te puedo ayudar con algo más?\n            </message>\n            <update_state>\n              <set variable=\"current_flow\" value=\"NONE\"/>\n              <reset_transaction_variables/>\n            </update_state>\n          </on_success>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-FC-01\">\n          <condition>Usuario no dice \"SÍ\" explícito</condition>\n          <response>\n            Entiendo, no cancelaré la cita entonces. \n            ¿Te puedo ayudar con algo más?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!--                                                                     -->\n    <!-- FLUJO D: DESPEDIDA                                                  -->\n    <!--                                                                     -->\n    \n    <flow id=\"FLOW-D\" name=\"Despedida\">\n      <trigger>\n        Usuario dice: gracias, chao, adiós, bye, eso es todo, no gracias, hasta luego\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"FD-S1\">\n          <action>RESPOND</action>\n          <message_variations>\n            <variation>\n              ¡Con mucho gusto! Fue un placer ayudarte.\n              Si necesitas algo más de Sersocial IPS, aquí estaré. \n              ¡Que te vaya muy bien! ??\n            </variation>\n            <variation>\n              ¡Para servirte! Cuídate mucho y recuerda asistir a tu cita.\n              ¡Hasta pronto! ??\n            </variation>\n          </message_variations>\n        </step>\n      </steps>\n    </flow>\n\n  </conversation_flows>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 8: PROCESO DE RAZONAMIENTO (CHAIN OF THOUGHT)                  -->\n  <!-- ============================================ -->\n  \n  <reasoning_process>\n    <description>\n      Chequeo mental INVISIBLE antes de cada respuesta.\n      NO mostrar al usuario.\n    </description>\n    \n    <checklist>\n      <check order=\"1\" id=\"CHK-01\" category=\"prerequisite\">\n        <question>¿Tengo paciente_internal_id? Si no, ¿necesito pedirlo?</question>\n        <if_no_and_needed>Ejecutar FLOW-000 primero</if_no_and_needed>\n      </check>\n      \n      <check order=\"2\" id=\"CHK-02\" category=\"tool\">\n        <question>¿Qué herramienta necesito para esta solicitud?</question>\n        <action>Identificar tool correcta antes de responder</action>\n      </check>\n      \n      <check order=\"3\" id=\"CHK-03\" category=\"truth\">\n        <question>¿La herramienta trajo datos reales?</question>\n        <if_empty>Responder honestamente que no hay datos</if_empty>\n        <if_error>Usar respuesta humanizada de error</if_error>\n      </check>\n      \n      <check order=\"4\" id=\"CHK-04\" category=\"identity\">\n        <question>¿Mi respuesta revela que soy IA/bot?</question>\n        <if_yes>Reformular para sonar natural</if_yes>\n      </check>\n      \n      <check order=\"5\" id=\"CHK-05\" category=\"conversation\">\n        <question>¿Estoy haciendo más de una pregunta?</question>\n        <if_yes>Dejar solo UNA pregunta</if_yes>\n      </check>\n      \n      <check order=\"6\" id=\"CHK-06\" category=\"format\">\n        <question>¿Estoy usando máximo 1-2 emojis?</question>\n        <if_no>Reducir emojis</if_no>\n      </check>\n      \n      <check order=\"7\" id=\"CHK-07\" category=\"humanization\">\n        <question>¿Cómo le digo esto para que se sienta ATENDIDO, no PROCESADO?</question>\n        <action>Ajustar tono si suena robótico</action>\n      </check>\n    </checklist>\n  </reasoning_process>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 9: CONFIGURACIÓN TÉCNICA                                       -->\n  <!-- ============================================ -->\n  \n  <technical_config>\n    <timezone>America/Bogota (UTC-5)</timezone>\n    <datetime_format>ISO 8601 (interno) / \"Lunes 20 de enero a las 2:30 PM\" (usuario)</datetime_format>\n    <language>es-CO</language>\n    \n    <tts_settings>\n      <pause_after_period_ms>300</pause_after_period_ms>\n      <pause_after_comma_ms>150</pause_after_comma_ms>\n      <pause_after_question_ms>400</pause_after_question_ms>\n    </tts_settings>\n    \n    <message_chunking>\n      <max_chars_per_message>500</max_chars_per_message>\n      <split_on>paragraph_break</split_on>\n    </message_chunking>\n    \n    <tool_timeouts>\n      <default_timeout_ms>10000</default_timeout_ms>\n      <on_timeout>Usar SH-06 (error humanizado)</on_timeout>\n    </tool_timeouts>\n    \n    <session_timeout_minutes>30</session_timeout_minutes>\n  </technical_config\n</system_prompt>"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3,
+        "position": [
+          -16,
+          -128
+        ],
+        "id": "13c9ecc0-ae19-43a7-a251-e17980ddb74d",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT \n    id as paciente_internal_id, \n    nombre, \n    tipo_documento,\n  numero_documento,\n    -- ESTA ES LA CLAVE: --\n    'ATENCION_IA: Este usuario es PACIENTE_ID=' || id || '. MEMORIZA ESTE NUMERO (paciente_internal_id=' || id || '). ES OBLIGATORIO USARLO AL FINAL PARA AGENDAR.' as instruccion_sistema\nFROM pacientes \nWHERE numero_documento = $1;",
+          "options": {
+            "queryReplacement": "={{ $fromAI('numero_documento', 'numero de documento del usuario', 'string') }}"
+          }
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          -192,
+          96
+        ],
+        "id": "7ad70773-0873-4646-bda3-15dfa0631acb",
+        "name": "consultar_paciente",
+        "credentials": {
+          "postgres": {
+            "id": "cffLg1U8OTnicsUa",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gpt-4.1-mini"
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          -576,
+          96
+        ],
+        "id": "e662315f-7e34-4f34-9fac-24b53a75da00",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "dNAey8tcxmUMRffx",
+            "name": "OpenAi account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Muestra la disponibilidad de agendas medicas",
+          "operation": "executeQuery",
+          "query": "WITH next_days AS (\n    -- 1. Generamos los próximos 7 días\n    SELECT generate_series(\n        CURRENT_DATE + INTERVAL '1 day', \n        CURRENT_DATE + INTERVAL '7 days', \n        '1 day'\n    )::date AS fecha\n),\nall_slots AS (\n    SELECT \n        p.id AS profesional_id,\n        p.nombre || ' ' || p.apellido AS medico,\n        s.nombre AS sede,\n        s.id AS sede_internal_id, -- <--- AGREGADO: ID de la sede explícito\n        nd.fecha,\n        slot_timestamp::time AS hora_inicio \n    FROM profesionales p\n    JOIN horarios_medicos hm ON p.id = hm.profesional_id\n    JOIN sedes s ON hm.sede_id = s.id\n    JOIN next_days nd ON EXTRACT(DOW FROM nd.fecha) = hm.dia_semana\n    CROSS JOIN LATERAL generate_series(\n        (nd.fecha + hm.hora_inicio)::timestamp,                \n        (nd.fecha + hm.hora_fin)::timestamp - INTERVAL '20 minutes', \n        INTERVAL '20 minutes'                                  \n    ) AS slot_timestamp\n    WHERE p.especialidad_id = $1\n    AND p.activo = true\n)\n-- 3. Filtramos citas ocupadas y seleccionamos\nSELECT \n    -- Texto amigable para la IA\n    to_char(fecha, 'Day DD/MM') || ' a las ' || to_char(hora_inicio, 'HH12:MI AM') || ' con ' || medico || ' (' || sede || ')' as texto_para_ia,\n    profesional_id,\n    sede_internal_id, -- <--- AGREGADO: Pasamos el ID a la salida\n    fecha,\n    hora_inicio,\n    sede,\n    medico\nFROM all_slots s\nWHERE NOT EXISTS (\n    SELECT 1 FROM citas c \n    WHERE c.profesional_id = s.profesional_id \n    AND c.fecha_cita = s.fecha \n    AND c.hora_inicio = s.hora_inicio\n    AND c.estado NOT IN ('CANCELADA_PACIENTE', 'CANCELADA_IPS')\n)\nORDER BY fecha ASC, hora_inicio ASC\nLIMIT 20;",
+          "options": {
+            "queryReplacement": "={{ $fromAI('especialidad_id', 'El ID numérico de la especialidad seleccionada', 'number') }}"
+          }
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          0,
+          96
+        ],
+        "id": "64083f79-c897-41bc-91fe-f4a52c2171fa",
+        "name": "consultar_disponibilidad",
+        "credentials": {
+          "postgres": {
+            "id": "cffLg1U8OTnicsUa",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "especialidades",
+            "mode": "list",
+            "cachedResultName": "especialidades"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          176,
+          96
+        ],
+        "id": "013b1c71-e5f6-40e7-a51e-05685165c9e5",
+        "name": "consultar_especialidades",
+        "credentials": {
+          "postgres": {
+            "id": "cffLg1U8OTnicsUa",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Utiliza esta herramienta EXCLUSIVAMENTE cuando el usuario haya confirmado todos los detalles de la cita (fecha, hora y médico) y responda 'Sí' para finalizar la reserva. Esta herramienta guarda la información en la base de datos.",
+          "operation": "executeQuery",
+          "query": "INSERT INTO citas (\n    paciente_id, \n    profesional_id, \n    sede_id,           \n    fecha_cita, \n    hora_inicio, \n    hora_fin,          \n    estado,\n    servicio_o_motivo\n)\nVALUES (\n    $1, -- paciente_internal_id (Entero)\n    $2, -- profesional_id (Entero)\n    $3, -- sede_internal_id (Entero - YA NO SE CALCULA, VIENE DE LA IA)\n    $4::date, -- fecha\n    $5::time, -- hora_inicio\n    $5::time + INTERVAL '20 minutes', -- Calculamos fin simple\n    'CONFIRMADA',\n    'Agendado por WhatsApp IA'\n)\nRETURNING id;",
+          "options": {
+            "queryReplacement": "={{ $fromAI('paciente_internal_id', 'El ID interno numérico (paciente_internal_id) obtenido al consultar paciente. NO usar cédula.', 'number') }}, {{ $fromAI('profesional_id', 'El ID del médico seleccionado', 'number') }},{{ $fromAI('sede_internal_id', 'El ID de la sede obtenido de la disponibilidad', 'number') }}, {{ $fromAI('fecha', 'La fecha en formato YYYY-MM-DD', 'string') }}, {{ $fromAI('hora', 'La hora en formato HH:MM:SS', 'string') }}"
+          }
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          288,
+          112
+        ],
+        "id": "e18c581c-045e-4f56-bdab-fac40bc5522c",
+        "name": "crear_cita",
+        "credentials": {
+          "postgres": {
+            "id": "cffLg1U8OTnicsUa",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{ $json.telefono }}",
+          "sessionTTL": 3600,
+          "contextWindowLength": 20
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+        "typeVersion": 1.5,
+        "position": [
+          -352,
+          96
+        ],
+        "id": "ec16e222-27bd-4d20-933e-fa5ecb08c680",
+        "name": "Redis Chat Memory",
+        "credentials": {
+          "redis": {
+            "id": "3XA5T4Gby6gagH8B",
+            "name": "Redis account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Utiliza esta herramienta EXCLUSIVAMENTE el usuario seleccione la opción de consultar citas",
+          "operation": "executeQuery",
+          "query": "select c.id ID,e.nombre Especialidad , c.fecha_cita Fecha ,c.hora_inicio Hora , concat(p.nombre ,' ',p.apellido  ) Medico, s.nombre Sede ,s.ciudad Ciudad,s.direccion Direccion\nfrom citas c \ninner join profesionales p \non c.profesional_id = p.id \ninner join sedes s \non s.id = c.sede_id \ninner join especialidades e \non e.id = p.especialidad_id \nwhere c.paciente_id = $1 and c.estado != 'CANCELADA'",
+          "options": {
+            "queryReplacement": "={{ $fromAI('paciente_id', 'El ID del paciente que guardaste en memoria', 'number') }}"
+          }
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          464,
+          112
+        ],
+        "id": "b1be73b2-dede-4159-8767-fe0ca1de8ab5",
+        "name": "consultar_cita",
+        "credentials": {
+          "postgres": {
+            "id": "cffLg1U8OTnicsUa",
+            "name": "Postgres account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Utiliza esta herramienta EXCLUSIVAMENTE el usuario seleccione la opción de cancelar cita",
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "citas",
+            "mode": "list",
+            "cachedResultName": "citas"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "estado": "={{'CANCELADA'}}",
+              "id": "={{ $fromAI('cita_id', 'El ID de la cita que guardaste en memoria', 'number') }}",
+              "observaciones": "={{ 'Cita cancelada a través de SarAI' }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "paciente_id",
+                "displayName": "paciente_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "profesional_id",
+                "displayName": "profesional_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sede_id",
+                "displayName": "sede_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "servicio_o_motivo",
+                "displayName": "servicio_o_motivo",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "fecha_cita",
+                "displayName": "fecha_cita",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "hora_inicio",
+                "displayName": "hora_inicio",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "time",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "hora_fin",
+                "displayName": "hora_fin",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "time",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "estado",
+                "displayName": "estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "observaciones",
+                "displayName": "observaciones",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha_creacion",
+                "displayName": "fecha_creacion",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          624,
+          96
+        ],
+        "id": "317f692a-0b09-4e6c-be63-5d5d298152ad",
+        "name": "cancelar_cita",
+        "credentials": {
+          "postgres": {
+            "id": "cffLg1U8OTnicsUa",
+            "name": "Postgres account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "consultar_paciente": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "consultar_disponibilidad": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "consultar_especialidades": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "crear_cita": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Redis Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "consultar_cita": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "cancelar_cita": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Neyla Polo",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-03T19:22:54.666Z",
+        "id": 8,
+        "workflowId": "4lmOH2EOOrd3Nwno",
+        "versionId": "b65d0a39-ce51-4ec3-8127-33db344d78cf",
+        "event": "activated",
+        "userId": null
+      }
+    ]
+  }
+}
