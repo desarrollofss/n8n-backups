@@ -1,0 +1,128 @@
+{
+  "updatedAt": "2026-01-26T16:36:25.697Z",
+  "createdAt": "2026-01-26T16:30:40.922Z",
+  "id": "1rX1qqf0uGq5LnHr",
+  "name": "My workflow 8",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -176,
+        0
+      ],
+      "id": "3f2fdecd-3c97-4855-97b8-dbfdb1f1cf84",
+      "name": "Wait",
+      "webhookId": "8cf00cf6-b699-4452-ad0f-384a00385522"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds",
+              "secondsInterval": 1
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -432,
+        0
+      ],
+      "id": "cda1d9fa-1ca3-492e-8d9a-029be4df32a9",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "meta": null,
+  "pinData": {},
+  "versionId": "1fae9c1b-8844-4365-b0df-a245ea73004d",
+  "activeVersionId": null,
+  "versionCounter": 10,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-26T16:30:40.922Z",
+      "createdAt": "2026-01-26T16:30:40.922Z",
+      "role": "workflow:owner",
+      "workflowId": "1rX1qqf0uGq5LnHr",
+      "projectId": "EBZGwgHNf54my5Ji",
+      "project": {
+        "updatedAt": "2026-01-22T19:43:29.746Z",
+        "createdAt": "2026-01-22T19:42:30.105Z",
+        "id": "EBZGwgHNf54my5Ji",
+        "name": "Neyla Polo <npolov@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:42:30.105Z",
+            "createdAt": "2026-01-22T19:42:30.105Z",
+            "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+            "projectId": "EBZGwgHNf54my5Ji",
+            "user": {
+              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "createdAt": "2026-01-22T19:42:30.105Z",
+              "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+              "email": "npolov@sersocial.org",
+              "firstName": "Neyla",
+              "lastName": "Polo",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:43:34.370Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "4lmOH2EOOrd3Nwno",
+                "userActivated": true,
+                "userActivatedAt": 1769195420470,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1770846671088
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-05",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
