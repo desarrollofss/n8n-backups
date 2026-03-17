@@ -1,0 +1,991 @@
+{
+  "updatedAt": "2026-02-04T14:13:17.173Z",
+  "createdAt": "2026-01-27T14:15:51.528Z",
+  "id": "2NmESVhUYoTc7JPj",
+  "name": "PROCESADOR_BAJO_SOSPECHA_PROSTATA",
+  "description": "",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "a6d2fbcb-0546-4813-9690-4e474dab54ef",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "file",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        0
+      ],
+      "id": "ba95defc-8e08-4d54-aead-cdda7f5e6589",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => ({\n  json: {\n    TIPO_DOCUMENTO: item.json.TIPO_DOCUMENTO?.toString().trim(),\n    DOCUMENTO: item.json.DOCUMENTO?.toString().trim(),\n    NOMBRE_COMPLETO: item.json.NOMBRE_COMPLETO?.trim(),\n    TELEFONO_1: item.json.TELEFONO_1?.toString().trim(),\n    TELEFONO_2: item.json.TELEFONO_2?.toString().trim(),\n    CORREO: item.json.CORREO?.toLowerCase().trim(),\n    EDAD: item.json.EDAD ? parseInt(item.json.EDAD) : null,\n    USUARIO_CONTACTADO: item.json.USUARIO_CONTACTADO?.trim()\n  }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        576,
+        0
+      ],
+      "id": "7e9bc563-891d-44b8-abca-9e3b913835f6",
+      "name": "limpiar_datos"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "pacientes_sospecha_colon",
+          "mode": "list",
+          "cachedResultName": "pacientes_sospecha_colon"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "edad": "={{ $json.EDAD }}",
+            "tipo_documento": "={{ $json.TIPO_DOCUMENTO }}",
+            "documento": "={{ $json.DOCUMENTO }}",
+            "nombre_completo": "={{ $json.NOMBRE_COMPLETO }}",
+            "telefono_1": "={{ $json.TELEFONO_1 }}",
+            "telefono_2": "={{ $json.TELEFONO_2 }}",
+            "correo": "={{ $json.CORREO }}",
+            "usuario_contactado": "={{ $json.USUARIO_CONTACTADO }}",
+            "fecha_carga": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "tipo_documento",
+              "displayName": "tipo_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "documento",
+              "displayName": "documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre_completo",
+              "displayName": "nombre_completo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefono_1",
+              "displayName": "telefono_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefono_2",
+              "displayName": "telefono_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "edad",
+              "displayName": "edad",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "usuario_contactado",
+              "displayName": "usuario_contactado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_carga",
+              "displayName": "fecha_carga",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1200,
+        0
+      ],
+      "id": "2b6d8b38-23e4-4693-a1f7-3c8b4543e7b3",
+      "name": "guardar_datos",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const columnasEsperadas = [\"TIPO_DOCUMENTO\",\"DOCUMENTO\",\"NOMBRE_COMPLETO\",\"TELEFONO_1\",\"TELEFONO_2\",\"CORREO\",\"EDAD\",\"USUARIO_CONTACTADO\"];\n\nconst columnasArchivo = Object.keys(items[0].json);\n\nfor (const col of columnasEsperadas) {\n  if (!columnasArchivo.includes(col)) {\n    throw new Error(`Falta la columna: ${col}`);\n  }\n}\n\nreturn items;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        0
+      ],
+      "id": "20e0002c-0ade-4f17-89c4-f908f5dabcd0",
+      "name": "validar_columnas"
+    },
+    {
+      "parameters": {
+        "jsCode": "const total = items.length;\nconst validos = items.length;\nconst rechazados = 0;\n\nreturn [\n  {\n    json: {\n      resumen: {\n        total_registros: total,\n        insertados: validos,\n        rechazados: rechazados\n      },\n      datos: items.map(i => i.json)\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        0
+      ],
+      "id": "c591c1ef-7a0c-4487-95a1-06e88753740f",
+      "name": "generar_resumen"
+    },
+    {
+      "parameters": {
+        "jsCode": "// El item 0 contiene { resumen, datos }\n\nconst datos = items[0].json.datos;\n\n// Convertimos cada fila en item independiente\nreturn datos.map(fila => ({\n  json: fila\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        0
+      ],
+      "id": "a960a3ed-c1c2-42c3-a175-9bfbeea9ad49",
+      "name": "preparar_para_insertar"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Recuperar el resumen que guardamos anteriormente\nconst resumenOriginal = $node[\"generar_resumen\"].json.resumen;\n\nreturn [\n  {\n    json: {\n      status: \"ok\",\n      message: \"Archivo procesado correctamente\",\n      resumen: resumenOriginal\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1472,
+        0
+      ],
+      "id": "7265702b-2575-4e11-a26e-34d1e70ae1c0",
+      "name": "retornar_resumen"
+    },
+    {
+      "parameters": {
+        "content": "- Nodo que atiende el llamado de petición por parte del flujo 'Alimentador', para desencadenar el flujo ",
+        "height": 320,
+        "width": 256,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -160
+      ],
+      "id": "e69ed083-be36-4acb-ace8-be781e006b41",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "- Nodo que obtiene o extrae el archivo y reposa en su formato configurado ",
+        "height": 320,
+        "width": 256
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        80,
+        -160
+      ],
+      "id": "a0ad9deb-9818-4d0e-b8dd-93f9dd425716",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "- validar_columnas: nodo comparar con las creadas, para encontrarlas en la db y almacenar la data\n\n- limpiar_datos: Nodo que se encarga de mantener el formato limpio, que los datos vengan con su respectiva columna\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "height": 320,
+        "width": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        352,
+        -160
+      ],
+      "id": "75dbcad4-8ab4-4474-a830-6d7fc4b5c4a6",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "- generar_resumen: Nodo que da respuesta de acuerdo a los datos procesados (Total de registros, Insertados, rechazados)\n\n\n- preparar_para_insertar: Nodo envuelve cada fila en item independiente\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "height": 320,
+        "width": 368
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        736,
+        -160
+      ],
+      "id": "e068d6dd-d7b0-4ffb-88a2-f2af99f8868a",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "- Nodo postgres: inserta la data sacada de los procesos anteriores\n",
+        "height": 320,
+        "width": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1120,
+        -160
+      ],
+      "id": "e205838d-26dc-4b12-b9d2-d2c596067530",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "- Retornando el resumen generado despues de guardar los datos en la base de datos\n",
+        "height": 320,
+        "width": 256,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -160
+      ],
+      "id": "2318d05f-b55e-4fde-b17b-476daeba5d8d",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Instrucciones de uso - Flujo PROCESADOR BAJO SOSPECHA PROSTATA 2025\n1. No es necesario ejecutar, solo atiende el llamado del flujo inicial: https://kaelyn-roughish-nonpacifically.ngrok-free.dev/workflow/nzVJBy9BXplTh4VU\n\nNota: En caso de realizar una modificación, duplicar el proyecto y colocar 'Alimentador Test' o dejar hacerlo en este mismo, pero dejar una nota de la modificación hecha con su fecha ",
+        "height": 208,
+        "width": 1840,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -384
+      ],
+      "id": "0e2edcf7-7d47-4f53-894c-a83aac3e2bbe",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## Historico de cambios\n\n- Creación del flujo (Estado funcional ) 2025-01-2026 12:17pm\n",
+        "height": 544,
+        "width": 448,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        -384
+      ],
+      "id": "4dfe53a2-49ba-4ead-b2c8-32c31232646b",
+      "name": "Sticky Note7"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "validar_columnas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "limpiar_datos": {
+      "main": [
+        [
+          {
+            "node": "generar_resumen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "validar_columnas": {
+      "main": [
+        [
+          {
+            "node": "limpiar_datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "generar_resumen": {
+      "main": [
+        [
+          {
+            "node": "preparar_para_insertar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "preparar_para_insertar": {
+      "main": [
+        [
+          {
+            "node": "guardar_datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "guardar_datos": {
+      "main": [
+        [
+          {
+            "node": "retornar_resumen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "c73b44bd-7c63-4eab-87a6-479c83b2c749",
+  "activeVersionId": "c73b44bd-7c63-4eab-87a6-479c83b2c749",
+  "versionCounter": 62,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-27T14:15:51.528Z",
+      "createdAt": "2026-01-27T14:15:51.528Z",
+      "role": "workflow:owner",
+      "workflowId": "2NmESVhUYoTc7JPj",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-02-04T14:11:17.701Z",
+      "createdAt": "2026-02-04T14:10:48.160Z",
+      "id": "iIzkKRlfsEkx5k2O",
+      "name": "relación alimentador 🔵"
+    },
+    {
+      "updatedAt": "2026-02-04T14:09:42.353Z",
+      "createdAt": "2026-02-04T14:08:26.384Z",
+      "id": "eNCFNRMiSjAOoUma",
+      "name": "terminado en test ✅"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-02-04T14:13:17.185Z",
+    "createdAt": "2026-02-04T14:13:17.185Z",
+    "versionId": "c73b44bd-7c63-4eab-87a6-479c83b2c749",
+    "workflowId": "2NmESVhUYoTc7JPj",
+    "nodes": [
+      {
+        "parameters": {
+          "inputSource": "passthrough"
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -112,
+          0
+        ],
+        "id": "a6d2fbcb-0546-4813-9690-4e474dab54ef",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "operation": "xlsx",
+          "binaryPropertyName": "file",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.extractFromFile",
+        "typeVersion": 1.1,
+        "position": [
+          160,
+          0
+        ],
+        "id": "ba95defc-8e08-4d54-aead-cdda7f5e6589",
+        "name": "Extract from File"
+      },
+      {
+        "parameters": {
+          "jsCode": "return items.map(item => ({\n  json: {\n    TIPO_DOCUMENTO: item.json.TIPO_DOCUMENTO?.toString().trim(),\n    DOCUMENTO: item.json.DOCUMENTO?.toString().trim(),\n    NOMBRE_COMPLETO: item.json.NOMBRE_COMPLETO?.trim(),\n    TELEFONO_1: item.json.TELEFONO_1?.toString().trim(),\n    TELEFONO_2: item.json.TELEFONO_2?.toString().trim(),\n    CORREO: item.json.CORREO?.toLowerCase().trim(),\n    EDAD: item.json.EDAD ? parseInt(item.json.EDAD) : null,\n    USUARIO_CONTACTADO: item.json.USUARIO_CONTACTADO?.trim()\n  }\n}));\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          576,
+          0
+        ],
+        "id": "7e9bc563-891d-44b8-abca-9e3b913835f6",
+        "name": "limpiar_datos"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "pacientes_sospecha_colon",
+            "mode": "list",
+            "cachedResultName": "pacientes_sospecha_colon"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "edad": "={{ $json.EDAD }}",
+              "tipo_documento": "={{ $json.TIPO_DOCUMENTO }}",
+              "documento": "={{ $json.DOCUMENTO }}",
+              "nombre_completo": "={{ $json.NOMBRE_COMPLETO }}",
+              "telefono_1": "={{ $json.TELEFONO_1 }}",
+              "telefono_2": "={{ $json.TELEFONO_2 }}",
+              "correo": "={{ $json.CORREO }}",
+              "usuario_contactado": "={{ $json.USUARIO_CONTACTADO }}",
+              "fecha_carga": "={{ new Date().toISOString() }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "tipo_documento",
+                "displayName": "tipo_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "documento",
+                "displayName": "documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "nombre_completo",
+                "displayName": "nombre_completo",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "telefono_1",
+                "displayName": "telefono_1",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "telefono_2",
+                "displayName": "telefono_2",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "edad",
+                "displayName": "edad",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "usuario_contactado",
+                "displayName": "usuario_contactado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha_carga",
+                "displayName": "fecha_carga",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1200,
+          0
+        ],
+        "id": "2b6d8b38-23e4-4693-a1f7-3c8b4543e7b3",
+        "name": "guardar_datos",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const columnasEsperadas = [\"TIPO_DOCUMENTO\",\"DOCUMENTO\",\"NOMBRE_COMPLETO\",\"TELEFONO_1\",\"TELEFONO_2\",\"CORREO\",\"EDAD\",\"USUARIO_CONTACTADO\"];\n\nconst columnasArchivo = Object.keys(items[0].json);\n\nfor (const col of columnasEsperadas) {\n  if (!columnasArchivo.includes(col)) {\n    throw new Error(`Falta la columna: ${col}`);\n  }\n}\n\nreturn items;\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          400,
+          0
+        ],
+        "id": "20e0002c-0ade-4f17-89c4-f908f5dabcd0",
+        "name": "validar_columnas"
+      },
+      {
+        "parameters": {
+          "jsCode": "const total = items.length;\nconst validos = items.length;\nconst rechazados = 0;\n\nreturn [\n  {\n    json: {\n      resumen: {\n        total_registros: total,\n        insertados: validos,\n        rechazados: rechazados\n      },\n      datos: items.map(i => i.json)\n    }\n  }\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          768,
+          0
+        ],
+        "id": "c591c1ef-7a0c-4487-95a1-06e88753740f",
+        "name": "generar_resumen"
+      },
+      {
+        "parameters": {
+          "jsCode": "// El item 0 contiene { resumen, datos }\n\nconst datos = items[0].json.datos;\n\n// Convertimos cada fila en item independiente\nreturn datos.map(fila => ({\n  json: fila\n}));\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          944,
+          0
+        ],
+        "id": "a960a3ed-c1c2-42c3-a175-9bfbeea9ad49",
+        "name": "preparar_para_insertar"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Recuperar el resumen que guardamos anteriormente\nconst resumenOriginal = $node[\"generar_resumen\"].json.resumen;\n\nreturn [\n  {\n    json: {\n      status: \"ok\",\n      message: \"Archivo procesado correctamente\",\n      resumen: resumenOriginal\n    }\n  }\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1472,
+          0
+        ],
+        "id": "7265702b-2575-4e11-a26e-34d1e70ae1c0",
+        "name": "retornar_resumen"
+      },
+      {
+        "parameters": {
+          "content": "- Nodo que atiende el llamado de petición por parte del flujo 'Alimentador', para desencadenar el flujo ",
+          "height": 320,
+          "width": 256,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -192,
+          -160
+        ],
+        "id": "e69ed083-be36-4acb-ace8-be781e006b41",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "- Nodo que obtiene o extrae el archivo y reposa en su formato configurado ",
+          "height": 320,
+          "width": 256
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          80,
+          -160
+        ],
+        "id": "a0ad9deb-9818-4d0e-b8dd-93f9dd425716",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "content": "- validar_columnas: nodo comparar con las creadas, para encontrarlas en la db y almacenar la data\n\n- limpiar_datos: Nodo que se encarga de mantener el formato limpio, que los datos vengan con su respectiva columna\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "height": 320,
+          "width": 368
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          352,
+          -160
+        ],
+        "id": "75dbcad4-8ab4-4474-a830-6d7fc4b5c4a6",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "content": "- generar_resumen: Nodo que da respuesta de acuerdo a los datos procesados (Total de registros, Insertados, rechazados)\n\n\n- preparar_para_insertar: Nodo envuelve cada fila en item independiente\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "height": 320,
+          "width": 368
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          736,
+          -160
+        ],
+        "id": "e068d6dd-d7b0-4ffb-88a2-f2af99f8868a",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "content": "- Nodo postgres: inserta la data sacada de los procesos anteriores\n",
+          "height": 320,
+          "width": 256,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1120,
+          -160
+        ],
+        "id": "e205838d-26dc-4b12-b9d2-d2c596067530",
+        "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "content": "- Retornando el resumen generado despues de guardar los datos en la base de datos\n",
+          "height": 320,
+          "width": 256,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          -160
+        ],
+        "id": "2318d05f-b55e-4fde-b17b-476daeba5d8d",
+        "name": "Sticky Note5"
+      },
+      {
+        "parameters": {
+          "content": "## Instrucciones de uso - Flujo PROCESADOR BAJO SOSPECHA PROSTATA 2025\n1. No es necesario ejecutar, solo atiende el llamado del flujo inicial: https://kaelyn-roughish-nonpacifically.ngrok-free.dev/workflow/nzVJBy9BXplTh4VU\n\nNota: En caso de realizar una modificación, duplicar el proyecto y colocar 'Alimentador Test' o dejar hacerlo en este mismo, pero dejar una nota de la modificación hecha con su fecha ",
+          "height": 208,
+          "width": 1840,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -192,
+          -384
+        ],
+        "id": "0e2edcf7-7d47-4f53-894c-a83aac3e2bbe",
+        "name": "Sticky Note6"
+      },
+      {
+        "parameters": {
+          "content": "## Historico de cambios\n\n- Creación del flujo (Estado funcional ) 2025-01-2026 12:17pm\n",
+          "height": 544,
+          "width": 448,
+          "color": 7
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -656,
+          -384
+        ],
+        "id": "4dfe53a2-49ba-4ead-b2c8-32c31232646b",
+        "name": "Sticky Note7"
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Extract from File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract from File": {
+        "main": [
+          [
+            {
+              "node": "validar_columnas",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "limpiar_datos": {
+        "main": [
+          [
+            {
+              "node": "generar_resumen",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "validar_columnas": {
+        "main": [
+          [
+            {
+              "node": "limpiar_datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "generar_resumen": {
+        "main": [
+          [
+            {
+              "node": "preparar_para_insertar",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "preparar_para_insertar": {
+        "main": [
+          [
+            {
+              "node": "guardar_datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "guardar_datos": {
+        "main": [
+          [
+            {
+              "node": "retornar_resumen",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Jean Carlos Tovio",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-02-04T14:13:17.173Z",
+        "id": 10,
+        "workflowId": "2NmESVhUYoTc7JPj",
+        "versionId": "c73b44bd-7c63-4eab-87a6-479c83b2c749",
+        "event": "activated",
+        "userId": null
+      }
+    ]
+  }
+}
