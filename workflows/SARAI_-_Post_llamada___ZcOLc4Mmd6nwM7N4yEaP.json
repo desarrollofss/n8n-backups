@@ -336,7 +336,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "={{ $('Call \\'OBTENER TOKEN ZEUS\\'').item.json.token }}"
+              "value": "***REDACTED***"
             }
           ]
         },
