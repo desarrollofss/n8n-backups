@@ -1,0 +1,364 @@
+{
+  "updatedAt": "2026-01-20T05:08:32.000Z",
+  "createdAt": "2026-01-20T04:35:04.331Z",
+  "id": "mtwKVkJepCzwBePs",
+  "name": "Workflow Validacion Afiliados",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cita-sersocial",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -1312,
+        336
+      ],
+      "id": "fd21b176-da74-4439-bd93-f5043e66c9fe",
+      "name": "Webhook",
+      "webhookId": "58f3ff62-0a3f-4956-95f7-c49c7616b6c1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "v1",
+              "name": "user_message",
+              "value": "={{ $json.body.args.message || $json.body.message || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "v2",
+              "name": "paciente_nombre",
+              "value": "={{ $json.body.args.nombre || $json.body.nombre || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "v3",
+              "name": "paciente_email",
+              "value": "={{ $json.body.args.email || $json.body.email || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "v4",
+              "name": "tipo_cita",
+              "value": "={{ $json.body.args.tipo || $json.body.tipo || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "v5",
+              "name": "fecha_hora_deseada",
+              "value": "={{ $json.body.args.fecha || $json.body.fecha || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "v6",
+              "name": "documento",
+              "value": "={{ $json.body.args.documento || $json.body.documento || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "v7",
+              "name": "accion",
+              "value": "={{ $json.body.args.accion || $json.body.accion || '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1088,
+        336
+      ],
+      "id": "9aaf0e63-92d9-45af-9ce8-666561281c75",
+      "name": "Set Variable (Datos Cita)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.accion }}",
+              "value2": "validar_afiliado"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        336
+      ],
+      "id": "3de2f20b-1773-4371-8175-e4364d9365bd",
+      "name": "¿Es validación?"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Documento",
+              "lookupValue": "={{ $json.documento }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [
+        -656,
+        240
+      ],
+      "id": "786eca42-b4e4-4241-8dd4-c6925a0f155a",
+      "name": "Buscar Afiliado",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Egw6ZlvbSRv2pWH9",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $input.all().length }}",
+              "operation": "larger"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        240
+      ],
+      "id": "fcfde03a-39a5-4b4b-bd2b-dd6b253a6af4",
+      "name": "¿Encontrado?"
+    },
+    {
+      "parameters": {
+        "jsCode": "const afiliado = $input.first().json;\n\nreturn {\n  json: {\n    validado: true,\n    documento: afiliado.Documento,\n    nombre: afiliado['Nombre Completo'],\n    email: afiliado['Correo Electrónico'],\n    mensaje: `Afiliado validado: ${afiliado['Nombre Completo']}`\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -208,
+        128
+      ],
+      "id": "558ac5da-acfa-4bf8-8548-3006fb74e1cf",
+      "name": "Resp SI"
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  json: {\n    validado: false,\n    documento: $('Set Variable (Datos Cita)').first().json.documento,\n    mensaje: \"El documento no está en nuestra base de datos. Verifica o contacta a soporte.\"\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -208,
+        336
+      ],
+      "id": "4432613f-afb8-42e4-9a77-f02a6b345d21",
+      "name": "Resp NO"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        16,
+        240
+      ],
+      "id": "4c224309-e734-42df-9bb3-ec318298a9bf",
+      "name": "Response"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Set Variable (Datos Cita)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variable (Datos Cita)": {
+      "main": [
+        [
+          {
+            "node": "¿Es validación?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es validación?": {
+      "main": [
+        [
+          {
+            "node": "Buscar Afiliado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Afiliado": {
+      "main": [
+        [
+          {
+            "node": "¿Encontrado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Encontrado?": {
+      "main": [
+        [
+          {
+            "node": "Resp SI",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Resp NO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resp SI": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resp NO": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "cac7c786-605f-41fe-90ef-457a1af6b3d8",
+  "activeVersionId": null,
+  "versionCounter": 4,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "mtwKVkJepCzwBePs",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
