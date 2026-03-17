@@ -1,0 +1,578 @@
+{
+  "updatedAt": "2026-02-04T14:07:33.581Z",
+  "createdAt": "2026-01-30T16:08:12.375Z",
+  "id": "kTfWq9Q30Ej1DtvA",
+  "name": "retell_router",
+  "description": null,
+  "active": false,
+  "isArchived": true,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Dqb2QrRj45EKwljB",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/Dqb2QrRj45EKwljB",
+          "cachedResultName": "get_paciente_pendiente"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -304,
+        -32
+      ],
+      "id": "45311e22-234d-4ab3-a5e6-26e6cd44c270",
+      "name": "Call 'get_paciente_pendiente'",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6137e17a-0b63-4519-8621-5aa75a44eaed",
+              "leftValue": "={{$json.existe}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        -32
+      ],
+      "id": "c8daa826-45f6-480b-8e00-13e3e2bfa263",
+      "name": "If",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"ok\",\n  \"mensaje\": \"Cita agendada correctamente\",\n  \"fecha\": \"{{$json.fecha}}\",\n  \"hora\": \"{{$json.hora}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        528,
+        -128
+      ],
+      "id": "44fc9a09-50c2-4282-83e6-54dd23e9f8f0",
+      "name": "Respond to Webhook",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "UkQA7gBhIusGaQPF",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/UkQA7gBhIusGaQPF",
+          "cachedResultName": "agendar_cita"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        -128
+      ],
+      "id": "70359359-3746-4f13-82ba-d94c24bce47b",
+      "name": "Call 'agendar_cita'",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"empty\",\n  \"mensaje\": \"No hay pacientes pendientes por contactar\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        544,
+        64
+      ],
+      "id": "38a49701-5f26-476a-b647-131fad8a5f7d",
+      "name": "Respond to Webhook1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c86305da-8da4-4901-a731-b502e0063cda",
+              "name": "documento",
+              "value": "={{$json.documento}}",
+              "type": "string"
+            },
+            {
+              "id": "51f0848a-6717-4167-93b0-22ea378bf5ea",
+              "name": "nombre_completo",
+              "value": "={{ $json.nombre_completo }}",
+              "type": "string"
+            },
+            {
+              "id": "8f60fb97-4174-4acd-a03f-78746b43d081",
+              "name": "telefono",
+              "value": "={{$json.telefono}}",
+              "type": "string"
+            },
+            {
+              "id": "c5400ddb-10b3-47a9-9ec3-e0b7fd2aa87d",
+              "name": "correo",
+              "value": "={{$json.correo}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        112,
+        -128
+      ],
+      "id": "35cad281-ef64-4c19-8ec9-c53f29d78915",
+      "name": "Edit Fields",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contactar_paciente",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -560,
+        -32
+      ],
+      "id": "2255efe3-0bd4-4974-8494-e6ace1d3f362",
+      "name": "Webhook Contactar Paciente",
+      "webhookId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contactar_paciente",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -560,
+        400
+      ],
+      "id": "4000868f-1716-458d-b342-1260376a6781",
+      "name": "Webhook Contactar Paciente1",
+      "webhookId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "Dqb2QrRj45EKwljB",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/Dqb2QrRj45EKwljB",
+          "cachedResultName": "get_paciente_pendiente"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -304,
+        400
+      ],
+      "id": "a1d5d11d-02d5-472c-a06b-d6ba8322b2ef",
+      "name": "Call 'get_paciente_pendiente'1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6137e17a-0b63-4519-8621-5aa75a44eaed",
+              "leftValue": "={{$json.existe}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        400
+      ],
+      "id": "a71b268d-d791-4035-aa25-0ab7136c7a2a",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c86305da-8da4-4901-a731-b502e0063cda",
+              "name": "documento",
+              "value": "={{$json.documento}}",
+              "type": "string"
+            },
+            {
+              "id": "51f0848a-6717-4167-93b0-22ea378bf5ea",
+              "name": "nombre_completo",
+              "value": "={{$json.nombre_completo}}",
+              "type": "string"
+            },
+            {
+              "id": "8f60fb97-4174-4acd-a03f-78746b43d081",
+              "name": "telefono",
+              "value": "={{$json.telefono}}",
+              "type": "string"
+            },
+            {
+              "id": "c5400ddb-10b3-47a9-9ec3-e0b7fd2aa87d",
+              "name": "correo",
+              "value": "={{$json.correo}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        112,
+        304
+      ],
+      "id": "259bcbff-719e-46a3-8985-c54769a3bcce",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "UkQA7gBhIusGaQPF",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/UkQA7gBhIusGaQPF",
+          "cachedResultName": "agendar_cita"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        304
+      ],
+      "id": "93997997-bec5-4b2e-b146-962394f2a0a4",
+      "name": "Call 'agendar_cita'1"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"existe\": true,\n  \"documento\": \"{{$('Edit Fields1').item.json.documento}}\",\n  \"nombre_completo\": \"{{$('Edit Fields1').item.json.nombre_completo}}\",\n  \"telefono\": \"{{$('Edit Fields1').item.json.telefono}}\",\n  \"correo\": \"{{$('Edit Fields1').item.json.correo}}\",\n  \"fecha\": \"{{$json.fecha}}\",\n  \"hora\": \"{{$json.hora}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        528,
+        304
+      ],
+      "id": "0b125ba7-7676-4c2b-9638-cbaf2ecc358b",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"existe\": false,\n  \"mensaje\": \"No hay pacientes pendientes por contactar\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        128,
+        496
+      ],
+      "id": "9e502c6c-c826-4b9e-92aa-aa3e06e04a14",
+      "name": "Respond to Webhook3"
+    }
+  ],
+  "connections": {
+    "Call 'get_paciente_pendiente'": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "Call 'agendar_cita'": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Call 'agendar_cita'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Contactar Paciente": {
+      "main": [
+        [
+          {
+            "node": "Call 'get_paciente_pendiente'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Contactar Paciente1": {
+      "main": [
+        [
+          {
+            "node": "Call 'get_paciente_pendiente'1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'get_paciente_pendiente'1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Call 'agendar_cita'1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'agendar_cita'1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "68de0a56-6052-4e00-9e0e-b8027fdd3961",
+  "activeVersionId": null,
+  "versionCounter": 22,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-30T16:08:12.375Z",
+      "createdAt": "2026-01-30T16:08:12.375Z",
+      "role": "workflow:owner",
+      "workflowId": "kTfWq9Q30Ej1DtvA",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-01-13T21:22:04.748Z",
+      "createdAt": "2026-01-13T21:22:04.748Z",
+      "id": "fikbPaiMxfrzFfMz",
+      "name": "test"
+    }
+  ],
+  "activeVersion": null
+}
