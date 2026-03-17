@@ -1,0 +1,610 @@
+{
+  "updatedAt": "2026-03-02T16:50:52.134Z",
+  "createdAt": "2026-03-02T16:50:52.134Z",
+  "id": "xEke6k4XAMUdYjeA",
+  "name": "zeus_citas_BK",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -240,
+        176
+      ],
+      "id": "b273076e-7a52-45db-b9bd-824bd899a395",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Vas a mostrar las disponibilidad de un medico en una determinada fecha. Quiero que me muestre las 3 primeras disponibilidades (Organizadas por fecha y hora)",
+        "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/GetProgramacionDisponible",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "fecha",
+              "value": "={{ $now.plus('1','days').format('yyyy-MM-dd') }}"
+            },
+            {
+              "name": "medico",
+              "value": "142"
+            },
+            {
+              "name": "idSede",
+              "value": "1"
+            },
+            {
+              "name": "asunto",
+              "value": "274"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        48,
+        192
+      ],
+      "id": "6260b59b-8606-46d3-93d1-af3980ae58b3",
+      "name": "Disponibilidad",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.tipo_documento }}_{{ $json.documento }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -96,
+        176
+      ],
+      "id": "d272ad16-d744-4541-97ee-47e576f92d2e",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "documento"
+            },
+            {
+              "name": "tipo_documento"
+            },
+            {
+              "name": "telefono"
+            },
+            {
+              "name": "email"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -544,
+        -32
+      ],
+      "id": "f4ba9912-c046-4c78-8155-85cc60c31466",
+      "name": "flujo_padre"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Ver en consola\nconsole.log('Datos:', $input.all());\n\n// Ver campo por campo\nconsole.log('tipo_documento:', $json.tipo_documento);\nconsole.log('documento:', $json.documento);\nconsole.log('TODO el objeto:', $json);\n\nreturn $input.all();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -352,
+        -32
+      ],
+      "id": "03e3f0ff-c657-4d5e-8d53-46d2cfcec19c",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "url": "=https://zeussalud_test.sersocial.org:8022/api/SisDeta/GetDatosBasicosPaciente",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "NumeroIdentificacion",
+              "value": "={{ $json.documento }}"
+            },
+            {
+              "name": "TipoIdentificacion",
+              "value": "={{ $json.tipo_documento }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        144
+      ],
+      "id": "52c674b5-4729-4a65-96e3-3243c81d36f2",
+      "name": "Obtener_datos_paciente",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=DATOS RECIBIDOS:\n- Tipo Identificación: {{ $json.tipo_documento }}\n- Número Identificación: {{ $json.documento }}\n\nINSTRUCCIONES:\n1. Llama a la herramienta 'Disponibilidad'\n2. De la respuesta obtenida, extrae las 3 primeras citas disponibles\n3. Retorna ÚNICAMENTE un array JSON con este formato exacto:\n[\n  {\"fecha\": \"2025-02-07\", \"hora\": \"07:00\", \"idProgramacion\": 40361885},\n  {\"fecha\": \"2025-02-07\", \"hora\": \"08:00\", \"idProgramacion\": 40361886},\n  {\"fecha\": \"2025-02-07\", \"hora\": \"09:00\", \"idProgramacion\": 40361887}\n]\nIMPORTANTE: \n- El campo idProgramacion debe ser el valor exacto del campo IdProgramacionMedicoDetalle que retorna Zeus\n- NO agregues texto explicativo\n- NO uses markdown\n- Solo retorna el array JSON puro\n- Ordena por fecha y hora (más próximas primero)",
+        "options": {
+          "systemMessage": "=Eres un asistente que procesa disponibilidades médicas.\n\nREGLAS ESTRICTAS:\n1. Llama a 'Disponibilidad' para obtener horarios\n2. Extrae las 3 primeras citas disponibles ordenadas por fecha y hora\n3. De cada cita extrae: fecha, hora e IdProgramacionMedicoDetalle\n4. Retorna SOLO un array JSON sin texto adicional\n5. Formato: [{\"fecha\": \"YYYY-MM-DD\", \"hora\": \"HH:MM\", \"idProgramacion\": 12345678}, ...]"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -128,
+        -32
+      ],
+      "id": "62e89a5c-ad09-4206-8be4-b0186e6d93b3",
+      "name": "Agente_consultor"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"fecha\": \"2026/03/02\",\n  \"medico\": \"142\",\n  \"idSede\": 1,\n  \"idProgramacionMedicoDetalle\": \"40362431\",\n  \"paciente\": \"197211\",\n  \"hora\": \"07:00\",\n  \"meridiano\": \"am\",\n  \"asunto\": \"274\",\n  \"codEmpresa\": 57,\n  \"contrato\": \"172\",\n  \"email\": \"jrueda@sersocial.org\",\n  \"telefono\": \"3205943893\",\n  \"nivel\": \"string\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        592,
+        160
+      ],
+      "id": "38274b97-3a96-4cf2-8637-96bf078022dd",
+      "name": "AgendarCita",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=DATOS DEL PACIENTE:\n- Tipo Identificación: {{ $json.tipo_documento }}\n- Número Identificación: {{ $json.documento }}\n- ID Paciente Zeus: {{ $json.paciente_id }}\n- Teléfono: {{ $json.telefono }}\n- Email: {{ $json.email }}\n\nTAREA: Obtener 1 horario disponible y agendarlo automáticamente.\n\nPASOS:\n1. Llama a 'Disponibilidad2' para obtener horarios disponibles\n2. De la respuesta, toma SOLO el PRIMER horario disponible y extrae:\n   - fecha\n   - hora  \n   - idProgramacionMedicoDetalle\n3. Determina el meridiano:\n   - Si hora < 12:00 → \"am\"\n   - Si hora >= 12:00 → \"pm\"\n4. Convierte la fecha al formato YYYY/MM/DD (reemplaza guiones por barras)\n5. Llama a 'AgendarCita2' con estos datos:\n   {\n     \"fecha\": \"YYYY/MM/DD\",\n     \"hora\": \"HH:MM\",\n     \"meridiano\": \"am\" o \"pm\",\n     \"idProgramacionMedicoDetalle\": \"el del paso 2\",\n     \"paciente\": \"{{ $json.paciente_id }}\",\n     \"telefono\": \"{{ $json.telefono }}\",\n     \"email\": \"{{ $json.email }}\"\n   }\n6. Retorna un JSON con:\n   {\n     \"success\": true o false,\n     \"fecha_agendada\": \"YYYY-MM-DD\",\n     \"hora_agendada\": \"HH:MM\",\n     \"mensaje\": \"Mensaje del resultado\"\n   }\n\nIMPORTANTE:\n- Usa SOLO el primer horario disponible\n- Convierte fecha correctamente (YYYY-MM-DD → YYYY/MM/DD)\n- Determina meridiano según la hora\n- Retorna SOLO JSON, sin markdown",
+        "options": {
+          "systemMessage": "=Eres un asistente que agenda citas médicas automáticamente.\n\nREGLAS:\n1. Obtén disponibilidades\n2. Toma el PRIMER horario disponible\n3. Agéndalo inmediatamente\n4. Retorna JSON con el resultado"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -304,
+        864
+      ],
+      "id": "06c74bc5-8292-4a84-bc14-80f040d08122",
+      "name": "Agente_agendar_automatico",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -480,
+        1072
+      ],
+      "id": "b4485e84-ed51-4c57-bb57-9bde44be5cb3",
+      "name": "OpenAI Chat Model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "Obtiene las disponibilidades del médico. Retorna lista de horarios disponibles.",
+        "url": "https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/GetProgramacionDisponible",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "fecha",
+              "value": "={{ $now.plus('1','days').format('yyyy-MM-dd') }}"
+            },
+            {
+              "name": "medico",
+              "value": "142"
+            },
+            {
+              "name": "idSede",
+              "value": "1"
+            },
+            {
+              "name": "asunto",
+              "value": "274"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        -128,
+        1072
+      ],
+      "id": "c8c22c2e-7116-4244-a28c-861a5a40da08",
+      "name": "Disponibilidad2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "Agenda una cita médica con los datos proporcionados.",
+        "method": "POST",
+        "url": "https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"fecha\": \"{{ $json.fecha }}\",\n  \"medico\": \"142\",\n  \"idSede\": 1,\n  \"idProgramacionMedicoDetalle\": \"{{ $json.idProgramacionMedicoDetalle }}\",\n  \"paciente\": \"{{ $json.paciente }}\",\n  \"hora\": \"{{ $json.hora }}\",\n  \"meridiano\": \"{{ $json.meridiano }}\",\n  \"asunto\": \"274\",\n  \"codEmpresa\": 57,\n  \"contrato\": \"172\",\n  \"email\": \"{{ $json.email || 'noreply@sersocial.org' }}\",\n  \"telefono\": \"{{ $json.telefono }}\",\n  \"nivel\": \"string\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        32,
+        1072
+      ],
+      "id": "97882fad-1c5c-4f3e-bcea-e37a3d04e911",
+      "name": "AgendarCita2",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "5NF42pqAyUFzvVGh",
+          "name": "API ZEUS"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.tipo_documento }}_{{ $json.documento }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -272,
+        1072
+      ],
+      "id": "95bba7fc-727a-4efd-be6d-e88704a161f3",
+      "name": "Postgres Chat Memory2",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/GetAgendaMedico",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "fecha",
+              "value": "={{ $now.plus('1','days').format('yyyy-MM-dd') }}"
+            },
+            {
+              "name": "idPuntoAtencion"
+            },
+            {
+              "name": "codMedico"
+            },
+            {
+              "name": "Asunto"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        288,
+        192
+      ],
+      "id": "44fb6f27-2a3e-4a0e-8604-7934661d619b",
+      "name": "HTTP Request"
+    }
+  ],
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente_consultor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disponibilidad": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente_consultor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agente_consultor",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "flujo_padre": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Agente_consultor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener_datos_paciente": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Agente_consultor": {
+      "main": [
+        []
+      ]
+    },
+    "AgendarCita": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente_agendar_automatico",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Disponibilidad2": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente_agendar_automatico",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AgendarCita2": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente_agendar_automatico",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agente_agendar_automatico",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente_consultor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "62a6521c-cecc-40dd-93b0-e85b976ad3b7",
+  "activeVersionId": null,
+  "versionCounter": 1,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-02T16:50:52.134Z",
+      "createdAt": "2026-03-02T16:50:52.134Z",
+      "role": "workflow:owner",
+      "workflowId": "xEke6k4XAMUdYjeA",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-02-04T20:18:39.085Z",
+      "createdAt": "2026-02-04T20:18:39.085Z",
+      "id": "2EO9Ro2seknMiiVu",
+      "name": "DEL ADMIN ☺️"
+    },
+    {
+      "updatedAt": "2026-02-04T21:57:31.305Z",
+      "createdAt": "2026-02-04T21:57:31.305Z",
+      "id": "Vt8x6W2rrtVBRg8l",
+      "name": "Relación get_paciente 🟢"
+    }
+  ],
+  "activeVersion": null
+}
