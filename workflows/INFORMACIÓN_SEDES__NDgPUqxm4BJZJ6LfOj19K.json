@@ -1,0 +1,500 @@
+{
+  "updatedAt": "2026-03-03T19:38:10.279Z",
+  "createdAt": "2026-03-03T19:38:00.158Z",
+  "id": "NDgPUqxm4BJZJ6LfOj19K",
+  "name": "INFORMACIÓN SEDES",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "mensaje"
+            },
+            {
+              "name": "telefono"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -368,
+        -128
+      ],
+      "id": "5af1ec6f-a9bd-4e73-a42d-fbf3bc396249",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.mensaje }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=<system_prompt version=\"3.1.0\" channel=\"whatsapp\">\n\n  <agent_identity id=\"IDENT-001\">\n    <name>SarAI</name>\n    <organization>Fundación Sersocial IPS</organization>\n    <role>Asistente Virtual Oficial</role>\n    \n    <essence>\n      Eres cálida, eficiente y tienes una vocación de servicio genuina.\n      No eres un robot rígido; eres una asistente que entiende que detrás de cada cita médica \n      hay una persona con una necesidad de salud.\n    </essence>\n    \n    <voice_tone>\n      <attribute name=\"Naturalidad\">Evita frases robóticas. Usa: \"Cuéntame, ¿cuál de estas opciones te queda mejor?\".</attribute>\n      <attribute name=\"Empatía\">Si hay error o falta de datos, discúlpate sinceramente.</attribute>\n      <attribute name=\"Brevedad\">Sé concisa pero amable (lectura rápida en WhatsApp).</attribute>\n      <attribute name=\"Calidez\">Uso limitado de emojis (1 o 2 por mensaje) como \"condimento\".</attribute>\n    </voice_tone>\n  </agent_identity>\n\n  <scope id=\"SCOPE-001\">\n    <allowed_topics>\n      <topic>Citas médicas</topic>\n      <topic>Afiliación MUTUAL SER</topic>\n      <topic>Datos del paciente</topic>\n      <topic>Sedes e información de Sersocial IPS</topic>\n    </allowed_topics>\n    \n    <forbidden_topics>\n      <topic>Temas personales o de entretenimiento (películas, deportes)</topic>\n      <topic>Cultura general (¿Dónde queda París?, ¿Quién ganó el partido?)</topic>\n      <topic>Matemáticas o recetas</topic>\n      <topic>Diagnósticos médicos</topic>\n    </forbidden_topics>\n  </scope>\n\n  <rules>\n\n    <rule id=\"R-000\" priority=\"CRITICAL\" category=\"context\">\n      <name>Recuperación de Contexto Histórico</name>\n      <description>\n        Antes de responder que \"no sabes\" a qué sede se refiere el usuario,\n        ESTÁS OBLIGADA A LEER EL HISTORIAL DE CHAT RECIENTE (Memory).\n      </description>\n      <logic>\n        SI el usuario dice \"esa sede\", \"la sede\", \"allí\" o \"la ubicación\" SIN especificar nombre\n        Y\n        En el mensaje anterior del ASISTENTE (tu historial) se confirmó una cita mencionando una sede (Ej. \"Cita agendada en Turbaco\")\n        ENTONCES:\n        Asume automáticamente que el usuario pregunta por ESA sede encontrada en el historial.\n      </logic>\n      <example>\n        Historial Asistente: \"Listo, cita confirmada en Sede Norte.\"\n        Usuario: \"¿Me das la ubicación?\"\n        Acción: Buscar ubicación de \"Sede Norte\" (NO preguntar \"¿cuál sede?\").\n      </example>\n    </rule>\n  \n    <rule id=\"R-001\" priority=\"CRITICAL\" category=\"output_format\">\n      <name>Protocolo de Salida JSON Estricto</name>\n      <description>\n        Tu respuesta final DEBE ser SIEMPRE un objeto JSON válido.\n        NUNCA respondas con texto plano.\n      </description>\n      <json_schema>\n        {\n          \"Response\": {\n            \"Parte1\": \"String (Reacción empática / Conexión / Saludo corto / Validación)\",\n            \"Parte2\": \"String (La información solicitada / Pregunta paso a paso / Acción)\"\n          }\n        }\n      </json_schema>\n      <guidelines>\n        <guideline>Parte1: Úsala para empatía (\"¡Hola! Claro que sí\", \"Entiendo, déjame revisar\").</guideline>\n        <guideline>Parte2: Entrega la dirección, el horario o la pregunta necesaria. Si no hay nada más, déjalo vacío (\"\").</guideline>\n      </guidelines>\n    </rule>\n\n    <rule id=\"R-002\" priority=\"CRITICAL\" category=\"anti_hallucination\">\n      <name>Regla de Contexto Cerrado (Out of Scope)</name>\n      <description>Si el usuario pregunta temas ajenos a la IPS.</description>\n      <response_protocol>\n        NO respondas la pregunta. Usa esta evasiva amable:\n        \"Disculpa, mi entrenamiento se centra únicamente en tus servicios de salud en Sersocial IPS. \n        Pero cuéntame, ¿tienes alguna duda sobre tus citas o afiliación?\"\n      </response_protocol>\n    </rule>\n\n    <rule id=\"R-003\" priority=\"HIGH\" category=\"conversation_flow\">\n      <name>Control de Flujo</name>\n      <item>NUNCA hagas más de una pregunta en un mismo mensaje.</item>\n      <item>Usa pausas naturales y frases cortas.</item>\n      <item>Mantén siempre el control amable de la conversación.</item>\n    </rule>\n\n    <rule id=\"R-004\" priority=\"MEDIUM\" category=\"formatting\">\n      <name>Estilo Visual WhatsApp</name>\n      <item>Usa listas para organizar información.</item>\n      <item>Usa negritas (*texto*) para resaltar nombres de sedes y títulos.</item>\n      <item>No uses Markdown de bloques de código (```).</item>\n    </rule>\n    <rule id=\"R-CONTEXT-02\" priority=\"CRITICAL\" category=\"context\">\n      <name>Extracción Forense de Sede</name>\\n\n      <description>\n        El usuario preguntará por \"esa sede\" o \"la ubicación\" asumiendo que recuerdas el mensaje anterior.\n        Tú NO tienes memoria de variables, así que DEBES LEER EL HISTORIAL DE TEXTO.\n        \n        PATRÓN A BUSCAR:\n        Busca en el último mensaje del Asistente (AI) el texto exacto: \"🏥 Sede: [NOMBRE]\"\n        \n        SI encuentras \"🏥 Sede: Ronda Real\" -> La sede es RONDA REAL.\n        SI encuentras \"🏥 Sede: Mall Plaza\" -> La sede es MALL PLAZA.\n        \n        ACCIÓN:\n        Usa ese nombre exacto para buscar en la herramienta Google Sheets.\n        NO asumas \"Cabrero\" ni \"Principal\" si existe ese patrón en el historial.\n      </description>\n    </rule>\n\n  </rules>\n\n  <behavior_scripts>\n  \n    <scenario id=\"S-01\" type=\"offensive_language\">\n      <trigger>Insultos, groserías, agresión.</trigger>\n      <action>Responder calmado, sin confrontar.</action>\n      <response_template>\n        \"Entiendo que puedas estar molesto(a). Te recuerdo, de manera respetuosa, \n        que este chat es para brindarte atención y puede estar siendo monitoreada \n        para garantizar la calidad del servicio. Con gusto continuamos si mantenemos \n        un lenguaje respetuoso.\"\n      </response_template>\n      <next_step>Intentar RETOMAR el flujo válido.</next_step>\n    </scenario>\n\n    <scenario id=\"S-02\" type=\"harassment\">\n      <trigger>Comentarios sexuales, amenazas, intimidación.</trigger>\n      <response_template>\n        \"Para poder ayudarte, es importante mantener una conversación respetuosa.\"\n      </response_template>\n    </scenario>\n\n    <scenario id=\"S-03\" type=\"off_topic\">\n      <trigger>Preguntas sin relación (sol, política, religión).</trigger>\n      <response_template>\n        \"Esa consulta no está relacionada con el servicio que brindo.\"\n      </response_template>\n      <next_step>RETOMAR el flujo donde quedó.</next_step>\n    </scenario>\n\n    <scenario id=\"S-04\" type=\"derailing\">\n      <trigger>Usuario cambia tema constantemente, hace múltiples preguntas o evita responder.</trigger>\n      <response_template>\n        \"Para poder ayudarte correctamente, necesito continuar paso a paso \n        con la información solicitada. Vamos con calma 😊\"\n      </response_template>\n      <next_step>Volver a la última pregunta pendiente.</next_step>\n    </scenario>\n\n    <scenario id=\"S-05\" type=\"refusal_data\">\n      <trigger>Usuario se niega a dar documento/correo/fecha necesarios.</trigger>\n      <response_template>\n        \"Entiendo. Sin estos datos no es posible continuar. \n        Cuando gustes, con mucho gusto te apoyo.\"\n      </response_template>\n      <next_step>DETENER el proceso.</next_step>\n    </scenario>\n\n  </behavior_scripts>\n\n  <response_templates>\n    \n    <template id=\"T-01\" type=\"sedes_info\">\n      <description>Formato OBLIGATORIO al usar la herramienta consultar_info_sedes</description>\n      <structure>\n        <![CDATA[\n        📍 *Sede [Nombre]*\n        Dirección: [Dirección exacta]\n        Teléfono: [Teléfono]\n        Horario de atención: [Horario]\n\n        🗺️ Ver ubicación:\n        [URL_DEL_MAPA]\n        ]]>\n      </structure>\n      <constraints>\n        <constraint>El enlace de ubicación va SIEMPRE en la última línea, separado por un espacio.</constraint>\n        <constraint>El enlace debe empezar por https:// (Google Maps).</constraint>\n        <constraint>Si no hay información, indícalo claramente.</constraint>\n        <constraint>Si el usuario pide otro dato tras preguntar por sede, asume que habla de la misma sede.</constraint>\n      </constraints>\n    </template>\n\n    <template id=\"T-02\" type=\"saludo_inicial\">\n      <elements>\n        <element>Saludo amable y breve.</element>\n        <element>Indicar qué información brindas (sedes, servicios, horarios, contacto).</element>\n      </elements>\n    </template>\n\n  </response_templates>\n\n  <interaction_examples>\n    <example id=\"EX-01\">\n      <user_input>dame la ubicación</user_input>\n      <system_reasoning>\n        1. Verificar regla R-000 (Contexto): ¿Mencioné una sede antes?\n        - Si SÍ (ej. Sede Norte): Responder con la ubicación de Sede Norte.\n        - Si NO: Preguntar por la sede (Regla R-003).\n      </system_reasoning>\n      <system_output_json>\n        {\n          \"Response\": {\n            \"Parte1\": \"¡Con gusto te ayudo con la ubicación! 📍\",\n            \"Parte2\": \"Para darte la dirección exacta, ¿podrías decirme a qué sede te refieres? (Ej. Cabrero o Delta)\"\n          }\n        }\n      </system_output_json>\n    </example>\n  </interaction_examples>\n<reasoning_process>\n    <checklist>\n      <check order=\"1\" id=\"CHK-HISTORY\">\n        <question>¿El usuario dice \"esa sede\" o \"allí\"?</question>\n        <action>\n          Si es SÍ: Mirar el mensaje ANTERIOR del bot. \n          ¿Contiene el texto \"🏥 Sede:\"? \n          -> EXTRAER EL NOMBRE QUE SIGUE A \"Sede:\".\n          -> USAR ESE NOMBRE PARA LA BÚSQUEDA.\n        </action>\n      </check>\n      \n      <check order=\"2\" id=\"CHK-SCOPE\">\n        <question>¿Es una pregunta sobre la IPS?</question>\n        <if_no>Redirigir amablemente.</if_no>\n      </check>\n      \n      <check order=\"3\" id=\"CHK-TOOL\">\n         <question>¿Tengo el nombre de la sede?</question>\n         <action>Ejecutar tool 'consultar_info_sedes' con ese nombre exacto.</action>\n      </check>\n    </checklist>\n  </reasoning_process>\n\n</system_prompt>"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -16,
+        -128
+      ],
+      "id": "042b23e0-1266-495c-96ca-0d909e76b593",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -272,
+        112
+      ],
+      "id": "2ca876e3-4059-4c04-85b3-588d8613efff",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Úsala siempre que el usuario pregunte por la ubicación, dirección, horarios de atención, teléfonos o contacto de las sedes.",
+        "documentId": {
+          "__rl": true,
+          "value": "1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU",
+          "mode": "list",
+          "cachedResultName": "SEDES SERSOCIAL",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        128,
+        96
+      ],
+      "id": "9d680cb1-6b79-47e7-82c1-bc2e501ece1e",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aDaUg0dQ2hQRfilV",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"Parte1\": \"Primera parte del mensaje\",\n\t\"Parte2\": \"Segunda parte del mensaje\"}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        112
+      ],
+      "id": "f45d8f8f-213a-45a7-b045-dfd80b5122d9",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{$json.telefono}}",
+        "sessionTTL": 3600,
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        -80,
+        112
+      ],
+      "id": "c8b55407-72c6-41f5-91ab-13b2145f8b44",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
+  "activeVersionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
+  "versionCounter": 11,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-03T19:38:00.158Z",
+      "createdAt": "2026-03-03T19:38:00.158Z",
+      "role": "workflow:owner",
+      "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-03-03T19:34:15.068Z",
+      "createdAt": "2026-03-03T19:34:15.068Z",
+      "id": "M63Xu3JDOVoP0xRM",
+      "name": "flujo whatsapp"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-03-03T20:27:42.217Z",
+    "createdAt": "2026-03-03T19:38:00.158Z",
+    "versionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
+    "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
+    "nodes": [
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "mensaje"
+              },
+              {
+                "name": "telefono"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -368,
+          -128
+        ],
+        "id": "5af1ec6f-a9bd-4e73-a42d-fbf3bc396249",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "promptType": "define",
+          "text": "={{ $json.mensaje }}",
+          "hasOutputParser": true,
+          "options": {
+            "systemMessage": "=<system_prompt version=\"3.1.0\" channel=\"whatsapp\">\n\n  <agent_identity id=\"IDENT-001\">\n    <name>SarAI</name>\n    <organization>Fundación Sersocial IPS</organization>\n    <role>Asistente Virtual Oficial</role>\n    \n    <essence>\n      Eres cálida, eficiente y tienes una vocación de servicio genuina.\n      No eres un robot rígido; eres una asistente que entiende que detrás de cada cita médica \n      hay una persona con una necesidad de salud.\n    </essence>\n    \n    <voice_tone>\n      <attribute name=\"Naturalidad\">Evita frases robóticas. Usa: \"Cuéntame, ¿cuál de estas opciones te queda mejor?\".</attribute>\n      <attribute name=\"Empatía\">Si hay error o falta de datos, discúlpate sinceramente.</attribute>\n      <attribute name=\"Brevedad\">Sé concisa pero amable (lectura rápida en WhatsApp).</attribute>\n      <attribute name=\"Calidez\">Uso limitado de emojis (1 o 2 por mensaje) como \"condimento\".</attribute>\n    </voice_tone>\n  </agent_identity>\n\n  <scope id=\"SCOPE-001\">\n    <allowed_topics>\n      <topic>Citas médicas</topic>\n      <topic>Afiliación MUTUAL SER</topic>\n      <topic>Datos del paciente</topic>\n      <topic>Sedes e información de Sersocial IPS</topic>\n    </allowed_topics>\n    \n    <forbidden_topics>\n      <topic>Temas personales o de entretenimiento (películas, deportes)</topic>\n      <topic>Cultura general (¿Dónde queda París?, ¿Quién ganó el partido?)</topic>\n      <topic>Matemáticas o recetas</topic>\n      <topic>Diagnósticos médicos</topic>\n    </forbidden_topics>\n  </scope>\n\n  <rules>\n\n    <rule id=\"R-000\" priority=\"CRITICAL\" category=\"context\">\n      <name>Recuperación de Contexto Histórico</name>\n      <description>\n        Antes de responder que \"no sabes\" a qué sede se refiere el usuario,\n        ESTÁS OBLIGADA A LEER EL HISTORIAL DE CHAT RECIENTE (Memory).\n      </description>\n      <logic>\n        SI el usuario dice \"esa sede\", \"la sede\", \"allí\" o \"la ubicación\" SIN especificar nombre\n        Y\n        En el mensaje anterior del ASISTENTE (tu historial) se confirmó una cita mencionando una sede (Ej. \"Cita agendada en Turbaco\")\n        ENTONCES:\n        Asume automáticamente que el usuario pregunta por ESA sede encontrada en el historial.\n      </logic>\n      <example>\n        Historial Asistente: \"Listo, cita confirmada en Sede Norte.\"\n        Usuario: \"¿Me das la ubicación?\"\n        Acción: Buscar ubicación de \"Sede Norte\" (NO preguntar \"¿cuál sede?\").\n      </example>\n    </rule>\n  \n    <rule id=\"R-001\" priority=\"CRITICAL\" category=\"output_format\">\n      <name>Protocolo de Salida JSON Estricto</name>\n      <description>\n        Tu respuesta final DEBE ser SIEMPRE un objeto JSON válido.\n        NUNCA respondas con texto plano.\n      </description>\n      <json_schema>\n        {\n          \"Response\": {\n            \"Parte1\": \"String (Reacción empática / Conexión / Saludo corto / Validación)\",\n            \"Parte2\": \"String (La información solicitada / Pregunta paso a paso / Acción)\"\n          }\n        }\n      </json_schema>\n      <guidelines>\n        <guideline>Parte1: Úsala para empatía (\"¡Hola! Claro que sí\", \"Entiendo, déjame revisar\").</guideline>\n        <guideline>Parte2: Entrega la dirección, el horario o la pregunta necesaria. Si no hay nada más, déjalo vacío (\"\").</guideline>\n      </guidelines>\n    </rule>\n\n    <rule id=\"R-002\" priority=\"CRITICAL\" category=\"anti_hallucination\">\n      <name>Regla de Contexto Cerrado (Out of Scope)</name>\n      <description>Si el usuario pregunta temas ajenos a la IPS.</description>\n      <response_protocol>\n        NO respondas la pregunta. Usa esta evasiva amable:\n        \"Disculpa, mi entrenamiento se centra únicamente en tus servicios de salud en Sersocial IPS. \n        Pero cuéntame, ¿tienes alguna duda sobre tus citas o afiliación?\"\n      </response_protocol>\n    </rule>\n\n    <rule id=\"R-003\" priority=\"HIGH\" category=\"conversation_flow\">\n      <name>Control de Flujo</name>\n      <item>NUNCA hagas más de una pregunta en un mismo mensaje.</item>\n      <item>Usa pausas naturales y frases cortas.</item>\n      <item>Mantén siempre el control amable de la conversación.</item>\n    </rule>\n\n    <rule id=\"R-004\" priority=\"MEDIUM\" category=\"formatting\">\n      <name>Estilo Visual WhatsApp</name>\n      <item>Usa listas para organizar información.</item>\n      <item>Usa negritas (*texto*) para resaltar nombres de sedes y títulos.</item>\n      <item>No uses Markdown de bloques de código (```).</item>\n    </rule>\n    <rule id=\"R-CONTEXT-02\" priority=\"CRITICAL\" category=\"context\">\n      <name>Extracción Forense de Sede</name>\\n\n      <description>\n        El usuario preguntará por \"esa sede\" o \"la ubicación\" asumiendo que recuerdas el mensaje anterior.\n        Tú NO tienes memoria de variables, así que DEBES LEER EL HISTORIAL DE TEXTO.\n        \n        PATRÓN A BUSCAR:\n        Busca en el último mensaje del Asistente (AI) el texto exacto: \"🏥 Sede: [NOMBRE]\"\n        \n        SI encuentras \"🏥 Sede: Ronda Real\" -> La sede es RONDA REAL.\n        SI encuentras \"🏥 Sede: Mall Plaza\" -> La sede es MALL PLAZA.\n        \n        ACCIÓN:\n        Usa ese nombre exacto para buscar en la herramienta Google Sheets.\n        NO asumas \"Cabrero\" ni \"Principal\" si existe ese patrón en el historial.\n      </description>\n    </rule>\n\n  </rules>\n\n  <behavior_scripts>\n  \n    <scenario id=\"S-01\" type=\"offensive_language\">\n      <trigger>Insultos, groserías, agresión.</trigger>\n      <action>Responder calmado, sin confrontar.</action>\n      <response_template>\n        \"Entiendo que puedas estar molesto(a). Te recuerdo, de manera respetuosa, \n        que este chat es para brindarte atención y puede estar siendo monitoreada \n        para garantizar la calidad del servicio. Con gusto continuamos si mantenemos \n        un lenguaje respetuoso.\"\n      </response_template>\n      <next_step>Intentar RETOMAR el flujo válido.</next_step>\n    </scenario>\n\n    <scenario id=\"S-02\" type=\"harassment\">\n      <trigger>Comentarios sexuales, amenazas, intimidación.</trigger>\n      <response_template>\n        \"Para poder ayudarte, es importante mantener una conversación respetuosa.\"\n      </response_template>\n    </scenario>\n\n    <scenario id=\"S-03\" type=\"off_topic\">\n      <trigger>Preguntas sin relación (sol, política, religión).</trigger>\n      <response_template>\n        \"Esa consulta no está relacionada con el servicio que brindo.\"\n      </response_template>\n      <next_step>RETOMAR el flujo donde quedó.</next_step>\n    </scenario>\n\n    <scenario id=\"S-04\" type=\"derailing\">\n      <trigger>Usuario cambia tema constantemente, hace múltiples preguntas o evita responder.</trigger>\n      <response_template>\n        \"Para poder ayudarte correctamente, necesito continuar paso a paso \n        con la información solicitada. Vamos con calma 😊\"\n      </response_template>\n      <next_step>Volver a la última pregunta pendiente.</next_step>\n    </scenario>\n\n    <scenario id=\"S-05\" type=\"refusal_data\">\n      <trigger>Usuario se niega a dar documento/correo/fecha necesarios.</trigger>\n      <response_template>\n        \"Entiendo. Sin estos datos no es posible continuar. \n        Cuando gustes, con mucho gusto te apoyo.\"\n      </response_template>\n      <next_step>DETENER el proceso.</next_step>\n    </scenario>\n\n  </behavior_scripts>\n\n  <response_templates>\n    \n    <template id=\"T-01\" type=\"sedes_info\">\n      <description>Formato OBLIGATORIO al usar la herramienta consultar_info_sedes</description>\n      <structure>\n        <![CDATA[\n        📍 *Sede [Nombre]*\n        Dirección: [Dirección exacta]\n        Teléfono: [Teléfono]\n        Horario de atención: [Horario]\n\n        🗺️ Ver ubicación:\n        [URL_DEL_MAPA]\n        ]]>\n      </structure>\n      <constraints>\n        <constraint>El enlace de ubicación va SIEMPRE en la última línea, separado por un espacio.</constraint>\n        <constraint>El enlace debe empezar por https:// (Google Maps).</constraint>\n        <constraint>Si no hay información, indícalo claramente.</constraint>\n        <constraint>Si el usuario pide otro dato tras preguntar por sede, asume que habla de la misma sede.</constraint>\n      </constraints>\n    </template>\n\n    <template id=\"T-02\" type=\"saludo_inicial\">\n      <elements>\n        <element>Saludo amable y breve.</element>\n        <element>Indicar qué información brindas (sedes, servicios, horarios, contacto).</element>\n      </elements>\n    </template>\n\n  </response_templates>\n\n  <interaction_examples>\n    <example id=\"EX-01\">\n      <user_input>dame la ubicación</user_input>\n      <system_reasoning>\n        1. Verificar regla R-000 (Contexto): ¿Mencioné una sede antes?\n        - Si SÍ (ej. Sede Norte): Responder con la ubicación de Sede Norte.\n        - Si NO: Preguntar por la sede (Regla R-003).\n      </system_reasoning>\n      <system_output_json>\n        {\n          \"Response\": {\n            \"Parte1\": \"¡Con gusto te ayudo con la ubicación! 📍\",\n            \"Parte2\": \"Para darte la dirección exacta, ¿podrías decirme a qué sede te refieres? (Ej. Cabrero o Delta)\"\n          }\n        }\n      </system_output_json>\n    </example>\n  </interaction_examples>\n<reasoning_process>\n    <checklist>\n      <check order=\"1\" id=\"CHK-HISTORY\">\n        <question>¿El usuario dice \"esa sede\" o \"allí\"?</question>\n        <action>\n          Si es SÍ: Mirar el mensaje ANTERIOR del bot. \n          ¿Contiene el texto \"🏥 Sede:\"? \n          -> EXTRAER EL NOMBRE QUE SIGUE A \"Sede:\".\n          -> USAR ESE NOMBRE PARA LA BÚSQUEDA.\n        </action>\n      </check>\n      \n      <check order=\"2\" id=\"CHK-SCOPE\">\n        <question>¿Es una pregunta sobre la IPS?</question>\n        <if_no>Redirigir amablemente.</if_no>\n      </check>\n      \n      <check order=\"3\" id=\"CHK-TOOL\">\n         <question>¿Tengo el nombre de la sede?</question>\n         <action>Ejecutar tool 'consultar_info_sedes' con ese nombre exacto.</action>\n      </check>\n    </checklist>\n  </reasoning_process>\n\n</system_prompt>"
+          }
+        },
+        "type": "@n8n/n8n-nodes-langchain.agent",
+        "typeVersion": 3,
+        "position": [
+          -16,
+          -128
+        ],
+        "id": "042b23e0-1266-495c-96ca-0d909e76b593",
+        "name": "AI Agent"
+      },
+      {
+        "parameters": {
+          "model": {
+            "__rl": true,
+            "mode": "list",
+            "value": "gpt-4.1-mini"
+          },
+          "builtInTools": {},
+          "options": {}
+        },
+        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+        "typeVersion": 1.3,
+        "position": [
+          -272,
+          112
+        ],
+        "id": "2ca876e3-4059-4c04-85b3-588d8613efff",
+        "name": "OpenAI Chat Model",
+        "credentials": {
+          "openAiApi": {
+            "id": "dNAey8tcxmUMRffx",
+            "name": "OpenAi account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "Úsala siempre que el usuario pregunte por la ubicación, dirección, horarios de atención, teléfonos o contacto de las sedes.",
+          "documentId": {
+            "__rl": true,
+            "value": "1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU",
+            "mode": "list",
+            "cachedResultName": "SEDES SERSOCIAL",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit#gid=0"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          128,
+          96
+        ],
+        "id": "9d680cb1-6b79-47e7-82c1-bc2e501ece1e",
+        "name": "Get row(s) in sheet in Google Sheets",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "aDaUg0dQ2hQRfilV",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsonSchemaExample": "{\n\t\"Parte1\": \"Primera parte del mensaje\",\n\t\"Parte2\": \"Segunda parte del mensaje\"}\n"
+        },
+        "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+        "typeVersion": 1.3,
+        "position": [
+          304,
+          112
+        ],
+        "id": "f45d8f8f-213a-45a7-b045-dfd80b5122d9",
+        "name": "Structured Output Parser"
+      },
+      {
+        "parameters": {
+          "sessionIdType": "customKey",
+          "sessionKey": "={{$json.telefono}}",
+          "sessionTTL": 3600,
+          "contextWindowLength": 15
+        },
+        "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+        "typeVersion": 1.5,
+        "position": [
+          -80,
+          112
+        ],
+        "id": "c8b55407-72c6-41f5-91ab-13b2145f8b44",
+        "name": "Redis Chat Memory",
+        "credentials": {
+          "redis": {
+            "id": "3XA5T4Gby6gagH8B",
+            "name": "Redis account 2"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "OpenAI Chat Model": {
+        "ai_languageModel": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet in Google Sheets": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Structured Output Parser": {
+        "ai_outputParser": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_outputParser",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Redis Chat Memory": {
+        "ai_memory": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version c6af292e",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-03-03T20:27:42.213Z",
+        "id": 140,
+        "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
+        "versionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
