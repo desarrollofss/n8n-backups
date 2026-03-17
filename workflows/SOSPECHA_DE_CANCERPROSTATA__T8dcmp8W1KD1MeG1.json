@@ -159,7 +159,7 @@
           "parameters": [
             {
               "name": "Content-Type",
-              "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              "value": "***REDACTED***"
             }
           ]
         },
