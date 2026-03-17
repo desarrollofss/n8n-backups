@@ -1,0 +1,607 @@
+{
+  "updatedAt": "2026-03-06T15:10:18.606Z",
+  "createdAt": "2026-03-05T21:03:45.735Z",
+  "id": "aaDzxQFh9EledX_t7tX6a",
+  "name": "REPORTE_2175_CORREO",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6 5 * *"
+            }
+          ]
+        }
+      },
+      "id": "e8bacd3e-d66c-484b-be9c-b84a357831f6",
+      "name": "Programación Mensual",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1232,
+        64
+      ],
+      "notes": "Día 5 de cada mes a las 6:00 AM. Reporta el mes vencido."
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-001",
+              "name": "ONEDRIVE_BASE_PATH",
+              "value": "Reportes PISIS/Resolución 2175/Tipo 3 - 0 a 5 años",
+              "type": "string"
+            },
+            {
+              "id": "assign-002",
+              "name": "EMAIL_FROM",
+              "value": "reportes@tuempresa.com",
+              "type": "string"
+            },
+            {
+              "id": "assign-003",
+              "name": "EMAIL_RECIPIENTS",
+              "value": "correo1@empresa.com,correo2@empresa.com",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "14970dbb-690f-4547-8927-63452839c611",
+      "name": "Configuración",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1008,
+        64
+      ],
+      "notes": "CONFIGURACION CENTRAL.\nONEDRIVE_BASE_PATH: ruta raíz en OneDrive. Se añade /ANIO/MES automáticamente.\nEjemplo resultado: Reportes PISIS/Resolución 2175/Tipo 3 - 0 a 5 años/2026/01"
+    },
+    {
+      "parameters": {
+        "jsCode": "const pad = n => String(n).padStart(2, '0');\nconst fmt = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;\n\nconst hoy                  = new Date();\nconst primerDiaMesActual   = new Date(hoy.getFullYear(), hoy.getMonth(), 1);\nconst ultimoDiaMesAnterior = new Date(primerDiaMesActual - 1);\nconst primerDiaMesAnterior = new Date(ultimoDiaMesAnterior.getFullYear(), ultimoDiaMesAnterior.getMonth(), 1);\n\nconst anio = String(ultimoDiaMesAnterior.getFullYear());\nconst mes  = pad(ultimoDiaMesAnterior.getMonth() + 1);\n\nconst config = $('Configuración').first().json;\nconst folderPath = `${config.ONEDRIVE_BASE_PATH}/${anio}/${mes}`;\n\nreturn [{ json: {\n  ONEDRIVE_FOLDER_PATH: folderPath,\n  EMAIL_FROM:           config.EMAIL_FROM,\n  EMAIL_RECIPIENTS:     config.EMAIL_RECIPIENTS,\n  fechaInicio:  fmt(primerDiaMesAnterior),\n  fechaFin:     fmt(ultimoDiaMesAnterior),\n  anio, mes,\n  nombreTxt:   `RES2175_T3_ECOPETROL_${anio}_${mes}.txt`,\n  nombreExcel: `RES2175_T3_ECOPETROL_${anio}_${mes}.xlsx`\n}}];"
+      },
+      "id": "376402b5-b39e-4362-aa85-d20343c32a0c",
+      "name": "Calcular Rango Mes Vencido",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "=WITH\nHistoriasClinicas AS (\n    SELECT estudio, DxI, Formato, FechaAtencion, [PESO/TALLA]\n    FROM (SELECT estudio, DxI, Formato, Campo, ValorCampo, FechaAtencion FROM [Zeus®HistoriasClinicas] WHERE Campo IN ('PESO/TALLA')) AS src\n    PIVOT (MAX(ValorCampo) FOR Campo IN ([PESO/TALLA])) AS pvt\n),\nMedidasDescompuestas AS (\n    SELECT hc.estudio, hc.DxI, hc.Formato, hc.FechaAtencion, hc.[PESO/TALLA],\n        CAST(TRY_CAST(LEFT(hc.[PESO/TALLA], CHARINDEX('-',hc.[PESO/TALLA])-1) AS DECIMAL(5,3)) AS DECIMAL(5,3)) AS Peso,\n        CAST(TRY_CAST(SUBSTRING(hc.[PESO/TALLA], CHARINDEX('-',hc.[PESO/TALLA])+1, CHARINDEX('-',hc.[PESO/TALLA],CHARINDEX('-',hc.[PESO/TALLA])+1)-CHARINDEX('-',hc.[PESO/TALLA])-1) AS INT) AS INT) AS Talla,\n        TRY_CAST(RIGHT(hc.[PESO/TALLA], LEN(hc.[PESO/TALLA])-CHARINDEX('-',hc.[PESO/TALLA],CHARINDEX('-',hc.[PESO/TALLA])+1)) AS DECIMAL(5,2)) AS IMC\n    FROM HistoriasClinicas hc\n),\nPertenenciaEtnica AS (\n    SELECT vd.IdPaciente,\n        CASE vd.Valor WHEN 1 THEN 6 WHEN 2 THEN 1 WHEN 3 THEN 5 WHEN 4 THEN 4 WHEN 5 THEN 2 WHEN 6 THEN 3 ELSE 6 END AS CodigoEtnicoResolucion\n    FROM VariablesDinamicasEntidadesRegistros vd WHERE vd.IdVariableDinamicaEntidad = '1'\n)\nSELECT\n    3 AS TipoRegistro,\n    ROW_NUMBER() OVER (ORDER BY c.estudio) AS Consecutivo,\n    p.tipo_id AS TipoIdentificacion, p.num_id AS NumeroIdentificacion,\n    FORMAT(p.fecha_naci,'yyyy-MM-dd') AS FechaNacimiento, p.sexo AS Sexo,\n    pe.CodigoEtnicoResolucion AS CodigoPertenenciaEtnica,\n    UPPER(p.primer_ape) AS PrimerApellido, UPPER(p.segundo_ape) AS SegundoApellido,\n    UPPER(p.primer_nom) AS PrimerNombre,   UPPER(p.segundo_nom) AS SegundoNombre,\n    FORMAT(md.FechaAtencion,'yyyy-MM-dd') AS FechaAtencion,\n    '04' AS FinalidadConsulta, ap.CodProcedimiento AS CodigoCUPS,\n    FORMAT(md.Peso,'N3') AS PesoKg, md.Talla AS TallaCm, NULL AS FechaTomHemoglobina\nFROM citas c\nJOIN sis_medi m ON m.codigo = c.cod_medi\nJOIN sis_asunto a ON a.id = c.asunto\nJOIN AsuntoPctos ap ON ap.Asunto = c.asunto\nJOIN sis_paci p ON p.autoid = c.autoid\nJOIN MedidasDescompuestas md ON md.estudio = c.estudio\nLEFT JOIN PertenenciaEtnica pe ON pe.IdPaciente = p.autoid\nWHERE c.estado = 'A'\n    AND md.FechaAtencion BETWEEN '{{ $('Calcular Rango Mes Vencido').item.json.fechaInicio }}' AND '{{ $('Calcular Rango Mes Vencido').item.json.fechaFin }}'\n    AND p.fecha_naci >= DATEADD(YEAR,-6,GETDATE()) AND p.fecha_naci <= GETDATE()\n    AND c.contrato IN ('168')\n    AND ap.CodProcedimiento IN ('890201','890205','890301','890305')\n    AND p.tipo_id IN ('RC','PA')\nORDER BY md.FechaAtencion, p.primer_ape, p.primer_nom"
+      },
+      "id": "4db04b93-f7f1-42ea-9f45-e1fa36c49837",
+      "name": "Consulta SQL Server",
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        64
+      ],
+      "credentials": {
+        "microsoftSql": {
+          "id": "OsFgiECu7T6iV06V",
+          "name": "Microsoft SQL account_PUNTO18"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const MAX = 1_000_000;\nconst items = $input.all();\nconst total = items.length;\n\nif (total === 0) throw new Error('Sin registros para el período. Verificar filtros.');\nif (total > MAX) throw new Error(`Límite superado: ${total.toLocaleString()} registros (máx ${MAX.toLocaleString()}).`);\n\nconst meta = $('Calcular Rango Mes Vencido').first().json;\nconsole.log(`Registros válidos: ${total}`);\n\nreturn items.map(item => ({ json: { ...item.json, _meta: { ...meta, totalRegistros: total } } }));"
+      },
+      "id": "522e6948-63b6-43cd-9514-1a4e7b86d29c",
+      "name": "Validar Registros",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -288,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const XLSX = require('xlsx');\n\nconst MAX_FILAS_POR_HOJA = 900_000;\nconst items = $input.all();\nconst meta  = items[0].json._meta;\n\nconst COLS_PLANO = [\n  'TipoRegistro','Consecutivo','TipoIdentificacion','NumeroIdentificacion',\n  'FechaNacimiento','Sexo','CodigoPertenenciaEtnica',\n  'PrimerApellido','SegundoApellido','PrimerNombre','SegundoNombre',\n  'FechaAtencion','FinalidadConsulta','CodigoCUPS','PesoKg','TallaCm','FechaTomHemoglobina'\n];\n\nconst HEADERS_EXCEL = {\n  TipoRegistro:'Tipo Registro', Consecutivo:'Consecutivo',\n  TipoIdentificacion:'Tipo ID', NumeroIdentificacion:'Número ID',\n  FechaNacimiento:'Fecha Nacimiento', Sexo:'Sexo',\n  CodigoPertenenciaEtnica:'Pertenencia Étnica',\n  PrimerApellido:'Primer Apellido', SegundoApellido:'Segundo Apellido',\n  PrimerNombre:'Primer Nombre', SegundoNombre:'Segundo Nombre',\n  FechaAtencion:'Fecha Atención', FinalidadConsulta:'Finalidad Consulta',\n  CodigoCUPS:'Código CUPS', PesoKg:'Peso (kg)', TallaCm:'Talla (cm)',\n  FechaTomHemoglobina:'Fecha Hemoglobina'\n};\n\n// ── 1. TXT ──────────────────────────────────────────────────\nconst txt    = items.map(i => COLS_PLANO.map(c => i.json[c] ?? '').join('|')).join('\\n');\nconst txt_b64 = Buffer.from(txt, 'utf-8').toString('base64');\nconsole.log(`TXT: ${items.length} registros`);\n\n// ── 2. Excel ────────────────────────────────────────────────\nconst wb = XLSX.utils.book_new();\nconst totalSheets = Math.ceil(items.length / MAX_FILAS_POR_HOJA);\n\nfor (let s = 0; s < totalSheets; s++) {\n  const chunk = items.slice(s * MAX_FILAS_POR_HOJA, (s + 1) * MAX_FILAS_POR_HOJA);\n  const datos = chunk.map(i => {\n    const row = {};\n    COLS_PLANO.forEach(col => { row[HEADERS_EXCEL[col]] = i.json[col] ?? ''; });\n    return row;\n  });\n  const ws = XLSX.utils.json_to_sheet(datos);\n  ws['!cols'] = Object.values(HEADERS_EXCEL).map(h => ({ wch: Math.max(h.length, 12) }));\n  XLSX.utils.book_append_sheet(wb, ws, totalSheets > 1 ? `Datos ${s+1} de ${totalSheets}` : 'Datos');\n}\n\n// Hoja resumen\nconst resumen = XLSX.utils.aoa_to_sheet([\n  ['Reporte Resolución 2175 de 2015 — Registro Tipo 3 (0 a 5 años)'], [],\n  ['Período',         `${meta.fechaInicio} al ${meta.fechaFin}`],\n  ['Total registros',  items.length.toLocaleString()],\n  ['Hojas de datos',   totalSheets],\n  ['Contrato',         'Unidad Móvil Ecopetrol (168)'],\n  ['Archivo plano',    meta.nombreTxt],\n  ['Generado',         new Date().toLocaleString('es-CO')]\n]);\nXLSX.utils.book_append_sheet(wb, resumen, 'Resumen');\n\nconst excel_b64 = XLSX.write(wb, { type: 'base64', bookType: 'xlsx' });\nconsole.log(`Excel: ${totalSheets} hoja(s) de datos + resumen`);\n\n// ── Salida: 1 item con 2 campos binarios ────────────────────\nreturn [{\n  json: {\n    nombreTxt:            meta.nombreTxt,\n    nombreExcel:          meta.nombreExcel,\n    fechaInicio:          meta.fechaInicio,\n    fechaFin:             meta.fechaFin,\n    totalRegistros:       meta.totalRegistros,\n    totalHojasExcel:      totalSheets,\n    ONEDRIVE_FOLDER_PATH: meta.ONEDRIVE_FOLDER_PATH,\n    EMAIL_FROM:           meta.EMAIL_FROM,\n    EMAIL_RECIPIENTS:     meta.EMAIL_RECIPIENTS\n  },\n  binary: {\n    archivo_txt: {\n      data:     txt_b64,\n      mimeType: 'text/plain',\n      fileName: meta.nombreTxt\n    },\n    archivo_excel: {\n      data:     excel_b64,\n      mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',\n      fileName: meta.nombreExcel\n    }\n  }\n}];"
+      },
+      "id": "0352e30b-db45-47df-975d-43cbd57ba435",
+      "name": "Generar TXT y Excel",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": "={{ $json.id }}",
+        "type": "view",
+        "scope": "organization"
+      },
+      "id": "5bbc2568-2e41-495b-8312-cece0c94dc89",
+      "name": "Compartir TXT",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        416,
+        -48
+      ],
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "lnk-001",
+              "name": "linkTxt",
+              "value": "={{ $json.link.webUrl }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "id": "99cc70d0-0bb6-437c-b86d-a1590b603524",
+      "name": "Guardar Link TXT",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": "={{ $json.id }}",
+        "type": "view",
+        "scope": "organization"
+      },
+      "id": "825eea4f-db04-4abb-ad7a-6d1c465a025d",
+      "name": "Compartir Excel",
+      "type": "n8n-nodes-base.microsoftOneDrive",
+      "typeVersion": 1,
+      "position": [
+        416,
+        160
+      ],
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "lnk-002",
+              "name": "linkExcel",
+              "value": "={{ $json.link.webUrl }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "id": "94b9775d-abad-4ce6-a229-99e277c7f47b",
+      "name": "Guardar Link Excel",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Une los links de ambas ramas con los metadatos del archivo\nconst item  = $input.first().json;\nconst meta  = $('Generar TXT y Excel').first().json;\n\nreturn [{ json: {\n  linkTxt:          item.linkTxt,\n  linkExcel:        item.linkExcel,\n  nombreTxt:        meta.nombreTxt,\n  nombreExcel:      meta.nombreExcel,\n  fechaInicio:      meta.fechaInicio,\n  fechaFin:         meta.fechaFin,\n  totalRegistros:   meta.totalRegistros,\n  totalHojasExcel:  meta.totalHojasExcel,\n  rutaOneDrive:     meta.ONEDRIVE_FOLDER_PATH,\n  EMAIL_FROM:       meta.EMAIL_FROM,\n  EMAIL_RECIPIENTS: meta.EMAIL_RECIPIENTS\n}}];"
+      },
+      "id": "9c07d88a-dca5-4154-940d-f7488fbf5ed7",
+      "name": "Preparar Datos Correo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1264,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "toRecipients": "directortic@sersocial.org",
+        "subject": "=Reporte Resolución 2175 - Tipo 3 | {{ $json.fechaInicio }} al {{ $json.fechaFin }}",
+        "bodyContent": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <style>\n    body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 0; }\n    .wrapper { max-width: 640px; margin: 30px auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }\n    .header { background-color: #003366; padding: 28px 32px; text-align: center; }\n    .header img { height: 48px; margin-bottom: 12px; }\n    .header h1 { color: #ffffff; font-size: 18px; margin: 0; letter-spacing: 0.5px; }\n    .header p { color: #a8c4e0; font-size: 13px; margin: 6px 0 0; }\n    .body { padding: 32px; }\n    .body p { color: #333333; font-size: 14px; line-height: 1.6; }\n    .info-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }\n    .info-table th { background-color: #e8f0f7; color: #003366; text-align: left; padding: 10px 14px; border-bottom: 2px solid #c5d8ec; }\n    .info-table td { padding: 10px 14px; border-bottom: 1px solid #eef0f3; color: #444; }\n    .info-table tr:last-child td { border-bottom: none; }\n    .btn-group { text-align: center; margin: 28px 0 16px; }\n    .btn { display: inline-block; margin: 6px 8px; padding: 12px 24px; border-radius: 5px; font-size: 14px; font-weight: bold; text-decoration: none; }\n    .btn-txt { background-color: #003366; color: #ffffff; }\n    .btn-excel { background-color: #1a7c3e; color: #ffffff; }\n    .footer { background-color: #f0f4f8; padding: 18px 32px; text-align: center; font-size: 11px; color: #888; border-top: 1px solid #e0e6ed; }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n\n    <div class=\"header\">\n      <h1>Sistema de Reportes PISIS</h1>\n      <p>Generación automática de reportes regulatorios</p>\n    </div>\n\n    <div class=\"body\">\n      <p>Estimado(a) equipo,</p>\n      <p>Se ha generado exitosamente el reporte correspondiente a la <strong>Resolución 2175 — Tipo 3 (0 a 5 años)</strong>. A continuación encontrará el resumen y los enlaces de descarga.</p>\n\n      <table class=\"info-table\">\n        <tr>\n          <th colspan=\"2\">📋 Detalle del Reporte</th>\n        </tr>\n        <tr>\n          <td><strong>Período</strong></td>\n          <td>{{ $json.fechaInicio }} al {{ $json.fechaFin }}</td>\n        </tr>\n        <tr>\n          <td><strong>Total de registros</strong></td>\n          <td>{{ $json.totalRegistros }}</td>\n        </tr>\n        <tr>\n          <td><strong>Hojas en Excel</strong></td>\n          <td>{{ $json.totalHojasExcel }}</td>\n        </tr>\n        <tr>\n          <td><strong>Archivo TXT</strong></td>\n          <td>{{ $json.nombreTxt }}</td>\n        </tr>\n        <tr>\n          <td><strong>Archivo Excel</strong></td>\n          <td>{{ $json.nombreExcel }}</td>\n        </tr>\n        <tr>\n          <td><strong>Ubicación en SharePoint</strong></td>\n          <td>{{ $json.rutaOneDrive }}</td>\n        </tr>\n      </table>\n\n      <div class=\"btn-group\">\n        <a href=\"{{ $json.linkTxt }}\" class=\"btn btn-txt\">📄 Descargar TXT</a>\n        <a href=\"{{ $json.linkExcel }}\" class=\"btn btn-excel\">📊 Descargar Excel</a>\n      </div>\n\n      <p style=\"font-size:12px; color:#888; text-align:center;\">Los archivos también están disponibles en la carpeta compartida de SharePoint.</p>\n    </div>\n\n    <div class=\"footer\">\n      Este correo fue generado automáticamente por el sistema de reportes PISIS.<br>\n      Por favor no responda este mensaje directamente.\n    </div>\n\n  </div>\n</body>\n</html>",
+        "additionalFields": {
+          "bodyContentType": "html"
+        }
+      },
+      "id": "60f671df-2074-4bed-9653-2612acbaa0c2",
+      "name": "Enviar Correo Outlook",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        1472,
+        64
+      ],
+      "webhookId": "da413e03-b56b-44b8-ab15-dec4d39f7794",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      },
+      "notes": "Credential: Outlook Reportes (OAuth2 Microsoft). No requiere SMTP."
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://graph.microsoft.com/v1.0/users/directortic@sersocial.org/drive/root:/GESTION DEL RIESGO/GENERACIÓN DE REPORTES/{{ $json.ONEDRIVE_FOLDER_PATH }}/{{ $json.nombreTxt }}:/content",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "archivo_txt",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        -48
+      ],
+      "id": "0c9477bc-e438-473f-a9da-6bc34e508a79",
+      "name": "CARGUE_ONEDRIVE_TXT",
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://graph.microsoft.com/v1.0/users/directortic@sersocial.org/drive/root:/GESTION DEL RIESGO/GENERACIÓN DE REPORTES/{{ $json.ONEDRIVE_FOLDER_PATH }}/{{ $json.nombreExcel }}:/content",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "archivo_excel",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        208,
+        160
+      ],
+      "id": "ea4d0a27-8c91-4f6e-8fff-feed92261ab3",
+      "name": "CARGUE_ONEDRIVE_TXT1",
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "54a124b1-1acb-417a-acee-773b02face23",
+              "name": "linkTxt",
+              "value": "={{ $('Guardar Link TXT').item.json.linkTxt }}",
+              "type": "string"
+            },
+            {
+              "id": "fe6fd3d2-badc-42cc-b327-ef28aab646bf",
+              "name": "linkExcel",
+              "value": "={{ $('Guardar Link Excel').item.json.linkExcel }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1072,
+        64
+      ],
+      "id": "efa29f8b-dafe-40bd-b046-7b5d6fd9c6b9",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        896,
+        64
+      ],
+      "id": "2f723b5b-4f99-4e8b-b6e9-e7c3f60e17fb",
+      "name": "Merge"
+    }
+  ],
+  "connections": {
+    "Programación Mensual": {
+      "main": [
+        [
+          {
+            "node": "Configuración",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configuración": {
+      "main": [
+        [
+          {
+            "node": "Calcular Rango Mes Vencido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calcular Rango Mes Vencido": {
+      "main": [
+        [
+          {
+            "node": "Consulta SQL Server",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consulta SQL Server": {
+      "main": [
+        [
+          {
+            "node": "Validar Registros",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Registros": {
+      "main": [
+        [
+          {
+            "node": "Generar TXT y Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar TXT y Excel": {
+      "main": [
+        [
+          {
+            "node": "CARGUE_ONEDRIVE_TXT",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "CARGUE_ONEDRIVE_TXT1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compartir TXT": {
+      "main": [
+        [
+          {
+            "node": "Guardar Link TXT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar Link TXT": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compartir Excel": {
+      "main": [
+        [
+          {
+            "node": "Guardar Link Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar Link Excel": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Preparar Datos Correo": {
+      "main": [
+        [
+          {
+            "node": "Enviar Correo Outlook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CARGUE_ONEDRIVE_TXT": {
+      "main": [
+        [
+          {
+            "node": "Compartir TXT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CARGUE_ONEDRIVE_TXT1": {
+      "main": [
+        [
+          {
+            "node": "Compartir Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Preparar Datos Correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "42618061-6576-4be3-bab3-22152cd99ab4",
+  "activeVersionId": null,
+  "versionCounter": 69,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-05T21:03:45.735Z",
+      "createdAt": "2026-03-05T21:03:45.735Z",
+      "role": "workflow:owner",
+      "workflowId": "aaDzxQFh9EledX_t7tX6a",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
