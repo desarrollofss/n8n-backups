@@ -564,11 +564,11 @@
           "parameters": [
             {
               "name": "xi-api-key",
-              "value": "sk_11e56ca75ba429a3fcb259a8483e932d0b5e3d86b39838ca"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -860,11 +860,11 @@
           "parameters": [
             {
               "name": "xi-api-key",
-              "value": "sk_11e56ca75ba429a3fcb259a8483e932d0b5e3d86b39838ca"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -1156,11 +1156,11 @@
           "parameters": [
             {
               "name": "xi-api-key",
-              "value": "sk_11e56ca75ba429a3fcb259a8483e932d0b5e3d86b39838ca"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             }
           ]
         },
