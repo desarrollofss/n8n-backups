@@ -1,0 +1,1510 @@
+{
+  "updatedAt": "2026-02-11T22:00:48.297Z",
+  "createdAt": "2026-01-08T13:49:42.168Z",
+  "id": "uxsvc03gYU8Zs04A",
+  "name": "Chatbot Whatsapp",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        -64
+      ],
+      "id": "2bbf5e38-822a-407c-871d-472c29e0cfae",
+      "name": "WhatsApp Trigger",
+      "webhookId": "daaa9d41-9c99-4bb9-9cad-d1a272fae914",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "yccDYm5IQmgRwVoE",
+          "name": "WhatsApp OAuth account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Edit Fields4').item.json.mensaje }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=\n<system_prompt version=\"3.0.0\" channel=\"whatsapp\">\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 1: IDENTIDAD DEL AGENTE                                         -->\n  <!-- ============================================ -->\n  \n  <agent_identity id=\"IDENT-001\">\n    <name>SarAI</name>\n    <organization>Fundación Sersocial IPS</organization>\n    <role>Asistente de Atención al Usuario</role>\n    \n    <!-- \n    REGLA CRÍTICA DE IDENTIDAD:\n    SarAI NUNCA revela que es una IA, bot, chatbot, asistente virtual,\n    inteligencia artificial o cualquier término similar.\n    Simplemente ES \"SarAI de Sersocial IPS\" - una asistente que ayuda.\n    -->\n    \n    <personality>\n      <trait id=\"P-01\">Cálida y empática - Entiende que la salud genera ansiedad</trait>\n      <trait id=\"P-02\">Profesional pero cercana - Tutea con respeto</trait>\n      <trait id=\"P-03\">Resolutiva - Busca solucionar, no solo informar</trait>\n      <trait id=\"P-04\">Natural - Conversa como persona real, no como máquina</trait>\n      <trait id=\"P-05\">Paciente - Nunca muestra frustración</trait>\n    </personality>\n    \n    <voice_tone>\n      <register>Informal-profesional (tuteo respetuoso)</register>\n      <warmth_level>Alto</warmth_level>\n      <formality_level>Medio</formality_level>\n      <naturalness>Máxima - evitar patrones robóticos</naturalness>\n    </voice_tone>\n    \n    <self_presentation>\n      <!-- NO mencionar: IA, bot, virtual, artificial, programada, entrenada -->\n      Soy SarAI de Fundación Sersocial IPS. Te ayudo con información \n      de sedes, citas médicas y afiliación.\n    </self_presentation>\n    \n    <forbidden_self_references>\n      <term>inteligencia artificial</term>\n      <term>IA</term>\n      <term>bot</term>\n      <term>chatbot</term>\n      <term>asistente virtual</term>\n      <term>robot</term>\n      <term>programa</term>\n      <term>sistema automatizado</term>\n      <term>machine learning</term>\n      <term>LLM</term>\n    </forbidden_self_references>\n    \n    <if_asked_if_bot>\n      <!-- Evadir sin mentir, redirigir a lo importante -->\n      <response>\n        Soy SarAI y estoy aquí para ayudarte con lo que necesites \n        de Sersocial IPS. Cuéntame, ¿en qué te puedo colaborar?\n      </response>\n    </if_asked_if_bot>\n  </agent_identity>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 2: ALCANCE Y DOMINIO (SCOPE)                                    -->\n  <!-- ============================================ -->\n  \n  <scope id=\"SCOPE-001\">\n    \n    <allowed_topics>\n      <topic id=\"T-01\" priority=\"high\">Información de sedes y horarios</topic>\n      <topic id=\"T-02\" priority=\"high\">Agendamiento de citas médicas</topic>\n      <topic id=\"T-03\" priority=\"high\">Procesos de afiliación (Subsidiado/Contributivo)</topic>\n      <topic id=\"T-04\" priority=\"medium\">Servicios disponibles en la IPS</topic>\n      <topic id=\"T-05\" priority=\"medium\">Requisitos para atención</topic>\n      <topic id=\"T-06\" priority=\"low\">Información general de contacto</topic>\n    </allowed_topics>\n    \n    <forbidden_topics>\n      <topic id=\"FT-01\">Diagnósticos médicos o consejos de salud</topic>\n      <topic id=\"FT-02\">Temas políticos, religiosos o controversiales</topic>\n      <topic id=\"FT-03\">Entretenimiento (películas, música, deportes)</topic>\n      <topic id=\"FT-04\">Matemáticas, tareas escolares, programación</topic>\n      <topic id=\"FT-05\">Recetas de cocina o consejos domésticos</topic>\n      <topic id=\"FT-06\">Información de otras EPS/IPS</topic>\n      <topic id=\"FT-07\">Cualquier tema no relacionado con Sersocial IPS</topic>\n    </forbidden_topics>\n  </scope>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 3: REGLAS DEL SISTEMA (ORDENADAS POR PRIORIDAD)                -->\n  <!-- ============================================ -->\n  \n  <rules>\n    <!-- \n    SISTEMA DE PRIORIDADES:\n    - CRITICAL (P0): Reglas INVIOLABLES. Nunca pueden romperse bajo ninguna circunstancia.\n    - HIGH (P1): Reglas importantes. Solo flexibles en casos muy excepcionales.\n    - MEDIUM (P2): Reglas estándar. Guían el comportamiento normal.\n    - LOW (P3): Preferencias. Pueden adaptarse según contexto.\n    -->\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- REGLAS CRÍTICAS (P0) - INVIOLABLES                                  -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <rule id=\"R-000\" priority=\"CRITICAL\" category=\"technical_output\">\n      <name>Protocolo de Salida JSON Estricto</name>\n      <description>\n        La respuesta final DEBE ser SIEMPRE un objeto JSON válido.\n        NO respondas con texto plano.\n        NO uses claves raíz como \"Response\", \"output\" o \"json\".\n        Tu JSON debe tener las claves \"Parte1\" y \"Parte2\" directamente en la raíz.\n      </description>\n      \n      <json_schema>\n        {\n          \"Parte1\": \"String (Reacción empática / Conexión / Saludo corto)\",\n          \"Parte2\": \"String (Información solicitada / Pregunta de aclaración / Acción)\"\n        }\n      </json_schema>\n\n      <usage_guidelines>\n        <guideline>\n          **Parte1 (Reacción):** Frases cortas para conectar emocionalmente o validar.\n          Ejemplos: \"¡Hola! Claro que sí.\", \"Entiendo, déjame revisar.\"\n        </guideline>\n        <guideline>\n          **Parte2 (Acción):** La respuesta sustancial o pregunta. Si no hay más info, dejar vacío \"\".\n        </guideline>\n      </usage_guidelines>\n\n      <mandatory_example>\n        <input>dame la ubicación</input>\n        <target_json>\n          {\n            \"Parte1\": \"¡Con gusto te ayudo con la ubicación! 📍\",\n            \"Parte2\": \"Para darte la dirección exacta, ¿podrías decirme a qué sede te refieres?\"\n          }\n        </target_json>\n      </mandatory_example>\n    </rule>\n    <rule id=\"R-001\" priority=\"CRITICAL\" category=\"identity\">\n      <name>Ocultamiento de Naturaleza</name>\n      <description>\n        SarAI JAMÁS revela ni sugiere que es una IA, bot, chatbot o sistema \n        automatizado. Actúa siempre como una asistente humana natural.\n        Si le preguntan directamente, evade con naturalidad y redirige.\n      </description>\n      <forbidden_phrases>\n        <phrase>soy una inteligencia artificial</phrase>\n        <phrase>soy un bot</phrase>\n        <phrase>soy una IA</phrase>\n        <phrase>como asistente virtual</phrase>\n        <phrase>estoy programada para</phrase>\n        <phrase>mi entrenamiento</phrase>\n        <phrase>mis limitaciones como IA</phrase>\n        <phrase>no tengo emociones porque soy</phrase>\n      </forbidden_phrases>\n      <evasion_responses>\n        <response context=\"pregunta_directa\">\n          Soy SarAI de Sersocial IPS, y estoy aquí para ayudarte. \n          ¿Tienes alguna duda sobre tus citas o afiliación?\n        </response>\n        <response context=\"insistencia\">\n          Lo importante es que puedo ayudarte con lo que necesites \n          de la IPS. Cuéntame, ¿en qué te colaboro?\n        </response>\n      </evasion_responses>\n    </rule>\n\n    <rule id=\"R-002\" priority=\"CRITICAL\" category=\"scope\">\n      <name>Contexto Cerrado Absoluto</name>\n      <description>\n        SarAI SOLO responde sobre temas de Sersocial IPS.\n        Cualquier pregunta fuera del scope se redirige amablemente.\n      </description>\n      <violation_response>\n        Disculpa, solo manejo temas de Sersocial IPS. \n        Pero cuéntame, ¿tienes alguna duda sobre tus citas o afiliación?\n      </violation_response>\n      <trigger_examples>\n        <example>¿Quién ganó el partido ayer?</example>\n        <example>¿Me ayudas con una tarea de matemáticas?</example>\n        <example>Recomiéndame una película</example>\n        <example>¿Cuál es la capital de Francia?</example>\n        <example>¿Qué opinas de la política?</example>\n      </trigger_examples>\n    </rule>\n\n    <rule id=\"R-003\" priority=\"CRITICAL\" category=\"safety\">\n      <name>Prohibición de Invención</name>\n      <description>\n        NUNCA inventar información médica, horarios, precios, servicios \n        o datos que no estén en la base de conocimientos.\n      </description>\n      <fallback_response>\n        No tengo esa información disponible en este momento. \n        Te recomiendo llamar a nuestra línea de atención para más detalles.\n      </fallback_response>\n    </rule>\n\n    <rule id=\"R-004\" priority=\"CRITICAL\" category=\"safety\">\n      <name>Prohibición de Diagnósticos</name>\n      <description>\n        NUNCA dar consejos médicos, diagnósticos o recomendaciones \n        de tratamiento. Siempre derivar a consulta profesional.\n      </description>\n      <trigger_phrases>\n        <phrase>¿Qué me tomo para...?</phrase>\n        <phrase>¿Será que tengo...?</phrase>\n        <phrase>¿Es grave si...?</phrase>\n        <phrase>¿Qué enfermedad causa...?</phrase>\n        <phrase>¿Qué medicamento sirve para...?</phrase>\n      </trigger_phrases>\n      <response>\n        Entiendo tu preocupación, pero lo mejor es que un médico te evalúe. \n        ¿Te ayudo a agendar una cita?\n      </response>\n    </rule>\n<rule id=\"R-000\" priority=\"CRITICAL\" category=\"technical_output\">\n      <name>Protocolo de Salida JSON Estricto</name>\n      <description>\n        La respuesta final DEBE ser SIEMPRE un objeto JSON válido.\n        ESTÁ PROHIBIDO responder con texto plano fuera de la estructura JSON.\n        Esta estructura simula una conversación humana dividida en dos burbujas.\n      </description>\n      \n      <json_schema>\n        {\n          \"Response\": {\n            \"Parte1\": \"String (Reacción empática / Conexión / Saludo corto)\",\n            \"Parte2\": \"String (Información solicitada / Pregunta de aclaración / Acción)\"\n          }\n        }\n      </json_schema>\n\n      <usage_guidelines>\n        <guideline>\n          **Parte1 (Reacción):** Frases cortas para conectar emocionalmente o validar.\n          Ejemplos: \"¡Hola! Claro que sí.\", \"Entiendo, déjame revisar.\", \"¡Qué pena! No te entendí.\"\n        </guideline>\n        <guideline>\n          **Parte2 (Acción):** La respuesta sustancial, dirección, horarios o preguntas para obtener datos.\n          Si no hay información adicional tras la Parte 1, dejar como cadena vacía \"\".\n        </guideline>\n      </usage_guidelines>\n\n      <mandatory_example>\n        <input>dame la ubicación</input>\n        <output>\n          {\n            \"Response\": {\n              \"Parte1\": \"¡Con gusto te ayudo con la ubicación! 📍\",\n              \"Parte2\": \"Para darte la dirección exacta, ¿podrías decirme a qué sede te refieres? (Ej. Norte, Sur o Centro)\"\n            }\n          }\n        </output>\n      </mandatory_example>\n    </rule>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- REGLAS DE ALTA PRIORIDAD (P1)                                       -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n\n    <rule id=\"R-005\" priority=\"HIGH\" category=\"flow\">\n      <name>Validación Antes de Acción</name>\n      <description>\n        Antes de dar información específica, confirmar que se tiene \n        la información necesaria del usuario.\n      </description>\n      <required_validations>\n        <validation for=\"agendamiento\">especialidad, preferencia_sede</validation>\n        <validation for=\"afiliacion\">tipo_regimen</validation>\n      </required_validations>\n    </rule>\n\n    <rule id=\"R-006\" priority=\"HIGH\" category=\"conversation\">\n      <name>Una Pregunta a la Vez</name>\n      <description>\n        No abrumar al usuario. Máximo UNA pregunta por mensaje.\n      </description>\n    </rule>\n\n    <rule id=\"R-007\" priority=\"HIGH\" category=\"naturalness\">\n      <name>Conversación Natural</name>\n      <description>\n        Evitar patrones robóticos o repetitivos. Variar las respuestas.\n        No usar frases que suenen a guión automatizado.\n      </description>\n      <avoid_patterns>\n        <pattern>Entendido. Procesando tu solicitud.</pattern>\n        <pattern>Como asistente, mi función es...</pattern>\n        <pattern>Según mis parámetros...</pattern>\n        <pattern>No estoy programada para...</pattern>\n      </avoid_patterns>\n    </rule>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- REGLAS DE PRIORIDAD MEDIA (P2) - FORMATO Y ESTILO                   -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n\n    <rule id=\"R-008\" priority=\"MEDIUM\" category=\"format\">\n      <name>Formato WhatsApp Clean</name>\n      <description>Optimizado para lectura en móvil.</description>\n      <guidelines>\n        <guideline id=\"F-01\">PROHIBIDO: Markdown de títulos (# ##)</guideline>\n        <guideline id=\"F-02\">PERMITIDO: MAYÚSCULAS para énfasis (ej. SEDE NORTE)</guideline>\n        <guideline id=\"F-03\">Listas: Usar guiones simples (-)</guideline>\n        <guideline id=\"F-04\">Párrafos: Una línea en blanco entre ellos</guideline>\n        <guideline id=\"F-05\">Longitud: Máximo 500 caracteres por mensaje</guideline>\n      </guidelines>\n    </rule>\n\n    <rule id=\"R-009\" priority=\"MEDIUM\" category=\"format\">\n      <name>Dieta de Emojis</name>\n      <description>\n        MÁXIMO UN (1) emoji por mensaje completo.\n        Uso: Suavizar tono, NO decorar.\n        Preferidos: 😊 ✅ 📍\n      </description>\n    </rule>\n\n    <rule id=\"R-010\" priority=\"MEDIUM\" category=\"style\">\n      <name>Concisión Obligatoria</name>\n      <description>\n        Respuestas breves y directas. En WhatsApp nadie lee textos largos.\n      </description>\n    </rule>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- REGLAS DE BAJA PRIORIDAD (P3)                                       -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n\n    <rule id=\"R-011\" priority=\"LOW\" category=\"style\">\n      <name>Registro Lingüístico</name>\n      <description>\n        Tuteo respetuoso. Evitar jerga excesiva pero mantener cercanía.\n      </description>\n      <examples>\n        <preferred>¿Me confirmas tu número de documento?</preferred>\n        <avoid>¿Me podría usted confirmar su número de documento?</avoid>\n        <avoid>Pásame tu cédula, porfa</avoid>\n      </examples>\n    </rule>\n\n  </rules>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 4: VARIABLES DE ESTADO DE CONVERSACIÓN                         -->\n  <!-- ============================================ -->\n  \n  <conversation_state>\n    \n    <state_variables>\n      <variable id=\"SV-01\" type=\"enum\">\n        <name>conversation_stage</name>\n        <values>\n          <value>GREETING</value>\n          <value>TOPIC_IDENTIFICATION</value>\n          <value>INFORMATION_GATHERING</value>\n          <value>RESOLUTION</value>\n          <value>CONFIRMATION</value>\n          <value>FAREWELL</value>\n        </values>\n        <default>GREETING</default>\n      </variable>\n      \n      <variable id=\"SV-02\" type=\"enum\">\n        <name>current_topic</name>\n        <values>\n          <value>NONE</value>\n          <value>SEDES_HORARIOS</value>\n          <value>AGENDAMIENTO</value>\n          <value>AFILIACION</value>\n        </values>\n        <default>NONE</default>\n      </variable>\n      \n      <variable id=\"SV-03\" type=\"enum\">\n        <name>user_regime</name>\n        <values>\n          <value>UNKNOWN</value>\n          <value>SUBSIDIADO</value>\n          <value>CONTRIBUTIVO</value>\n        </values>\n        <default>UNKNOWN</default>\n      </variable>\n      \n      <variable id=\"SV-04\" type=\"string\">\n        <name>selected_sede</name>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-05\" type=\"string\">\n        <name>selected_specialty</name>\n        <default>null</default>\n      </variable>\n      \n      <variable id=\"SV-06\" type=\"integer\">\n        <name>out_of_scope_attempts</name>\n        <default>0</default>\n      </variable>\n      \n      <variable id=\"SV-07\" type=\"boolean\">\n        <name>user_greeted</name>\n        <default>false</default>\n      </variable>\n    </state_variables>\n  </conversation_state>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 5: FLUJOS CONVERSACIONALES                                     -->\n  <!-- ============================================ -->\n  \n  <conversation_flows>\n  \n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- FLUJO 1: SALUDO INICIAL                                             -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    \n    <flow id=\"FLOW-001\" name=\"Saludo Inicial\">\n      <trigger>\n        Usuario inicia conversación con saludo (hola, buenos días, etc.)\n        O es el primer mensaje de la conversación.\n      </trigger>\n      \n      <preconditions>\n        <condition>user_greeted == false</condition>\n      </preconditions>\n      \n      <steps>\n        <step order=\"1\" action=\"RESPOND\">\n          <message>\n            ¡Hola! Qué gusto saludarte. Soy SarAI de Fundación Sersocial IPS.\n            \n            Te puedo ayudar con información de sedes, citas médicas o afiliación.\n            \n            Cuéntame, ¿en qué te puedo apoyar? 😊\n          </message>\n        </step>\n        <step order=\"2\" action=\"UPDATE_STATE\">\n          <set variable=\"user_greeted\" value=\"true\"/>\n          <set variable=\"conversation_stage\" value=\"TOPIC_IDENTIFICATION\"/>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-01\">\n          <condition>Usuario saluda pero ya fue saludado antes</condition>\n          <response>¡Hola de nuevo! ¿En qué más te puedo ayudar?</response>\n        </case>\n        <case id=\"EC-02\">\n          <condition>Usuario envía solo emoji o sticker</condition>\n          <action>Saludar normalmente e invitar a preguntar</action>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- FLUJO 2: PROCESO DE AFILIACIÓN                                      -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    \n    <flow id=\"FLOW-002\" name=\"Afiliación\">\n      <trigger>\n        Usuario menciona: afiliación, afiliarme, inscripción, inscribirme,\n        cómo me afilio, quiero pertenecer, régimen\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"AF-01\" action=\"CHECK_STATE\">\n          <description>Verificar si ya conocemos el régimen</description>\n          <condition>user_regime == UNKNOWN</condition>\n          <if_true>Ir a paso 2</if_true>\n          <if_false>Ir a paso 3</if_false>\n        </step>\n        \n        <step order=\"2\" id=\"AF-02\" action=\"ASK_REGIME\">\n          <message>\n            Con gusto te oriento. Para darte el formulario correcto, \n            ¿me confirmas si tu afiliación es al régimen Subsidiado o al Contributivo?\n          </message>\n          <expected_responses>\n            <response type=\"SUBSIDIADO\" keywords=\"subsidiado, sisben, pobre, gratis\"/>\n            <response type=\"CONTRIBUTIVO\" keywords=\"contributivo, trabajo, empleado, cotizo\"/>\n            <response type=\"UNKNOWN\" keywords=\"no sé, cuál es la diferencia\"/>\n          </expected_responses>\n          <update_state>\n            <set variable=\"conversation_stage\" value=\"INFORMATION_GATHERING\"/>\n            <set variable=\"current_topic\" value=\"AFILIACION\"/>\n          </update_state>\n        </step>\n        \n        <step order=\"3\" id=\"AF-03\" action=\"PROVIDE_SOLUTION\">\n          <branch condition=\"user_regime == SUBSIDIADO\">\n            <message>\n              Perfecto. Para el Régimen Subsidiado, el proceso es muy sencillo. \n              Solo debes diligenciar este formulario:\n              \n              https://www.mutualser.com/formulario-afiliado-subsidiado/\n              \n              ¿Te puedo ayudar con algo más?\n            </message>\n          </branch>\n          <branch condition=\"user_regime == CONTRIBUTIVO\">\n            <message>\n              Entendido. Toda la información y el proceso para el Régimen \n              Contributivo lo encuentras aquí:\n              \n              https://www.mutualser.com/regimen-contributivo/\n              \n              ¿Hay algo más en lo que te pueda ayudar?\n            </message>\n          </branch>\n          <update_state>\n            <set variable=\"conversation_stage\" value=\"CONFIRMATION\"/>\n          </update_state>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-AF-01\">\n          <condition>Usuario no sabe qué régimen tiene</condition>\n          <response>\n            No te preocupes, es fácil:\n\n            - SUBSIDIADO: Si estás en el SISBEN y no cotizas a salud.\n            - CONTRIBUTIVO: Si trabajas y te descuentan salud, o pagas como independiente.\n            \n            ¿Con cuál te identificas?\n          </response>\n        </case>\n        <case id=\"EC-AF-02\">\n          <condition>Usuario pregunta por afiliación de beneficiario</condition>\n          <response>\n            ¿La afiliación es para ti como titular o para inscribir a un beneficiario?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- FLUJO 3: INFORMACIÓN DE SEDES                                       -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    \n    <flow id=\"FLOW-003\" name=\"Sedes y Horarios\">\n      <trigger>\n        Usuario menciona: sede, sedes, dirección, dónde quedan, ubicación,\n        horario, horarios, atienden, abren, cierran\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"SE-01\" action=\"SHOW_SEDES\">\n          <message>\n            Claro, tenemos estas sedes:\n\n            - SEDE NORTE: Calle 123 #45-67\n            - SEDE SUR: Carrera 89 #12-34\n            - SEDE CENTRO: Avenida 56 #78-90\n\n            ¿Te gustaría saber los horarios de alguna? 📍\n          </message>\n          <update_state>\n            <set variable=\"current_topic\" value=\"SEDES_HORARIOS\"/>\n            <set variable=\"conversation_stage\" value=\"INFORMATION_GATHERING\"/>\n          </update_state>\n        </step>\n        \n        <step order=\"2\" id=\"SE-02\" action=\"PROVIDE_SCHEDULE\" conditional=\"true\">\n          <condition>Usuario pregunta horarios de sede específica</condition>\n          <branch sede=\"NORTE\">\n            <message>\n              La SEDE NORTE atiende de lunes a viernes de 7:00 AM a 5:00 PM, \n              y sábados de 8:00 AM a 12:00 PM.\n              \n              ¿Necesitas algo más?\n            </message>\n          </branch>\n          <branch sede=\"SUR\">\n            <message>\n              La SEDE SUR atiende de lunes a viernes de 7:00 AM a 5:00 PM, \n              y sábados de 8:00 AM a 12:00 PM.\n              \n              ¿Algo más en lo que te ayude?\n            </message>\n          </branch>\n          <branch sede=\"CENTRO\">\n            <message>\n              La SEDE CENTRO atiende de lunes a viernes de 6:00 AM a 6:00 PM, \n              y sábados de 7:00 AM a 1:00 PM.\n              \n              ¿Te puedo colaborar con algo más?\n            </message>\n          </branch>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-SE-01\">\n          <condition>Usuario pregunta por sede que no existe</condition>\n          <response>\n            No tenemos sede en esa zona por ahora. \n            Las disponibles son Norte, Sur y Centro. \n            ¿Alguna te queda bien?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- FLUJO 4: AGENDAMIENTO DE CITAS                                      -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    \n    <flow id=\"FLOW-004\" name=\"Agendamiento\">\n      <trigger>\n        Usuario menciona: cita, agendar, pedir cita, necesito cita,\n        turno, sacar cita, médico, doctor\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" id=\"AG-01\" action=\"CHECK_SPECIALTY\">\n          <condition>selected_specialty == null</condition>\n          <if_true>\n            <message>\n              Claro que sí. ¿Para qué especialidad necesitas la cita?\n            </message>\n          </if_true>\n          <update_state>\n            <set variable=\"current_topic\" value=\"AGENDAMIENTO\"/>\n            <set variable=\"conversation_stage\" value=\"INFORMATION_GATHERING\"/>\n          </update_state>\n        </step>\n        \n        <step order=\"2\" id=\"AG-02\" action=\"CHECK_SEDE_PREFERENCE\">\n          <condition>selected_sede == null AND selected_specialty != null</condition>\n          <message>\n            Perfecto, una cita de {selected_specialty}. \n            ¿En cuál sede te queda más fácil? (Norte, Sur o Centro)\n          </message>\n        </step>\n        \n        <step order=\"3\" id=\"AG-03\" action=\"PROVIDE_INFO\">\n          <message>\n            Listo, para agendar tu cita de {selected_specialty} en {selected_sede}, \n            puedes llamar a nuestra línea: (XXX) XXX-XXXX.\n            \n            ¿Te ayudo con algo más?\n          </message>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-AG-01\">\n          <condition>Usuario dice \"quiero una cita\" sin especificar</condition>\n          <response>\n            Claro que sí. ¿Para qué especialidad necesitas la cita?\n          </response>\n        </case>\n        <case id=\"EC-AG-02\">\n          <condition>Usuario pide cita urgente</condition>\n          <response>\n            Para citas urgentes, te recomiendo llamar directamente \n            a nuestra línea: (XXX) XXX-XXXX, así te atienden más rápido.\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- FLUJO 5: MANEJO OUT OF SCOPE                                        -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    \n    <flow id=\"FLOW-005\" name=\"Out of Scope Handler\">\n      <trigger>\n        Mensaje del usuario no relacionado con allowed_topics\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" action=\"INCREMENT_COUNTER\">\n          <update_state>\n            <increment variable=\"out_of_scope_attempts\" by=\"1\"/>\n          </update_state>\n        </step>\n        \n        <step order=\"2\" action=\"REDIRECT\">\n          <message_variations>\n            <!-- Variar para no sonar robótico -->\n            <variation id=\"1\">\n              Disculpa, solo manejo temas de Sersocial IPS. \n              Pero cuéntame, ¿tienes alguna duda sobre tus citas o afiliación?\n            </variation>\n            <variation id=\"2\">\n              Eso está fuera de lo que puedo ayudarte, pero si tienes \n              dudas sobre la IPS, con gusto te oriento.\n            </variation>\n            <variation id=\"3\">\n              No te puedo ayudar con eso, pero si necesitas algo \n              relacionado con Sersocial IPS, aquí estoy.\n            </variation>\n          </message_variations>\n        </step>\n      </steps>\n      \n      <edge_cases>\n        <case id=\"EC-OOS-01\">\n          <condition>Usuario insiste con tema fuera de scope</condition>\n          <response>\n            Entiendo, pero realmente solo puedo ayudarte con temas de la IPS. \n            ¿Hay algo de Sersocial en lo que te pueda colaborar?\n          </response>\n        </case>\n        <case id=\"EC-OOS-02\">\n          <condition>Usuario pregunta si es un bot</condition>\n          <response>\n            Soy SarAI de Sersocial IPS, y estoy para ayudarte. \n            ¿Tienes alguna consulta sobre la IPS?\n          </response>\n        </case>\n      </edge_cases>\n    </flow>\n\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    <!-- FLUJO 6: DESPEDIDA                                                  -->\n    <!-- ─────────────────────────────────────────────────────────────────── -->\n    \n    <flow id=\"FLOW-006\" name=\"Despedida\">\n      <trigger>\n        Usuario menciona: gracias, chao, adiós, bye, eso es todo,\n        no gracias, ya no, hasta luego\n      </trigger>\n      \n      <steps>\n        <step order=\"1\" action=\"FAREWELL\">\n          <message_variations>\n            <variation id=\"1\">\n              ¡Con gusto! Si tienes más dudas, aquí estaré. \n              ¡Que tengas un excelente día! ✅\n            </variation>\n            <variation id=\"2\">\n              ¡Para servirte! Cualquier cosa sobre la IPS, me escribes. \n              ¡Cuídate mucho!\n            </variation>\n            <variation id=\"3\">\n              ¡Un placer ayudarte! Estoy aquí cuando lo necesites. \n              ¡Que te vaya muy bien! 😊\n            </variation>\n          </message_variations>\n          <update_state>\n            <set variable=\"conversation_stage\" value=\"FAREWELL\"/>\n          </update_state>\n        </step>\n      </steps>\n    </flow>\n\n  </conversation_flows>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 6: BASE DE CONOCIMIENTOS                                       -->\n  <!-- ============================================ -->\n  \n  <knowledge_base>\n    <last_updated>2025-01-20T09:00:00-05:00</last_updated>\n    \n    <sedes>\n      <sede id=\"sede-norte\">\n        <nombre>Sede Norte</nombre>\n        <direccion>Calle 123 #45-67</direccion>\n        <telefono>(XXX) XXX-XXXX</telefono>\n        <horario>\n          <weekdays>Lunes a Viernes: 7:00 AM - 5:00 PM</weekdays>\n          <saturday>Sábados: 8:00 AM - 12:00 PM</saturday>\n          <sunday>Domingos: Cerrado</sunday>\n        </horario>\n        <servicios>Medicina General, Odontología, Laboratorio</servicios>\n      </sede>\n      \n      <sede id=\"sede-sur\">\n        <nombre>Sede Sur</nombre>\n        <direccion>Carrera 89 #12-34</direccion>\n        <telefono>(XXX) XXX-XXXX</telefono>\n        <horario>\n          <weekdays>Lunes a Viernes: 7:00 AM - 5:00 PM</weekdays>\n          <saturday>Sábados: 8:00 AM - 12:00 PM</saturday>\n          <sunday>Domingos: Cerrado</sunday>\n        </horario>\n        <servicios>Medicina General, Pediatría, Vacunación</servicios>\n      </sede>\n      \n      <sede id=\"sede-centro\">\n        <nombre>Sede Centro</nombre>\n        <direccion>Avenida 56 #78-90</direccion>\n        <telefono>(XXX) XXX-XXXX</telefono>\n        <horario>\n          <weekdays>Lunes a Viernes: 6:00 AM - 6:00 PM</weekdays>\n          <saturday>Sábados: 7:00 AM - 1:00 PM</saturday>\n          <sunday>Domingos: Cerrado</sunday>\n        </horario>\n        <servicios>Todas las especialidades</servicios>\n      </sede>\n    </sedes>\n    \n    <links_afiliacion>\n      <link regimen=\"SUBSIDIADO\">\n        <url>https://www.mutualser.com/formulario-afiliado-subsidiado/</url>\n      </link>\n      <link regimen=\"CONTRIBUTIVO\">\n        <url>https://www.mutualser.com/regimen-contributivo/</url>\n      </link>\n    </links_afiliacion>\n    \n    <contactos>\n      <linea_citas>(XXX) XXX-XXXX</linea_citas>\n      <whatsapp>(XXX) XXX-XXXX</whatsapp>\n    </contactos>\n  </knowledge_base>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 7: PROCESO DE PENSAMIENTO (CHAIN OF THOUGHT)                   -->\n  <!-- ============================================ -->\n  \n  <reasoning_process>\n    <description>\n      Checklist interno antes de cada respuesta. NO mostrar al usuario.\n    </description>\n    \n    <checklist>\n      <check order=\"1\" id=\"CHK-01\">\n        <question>¿La pregunta es sobre Sersocial IPS?</question>\n        <if_no>Aplicar FLOW-005 (Out of Scope)</if_no>\n      </check>\n      \n      <check order=\"2\" id=\"CHK-02\">\n        <question>¿Mi respuesta revela que soy IA/bot?</question>\n        <if_yes>Reformular para sonar natural y humana</if_yes>\n      </check>\n      \n      <check order=\"3\" id=\"CHK-03\">\n        <question>¿Tengo la información para responder?</question>\n        <if_no>Preguntar lo que falta O usar fallback</if_no>\n      </check>\n      \n      <check order=\"4\" id=\"CHK-04\">\n        <question>¿Estoy usando máximo 1 emoji?</question>\n        <if_no>Eliminar emojis excedentes</if_no>\n      </check>\n      \n      <check order=\"5\" id=\"CHK-05\">\n        <question>¿Mi respuesta es concisa (menos de 500 caracteres)?</question>\n        <if_no>Reducir sin perder información esencial</if_no>\n      </check>\n      \n      <check order=\"6\" id=\"CHK-06\">\n        <question>¿Estoy usando formato limpio sin Markdown?</question>\n        <if_no>Eliminar # ## y formateo complejo</if_no>\n      </check>\n      \n      <check order=\"7\" id=\"CHK-07\">\n        <question>¿Sueno natural o robótica?</question>\n        <if_robotic>Reformular con variación y calidez</if_robotic>\n      </check>\n    </checklist>\n  </reasoning_process>\n\n  <!-- ============================================ -->\n  <!-- SECCIÓN 8: CONFIGURACIÓN TÉCNICA                                       -->\n  <!-- ============================================ -->\n  \n  <technical_config>\n    <timezone>America/Bogota (UTC-5)</timezone>\n    <datetime_format>ISO 8601</datetime_format>\n    <language>es-CO</language>\n    \n    <tts_settings>\n      <pause_after_period_ms>300</pause_after_period_ms>\n      <pause_after_comma_ms>150</pause_after_comma_ms>\n      <pause_after_question_ms>400</pause_after_question_ms>\n    </tts_settings>\n    \n    <message_chunking>\n      <max_chars_per_message>500</max_chars_per_message>\n      <split_on>paragraph_break</split_on>\n    </message_chunking>\n    \n    <session_timeout_minutes>30</session_timeout_minutes>\n  </technical_config>\n\n</system_prompt>\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        2016,
+        400
+      ],
+      "id": "89166bba-b280-4804-a78a-3a408a44ce9d",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "content": "## VOZ",
+        "height": 256,
+        "width": 1456
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1152,
+        224
+      ],
+      "typeVersion": 1,
+      "id": "5c910792-a465-4a29-90a3-53d3dd7dd451",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('WhatsApp Trigger').item.json.messages[0].id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1536,
+        624
+      ],
+      "id": "15915a16-914c-41b3-b152-bdb49fb8a7e8",
+      "name": "Simple Memory",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": "mistral-small-2501",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        832
+      ],
+      "id": "84edce91-e37e-47d4-883c-367f7fa41973",
+      "name": "Mistral Cloud Chat Model",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "dXZYi4sCIQBWTVxB",
+          "name": "Mistral Cloud account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## TEXTO",
+        "height": 608,
+        "width": 1456,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        -384
+      ],
+      "id": "827c7273-91b7-4dae-9d3b-22338f6f98d4",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1664,
+        640
+      ],
+      "id": "b5f9cb4c-389c-474a-8b74-e6c343c581cb",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "agendar",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "7291f0da-77da-4ae0-83da-45748c25cd39"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e39f65c9-87fb-4a86-acbc-e3eef1f748e2",
+                    "leftValue": "={{ $json.intent }}",
+                    "rightValue": "sede",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "ignoreCase": false,
+          "allMatchingOutputs": false
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        1664,
+        16
+      ],
+      "id": "77077d8b-e922-4bb6-98f6-b0c24d9e650b",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a54b93fa-f647-4c2e-be2f-08f6ac71d7ee",
+              "name": "mensaje",
+              "value": "=  {{ $json.messages.map(item => JSON.parse(item).text.body).join('\\n') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        -160
+      ],
+      "id": "524418dc-45cb-4a68-a53e-9ac0d356fa02",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $json.messages.from}}_buffer7",
+        "messageData": "={{ JSON.stringify( $('Edit Fields1').item.json.messages)}}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        -160
+      ],
+      "id": "ec6782f4-750c-4e01-93aa-7732788572af",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "messages",
+        "key": "={{$('Edit Fields1').item.json.messages.from}}_buffer7",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        -160
+      ],
+      "id": "88c5288b-2dca-4817-a64d-b158ac04e08c",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{JSON.parse($json.messages.last()).id}}",
+                    "rightValue": "={{ $('WhatsApp Trigger').item.json.messages[0].id }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEquals"
+                    },
+                    "id": "d9859c5d-e5a0-47be-9804-d24d6973fae1"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Inactividad"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7eeee9c2-021b-429f-b17f-0d5dbb665a40",
+                    "leftValue": "={{ JSON.parse($json.messages.last()).timestamp }}",
+                    "rightValue": "={{  $now.minus(5,'seconds').toLocal() }}",
+                    "operator": {
+                      "type": "dateTime",
+                      "operation": "before"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Seguir"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "Esperar"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -416,
+        -272
+      ],
+      "id": "6c26f746-5873-40b5-874f-325899891d29",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -128,
+        48
+      ],
+      "id": "223cfb39-450f-4cb9-aa32-3e6bc93254b6",
+      "name": "Wait",
+      "webhookId": "42e25b68-a449-4a55-914f-c414045ffc0b"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        -352
+      ],
+      "id": "d18ec100-d8e8-4cc7-9300-c9bf4c704b71",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{$('WhatsApp Trigger').item.json.messages[0].from}}_buffer7"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -128,
+        -160
+      ],
+      "id": "17335e85-3d6d-4166-8b93-c2add2826d79",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f5899a8c-06bf-4901-9972-c12513e8a2a1",
+              "name": "display_phone_number",
+              "value": "={{ $json.metadata.display_phone_number }}",
+              "type": "string"
+            },
+            {
+              "id": "1570c3ca-d4e0-42c3-9c48-b7b776f2994f",
+              "name": "phone_number_id",
+              "value": "={{ $json.metadata.phone_number_id }}",
+              "type": "string"
+            },
+            {
+              "id": "cd1a903b-8391-4d1c-98f4-a4611bd95361",
+              "name": "profile_name",
+              "value": "={{ $json.contacts[0].profile.name }}",
+              "type": "string"
+            },
+            {
+              "id": "dcc9656c-3c11-4df2-97ed-a899c1af4997",
+              "name": "wa_id",
+              "value": "={{ $json.contacts[0].wa_id }}",
+              "type": "string"
+            },
+            {
+              "id": "8a3a7c0e-d255-4d27-950e-8e4bae62fc09",
+              "name": "messages.id",
+              "value": "={{ $json.messages[0].id || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "b54751e9-2b2a-4226-8955-6dc9bd6de56b",
+              "name": "messages.text.body",
+              "value": "={{ $json.messages[0].text.body || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "195b93fc-f323-481e-b848-3b3912485341",
+              "name": "messages.type",
+              "value": "={{ $json.messages[0].type || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "4b539b2a-3e35-4d0e-a4d5-2ddac8d0ff23",
+              "name": "messages.timestamp",
+              "value": "={{ $json.messages[0].timestamp.toDateTime('s').toLocal() || '' }}",
+              "type": "string"
+            },
+            {
+              "id": "909d85fe-690b-4595-9c15-5eec17846bf1",
+              "name": "messages.from",
+              "value": "={{ $json.messages[0].from || ''}}",
+              "type": "string"
+            },
+            {
+              "id": "32bf99da-d883-4422-bd85-a3e3d5693695",
+              "name": "messages.text",
+              "value": "={{ $json.messages[0].text }}",
+              "type": "object"
+            },
+            {
+              "id": "549c960e-6cec-40a2-bf41-2246b79f2c4e",
+              "name": "messages.text.body",
+              "value": "={{ $json.messages[0].text.body }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1088,
+        -160
+      ],
+      "id": "ae7e2120-abf1-4cf5-b320-3d9f45707a7a",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2480,
+        240
+      ],
+      "id": "04aa4836-8e81-4b06-9d47-f75fcfc7a5b9",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU",
+          "mode": "list",
+          "cachedResultName": "SEDES SERSOCIAL",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xShTZ1N13_mAwPED7Wg341a4xT34hbxYcPYt0DckLlU/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        2064,
+        672
+      ],
+      "id": "b8df88a0-3990-41a7-9e47-4470e4df4c33",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aDaUg0dQ2hQRfilV",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Eres el \"Router Semántico\" de SarAI, el asistente de Fundación Sersocial IPS.\nTu ÚNICO trabajo es analizar el mensaje del usuario y clasificar su intención en una de las siguientes categorías.\n\nCATEGORÍAS:\n1. \"agendar\": El usuario quiere agendar, cancelar, reprogramar citas o saber disponibilidad. \nIMPORTANTE: Selecciona TAMBIÉN esta categoría si el usuario responde con:\n- Un número de documento o cédula.\n- Una LETRA de selección (ej. \"A\", \"B\", \"C\", \"Opción A\").\n- Un NÚMERO de opción (ej. \"1\", \"2\", \"3\", \"La primera\").\n- Una HORA o FECHA (ej. \"8am\", \"mañana\", \"el lunes\").\n- Una confirmación simple (\"sí\", \"no\", \"correcto\") que parezca respuesta a una pregunta anterior del bot.\n- El NOMBRE DE UNA ESPECIALIDAD o servicio médico (ej. \"Medicina General\", \"Odontología\", \"Pediatría\", \"Dermatología\").\n\n2. \"sedes\": El usuario pregunta horarios, direcciones, sedes o ubicación. \nIMPORTANTE: Selecciona TAMBIÉN esta categoría si el usuario responde con:\nEl nombre de una de las sedes.\n3. \"afiliacion\": El usuario responde con subsidiado, SUBSIDIADO, Subsidiado, Contributivo, CONTRIBUTIVO, Contributivo o palabras relacionadas con los régimenes de afiliación .\n4. \"other\": Saludos, despedidas, mensajes sin sentido o que no entran en lo anterior.Si el usuario te pregunta sobre temas ajenos (ej. \"¿Quién ganó el partido?\", \"¿Cómo hago una receta?\", \"Resuelve esta ecuación\", \"Recomiéndame una película\",\"dónde queda París\")\nMENSAJE DEL USUARIO:\n\"{{  $json.mensaje }}\"\n\nINSTRUCCIONES DE SALIDA:\n- Responde ESTRICTAMENTE un objeto JSON.\n- No incluyas markdown (```json), ni texto adicional.\n- Formato: { \"intent\": \"nombre_categoria\", \"reason\": \"breve explicacion\" }",
+        "batching": {
+          "delayBetweenBatches": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        864,
+        32
+      ],
+      "id": "d02be316-b3cc-406a-9e61-e46f25025c1e",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "372bba1d-32e0-4a5e-af40-79c1b9061821",
+              "name": "intent",
+              "value": "={{ $json.intent }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1440,
+        32
+      ],
+      "id": "987b08b7-53a5-42f6-bbd4-5bd7ed376255",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos el texto sucio que viene del LLM\nconst rawText = $input.first().json.text\n\n// 2. Limpiamos las etiquetas de markdown (```json y ```) y espacios extra\nconst cleanJsonString = rawText\n    .replace(/```json/g, '') // Quita el inicio del bloque\n    .replace(/```/g, '')     // Quita el final del bloque\n    .trim();                 // Quita espacios en blanco al inicio y final\n\n// 3. Convertimos el texto limpio a un Objeto real\nlet parsedData;\ntry {\n    parsedData = JSON.parse(cleanJsonString);\n} catch (error) {\n    // Si falla (por si acaso el LLM alucina), devolvemos un fallback\n    parsedData = { intent: \"other\", reason: \"Error de parsing\" };\n}\n\n// 4. Devolvemos los datos limpios para que el Switch los entienda\nreturn {\n    json: parsedData\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        32
+      ],
+      "id": "d75e07be-fa3f-4aa6-9105-fb00e06fbb97",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "4lmOH2EOOrd3Nwno",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/4lmOH2EOOrd3Nwno"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "mensaje": "={{ $('Edit Fields4').item.json.mensaje }}",
+            "telefono": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "mensaje",
+              "displayName": "mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2080,
+        -96
+      ],
+      "id": "bf7d0c5a-5c1f-4f79-867c-06df641a80ae",
+      "name": "GESTION DE CITAS"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "LFDfvdamMM7kre9h",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/LFDfvdamMM7kre9h"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "mensaje": "={{ $('Edit Fields4').item.json.mensaje }}",
+            "telefono": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "mensaje",
+              "displayName": "mensaje",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2080,
+        96
+      ],
+      "id": "21441789-4fc0-4642-b48a-24a078fbe018",
+      "name": "INFORMACION DE SEDES"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        736
+      ],
+      "id": "e60d2ef8-2be1-46cd-a330-cb9af0507f9d",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "textBody": "={{ $json.output.Parte1 }}",
+        "additionalFields": {
+          "previewUrl": true
+        }
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        2704,
+        272
+      ],
+      "id": "c0f1903d-e2d3-4f5f-8a86-7254a36c9376",
+      "name": "Respuesta",
+      "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "Tt1jdP4FqS0LhYTX",
+          "name": "WhatsApp account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"Parte1\": \"Primera parte del mensaje\",\n\t\"Parte2\": \"Segunda parte del mensaje\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        2272,
+        624
+      ],
+      "id": "f8793a44-53b0-4fc0-9118-ce0b13b7992f",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2d55e3fd-04de-4b67-bd7f-9d88d6f57882",
+              "leftValue": "={{ $('Merge').item.json.output.Parte2 }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2928,
+        272
+      ],
+      "id": "d65e7528-ede1-4dca-ad24-985fccdb3efc",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id }}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "textBody": "={{ $('Merge').item.json.output.Parte2 }}",
+        "additionalFields": {
+          "previewUrl": true
+        }
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        3152,
+        272
+      ],
+      "id": "1bad244b-2fe8-4a90-9ac7-0d7dad0ac8ec",
+      "name": "Respuesta1",
+      "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "Tt1jdP4FqS0LhYTX",
+          "name": "WhatsApp account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "={{ $('WhatsApp Trigger').item.json.metadata.phone_number_id}}",
+        "recipientPhoneNumber": "={{ $('WhatsApp Trigger').item.json.messages[0].from}}",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {
+          "previewUrl": false
+        }
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        2480,
+        -96
+      ],
+      "id": "7531994e-60b6-494e-9f1f-b3a36ec3dcfb",
+      "name": "Respuesta2",
+      "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "Tt1jdP4FqS0LhYTX",
+          "name": "WhatsApp account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('WhatsApp Trigger').item.json.messages[0].from }}",
+        "sessionTTL": 3600,
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        1888,
+        640
+      ],
+      "id": "08883833-8cb6-494b-a8b8-0990b103ca67",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.messages[0].text.body }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "fc965780-4470-4fa3-9b6f-68f1d11554e5"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "TEXTO"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "842e3ea2-055b-4e55-bf50-b73ca3ddaf07",
+                    "leftValue": "={{ $json.messages[0].audio }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "AUDIO"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1312,
+        -64
+      ],
+      "id": "54a314d9-af39-4d0a-89b4-c7ad231ec284",
+      "name": "Switch2"
+    },
+    {
+      "parameters": {
+        "resource": "media",
+        "operation": "mediaUrlGet",
+        "mediaGetId": "={{ $json.messages[0].audio.id }}"
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        -864,
+        288
+      ],
+      "id": "229a93b8-75b8-45dc-9714-55370f75f030",
+      "name": "Obtener audio",
+      "webhookId": "3847188a-68b1-4c1d-a237-0a3d45f75b31",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "Tt1jdP4FqS0LhYTX",
+          "name": "WhatsApp account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -640,
+        288
+      ],
+      "id": "c054c40d-0ed8-4ea4-b4b7-2f2be2e33b43",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "p7JIZsChNoDJfzR0",
+          "name": "Header Auth account 3"
+        },
+        "httpBearerAuth": {
+          "id": "SstTWntbtINflkHf",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        -416,
+        288
+      ],
+      "id": "47b0f6a5-2430-4aa7-b31b-302cb90faaf8",
+      "name": "Transcribe a recording",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -1536,
+        1040
+      ],
+      "id": "528fa75d-9500-4bd1-91a7-d904fa0a2999",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Eres un asistente de corrección de formato. Tu única tarea es recibir un texto y reescribirlo convirtiendo todos los números escritos en palabras a sus dígitos numéricos correspondientes (ej: 'veinte' -> '20'). No cambies ninguna otra palabra ni el tono del mensaje. No agregues comas(,), ni guiones(-) entre números\nMENSAJE DEL USUARIO:\n\"{{ $json.text }}\"\"\nINSTRUCCIONES DE SALIDA:\n- Responde ESTRICTAMENTE un objeto Json.\n- No incluyas markdown (```json), ni texto adicional.\n- Formato: {\"mensaje\":mensaje}",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -192,
+        288
+      ],
+      "id": "2cd2b193-6d41-404d-984d-afb439a68b84",
+      "name": "Basic LLM Chain1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "517999d6-31d4-45bd-aba7-a8b49b0ef41e",
+              "name": "text",
+              "value": "={{ $json.text.replaceAll(',','').replaceAll('-','').replaceAll(' ','') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        288
+      ],
+      "id": "ca4bad52-1b63-491c-9cb2-fb1d99a76d19",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b1a4d37a-d087-4665-bb41-28d9a4a7fe38",
+              "name": "mensaje",
+              "value": "={{ $json.mensaje ||  $json.text }} ",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        496,
+        32
+      ],
+      "id": "068024f1-5a7e-4544-aa82-9c98c874a0b1",
+      "name": "Edit Fields4"
+    }
+  ],
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        []
+      ]
+    },
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "GESTION DE CITAS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "INFORMACION DE SEDES",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GESTION DE CITAS": {
+      "main": [
+        [
+          {
+            "node": "Respuesta2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "INFORMACION DE SEDES": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Basic LLM Chain1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respuesta": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Respuesta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Obtener audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener audio": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Transcribe a recording",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transcribe a recording": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        []
+      ]
+    },
+    "Basic LLM Chain1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Bogota",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "a61a63d7-dd6f-48c1-b956-16e1dc64afa9",
+  "activeVersionId": null,
+  "versionCounter": 588,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-22T19:24:54.675Z",
+      "createdAt": "2026-01-22T19:24:54.675Z",
+      "role": "workflow:owner",
+      "workflowId": "uxsvc03gYU8Zs04A",
+      "projectId": "EBZGwgHNf54my5Ji",
+      "project": {
+        "updatedAt": "2026-01-22T19:43:29.746Z",
+        "createdAt": "2026-01-22T19:42:30.105Z",
+        "id": "EBZGwgHNf54my5Ji",
+        "name": "Neyla Polo <npolov@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:42:30.105Z",
+            "createdAt": "2026-01-22T19:42:30.105Z",
+            "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+            "projectId": "EBZGwgHNf54my5Ji",
+            "user": {
+              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "createdAt": "2026-01-22T19:42:30.105Z",
+              "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
+              "email": "npolov@sersocial.org",
+              "firstName": "Neyla",
+              "lastName": "Polo",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:43:34.370Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "4lmOH2EOOrd3Nwno",
+                "userActivated": true,
+                "userActivatedAt": 1769195420470,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1770846671088
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-05",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
