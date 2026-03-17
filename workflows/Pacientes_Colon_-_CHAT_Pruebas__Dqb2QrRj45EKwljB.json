@@ -1,0 +1,683 @@
+{
+  "updatedAt": "2026-02-04T20:42:08.922Z",
+  "createdAt": "2026-01-29T16:00:33.084Z",
+  "id": "Dqb2QrRj45EKwljB",
+  "name": "Pacientes Colon - CHAT (Pruebas)",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: $input.first().json\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -352,
+        176
+      ],
+      "id": "0d1bbb67-2d2b-417a-b6df-3554362f2062",
+      "name": "tomar_paciente"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT *\nFROM pacientes_sospecha_colon\nWHERE usuario_contactado = 'NO'\nORDER BY id ASC\nLIMIT 1;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -848,
+        304
+      ],
+      "id": "8ffeee85-3a34-4514-abae-ba54e1507be0",
+      "name": "obtener_paciente_pendiente",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6948bfac-b6a6-4232-a75a-98a78a97746c",
+              "leftValue": "={{$items(\"obtener_paciente_pendiente\").length}}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -624,
+        304
+      ],
+      "id": "1cb033d5-3aa2-4c02-83be-a0dcb9ee9df0",
+      "name": "paciente encontrado con contactado en NO?"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"existe\": true,\n  \"documento\": \"{{$json.documento}}\",\n  \"nombre_completo\": \"{{$json.nombre_completo}}\",\n  \"telefono\": \"{{$json.telefono_1}}\",\n  \"correo\": \"{{$json.correo}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -144,
+        176
+      ],
+      "id": "d9741c6a-3be8-4834-b7dd-652dde6354f4",
+      "name": "paciente_encontrado"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "get_paciente_pendiente",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1072,
+        304
+      ],
+      "id": "efb227a7-795f-4dc1-8b95-7cdf5af729a7",
+      "name": "get_paciente_pendiente",
+      "webhookId": "435a2fab-0a21-4862-947f-d925a3e7830a"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"existe\": false\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        -336,
+        352
+      ],
+      "id": "f445ae75-0c8b-44ae-ab98-b9ebdd812052",
+      "name": "paciente_no_encontrado"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -1312,
+        928
+      ],
+      "id": "60abb0ce-7c30-4d21-b55f-087511ef4b01",
+      "name": "When chat message received",
+      "webhookId": "1f1b971f-70df-4180-8b95-00597998133e",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: $input.first().json\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        800
+      ],
+      "id": "bf127b7e-de1d-4d71-8da2-50c118a60665",
+      "name": "tomar_paciente1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT *\nFROM pacientes_sospecha_colon\nWHERE usuario_contactado = 'NO'\nORDER BY id ASC\nLIMIT 1;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -784,
+        928
+      ],
+      "id": "f9407dce-a046-4eea-9aa3-0689f4e3096e",
+      "name": "obtener_paciente_pendiente1",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6948bfac-b6a6-4232-a75a-98a78a97746c",
+              "leftValue": "={{$items(\"obtener_paciente_pendiente1\").length}}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -112,
+        928
+      ],
+      "id": "2a74a424-db7e-4071-b504-1dc0022c9389",
+      "name": "paciente encontrado con contactado en NO?1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"existe\": true,\n  \"documento\": \"{{$json.documento}}\",\n  \"nombre_completo\": \"{{$json.nombre_completo}}\",\n  \"telefono\": \"{{$json.telefono_1}}\",\n  \"correo\": \"{{$json.correo}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        368,
+        800
+      ],
+      "id": "e5aca517-ec4b-4e50-9229-1291c5b3d6ab",
+      "name": "paciente_encontrado1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"existe\": false\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        176,
+        976
+      ],
+      "id": "bfb31bcc-5798-4545-adab-ed905d58fa3c",
+      "name": "paciente_no_encontrado1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -608,
+        1152
+      ],
+      "id": "b73ec471-5898-4d32-b7c0-2a99afea4343",
+      "name": "AI Agent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -384,
+        1248
+      ],
+      "id": "74d8dbb1-8691-47fd-9960-e17a9f8fa4c1",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "JtHsW2zgXJTWoMao",
+          "name": "OpenAi account 4"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        1248
+      ],
+      "id": "37289285-335e-428f-a313-d269cfc87baf",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT *\nFROM pacientes_sospecha_colon\nWHERE usuario_contactado = 'NO'\nORDER BY id ASC\nLIMIT 1;\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1120,
+        928
+      ],
+      "id": "d8cde641-aa87-448e-98d7-5fc952741f0f",
+      "name": "disponibiliad_medico",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Cuando recibas los datos los datos {{ $json.tipo_documento }} y {{ $json.documento }} consulta la tool 'citas_zeus' y ejecutala\n\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        64,
+        176
+      ],
+      "id": "6660f779-cafd-4fdc-8c32-34cde3f0a550",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.tipo_documento }}{{ $json.documento }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        400
+      ],
+      "id": "6f5df011-fd13-49f3-adb5-1f5a43c809f9",
+      "name": "Postgres Chat Memory1",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        64,
+        400
+      ],
+      "id": "58bf271b-1705-4063-a423-0fe29aa3c32e",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "JtHsW2zgXJTWoMao",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "LTmtmcMGQaHqcOnO",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/LTmtmcMGQaHqcOnO"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "TipoIdentificacion": "={{ $json.tipo_documento }}",
+            "NumeroIdentificacion": "={{ $json.documento }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "NumeroIdentificacion",
+              "displayName": "NumeroIdentificacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "TipoIdentificacion",
+              "displayName": "TipoIdentificacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        400
+      ],
+      "id": "c356c291-4c87-4a25-8a9b-1463cbd1d381",
+      "name": "citas_zeus"
+    }
+  ],
+  "connections": {
+    "tomar_paciente": {
+      "main": [
+        [
+          {
+            "node": "paciente_encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener_paciente_pendiente": {
+      "main": [
+        [
+          {
+            "node": "paciente encontrado con contactado en NO?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "paciente encontrado con contactado en NO?": {
+      "main": [
+        [
+          {
+            "node": "tomar_paciente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "paciente_no_encontrado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_paciente_pendiente": {
+      "main": [
+        [
+          {
+            "node": "obtener_paciente_pendiente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "disponibiliad_medico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "tomar_paciente1": {
+      "main": [
+        [
+          {
+            "node": "paciente_encontrado1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener_paciente_pendiente1": {
+      "main": [
+        [
+          {
+            "node": "paciente encontrado con contactado en NO?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "paciente encontrado con contactado en NO?1": {
+      "main": [
+        [
+          {
+            "node": "tomar_paciente1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "paciente_no_encontrado1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "paciente_encontrado": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "citas_zeus": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "ee10213c-d9ec-4186-9157-4335b5adb572",
+  "activeVersionId": null,
+  "versionCounter": 76,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-01-29T16:00:33.084Z",
+      "createdAt": "2026-01-29T16:00:33.084Z",
+      "role": "workflow:owner",
+      "workflowId": "Dqb2QrRj45EKwljB",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-01-13T21:22:04.748Z",
+      "createdAt": "2026-01-13T21:22:04.748Z",
+      "id": "fikbPaiMxfrzFfMz",
+      "name": "test"
+    }
+  ],
+  "activeVersion": null
+}
