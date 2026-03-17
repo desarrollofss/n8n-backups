@@ -1,0 +1,1181 @@
+{
+  "updatedAt": "2026-01-30T21:26:14.872Z",
+  "createdAt": "2026-01-28T19:14:39.794Z",
+  "id": "UkQA7gBhIusGaQPF",
+  "name": "agendar_cita",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        704,
+        -336
+      ],
+      "id": "f1984b08-6443-4c6d-9d97-61324f4682a0",
+      "name": "calcular_fecha_cita",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1120,
+        -336
+      ],
+      "id": "8c844e95-41e2-4954-9c73-2641e6f8f7ad",
+      "name": "actualizar_estado_paciente",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "citas_medicas",
+          "mode": "list",
+          "cachedResultName": "citas_medicas"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "duracion": "={{$json.duracion}}",
+            "documento": "={{$json.documento}}",
+            "nombre": "={{$json.nombre_completo}}",
+            "correo": "={{$json.correo}}",
+            "telefono": "={{$json.telefono}}",
+            "tipo_cita": "colon",
+            "hora": "={{$json.hora_cita}}",
+            "estado": "agendada",
+            "fecha": "={{$json.fecha_cita}}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "documento",
+              "displayName": "documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipo_cita",
+              "displayName": "tipo_cita",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "hora",
+              "displayName": "hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "duracion",
+              "displayName": "duracion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        912,
+        -336
+      ],
+      "id": "58b4f397-edf1-43c5-a451-30b5ca12a37b",
+      "name": "insertar_datos_citas",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "agendar_cita",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        496,
+        -336
+      ],
+      "id": "82f1598c-980d-40b1-b002-cd1d9999be35",
+      "name": "agendar_cita",
+      "webhookId": "435a2fab-0a21-4862-947f-d925a3e7830a",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"ok\",\n  \"mensaje\": \"Cita agendada correctamente\",\n  \"fecha\": \"{{$json.fecha_cita}}\",\n  \"hora\": \"{{$json.hora_cita}}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1328,
+        -336
+      ],
+      "id": "74fd7017-3a0f-46c0-bc6f-80d8e2e14ef0",
+      "name": "respuesta",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        496,
+        -112
+      ],
+      "id": "ffa5e860-450e-4bfc-ba04-d6c5715d6fbd",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        704,
+        -112
+      ],
+      "id": "08c08da1-fe29-4d6c-b0e6-0f9799779bf5",
+      "name": "calcular_fecha_cita1"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "citas_medicas",
+          "mode": "list",
+          "cachedResultName": "citas_medicas"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "duracion": "={{$json.duracion}}",
+            "documento": "={{$json.documento}}",
+            "nombre": "={{$json.nombre_completo}}",
+            "correo": "={{$json.correo}}",
+            "telefono": "={{$json.telefono}}",
+            "tipo_cita": "prostata",
+            "hora": "={{$json.hora_cita}}",
+            "estado": "agendada",
+            "fecha": "={{$json.fecha_cita}}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "documento",
+              "displayName": "documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipo_cita",
+              "displayName": "tipo_cita",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "hora",
+              "displayName": "hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "duracion",
+              "displayName": "duracion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        912,
+        -112
+      ],
+      "id": "18bb0912-9258-4372-84f3-d9cd819fc83a",
+      "name": "insertar_datos_citas1",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1120,
+        -112
+      ],
+      "id": "278ff884-9038-4e09-a15a-160e4d6e7f2b",
+      "name": "actualizar_estado_paciente1",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "r1",
+              "name": "fecha",
+              "value": "={{$json.fecha_cita}}",
+              "type": "string"
+            },
+            {
+              "id": "r2",
+              "name": "hora",
+              "value": "={{$json.hora_cita}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1328,
+        -112
+      ],
+      "id": "c07c755c-495e-4f76-ac66-dc7da24e41af",
+      "name": "respuesta1"
+    }
+  ],
+  "connections": {
+    "calcular_fecha_cita": {
+      "main": [
+        [
+          {
+            "node": "insertar_datos_citas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "insertar_datos_citas": {
+      "main": [
+        [
+          {
+            "node": "actualizar_estado_paciente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "actualizar_estado_paciente": {
+      "main": [
+        [
+          {
+            "node": "respuesta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "agendar_cita": {
+      "main": [
+        [
+          {
+            "node": "calcular_fecha_cita",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "calcular_fecha_cita1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "calcular_fecha_cita1": {
+      "main": [
+        [
+          {
+            "node": "insertar_datos_citas1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "insertar_datos_citas1": {
+      "main": [
+        [
+          {
+            "node": "actualizar_estado_paciente1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "actualizar_estado_paciente1": {
+      "main": [
+        [
+          {
+            "node": "respuesta1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "13512395-d6b6-462a-9c47-7e88612c99d6",
+  "activeVersionId": "13512395-d6b6-462a-9c47-7e88612c99d6",
+  "versionCounter": 89,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-01-28T19:14:39.794Z",
+      "createdAt": "2026-01-28T19:14:39.794Z",
+      "role": "workflow:owner",
+      "workflowId": "UkQA7gBhIusGaQPF",
+      "projectId": "0EZH4fBSbwkwd6Kg",
+      "project": {
+        "updatedAt": "2026-01-22T20:51:49.854Z",
+        "createdAt": "2026-01-22T20:50:50.165Z",
+        "id": "0EZH4fBSbwkwd6Kg",
+        "name": "Jean Carlos Tovio <jtovio@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T20:50:50.165Z",
+            "createdAt": "2026-01-22T20:50:50.165Z",
+            "userId": "955f2b79-a765-42d3-9d89-218b2adce28a",
+            "projectId": "0EZH4fBSbwkwd6Kg",
+            "user": {
+              "updatedAt": "2026-02-04T13:12:33.824Z",
+              "createdAt": "2026-01-22T20:50:50.165Z",
+              "id": "955f2b79-a765-42d3-9d89-218b2adce28a",
+              "email": "jtoviol@sersocial.org",
+              "firstName": "Jean Carlos",
+              "lastName": "Tovio",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T20:51:54.619Z",
+                "personalization_survey_n8n_version": "1.121.2"
+              },
+              "settings": {
+                "firstSuccessfulWorkflowId": "UkQA7gBhIusGaQPF",
+                "userActivated": true,
+                "userActivatedAt": 1769809067095,
+                "easyAIWorkflowOnboarded": true,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1769791993468
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-02-04",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-01-13T21:22:04.748Z",
+      "createdAt": "2026-01-13T21:22:04.748Z",
+      "id": "fikbPaiMxfrzFfMz",
+      "name": "test"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-01-30T21:26:14.880Z",
+    "createdAt": "2026-01-30T21:26:14.880Z",
+    "versionId": "13512395-d6b6-462a-9c47-7e88612c99d6",
+    "workflowId": "UkQA7gBhIusGaQPF",
+    "nodes": [
+      {
+        "parameters": {
+          "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          704,
+          -336
+        ],
+        "id": "f1984b08-6443-4c6d-9d97-61324f4682a0",
+        "name": "calcular_fecha_cita",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1120,
+          -336
+        ],
+        "id": "8c844e95-41e2-4954-9c73-2641e6f8f7ad",
+        "name": "actualizar_estado_paciente",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "citas_medicas",
+            "mode": "list",
+            "cachedResultName": "citas_medicas"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "duracion": "={{$json.duracion}}",
+              "documento": "={{$json.documento}}",
+              "nombre": "={{$json.nombre_completo}}",
+              "correo": "={{$json.correo}}",
+              "telefono": "={{$json.telefono}}",
+              "tipo_cita": "colon",
+              "hora": "={{$json.hora_cita}}",
+              "estado": "agendada",
+              "fecha": "={{$json.fecha_cita}}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "documento",
+                "displayName": "documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "nombre",
+                "displayName": "nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "telefono",
+                "displayName": "telefono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "tipo_cita",
+                "displayName": "tipo_cita",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha",
+                "displayName": "fecha",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "hora",
+                "displayName": "hora",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "time",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "duracion",
+                "displayName": "duracion",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "estado",
+                "displayName": "estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          912,
+          -336
+        ],
+        "id": "58b4f397-edf1-43c5-a451-30b5ca12a37b",
+        "name": "insertar_datos_citas",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "agendar_cita",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          496,
+          -336
+        ],
+        "id": "82f1598c-980d-40b1-b002-cd1d9999be35",
+        "name": "agendar_cita",
+        "webhookId": "435a2fab-0a21-4862-947f-d925a3e7830a",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "{\n  \"status\": \"ok\",\n  \"mensaje\": \"Cita agendada correctamente\",\n  \"fecha\": \"{{$json.fecha_cita}}\",\n  \"hora\": \"{{$json.hora_cita}}\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.4,
+        "position": [
+          1328,
+          -336
+        ],
+        "id": "74fd7017-3a0f-46c0-bc6f-80d8e2e14ef0",
+        "name": "respuesta",
+        "disabled": true
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          496,
+          -112
+        ],
+        "id": "ffa5e860-450e-4bfc-ba04-d6c5715d6fbd",
+        "name": "Execute Workflow Trigger"
+      },
+      {
+        "parameters": {
+          "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          704,
+          -112
+        ],
+        "id": "08c08da1-fe29-4d6c-b0e6-0f9799779bf5",
+        "name": "calcular_fecha_cita1"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "citas_medicas",
+            "mode": "list",
+            "cachedResultName": "citas_medicas"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "duracion": "={{$json.duracion}}",
+              "documento": "={{$json.documento}}",
+              "nombre": "={{$json.nombre_completo}}",
+              "correo": "={{$json.correo}}",
+              "telefono": "={{$json.telefono}}",
+              "tipo_cita": "prostata",
+              "hora": "={{$json.hora_cita}}",
+              "estado": "agendada",
+              "fecha": "={{$json.fecha_cita}}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "documento",
+                "displayName": "documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "nombre",
+                "displayName": "nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "telefono",
+                "displayName": "telefono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "tipo_cita",
+                "displayName": "tipo_cita",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha",
+                "displayName": "fecha",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "hora",
+                "displayName": "hora",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "time",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "duracion",
+                "displayName": "duracion",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "estado",
+                "displayName": "estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          912,
+          -112
+        ],
+        "id": "18bb0912-9258-4372-84f3-d9cd819fc83a",
+        "name": "insertar_datos_citas1",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1120,
+          -112
+        ],
+        "id": "278ff884-9038-4e09-a15a-160e4d6e7f2b",
+        "name": "actualizar_estado_paciente1",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "r1",
+                "name": "fecha",
+                "value": "={{$json.fecha_cita}}",
+                "type": "string"
+              },
+              {
+                "id": "r2",
+                "name": "hora",
+                "value": "={{$json.hora_cita}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1328,
+          -112
+        ],
+        "id": "c07c755c-495e-4f76-ac66-dc7da24e41af",
+        "name": "respuesta1"
+      }
+    ],
+    "connections": {
+      "calcular_fecha_cita": {
+        "main": [
+          [
+            {
+              "node": "insertar_datos_citas",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "insertar_datos_citas": {
+        "main": [
+          [
+            {
+              "node": "actualizar_estado_paciente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "actualizar_estado_paciente": {
+        "main": [
+          [
+            {
+              "node": "respuesta",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "agendar_cita": {
+        "main": [
+          [
+            {
+              "node": "calcular_fecha_cita",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "calcular_fecha_cita1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "calcular_fecha_cita1": {
+        "main": [
+          [
+            {
+              "node": "insertar_datos_citas1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "insertar_datos_citas1": {
+        "main": [
+          [
+            {
+              "node": "actualizar_estado_paciente1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "actualizar_estado_paciente1": {
+        "main": [
+          [
+            {
+              "node": "respuesta1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Jean Carlos Tovio",
+    "name": null,
+    "description": null,
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-01-30T21:26:14.872Z",
+        "id": 9,
+        "workflowId": "UkQA7gBhIusGaQPF",
+        "versionId": "13512395-d6b6-462a-9c47-7e88612c99d6",
+        "event": "activated",
+        "userId": null
+      }
+    ]
+  }
+}
