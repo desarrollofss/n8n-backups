@@ -1,0 +1,1596 @@
+{
+  "updatedAt": "2026-03-16T21:19:44.533Z",
+  "createdAt": "2026-02-23T16:58:21.617Z",
+  "id": "_ZcOLc4Mmd6nwM7N4yEaP",
+  "name": "SARAI - Post llamada",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "8QAWBLL5xzNT3DoYH-AW6",
+          "mode": "id",
+          "cachedResultUrl": "/n8n/workflow/8QAWBLL5xzNT3DoYH-AW6"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "aField",
+              "displayName": "aField",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": true
+            },
+            {
+              "id": "aNumber",
+              "displayName": "aNumber",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": true
+            },
+            {
+              "id": "thisFieldAcceptsAnyType",
+              "displayName": "thisFieldAcceptsAnyType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "anArray",
+              "displayName": "anArray",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "array",
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -224,
+        128
+      ],
+      "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
+      "name": "Call 'OBTENER TOKEN ZEUS'"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_CONTESTO',\n  resultado_llamada = 'NO_CONTESTO'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -800,
+        304
+      ],
+      "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
+      "name": "Marcar NO_CONTESTO",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "50828eea-843f-466c-8482-a6f56095273b",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_status }}",
+              "rightValue": "not_connected",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1088,
+        288
+      ],
+      "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
+      "name": "¿Fue contestada?"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'ACUDIENTE',\n  resultado_llamada = 'ACUDIENTE',\n  numero_brindado = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.numero_brindado }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -288,
+        -128
+      ],
+      "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
+      "name": "Guardar número acudiente",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e3ec67d0-60a9-4f79-afb9-a82f1c5d8d2d",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.es_acudiente }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "27e47a94-95ad-4c49-885f-1989ac61e406",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.numero_brindado }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -608,
+        128
+      ],
+      "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
+      "name": "¿Acudiente con número?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+              "rightValue": "NUMERO_EQUIVOCADO",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+              "rightValue": "NO_ACEPTA_GRABACION",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -928,
+        112
+      ],
+      "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
+      "name": "Número equivocado ?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "filter-event",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "call_analyzed",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -1440,
+        240
+      ],
+      "id": "db2fd84d-e5b0-4674-93df-4106fcdfe125",
+      "name": "¿Es call_analyzed?"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"ok\": true}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1168,
+        304
+      ],
+      "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
+      "name": "Responder OK a Retell"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_AGENDO',\n  resultado_llamada = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}',\n  motivo_no_asistencia = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.motivo_no_asistencia }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -320,
+        448
+      ],
+      "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
+      "name": "Marcar como NO_AGENDO",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE pacientes_sospecha_colon SET usuario_contactado = 'AGENDADO', opcion_elegida = '{{ $('Preparar datos agendamiento').first().json.opcion_elegida }}', fecha_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.fecha }}', hora_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.hora }}', resultado_llamada = 'AGENDADO' WHERE id = {{ $('Preparar datos agendamiento').first().json.paciente_id }};",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        608,
+        128
+      ],
+      "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
+      "name": "Marcar como AGENDADO",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ $('Call \\'OBTENER TOKEN ZEUS\\'').item.json.token }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "=json",
+        "specifyBody": "json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "={\n  \"fecha\": \"{{ $json.fecha }}\",\n  \"medico\": \"{{ $json.id_medico }}\",\n  \"idPuntoAtencion\": {{ $json.IdPuntoAtencionCita }},\n  \"idProgramacionMedicoDetalle\": {{ $json.id_programacion }},\n  \"paciente\": \"{{ $json.auto_id }}\",\n  \"hora\": \"{{ $json.hora }}\",\n  \"meridiano\": \"{{ $json.meridiano }}\",\n  \"asunto\": \"{{ $json.idAsunto }}\",\n  \"codEmpresa\": {{ $json.codEmpresa }},\n  \"contrato\": \"{{ $json.contrato }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"telefono\": \"{{ $json.telefono }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        416,
+        128
+      ],
+      "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
+      "name": "Agendar en Zeus"
+    },
+    {
+      "parameters": {
+        "jsCode": "const webhook = $('Webhook Retell Post-Call').first().json.body.call;\nconst paciente = $('Buscar paciente por call_id').first().json;\nconst opcionElegida = webhook.call_analysis.custom_analysis_data.opcion_elegida;\n\nconsole.log('opcion_elegida:', opcionElegida);\nconsole.log('opcion_1_raw:', paciente.opcion_1_raw);\nconsole.log('opcion_2_raw:', paciente.opcion_2_raw);\nconsole.log('opcion_3_raw:', paciente.opcion_3_raw);\n\nlet opcionRaw;\nif (opcionElegida === 'opcion_1') opcionRaw = paciente.opcion_1_raw;\nelse if (opcionElegida === 'opcion_2') opcionRaw = paciente.opcion_2_raw;\nelse if (opcionElegida === 'opcion_3') opcionRaw = paciente.opcion_3_raw;\n\nconsole.log('opcionRaw resultante:', opcionRaw);\n\nif (!opcionRaw) {\n  throw new Error(`opcionRaw es undefined. opcion_elegida recibida: \"${opcionElegida}\"`);\n}\n\nconst hora = opcionRaw.hora;\nconst hNum = parseInt(hora.split(':')[0]);\nconst meridiano = hNum < 12 ? 'am' : 'pm';\n\nreturn [{\n  json: {\n    paciente_id: paciente.id,\n    documento: paciente.documento,\n    tipo_documento: paciente.tipo_documento,\n    id_programacion: opcionRaw.idProgramacion,\n    auto_id: paciente.auto_id,\n    email: paciente.email,\n    telefono: paciente.telefono_1,\n    contrato: paciente.contrato,\n    codEmpresa: paciente.codigo_empresa,\n    fecha: opcionRaw.fecha.replace(/-/g, '/'),\n    hora: opcionRaw.hora,\n    id_medico: opcionRaw.id_medico,\n    IdPuntoAtencionCita: opcionRaw.idPuntoAntencionCita,\n    idAsunto: opcionRaw.idAsunto,\n    meridiano: meridiano,\n    opcion_elegida: opcionElegida\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        128
+      ],
+      "id": "71e76a8d-c34f-4905-836f-6420f778d714",
+      "name": "Preparar datos agendamiento"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "check-confirmo",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.confirmo_asistencia }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "c3749e9c-ea7b-4b0a-8a4a-d09a826bcfa3",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.opcion_elegida }}",
+              "rightValue": "ninguna",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "93d8267b-ce28-47cc-a34a-5bbc170581d5",
+              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+              "rightValue": "CONTESTO",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -432,
+        144
+      ],
+      "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
+      "name": "¿Confirmó asistencia?"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT p.*, p.opcion_1_raw, p.opcion_2_raw, p.opcion_3_raw FROM pacientes_sospecha_colon p WHERE p.call_id = '{{ $json.body.call.call_id }}' LIMIT 1;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1264,
+        96
+      ],
+      "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
+      "name": "Buscar paciente por call_id",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "retell-post-call",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1648,
+        240
+      ],
+      "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
+      "name": "Webhook Retell Post-Call",
+      "webhookId": "1d97ccb6-ff70-45ca-9188-1b70733db3f0"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}'\nAND id_programacion = '{{ $('Preparar datos agendamiento').first().json.id_programacion }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        976,
+        128
+      ],
+      "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
+      "name": "DELETE slot elegido",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        688,
+        304
+      ],
+      "id": "44861220-f696-450a-9b21-a9b4386a6d87",
+      "name": "Liberar slots",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "Postgres account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "to": "=57{{ $('Buscar paciente por call_id').first().json.telefono_1 }}",
+        "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, soy yo de nuevo, Sarai asistente virtual de Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
+      },
+      "type": "n8n-nodes-labsmobile.labsMobile",
+      "typeVersion": 2,
+      "position": [
+        800,
+        128
+      ],
+      "id": "5460d015-8811-4f5a-93b4-3b4434698162",
+      "name": "Send SMS",
+      "credentials": {
+        "labsMobileApi": {
+          "id": "yNeI900JwvYTBQOa",
+          "name": "LabsMobile account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "¿Fue contestada?": {
+      "main": [
+        [
+          {
+            "node": "Número equivocado ?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marcar NO_CONTESTO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Acudiente con número?": {
+      "main": [
+        [
+          {
+            "node": "Guardar número acudiente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Confirmó asistencia?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Número equivocado ?": {
+      "main": [
+        [
+          {
+            "node": "Marcar como NO_AGENDO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Acudiente con número?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es call_analyzed?": {
+      "main": [
+        [
+          {
+            "node": "Buscar paciente por call_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'OBTENER TOKEN ZEUS'": {
+      "main": [
+        [
+          {
+            "node": "Preparar datos agendamiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar NO_CONTESTO": {
+      "main": [
+        [
+          {
+            "node": "Liberar slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar número acudiente": {
+      "main": [
+        [
+          {
+            "node": "Liberar slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar como NO_AGENDO": {
+      "main": [
+        [
+          {
+            "node": "Liberar slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar como AGENDADO": {
+      "main": [
+        [
+          {
+            "node": "Send SMS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendar en Zeus": {
+      "main": [
+        [
+          {
+            "node": "Marcar como AGENDADO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar datos agendamiento": {
+      "main": [
+        [
+          {
+            "node": "Agendar en Zeus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Confirmó asistencia?": {
+      "main": [
+        [
+          {
+            "node": "Call 'OBTENER TOKEN ZEUS'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marcar como NO_AGENDO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar paciente por call_id": {
+      "main": [
+        [
+          {
+            "node": "¿Fue contestada?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Retell Post-Call": {
+      "main": [
+        [
+          {
+            "node": "¿Es call_analyzed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DELETE slot elegido": {
+      "main": [
+        [
+          {
+            "node": "Responder OK a Retell",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Liberar slots": {
+      "main": [
+        [
+          {
+            "node": "Responder OK a Retell",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send SMS": {
+      "main": [
+        [
+          {
+            "node": "DELETE slot elegido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
+  "activeVersionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
+  "versionCounter": 610,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-02-23T16:58:21.617Z",
+      "createdAt": "2026-02-23T16:58:21.617Z",
+      "role": "workflow:owner",
+      "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-17",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-02-04T21:57:31.305Z",
+      "createdAt": "2026-02-04T21:57:31.305Z",
+      "id": "Vt8x6W2rrtVBRg8l",
+      "name": "Relación get_paciente 🟢"
+    },
+    {
+      "updatedAt": "2026-02-04T20:18:39.085Z",
+      "createdAt": "2026-02-04T20:18:39.085Z",
+      "id": "2EO9Ro2seknMiiVu",
+      "name": "DEL ADMIN ☺️"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-03-16T21:19:45.962Z",
+    "createdAt": "2026-03-16T21:19:44.534Z",
+    "versionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
+    "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
+    "nodes": [
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "8QAWBLL5xzNT3DoYH-AW6",
+            "mode": "id",
+            "cachedResultUrl": "/n8n/workflow/8QAWBLL5xzNT3DoYH-AW6"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "aField",
+                "displayName": "aField",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string",
+                "removed": true
+              },
+              {
+                "id": "aNumber",
+                "displayName": "aNumber",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "number",
+                "removed": true
+              },
+              {
+                "id": "thisFieldAcceptsAnyType",
+                "displayName": "thisFieldAcceptsAnyType",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "anArray",
+                "displayName": "anArray",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "array",
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          -224,
+          128
+        ],
+        "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
+        "name": "Call 'OBTENER TOKEN ZEUS'"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_CONTESTO',\n  resultado_llamada = 'NO_CONTESTO'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -800,
+          304
+        ],
+        "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
+        "name": "Marcar NO_CONTESTO",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "50828eea-843f-466c-8482-a6f56095273b",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_status }}",
+                "rightValue": "not_connected",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEquals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -1088,
+          288
+        ],
+        "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
+        "name": "¿Fue contestada?"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'ACUDIENTE',\n  resultado_llamada = 'ACUDIENTE',\n  numero_brindado = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.numero_brindado }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -288,
+          -128
+        ],
+        "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
+        "name": "Guardar número acudiente",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "e3ec67d0-60a9-4f79-afb9-a82f1c5d8d2d",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.es_acudiente }}",
+                "rightValue": true,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "equals"
+                }
+              },
+              {
+                "id": "27e47a94-95ad-4c49-885f-1989ac61e406",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.numero_brindado }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -608,
+          128
+        ],
+        "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
+        "name": "¿Acudiente con número?"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+                "rightValue": "NUMERO_EQUIVOCADO",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+                "rightValue": "NO_ACEPTA_GRABACION",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -928,
+          112
+        ],
+        "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
+        "name": "Número equivocado ?"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "filter-event",
+                "leftValue": "={{ $json.body.event }}",
+                "rightValue": "call_analyzed",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -1440,
+          240
+        ],
+        "id": "db2fd84d-e5b0-4674-93df-4106fcdfe125",
+        "name": "¿Es call_analyzed?"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "{\"ok\": true}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.4,
+        "position": [
+          1168,
+          304
+        ],
+        "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
+        "name": "Responder OK a Retell"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_AGENDO',\n  resultado_llamada = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}',\n  motivo_no_asistencia = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.motivo_no_asistencia }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -320,
+          448
+        ],
+        "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
+        "name": "Marcar como NO_AGENDO",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "UPDATE pacientes_sospecha_colon SET usuario_contactado = 'AGENDADO', opcion_elegida = '{{ $('Preparar datos agendamiento').first().json.opcion_elegida }}', fecha_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.fecha }}', hora_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.hora }}', resultado_llamada = 'AGENDADO' WHERE id = {{ $('Preparar datos agendamiento').first().json.paciente_id }};",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          608,
+          128
+        ],
+        "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
+        "name": "Marcar como AGENDADO",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "={{ $('Call \\'OBTENER TOKEN ZEUS\\'').item.json.token }}"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "=json",
+          "specifyBody": "json",
+          "bodyParameters": {
+            "parameters": [
+              {}
+            ]
+          },
+          "jsonBody": "={\n  \"fecha\": \"{{ $json.fecha }}\",\n  \"medico\": \"{{ $json.id_medico }}\",\n  \"idPuntoAtencion\": {{ $json.IdPuntoAtencionCita }},\n  \"idProgramacionMedicoDetalle\": {{ $json.id_programacion }},\n  \"paciente\": \"{{ $json.auto_id }}\",\n  \"hora\": \"{{ $json.hora }}\",\n  \"meridiano\": \"{{ $json.meridiano }}\",\n  \"asunto\": \"{{ $json.idAsunto }}\",\n  \"codEmpresa\": {{ $json.codEmpresa }},\n  \"contrato\": \"{{ $json.contrato }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"telefono\": \"{{ $json.telefono }}\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          416,
+          128
+        ],
+        "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
+        "name": "Agendar en Zeus"
+      },
+      {
+        "parameters": {
+          "jsCode": "const webhook = $('Webhook Retell Post-Call').first().json.body.call;\nconst paciente = $('Buscar paciente por call_id').first().json;\nconst opcionElegida = webhook.call_analysis.custom_analysis_data.opcion_elegida;\n\nconsole.log('opcion_elegida:', opcionElegida);\nconsole.log('opcion_1_raw:', paciente.opcion_1_raw);\nconsole.log('opcion_2_raw:', paciente.opcion_2_raw);\nconsole.log('opcion_3_raw:', paciente.opcion_3_raw);\n\nlet opcionRaw;\nif (opcionElegida === 'opcion_1') opcionRaw = paciente.opcion_1_raw;\nelse if (opcionElegida === 'opcion_2') opcionRaw = paciente.opcion_2_raw;\nelse if (opcionElegida === 'opcion_3') opcionRaw = paciente.opcion_3_raw;\n\nconsole.log('opcionRaw resultante:', opcionRaw);\n\nif (!opcionRaw) {\n  throw new Error(`opcionRaw es undefined. opcion_elegida recibida: \"${opcionElegida}\"`);\n}\n\nconst hora = opcionRaw.hora;\nconst hNum = parseInt(hora.split(':')[0]);\nconst meridiano = hNum < 12 ? 'am' : 'pm';\n\nreturn [{\n  json: {\n    paciente_id: paciente.id,\n    documento: paciente.documento,\n    tipo_documento: paciente.tipo_documento,\n    id_programacion: opcionRaw.idProgramacion,\n    auto_id: paciente.auto_id,\n    email: paciente.email,\n    telefono: paciente.telefono_1,\n    contrato: paciente.contrato,\n    codEmpresa: paciente.codigo_empresa,\n    fecha: opcionRaw.fecha.replace(/-/g, '/'),\n    hora: opcionRaw.hora,\n    id_medico: opcionRaw.id_medico,\n    IdPuntoAtencionCita: opcionRaw.idPuntoAntencionCita,\n    idAsunto: opcionRaw.idAsunto,\n    meridiano: meridiano,\n    opcion_elegida: opcionElegida\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -16,
+          128
+        ],
+        "id": "71e76a8d-c34f-4905-836f-6420f778d714",
+        "name": "Preparar datos agendamiento"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "loose",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "check-confirmo",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.confirmo_asistencia }}",
+                "rightValue": true,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "equals"
+                }
+              },
+              {
+                "id": "c3749e9c-ea7b-4b0a-8a4a-d09a826bcfa3",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.opcion_elegida }}",
+                "rightValue": "ninguna",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEquals"
+                }
+              },
+              {
+                "id": "93d8267b-ce28-47cc-a34a-5bbc170581d5",
+                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+                "rightValue": "CONTESTO",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -432,
+          144
+        ],
+        "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
+        "name": "¿Confirmó asistencia?"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT p.*, p.opcion_1_raw, p.opcion_2_raw, p.opcion_3_raw FROM pacientes_sospecha_colon p WHERE p.call_id = '{{ $json.body.call.call_id }}' LIMIT 1;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -1264,
+          96
+        ],
+        "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
+        "name": "Buscar paciente por call_id",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "retell-post-call",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -1648,
+          240
+        ],
+        "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
+        "name": "Webhook Retell Post-Call",
+        "webhookId": "1d97ccb6-ff70-45ca-9188-1b70733db3f0"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}'\nAND id_programacion = '{{ $('Preparar datos agendamiento').first().json.id_programacion }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          976,
+          128
+        ],
+        "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
+        "name": "DELETE slot elegido",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          688,
+          304
+        ],
+        "id": "44861220-f696-450a-9b21-a9b4386a6d87",
+        "name": "Liberar slots",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "to": "=57{{ $('Buscar paciente por call_id').first().json.telefono_1 }}",
+          "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, soy yo de nuevo, Sarai asistente virtual de Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
+        },
+        "type": "n8n-nodes-labsmobile.labsMobile",
+        "typeVersion": 2,
+        "position": [
+          800,
+          128
+        ],
+        "id": "5460d015-8811-4f5a-93b4-3b4434698162",
+        "name": "Send SMS",
+        "credentials": {
+          "labsMobileApi": {
+            "id": "yNeI900JwvYTBQOa",
+            "name": "LabsMobile account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "¿Fue contestada?": {
+        "main": [
+          [
+            {
+              "node": "Número equivocado ?",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Marcar NO_CONTESTO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Acudiente con número?": {
+        "main": [
+          [
+            {
+              "node": "Guardar número acudiente",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "¿Confirmó asistencia?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Número equivocado ?": {
+        "main": [
+          [
+            {
+              "node": "Marcar como NO_AGENDO",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "¿Acudiente con número?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Es call_analyzed?": {
+        "main": [
+          [
+            {
+              "node": "Buscar paciente por call_id",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'OBTENER TOKEN ZEUS'": {
+        "main": [
+          [
+            {
+              "node": "Preparar datos agendamiento",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Marcar NO_CONTESTO": {
+        "main": [
+          [
+            {
+              "node": "Liberar slots",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guardar número acudiente": {
+        "main": [
+          [
+            {
+              "node": "Liberar slots",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Marcar como NO_AGENDO": {
+        "main": [
+          [
+            {
+              "node": "Liberar slots",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Marcar como AGENDADO": {
+        "main": [
+          [
+            {
+              "node": "Send SMS",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Agendar en Zeus": {
+        "main": [
+          [
+            {
+              "node": "Marcar como AGENDADO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar datos agendamiento": {
+        "main": [
+          [
+            {
+              "node": "Agendar en Zeus",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Confirmó asistencia?": {
+        "main": [
+          [
+            {
+              "node": "Call 'OBTENER TOKEN ZEUS'",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Marcar como NO_AGENDO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar paciente por call_id": {
+        "main": [
+          [
+            {
+              "node": "¿Fue contestada?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook Retell Post-Call": {
+        "main": [
+          [
+            {
+              "node": "¿Es call_analyzed?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DELETE slot elegido": {
+        "main": [
+          [
+            {
+              "node": "Responder OK a Retell",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Liberar slots": {
+        "main": [
+          [
+            {
+              "node": "Responder OK a Retell",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send SMS": {
+        "main": [
+          [
+            {
+              "node": "DELETE slot elegido",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version 1cdd2a20",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-03-16T21:19:45.961Z",
+        "id": 273,
+        "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
+        "versionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
