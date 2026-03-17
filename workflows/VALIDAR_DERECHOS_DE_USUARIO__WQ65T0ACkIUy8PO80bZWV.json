@@ -161,15 +161,15 @@
           "parameters": [
             {
               "name": "Cookie",
-              "value": "JSESSIONID=6AD773EA67E6CCE789FD47A706134B8B"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             },
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $json.token }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -564,15 +564,15 @@
           "parameters": [
             {
               "name": "Cookie",
-              "value": "JSESSIONID=6AD773EA67E6CCE789FD47A706134B8B"
+              "value": "***REDACTED***"
             },
             {
               "name": "Content-Type",
-              "value": "application/json"
+              "value": "***REDACTED***"
             },
             {
               "name": "Authorization",
-              "value": "=Bearer {{ $json.token }}"
+              "value": "***REDACTED***"
             }
           ]
         },
