@@ -9,7 +9,7 @@
   "nodes": [
     {
       "parameters": {
-        "jsCode": "const valor = $input.item.json.value;\nconsole.log(valor)\nlet tokenData = null;\ntry {\n  tokenData = valor ? JSON.parse(valor) : null;\n} catch(e) {\n  tokenData = null;\n}\n\nconst ahora = Date.now();\nconst tokenValido = !!(\n  tokenData?.token && \n  tokenData?.expira_en && \n  ahora < tokenData.expira_en\n);\n\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', tokenData?.expira_en \n  ? Math.round((tokenData.expira_en - ahora) / 60000) \n  : 'N/A'\n);\nconsole.log(\"valor\")\nreturn [{ json: { \n  tokenValido,\n  token: tokenData?.token\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -56,7 +56,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst tokenZeus = $input.item.json.BearerToken;\n\n// Decodifica el JWT y lee la expiración real\nconst payload = JSON.parse(Buffer.from(tokenZeus.split('.')[1], 'base64').toString());\nconst expiryMs = (payload.exp * 1000) - (60 * 1000); // 1 minuto de margen\n\nstaticData.tokenZeus = tokenZeus;\nstaticData.tokenZeusExpiry = expiryMs;\n\nreturn [{\n  json: {\n    tokenZeus: tokenZeus,\n    tokenValidoZeus: true,\n    expiraEl: new Date(expiryMs).toISOString()\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -71,11 +71,11 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://zeussalud_test.sersocial.org:8022/api/AppApiUsers/Authenticate",
+        "url": "***REDACTED***",
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "{ \"userName\": \"administrador\",  \"password\": \"123456\"}",
+        "body": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -108,7 +108,7 @@
             {
               "id": "1d24da8b-b85b-4d56-844f-92b645421203",
               "name": "token",
-              "value": "={{ $json.token }}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -131,7 +131,7 @@
             {
               "id": "d5e686b8-8476-470d-8529-06e500b7956f",
               "name": "token",
-              "value": "={{ $json.token}}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -184,7 +184,7 @@
       "parameters": {
         "operation": "set",
         "key": "token_zeus",
-        "value": "={{ JSON.stringify({token: $json.BearerToken,expira_en: Date.now() + (86400000 -500 )*1000}) }}"
+        "value": "***REDACTED***"
       },
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
@@ -203,7 +203,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{ json: {\n  token: $('Login para obtener token Zeus').first().json.BearerToken\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -375,7 +375,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -387,7 +387,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -420,7 +420,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
@@ -437,7 +437,7 @@
     "nodes": [
       {
         "parameters": {
-          "jsCode": "const valor = $input.item.json.value;\nconsole.log(valor)\nlet tokenData = null;\ntry {\n  tokenData = valor ? JSON.parse(valor) : null;\n} catch(e) {\n  tokenData = null;\n}\n\nconst ahora = Date.now();\nconst tokenValido = !!(\n  tokenData?.token && \n  tokenData?.expira_en && \n  ahora < tokenData.expira_en\n);\n\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', tokenData?.expira_en \n  ? Math.round((tokenData.expira_en - ahora) / 60000) \n  : 'N/A'\n);\nconsole.log(\"valor\")\nreturn [{ json: { \n  tokenValido,\n  token: tokenData?.token\n}}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -484,7 +484,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst tokenZeus = $input.item.json.BearerToken;\n\n// Decodifica el JWT y lee la expiración real\nconst payload = JSON.parse(Buffer.from(tokenZeus.split('.')[1], 'base64').toString());\nconst expiryMs = (payload.exp * 1000) - (60 * 1000); // 1 minuto de margen\n\nstaticData.tokenZeus = tokenZeus;\nstaticData.tokenZeusExpiry = expiryMs;\n\nreturn [{\n  json: {\n    tokenZeus: tokenZeus,\n    tokenValidoZeus: true,\n    expiraEl: new Date(expiryMs).toISOString()\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -499,11 +499,11 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://zeussalud_test.sersocial.org:8022/api/AppApiUsers/Authenticate",
+          "url": "***REDACTED***",
           "sendBody": true,
           "contentType": "raw",
           "rawContentType": "application/json",
-          "body": "{ \"userName\": \"administrador\",  \"password\": \"123456\"}",
+          "body": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -536,7 +536,7 @@
               {
                 "id": "1d24da8b-b85b-4d56-844f-92b645421203",
                 "name": "token",
-                "value": "={{ $json.token }}",
+                "value": "***REDACTED***",
                 "type": "string"
               }
             ]
@@ -559,7 +559,7 @@
               {
                 "id": "d5e686b8-8476-470d-8529-06e500b7956f",
                 "name": "token",
-                "value": "={{ $json.token}}",
+                "value": "***REDACTED***",
                 "type": "string"
               }
             ]
@@ -612,7 +612,7 @@
         "parameters": {
           "operation": "set",
           "key": "token_zeus",
-          "value": "={{ JSON.stringify({token: $json.BearerToken,expira_en: Date.now() + (86400000 -500 )*1000}) }}"
+          "value": "***REDACTED***"
         },
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
@@ -631,7 +631,7 @@
       },
       {
         "parameters": {
-          "jsCode": "return [{ json: {\n  token: $('Login para obtener token Zeus').first().json.BearerToken\n}}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
