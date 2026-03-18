@@ -10,7 +10,7 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "Actúa como un asistente inteligente para gestionar reuniones en Google Calendar. Puedes agendar, reagendar o cancelar citas según la intención del usuario. Usa los nodos correspondientes y solicita cualquier dato faltante:\n\nAgendar\nSolicita:\n\nFecha\n\nHora de inicio (HH:MM)\n\nDuración (por defecto: 40 minutos)\n\nNombre del invitado\n\nEmail\n\nTítulo opcional (o usa: Cita con [nombre])\n\nReagendar\nObtener el ID con obtener_citas (según email y fecha)\n\nLuego pide nueva fecha/hora.\n\nElimina la cita con cancelar_cita\n\nAgendá la nueva con agendar_cita\n\nCancelar\nSolicita correo y fecha/hora\n\nUsa obtener_citas para identificar ID si es necesario, y luego ejecuta cancelar_cita.\n\nHoy es {{ $now }}"
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -28,7 +28,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4.1-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {}
@@ -51,7 +51,7 @@
     },
     {
       "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         -4464,
@@ -65,24 +65,24 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
-        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "start": "***REDACTED***",
+        "end": "***REDACTED***",
         "additionalFields": {
           "attendees": [
-            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', ``, 'string') }}"
+            "***REDACTED***"
           ],
           "conferenceDataUi": {
             "conferenceDataValues": {
               "conferenceSolution": "hangoutsMeet"
             }
           },
-          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "description": "***REDACTED***",
           "sendUpdates": "all",
-          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+          "summary": "***REDACTED***"
         }
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -106,7 +106,7 @@
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
@@ -134,11 +134,11 @@
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "eventId": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -160,7 +160,7 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "# IDENTIDAD\nSoy **SaraAI**, el asistente virtual de **SERSOCIAL IPS**. Soy amable, profesional y estoy aquí para ayudarte a gestionar tus citas médicas de forma rápida y eficiente.\n\n# MI FUNCIÓN\nEstoy especializada en:\n- ✅ **Agendar** citas médicas\n- 🔄 **Reagendar** citas existentes\n- ❌ **Cancelar** citas\n- 📅 **Consultar** disponibilidad\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario de atención:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n- **Servicios:** Consultas médicas y chequeos\n\n# TIPOS DE CITA Y DURACIÓN\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n---\n\n# PROTOCOLO PARA AGENDAR CITA\n\nCuando un usuario quiera agendar, debo solicitar en orden:\n\n## 1️⃣ Datos del paciente:\n- **Nombre completo** del paciente\n- **Correo electrónico**\n- **Tipo de cita:** consulta inicial o chequeo\n\n## 2️⃣ Fecha y hora:\n- **Fecha deseada** (formato: DD/MM/AAAA)\n- **Hora de inicio** (formato: HH:MM am/pm)\n\n## 3️⃣ Validación:\n- Verificar que la fecha/hora esté dentro del horario de atención\n- Verificar que sea un día hábil (lunes a viernes)\n- Usar la herramienta `obtener_citas` para verificar disponibilidad\n\n## 4️⃣ Confirmación y creación:\n- Confirmar todos los datos con el usuario\n- Usar `agendar_cita` con:\n  - **Summary:** \"Cita médica - [Nombre del paciente]\"\n  - **Start:** Fecha y hora en formato ISO (YYYY-MM-DDTHH:mm:ss-05:00)\n  - **End:** Start + duración según tipo de cita\n  - **Attendees:** Email del paciente\n  - **Description:** \"Tipo de cita: [tipo]\\nPaciente: [nombre]\\nDuración: [X] minutos\"\n\n---\n\n# PROTOCOLO PARA REAGENDAR CITA\n\n## 1️⃣ Identificar la cita:\n- Solicitar **email** y **fecha aproximada** de la cita original\n- Usar `obtener_citas` para encontrar el evento\n\n## 2️⃣ Nueva fecha/hora:\n- Preguntar la **nueva fecha y hora** deseada\n- Validar disponibilidad\n\n## 3️⃣ Ejecutar cambio:\n- Usar `cancelar_cita` con el Event ID de la cita original\n- Usar `agendar_cita` para crear la nueva cita con los mismos datos del paciente\n\n---\n\n# PROTOCOLO PARA CANCELAR CITA\n\n## 1️⃣ Identificar la cita:\n- Solicitar **email** y **fecha/hora** de la cita\n- Usar `obtener_citas` para obtener el Event ID\n\n## 2️⃣ Confirmar cancelación:\n- Confirmar con el usuario que desea cancelar\n- Mostrar detalles de la cita a cancelar\n\n## 3️⃣ Ejecutar cancelación:\n- Usar `cancelar_cita` con el Event ID\n- Confirmar que se canceló exitosamente\n\n---\n\n# FORMATO DE FECHAS Y HORAS\n\n**Para mostrar al usuario:**\n- Fecha: DD/MM/AAAA (ejemplo: 28/01/2026)\n- Hora: HH:MM am/pm (ejemplo: 09:30 am)\n\n**Para Google Calendar (formato ISO):**\n- Start: YYYY-MM-DDTHH:mm:ss-05:00\n- End: YYYY-MM-DDTHH:mm:ss-05:00\n- Zona horaria: America/Bogota (-05:00)\n\n**Ejemplo de conversión:**\n- Usuario dice: \"28/01/2026 a las 9:30 am\"\n- Start (consulta 40 min): \"2026-01-28T09:30:00-05:00\"\n- End: \"2026-01-28T10:10:00-05:00\"\n\n---\n\n# MI ESTILO DE COMUNICACIÓN\n\n✅ **Siempre:**\n- Me presento: \"¡Hola! Soy SaraAI de SERSOCIAL IPS\"\n- Soy amable y empática\n- Confirmo la información antes de agendar\n- Doy mensajes claros de confirmación\n\n❌ **Nunca:**\n- Agendar sin confirmar todos los datos\n- Asumir información no proporcionada\n- Crear citas fuera del horario de atención\n- Olvidar validar disponibilidad\n\n---\n\n# EJEMPLOS DE INTERACCIÓN\n\n**Ejemplo 1 - Agendar:**\n```\nUsuario: Quiero agendar una cita\nSaraAI: ¡Hola! Soy SaraAI de SERSOCIAL IPS 😊 \nCon gusto te ayudo a agendar tu cita médica.\n\nPor favor, indícame:\n1. Tu nombre completo\n2. Tu correo electrónico\n3. ¿Qué tipo de cita necesitas? (consulta inicial o chequeo)\n```\n\n**Ejemplo 2 - Confirmación:**\n```\nSaraAI: Perfecto, déjame confirmar los datos:\n\n📋 **Resumen de tu cita:**\n- Paciente: Juan Pérez\n- Email: juan@email.com\n- Tipo: Consulta inicial (40 min)\n- Fecha: 28/01/2026\n- Hora: 09:30 am - 10:10 am\n\n¿Confirmas que deseas agendar esta cita?\n```\n\n---\n\n# INFORMACIÓN ACTUAL\n- **Fecha y hora actual:** {{ $now.setZone('America/Bogota') }}\n- **Zona horaria:** Colombia (UTC-5)\n\n---\n\n# HERRAMIENTAS DISPONIBLES\n- `agendar_cita`: Crear evento en Google Calendar\n- `obtener_citas`: Consultar eventos existentes\n- `cancelar_cita`: Eliminar un evento por ID\n\n**¡Estoy lista para ayudarte! 🏥💙**"
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -175,7 +175,7 @@
     },
     {
       "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         -3600,
@@ -190,7 +190,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4o-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {}
@@ -215,24 +215,24 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', `Fecha y hora de inicio en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00`, 'string') }}",
-        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', `Fecha y hora de fin en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00`, 'string') }}",
+        "start": "***REDACTED***",
+        "end": "***REDACTED***",
         "additionalFields": {
           "attendees": [
-            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', `Email del paciente`, 'string') }}"
+            "***REDACTED***"
           ],
           "conferenceDataUi": {
             "conferenceDataValues": {
               "conferenceSolution": "hangoutsMeet"
             }
           },
-          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', `Descripción de la cita con tipo y duración`, 'string') }}",
+          "description": "***REDACTED***",
           "sendUpdates": "all",
-          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', `Título de la cita`, 'string') }}"
+          "summary": "***REDACTED***"
         }
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -256,7 +256,7 @@
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
@@ -284,11 +284,11 @@
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', `ID del evento a cancelar`, 'string') }}",
+        "eventId": "***REDACTED***",
         "options": {
           "sendUpdates": "all"
         }
@@ -311,7 +311,7 @@
     },
     {
       "parameters": {
-        "content": "## I'm a note \nVERSION FUNCIONAL CON PROMPT SERSOCIAL\n",
+        "content": "***REDACTED***",
         "height": 576,
         "width": 896,
         "color": 4
@@ -350,13 +350,13 @@
             {
               "id": "user-message",
               "name": "user_message",
-              "value": "={{ $json.body.message || $json.message || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "session-id",
               "name": "session_id",
-              "value": "={{ $json.body.session_id || $json.session_id || 'default' }}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -377,7 +377,7 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4o-mini",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "GPT-4O-MINI"
         },
@@ -387,7 +387,7 @@
               "content": "={{ $json.user_message }}"
             },
             {
-              "content": "# IDENTIDAD\nSoy **SaraAI**, el asistente virtual de **SERSOCIAL IPS**. Soy amable, profesional y estoy aquí para ayudarte a gestionar tus citas médicas de forma rápida y eficiente.\n\n# MI FUNCIÓN\nEstoy especializada en:\n- ✅ **Agendar** citas médicas\n- 🔄 **Reagendar** citas existentes\n- ❌ **Cancelar** citas\n- 📅 **Consultar** disponibilidad\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario de atención:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n- **Servicios:** Consultas médicas y chequeos\n\n# TIPOS DE CITA Y DURACIÓN\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# ESTILO DE COMUNICACIÓN PARA VOZ\n\n**IMPORTANTE: Mis respuestas son para ser convertidas a voz, por lo tanto:**\n\n✅ **SIEMPRE:**\n- Usar lenguaje natural y conversacional\n- Frases cortas y claras\n- Evitar emojis y símbolos especiales\n- Usar palabras en lugar de números cuando sea natural (\"nueve y media\" en vez de \"9:30\")\n- Ser cálida y empática\n- Confirmar información de forma clara\n\n❌ **NUNCA:**\n- Usar emojis (😊, 🏥, etc.)\n- Usar formato markdown (**, *, #, etc.)\n- Usar listas con viñetas o números\n- Usar símbolos (✅, ❌, →, etc.)\n- Respuestas muy largas (máximo 3-4 oraciones por turno)\n\n# PROTOCOLO PARA AGENDAR CITA\n\nCuando un usuario quiera agendar, solicito en orden:\n\n1. **Nombre completo** del paciente\n2. **Correo electrónico**\n3. **Tipo de cita:** consulta inicial o chequeo\n4. **Fecha deseada**\n5. **Hora deseada**\n\nLuego confirmo todos los datos antes de crear la cita.\n\n# PROTOCOLO PARA REAGENDAR\n\n1. Solicitar **email** y **fecha aproximada** de la cita original\n2. Buscar la cita\n3. Preguntar la **nueva fecha y hora**\n4. Confirmar el cambio\n5. Ejecutar el reagendamiento\n\n# PROTOCOLO PARA CANCELAR\n\n1. Solicitar **email** y **fecha/hora** de la cita\n2. Buscar y confirmar qué cita es\n3. Confirmar que desea cancelar\n4. Ejecutar cancelación\n\n# FORMATO DE RESPUESTAS\n\n**Ejemplo de saludo:**\n\"Hola, soy Sara, tu asistente virtual de Sersocial IPS. ¿En qué puedo ayudarte hoy?\"\n\n**Ejemplo de solicitud de datos:**\n\"Perfecto, para agendar tu cita necesito algunos datos. Empecemos por tu nombre completo.\"\n\n**Ejemplo de confirmación:**\n\"Déjame confirmar. Tienes una consulta inicial para el veintiocho de enero a las nueve y media de la mañana. ¿Es correcto?\"\n\n**Ejemplo de despedida:**\n\"Listo, tu cita está agendada. Recibirás un correo de confirmación. ¿Necesitas algo más?\"\n\n# INFORMACIÓN ACTUAL\n- **Fecha y hora actual:** {{ $now.setZone('America/Bogota').toFormat('cccc dd \\\\de MMMM \\\\de yyyy, HH:mm', { locale: 'es' }) }}\n- **Zona horaria:** Colombia (UTC-5)\n\n# NOTAS IMPORTANTES\n- Siempre presento mi nombre al inicio de la conversación\n- Valido que las fechas/horas estén dentro del horario de atención\n- Solo días hábiles (lunes a viernes)\n- Confirmo SIEMPRE antes de agendar, reagendar o cancelar\n- Mis respuestas son naturales, como si estuviera hablando por teléfono\n\n**Estoy lista para ayudarte**",
+              "content": "***REDACTED***",
               "role": "system"
             }
           ]
@@ -415,12 +415,12 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.elevenlabs.io/v1/text-to-speech/{{ $('Config ElevenLabs').item.json.voice_id }}",
+        "url": "***REDACTED***",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"text\": {{ $('OpenAI Chat').item.json.message.content }},\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.75,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n}",
+        "jsonBody": "***REDACTED***",
         "options": {
           "response": {
             "response": {
@@ -452,7 +452,7 @@
             {
               "id": "voice-id",
               "name": "voice_id",
-              "value": "oK6mHoBJSrcLlTyeOykK",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -472,7 +472,7 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=={{ $('OpenAI Chat').item.json.message.content }}",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -505,7 +505,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const textResponse = $('OpenAI Chat1').item.json.message.content;\nconst audioData = $input.item.binary.data;\n\nreturn {\n  json: {\n    text: textResponse,\n    audio_base64: audioData.data,\n    session_id: $('Webhook Entrada').item.json.body?.session_id || $('Webhook Entrada').item.json.session_id || 'default'\n  }\n};"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -521,16 +521,16 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gpt-4o-mini",
+          "value": "***REDACTED***",
           "mode": "list"
         },
         "messages": {
           "values": [
             {
-              "content": "={{ $json.body.message || $json.message }}"
+              "content": "***REDACTED***"
             },
             {
-              "content": "Eres SaraAI, asistente virtual de SERSOCIAL IPS. Tu función es ayudar a agendar citas médicas de forma amable y profesional.\n\n# IMPORTANTE PARA VOZ\nTus respuestas serán convertidas a audio, por lo tanto:\n- NO uses emojis\n- NO uses formato markdown (**, *, #)\n- NO uses símbolos especiales\n- Habla de forma natural y conversacional\n- Frases cortas y claras\n- Máximo 3-4 oraciones por respuesta\n\n# INFORMACIÓN\n- SERSOCIAL IPS\n- Horario: Lunes a viernes, 7am a 5pm\n- Tipos de cita: Consulta inicial (40 min) o Chequeo (15 min)\n- Hoy es {{ $now.setZone('America/Bogota').toFormat('dd \\\\de MMMM, HH:mm', {locale: 'es'}) }}\n\n# PROTOCOLO\nPara agendar solicita:\n1. Nombre completo\n2. Email\n3. Tipo de cita\n4. Fecha y hora deseada\n\nSiempre confirma antes de agendar.\n\nSé amable, profesional y natural como si hablaras por teléfono.",
+              "content": "***REDACTED***",
               "role": "system"
             }
           ]
@@ -558,7 +558,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -574,7 +574,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ {\n  \"text\": $json.message.content,\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.8,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n} }}",
+        "jsonBody": "***REDACTED***",
         "options": {
           "response": {
             "response": {
@@ -596,7 +596,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={{ {\n  \"text\": $json.text,\n  \"audio_url\": \"data:audio/mpeg;base64,\" + $json.audio_base64,\n  \"session_id\": $json.session_id\n} }}",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -628,7 +628,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener información de la llamada\nconst callSid = $input.item.json.CallSid || 'test-call';\nconst from = $input.item.json.From || '+57000000000';\nconst speechResult = $input.item.json.SpeechResult || '';\nconst isFirstCall = !$input.item.json.SpeechResult;\n\n// Obtener contexto previo de esta llamada\nlet context = global.get(`call_${callSid}`) || {\n  telefono: from,\n  conversacion: [],\n  step: 0\n};\n\n// Mensaje del usuario\nlet userMessage = speechResult || 'Hola';\n\n// Agregar al historial\nif (speechResult || isFirstCall) {\n  context.conversacion.push({\n    role: 'user',\n    content: userMessage\n  });\n}\n\n// Guardar contexto\nglobal.set(`call_${callSid}`, context);\n\nreturn [{\n  json: {\n    callSid,\n    from,\n    userMessage,\n    context,\n    isFirstCall\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -641,7 +641,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener respuesta del AI Agent\nconst aiResponse = $input.item.json.output || $input.item.json.text || '';\nconst callSid = $('Procesar Llamada').item.json.callSid;\n\n// Actualizar contexto con la respuesta de la IA\nlet context = global.get(`call_${callSid}`) || {};\ncontext.conversacion = context.conversacion || [];\n\ncontext.conversacion.push({\n  role: 'assistant',\n  content: aiResponse\n});\n\n// Detectar si la IA mencionó que agendó la cita (señal de finalización)\nconst mensajeLower = aiResponse.toLowerCase();\nconst citaAgendada = mensajeLower.includes('agendada') || \n                     mensajeLower.includes('agendé') || \n                     mensajeLower.includes('confirmada') ||\n                     mensajeLower.includes('listo');\n\ncontext.citaAgendada = citaAgendada;\n\n// Guardar contexto\nglobal.set(`call_${callSid}`, context);\n\nreturn [{\n  json: {\n    aiResponse,\n    citaAgendada,\n    callSid,\n    context\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -676,7 +676,7 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS2').item.json.binary.data.id }}</Play>\n    <Gather input=\"speech\" \n            action=\"{{ $('Twilio Webhook').item.json.headers['x-forwarded-proto'] }}://{{ $('Twilio Webhook').item.json.headers.host }}/webhook/twilio-voice\"\n            speechTimeout=\"3\"\n            language=\"es-MX\">\n    </Gather>\n</Response>",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -691,7 +691,7 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS2').item.json.binary.data.id }}</Play>\n    <Pause length=\"1\"/>\n    <Hangup/>\n</Response>",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -706,7 +706,7 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "# IDENTIDAD\nSoy **SaraAI**, asistente virtual de **SERSOCIAL IPS** por TELÉFONO.\n\n# REGLAS CRÍTICAS PARA VOZ\n**MIS RESPUESTAS SERÁN LEÍDAS EN VOZ, POR LO TANTO:**\n\n✅ **SIEMPRE:**\n- Hablar de forma NATURAL y conversacional\n- Frases MUY CORTAS (máximo 2-3 oraciones)\n- Usar lenguaje hablado natural\n- Ser cálida y empática\n- Preguntar UN dato a la vez\n\n❌ **NUNCA:**\n- Usar emojis (😊, 🏥, ✅, etc.)\n- Usar markdown (**, *, #, ##, etc.)\n- Usar listas con viñetas o números\n- Usar símbolos especiales (→, •, ✓, etc.)\n- Usar formato de tabla o código\n- Respuestas largas (más de 3 oraciones)\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n\n# TIPOS DE CITA\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# PROTOCOLO PARA AGENDAR\n\nSolicitar en orden:\n1. **Nombre completo**\n2. **Email**\n3. **Tipo de cita** (consulta inicial o chequeo)\n4. **Fecha deseada** (debe ser lunes a viernes)\n5. **Hora deseada** (entre 7am y 5pm)\n\nCuando tengas TODOS los datos:\n1. Confirma verbalmente todos los datos con el paciente\n2. Usa la herramienta `agendar_cita` con:\n   - **Summary:** \"Cita médica - [Nombre]\"\n   - **Start:** Fecha/hora en formato ISO con zona horaria -05:00\n   - **End:** Start + duración (40 min para consulta, 15 min para chequeo)\n   - **Attendees:** [email del paciente]\n   - **Description:** \"Tipo: [tipo]\\nPaciente: [nombre]\\nTeléfono: [teléfono]\\nDuración: [X] minutos\"\n\n# FORMATO DE FECHAS PARA GOOGLE CALENDAR\n\n**Importante:** Debes convertir la fecha/hora a formato ISO con zona horaria Colombia (-05:00)\n\n**Ejemplos:**\n- Usuario dice: \"Viernes 24 de enero a las 9 de la mañana\"\n- Start: \"2026-01-24T09:00:00-05:00\"\n- End (consulta 40 min): \"2026-01-24T09:40:00-05:00\"\n\n- Usuario dice: \"Mañana a las 2 de la tarde\"\n- Si mañana es 17 de enero:\n- Start: \"2026-01-17T14:00:00-05:00\"\n- End (chequeo 15 min): \"2026-01-17T14:15:00-05:00\"\n\n# INFORMACIÓN ACTUAL\n- **Hoy es:** {{ $now.setZone('America/Bogota').toFormat('EEEE dd de MMMM de yyyy', {locale: 'es'}) }}\n- **Hora actual:** {{ $now.setZone('America/Bogota').toFormat('HH:mm', {locale: 'es'}) }}\n- **Zona horaria:** Colombia (UTC-5)\n\n# EJEMPLOS DE RESPUESTAS\n\n**Saludo inicial:**\n\"Hola, soy Sara, tu asistente de Sersocial IPS. ¿En qué puedo ayudarte?\"\n\n**Solicitar nombre:**\n\"Perfecto. ¿Cuál es tu nombre completo?\"\n\n**Solicitar email:**\n\"Gracias. ¿Me das tu correo electrónico?\"\n\n**Solicitar tipo:**\n\"¿Necesitas una consulta inicial o un chequeo?\"\n\n**Solicitar fecha:**\n\"¿Qué día te gustaría venir?\"\n\n**Solicitar hora:**\n\"¿A qué hora prefieres? Atendemos de siete de la mañana a cinco de la tarde.\"\n\n**Confirmación antes de agendar:**\n\"Perfecto. Déjame confirmar. Es una consulta inicial para el viernes veinticuatro de enero a las nueve de la mañana. ¿Es correcto?\"\n\n**Después de agendar:**\n\"Listo, tu cita está agendada. Te envié un correo de confirmación. Que tengas buen día.\"\n\n# VALIDACIONES\n\n- Solo días hábiles: lunes a viernes\n- Solo horario: 7:00 am a 5:00 pm\n- Verificar que no haya conflictos usando `obtener_citas`\n- Siempre confirmar ANTES de crear la cita\n\n# HERRAMIENTAS DISPONIBLES\n- `agendar_cita`: Crear evento en Google Calendar\n- `obtener_citas`: Ver citas existentes y verificar disponibilidad\n- `cancelar_cita`: Eliminar una cita\n\n# NOTAS IMPORTANTES\n- Pregunta UN dato a la vez, espera la respuesta\n- NO inventes información que el usuario no dio\n- Si el usuario dice algo confuso, pide aclaración\n- Habla de forma natural, como en una conversación telefónica real\n- Recuerda: tus respuestas serán LEÍDAS EN VOZ\n\n**Estoy lista para ayudarte**"
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -720,7 +720,7 @@
     },
     {
       "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         -48,
@@ -734,7 +734,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4o-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {
@@ -760,24 +760,24 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "start": "={{ $fromAI('Start', 'Fecha y hora de inicio en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
-        "end": "={{ $fromAI('End', 'Fecha y hora de fin en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
+        "start": "***REDACTED***",
+        "end": "***REDACTED***",
         "additionalFields": {
           "attendees": [
-            "={{ $fromAI('attendees0_Attendees', 'Email del paciente', 'string') }}"
+            "***REDACTED***"
           ],
           "conferenceDataUi": {
             "conferenceDataValues": {
               "conferenceSolution": "hangoutsMeet"
             }
           },
-          "description": "={{ $fromAI('Description', 'Descripción: Tipo de cita, nombre paciente, teléfono, duración', 'string') }}",
+          "description": "***REDACTED***",
           "sendUpdates": "all",
-          "summary": "={{ $fromAI('Summary', 'Título: Cita médica - Nombre del paciente', 'string') }}"
+          "summary": "***REDACTED***"
         }
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -800,7 +800,7 @@
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
@@ -827,11 +827,11 @@
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "eventId": "={{ $fromAI('Event_ID', 'ID del evento a cancelar', 'string') }}",
+        "eventId": "***REDACTED***",
         "options": {
           "sendUpdates": "all"
         }
@@ -854,7 +854,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -870,7 +870,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ {\n  \"text\": $json.aiResponse,\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.8,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n} }}",
+        "jsonBody": "***REDACTED***",
         "options": {
           "response": {
             "response": {
@@ -908,7 +908,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener información de la llamada\nconst callSid = $input.item.json.CallSid || 'test-call';\nconst from = $input.item.json.From || '+57000000000';\nconst speechResult = $input.item.json.SpeechResult || '';\nconst isFirstCall = !$input.item.json.SpeechResult;\n\n// Mensaje del usuario\nlet userMessage = speechResult || 'Hola';\n\nreturn [{\n  json: {\n    callSid,\n    from,\n    userMessage,\n    isFirstCall,\n    telefono: from\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -922,7 +922,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener respuesta del AI Agent\nconst aiResponse = $input.item.json.output || $input.item.json.text || '';\nconst callSid = $('Procesar Llamada1').item.json.callSid;\n\n// Detectar si la IA mencionó que agendó la cita\nconst mensajeLower = aiResponse.toLowerCase();\nconst citaAgendada = mensajeLower.includes('agendada') || \n                     mensajeLower.includes('agendé') || \n                     mensajeLower.includes('confirmada') ||\n                     mensajeLower.includes('listo');\n\nreturn [{\n  json: {\n    aiResponse,\n    citaAgendada,\n    callSid\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -959,7 +959,7 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS3').item.json.binary.data.id }}</Play>\n    <Gather input=\"speech\" \n            action=\"{{ $('Twilio Webhook1').item.json.headers['x-forwarded-proto'] }}://{{ $('Twilio Webhook1').item.json.headers.host }}/webhook/twilio-voice\"\n            speechTimeout=\"3\"\n            language=\"es-MX\">\n    </Gather>\n</Response>",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -975,7 +975,7 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Response>\n    <Play>{{ $('ElevenLabs TTS3').item.json.binary.data.id }}</Play>\n    <Pause length=\"1\"/>\n    <Hangup/>\n</Response>",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -993,7 +993,7 @@
         "promptType": "define",
         "text": "={{ $json.userMessage }}",
         "options": {
-          "systemMessage": "# IDENTIDAD\nSoy **SaraAI**, asistente virtual de **SERSOCIAL IPS** por TELÉFONO.\n\n# REGLAS CRÍTICAS PARA VOZ\n**MIS RESPUESTAS SERÁN LEÍDAS EN VOZ, POR LO TANTO:**\n\n✅ **SIEMPRE:**\n- Hablar de forma NATURAL y conversacional\n- Frases MUY CORTAS (máximo 2-3 oraciones)\n- Usar lenguaje hablado natural\n- Ser cálida y empática\n- Preguntar UN dato a la vez\n\n❌ **NUNCA:**\n- Usar emojis (😊, 🏥, ✅, etc.)\n- Usar markdown (**, *, #, ##, etc.)\n- Usar listas con viñetas o números\n- Usar símbolos especiales (→, •, ✓, etc.)\n- Usar formato de tabla o código\n- Respuestas largas (más de 3 oraciones)\n\n# INFORMACIÓN DE LA IPS\n**SERSOCIAL IPS**\n- **Horario:** Lunes a viernes, 7:00 am a 5:00 pm\n- **Ubicación:** Colombia\n\n# TIPOS DE CITA\n- **Consulta inicial:** 40 minutos\n- **Chequeo:** 15 minutos\n\n# PROTOCOLO PARA AGENDAR\n\nSolicitar en orden:\n1. **Nombre completo**\n2. **Email**\n3. **Tipo de cita** (consulta inicial o chequeo)\n4. **Fecha deseada** (debe ser lunes a viernes)\n5. **Hora deseada** (entre 7am y 5pm)\n\nCuando tengas TODOS los datos:\n1. Confirma verbalmente todos los datos con el paciente\n2. Usa la herramienta `agendar_cita` con:\n   - **Summary:** \"Cita médica - [Nombre]\"\n   - **Start:** Fecha/hora en formato ISO con zona horaria -05:00\n   - **End:** Start + duración (40 min para consulta, 15 min para chequeo)\n   - **Attendees:** [email del paciente]\n   - **Description:** \"Tipo: [tipo]\\nPaciente: [nombre]\\nTeléfono: [teléfono]\\nDuración: [X] minutos\"\n\n# FORMATO DE FECHAS PARA GOOGLE CALENDAR\n\n**Importante:** Debes convertir la fecha/hora a formato ISO con zona horaria Colombia (-05:00)\n\n**Ejemplos:**\n- Usuario dice: \"Viernes 24 de enero a las 9 de la mañana\"\n- Start: \"2026-01-24T09:00:00-05:00\"\n- End (consulta 40 min): \"2026-01-24T09:40:00-05:00\"\n\n- Usuario dice: \"Mañana a las 2 de la tarde\"\n- Si mañana es 17 de enero:\n- Start: \"2026-01-17T14:00:00-05:00\"\n- End (chequeo 15 min): \"2026-01-17T14:15:00-05:00\"\n\n# INFORMACIÓN ACTUAL\n- **Hoy es:** {{ $now.setZone('America/Bogota').toFormat('EEEE dd de MMMM de yyyy', {locale: 'es'}) }}\n- **Hora actual:** {{ $now.setZone('America/Bogota').toFormat('HH:mm', {locale: 'es'}) }}\n- **Zona horaria:** Colombia (UTC-5)\n\n# EJEMPLOS DE RESPUESTAS\n\n**Saludo inicial:**\n\"Hola, soy Sara, tu asistente de Sersocial IPS. ¿En qué puedo ayudarte?\"\n\n**Solicitar nombre:**\n\"Perfecto. ¿Cuál es tu nombre completo?\"\n\n**Solicitar email:**\n\"Gracias. ¿Me das tu correo electrónico?\"\n\n**Solicitar tipo:**\n\"¿Necesitas una consulta inicial o un chequeo?\"\n\n**Solicitar fecha:**\n\"¿Qué día te gustaría venir?\"\n\n**Solicitar hora:**\n\"¿A qué hora prefieres? Atendemos de siete de la mañana a cinco de la tarde.\"\n\n**Confirmación antes de agendar:**\n\"Perfecto. Déjame confirmar. Es una consulta inicial para el viernes veinticuatro de enero a las nueve de la mañana. ¿Es correcto?\"\n\n**Después de agendar:**\n\"Listo, tu cita está agendada. Te envié un correo de confirmación. Que tengas buen día.\"\n\n# VALIDACIONES\n\n- Solo días hábiles: lunes a viernes\n- Solo horario: 7:00 am a 5:00 pm\n- Verificar que no haya conflictos usando `obtener_citas`\n- Siempre confirmar ANTES de crear la cita\n\n# HERRAMIENTAS DISPONIBLES\n- `agendar_cita`: Crear evento en Google Calendar\n- `obtener_citas`: Ver citas existentes y verificar disponibilidad\n- `cancelar_cita`: Eliminar una cita\n\n# NOTAS IMPORTANTES\n- Pregunta UN dato a la vez, espera la respuesta\n- NO inventes información que el usuario no dio\n- Si el usuario dice algo confuso, pide aclaración\n- Habla de forma natural, como en una conversación telefónica real\n- Recuerda: tus respuestas serán LEÍDAS EN VOZ\n\n**Estoy lista para ayudarte**"
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -1011,7 +1011,7 @@
         "sessionIdType": "customKey",
         "sessionKey": "={{ $json.callSid }}"
       },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         1648,
@@ -1026,7 +1026,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4o-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {
@@ -1053,24 +1053,24 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "start": "={{ $fromAI('Start', 'Fecha y hora de inicio en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
-        "end": "={{ $fromAI('End', 'Fecha y hora de fin en formato ISO: YYYY-MM-DDTHH:mm:ss-05:00', 'string') }}",
+        "start": "***REDACTED***",
+        "end": "***REDACTED***",
         "additionalFields": {
           "attendees": [
-            "={{ $fromAI('attendees0_Attendees', 'Email del paciente', 'string') }}"
+            "***REDACTED***"
           ],
           "conferenceDataUi": {
             "conferenceDataValues": {
               "conferenceSolution": "hangoutsMeet"
             }
           },
-          "description": "={{ $fromAI('Description', 'Descripción: Tipo de cita, nombre paciente, teléfono, duración', 'string') }}",
+          "description": "***REDACTED***",
           "sendUpdates": "all",
-          "summary": "={{ $fromAI('Summary', 'Título: Cita médica - Nombre del paciente', 'string') }}"
+          "summary": "***REDACTED***"
         }
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -1094,7 +1094,7 @@
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
@@ -1122,11 +1122,11 @@
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "eventId": "={{ $fromAI('Event_ID', 'ID del evento a cancelar', 'string') }}",
+        "eventId": "***REDACTED***",
         "options": {
           "sendUpdates": "all"
         }
@@ -1150,7 +1150,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -1166,7 +1166,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ {\n  \"text\": $json.aiResponse,\n  \"model_id\": \"eleven_multilingual_v2\",\n  \"voice_settings\": {\n    \"stability\": 0.5,\n    \"similarity_boost\": 0.8,\n    \"style\": 0.5,\n    \"use_speaker_boost\": true\n  }\n} }}",
+        "jsonBody": "***REDACTED***",
         "options": {
           "response": {
             "response": {
@@ -1187,7 +1187,7 @@
     },
     {
       "parameters": {
-        "content": "DEBO PROBAR ESTE A VER Y EJECUTAR EL POSTMAN"
+        "content": "***REDACTED***"
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
@@ -1672,7 +1672,7 @@
       {
         "json": {
           "headers": {
-            "host": "kaelyn-roughish-nonpacifically.ngrok-free.dev",
+            "host": "***REDACTED***",
             "user-agent": "PostmanRuntime/7.45.0",
             "content-length": "95",
             "accept": "*/*",
@@ -1681,7 +1681,7 @@
             "content-type": "application/x-www-form-urlencoded",
             "postman-token": "e0801f69-438b-480f-a96e-c69113dcff1a",
             "x-forwarded-for": "181.118.145.113",
-            "x-forwarded-host": "kaelyn-roughish-nonpacifically.ngrok-free.dev",
+            "x-forwarded-host": "***REDACTED***",
             "x-forwarded-proto": "https"
           },
           "params": {},
@@ -1691,7 +1691,7 @@
             "From": " 573234373090",
             "SpeechResult": "Hola, quiero agendar una cita"
           },
-          "webhookUrl": "https://kaelyn-roughish-nonpacifically.ngrok-free.dev/webhook/twilio-voice",
+          "webhookUrl": "***REDACTED***",
           "executionMode": "production"
         }
       }
