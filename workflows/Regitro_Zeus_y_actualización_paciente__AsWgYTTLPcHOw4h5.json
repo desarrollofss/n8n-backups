@@ -10,65 +10,65 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://zeussalud_test.sersocial.org:8022/api/SisDeta/DatosBasicospaciente",
+        "url": "***REDACTED***",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
             {
               "name": "NumeroIdentificacion",
-              "value": "={{ $('verificar_paciente_no_creado').item.json.documento }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "TipoIdentificacion",
-              "value": "={{ $('verificar_paciente_no_creado').item.json.tipo_documento }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Primernom",
-              "value": "={{ $('verificar_paciente_no_creado').item.json.primer_nombre }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Primerape",
-              "value": "={{ $('verificar_paciente_no_creado').item.json.primer_apellido }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Segundoape",
-              "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.segundo_apellido }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Fechanaci",
-              "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.fecha_nacimiento }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Sexo",
-              "value": "={{ $json.sexo }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Tipousuario",
-              "value": "={{ $('Actualizar datos de usuario').first().json.id_regimen }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "CodDep",
-              "value": "={{$('Seleccionar usuarios que esten activos sin autoid').first().json.codigo_departamento }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "CodMuni",
-              "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.codigo_municipio }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "Telefono",
-              "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.telefono_1 }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "email",
-              "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.email }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "direccion",
-              "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.direccion }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "segundonom",
-              "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.segundo_nombre }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -111,7 +111,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "pacientes_sospecha_colon"
         },
@@ -119,8 +119,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "auto_id": "={{ $json.autoid }}",
-            "tipo_documento": "={{ $('Update rows in a table').item.json.tipo_documento }}",
-            "documento": "={{ $('Update rows in a table').item.json.documento }}"
+            "tipo_documento": "***REDACTED***",
+            "documento": "***REDACTED***"
           },
           "matchingColumns": [
             "documento",
@@ -534,7 +534,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const result = [];\n\n// Iteramos sobre cada registro\nfor (const item of $input.all()) {\n  let data = item.json;\n  let errors = [];\n\n  // --- 1. LIMPIEZA DE DATOS ---\n  const cleanText = (str) => (typeof str === 'string' ? str.trim().toUpperCase() : '');\n\n  data.primer_nombre = cleanText(data.primer_nombre);\n  data.segundo_nombre = cleanText(data.segundo_nombre);\n  data.primer_apellido = cleanText(data.primer_apellido);\n  data.segundo_apellido = cleanText(data.segundo_apellido);\n  data.regional = cleanText(data.regional);\n  data.municipio = cleanText(data.municipio);\n\n  if (data.documento) data.documento = data.documento.toString().replace(/\\D/g, '');\n  if (data.telefono) data.telefono = data.telefono.toString().replace(/\\D/g, '');\n\n  if (data.edad) {\n    data.edad = parseInt(data.edad, 10);\n  }\n\n  // --- 2. VALIDACIÓN ---\n  if (!data.documento || data.documento === '') {\n    errors.push(\"Documento vacío o inválido\");\n  }\n  if (!data.primer_nombre || data.primer_nombre === '') {\n    errors.push(\"Falta el primer nombre\");\n  }\n  if (!data.tipo_documento) {\n    errors.push(\"Falta tipo de documento\");\n  }\n \n\n  // --- 3. ETIQUETADO (Para separar luego en el nodo If) ---\n  // Creamos una nueva propiedad booleana\n  data.es_valido = errors.length === 0;\n  \n  // Si hay errores, guardamos el motivo\n  if (!data.es_valido) {\n    data.motivo_error = errors.join(\", \");\n  }\n\n  // Agregamos el ítem al arreglo final\n  result.push({ json: data });\n}\n\nreturn result;"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -551,7 +551,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconsole.log(staticData)\nconst ahora = Date.now();\nconst tokenValido = !!(staticData.token && \n                    staticData.tokenExpiry && \n                    ahora < staticData.tokenExpiry);\n\nreturn [{\n  json: {\n    datos: [...$input.all()],\n    tokenValido: tokenValido,\n    token: staticData.token || null\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -565,7 +565,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\n\nstaticData.token = $input.first().json.access_token;\n\nconst expiry = $input.first().json.expires_in.toString()\nstaticData.tokenExpiry = Date.now() + ((parseInt(expiry)-500) * 1000)\n//staticData.tokenExpiry = Date.now() + (3500 * 1000);\n\n\n\nreturn [{\n  json: {\n    datos:[...$('Limpiar y estructurar datos').all()],\n    token: staticData.token,\n    tokenValido: true,\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -579,7 +579,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const staticDataZeus = $getWorkflowStaticData('global');\nconsole.log(staticDataZeus)\nconst ahora = Date.now();\nconst tokenValido = !!(staticDataZeus.tokenZeus && \n                    staticDataZeus.tokenZeusExpiry && \n                    ahora < staticDataZeus.tokenZeusExpiry);\n\nreturn [{\n  json: {\n     datos: [...$(\"Seleccionar usuarios que esten activos sin autoid\").all()],\n    tokenValidoZeus: tokenValido,\n    tokenZeus: staticDataZeus.tokenZeus || null\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -626,7 +626,7 @@
     },
     {
       "parameters": {
-        "content": "## Gestión validación derechos de usuario MUTUAL\n",
+        "content": "***REDACTED***",
         "height": 576,
         "width": 1348
       },
@@ -681,7 +681,7 @@
           "conditions": [
             {
               "id": "0ce07751-9cb0-47cc-b8de-6083c362b452",
-              "leftValue": "={{ $('Limpiar y estructurar datos').item.json.es_valido }}",
+              "leftValue": "***REDACTED***",
               "rightValue": "",
               "operator": {
                 "type": "boolean",
@@ -740,7 +740,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const cleanedItems = [];\n\nfor (const item of $input.all()) {\n  try {\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    \n    // Eliminar el código del departamento del inicio del código de municipio\n    // Ejemplo: \"13657\" con depCod \"13\" → \"657\" | \"08001\" con depCod \"08\" → \"001\"\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    // Extraer tipo y número de documento\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    const resultado = {\n      // --- Identificación ---\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n\n      // --- Estado ---\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n\n      // --- Datos personales ---\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n\n      // --- Contacto ---\n      telefono_fijo: patientData.telecom?.find(t => t.use === 'home')?.value || '',\n      telefono_movil: patientData.telecom?.find(t => t.use === 'mobile')?.value || '',\n      email: patientData.telecom?.find(t => t.system === 'email')?.value || '',\n\n      // --- Dirección ---\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona: zona,\n      ubicacion: ubicacion,\n\n      // --- Afiliación ---\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n\n      // --- Lugar de atención ---\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod,\n    };\n\n    if (estaFallecido) {\n      resultado.fecha_fallecimiento = getExt('dateOfDeath')?.valueDate || '';\n    }\n\n    cleanedItems.push({ json: resultado });\n\n  } catch (error) {\n    cleanedItems.push({\n      json: {\n        error: \"Fallo al parsear la data de la API\",\n        details: error.message\n      }\n    });\n  }\n}\n\nreturn cleanedItems;"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -762,7 +762,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "pacientes_sospecha_colon"
         },
@@ -770,25 +770,25 @@
           "mappingMode": "defineBelow",
           "value": {
             "estado_mutal": true,
-            "tipo_documento": "={{ $('Verificar usuario activo').item.json.tipo_documento }}",
-            "documento": "={{ $('Verificar usuario activo').item.json.numero_documento }}",
-            "direccion": "={{ $('Verificar usuario activo').first().json.direccion_texto }},{{ $('Verificar usuario activo').item.json.ubicacion }} ",
-            "email": "={{ $('Verificar usuario activo').first().json.email }}",
-            "telefono_2": "={{ $('Verificar usuario activo').item.json.telefono_movil }}",
-            "sexo": "={{ $('Verificar usuario activo').first().json.genero=='male'? 'M': 'F' }}",
-            "tipo_usuario": "={{$('Verificar usuario activo').first().json.tipo_usuario }}",
-            "tipo_afiliado": "={{ $('Verificar usuario activo').first().json.tipo_afiliado }}",
-            "regimen": "={{ $('Verificar usuario activo').first().json.regimen }}",
-            "nombre_departamento": "={{ $('Verificar usuario activo').first().json.nombre_departamento }}",
-            "nombre_municipio": "={{ $('Verificar usuario activo').first().json.nombre_municipio }}",
-            "fallecido": "={{ $('Verificar usuario activo').first().json.esta_fallecido }}",
-            "codigo_regimen": "={{ $('Verificar usuario activo').first().json.regimen_codigo.toUpperCase() }}",
-            "codigo_departamento": "={{ $('Verificar usuario activo').first().json.codigo_departamento }}",
-            "codigo_municipio": "={{ $('Verificar usuario activo').first().json.codigo_municipio }}",
-            "contrato": "={{ $('OBTENER EMPRESA Y CONTRATO').first().json.contrato }}",
-            "codigo_empresa": "={{ $('OBTENER EMPRESA Y CONTRATO').first().json.id_empresa }}",
-            "id_regimen": "={{ $('Obtener Regimen').first().json.id_tipo_regimen }}",
-            "id_registro": "={{ $('Verificar usuario activo').item.json.id_registro }}"
+            "tipo_documento": "***REDACTED***",
+            "documento": "***REDACTED***",
+            "direccion": "***REDACTED***",
+            "email": "***REDACTED***",
+            "telefono_2": "***REDACTED***",
+            "sexo": "***REDACTED***",
+            "tipo_usuario": "***REDACTED***",
+            "tipo_afiliado": "***REDACTED***",
+            "regimen": "***REDACTED***",
+            "nombre_departamento": "***REDACTED***",
+            "nombre_municipio": "***REDACTED***",
+            "fallecido": "***REDACTED***",
+            "codigo_regimen": "***REDACTED***",
+            "codigo_departamento": "***REDACTED***",
+            "codigo_municipio": "***REDACTED***",
+            "contrato": "***REDACTED***",
+            "codigo_empresa": "***REDACTED***",
+            "id_regimen": "***REDACTED***",
+            "id_registro": "***REDACTED***"
           },
           "matchingColumns": [
             "tipo_documento",
@@ -1303,7 +1303,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst tokenZeus = $input.item.json.BearerToken;\n\n// Decodifica el JWT y lee la expiración real\nconst payload = JSON.parse(Buffer.from(tokenZeus.split('.')[1], 'base64').toString());\nconst expiryMs = (payload.exp * 1000) - (60 * 1000); // 1 minuto de margen\n\nstaticData.tokenZeus = tokenZeus;\nstaticData.tokenZeusExpiry = expiryMs;\n\nreturn [{\n  json: {\n    datos: [...$(\"Seleccionar usuarios que esten activos sin autoid\").all()],\n    tokenZeus: tokenZeus,\n    tokenValidoZeus: true,\n    expiraEl: new Date(expiryMs).toISOString()\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1338,29 +1338,29 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "pacientes_sospecha_colon"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "tipo_documento": "={{ $('generar id unico registro').item.json.tipo_documento }}",
-            "nombre_completo": "={{ $('generar id unico registro').item.json.primer_nombre }} {{ $('Validar datos').item.json.segundo_nombre }} {{ $('Validar datos').item.json.primer_apellido }} {{ $('Validar datos').item.json.segundo_apellido }}",
-            "telefono_1": "={{ $('generar id unico registro').item.json.telefono }}",
-            "edad": "={{ $('generar id unico registro').item.json.edad }}",
-            "primer_nombre": "={{ $('generar id unico registro').item.json.primer_nombre }}",
-            "primer_apellido": "={{ $('generar id unico registro').item.json.primer_apellido }}",
-            "segundo_apellido": "={{ $('generar id unico registro').item.json.segundo_apellido }}",
-            "documento": "={{ $('generar id unico registro').item.json.documento }}",
+            "tipo_documento": "***REDACTED***",
+            "nombre_completo": "***REDACTED***",
+            "telefono_1": "***REDACTED***",
+            "edad": "***REDACTED***",
+            "primer_nombre": "***REDACTED***",
+            "primer_apellido": "***REDACTED***",
+            "segundo_apellido": "***REDACTED***",
+            "documento": "***REDACTED***",
             "estado_mutal": false,
-            "segundo_nombre": "={{ $('generar id unico registro').item.json.segundo_nombre }}",
-            "fecha_toma_examen": "={{ $('generar id unico registro').item.json.fecha_toma_examen }}",
-            "fecha_resultados_examen": "={{ $('generar id unico registro').item.json.fecha_resultados }}",
-            "fecha_nacimiento": "={{ $('generar id unico registro').item.json.fecha_nacimiento }}",
-            "nombre_examen": "={{ $('generar id unico registro').item.json.nombre_examen }}",
+            "segundo_nombre": "***REDACTED***",
+            "fecha_toma_examen": "***REDACTED***",
+            "fecha_resultados_examen": "***REDACTED***",
+            "fecha_nacimiento": "***REDACTED***",
+            "nombre_examen": "***REDACTED***",
             "usuario_contactado": "NO",
-            "id_registro": "={{ $('generar id unico registro').item.json.id_registro }}"
+            "id_registro": "***REDACTED***"
           },
           "matchingColumns": [
             "id"
@@ -1970,7 +1970,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+        "url": "***REDACTED***",
         "sendBody": true,
         "contentType": "form-urlencoded",
         "bodyParameters": {
@@ -1981,15 +1981,15 @@
             },
             {
               "name": "client_id",
-              "value": "right-validation"
+              "value": "***REDACTED***"
             },
             {
               "name": "username",
-              "value": "desarrollotecnologico@sersocial.org"
+              "value": "***REDACTED***"
             },
             {
               "name": "password",
-              "value": "8J(?DEQ/98hg"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -2008,7 +2008,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://guacamayaazul.mutualser.com/validateRights/",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -2028,7 +2028,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{ $json.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{ $json.documento }}\"  \n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2045,11 +2045,11 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://zeussalud_test.sersocial.org:8022/api/AppApiUsers/Authenticate",
+        "url": "***REDACTED***",
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "{ \"userName\": \"administrador\",  \"password\": \"123456\"}",
+        "body": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -2071,19 +2071,19 @@
             {
               "id": "b140a3bd-14f7-494d-98d1-ae9cc669a70f",
               "name": "token",
-              "value": "={{ $('Verificar token MUTUAL').item.json.token }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "17333cc7-f3e2-42a3-8c82-2564695bd94d",
               "name": "tipo_documento",
-              "value": "={{ $json.json.tipo_documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "5e67fa48-f195-4d27-8b53-6227dd6a71a6",
               "name": "documento",
-              "value": "={{ $json.json.documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -2122,19 +2122,19 @@
             {
               "id": "45e20681-a2e5-4383-8021-806ec29bd9b8",
               "name": "token",
-              "value": "={{ $('Guardar Token MUTUAL').item.json.token }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "90e04961-3cf9-412f-97dc-13d934eed0e8",
               "name": "tipo_documento",
-              "value": "={{ $json.json.tipo_documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "e0aea6b2-a794-4401-913d-22a4f90af6eb",
               "name": "documento",
-              "value": "={{ $json.json.documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -2172,25 +2172,25 @@
             {
               "id": "b9b9091f-e085-48fd-ac26-89eac58e3699",
               "name": "tipo_documento",
-              "value": "={{ $json.json.tipo_documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "645480b3-5941-4f5a-b194-be2e049c4900",
               "name": "documento",
-              "value": "={{ $json.json.documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "8bdcd634-b534-410b-bbd1-cf5d5dc27f67",
               "name": "token_zeus",
-              "value": "={{ $('VERIFICAR TOKEN ZEUS').item.json.tokenZeus }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "90e4d53d-3b8a-4999-b9a1-447809ab5647",
               "name": "datos",
-              "value": "={{ $json.json }}",
+              "value": "***REDACTED***",
               "type": "object"
             }
           ]
@@ -2213,25 +2213,25 @@
             {
               "id": "2ed4ffee-aca1-44f3-bb41-fa23892f0613",
               "name": "tipo_documento",
-              "value": "={{ $json.json.tipo_documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "a0285de8-3f79-4e9c-a761-e646acdd1170",
               "name": "documento",
-              "value": "={{ $json.json.documento }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "2d46d5f1-e35b-48a2-9692-5fb767a1b8d8",
               "name": "tokenZeus",
-              "value": "={{ $('Guardar token ZEUS').item.json.tokenZeus }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "fa7d4cac-2b65-499d-8419-3d5aba14dd24",
               "name": "datos",
-              "value": "={{ $json.json }}",
+              "value": "***REDACTED***",
               "type": "object"
             }
           ]
@@ -2265,7 +2265,7 @@
           "values": [
             {
               "column": "codigo",
-              "value": "={{ $('Verificar usuario activo').first().json.codigo_empresa }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -2296,7 +2296,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "tipos_regimen",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "tipos_regimen"
         },
@@ -2305,7 +2305,7 @@
           "values": [
             {
               "column": "codigo",
-              "value": "={{ $('Verificar usuario activo').first().json.regimen_codigo }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -2330,7 +2330,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "WQ65T0ACkIUy8PO80bZWV",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultUrl": "/n8n/workflow/WQ65T0ACkIUy8PO80bZWV",
           "cachedResultName": "VALIDAR DERECHOS DE USUARIO"
@@ -2338,7 +2338,7 @@
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
-            "datos_paciente": "={{ {\n\"tipo_documento\": $json.tipo_documento ,\n\"documento\": $json.documento,\n\"id_registro\": $json.id_registro\n }  }}"
+            "datos_paciente": "***REDACTED***"
           },
           "matchingColumns": [
             "datos_paciente"
@@ -2382,17 +2382,17 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "pacientes_sospecha_colon"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "tipo_documento": "={{ $('Merge2').item.json.tipo_documento }}",
+            "tipo_documento": "***REDACTED***",
             "documento": "={{ $('Merge2').item.json.documento }}",
             "auto_id": "={{ $json.Datos[0].autoid}}",
-            "registro_zeus": "={{ $('obtener_datos_paciente').item.json.Datos.length > 0 ? true : false }}"
+            "registro_zeus": "***REDACTED***"
           },
           "matchingColumns": [
             "tipo_documento",
@@ -2961,17 +2961,17 @@
     },
     {
       "parameters": {
-        "url": "https://zeussalud_test.sersocial.org:8022/api/SisDeta/GetDatosBasicosPaciente",
+        "url": "***REDACTED***",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
             {
               "name": "NumeroIdentificacion",
-              "value": "={{ $json.documento }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "TipoIdentificacion",
-              "value": "={{ $json.tipo_documento }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -3000,7 +3000,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return $input.all().map(item => {\n  const { tipo_documento, documento, nombre_examen, fecha_toma_examen } = item.json;\n\n  const id_registro = Buffer.from(\n    `${tipo_documento}|${documento}|${nombre_examen}|${fecha_toma_examen}`\n  ).toString('base64').replace(/=+$/, '');\n\n  return { json: { ...item.json, id_registro } };\n});"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -3022,7 +3022,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list"
         },
         "returnAll": true,
@@ -3030,7 +3030,7 @@
           "values": [
             {
               "column": "=estado_mutal",
-              "value": "={{ true }}"
+              "value": "***REDACTED***"
             },
             {
               "column": "auto_id",
@@ -3047,7 +3047,7 @@
         -512
       ],
       "id": "c73eceb0-2420-47dd-8585-c360abf28dee",
-      "name": "Seleccionar usuarios que esten activos sin autoid",
+      "name": "***REDACTED***",
       "executeOnce": true,
       "credentials": {
         "postgres": {
@@ -3058,7 +3058,7 @@
     },
     {
       "parameters": {
-        "errorMessage": "Error al validar los derechos de usuario en Mutual"
+        "errorMessage": "***REDACTED***"
       },
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
@@ -3110,7 +3110,7 @@
     },
     {
       "parameters": {
-        "errorMessage": "Error al obtener datos del usuario en Zeus"
+        "errorMessage": "***REDACTED***"
       },
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
@@ -3287,7 +3287,7 @@
       "main": [
         [
           {
-            "node": "Seleccionar usuarios que esten activos sin autoid",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -3627,9 +3627,9 @@
   },
   "staticData": {
     "global": {
-      "token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIzZkZIbmhra1ZaQ0RxWVJ5cjZoU0dDcDZicDQ0djFuVUFxNjVpbHN3eXlnIn0.eyJleHAiOjE3NzI0NjIwNzIsImlhdCI6MTc3MjQ1ODQ3MiwianRpIjoiM2I1MmE2MmEtMzViZS00ODc5LThiYzktYzAxZDg3OWMxNWRmIiwiaXNzIjoiaHR0cHM6Ly9yaW5vLm11dHVhbHNlci5jb20vYXV0aC9yZWFsbXMvcmlnaHQtdmFsaWRhdGlvbiIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4NWNkYTQxMC03MDVhLTQ5MjEtOTE0ZS0xZWU0MGU4MTNlMTMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJyaWdodC12YWxpZGF0aW9uIiwic2Vzc2lvbl9zdGF0ZSI6IjMwOTQyZjQ5LTExNjUtNDFmZS1iYTQwLWI1OWRlYTRhYjhmMSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlNFUiBTT0NJQUwiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJkZXNhcnJvbGxvdGVjbm9sb2dpY29Ac2Vyc29jaWFsLm9yZyIsImdpdmVuX25hbWUiOiJTRVIgU09DSUFMIiwiZW1haWwiOiJkZXNhcnJvbGxvdGVjbm9sb2dpY29Ac2Vyc29jaWFsLm9yZyJ9.dUqZ9Z2hthdxQSInLKACF52Q7jgrX4sTtfrYtdmxvFrahXnoa21LI381noT82sVzR-TnOCce6Qi_BTWzs3dOa_NqcXr6omZp2ouYcp9-IAtAUhk0yMVTvFmoUqs5qn6tDHHss6U-WCHdBiB5HwMiLjthi1000aBMoxa8a5-gq-1r4SCUC8NOcYSPYhWEXG9PERs2GVNwAEqPJv0848TfgjpqOgpEBd2wFK6eu5q0qpbGbU8_EWWL8XgGW7BdmPACQwcKH2n6jHUcRlvn4jCBQU_g62wrBDZnag1GTIyUDhrqeY08eUQA-NSlg2YIG5ZiKvvbQowPGZ4LG5wwUfH8BQ",
+      "token": "***REDACTED***",
       "tokenExpiry": 1772461972826,
-      "tokenZeus": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluaXN0cmFkb3IiLCJyb2xlIjoiQURNSU5JU1RSQVRPUiIsIm5iZiI6MTc3MjQ1ODQ3MSwiZXhwIjoxNzgwMzIwODcxLCJpYXQiOjE3NzI0NTg0NzF9.km6cO0MV2xG9byP1IYFZfTH5S1rmjdS_37xGp1CKWHo",
+      "tokenZeus": "***REDACTED***",
       "tokenZeusExpiry": 1780320811000
     }
   },
@@ -3642,15 +3642,15 @@
         "json": {
           "headers": {
             "host": "localhost:5678",
-            "user-agent": "azure-logic-apps/1.0 (workflow 5701059ccbc347a99c50671b8068fdee; version 08584283632726897889) microsoft-flow/1.0",
+            "user-agent": "***REDACTED***",
             "accept-encoding": "gzip, deflate",
             "accept-language": "es-ES",
-            "power_automate": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5MDA0MjI3NTciLCJuYW1lIjoiRnVuZGFjaW9uIFNFUlNPQ0lBTCIsImFkbWluIjp0cnVlLCJpYXQiOjE1MTYyMzkwMjJ9.5vblcC0KS1BOcEjhxSde95EAgT0xdTg--ee_rUDCY6g",
+            "power_automate": "***REDACTED***",
             "workermetadata": "PAuto/MTA",
             "x-ms-workflow-id": "5701059ccbc347a99c50671b8068fdee",
             "x-ms-workflow-version": "08584283632726897889",
             "x-ms-workflow-name": "ef13f099-d18d-4cd7-8e8e-a54451556bf9",
-            "x-ms-workflow-system-id": "/locations/westus/scaleunits/prod-10/workflows/5701059ccbc347a99c50671b8068fdee",
+            "x-ms-workflow-system-id": "***REDACTED***",
             "x-ms-workflow-run-id": "08584283631933537319363259938CU02",
             "x-ms-workflow-run-tracking-id": "ae5a930d-2315-40b0-a7ab-09522f80778f",
             "x-ms-workflow-operation-name": "HTTP_1",
@@ -3658,14 +3658,14 @@
             "x-ms-workflow-repeatitem-index": "0",
             "x-ms-workflow-repeatitem-batch-index": "0",
             "x-ms-execution-location": "westus",
-            "x-ms-workflow-subscription-id": "Default-df4534ac-d804-41fa-bfa2-578dc8a69d31",
+            "x-ms-workflow-subscription-id": "***REDACTED***",
             "x-ms-workflow-resourcegroup-name": "selfhostingresourcegroup",
             "x-ms-tracking-id": "88d4c14a-747f-4dc7-a50e-45d1e3afebfb",
             "x-ms-correlation-id": "88d4c14a-747f-4dc7-a50e-45d1e3afebfb",
             "x-ms-client-request-id": "88d4c14a-747f-4dc7-a50e-45d1e3afebfb",
             "x-ms-client-tracking-id": "08584283631933537320363259938CU27",
             "x-ms-action-tracking-id": "1f06a8e0-db6d-4c9e-837f-e4ecf4315b94",
-            "traceparent": "00-bfdce8a674ef484c34bf0c0ef8a3cde2-2af884ae45f6bd42-00",
+            "traceparent": "***REDACTED***",
             "content-type": "application/json; charset=utf-8",
             "x-forwarded-for": "4.150.249.52",
             "x-forwarded-host": "vdc.sersocial.org",
@@ -3821,7 +3821,7 @@
               "nombre_examen": "PSA"
             }
           ],
-          "webhookUrl": "https://vdc.sersocial.org/n8n/webhook/3f3339a2-f2ba-4899-90c6-bf87e44bd6b1",
+          "webhookUrl": "***REDACTED***",
           "executionMode": "production"
         }
       }
@@ -3842,7 +3842,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -3905,65 +3905,65 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "=https://zeussalud_test.sersocial.org:8022/api/SisDeta/DatosBasicospaciente",
+          "url": "***REDACTED***",
           "sendQuery": true,
           "queryParameters": {
             "parameters": [
               {
                 "name": "NumeroIdentificacion",
-                "value": "={{ $('verificar_paciente_no_creado').item.json.documento }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "TipoIdentificacion",
-                "value": "={{ $('verificar_paciente_no_creado').item.json.tipo_documento }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Primernom",
-                "value": "={{ $('verificar_paciente_no_creado').item.json.primer_nombre }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Primerape",
-                "value": "={{ $('verificar_paciente_no_creado').item.json.primer_apellido }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Segundoape",
-                "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.segundo_apellido }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Fechanaci",
-                "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.fecha_nacimiento }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Sexo",
-                "value": "={{ $json.sexo }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Tipousuario",
-                "value": "={{ $('Actualizar datos de usuario').first().json.id_regimen }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "CodDep",
-                "value": "={{$('Seleccionar usuarios que esten activos sin autoid').first().json.codigo_departamento }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "CodMuni",
-                "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.codigo_municipio }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Telefono",
-                "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.telefono_1 }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "email",
-                "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.email }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "direccion",
-                "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.direccion }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "segundonom",
-                "value": "={{ $('Seleccionar usuarios que esten activos sin autoid').first().json.segundo_nombre }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -3972,7 +3972,7 @@
             "parameters": [
               {
                 "name": "Authorization",
-                "value": "={{ $('Guardar token ZEUS').item.json.tokenZeus }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -4006,7 +4006,7 @@
           },
           "table": {
             "__rl": true,
-            "value": "pacientes_sospecha_colon",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "pacientes_sospecha_colon"
           },
@@ -4014,8 +4014,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "auto_id": "={{ $json.autoid }}",
-              "tipo_documento": "={{ $('Update rows in a table').item.json.tipo_documento }}",
-              "documento": "={{ $('Update rows in a table').item.json.documento }}"
+              "tipo_documento": "***REDACTED***",
+              "documento": "***REDACTED***"
             },
             "matchingColumns": [
               "documento",
@@ -4429,7 +4429,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const result = [];\n\n// Iteramos sobre cada registro\nfor (const item of $input.all()) {\n  let data = item.json;\n  let errors = [];\n\n  // --- 1. LIMPIEZA DE DATOS ---\n  const cleanText = (str) => (typeof str === 'string' ? str.trim().toUpperCase() : '');\n\n  data.primer_nombre = cleanText(data.primer_nombre);\n  data.segundo_nombre = cleanText(data.segundo_nombre);\n  data.primer_apellido = cleanText(data.primer_apellido);\n  data.segundo_apellido = cleanText(data.segundo_apellido);\n  data.regional = cleanText(data.regional);\n  data.municipio = cleanText(data.municipio);\n\n  if (data.documento) data.documento = data.documento.toString().replace(/\\D/g, '');\n  if (data.telefono) data.telefono = data.telefono.toString().replace(/\\D/g, '');\n\n  if (data.edad) {\n    data.edad = parseInt(data.edad, 10);\n  }\n\n  // --- 2. VALIDACIÓN ---\n  if (!data.documento || data.documento === '') {\n    errors.push(\"Documento vacío o inválido\");\n  }\n  if (!data.primer_nombre || data.primer_nombre === '') {\n    errors.push(\"Falta el primer nombre\");\n  }\n  if (!data.tipo_documento) {\n    errors.push(\"Falta tipo de documento\");\n  }\n \n\n  // --- 3. ETIQUETADO (Para separar luego en el nodo If) ---\n  // Creamos una nueva propiedad booleana\n  data.es_valido = errors.length === 0;\n  \n  // Si hay errores, guardamos el motivo\n  if (!data.es_valido) {\n    data.motivo_error = errors.join(\", \");\n  }\n\n  // Agregamos el ítem al arreglo final\n  result.push({ json: data });\n}\n\nreturn result;"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -4446,7 +4446,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const staticData = $getWorkflowStaticData('global');\nconsole.log(staticData)\nconst ahora = Date.now();\nconst tokenValido = !!(staticData.token && \n                    staticData.tokenExpiry && \n                    ahora < staticData.tokenExpiry);\n\nreturn [{\n  json: {\n    datos: [...$input.all()],\n    tokenValido: tokenValido,\n    token: staticData.token || null\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -4460,7 +4460,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const staticData = $getWorkflowStaticData('global');\n\nstaticData.token = $input.first().json.access_token;\n\nconst expiry = $input.first().json.expires_in.toString()\nstaticData.tokenExpiry = Date.now() + ((parseInt(expiry)-500) * 1000)\n//staticData.tokenExpiry = Date.now() + (3500 * 1000);\n\n\n\nreturn [{\n  json: {\n    datos:[...$('Limpiar y estructurar datos').all()],\n    token: staticData.token,\n    tokenValido: true,\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -4474,7 +4474,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const staticDataZeus = $getWorkflowStaticData('global');\nconsole.log(staticDataZeus)\nconst ahora = Date.now();\nconst tokenValido = !!(staticDataZeus.tokenZeus && \n                    staticDataZeus.tokenZeusExpiry && \n                    ahora < staticDataZeus.tokenZeusExpiry);\n\nreturn [{\n  json: {\n     datos: [...$(\"Seleccionar usuarios que esten activos sin autoid\").all()],\n    tokenValidoZeus: tokenValido,\n    tokenZeus: staticDataZeus.tokenZeus || null\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -4521,7 +4521,7 @@
       },
       {
         "parameters": {
-          "content": "## Gestión validación derechos de usuario MUTUAL\n",
+          "content": "***REDACTED***",
           "height": 576,
           "width": 1348
         },
@@ -4576,7 +4576,7 @@
             "conditions": [
               {
                 "id": "0ce07751-9cb0-47cc-b8de-6083c362b452",
-                "leftValue": "={{ $('Limpiar y estructurar datos').item.json.es_valido }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": "",
                 "operator": {
                   "type": "boolean",
@@ -4635,7 +4635,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const cleanedItems = [];\n\nfor (const item of $input.all()) {\n  try {\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    \n    // Eliminar el código del departamento del inicio del código de municipio\n    // Ejemplo: \"13657\" con depCod \"13\" → \"657\" | \"08001\" con depCod \"08\" → \"001\"\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    // Extraer tipo y número de documento\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    const resultado = {\n      // --- Identificación ---\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n\n      // --- Estado ---\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n\n      // --- Datos personales ---\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n\n      // --- Contacto ---\n      telefono_fijo: patientData.telecom?.find(t => t.use === 'home')?.value || '',\n      telefono_movil: patientData.telecom?.find(t => t.use === 'mobile')?.value || '',\n      email: patientData.telecom?.find(t => t.system === 'email')?.value || '',\n\n      // --- Dirección ---\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona: zona,\n      ubicacion: ubicacion,\n\n      // --- Afiliación ---\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n\n      // --- Lugar de atención ---\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod,\n    };\n\n    if (estaFallecido) {\n      resultado.fecha_fallecimiento = getExt('dateOfDeath')?.valueDate || '';\n    }\n\n    cleanedItems.push({ json: resultado });\n\n  } catch (error) {\n    cleanedItems.push({\n      json: {\n        error: \"Fallo al parsear la data de la API\",\n        details: error.message\n      }\n    });\n  }\n}\n\nreturn cleanedItems;"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -4657,7 +4657,7 @@
           },
           "table": {
             "__rl": true,
-            "value": "pacientes_sospecha_colon",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "pacientes_sospecha_colon"
           },
@@ -4665,25 +4665,25 @@
             "mappingMode": "defineBelow",
             "value": {
               "estado_mutal": true,
-              "tipo_documento": "={{ $('Verificar usuario activo').item.json.tipo_documento }}",
-              "documento": "={{ $('Verificar usuario activo').item.json.numero_documento }}",
-              "direccion": "={{ $('Verificar usuario activo').first().json.direccion_texto }},{{ $('Verificar usuario activo').item.json.ubicacion }} ",
-              "email": "={{ $('Verificar usuario activo').first().json.email }}",
-              "telefono_2": "={{ $('Verificar usuario activo').item.json.telefono_movil }}",
-              "sexo": "={{ $('Verificar usuario activo').first().json.genero=='male'? 'M': 'F' }}",
-              "tipo_usuario": "={{$('Verificar usuario activo').first().json.tipo_usuario }}",
-              "tipo_afiliado": "={{ $('Verificar usuario activo').first().json.tipo_afiliado }}",
-              "regimen": "={{ $('Verificar usuario activo').first().json.regimen }}",
-              "nombre_departamento": "={{ $('Verificar usuario activo').first().json.nombre_departamento }}",
-              "nombre_municipio": "={{ $('Verificar usuario activo').first().json.nombre_municipio }}",
-              "fallecido": "={{ $('Verificar usuario activo').first().json.esta_fallecido }}",
-              "codigo_regimen": "={{ $('Verificar usuario activo').first().json.regimen_codigo.toUpperCase() }}",
-              "codigo_departamento": "={{ $('Verificar usuario activo').first().json.codigo_departamento }}",
-              "codigo_municipio": "={{ $('Verificar usuario activo').first().json.codigo_municipio }}",
-              "contrato": "={{ $('OBTENER EMPRESA Y CONTRATO').first().json.contrato }}",
-              "codigo_empresa": "={{ $('OBTENER EMPRESA Y CONTRATO').first().json.id_empresa }}",
-              "id_regimen": "={{ $('Obtener Regimen').first().json.id_tipo_regimen }}",
-              "id_registro": "={{ $('Verificar usuario activo').item.json.id_registro }}"
+              "tipo_documento": "***REDACTED***",
+              "documento": "***REDACTED***",
+              "direccion": "***REDACTED***",
+              "email": "***REDACTED***",
+              "telefono_2": "***REDACTED***",
+              "sexo": "***REDACTED***",
+              "tipo_usuario": "***REDACTED***",
+              "tipo_afiliado": "***REDACTED***",
+              "regimen": "***REDACTED***",
+              "nombre_departamento": "***REDACTED***",
+              "nombre_municipio": "***REDACTED***",
+              "fallecido": "***REDACTED***",
+              "codigo_regimen": "***REDACTED***",
+              "codigo_departamento": "***REDACTED***",
+              "codigo_municipio": "***REDACTED***",
+              "contrato": "***REDACTED***",
+              "codigo_empresa": "***REDACTED***",
+              "id_regimen": "***REDACTED***",
+              "id_registro": "***REDACTED***"
             },
             "matchingColumns": [
               "tipo_documento",
@@ -5198,7 +5198,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst tokenZeus = $input.item.json.BearerToken;\n\n// Decodifica el JWT y lee la expiración real\nconst payload = JSON.parse(Buffer.from(tokenZeus.split('.')[1], 'base64').toString());\nconst expiryMs = (payload.exp * 1000) - (60 * 1000); // 1 minuto de margen\n\nstaticData.tokenZeus = tokenZeus;\nstaticData.tokenZeusExpiry = expiryMs;\n\nreturn [{\n  json: {\n    datos: [...$(\"Seleccionar usuarios que esten activos sin autoid\").all()],\n    tokenZeus: tokenZeus,\n    tokenValidoZeus: true,\n    expiraEl: new Date(expiryMs).toISOString()\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -5233,29 +5233,29 @@
           },
           "table": {
             "__rl": true,
-            "value": "pacientes_sospecha_colon",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "pacientes_sospecha_colon"
           },
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "tipo_documento": "={{ $('generar id unico registro').item.json.tipo_documento }}",
-              "nombre_completo": "={{ $('generar id unico registro').item.json.primer_nombre }} {{ $('Validar datos').item.json.segundo_nombre }} {{ $('Validar datos').item.json.primer_apellido }} {{ $('Validar datos').item.json.segundo_apellido }}",
-              "telefono_1": "={{ $('generar id unico registro').item.json.telefono }}",
-              "edad": "={{ $('generar id unico registro').item.json.edad }}",
-              "primer_nombre": "={{ $('generar id unico registro').item.json.primer_nombre }}",
-              "primer_apellido": "={{ $('generar id unico registro').item.json.primer_apellido }}",
-              "segundo_apellido": "={{ $('generar id unico registro').item.json.segundo_apellido }}",
-              "documento": "={{ $('generar id unico registro').item.json.documento }}",
+              "tipo_documento": "***REDACTED***",
+              "nombre_completo": "***REDACTED***",
+              "telefono_1": "***REDACTED***",
+              "edad": "***REDACTED***",
+              "primer_nombre": "***REDACTED***",
+              "primer_apellido": "***REDACTED***",
+              "segundo_apellido": "***REDACTED***",
+              "documento": "***REDACTED***",
               "estado_mutal": false,
-              "segundo_nombre": "={{ $('generar id unico registro').item.json.segundo_nombre }}",
-              "fecha_toma_examen": "={{ $('generar id unico registro').item.json.fecha_toma_examen }}",
-              "fecha_resultados_examen": "={{ $('generar id unico registro').item.json.fecha_resultados }}",
-              "fecha_nacimiento": "={{ $('generar id unico registro').item.json.fecha_nacimiento }}",
-              "nombre_examen": "={{ $('generar id unico registro').item.json.nombre_examen }}",
+              "segundo_nombre": "***REDACTED***",
+              "fecha_toma_examen": "***REDACTED***",
+              "fecha_resultados_examen": "***REDACTED***",
+              "fecha_nacimiento": "***REDACTED***",
+              "nombre_examen": "***REDACTED***",
               "usuario_contactado": "NO",
-              "id_registro": "={{ $('generar id unico registro').item.json.id_registro }}"
+              "id_registro": "***REDACTED***"
             },
             "matchingColumns": [
               "id"
@@ -5865,7 +5865,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+          "url": "***REDACTED***",
           "sendBody": true,
           "contentType": "form-urlencoded",
           "bodyParameters": {
@@ -5876,15 +5876,15 @@
               },
               {
                 "name": "client_id",
-                "value": "right-validation"
+                "value": "***REDACTED***"
               },
               {
                 "name": "username",
-                "value": "desarrollotecnologico@sersocial.org"
+                "value": "***REDACTED***"
               },
               {
                 "name": "password",
-                "value": "8J(?DEQ/98hg"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -5903,27 +5903,27 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://guacamayaazul.mutualser.com/validateRights/",
+          "url": "***REDACTED***",
           "sendHeaders": true,
           "headerParameters": {
             "parameters": [
               {
                 "name": "Cookie",
-                "value": "JSESSIONID=6AD773EA67E6CCE789FD47A706134B8B"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Content-Type",
-                "value": "application/json"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Authorization",
-                "value": "=Bearer {{ $json.token }}"
+                "value": "***REDACTED***"
               }
             ]
           },
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{ $json.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{ $json.documento }}\"  \n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+          "jsonBody": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -5940,11 +5940,11 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://zeussalud_test.sersocial.org:8022/api/AppApiUsers/Authenticate",
+          "url": "***REDACTED***",
           "sendBody": true,
           "contentType": "raw",
           "rawContentType": "application/json",
-          "body": "{ \"userName\": \"administrador\",  \"password\": \"123456\"}",
+          "body": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -5966,19 +5966,19 @@
               {
                 "id": "b140a3bd-14f7-494d-98d1-ae9cc669a70f",
                 "name": "token",
-                "value": "={{ $('Verificar token MUTUAL').item.json.token }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "17333cc7-f3e2-42a3-8c82-2564695bd94d",
                 "name": "tipo_documento",
-                "value": "={{ $json.json.tipo_documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "5e67fa48-f195-4d27-8b53-6227dd6a71a6",
                 "name": "documento",
-                "value": "={{ $json.json.documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               }
             ]
@@ -6017,19 +6017,19 @@
               {
                 "id": "45e20681-a2e5-4383-8021-806ec29bd9b8",
                 "name": "token",
-                "value": "={{ $('Guardar Token MUTUAL').item.json.token }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "90e04961-3cf9-412f-97dc-13d934eed0e8",
                 "name": "tipo_documento",
-                "value": "={{ $json.json.tipo_documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "e0aea6b2-a794-4401-913d-22a4f90af6eb",
                 "name": "documento",
-                "value": "={{ $json.json.documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               }
             ]
@@ -6067,25 +6067,25 @@
               {
                 "id": "b9b9091f-e085-48fd-ac26-89eac58e3699",
                 "name": "tipo_documento",
-                "value": "={{ $json.json.tipo_documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "645480b3-5941-4f5a-b194-be2e049c4900",
                 "name": "documento",
-                "value": "={{ $json.json.documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "8bdcd634-b534-410b-bbd1-cf5d5dc27f67",
                 "name": "token_zeus",
-                "value": "={{ $('VERIFICAR TOKEN ZEUS').item.json.tokenZeus }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "90e4d53d-3b8a-4999-b9a1-447809ab5647",
                 "name": "datos",
-                "value": "={{ $json.json }}",
+                "value": "***REDACTED***",
                 "type": "object"
               }
             ]
@@ -6108,25 +6108,25 @@
               {
                 "id": "2ed4ffee-aca1-44f3-bb41-fa23892f0613",
                 "name": "tipo_documento",
-                "value": "={{ $json.json.tipo_documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "a0285de8-3f79-4e9c-a761-e646acdd1170",
                 "name": "documento",
-                "value": "={{ $json.json.documento }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "2d46d5f1-e35b-48a2-9692-5fb767a1b8d8",
                 "name": "tokenZeus",
-                "value": "={{ $('Guardar token ZEUS').item.json.tokenZeus }}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "fa7d4cac-2b65-499d-8419-3d5aba14dd24",
                 "name": "datos",
-                "value": "={{ $json.json }}",
+                "value": "***REDACTED***",
                 "type": "object"
               }
             ]
@@ -6160,7 +6160,7 @@
             "values": [
               {
                 "column": "codigo",
-                "value": "={{ $('Verificar usuario activo').first().json.codigo_empresa }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -6191,7 +6191,7 @@
           },
           "table": {
             "__rl": true,
-            "value": "tipos_regimen",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "tipos_regimen"
           },
@@ -6200,7 +6200,7 @@
             "values": [
               {
                 "column": "codigo",
-                "value": "={{ $('Verificar usuario activo').first().json.regimen_codigo }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -6225,7 +6225,7 @@
         "parameters": {
           "workflowId": {
             "__rl": true,
-            "value": "WQ65T0ACkIUy8PO80bZWV",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultUrl": "/n8n/workflow/WQ65T0ACkIUy8PO80bZWV",
             "cachedResultName": "VALIDAR DERECHOS DE USUARIO"
@@ -6233,7 +6233,7 @@
           "workflowInputs": {
             "mappingMode": "defineBelow",
             "value": {
-              "datos_paciente": "={{ {\n\"tipo_documento\": $json.tipo_documento ,\n\"documento\": $json.documento,\n\"id_registro\": $json.id_registro\n }  }}"
+              "datos_paciente": "***REDACTED***"
             },
             "matchingColumns": [
               "datos_paciente"
@@ -6277,17 +6277,17 @@
           },
           "table": {
             "__rl": true,
-            "value": "pacientes_sospecha_colon",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "pacientes_sospecha_colon"
           },
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "tipo_documento": "={{ $('Merge2').item.json.tipo_documento }}",
+              "tipo_documento": "***REDACTED***",
               "documento": "={{ $('Merge2').item.json.documento }}",
               "auto_id": "={{ $json.Datos[0].autoid}}",
-              "registro_zeus": "={{ $('obtener_datos_paciente').item.json.Datos.length > 0 ? true : false }}"
+              "registro_zeus": "***REDACTED***"
             },
             "matchingColumns": [
               "tipo_documento",
@@ -6856,17 +6856,17 @@
       },
       {
         "parameters": {
-          "url": "https://zeussalud_test.sersocial.org:8022/api/SisDeta/GetDatosBasicosPaciente",
+          "url": "***REDACTED***",
           "sendQuery": true,
           "queryParameters": {
             "parameters": [
               {
                 "name": "NumeroIdentificacion",
-                "value": "={{ $json.documento }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "TipoIdentificacion",
-                "value": "={{ $json.tipo_documento }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -6875,7 +6875,7 @@
             "parameters": [
               {
                 "name": "Authorization",
-                "value": "={{ $json.tokenZeus }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -6895,7 +6895,7 @@
       },
       {
         "parameters": {
-          "jsCode": "return $input.all().map(item => {\n  const { tipo_documento, documento, nombre_examen, fecha_toma_examen } = item.json;\n\n  const id_registro = Buffer.from(\n    `${tipo_documento}|${documento}|${nombre_examen}|${fecha_toma_examen}`\n  ).toString('base64').replace(/=+$/, '');\n\n  return { json: { ...item.json, id_registro } };\n});"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -6917,7 +6917,7 @@
           },
           "table": {
             "__rl": true,
-            "value": "pacientes_sospecha_colon",
+            "value": "***REDACTED***",
             "mode": "list"
           },
           "returnAll": true,
@@ -6925,7 +6925,7 @@
             "values": [
               {
                 "column": "=estado_mutal",
-                "value": "={{ true }}"
+                "value": "***REDACTED***"
               },
               {
                 "column": "auto_id",
@@ -6942,7 +6942,7 @@
           -512
         ],
         "id": "c73eceb0-2420-47dd-8585-c360abf28dee",
-        "name": "Seleccionar usuarios que esten activos sin autoid",
+        "name": "***REDACTED***",
         "executeOnce": true,
         "credentials": {
           "postgres": {
@@ -6953,7 +6953,7 @@
       },
       {
         "parameters": {
-          "errorMessage": "Error al validar los derechos de usuario en Mutual"
+          "errorMessage": "***REDACTED***"
         },
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
@@ -7005,7 +7005,7 @@
       },
       {
         "parameters": {
-          "errorMessage": "Error al obtener datos del usuario en Zeus"
+          "errorMessage": "***REDACTED***"
         },
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
@@ -7182,7 +7182,7 @@
         "main": [
           [
             {
-              "node": "Seleccionar usuarios que esten activos sin autoid",
+              "node": "***REDACTED***",
               "type": "main",
               "index": 0
             }
