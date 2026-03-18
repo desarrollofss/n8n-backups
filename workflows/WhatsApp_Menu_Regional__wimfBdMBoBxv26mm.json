@@ -30,7 +30,7 @@
             {
               "value1": "={{ $json.body.message.toLowerCase() }}",
               "operation": "regex",
-              "value2": "hola|hello|hi|buenos dias|buenas tardes|buenas noches|inicio"
+              "value2": "***REDACTED***"
             }
           ]
         }
@@ -43,7 +43,7 @@
         -32
       ],
       "id": "30e037da-9204-49b2-b3bc-085aef8c7116",
-      "notes": "Detecta si el mensaje es un saludo para mostrar menú principal"
+      "notes": "***REDACTED***"
     },
     {
       "parameters": {
@@ -65,7 +65,7 @@
         -128
       ],
       "id": "09ed6c34-d74b-4c02-a9c1-24d34c066c57",
-      "notes": "Usuario seleccionó Canales de Comunicación"
+      "notes": "***REDACTED***"
     },
     {
       "parameters": {
@@ -87,7 +87,7 @@
         32
       ],
       "id": "2cac677d-86b5-47f6-babe-0008d4e20824",
-      "notes": "Usuario seleccionó Citas (preparado para futuro)"
+      "notes": "***REDACTED***"
     },
     {
       "parameters": {
@@ -109,7 +109,7 @@
         176
       ],
       "id": "5b0120c2-ed2d-4b3a-908b-5133030bb1e9",
-      "notes": "Usuario seleccionó Información (preparado para futuro)"
+      "notes": "***REDACTED***"
     },
     {
       "parameters": {
@@ -126,7 +126,7 @@
             },
             {
               "name": "to",
-              "value": "={{ $json.body.from }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "type",
@@ -134,7 +134,7 @@
             },
             {
               "name": "text",
-              "value": "={\"body\": \"¡Hola! 👋 Bienvenido a nuestro servicio de atención.\\n\\nPor favor selecciona una opción:\\n\\n1️⃣ Canales de Comunicación por Regional\\n2️⃣ Citas\\n3️⃣ Información\\n\\nResponde con el número de la opción que deseas.\"}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -165,7 +165,7 @@
             },
             {
               "name": "to",
-              "value": "={{ $json.body.from }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "type",
@@ -173,7 +173,7 @@
             },
             {
               "name": "text",
-              "value": "={\"body\": \"📍 Selecciona tu regional:\\n\\n1️⃣ Cartagena\\n2️⃣ Barranquilla\\n3️⃣ Sincelejo\\n\\nResponde con el número de tu regional.\"}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -267,7 +267,7 @@
             },
             {
               "name": "to",
-              "value": "={{ $json.body.from }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "type",
@@ -275,7 +275,7 @@
             },
             {
               "name": "text",
-              "value": "={\"body\": \"📍 *CARTAGENA*\\n\\n📧 Dirección: Calle de la Factoria #36-66, Centro Histórico, Cartagena\\n☎️ Teléfono: +57 (5) 664-2000\\n\\n¿Necesitas algo más? Escribe *MENU* para volver al inicio.\"}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -305,7 +305,7 @@
             },
             {
               "name": "to",
-              "value": "={{ $json.body.from }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "type",
@@ -313,7 +313,7 @@
             },
             {
               "name": "text",
-              "value": "={\"body\": \"📍 *BARRANQUILLA*\\n\\n📧 Dirección: Calle 72 #57-47, Barrio El Prado, Barranquilla\\n☎️ Teléfono: +57 (5) 368-5000\\n\\n¿Necesitas algo más? Escribe *MENU* para volver al inicio.\"}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -343,7 +343,7 @@
             },
             {
               "name": "to",
-              "value": "={{ $json.body.from }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "type",
@@ -351,7 +351,7 @@
             },
             {
               "name": "text",
-              "value": "={\"body\": \"📍 *SINCELEJO*\\n\\n📧 Dirección: Carrera 20 #25-34, Centro, Sincelejo\\n☎️ Teléfono: +57 (5) 282-4000\\n\\n¿Necesitas algo más? Escribe *MENU* para volver al inicio.\"}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -381,7 +381,7 @@
             },
             {
               "name": "to",
-              "value": "={{ $json.body.from }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "type",
@@ -389,7 +389,7 @@
             },
             {
               "name": "text",
-              "value": "={\"body\": \"⏳ Esta opción estará disponible próximamente.\\n\\nEscribe *MENU* para volver al inicio.\"}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -403,7 +403,7 @@
         128
       ],
       "id": "137cf9b0-e568-49de-9ed5-2d71c9221089",
-      "notes": "Para las opciones 2 y 3 que aún no están implementadas"
+      "notes": "***REDACTED***"
     }
   ],
   "connections": {
