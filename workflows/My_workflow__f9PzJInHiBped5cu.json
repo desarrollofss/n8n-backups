@@ -38,7 +38,7 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "gemini-2.5-flash",
+          "value": "***REDACTED***",
           "mode": "id"
         },
         "messages": {
@@ -67,7 +67,7 @@
       "parameters": {
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "type": "***REDACTED***",
       "typeVersion": 1,
       "position": [
         80,
@@ -141,7 +141,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -153,7 +153,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -186,7 +186,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
