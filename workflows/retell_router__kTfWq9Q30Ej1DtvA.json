@@ -11,7 +11,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "Dqb2QrRj45EKwljB",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultUrl": "/workflow/Dqb2QrRj45EKwljB",
           "cachedResultName": "get_paciente_pendiente"
@@ -72,7 +72,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "{\n  \"status\": \"ok\",\n  \"mensaje\": \"Cita agendada correctamente\",\n  \"fecha\": \"{{$json.fecha}}\",\n  \"hora\": \"{{$json.hora}}\"\n}\n",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -89,7 +89,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "UkQA7gBhIusGaQPF",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultUrl": "/workflow/UkQA7gBhIusGaQPF",
           "cachedResultName": "agendar_cita"
@@ -119,7 +119,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "{\n  \"status\": \"empty\",\n  \"mensaje\": \"No hay pacientes pendientes por contactar\"\n}\n",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -139,25 +139,25 @@
             {
               "id": "c86305da-8da4-4901-a731-b502e0063cda",
               "name": "documento",
-              "value": "={{$json.documento}}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "51f0848a-6717-4167-93b0-22ea378bf5ea",
               "name": "nombre_completo",
-              "value": "={{ $json.nombre_completo }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "8f60fb97-4174-4acd-a03f-78746b43d081",
               "name": "telefono",
-              "value": "={{$json.telefono}}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "c5400ddb-10b3-47a9-9ec3-e0b7fd2aa87d",
               "name": "correo",
-              "value": "={{$json.correo}}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -213,7 +213,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "Dqb2QrRj45EKwljB",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultUrl": "/workflow/Dqb2QrRj45EKwljB",
           "cachedResultName": "get_paciente_pendiente"
@@ -276,25 +276,25 @@
             {
               "id": "c86305da-8da4-4901-a731-b502e0063cda",
               "name": "documento",
-              "value": "={{$json.documento}}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "51f0848a-6717-4167-93b0-22ea378bf5ea",
               "name": "nombre_completo",
-              "value": "={{$json.nombre_completo}}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "8f60fb97-4174-4acd-a03f-78746b43d081",
               "name": "telefono",
-              "value": "={{$json.telefono}}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "c5400ddb-10b3-47a9-9ec3-e0b7fd2aa87d",
               "name": "correo",
-              "value": "={{$json.correo}}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -314,7 +314,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "UkQA7gBhIusGaQPF",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultUrl": "/workflow/UkQA7gBhIusGaQPF",
           "cachedResultName": "agendar_cita"
@@ -343,7 +343,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={\n  \"existe\": true,\n  \"documento\": \"{{$('Edit Fields1').item.json.documento}}\",\n  \"nombre_completo\": \"{{$('Edit Fields1').item.json.nombre_completo}}\",\n  \"telefono\": \"{{$('Edit Fields1').item.json.telefono}}\",\n  \"correo\": \"{{$('Edit Fields1').item.json.correo}}\",\n  \"fecha\": \"{{$json.fecha}}\",\n  \"hora\": \"{{$json.hora}}\"\n}\n",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -358,7 +358,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "{\n  \"existe\": false,\n  \"mensaje\": \"No hay pacientes pendientes por contactar\"\n}\n",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
