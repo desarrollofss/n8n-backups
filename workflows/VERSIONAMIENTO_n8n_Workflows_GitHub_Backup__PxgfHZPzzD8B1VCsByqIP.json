@@ -1,0 +1,1588 @@
+{
+  "updatedAt": "2026-03-18T16:04:25.458Z",
+  "createdAt": "2026-03-16T21:39:41.586Z",
+  "id": "PxgfHZPzzD8B1VCsByqIP",
+  "name": "***REDACTED***",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "fba82747-1a61-4204-b391-74ecc785f0ed",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        -304
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "db40e785-a9c7-46e2-b11a-eb7211627cdd",
+      "name": "GET All Workflows",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -160,
+        -112
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "04828363-67f5-492f-bda2-705ecfc19275",
+      "name": "Extraer Lista",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        -112
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f404a9a7-5185-4558-aab7-163489aac069",
+      "name": "Loop por Workflow",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        528,
+        -128
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "539d88fd-9965-4596-a6fe-47bcf96d3f5d",
+      "name": "GET Workflow Detalle",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        720,
+        -128
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "9e0f4d35-6917-41d7-9703-121e7f499c45",
+      "name": "Preparar Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        928,
+        -128
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Accept",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2864318d-bccb-4e51-99ba-7f1ac8cc0ffa",
+      "name": "GET SHA de GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1152,
+        -128
+      ],
+      "disabled": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "64748215-14e9-45d8-8609-5eb7bdc68d50",
+      "name": "Construir Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        -128
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Accept",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.body) }}",
+        "options": {}
+      },
+      "id": "17b13f93-3eaa-4037-8f7d-615769abbc76",
+      "name": "PUT a GitHub",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1600,
+        -128
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "26df5f6f-3fe7-4ba3-8751-a06dc2caa505",
+      "name": "Log Resultado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1808,
+        -128
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                5
+              ],
+              "triggerAtHour": 18
+            }
+          ]
+        }
+      },
+      "id": "5ea4e021-eab7-4458-8e64-fc3a29f0580b",
+      "name": "Schedule Trigger1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        -112
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "432c9f4b-2da9-432f-94af-40767d6784e1",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1456,
+        -288
+      ],
+      "id": "bcc96277-965f-43ac-8841-4c77e41a7ac6",
+      "name": "If",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condicion-sin-cambios",
+              "leftValue": "={{ $json.sin_cambios }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "028fc76d-56d2-41c5-8888-1e89a66f09c7",
+      "name": "¿Sin Cambios?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                5
+              ],
+              "triggerAtHour": 18
+            }
+          ]
+        }
+      },
+      "id": "d9c4e50e-26e3-4e26-b010-820a749be5f6",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -416,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f7de8a6f-101b-44b5-a793-bfc8a7128b9d",
+      "name": "GET All Workflows1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        -176,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "90eb786c-db96-4803-aa69-17cebd64eb18",
+      "name": "Extraer Lista1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "06bfd723-b4eb-44dc-a737-ab250c1d81b0",
+      "name": "Loop por Workflow1",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        256,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b613f44d-d35e-4e31-a44c-ff38d0e8b14d",
+      "name": "GET Workflow Detalle1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        496,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "1cd2ae18-e1a4-4f3f-ba70-3cb378e9708d",
+      "name": "Preparar Payload1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        704,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Accept",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c888ea8a-02c9-4e9b-8833-0f0d2066be3a",
+      "name": "GET SHA de GitHub1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        928,
+        560
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "3d4eb830-ae7c-45f4-9c95-ab37fc03365d",
+      "name": "Construir Body1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1152,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Accept",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.body) }}",
+        "options": {}
+      },
+      "id": "de395014-e21d-4148-ba7f-3bea50ca10d0",
+      "name": "PUT a GitHub1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        1424,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "0ded7c0f-80b8-4112-a052-38862d8098d1",
+      "name": "Log Resultado1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1968,
+        672
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        []
+      ]
+    },
+    "GET All Workflows": {
+      "main": [
+        [
+          {
+            "node": "Extraer Lista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Lista": {
+      "main": [
+        [
+          {
+            "node": "Loop por Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop por Workflow": {
+      "main": [
+        [],
+        [
+          {
+            "node": "GET Workflow Detalle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Workflow Detalle": {
+      "main": [
+        [
+          {
+            "node": "Preparar Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Payload": {
+      "main": [
+        [
+          {
+            "node": "GET SHA de GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET SHA de GitHub": {
+      "main": [
+        [
+          {
+            "node": "Construir Body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construir Body": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PUT a GitHub": {
+      "main": [
+        [
+          {
+            "node": "Log Resultado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Resultado": {
+      "main": [
+        [
+          {
+            "node": "Loop por Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "GET All Workflows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "PUT a GitHub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Sin Cambios?": {
+      "main": [
+        [
+          {
+            "node": "Log Resultado1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "PUT a GitHub1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "GET All Workflows1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET All Workflows1": {
+      "main": [
+        [
+          {
+            "node": "Extraer Lista1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Lista1": {
+      "main": [
+        [
+          {
+            "node": "Loop por Workflow1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop por Workflow1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "GET Workflow Detalle1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Workflow Detalle1": {
+      "main": [
+        [
+          {
+            "node": "Preparar Payload1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Payload1": {
+      "main": [
+        [
+          {
+            "node": "GET SHA de GitHub1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET SHA de GitHub1": {
+      "main": [
+        [
+          {
+            "node": "Construir Body1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Construir Body1": {
+      "main": [
+        [
+          {
+            "node": "¿Sin Cambios?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PUT a GitHub1": {
+      "main": [
+        [
+          {
+            "node": "Log Resultado1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Resultado1": {
+      "main": [
+        [
+          {
+            "node": "Loop por Workflow1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "0527cfbc-8b35-4da9-aeb1-70e87f778f6f",
+  "activeVersionId": "0527cfbc-8b35-4da9-aeb1-70e87f778f6f",
+  "versionCounter": 58,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-03-16T21:39:41.586Z",
+      "createdAt": "2026-03-16T21:39:41.586Z",
+      "role": "workflow:owner",
+      "workflowId": "PxgfHZPzzD8B1VCsByqIP",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-18T12:43:19.027Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-18",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-02-04T21:56:48.941Z",
+      "createdAt": "2026-02-04T21:56:48.941Z",
+      "id": "S7UevxOArIeglzP8",
+      "name": "🟢"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-03-18T16:05:13.297Z",
+    "createdAt": "2026-03-18T16:04:25.459Z",
+    "versionId": "0527cfbc-8b35-4da9-aeb1-70e87f778f6f",
+    "workflowId": "PxgfHZPzzD8B1VCsByqIP",
+    "nodes": [
+      {
+        "parameters": {},
+        "id": "fba82747-1a61-4204-b391-74ecc785f0ed",
+        "name": "Manual Trigger",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -416,
+          -304
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "X-N8N-API-KEY",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "db40e785-a9c7-46e2-b11a-eb7211627cdd",
+        "name": "GET All Workflows",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          -160,
+          -112
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "04828363-67f5-492f-bda2-705ecfc19275",
+        "name": "Extraer Lista",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          64,
+          -112
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "f404a9a7-5185-4558-aab7-163489aac069",
+        "name": "Loop por Workflow",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          528,
+          -128
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "X-N8N-API-KEY",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "539d88fd-9965-4596-a6fe-47bcf96d3f5d",
+        "name": "GET Workflow Detalle",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          720,
+          -128
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "9e0f4d35-6917-41d7-9703-121e7f499c45",
+        "name": "Preparar Payload",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          928,
+          -128
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Accept",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "2864318d-bccb-4e51-99ba-7f1ac8cc0ffa",
+        "name": "GET SHA de GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          1152,
+          -128
+        ],
+        "disabled": true,
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "64748215-14e9-45d8-8609-5eb7bdc68d50",
+        "name": "Construir Body",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1328,
+          -128
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "method": "PUT",
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Accept",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "={{ JSON.stringify($json.body) }}",
+          "options": {}
+        },
+        "id": "17b13f93-3eaa-4037-8f7d-615769abbc76",
+        "name": "PUT a GitHub",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          1600,
+          -128
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "26df5f6f-3fe7-4ba3-8751-a06dc2caa505",
+        "name": "Log Resultado",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1808,
+          -128
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "weeks",
+                "triggerAtDay": [
+                  5
+                ],
+                "triggerAtHour": 18
+              }
+            ]
+          }
+        },
+        "id": "5ea4e021-eab7-4458-8e64-fc3a29f0580b",
+        "name": "Schedule Trigger1",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -400,
+          -112
+        ],
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "432c9f4b-2da9-432f-94af-40767d6784e1",
+                "leftValue": "",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1456,
+          -288
+        ],
+        "id": "bcc96277-965f-43ac-8841-4c77e41a7ac6",
+        "name": "If",
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict"
+            },
+            "conditions": [
+              {
+                "id": "condicion-sin-cambios",
+                "leftValue": "={{ $json.sin_cambios }}",
+                "rightValue": true,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "028fc76d-56d2-41c5-8888-1e89a66f09c7",
+        "name": "¿Sin Cambios?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          1328,
+          320
+        ]
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "weeks",
+                "triggerAtDay": [
+                  5
+                ],
+                "triggerAtHour": 18
+              }
+            ]
+          }
+        },
+        "id": "d9c4e50e-26e3-4e26-b010-820a749be5f6",
+        "name": "Schedule Trigger",
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          -416,
+          560
+        ]
+      },
+      {
+        "parameters": {
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "X-N8N-API-KEY",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "f7de8a6f-101b-44b5-a793-bfc8a7128b9d",
+        "name": "GET All Workflows1",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          -176,
+          560
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "90eb786c-db96-4803-aa69-17cebd64eb18",
+        "name": "Extraer Lista1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          32,
+          560
+        ]
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "id": "06bfd723-b4eb-44dc-a737-ab250c1d81b0",
+        "name": "Loop por Workflow1",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          256,
+          544
+        ]
+      },
+      {
+        "parameters": {
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "X-N8N-API-KEY",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "b613f44d-d35e-4e31-a44c-ff38d0e8b14d",
+        "name": "GET Workflow Detalle1",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          496,
+          560
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "1cd2ae18-e1a4-4f3f-ba70-3cb378e9708d",
+        "name": "Preparar Payload1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          704,
+          560
+        ]
+      },
+      {
+        "parameters": {
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Accept",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "c888ea8a-02c9-4e9b-8833-0f0d2066be3a",
+        "name": "GET SHA de GitHub1",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          928,
+          560
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "3d4eb830-ae7c-45f4-9c95-ab37fc03365d",
+        "name": "Construir Body1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1152,
+          560
+        ]
+      },
+      {
+        "parameters": {
+          "method": "PUT",
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Accept",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "={{ JSON.stringify($json.body) }}",
+          "options": {}
+        },
+        "id": "de395014-e21d-4148-ba7f-3bea50ca10d0",
+        "name": "PUT a GitHub1",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.1,
+        "position": [
+          1424,
+          672
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "0ded7c0f-80b8-4112-a052-38862d8098d1",
+        "name": "Log Resultado1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1968,
+          672
+        ]
+      }
+    ],
+    "connections": {
+      "Manual Trigger": {
+        "main": [
+          []
+        ]
+      },
+      "GET All Workflows": {
+        "main": [
+          [
+            {
+              "node": "Extraer Lista",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extraer Lista": {
+        "main": [
+          [
+            {
+              "node": "Loop por Workflow",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop por Workflow": {
+        "main": [
+          [],
+          [
+            {
+              "node": "GET Workflow Detalle",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET Workflow Detalle": {
+        "main": [
+          [
+            {
+              "node": "Preparar Payload",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar Payload": {
+        "main": [
+          [
+            {
+              "node": "GET SHA de GitHub",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET SHA de GitHub": {
+        "main": [
+          [
+            {
+              "node": "Construir Body",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Construir Body": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "PUT a GitHub": {
+        "main": [
+          [
+            {
+              "node": "Log Resultado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log Resultado": {
+        "main": [
+          [
+            {
+              "node": "Loop por Workflow",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger1": {
+        "main": [
+          [
+            {
+              "node": "GET All Workflows",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "PUT a GitHub",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Sin Cambios?": {
+        "main": [
+          [
+            {
+              "node": "Log Resultado1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "PUT a GitHub1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "GET All Workflows1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET All Workflows1": {
+        "main": [
+          [
+            {
+              "node": "Extraer Lista1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extraer Lista1": {
+        "main": [
+          [
+            {
+              "node": "Loop por Workflow1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop por Workflow1": {
+        "main": [
+          [],
+          [
+            {
+              "node": "GET Workflow Detalle1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET Workflow Detalle1": {
+        "main": [
+          [
+            {
+              "node": "Preparar Payload1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar Payload1": {
+        "main": [
+          [
+            {
+              "node": "GET SHA de GitHub1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET SHA de GitHub1": {
+        "main": [
+          [
+            {
+              "node": "Construir Body1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Construir Body1": {
+        "main": [
+          [
+            {
+              "node": "¿Sin Cambios?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "PUT a GitHub1": {
+        "main": [
+          [
+            {
+              "node": "Log Resultado1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Log Resultado1": {
+        "main": [
+          [
+            {
+              "node": "Loop por Workflow1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version 0527cfbc",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-03-18T16:05:13.296Z",
+        "id": 290,
+        "workflowId": "PxgfHZPzzD8B1VCsByqIP",
+        "versionId": "0527cfbc-8b35-4da9-aeb1-70e87f778f6f",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
