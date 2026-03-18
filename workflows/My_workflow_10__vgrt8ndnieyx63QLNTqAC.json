@@ -10,7 +10,7 @@
     {
       "parameters": {
         "inputSource": "jsonExample",
-        "jsonExample": "{\n  \"datos_paciente\": {\n    \"tipo_documento\": \"CC\",\n    \"documento\": \"1143331246\",\n    \"id_registro\": \"Q0N8NzIxNDQ0NDl8UFNBfDIwMjUtMDYtMTA=\"\n  }\n}"
+        "jsonExample": "***REDACTED***"
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
@@ -24,7 +24,7 @@
     {
       "parameters": {
         "operation": "get",
-        "key": "mutual_token",
+        "key": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.redis",
@@ -44,7 +44,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const valor = $input.item.json.value;\n\nlet tokenData = null;\ntry {\n  tokenData = valor ? JSON.parse(valor) : null;\n} catch(e) {\n  tokenData = null;\n}\n\nconst ahora = Date.now();\nconst tokenValido = !!(\n  tokenData?.token && \n  tokenData?.expira_en && \n  ahora < tokenData.expira_en\n);\n\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', tokenData?.expira_en \n  ? Math.round((tokenData.expira_en - ahora) / 60000) \n  : 'N/A'\n);\n\nreturn [{ json: { \n  tokenValido,\n  token: tokenData?.token || null,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -91,7 +91,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{ json: {\n  token: $json.token,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -105,7 +105,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+        "url": "***REDACTED***",
         "sendBody": true,
         "contentType": "form-urlencoded",
         "bodyParameters": {
@@ -116,15 +116,15 @@
             },
             {
               "name": "client_id",
-              "value": "right-validation"
+              "value": "***REDACTED***"
             },
             {
               "name": "username",
-              "value": "={{ $env.MUTUAL_USERNAME }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "password",
-              "value": "={{ $env.MUTUAL_PASSWORD }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -145,8 +145,8 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "mutual_token",
-        "value": "={{ JSON.stringify({ token: $json.access_token, expira_en: Date.now() + ((parseInt($json.expires_in) - 500) * 1000) }) }}",
+        "key": "***REDACTED***",
+        "value": "***REDACTED***",
         "expire": true,
         "ttl": 3100
       },
@@ -167,7 +167,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{ json: {\n  token: $('HTTP: Login Mutual').item.json.access_token,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -192,7 +192,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://guacamayaazul.mutualser.com/validateRights/",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -212,7 +212,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{ $json.datos_paciente.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{ $json.datos_paciente.documento }}\"\n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -229,7 +229,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const cleanedItems = [];\n\nconst cleanNotFound = (value) => {\n  if (!value) return '';\n  return value.toLowerCase().includes('not found') ? '' : value;\n};\n\nfor (const item of $input.all()) {\n  try {\n    const idRegistro = $('Merge token').all()[\n      $input.all().indexOf(item)\n    ]?.json?.datos_paciente?.id_registro || '';\n\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    cleanedItems.push({ json: {\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n      id_registro: idRegistro,\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n      telefono_fijo: cleanNotFound(patientData.telecom?.find(t => t.use === 'home')?.value),\n      telefono_movil: cleanNotFound(patientData.telecom?.find(t => t.use === 'mobile')?.value),\n      email: cleanNotFound(patientData.telecom?.find(t => t.system === 'email')?.value),\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona,\n      ubicacion,\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod\n    }});\n\n  } catch (error) {\n    cleanedItems.push({ json: { error: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -242,7 +242,7 @@
     },
     {
       "parameters": {
-        "errorMessage": "Error al validar los derechos de usuario en Mutual"
+        "errorMessage": "***REDACTED***"
       },
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
@@ -424,7 +424,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -436,7 +436,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -469,7 +469,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
