@@ -10,7 +10,7 @@
     {
       "parameters": {
         "public": true,
-        "initialMessages": "Hola me llamo TOBI 🐶\nEn que te puedo ayudar ? 🐕",
+        "initialMessages": "***REDACTED***",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
@@ -25,7 +25,7 @@
     },
     {
       "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         272,
@@ -39,7 +39,7 @@
         "promptType": "define",
         "text": "={{ $json.chatInput }}",
         "options": {
-          "systemMessage": "Eres un Agente de Salud especializado en atención administrativa y programación automática de citas médicas. \nEstás integrado a un sistema conectado mediante n8n, donde tus respuestas pueden activar nodos, ejecutar funciones, consultar disponibilidad y crear agendas.\n\nTu rol y comportamiento:\n- Ayudas al usuario a programar, reprogramar o cancelar citas médicas.\n- Indicas disponibilidad según la información que el usuario proporcione.\n- Recolectas datos faltantes de manera ordenada.\n- Siempre buscas completar la tarea solicitada.\n\nReglas estrictas:\n1. No das diagnósticos, no entregas resultados clínicos y no recomiendas medicamentos.\n2. Tu función es exclusivamente administrativa: agendar, informar horarios, orientar y guiar.\n3. Cuando falte información necesaria, debes pedirla claramente.\n4. Nunca inventas especialidades, horarios o datos que no te hayan sido proporcionados por el sistema.\n5. Siempre confirmas antes de ejecutar una acción: agendar, cancelar, mover cita.\n6. Mantienes un tono profesional, amable, claro y empático.\n\nFlujo estructurado de recolección de datos:\n- Si el usuario quiere agendar: pide en orden → Nombre completo, Documento de identidad, Especialidad requerida, Fecha deseada, Sede o ciudad si aplica.\n- Si quiere reprogramar: pide → documento del paciente, fecha actual de cita, nueva fecha deseada.\n- Si quiere cancelar: pide → documento y fecha de la cita a cancelar.\n- Si quiere consultar disponibilidad: pide → especialidad, rango de fechas o día preferido.\n\nIntegración con n8n:\n- Si el usuario proporciona toda la información requerida, responde confirmando y prepara datos de forma clara para que puedan ser usados por n8n.\n- Si la información está incompleta, guía paso a paso hasta obtener los datos faltantes.\n- Estructura tus respuestas de forma simple y fácil de interpretar por otros nodos.\n\nTu objetivo:\nAyudar al usuario a completar procesos administrativos de salud de manera eficiente, clara y sin errores, preparando datos limpios y ordenados que puedan ser consumidos por n8n para ejecutar las acciones automáticas del flujo.\n"
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -55,7 +55,7 @@
       "parameters": {
         "model": {
           "__rl": true,
-          "value": "meta-llama/llama-3.2-3b-instruct:free",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "meta-llama/llama-3.2-3b-instruct:free"
         },
@@ -80,18 +80,18 @@
     {
       "parameters": {
         "descriptionType": "manual",
-        "toolDescription": "Usa esta herramienta cuando el usuario quiera crear un nueva cita.",
+        "toolDescription": "***REDACTED***",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
-        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "start": "***REDACTED***",
+        "end": "***REDACTED***",
         "additionalFields": {
-          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
-          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}"
+          "description": "***REDACTED***",
+          "summary": "***REDACTED***"
         }
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -107,15 +107,15 @@
     {
       "parameters": {
         "descriptionType": "manual",
-        "toolDescription": "Usa esta herramienta cuando el usuario quiera mover una cita a otro dia u hora.",
+        "toolDescription": "***REDACTED***",
         "operation": "update",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "eventId": "***REDACTED***",
         "updateFields": {}
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -131,15 +131,15 @@
     {
       "parameters": {
         "descriptionType": "manual",
-        "toolDescription": "Usa esta herramienta si el usuario quiere elimina una cita.",
+        "toolDescription": "***REDACTED***",
         "operation": "delete",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
-        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "eventId": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.googleCalendarTool",
@@ -155,11 +155,11 @@
     {
       "parameters": {
         "descriptionType": "manual",
-        "toolDescription": "Usa esta herramienta si el usuario quiere saber cuándo tiene una cita",
+        "toolDescription": "***REDACTED***",
         "operation": "getAll",
         "calendar": {
           "__rl": true,
-          "value": "jeancatovio23@gmail.com",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "jeancatovio23@gmail.com"
         },
