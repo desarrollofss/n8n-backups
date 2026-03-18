@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-16T21:19:44.533Z",
+  "updatedAt": "2026-03-17T21:20:08.170Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
@@ -68,8 +68,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -224,
-        128
+        -16,
+        240
       ],
       "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
       "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -83,8 +83,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -800,
-        304
+        -352,
+        496
       ],
       "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
       "name": "Marcar NO_CONTESTO",
@@ -122,8 +122,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1088,
-        288
+        -1136,
+        96
       ],
       "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
       "name": "¿Fue contestada?"
@@ -137,8 +137,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -288,
-        -128
+        -352,
+        0
       ],
       "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
       "name": "Guardar número acudiente",
@@ -187,8 +187,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -608,
-        128
+        -624,
+        96
       ],
       "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
       "name": "¿Acudiente con número?"
@@ -231,8 +231,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -928,
-        112
+        -816,
+        80
       ],
       "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
       "name": "Número equivocado ?"
@@ -264,7 +264,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -1440,
+        -1632,
         240
       ],
       "id": "db2fd84d-e5b0-4674-93df-4106fcdfe125",
@@ -279,8 +279,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        1168,
-        304
+        1760,
+        240
       ],
       "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
       "name": "Responder OK a Retell"
@@ -294,8 +294,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -320,
-        448
+        -352,
+        -192
       ],
       "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
       "name": "Marcar como NO_AGENDO",
@@ -315,8 +315,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        608,
-        128
+        976,
+        240
       ],
       "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
       "name": "Marcar como AGENDADO",
@@ -354,8 +354,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        416,
-        128
+        768,
+        240
       ],
       "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
       "name": "Agendar en Zeus"
@@ -367,8 +367,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -16,
-        128
+        240,
+        240
       ],
       "id": "71e76a8d-c34f-4905-836f-6420f778d714",
       "name": "Preparar datos agendamiento"
@@ -420,8 +420,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -432,
-        144
+        -352,
+        208
       ],
       "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
       "name": "¿Confirmó asistencia?"
@@ -435,7 +435,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -1264,
+        -1328,
         96
       ],
       "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
@@ -457,7 +457,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1648,
+        -1984,
         240
       ],
       "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
@@ -473,8 +473,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        976,
-        128
+        1424,
+        240
       ],
       "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
       "name": "DELETE slot elegido",
@@ -494,8 +494,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        688,
-        304
+        1200,
+        496
       ],
       "id": "44861220-f696-450a-9b21-a9b4386a6d87",
       "name": "Liberar slots",
@@ -509,13 +509,13 @@
     {
       "parameters": {
         "to": "=57{{ $('Buscar paciente por call_id').first().json.telefono_1 }}",
-        "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, soy yo de nuevo, Sarai asistente virtual de Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
+        "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, desde Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
       },
       "type": "n8n-nodes-labsmobile.labsMobile",
       "typeVersion": 2,
       "position": [
-        800,
-        128
+        1184,
+        240
       ],
       "id": "5460d015-8811-4f5a-93b4-3b4434698162",
       "name": "Send SMS",
@@ -753,9 +753,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
-  "activeVersionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
-  "versionCounter": 610,
+  "versionId": "ad00fd25-e23e-43cc-b48a-ef1f3adb5834",
+  "activeVersionId": "ad00fd25-e23e-43cc-b48a-ef1f3adb5834",
+  "versionCounter": 664,
   "triggerCount": 1,
   "shared": [
     {
@@ -780,7 +780,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -813,7 +813,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
@@ -823,22 +823,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T21:57:31.305Z",
-      "createdAt": "2026-02-04T21:57:31.305Z",
-      "id": "Vt8x6W2rrtVBRg8l",
-      "name": "Relación get_paciente 🟢"
-    },
-    {
       "updatedAt": "2026-02-04T20:18:39.085Z",
       "createdAt": "2026-02-04T20:18:39.085Z",
       "id": "2EO9Ro2seknMiiVu",
       "name": "DEL ADMIN ☺️"
+    },
+    {
+      "updatedAt": "2026-02-04T21:57:31.305Z",
+      "createdAt": "2026-02-04T21:57:31.305Z",
+      "id": "Vt8x6W2rrtVBRg8l",
+      "name": "Relación get_paciente 🟢"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-16T21:19:45.962Z",
-    "createdAt": "2026-03-16T21:19:44.534Z",
-    "versionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
+    "updatedAt": "2026-03-17T21:20:11.209Z",
+    "createdAt": "2026-03-17T21:20:08.171Z",
+    "versionId": "ad00fd25-e23e-43cc-b48a-ef1f3adb5834",
     "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
     "nodes": [
       {
@@ -902,8 +902,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          -224,
-          128
+          -16,
+          240
         ],
         "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
         "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -917,8 +917,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -800,
-          304
+          -352,
+          496
         ],
         "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
         "name": "Marcar NO_CONTESTO",
@@ -956,8 +956,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -1088,
-          288
+          -1136,
+          96
         ],
         "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
         "name": "¿Fue contestada?"
@@ -971,8 +971,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -288,
-          -128
+          -352,
+          0
         ],
         "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
         "name": "Guardar número acudiente",
@@ -1021,8 +1021,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -608,
-          128
+          -624,
+          96
         ],
         "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
         "name": "¿Acudiente con número?"
@@ -1065,8 +1065,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -928,
-          112
+          -816,
+          80
         ],
         "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
         "name": "Número equivocado ?"
@@ -1098,7 +1098,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          -1440,
+          -1632,
           240
         ],
         "id": "db2fd84d-e5b0-4674-93df-4106fcdfe125",
@@ -1113,8 +1113,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.4,
         "position": [
-          1168,
-          304
+          1760,
+          240
         ],
         "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
         "name": "Responder OK a Retell"
@@ -1128,8 +1128,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -320,
-          448
+          -352,
+          -192
         ],
         "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
         "name": "Marcar como NO_AGENDO",
@@ -1149,8 +1149,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          608,
-          128
+          976,
+          240
         ],
         "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
         "name": "Marcar como AGENDADO",
@@ -1188,8 +1188,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          416,
-          128
+          768,
+          240
         ],
         "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
         "name": "Agendar en Zeus"
@@ -1201,8 +1201,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -16,
-          128
+          240,
+          240
         ],
         "id": "71e76a8d-c34f-4905-836f-6420f778d714",
         "name": "Preparar datos agendamiento"
@@ -1254,8 +1254,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          -432,
-          144
+          -352,
+          208
         ],
         "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
         "name": "¿Confirmó asistencia?"
@@ -1269,7 +1269,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -1264,
+          -1328,
           96
         ],
         "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
@@ -1291,7 +1291,7 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1648,
+          -1984,
           240
         ],
         "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
@@ -1307,8 +1307,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          976,
-          128
+          1424,
+          240
         ],
         "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
         "name": "DELETE slot elegido",
@@ -1328,8 +1328,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          688,
-          304
+          1200,
+          496
         ],
         "id": "44861220-f696-450a-9b21-a9b4386a6d87",
         "name": "Liberar slots",
@@ -1343,13 +1343,13 @@
       {
         "parameters": {
           "to": "=57{{ $('Buscar paciente por call_id').first().json.telefono_1 }}",
-          "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, soy yo de nuevo, Sarai asistente virtual de Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
+          "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, desde Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
         },
         "type": "n8n-nodes-labsmobile.labsMobile",
         "typeVersion": 2,
         "position": [
-          800,
-          128
+          1184,
+          240
         ],
         "id": "5460d015-8811-4f5a-93b4-3b4434698162",
         "name": "Send SMS",
@@ -1579,15 +1579,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 1cdd2a20",
+    "name": "Version ad00fd25",
     "description": "",
-    "autosaved": false,
+    "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-16T21:19:45.961Z",
-        "id": 273,
+        "createdAt": "2026-03-17T21:20:11.208Z",
+        "id": 285,
         "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "1cdd2a20-2c53-4f25-a6e8-573f5bda8185",
+        "versionId": "ad00fd25-e23e-43cc-b48a-ef1f3adb5834",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
