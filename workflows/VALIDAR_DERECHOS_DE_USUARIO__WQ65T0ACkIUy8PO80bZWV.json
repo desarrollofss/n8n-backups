@@ -9,7 +9,7 @@
   "nodes": [
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst ahora = Date.now();\nconst tokenValido = !!(staticData.token && \n                    staticData.tokenExpiry && \n                    ahora < staticData.tokenExpiry);\n\nreturn [{\n  json: {        \n    tokenValido: tokenValido,\n    token: staticData.token || null\n  }\n}];\n"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -23,7 +23,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\n\nstaticData.token = $input.first().json.access_token;\n\nconst expiry = $input.first().json.expires_in.toString()\nstaticData.tokenExpiry = Date.now() + ((parseInt(expiry)-500) * 1000)\n//staticData.tokenExpiry = Date.now() + (3500 * 1000);\n\n\n\nreturn [{\n\n    token: staticData.token,\n    tokenValido: true,\n  \n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -37,7 +37,7 @@
     },
     {
       "parameters": {
-        "content": "## Gestión validación derechos de usuario MUTUAL\n",
+        "content": "***REDACTED***",
         "height": 704,
         "width": 2772
       },
@@ -87,7 +87,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const cleanedItems = [];\n\n// Función auxiliar para limpiar los \"Not found\"\nconst cleanNotFound = (value) => {\n  if (!value) return '';\n  // Usamos toLowerCase() para que sea insensible a mayúsculas/minúsculas \n  // por si la API cambia a \"phone not found\" o \"Email not found\"\n  return value.toLowerCase().includes('not found') ? '' : value;\n};\n\nfor (const item of $input.all()) {\n  try {\n\n    const idRegistro = $('Merge3').all()[\n  $input.all().indexOf(item)\n]?.json?.datos_paciente?.id_registro || '';\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    \n    // Eliminar el código del departamento del inicio del código de municipio\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    // Extraer tipo y número de documento\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    const resultado = {\n      // --- Identificación ---\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n       id_registro: idRegistro,\n      // --- Estado ---\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n\n      // --- Datos personales ---\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n\n      // --- Contacto (MODIFICADO) ---\n      telefono_fijo: cleanNotFound(patientData.telecom?.find(t => t.use === 'home')?.value),\n      telefono_movil: cleanNotFound(patientData.telecom?.find(t => t.use === 'mobile')?.value),\n      email: cleanNotFound(patientData.telecom?.find(t => t.system === 'email')?.value),\n\n      // --- Dirección ---\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona: zona,\n      ubicacion: ubicacion,\n\n      // --- Afiliación ---\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n\n      // --- Lugar de atención ---\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod,\n    };\n\n    // Empujar el resultado formateado para n8n\n    cleanedItems.push({ json: resultado });\n\n  } catch (error) {\n    // Manejo de errores a nivel de item individual\n    cleanedItems.push({ json: { error: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -114,7 +114,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+        "url": "***REDACTED***",
         "sendBody": true,
         "contentType": "form-urlencoded",
         "bodyParameters": {
@@ -125,15 +125,15 @@
             },
             {
               "name": "client_id",
-              "value": "right-validation"
+              "value": "***REDACTED***"
             },
             {
               "name": "username",
-              "value": "={{ $env.MUTUAL_USERNAME }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "password",
-              "value": "={{ $env.MUTUAL_PASSWORD }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -155,7 +155,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://guacamayaazul.mutualser.com/validateRights/",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -175,7 +175,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{$json.datos_paciente.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{$json.datos_paciente.documento }}\"  \n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -198,7 +198,7 @@
             {
               "id": "b140a3bd-14f7-494d-98d1-ae9cc669a70f",
               "name": "token",
-              "value": "={{ $('Verificar token MUTUAL').item.json.token }}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -222,7 +222,7 @@
             {
               "id": "45e20681-a2e5-4383-8021-806ec29bd9b8",
               "name": "token",
-              "value": "={{ $('Guardar Token MUTUAL').item.json.token }}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -242,7 +242,7 @@
     {
       "parameters": {
         "inputSource": "jsonExample",
-        "jsonExample": "{\n  \"datos_paciente\": {\n    \"tipo_documento\": \"CC\",\n    \"documento\": \"1143331246\",\n    \"id_registro\": \"Q0N8NzIxNDQ0NDl8UFNBfDIwMjUtMDYtMTA=\"\n  }\n}"
+        "jsonExample": "***REDACTED***"
       },
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
@@ -271,7 +271,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const cleanedItems = [];\n\nfor (const item of $input.all()) {\n  try {\n    const data = item.json;\n\n    if (data.error && data.error.name === \"AxiosError\") {\n      const errorObj = data.error;\n      const statusCode = errorObj.status || 0;\n\n      let mensajeLimpio = \"Error de API sin detalles\";\n      let codigoErrorApi = \"Desconocido\";\n\n      const jsonStringMatch = errorObj.message?.match(/\\{.*\\}/);\n      if (jsonStringMatch) {\n        const unescapedString = jsonStringMatch[0].replace(/\\\\\"/g, '\"');\n        try {\n          const parsedApiError = JSON.parse(unescapedString);\n          const issue = parsedApiError.entry?.[0]?.resource?.issue?.[0];\n          mensajeLimpio = issue?.details?.text || \"Error desconocido\";\n          codigoErrorApi = issue?.code || \"Desconocido\";\n        } catch (_) {}\n      }\n\n      cleanedItems.push({\n        json: {\n          encontrado: false,\n          tipo_documento: $input.first().json.datos_paciente?.tipo_documento,\n          documento: $input.first().json.datos_paciente?.documento,\n          status: statusCode,\n          codigo_error_http: errorObj.code,\n          codigo_error_api: codigoErrorApi,\n          mensaje_error: mensajeLimpio,\n        }\n      });\n\n    } else {\n      cleanedItems.push({ json: data });\n    }\n\n  } catch (error) {\n    cleanedItems.push({ json: { encontrado: false, error_interno: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -299,7 +299,7 @@
     },
     {
       "parameters": {
-        "errorMessage": "Error al validar los derechos de usuario en Mutal"
+        "errorMessage": "***REDACTED***"
       },
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
@@ -328,7 +328,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst ahora = Date.now();\n\nconst tokenValido = !!(\n  staticData.tokenMutual &&\n  staticData.tokenMutualExpiry &&\n  ahora < staticData.tokenMutualExpiry\n);\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', staticData.tokenMutualExpiry \n  ? Math.round((staticData.tokenMutualExpiry - Date.now()) / 60000) \n  : 'N/A'\n);\n\nif (tokenValido) {\n  return [{ json: { token: staticData.tokenMutual } }];\n}\n\n// Login — body como string form-urlencoded sin URLSearchParams\nconst response = await this.helpers.httpRequest({\n  method: 'POST',\n  url: 'https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token',\n  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },\n  body: `grant_type=password&client_id=right-validation&username=${encodeURIComponent($env.MUTUAL_USERNAME)}&password=${encodeURIComponent($env.MUTUAL_PASSWORD)}`,\n});\n\nconst expiresIn = parseInt(response.expires_in, 10);\nif (!response.access_token || isNaN(expiresIn)) {\n  throw new Error(`Login fallido: ${JSON.stringify(response)}`);\n}\n\nstaticData.tokenMutual = response.access_token;\nstaticData.tokenMutualExpiry = Date.now() + ((expiresIn - 500) * 1000);\n\nreturn [{ json: { token: staticData.tokenMutual,token_valido: tokenValido } }];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -377,7 +377,7 @@
       "parameters": {
         "operation": "get",
         "propertyName": "value",
-        "key": "mutual_token",
+        "key": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.redis",
@@ -397,7 +397,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const valor = $input.item.json.value;\nconsole.log(valor)\nlet tokenData = null;\ntry {\n  tokenData = valor ? JSON.parse(valor) : null;\n} catch(e) {\n  tokenData = null;\n}\n\nconst ahora = Date.now();\nconst tokenValido = !!(\n  tokenData?.token && \n  tokenData?.expira_en && \n  ahora < tokenData.expira_en\n);\n\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', tokenData?.expira_en \n  ? Math.round((tokenData.expira_en - ahora) / 60000) \n  : 'N/A'\n);\nconsole.log(\"valor\")\nreturn [{ json: { \n  tokenValido,\n  token: tokenData?.token || null,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -444,7 +444,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{ json: {\n  token:$input.first().json.token ,\n  datos_paciente: $('When Executed by Another Workflow').first().json.datos_paciente\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -458,7 +458,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+        "url": "***REDACTED***",
         "sendBody": true,
         "contentType": "form-urlencoded",
         "bodyParameters": {
@@ -469,15 +469,15 @@
             },
             {
               "name": "client_id",
-              "value": "right-validation"
+              "value": "***REDACTED***"
             },
             {
               "name": "username",
-              "value": "={{ $env.MUTUAL_USERNAME }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "password",
-              "value": "={{ $env.MUTUAL_PASSWORD }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -498,8 +498,8 @@
     {
       "parameters": {
         "operation": "set",
-        "key": "mutual_token",
-        "value": "={{ JSON.stringify({ token: $json.access_token, expira_en: Date.now() + ((parseInt($json.expires_in) - 500) * 1000) }) }}",
+        "key": "***REDACTED***",
+        "value": "***REDACTED***",
         "expire": true,
         "ttl": 3100
       },
@@ -520,7 +520,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{ json: {\n  token: $('HTTP: Login Mutual').first().json.access_token,\n  datos_paciente: $('When Executed by Another Workflow').first().json.datos_paciente\n}}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -558,7 +558,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://guacamayaazul.mutualser.com/validateRights/",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -578,7 +578,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{ $json.datos_paciente.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{ $json.datos_paciente.documento }}\"\n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -595,7 +595,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const cleanedItems = [];\n\nconst cleanNotFound = (value) => {\n  if (!value) return '';\n  return value.toLowerCase().includes('not found') ? '' : value;\n};\n\nfor (const item of $input.all()) {\n  try {\n    const idRegistro = $('Merge token').all()[\n      $input.all().indexOf(item)\n    ]?.json?.datos_paciente?.id_registro || '';\n\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    cleanedItems.push({ json: {\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n      id_registro: idRegistro,\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n      telefono_fijo: cleanNotFound(patientData.telecom?.find(t => t.use === 'home')?.value),\n      telefono_movil: cleanNotFound(patientData.telecom?.find(t => t.use === 'mobile')?.value),\n      email: cleanNotFound(patientData.telecom?.find(t => t.system === 'email')?.value),\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona,\n      ubicacion,\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod\n    }});\n\n  } catch (error) {\n    cleanedItems.push({ json: { error: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -608,7 +608,7 @@
     },
     {
       "parameters": {
-        "errorMessage": "Error al validar los derechos de usuario en Mutual"
+        "errorMessage": "***REDACTED***"
       },
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
@@ -1012,7 +1012,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -1024,7 +1024,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1057,7 +1057,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
@@ -1074,7 +1074,7 @@
     "nodes": [
       {
         "parameters": {
-          "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst ahora = Date.now();\nconst tokenValido = !!(staticData.token && \n                    staticData.tokenExpiry && \n                    ahora < staticData.tokenExpiry);\n\nreturn [{\n  json: {        \n    tokenValido: tokenValido,\n    token: staticData.token || null\n  }\n}];\n"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1088,7 +1088,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const staticData = $getWorkflowStaticData('global');\n\nstaticData.token = $input.first().json.access_token;\n\nconst expiry = $input.first().json.expires_in.toString()\nstaticData.tokenExpiry = Date.now() + ((parseInt(expiry)-500) * 1000)\n//staticData.tokenExpiry = Date.now() + (3500 * 1000);\n\n\n\nreturn [{\n\n    token: staticData.token,\n    tokenValido: true,\n  \n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1102,7 +1102,7 @@
       },
       {
         "parameters": {
-          "content": "## Gestión validación derechos de usuario MUTUAL\n",
+          "content": "***REDACTED***",
           "height": 704,
           "width": 2772
         },
@@ -1152,7 +1152,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const cleanedItems = [];\n\n// Función auxiliar para limpiar los \"Not found\"\nconst cleanNotFound = (value) => {\n  if (!value) return '';\n  // Usamos toLowerCase() para que sea insensible a mayúsculas/minúsculas \n  // por si la API cambia a \"phone not found\" o \"Email not found\"\n  return value.toLowerCase().includes('not found') ? '' : value;\n};\n\nfor (const item of $input.all()) {\n  try {\n\n    const idRegistro = $('Merge3').all()[\n  $input.all().indexOf(item)\n]?.json?.datos_paciente?.id_registro || '';\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    \n    // Eliminar el código del departamento del inicio del código de municipio\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    // Extraer tipo y número de documento\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    const resultado = {\n      // --- Identificación ---\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n       id_registro: idRegistro,\n      // --- Estado ---\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n\n      // --- Datos personales ---\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n\n      // --- Contacto (MODIFICADO) ---\n      telefono_fijo: cleanNotFound(patientData.telecom?.find(t => t.use === 'home')?.value),\n      telefono_movil: cleanNotFound(patientData.telecom?.find(t => t.use === 'mobile')?.value),\n      email: cleanNotFound(patientData.telecom?.find(t => t.system === 'email')?.value),\n\n      // --- Dirección ---\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona: zona,\n      ubicacion: ubicacion,\n\n      // --- Afiliación ---\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n\n      // --- Lugar de atención ---\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod,\n    };\n\n    // Empujar el resultado formateado para n8n\n    cleanedItems.push({ json: resultado });\n\n  } catch (error) {\n    // Manejo de errores a nivel de item individual\n    cleanedItems.push({ json: { error: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1179,7 +1179,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+          "url": "***REDACTED***",
           "sendBody": true,
           "contentType": "form-urlencoded",
           "bodyParameters": {
@@ -1190,15 +1190,15 @@
               },
               {
                 "name": "client_id",
-                "value": "right-validation"
+                "value": "***REDACTED***"
               },
               {
                 "name": "username",
-                "value": "={{ $env.MUTUAL_USERNAME }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "password",
-                "value": "={{ $env.MUTUAL_PASSWORD }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -1220,27 +1220,27 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://guacamayaazul.mutualser.com/validateRights/",
+          "url": "***REDACTED***",
           "sendHeaders": true,
           "headerParameters": {
             "parameters": [
               {
                 "name": "Cookie",
-                "value": "JSESSIONID=6AD773EA67E6CCE789FD47A706134B8B"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Content-Type",
-                "value": "application/json"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Authorization",
-                "value": "=Bearer {{ $json.token }}"
+                "value": "***REDACTED***"
               }
             ]
           },
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{$json.datos_paciente.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{$json.datos_paciente.documento }}\"  \n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+          "jsonBody": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -1263,7 +1263,7 @@
               {
                 "id": "b140a3bd-14f7-494d-98d1-ae9cc669a70f",
                 "name": "token",
-                "value": "={{ $('Verificar token MUTUAL').item.json.token }}",
+                "value": "***REDACTED***",
                 "type": "string"
               }
             ]
@@ -1287,7 +1287,7 @@
               {
                 "id": "45e20681-a2e5-4383-8021-806ec29bd9b8",
                 "name": "token",
-                "value": "={{ $('Guardar Token MUTUAL').item.json.token }}",
+                "value": "***REDACTED***",
                 "type": "string"
               }
             ]
@@ -1307,7 +1307,7 @@
       {
         "parameters": {
           "inputSource": "jsonExample",
-          "jsonExample": "{\n  \"datos_paciente\": {\n    \"tipo_documento\": \"CC\",\n    \"documento\": \"1143331246\",\n    \"id_registro\": \"Q0N8NzIxNDQ0NDl8UFNBfDIwMjUtMDYtMTA=\"\n  }\n}"
+          "jsonExample": "***REDACTED***"
         },
         "type": "n8n-nodes-base.executeWorkflowTrigger",
         "typeVersion": 1.1,
@@ -1336,7 +1336,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const cleanedItems = [];\n\nfor (const item of $input.all()) {\n  try {\n    const data = item.json;\n\n    if (data.error && data.error.name === \"AxiosError\") {\n      const errorObj = data.error;\n      const statusCode = errorObj.status || 0;\n\n      let mensajeLimpio = \"Error de API sin detalles\";\n      let codigoErrorApi = \"Desconocido\";\n\n      const jsonStringMatch = errorObj.message?.match(/\\{.*\\}/);\n      if (jsonStringMatch) {\n        const unescapedString = jsonStringMatch[0].replace(/\\\\\"/g, '\"');\n        try {\n          const parsedApiError = JSON.parse(unescapedString);\n          const issue = parsedApiError.entry?.[0]?.resource?.issue?.[0];\n          mensajeLimpio = issue?.details?.text || \"Error desconocido\";\n          codigoErrorApi = issue?.code || \"Desconocido\";\n        } catch (_) {}\n      }\n\n      cleanedItems.push({\n        json: {\n          encontrado: false,\n          tipo_documento: $input.first().json.datos_paciente?.tipo_documento,\n          documento: $input.first().json.datos_paciente?.documento,\n          status: statusCode,\n          codigo_error_http: errorObj.code,\n          codigo_error_api: codigoErrorApi,\n          mensaje_error: mensajeLimpio,\n        }\n      });\n\n    } else {\n      cleanedItems.push({ json: data });\n    }\n\n  } catch (error) {\n    cleanedItems.push({ json: { encontrado: false, error_interno: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1364,7 +1364,7 @@
       },
       {
         "parameters": {
-          "errorMessage": "Error al validar los derechos de usuario en Mutal"
+          "errorMessage": "***REDACTED***"
         },
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
@@ -1393,7 +1393,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst ahora = Date.now();\n\nconst tokenValido = !!(\n  staticData.tokenMutual &&\n  staticData.tokenMutualExpiry &&\n  ahora < staticData.tokenMutualExpiry\n);\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', staticData.tokenMutualExpiry \n  ? Math.round((staticData.tokenMutualExpiry - Date.now()) / 60000) \n  : 'N/A'\n);\n\nif (tokenValido) {\n  return [{ json: { token: staticData.tokenMutual } }];\n}\n\n// Login — body como string form-urlencoded sin URLSearchParams\nconst response = await this.helpers.httpRequest({\n  method: 'POST',\n  url: 'https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token',\n  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },\n  body: `grant_type=password&client_id=right-validation&username=${encodeURIComponent($env.MUTUAL_USERNAME)}&password=${encodeURIComponent($env.MUTUAL_PASSWORD)}`,\n});\n\nconst expiresIn = parseInt(response.expires_in, 10);\nif (!response.access_token || isNaN(expiresIn)) {\n  throw new Error(`Login fallido: ${JSON.stringify(response)}`);\n}\n\nstaticData.tokenMutual = response.access_token;\nstaticData.tokenMutualExpiry = Date.now() + ((expiresIn - 500) * 1000);\n\nreturn [{ json: { token: staticData.tokenMutual,token_valido: tokenValido } }];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1442,7 +1442,7 @@
         "parameters": {
           "operation": "get",
           "propertyName": "value",
-          "key": "mutual_token",
+          "key": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.redis",
@@ -1462,7 +1462,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const valor = $input.item.json.value;\nconsole.log(valor)\nlet tokenData = null;\ntry {\n  tokenData = valor ? JSON.parse(valor) : null;\n} catch(e) {\n  tokenData = null;\n}\n\nconst ahora = Date.now();\nconst tokenValido = !!(\n  tokenData?.token && \n  tokenData?.expira_en && \n  ahora < tokenData.expira_en\n);\n\nconsole.log('Token válido:', tokenValido);\nconsole.log('Expira en (min):', tokenData?.expira_en \n  ? Math.round((tokenData.expira_en - ahora) / 60000) \n  : 'N/A'\n);\nconsole.log(\"valor\")\nreturn [{ json: { \n  tokenValido,\n  token: tokenData?.token || null,\n  datos_paciente: $('When Executed by Another Workflow').item.json.datos_paciente\n}}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1509,7 +1509,7 @@
       },
       {
         "parameters": {
-          "jsCode": "return [{ json: {\n  token:$input.first().json.token ,\n  datos_paciente: $('When Executed by Another Workflow').first().json.datos_paciente\n}}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1523,7 +1523,7 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://rino.mutualser.com/auth/realms/right-validation/protocol/openid-connect/token",
+          "url": "***REDACTED***",
           "sendBody": true,
           "contentType": "form-urlencoded",
           "bodyParameters": {
@@ -1534,15 +1534,15 @@
               },
               {
                 "name": "client_id",
-                "value": "right-validation"
+                "value": "***REDACTED***"
               },
               {
                 "name": "username",
-                "value": "={{ $env.MUTUAL_USERNAME }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "password",
-                "value": "={{ $env.MUTUAL_PASSWORD }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -1563,8 +1563,8 @@
       {
         "parameters": {
           "operation": "set",
-          "key": "mutual_token",
-          "value": "={{ JSON.stringify({ token: $json.access_token, expira_en: Date.now() + ((parseInt($json.expires_in) - 500) * 1000) }) }}",
+          "key": "***REDACTED***",
+          "value": "***REDACTED***",
           "expire": true,
           "ttl": 3100
         },
@@ -1585,7 +1585,7 @@
       },
       {
         "parameters": {
-          "jsCode": "return [{ json: {\n  token: $('HTTP: Login Mutual').first().json.access_token,\n  datos_paciente: $('When Executed by Another Workflow').first().json.datos_paciente\n}}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1623,27 +1623,27 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://guacamayaazul.mutualser.com/validateRights/",
+          "url": "***REDACTED***",
           "sendHeaders": true,
           "headerParameters": {
             "parameters": [
               {
                 "name": "Cookie",
-                "value": "JSESSIONID=6AD773EA67E6CCE789FD47A706134B8B"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Content-Type",
-                "value": "application/json"
+                "value": "***REDACTED***"
               },
               {
                 "name": "Authorization",
-                "value": "=Bearer {{ $json.token }}"
+                "value": "***REDACTED***"
               }
             ]
           },
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n    \"resourceType\": \"Parameters\",\n    \"id\": \"CorrelationId\",\n    \"parameter\": [\n        {\n            \"name\": \"documentType\",\n            \"valueString\": \"{{ $json.datos_paciente.tipo_documento }}\"\n        },\n        {\n            \"name\": \"documentId\",\n            \"valueString\": \"{{ $json.datos_paciente.documento }}\"\n        },\n        {\n            \"name\": \"contractValidate\",\n            \"valueBoolean\": false\n        }\n    ]\n}",
+          "jsonBody": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -1660,7 +1660,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const cleanedItems = [];\n\nconst cleanNotFound = (value) => {\n  if (!value) return '';\n  return value.toLowerCase().includes('not found') ? '' : value;\n};\n\nfor (const item of $input.all()) {\n  try {\n    const idRegistro = $('Merge token').all()[\n      $input.all().indexOf(item)\n    ]?.json?.datos_paciente?.id_registro || '';\n\n    const rawData = JSON.parse(item.json.data);\n    const entries = rawData.entry || [];\n\n    let patientData = null;\n    let operationOutcome = null;\n\n    entries.forEach(entry => {\n      if (entry.resource.resourceType === 'Patient') {\n        patientData = entry.resource;\n      } else if (entry.resource.resourceType === 'OperationOutcome') {\n        operationOutcome = entry.resource;\n      }\n    });\n\n    if (!patientData) {\n      cleanedItems.push({ json: { error: \"No se encontró información del paciente\" } });\n      continue;\n    }\n\n    const getExt = (url) => patientData.extension?.find(e => e.url?.endsWith(url));\n\n    const estadoAfiliado = getExt('afilliateStatus')?.valueCoding?.display || 'Desconocido';\n    const estaActivo = estadoAfiliado === 'ACTIVO';\n    const estaFallecido = estadoAfiliado === 'AFILIADO FALLECIDO';\n\n    const direccion = patientData.address?.[0];\n    const zona = direccion?.extension?.find(e => e.url?.endsWith('zone'))?.valueString || '';\n    const ubicacion = direccion?.extension?.find(e => e.url?.endsWith('location'))?.valueString || '';\n\n    const placeOfCare = getExt('placeOfCare');\n    const nomDep = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.display || '';\n    const nomMun = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.display || '';\n    const depCod = placeOfCare?.extension?.find(e => e.url?.endsWith('state'))?.valueCoding?.code || '';\n    const munCodRaw = placeOfCare?.extension?.find(e => e.url?.endsWith('city'))?.valueCoding?.code || '';\n    const munCod = munCodRaw.startsWith(depCod) ? munCodRaw.slice(depCod.length) : munCodRaw;\n\n    const tipoDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DT')?.value || '';\n    const numDoc = patientData.identifier?.find(i => i.type?.coding?.[0]?.code === 'DI')?.value || '';\n\n    cleanedItems.push({ json: {\n      tipo_documento: tipoDoc,\n      numero_documento: numDoc,\n      id_registro: idRegistro,\n      status: operationOutcome?.issue[0]?.details?.text || 'Desconocido',\n      estado_afiliado: estadoAfiliado,\n      esta_activo: estaActivo,\n      esta_fallecido: estaFallecido,\n      nombre_completo: patientData.name?.[0]?.text || '',\n      primer_nombre: patientData.name?.[0]?.given?.[0] || '',\n      segundo_nombre: patientData.name?.[0]?.given?.[1] || '',\n      primer_apellido: patientData.name?.[0]?.family?.split('firstSurname=')?.[1]?.split('|')?.[0] || '',\n      segundo_apellido: patientData.name?.[0]?.family?.split('secondSurname=')?.[1] || '',\n      fecha_nacimiento: patientData.birthDate || '',\n      genero: patientData.gender || '',\n      edad: getExt('age')?.valueInteger || null,\n      telefono_fijo: cleanNotFound(patientData.telecom?.find(t => t.use === 'home')?.value),\n      telefono_movil: cleanNotFound(patientData.telecom?.find(t => t.use === 'mobile')?.value),\n      email: cleanNotFound(patientData.telecom?.find(t => t.system === 'email')?.value),\n      direccion_texto: direccion?.text || '',\n      ciudad: direccion?.city || '',\n      departamento: direccion?.state || '',\n      zona,\n      ubicacion,\n      regimen: getExt('healthModality')?.valueCoding?.display || '',\n      regimen_codigo: getExt('healthModality')?.valueCoding?.code || '',\n      tipo_afiliado: getExt('affiliateType')?.valueCoding?.display || '',\n      codigo_afiliado: getExt('affiliateType')?.valueCoding?.code || '',\n      tipo_usuario: getExt('entityCode')?.valueCoding?.display || '',\n      codigo_empresa: getExt('entityCode')?.valueCoding?.code || '',\n      fecha_afiliacion: getExt('affiliationDate')?.valueDate || '',\n      nombre_departamento: nomDep,\n      codigo_departamento: depCod,\n      nombre_municipio: nomMun,\n      codigo_municipio: munCod\n    }});\n\n  } catch (error) {\n    cleanedItems.push({ json: { error: error.message } });\n  }\n}\n\nreturn cleanedItems;"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1673,7 +1673,7 @@
       },
       {
         "parameters": {
-          "errorMessage": "Error al validar los derechos de usuario en Mutual"
+          "errorMessage": "***REDACTED***"
         },
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
