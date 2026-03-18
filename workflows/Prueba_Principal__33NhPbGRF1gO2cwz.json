@@ -26,7 +26,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Eres Un agente para la gestion de citas.\nguarda los datos {{ $json.body.TipoIndentificacion }} y {{ $json.body.identificacion }}",
+        "text": "***REDACTED***",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -43,7 +43,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4.1-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {}
@@ -67,7 +67,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "UYneIrbnWNwPMYmu",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultUrl": "/workflow/UYneIrbnWNwPMYmu",
           "cachedResultName": "Citas Zeus"
@@ -75,8 +75,8 @@
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
-            "TipoIdentificacion": "={{ $('Webhook').item.json.body.TipoIndentificacion }}",
-            "NumeroIdentificacion": "={{ $('Webhook').item.json.body.identificacion }}"
+            "TipoIdentificacion": "***REDACTED***",
+            "NumeroIdentificacion": "***REDACTED***"
           },
           "matchingColumns": [],
           "schema": [
@@ -148,7 +148,7 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.body.TipoIndentificacion }}_{{ $json.body.identificacion }}",
+        "sessionKey": "***REDACTED***",
         "sessionTTL": 3600,
         "contextWindowLength": 15
       },
@@ -170,10 +170,10 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.body.TipoIndentificacion }}_{{ $json.body.identificacion }}",
+        "sessionKey": "***REDACTED***",
         "contextWindowLength": 10
       },
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         -112,
