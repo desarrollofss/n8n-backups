@@ -37,7 +37,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return items.map(item => ({\n  json: {\n    TIPO_DOCUMENTO: item.json.TIPO_DOCUMENTO?.toString().trim(),\n    DOCUMENTO: item.json.DOCUMENTO?.toString().trim(),\n    NOMBRE_COMPLETO: item.json.NOMBRE_COMPLETO?.trim(),\n    TELEFONO_1: item.json.TELEFONO_1?.toString().trim(),\n    TELEFONO_2: item.json.TELEFONO_2?.toString().trim(),\n    CORREO: item.json.CORREO?.toLowerCase().trim(),\n    EDAD: item.json.EDAD ? parseInt(item.json.EDAD) : null,\n    USUARIO_CONTACTADO: item.json.USUARIO_CONTACTADO?.trim()\n  }\n}));\n"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -57,7 +57,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "pacientes_sospecha_colon"
         },
@@ -192,7 +192,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const columnasEsperadas = [\"TIPO_DOCUMENTO\",\"DOCUMENTO\",\"NOMBRE_COMPLETO\",\"TELEFONO_1\",\"TELEFONO_2\",\"CORREO\",\"EDAD\",\"USUARIO_CONTACTADO\"];\n\nconst columnasArchivo = Object.keys(items[0].json);\n\nfor (const col of columnasEsperadas) {\n  if (!columnasArchivo.includes(col)) {\n    throw new Error(`Falta la columna: ${col}`);\n  }\n}\n\nreturn items;\n"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -205,7 +205,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const total = items.length;\nconst validos = items.length;\nconst rechazados = 0;\n\nreturn [\n  {\n    json: {\n      resumen: {\n        total_registros: total,\n        insertados: validos,\n        rechazados: rechazados\n      },\n      datos: items.map(i => i.json)\n    }\n  }\n];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -218,7 +218,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// El item 0 contiene { resumen, datos }\n\nconst datos = items[0].json.datos;\n\n// Convertimos cada fila en item independiente\nreturn datos.map(fila => ({\n  json: fila\n}));\n"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -231,7 +231,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Recuperar el resumen que guardamos anteriormente\nconst resumenOriginal = $node[\"generar_resumen\"].json.resumen;\n\nreturn [\n  {\n    json: {\n      status: \"ok\",\n      message: \"Archivo procesado correctamente\",\n      resumen: resumenOriginal\n    }\n  }\n];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -244,7 +244,7 @@
     },
     {
       "parameters": {
-        "content": "- Nodo que atiende el llamado de petición por parte del flujo 'Alimentador', para desencadenar el flujo ",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 256,
         "color": 4
@@ -260,7 +260,7 @@
     },
     {
       "parameters": {
-        "content": "- Nodo que obtiene o extrae el archivo y reposa en su formato configurado ",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 256
       },
@@ -275,7 +275,7 @@
     },
     {
       "parameters": {
-        "content": "- validar_columnas: nodo comparar con las creadas, para encontrarlas en la db y almacenar la data\n\n- limpiar_datos: Nodo que se encarga de mantener el formato limpio, que los datos vengan con su respectiva columna\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 368
       },
@@ -290,7 +290,7 @@
     },
     {
       "parameters": {
-        "content": "- generar_resumen: Nodo que da respuesta de acuerdo a los datos procesados (Total de registros, Insertados, rechazados)\n\n\n- preparar_para_insertar: Nodo envuelve cada fila en item independiente\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 368
       },
@@ -305,7 +305,7 @@
     },
     {
       "parameters": {
-        "content": "- Nodo postgres: inserta la data sacada de los procesos anteriores\n",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 256,
         "color": 6
@@ -321,7 +321,7 @@
     },
     {
       "parameters": {
-        "content": "- Retornando el resumen generado despues de guardar los datos en la base de datos\n",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 256,
         "color": 6
@@ -337,7 +337,7 @@
     },
     {
       "parameters": {
-        "content": "## Instrucciones de uso - Flujo PROCESADOR BAJO SOSPECHA PROSTATA 2025\n1. No es necesario ejecutar, solo atiende el llamado del flujo inicial: https://kaelyn-roughish-nonpacifically.ngrok-free.dev/workflow/nzVJBy9BXplTh4VU\n\nNota: En caso de realizar una modificación, duplicar el proyecto y colocar 'Alimentador Test' o dejar hacerlo en este mismo, pero dejar una nota de la modificación hecha con su fecha ",
+        "content": "***REDACTED***",
         "height": 208,
         "width": 1840,
         "color": 5
@@ -353,7 +353,7 @@
     },
     {
       "parameters": {
-        "content": "## Historico de cambios\n\n- Creación del flujo (Estado funcional ) 2025-01-2026 12:17pm\n",
+        "content": "***REDACTED***",
         "height": 544,
         "width": 448,
         "color": 7
@@ -563,7 +563,7 @@
       },
       {
         "parameters": {
-          "jsCode": "return items.map(item => ({\n  json: {\n    TIPO_DOCUMENTO: item.json.TIPO_DOCUMENTO?.toString().trim(),\n    DOCUMENTO: item.json.DOCUMENTO?.toString().trim(),\n    NOMBRE_COMPLETO: item.json.NOMBRE_COMPLETO?.trim(),\n    TELEFONO_1: item.json.TELEFONO_1?.toString().trim(),\n    TELEFONO_2: item.json.TELEFONO_2?.toString().trim(),\n    CORREO: item.json.CORREO?.toLowerCase().trim(),\n    EDAD: item.json.EDAD ? parseInt(item.json.EDAD) : null,\n    USUARIO_CONTACTADO: item.json.USUARIO_CONTACTADO?.trim()\n  }\n}));\n"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -583,7 +583,7 @@
           },
           "table": {
             "__rl": true,
-            "value": "pacientes_sospecha_colon",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "pacientes_sospecha_colon"
           },
@@ -718,7 +718,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const columnasEsperadas = [\"TIPO_DOCUMENTO\",\"DOCUMENTO\",\"NOMBRE_COMPLETO\",\"TELEFONO_1\",\"TELEFONO_2\",\"CORREO\",\"EDAD\",\"USUARIO_CONTACTADO\"];\n\nconst columnasArchivo = Object.keys(items[0].json);\n\nfor (const col of columnasEsperadas) {\n  if (!columnasArchivo.includes(col)) {\n    throw new Error(`Falta la columna: ${col}`);\n  }\n}\n\nreturn items;\n"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -731,7 +731,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const total = items.length;\nconst validos = items.length;\nconst rechazados = 0;\n\nreturn [\n  {\n    json: {\n      resumen: {\n        total_registros: total,\n        insertados: validos,\n        rechazados: rechazados\n      },\n      datos: items.map(i => i.json)\n    }\n  }\n];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -744,7 +744,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// El item 0 contiene { resumen, datos }\n\nconst datos = items[0].json.datos;\n\n// Convertimos cada fila en item independiente\nreturn datos.map(fila => ({\n  json: fila\n}));\n"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -757,7 +757,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// Recuperar el resumen que guardamos anteriormente\nconst resumenOriginal = $node[\"generar_resumen\"].json.resumen;\n\nreturn [\n  {\n    json: {\n      status: \"ok\",\n      message: \"Archivo procesado correctamente\",\n      resumen: resumenOriginal\n    }\n  }\n];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -770,7 +770,7 @@
       },
       {
         "parameters": {
-          "content": "- Nodo que atiende el llamado de petición por parte del flujo 'Alimentador', para desencadenar el flujo ",
+          "content": "***REDACTED***",
           "height": 320,
           "width": 256,
           "color": 4
@@ -786,7 +786,7 @@
       },
       {
         "parameters": {
-          "content": "- Nodo que obtiene o extrae el archivo y reposa en su formato configurado ",
+          "content": "***REDACTED***",
           "height": 320,
           "width": 256
         },
@@ -801,7 +801,7 @@
       },
       {
         "parameters": {
-          "content": "- validar_columnas: nodo comparar con las creadas, para encontrarlas en la db y almacenar la data\n\n- limpiar_datos: Nodo que se encarga de mantener el formato limpio, que los datos vengan con su respectiva columna\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "content": "***REDACTED***",
           "height": 320,
           "width": 368
         },
@@ -816,7 +816,7 @@
       },
       {
         "parameters": {
-          "content": "- generar_resumen: Nodo que da respuesta de acuerdo a los datos procesados (Total de registros, Insertados, rechazados)\n\n\n- preparar_para_insertar: Nodo envuelve cada fila en item independiente\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+          "content": "***REDACTED***",
           "height": 320,
           "width": 368
         },
@@ -831,7 +831,7 @@
       },
       {
         "parameters": {
-          "content": "- Nodo postgres: inserta la data sacada de los procesos anteriores\n",
+          "content": "***REDACTED***",
           "height": 320,
           "width": 256,
           "color": 6
@@ -847,7 +847,7 @@
       },
       {
         "parameters": {
-          "content": "- Retornando el resumen generado despues de guardar los datos en la base de datos\n",
+          "content": "***REDACTED***",
           "height": 320,
           "width": 256,
           "color": 6
@@ -863,7 +863,7 @@
       },
       {
         "parameters": {
-          "content": "## Instrucciones de uso - Flujo PROCESADOR BAJO SOSPECHA PROSTATA 2025\n1. No es necesario ejecutar, solo atiende el llamado del flujo inicial: https://kaelyn-roughish-nonpacifically.ngrok-free.dev/workflow/nzVJBy9BXplTh4VU\n\nNota: En caso de realizar una modificación, duplicar el proyecto y colocar 'Alimentador Test' o dejar hacerlo en este mismo, pero dejar una nota de la modificación hecha con su fecha ",
+          "content": "***REDACTED***",
           "height": 208,
           "width": 1840,
           "color": 5
@@ -879,7 +879,7 @@
       },
       {
         "parameters": {
-          "content": "## Historico de cambios\n\n- Creación del flujo (Estado funcional ) 2025-01-2026 12:17pm\n",
+          "content": "***REDACTED***",
           "height": 544,
           "width": 448,
           "color": 7
