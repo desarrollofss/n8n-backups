@@ -9,7 +9,7 @@
   "nodes": [
     {
       "parameters": {
-        "jsCode": "return [\n  {\n    json: $input.first().json\n  }\n];\n"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -24,7 +24,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT *\nFROM pacientes_sospecha_colon\nWHERE usuario_contactado = 'NO'\nORDER BY id ASC\nLIMIT 1;\n",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -55,7 +55,7 @@
           "conditions": [
             {
               "id": "6948bfac-b6a6-4232-a75a-98a78a97746c",
-              "leftValue": "={{$items(\"obtener_paciente_pendiente\").length}}",
+              "leftValue": "***REDACTED***",
               "rightValue": 0,
               "operator": {
                 "type": "number",
@@ -74,7 +74,7 @@
         -128
       ],
       "id": "5017c9b2-ee84-4d7e-b9f0-27da1a0c85f5",
-      "name": "paciente encontrado con contactado en NO?",
+      "name": "***REDACTED***",
       "disabled": true
     },
     {
@@ -114,10 +114,10 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.tipo_documento }}{{ $json.documento }}",
+        "sessionKey": "***REDACTED***",
         "contextWindowLength": 10
       },
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         -432,
@@ -138,7 +138,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4.1-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {}
@@ -163,7 +163,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "LTmtmcMGQaHqcOnO",
+          "value": "***REDACTED***",
           "mode": "id",
           "cachedResultUrl": "/workflow/LTmtmcMGQaHqcOnO"
         },
@@ -213,9 +213,9 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Eres un asistente médico que ayuda a agendar citas.\n\nDATOS DEL PACIENTE:\n- Tipo de documento: {{ $json.tipo_documento }}\n- Número de documento: {{ $json.documento }}\n\nTAREA:\n1. Usa la herramienta 'citas_zeus' para obtener disponibilidades\n2. La herramienta te retornará un objeto con las disponibilidades\n3. Luego usa la herramienta 'citas_zeus' para agenda la cita\n3. Pasa esos datos al siguiente paso\n\nEjecuta la herramienta ahora.",
+        "text": "***REDACTED***",
         "options": {
-          "systemMessage": "=Eres un asistente que procesa disponibilidades médicas, enviar datos del paciente y agendar citas.\n\nREGLAS ESTRICTAS:\n1. Llama a 'Disponibilidad' para obtener horarios\n2. Extrae 1 sola disponibilidad\n3. Retorna SOLO un array JSON sin texto adicional\n4. Formato: [{\"fecha\": \"YYYY-MM-DD\", \"hora\": \"HH:MM\"}, ...]\n5. llama a 'AgendarCita' para que agendes la cita "
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -231,13 +231,13 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={\n  \"existe\": {{ $json.existe }},\n  \"documento\": \"{{ $json.documento }}\",\n  \"tipo_documento\": \"{{ $json.tipo_documento }}\",\n  \"nombre_completo\": \"{{ $json.nombre_completo }}\",\n  \"telefono\": \"{{ $json.telefono }}\",\n  \"mensaje\": \"{{ $json.mensaje }}\",\n  \"horarios\": {{ JSON.stringify($json.horarios) }},\n  \"resume_url\": \"{{ $json.resume_url }}\",\n  \"success\": {{ $json.success }}\n}",
+        "responseBody": "***REDACTED***",
         "options": {
           "responseHeaders": {
             "entries": [
               {
                 "name": "Content-Type",
-                "value": "application/json"
+                "value": "***REDACTED***"
               }
             ]
           }
@@ -274,7 +274,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Extraer la elección del usuario\nconst horarioElegido = $json.horario_elegido; // \"2026-02-10 a las 07:00\"\n\n// Separar fecha y hora\nconst partes = horarioElegido.split(' a las ');\nconst fecha = partes[0];\nconst hora = partes[1];\n\n// Obtener datos del paciente del nodo anterior\nconst documento = $('tomar_paciente').item.json.documento;\nconst tipoDocumento = $('tomar_paciente').item.json.tipo_documento;\n\nreturn [{\n  json: {\n    documento,\n    tipo_documento: tipoDocumento,\n    fecha,\n    hora\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -288,7 +288,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const raw = $json.output;\nconst horarios = JSON.parse(raw);\n\n// Devolver array de horarios ya formateados\nreturn [\n  {\n    json: {\n      horarios: horarios.map(h => `${h.fecha} a las ${h.hora}`),\n      mensaje: \"Horarios disponibles obtenidos exitosamente\",\n      success: true\n    }\n  }\n];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -302,7 +302,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener datos del paciente\nconst paciente = $('tomar_paciente').item.json;\n\n// Obtener horarios formateados\nconst horarios = $json.horarios;\n\n// n8n ya provee la resume_url correcta\nconst resumeUrl = $execution.resumeUrl;\n\n// Retornar en formato n8n correcto\nreturn [{\n  json: {\n    existe: true,\n    documento: paciente.documento,\n    tipo_documento: paciente.tipo_documento,\n    nombre_completo: paciente.nombre_completo,\n    telefono: paciente.telefono_1,\n    mensaje: \"Hola, buenos días. Mi nombre es sarAI, asistente virtual de FUNDACIÓN SERSOCIAL IPS.\",\n    horarios: horarios,\n    resume_url: resumeUrl,\n    success: true\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -336,13 +336,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.retellai.com/v2/create-phone-call",
+        "url": "***REDACTED***",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={\n  \"from_number\": \"+573102320148\",\n  \"to_number\": \"+57{{ $json.telefono_1 }}\",\n  \"agent_id\": \"agent_ae4b406a644b1c4f664d6f94df\",\n  \"retell_llm_dynamic_variables\": {\n    \"nombre_paciente\": \"{{ $json.nombre_completo }}\"\n \n  }\n}",
+        "body": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -364,10 +364,10 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.tipo_documento }}{{ $json.documento }}",
+        "sessionKey": "***REDACTED***",
         "contextWindowLength": 10
       },
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         464,
@@ -388,7 +388,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4.1-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {}
@@ -412,7 +412,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "LTmtmcMGQaHqcOnO",
+          "value": "***REDACTED***",
           "mode": "id",
           "cachedResultUrl": "/workflow/LTmtmcMGQaHqcOnO"
         },
@@ -462,9 +462,9 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Eres un asistente médico que ayuda a agendar citas.\n\nDATOS DEL PACIENTE:\n- Tipo de documento: {{ $json.tipo_documento }}\n- Número de documento: {{ $json.documento }}\n\nTAREA:\n1. Usa la herramienta 'citas_zeus' para obtener disponibilidades\n2. La herramienta te retornará un objeto con las disponibilidades\n3. Luego usa la herramienta 'citas_zeus' para agenda la cita\n3. Pasa esos datos al siguiente paso\n\nEjecuta la herramienta ahora.",
+        "text": "***REDACTED***",
         "options": {
-          "systemMessage": "=Eres un asistente que procesa disponibilidades médicas, enviar datos del paciente y agendar citas.\n\nREGLAS ESTRICTAS:\n1. Llama a 'Disponibilidad' para obtener horarios\n2. Extrae 1 sola disponibilidad\n3. Retorna SOLO un array JSON sin texto adicional\n4. Formato: [{\"fecha\": \"YYYY-MM-DD\", \"hora\": \"HH:MM\"}, ...]\n5. llama a 'AgendarCita' para que agendes la cita "
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -501,7 +501,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "-- SELECT * FROM pacientes_sospecha_colon WHERE usuario_contactado = 'NO' ORDER BY id ASC LIMIT 1;\n\nSELECT * FROM pacientes_sospecha_colon WHERE usuario_contactado = 'LLAMA_NO' ORDER BY id ASC LIMIT 6;",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -531,7 +531,7 @@
           "conditions": [
             {
               "id": "check-paciente",
-              "leftValue": "={{ $items('obtener_paciente_pendiente2').length }}",
+              "leftValue": "***REDACTED***",
               "rightValue": 0,
               "operator": {
                 "type": "number",
@@ -554,7 +554,7 @@
     },
     {
       "parameters": {
-        "jsCode": "console.log('No hay pacientes pendientes por contactar'); return [];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -569,7 +569,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "LTmtmcMGQaHqcOnO",
+          "value": "***REDACTED***",
           "mode": "id"
         },
         "options": {}
@@ -586,7 +586,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "=UPDATE pacientes_sospecha_colon SET opcion_1_raw = '{{ JSON.stringify($json.opcion_1_raw) }}'::jsonb, opcion_2_raw = '{{ JSON.stringify($json.opcion_2_raw) }}'::jsonb, opcion_3_raw = '{{ JSON.stringify($json.opcion_3_raw) }}'::jsonb WHERE id = {{ $json.id }};",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -607,7 +607,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "=UPDATE pacientes_sospecha_colon SET call_id = '{{ $json.call_id }}', usuario_contactado = 'EN_PROCESO', fecha_llamada = NOW() WHERE id = {{ $('formatearRespuesta').first().json.id }};",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -654,7 +654,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const output = $input.first().json;\n\nlet disponibilidades = output.output;\nif (typeof disponibilidades === 'string') {\n  disponibilidades = JSON.parse(disponibilidades);\n}\n\nconst opciones = disponibilidades.slice(0, 3);\n\nconst meses = {\n  '01': 'enero', '02': 'febrero', '03': 'marzo',\n  '04': 'abril', '05': 'mayo', '06': 'junio',\n  '07': 'julio', '08': 'agosto', '09': 'septiembre',\n  '10': 'octubre', '11': 'noviembre', '12': 'diciembre'\n};\n\nconst dias = {\n  0: 'domingo', 1: 'lunes', 2: 'martes', 3: 'miércoles',\n  4: 'jueves', 5: 'viernes', 6: 'sábado'\n};\n\nfunction formatearFecha(fecha, hora) {\n  const d = new Date(fecha + 'T00:00:00');\n  const diaSemana = dias[d.getDay()];\n  const diaMes = d.getDate();\n  const mes = meses[fecha.substring(5, 7)];\n  \n  const [h, m] = hora.split(':');\n  const hNum = parseInt(h);\n  const mNum = parseInt(m);\n  const meridiano = hNum < 12 ? 'de la mañana' : 'de la tarde';\n  const h12 = hNum > 12 ? hNum - 12 : hNum;\n  \n  // Si los minutos son 00 no los decimos\n  const horaTexto = mNum === 0 \n    ? `las ${h12} ${meridiano}`\n    : `las ${h12} y ${mNum} ${meridiano}`;\n  \n  return `${diaSemana} ${diaMes} de ${mes} a ${horaTexto}`;\n}\n\nconst paciente = $('obtener_paciente_pendiente2').first().json;\n\nreturn [{\n  json: {\n    ...paciente,\n    opcion_1: opciones[0] ? formatearFecha(opciones[0].fecha, opciones[0].hora) : null,\n    opcion_2: opciones[1] ? formatearFecha(opciones[1].fecha, opciones[1].hora) : null,\n    opcion_3: opciones[2] ? formatearFecha(opciones[2].fecha, opciones[2].hora) : null,\n    opcion_1_raw: opciones[0] || null,\n    opcion_2_raw: opciones[1] || null,\n    opcion_3_raw: opciones[2] || null\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -668,7 +668,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const output = $input.first().json;\nlet disponibilidades = output.output;\nif (typeof disponibilidades === 'string') {\n  disponibilidades = JSON.parse(disponibilidades);\n}\nconst opciones = disponibilidades.slice(0, 3);\nconst meses = {\n  '01': 'enero', '02': 'febrero', '03': 'marzo',\n  '04': 'abril', '05': 'mayo', '06': 'junio',\n  '07': 'julio', '08': 'agosto', '09': 'septiembre',\n  '10': 'octubre', '11': 'noviembre', '12': 'diciembre'\n};\nconst dias = {\n  0: 'domingo', 1: 'lunes', 2: 'martes', 3: 'miércoles',\n  4: 'jueves', 5: 'viernes', 6: 'sábado'\n};\nfunction formatearFecha(fecha, hora) {\n  const d = new Date(fecha + 'T00:00:00');\n  const diaSemana = dias[d.getDay()];\n  const diaMes = d.getDate();\n  const mes = meses[fecha.substring(5, 7)];\n  const [h, m] = hora.split(':');\n  const hNum = parseInt(h);\n  const mNum = parseInt(m);\n  const meridiano = hNum < 12 ? 'de la mañana' : 'de la tarde';\n  const h12 = hNum > 12 ? hNum - 12 : hNum;\n  const horaTexto = mNum === 0 \n    ? `las ${h12} ${meridiano}`\n    : `las ${h12} y ${mNum} ${meridiano}`;\n  return `${diaSemana} ${diaMes} de ${mes} a ${horaTexto}`;\n}\n\nconst paciente = $('Loop Over Items').item.json;\n\nreturn [{\n  json: {\n    ...paciente,\n    opcion_1: opciones[0] ? formatearFecha(opciones[0].fecha, opciones[0].hora) : null,\n    opcion_2: opciones[1] ? formatearFecha(opciones[1].fecha, opciones[1].hora) : null,\n    opcion_3: opciones[2] ? formatearFecha(opciones[2].fecha, opciones[2].hora) : null,\n    opcion_1_raw: opciones[0] || null,\n    opcion_2_raw: opciones[1] || null,\n    opcion_3_raw: opciones[2] || null\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -693,13 +693,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.retellai.com/v2/create-phone-call",
+        "url": "***REDACTED***",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={\n  \"from_number\": \"+573102320148\",\n  \"to_number\": \"+57{{ $('formatearRespuesta').first().json.telefono_1 }}\",\n  \"agent_id\": \"agent_9d70bf997c33310a16d9de1cae\",\n  \"retell_llm_dynamic_variables\": {\n    \"nombre_paciente\": \"{{ $('formatearRespuesta').first().json.nombre_completo }}\",\n    \"opcion_1\": \"{{ $('formatearRespuesta').first().json.opcion_1 }}\",\n    \"opcion_2\": \"{{ $('formatearRespuesta').first().json.opcion_2 }}\",\n    \"opcion_3\": \"{{ $('formatearRespuesta').first().json.opcion_3 }}\",\n    \"documento\": \"{{ $('formatearRespuesta').item.json.documento }}\"\n  }\n}",
+        "body": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -721,13 +721,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.retellai.com/v2/create-phone-call",
+        "url": "***REDACTED***",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={\n  \"from_number\": \"+573102320148\",\n  \"to_number\": \"+57{{ $('formatearRespuesta').first().json.telefono_1 }}\",\n  \"agent_id\": \"agent_0db8bb0224bce6f6e0d4db7d98\",\n  \"retell_llm_dynamic_variables\": {\n    \"nombre_paciente\": \"{{ $('formatearRespuesta').first().json.nombre_completo }}\",\n    \"opcion_1\": \"{{ $('formatearRespuesta').first().json.opcion_1 }}\",\n    \"opcion_2\": \"{{ $('formatearRespuesta').first().json.opcion_2 }}\",\n    \"opcion_3\": \"{{ $('formatearRespuesta').first().json.opcion_3 }}\",\n    \"cedula_paciente\": \"{{ $('formatearRespuesta').first().json.documento }}\"\n  }\n}",
+        "body": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -762,7 +762,7 @@
       "main": [
         [
           {
-            "node": "paciente encontrado con contactado en NO?",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -1110,7 +1110,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -1122,7 +1122,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1155,7 +1155,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
@@ -1185,7 +1185,7 @@
     "nodes": [
       {
         "parameters": {
-          "jsCode": "return [\n  {\n    json: $input.first().json\n  }\n];\n"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1200,7 +1200,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "SELECT *\nFROM pacientes_sospecha_colon\nWHERE usuario_contactado = 'NO'\nORDER BY id ASC\nLIMIT 1;\n",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1231,7 +1231,7 @@
             "conditions": [
               {
                 "id": "6948bfac-b6a6-4232-a75a-98a78a97746c",
-                "leftValue": "={{$items(\"obtener_paciente_pendiente\").length}}",
+                "leftValue": "***REDACTED***",
                 "rightValue": 0,
                 "operator": {
                   "type": "number",
@@ -1250,7 +1250,7 @@
           -128
         ],
         "id": "5017c9b2-ee84-4d7e-b9f0-27da1a0c85f5",
-        "name": "paciente encontrado con contactado en NO?",
+        "name": "***REDACTED***",
         "disabled": true
       },
       {
@@ -1290,10 +1290,10 @@
       {
         "parameters": {
           "sessionIdType": "customKey",
-          "sessionKey": "={{ $json.tipo_documento }}{{ $json.documento }}",
+          "sessionKey": "***REDACTED***",
           "contextWindowLength": 10
         },
-        "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+        "type": "***REDACTED***",
         "typeVersion": 1.3,
         "position": [
           -432,
@@ -1314,7 +1314,7 @@
           "model": {
             "__rl": true,
             "mode": "list",
-            "value": "gpt-4.1-mini"
+            "value": "***REDACTED***"
           },
           "builtInTools": {},
           "options": {}
@@ -1339,7 +1339,7 @@
         "parameters": {
           "workflowId": {
             "__rl": true,
-            "value": "LTmtmcMGQaHqcOnO",
+            "value": "***REDACTED***",
             "mode": "id",
             "cachedResultUrl": "/workflow/LTmtmcMGQaHqcOnO"
           },
@@ -1389,9 +1389,9 @@
       {
         "parameters": {
           "promptType": "define",
-          "text": "=Eres un asistente médico que ayuda a agendar citas.\n\nDATOS DEL PACIENTE:\n- Tipo de documento: {{ $json.tipo_documento }}\n- Número de documento: {{ $json.documento }}\n\nTAREA:\n1. Usa la herramienta 'citas_zeus' para obtener disponibilidades\n2. La herramienta te retornará un objeto con las disponibilidades\n3. Luego usa la herramienta 'citas_zeus' para agenda la cita\n3. Pasa esos datos al siguiente paso\n\nEjecuta la herramienta ahora.",
+          "text": "***REDACTED***",
           "options": {
-            "systemMessage": "=Eres un asistente que procesa disponibilidades médicas, enviar datos del paciente y agendar citas.\n\nREGLAS ESTRICTAS:\n1. Llama a 'Disponibilidad' para obtener horarios\n2. Extrae 1 sola disponibilidad\n3. Retorna SOLO un array JSON sin texto adicional\n4. Formato: [{\"fecha\": \"YYYY-MM-DD\", \"hora\": \"HH:MM\"}, ...]\n5. llama a 'AgendarCita' para que agendes la cita "
+            "systemMessage": "***REDACTED***"
           }
         },
         "type": "@n8n/n8n-nodes-langchain.agent",
@@ -1407,13 +1407,13 @@
       {
         "parameters": {
           "respondWith": "json",
-          "responseBody": "={\n  \"existe\": {{ $json.existe }},\n  \"documento\": \"{{ $json.documento }}\",\n  \"tipo_documento\": \"{{ $json.tipo_documento }}\",\n  \"nombre_completo\": \"{{ $json.nombre_completo }}\",\n  \"telefono\": \"{{ $json.telefono }}\",\n  \"mensaje\": \"{{ $json.mensaje }}\",\n  \"horarios\": {{ JSON.stringify($json.horarios) }},\n  \"resume_url\": \"{{ $json.resume_url }}\",\n  \"success\": {{ $json.success }}\n}",
+          "responseBody": "***REDACTED***",
           "options": {
             "responseHeaders": {
               "entries": [
                 {
                   "name": "Content-Type",
-                  "value": "application/json"
+                  "value": "***REDACTED***"
                 }
               ]
             }
@@ -1450,7 +1450,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// Extraer la elección del usuario\nconst horarioElegido = $json.horario_elegido; // \"2026-02-10 a las 07:00\"\n\n// Separar fecha y hora\nconst partes = horarioElegido.split(' a las ');\nconst fecha = partes[0];\nconst hora = partes[1];\n\n// Obtener datos del paciente del nodo anterior\nconst documento = $('tomar_paciente').item.json.documento;\nconst tipoDocumento = $('tomar_paciente').item.json.tipo_documento;\n\nreturn [{\n  json: {\n    documento,\n    tipo_documento: tipoDocumento,\n    fecha,\n    hora\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1464,7 +1464,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const raw = $json.output;\nconst horarios = JSON.parse(raw);\n\n// Devolver array de horarios ya formateados\nreturn [\n  {\n    json: {\n      horarios: horarios.map(h => `${h.fecha} a las ${h.hora}`),\n      mensaje: \"Horarios disponibles obtenidos exitosamente\",\n      success: true\n    }\n  }\n];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1478,7 +1478,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// Obtener datos del paciente\nconst paciente = $('tomar_paciente').item.json;\n\n// Obtener horarios formateados\nconst horarios = $json.horarios;\n\n// n8n ya provee la resume_url correcta\nconst resumeUrl = $execution.resumeUrl;\n\n// Retornar en formato n8n correcto\nreturn [{\n  json: {\n    existe: true,\n    documento: paciente.documento,\n    tipo_documento: paciente.tipo_documento,\n    nombre_completo: paciente.nombre_completo,\n    telefono: paciente.telefono_1,\n    mensaje: \"Hola, buenos días. Mi nombre es sarAI, asistente virtual de FUNDACIÓN SERSOCIAL IPS.\",\n    horarios: horarios,\n    resume_url: resumeUrl,\n    success: true\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1512,13 +1512,13 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://api.retellai.com/v2/create-phone-call",
+          "url": "***REDACTED***",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpHeaderAuth",
           "sendBody": true,
           "contentType": "raw",
           "rawContentType": "application/json",
-          "body": "={\n  \"from_number\": \"+573102320148\",\n  \"to_number\": \"+57{{ $json.telefono_1 }}\",\n  \"agent_id\": \"agent_ae4b406a644b1c4f664d6f94df\",\n  \"retell_llm_dynamic_variables\": {\n    \"nombre_paciente\": \"{{ $json.nombre_completo }}\"\n \n  }\n}",
+          "body": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -1540,10 +1540,10 @@
       {
         "parameters": {
           "sessionIdType": "customKey",
-          "sessionKey": "={{ $json.tipo_documento }}{{ $json.documento }}",
+          "sessionKey": "***REDACTED***",
           "contextWindowLength": 10
         },
-        "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+        "type": "***REDACTED***",
         "typeVersion": 1.3,
         "position": [
           464,
@@ -1564,7 +1564,7 @@
           "model": {
             "__rl": true,
             "mode": "list",
-            "value": "gpt-4.1-mini"
+            "value": "***REDACTED***"
           },
           "builtInTools": {},
           "options": {}
@@ -1588,7 +1588,7 @@
         "parameters": {
           "workflowId": {
             "__rl": true,
-            "value": "LTmtmcMGQaHqcOnO",
+            "value": "***REDACTED***",
             "mode": "id",
             "cachedResultUrl": "/workflow/LTmtmcMGQaHqcOnO"
           },
@@ -1638,9 +1638,9 @@
       {
         "parameters": {
           "promptType": "define",
-          "text": "=Eres un asistente médico que ayuda a agendar citas.\n\nDATOS DEL PACIENTE:\n- Tipo de documento: {{ $json.tipo_documento }}\n- Número de documento: {{ $json.documento }}\n\nTAREA:\n1. Usa la herramienta 'citas_zeus' para obtener disponibilidades\n2. La herramienta te retornará un objeto con las disponibilidades\n3. Luego usa la herramienta 'citas_zeus' para agenda la cita\n3. Pasa esos datos al siguiente paso\n\nEjecuta la herramienta ahora.",
+          "text": "***REDACTED***",
           "options": {
-            "systemMessage": "=Eres un asistente que procesa disponibilidades médicas, enviar datos del paciente y agendar citas.\n\nREGLAS ESTRICTAS:\n1. Llama a 'Disponibilidad' para obtener horarios\n2. Extrae 1 sola disponibilidad\n3. Retorna SOLO un array JSON sin texto adicional\n4. Formato: [{\"fecha\": \"YYYY-MM-DD\", \"hora\": \"HH:MM\"}, ...]\n5. llama a 'AgendarCita' para que agendes la cita "
+            "systemMessage": "***REDACTED***"
           }
         },
         "type": "@n8n/n8n-nodes-langchain.agent",
@@ -1676,7 +1676,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "-- SELECT * FROM pacientes_sospecha_colon WHERE usuario_contactado = 'NO' ORDER BY id ASC LIMIT 1;\n\nSELECT * FROM pacientes_sospecha_colon WHERE usuario_contactado = 'LLAMA_NO' ORDER BY id ASC LIMIT 10;",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1706,7 +1706,7 @@
             "conditions": [
               {
                 "id": "check-paciente",
-                "leftValue": "={{ $items('obtener_paciente_pendiente2').length }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": 0,
                 "operator": {
                   "type": "number",
@@ -1729,7 +1729,7 @@
       },
       {
         "parameters": {
-          "jsCode": "console.log('No hay pacientes pendientes por contactar'); return [];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1744,7 +1744,7 @@
         "parameters": {
           "workflowId": {
             "__rl": true,
-            "value": "LTmtmcMGQaHqcOnO",
+            "value": "***REDACTED***",
             "mode": "id"
           },
           "options": {}
@@ -1761,7 +1761,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "=UPDATE pacientes_sospecha_colon SET opcion_1_raw = '{{ JSON.stringify($json.opcion_1_raw) }}'::jsonb, opcion_2_raw = '{{ JSON.stringify($json.opcion_2_raw) }}'::jsonb, opcion_3_raw = '{{ JSON.stringify($json.opcion_3_raw) }}'::jsonb WHERE id = {{ $json.id }};",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1782,7 +1782,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "=UPDATE pacientes_sospecha_colon SET call_id = '{{ $json.call_id }}', usuario_contactado = 'EN_PROCESO', fecha_llamada = NOW() WHERE id = {{ $('formatearRespuesta').first().json.id }};",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1829,7 +1829,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const output = $input.first().json;\n\nlet disponibilidades = output.output;\nif (typeof disponibilidades === 'string') {\n  disponibilidades = JSON.parse(disponibilidades);\n}\n\nconst opciones = disponibilidades.slice(0, 3);\n\nconst meses = {\n  '01': 'enero', '02': 'febrero', '03': 'marzo',\n  '04': 'abril', '05': 'mayo', '06': 'junio',\n  '07': 'julio', '08': 'agosto', '09': 'septiembre',\n  '10': 'octubre', '11': 'noviembre', '12': 'diciembre'\n};\n\nconst dias = {\n  0: 'domingo', 1: 'lunes', 2: 'martes', 3: 'miércoles',\n  4: 'jueves', 5: 'viernes', 6: 'sábado'\n};\n\nfunction formatearFecha(fecha, hora) {\n  const d = new Date(fecha + 'T00:00:00');\n  const diaSemana = dias[d.getDay()];\n  const diaMes = d.getDate();\n  const mes = meses[fecha.substring(5, 7)];\n  \n  const [h, m] = hora.split(':');\n  const hNum = parseInt(h);\n  const mNum = parseInt(m);\n  const meridiano = hNum < 12 ? 'de la mañana' : 'de la tarde';\n  const h12 = hNum > 12 ? hNum - 12 : hNum;\n  \n  // Si los minutos son 00 no los decimos\n  const horaTexto = mNum === 0 \n    ? `las ${h12} ${meridiano}`\n    : `las ${h12} y ${mNum} ${meridiano}`;\n  \n  return `${diaSemana} ${diaMes} de ${mes} a ${horaTexto}`;\n}\n\nconst paciente = $('obtener_paciente_pendiente2').first().json;\n\nreturn [{\n  json: {\n    ...paciente,\n    opcion_1: opciones[0] ? formatearFecha(opciones[0].fecha, opciones[0].hora) : null,\n    opcion_2: opciones[1] ? formatearFecha(opciones[1].fecha, opciones[1].hora) : null,\n    opcion_3: opciones[2] ? formatearFecha(opciones[2].fecha, opciones[2].hora) : null,\n    opcion_1_raw: opciones[0] || null,\n    opcion_2_raw: opciones[1] || null,\n    opcion_3_raw: opciones[2] || null\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1843,7 +1843,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const output = $input.first().json;\nlet disponibilidades = output.output;\nif (typeof disponibilidades === 'string') {\n  disponibilidades = JSON.parse(disponibilidades);\n}\nconst opciones = disponibilidades.slice(0, 3);\nconst meses = {\n  '01': 'enero', '02': 'febrero', '03': 'marzo',\n  '04': 'abril', '05': 'mayo', '06': 'junio',\n  '07': 'julio', '08': 'agosto', '09': 'septiembre',\n  '10': 'octubre', '11': 'noviembre', '12': 'diciembre'\n};\nconst dias = {\n  0: 'domingo', 1: 'lunes', 2: 'martes', 3: 'miércoles',\n  4: 'jueves', 5: 'viernes', 6: 'sábado'\n};\nfunction formatearFecha(fecha, hora) {\n  const d = new Date(fecha + 'T00:00:00');\n  const diaSemana = dias[d.getDay()];\n  const diaMes = d.getDate();\n  const mes = meses[fecha.substring(5, 7)];\n  const [h, m] = hora.split(':');\n  const hNum = parseInt(h);\n  const mNum = parseInt(m);\n  const meridiano = hNum < 12 ? 'de la mañana' : 'de la tarde';\n  const h12 = hNum > 12 ? hNum - 12 : hNum;\n  const horaTexto = mNum === 0 \n    ? `las ${h12} ${meridiano}`\n    : `las ${h12} y ${mNum} ${meridiano}`;\n  return `${diaSemana} ${diaMes} de ${mes} a ${horaTexto}`;\n}\n\nconst paciente = $('Loop Over Items').item.json;\n\nreturn [{\n  json: {\n    ...paciente,\n    opcion_1: opciones[0] ? formatearFecha(opciones[0].fecha, opciones[0].hora) : null,\n    opcion_2: opciones[1] ? formatearFecha(opciones[1].fecha, opciones[1].hora) : null,\n    opcion_3: opciones[2] ? formatearFecha(opciones[2].fecha, opciones[2].hora) : null,\n    opcion_1_raw: opciones[0] || null,\n    opcion_2_raw: opciones[1] || null,\n    opcion_3_raw: opciones[2] || null\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1868,13 +1868,13 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://api.retellai.com/v2/create-phone-call",
+          "url": "***REDACTED***",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpHeaderAuth",
           "sendBody": true,
           "contentType": "raw",
           "rawContentType": "application/json",
-          "body": "={\n  \"from_number\": \"+573102320148\",\n  \"to_number\": \"+57{{ $('formatearRespuesta').first().json.telefono_1 }}\",\n  \"agent_id\": \"agent_9d70bf997c33310a16d9de1cae\",\n  \"retell_llm_dynamic_variables\": {\n    \"nombre_paciente\": \"{{ $('formatearRespuesta').first().json.nombre_completo }}\",\n    \"opcion_1\": \"{{ $('formatearRespuesta').first().json.opcion_1 }}\",\n    \"opcion_2\": \"{{ $('formatearRespuesta').first().json.opcion_2 }}\",\n    \"opcion_3\": \"{{ $('formatearRespuesta').first().json.opcion_3 }}\",\n    \"documento\": \"{{ $('formatearRespuesta').item.json.documento }}\"\n  }\n}",
+          "body": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -1896,13 +1896,13 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://api.retellai.com/v2/create-phone-call",
+          "url": "***REDACTED***",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpHeaderAuth",
           "sendBody": true,
           "contentType": "raw",
           "rawContentType": "application/json",
-          "body": "={\n  \"from_number\": \"+573102320148\",\n  \"to_number\": \"+57{{ $('formatearRespuesta').first().json.telefono_1 }}\",\n  \"agent_id\": \"agent_0db8bb0224bce6f6e0d4db7d98\",\n  \"retell_llm_dynamic_variables\": {\n    \"nombre_paciente\": \"{{ $('formatearRespuesta').first().json.nombre_completo }}\",\n    \"opcion_1\": \"{{ $('formatearRespuesta').first().json.opcion_1 }}\",\n    \"opcion_2\": \"{{ $('formatearRespuesta').first().json.opcion_2 }}\",\n    \"opcion_3\": \"{{ $('formatearRespuesta').first().json.opcion_3 }}\",\n    \"cedula_paciente\": \"{{ $('formatearRespuesta').first().json.documento }}\"\n  }\n}",
+          "body": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -1937,7 +1937,7 @@
         "main": [
           [
             {
-              "node": "paciente encontrado con contactado en NO?",
+              "node": "***REDACTED***",
               "type": "main",
               "index": 0
             }
