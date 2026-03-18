@@ -29,11 +29,11 @@
           "name": "Header Auth account 5"
         }
       },
-      "notes": "Power Automate envía: { asunto, remitente, excel_base64, nombre_archivo }"
+      "notes": "***REDACTED***"
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO 1: Parsear asunto y extraer NIT / NOMBRE PRESTADOR\n// Formato esperado: 'RESULTADOS PROSTATA - NOMBRE IPS - NIT'\n// Robusto: soporta nombres con guiones\n// ============================================================\nconst item = $input.first().json;\n\nconst asunto = (item.body?.asunto || item.asunto || '').toString().toUpperCase().trim();\nconst remitente = item.body?.remitente || item.remitente || '';\nconst excelBase64 = item.body?.excel_base64 || item.excel_base64 || '';\nconst nombreArchivo = item.body?.nombre_archivo || item.nombre_archivo || 'reporte.xlsx';\n\n// Parseo robusto: NIT = última parte, NOMBRE = todo lo del medio\nconst partes = asunto.split('-').map(p => p.trim());\n\nlet nitPrestador = '';\nlet nombrePrestador = '';\nlet errorAsunto = '';\n\nif (partes.length < 3) {\n  errorAsunto = `El asunto \"${asunto}\" no cumple el formato: RESULTADOS PROSTATA - NOMBRE IPS - NIT`;\n} else {\n  nitPrestador = partes[partes.length - 1].trim();\n  nombrePrestador = partes.slice(1, partes.length - 1).join('-').trim();\n  \n  // Validar que el asunto contenga PROSTATA\n  if (!asunto.includes('PROSTATA')) {\n    errorAsunto = `El asunto no contiene la palabra PROSTATA`;\n  }\n  // Validar que NIT sea numérico\n  if (!/^\\d+$/.test(nitPrestador)) {\n    errorAsunto = `El NIT \"${nitPrestador}\" no es válido (debe ser numérico)`;\n  }\n}\n\nreturn [{\n  json: {\n    asunto,\n    remitente,\n    excelBase64,\n    nombreArchivo,\n    nitPrestador,\n    nombrePrestador,\n    errorAsunto,\n    asunoValido: errorAsunto === ''\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -77,7 +77,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO 2: Decodificar Excel base64 y leer todas las filas\n// Usa la librería xlsx ya disponible en n8n\n// ============================================================\nconst XLSX = require('xlsx');\n\nconst { excelBase64, nombreArchivo, nitPrestador, nombrePrestador, remitente, asunto } = $input.first().json;\n\n// Decodificar base64\nconst buffer = Buffer.from(excelBase64, 'base64');\nconst workbook = XLSX.read(buffer, { type: 'buffer', cellDates: false });\n\n// Leer primera hoja (Tabla1)\nconst sheetName = workbook.SheetNames[0];\nconst sheet = workbook.Sheets[sheetName];\nconst filas = XLSX.utils.sheet_to_json(sheet, { defval: '' });\n\n// Guardar workbook original en base64 para reutilizarlo después\nconst workbookBase64 = Buffer.from(XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' })).toString('base64');\n\nreturn [{\n  json: {\n    filas,\n    totalFilas: filas.length,\n    workbookBase64,\n    nombreArchivo,\n    nitPrestador,\n    nombrePrestador,\n    remitente,\n    asunto,\n    sheetName\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -90,7 +90,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO 3: Validar cada fila del Excel\n// Detecta todos los errores por fila y clasifica:\n//   - filasValidas: pasan todas las validaciones locales\n//   - filasConError: tienen al menos un error\n// La validación de usuario activo en EPS se hace después\n// ============================================================\n\nconst { filas, workbookBase64, nombreArchivo, nitPrestador, nombrePrestador, remitente, asunto, sheetName } = $input.first().json;\n\nconst TIPOS_DOCUMENTO_VALIDOS = ['CC', 'CE', 'PA', 'RC', 'TI', 'CD', 'MS', 'AS', 'NU', 'PE'];\n\n// Convertir serial de Excel a fecha ISO\nconst serialToISO = (serial) => {\n  if (!serial && serial !== 0) return null;\n  const num = typeof serial === 'string' ? parseInt(serial.replace(/[^0-9]/g, '')) : serial;\n  if (isNaN(num) || num < 1) return null;\n  const date = new Date(Date.UTC(1899, 11, 30) + num * 86400000);\n  if (isNaN(date.getTime())) return null;\n  return date.toISOString().split('T')[0];\n};\n\nconst esSerialFechaValido = (val) => {\n  if (val === '' || val === null || val === undefined) return false;\n  // Puede ser número serial o string de fecha\n  if (typeof val === 'number') return val > 1 && val < 200000;\n  if (typeof val === 'string') {\n    // Intentar como serial\n    const n = parseInt(val);\n    if (!isNaN(n) && n > 1) return true;\n    // Intentar como fecha ISO\n    return !isNaN(Date.parse(val));\n  }\n  return false;\n};\n\nconst filasValidas = [];\nconst filasConError = [];\n\nfilas.forEach((fila, index) => {\n  const errores = [];\n  const numeroFila = index + 2; // +2 porque fila 1 es encabezado\n\n  // Saltar filas completamente vacías\n  const todosVacios = Object.values(fila).every(v => v === '' || v === null || v === undefined);\n  if (todosVacios) return;\n\n  // ---- VALIDACIONES ----\n\n  // 1. TIPO IDENTIFICACION\n  const tipoDoc = (fila['TIPO IDENTIFICACION'] || '').toString().trim().toUpperCase();\n  if (!tipoDoc) {\n    errores.push('Tipo de identificación vacío');\n  } else if (!TIPOS_DOCUMENTO_VALIDOS.includes(tipoDoc)) {\n    errores.push(`Tipo de identificación inválido: \"${tipoDoc}\". Válidos: ${TIPOS_DOCUMENTO_VALIDOS.join(', ')}`);\n  }\n\n  // 2. IDENTIFICACION\n  const documento = (fila['IDENTIFICACION'] || '').toString().replace(/\\D/g, '').trim();\n  if (!documento) {\n    errores.push('Número de identificación vacío');\n  } else if (documento.length < 5) {\n    errores.push(`Número de identificación muy corto: \"${documento}\"`);\n  }\n\n  // 3. PRIMER NOMBRE\n  if (!(fila['PRIMER NOMBRE'] || '').toString().trim()) {\n    errores.push('Primer nombre vacío');\n  }\n\n  // 4. PRIMER APELLIDO\n  if (!(fila['PRIMER APELLIDO'] || '').toString().trim()) {\n    errores.push('Primer apellido vacío');\n  }\n\n  // 5. FECHA DE NACIMIENTO\n  if (!esSerialFechaValido(fila['FECHA DE NACIMIENTO'])) {\n    errores.push('Fecha de nacimiento inválida o vacía');\n  }\n\n  // 6. FECHA DE TOMA DEL EXAMEN\n  if (!esSerialFechaValido(fila['FECHA DE TOMA DEL EXAMEN'])) {\n    errores.push('Fecha de toma del examen inválida o vacía');\n  }\n\n  // 7. FECHA DE RESULTADOS DEL EXAMEN\n  const campoFechaResultados = fila['FECHA DE RESULTADOS DEL EXAMEN'] || fila['FECHA_DE RESULTADOS_DEL_EXAMEN'] || '';\n  if (!esSerialFechaValido(campoFechaResultados)) {\n    errores.push('Fecha de resultados del examen inválida o vacía');\n  }\n\n  // 8. NOMBRE DEL EXAMEN\n  if (!(fila['NOMBRE DEL EXAMEN'] || '').toString().trim()) {\n    errores.push('Nombre del examen vacío');\n  }\n\n  // 9. RESULTADO DEL EXAMEN\n  if (!(fila['RESULTADO PSA'] || fila['RESULTADO BIOPSIA'] || fila['RESULTADO DEL EXAMEN'] || '').toString().trim()) {\n    errores.push('Resultado del examen vacío');\n  }\n\n  // 10. HERRAMIENTA\n  const herramienta = (fila['HERRAMIENTA'] || '').toString().trim();\n  if (herramienta && herramienta !== 'FOR-REPORTE-SOSPECHOSO') {\n    errores.push(`Campo HERRAMIENTA incorrecto: \"${herramienta}\". Debe ser: FOR-REPORTE-SOSPECHOSO`);\n  }\n\n  // 11. Nº REGISTRO\n  const nroRegistro = (fila['Nº REGISTRO'] || fila['N° REGISTRO'] || fila['NUMERO REGISTRO'] || '').toString().trim().toUpperCase();\n  if (nroRegistro && !['SI', 'NO'].includes(nroRegistro)) {\n    errores.push(`Campo Nº REGISTRO incorrecto: \"${nroRegistro}\". Debe ser SI o NO`);\n  }\n\n  // Convertir fechas para procesamiento posterior\n  const filaConFechas = {\n    ...fila,\n    tipo_documento: tipoDoc,\n    documento: documento,\n    primer_nombre: (fila['PRIMER NOMBRE'] || '').toString().trim().toUpperCase(),\n    segundo_nombre: (fila['SEGUNDO NOMBRE'] || '').toString().trim().toUpperCase(),\n    primer_apellido: (fila['PRIMER APELLIDO'] || '').toString().trim().toUpperCase(),\n    segundo_apellido: (fila['SEGUNDO APELLIDO'] || '').toString().trim().toUpperCase(),\n    fecha_nacimiento: serialToISO(fila['FECHA DE NACIMIENTO']),\n    fecha_toma_examen: serialToISO(fila['FECHA DE TOMA DEL EXAMEN']),\n    fecha_resultados: serialToISO(campoFechaResultados),\n    telefono: (fila['TELEFONO'] || '').toString().replace(/\\D/g, ''),\n    regional: (fila['REGIONAL'] || '').toString().trim().toUpperCase(),\n    municipio: (fila['MUNICIPIO'] || '').toString().trim().toUpperCase(),\n    nombre_examen: (fila['NOMBRE DEL EXAMEN'] || '').toString().trim().toUpperCase(),\n    resultado_psa: (fila['RESULTADO PSA'] || '').toString().trim(),\n    resultado_biopsia: (fila['RESULTADO BIOPSIA'] || '').toString().trim(),\n    nit_prestador: nitPrestador,\n    nombre_prestador: nombrePrestador,\n    numero_fila: numeroFila,\n    errores_validacion: errores\n  };\n\n  if (errores.length === 0) {\n    filasValidas.push(filaConFechas);\n  } else {\n    filasConError.push(filaConFechas);\n  }\n});\n\nreturn [{\n  json: {\n    filasValidas,\n    filasConError,\n    totalValidas: filasValidas.length,\n    totalConError: filasConError.length,\n    workbookBase64,\n    nombreArchivo,\n    nitPrestador,\n    nombrePrestador,\n    remitente,\n    asunto,\n    sheetName\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -149,14 +149,14 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "WQ65T0ACkIUy8PO80bZWV",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "VALIDAR DERECHOS DE USUARIO"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
           "value": {
-            "datos_paciente": "={{ { \"tipo_documento\": $json.tipo_documento, \"documento\": $json.documento } }}"
+            "datos_paciente": "***REDACTED***"
           },
           "matchingColumns": [
             "datos_paciente"
@@ -186,7 +186,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO 5: Clasificar resultado de validación EPS\n// Agrega el resultado de Mutual a cada fila\n// Separa: activos vs inactivos (error de EPS)\n// ============================================================\nconst filaOriginal = $('Split_Filas_Validas').item.json;\nconst resultadoEPS = $input.first().json;\n\nconst estaActivo = resultadoEPS.esta_activo === true || resultadoEPS.esta_activo === 'ACTIVO';\nconst estadoAfiliado = resultadoEPS.estado_afiliado || resultadoEPS.estadoAfiliado || 'DESCONOCIDO';\n\nreturn [{\n  json: {\n    ...filaOriginal,\n    estaActivo,\n    estadoAfiliado,\n    errorEPS: estaActivo ? '' : `Usuario no activo en EPS: estado = ${estadoAfiliado}`,\n    // Datos adicionales de Mutual para enriquecer el registro\n    codigo_departamento: resultadoEPS.codigo_departamento || '',\n    codigo_municipio: resultadoEPS.codigo_municipio || '',\n    nombre_departamento: resultadoEPS.nombre_departamento || '',\n    nombre_municipio: resultadoEPS.nombre_municipio || '',\n    email_paciente: resultadoEPS.email || '',\n    direccion: resultadoEPS.direccion_texto || '',\n    telefono_movil: resultadoEPS.telefono_movil || '',\n    regimen_codigo: resultadoEPS.regimen_codigo || '',\n    id_regimen: resultadoEPS.id_regimen || null\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -238,18 +238,18 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list"
         },
         "where": {
           "values": [
             {
               "column": "documento",
-              "value": "={{ $json.documento }}"
+              "value": "***REDACTED***"
             },
             {
               "column": "tipo_documento",
-              "value": "={{ $json.tipo_documento }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -272,7 +272,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO 7: Determinar si es duplicado\n// Si ya existe en BD → marcar como duplicado\n// ============================================================\nconst registroExistente = $input.all();\nconst filaOriginal = $('Resultado_Validacion_EPS').item.json;\n\nconst esDuplicado = registroExistente.length > 0;\nconst autoIdExistente = esDuplicado ? registroExistente[0].json.auto_id : null;\n\nreturn [{\n  json: {\n    ...filaOriginal,\n    esDuplicado,\n    autoIdExistente\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -323,7 +323,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon",
+          "value": "***REDACTED***",
           "mode": "list"
         },
         "columns": {
@@ -335,7 +335,7 @@
             "segundo_nombre": "={{ $json.segundo_nombre }}",
             "primer_apellido": "={{ $json.primer_apellido }}",
             "segundo_apellido": "={{ $json.segundo_apellido }}",
-            "nombre_completo": "={{ $json.primer_nombre + ' ' + $json.segundo_nombre + ' ' + $json.primer_apellido + ' ' + $json.segundo_apellido }}",
+            "nombre_completo": "***REDACTED***",
             "fecha_nacimiento": "={{ $json.fecha_nacimiento }}",
             "fecha_toma_examen": "={{ $json.fecha_toma_examen }}",
             "fecha_resultados_examen": "={{ $json.fecha_resultados }}",
@@ -847,7 +847,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "pacientes_sospecha_colon_duplicados",
+          "value": "***REDACTED***",
           "mode": "list"
         },
         "columns": {
@@ -898,7 +898,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO: Recolectar filas con error de EPS\n// Agrega el error de EPS al array de errores de la fila\n// ============================================================\nconst fila = $input.first().json;\n\nreturn [{\n  json: {\n    ...fila,\n    errores_validacion: [...(fila.errores_validacion || []), fila.errorEPS]\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -926,7 +926,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO FINAL RAMA VÁLIDAS: Consolidar todos los items\n// procesados para pasarlos al generador de reporte\n// ============================================================\nconst items = $input.all();\n\n// Recopilar las filas con error de EPS que fueron procesadas\nconst filasConErrorEPS = items\n  .map(i => i.json)\n  .filter(f => f.errores_validacion && f.errores_validacion.length > 0);\n\nreturn [{ json: { filasConErrorEPS } }];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -939,7 +939,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ============================================================\n// PASO GENERADOR EXCEL DE ERRORES\n// Recibe:\n//   - filasConError (validación local) desde Validar_Filas_Excel\n//   - filasConErrorEPS desde el procesamiento de EPS\n// Genera un Excel con columna MOTIVO_ERROR coloreada\n// ============================================================\nconst XLSX = require('xlsx');\n\n// Obtener datos del nodo de validación (tiene workbook original)\nconst datosValidacion = $('Validar_Filas_Excel').first().json;\nconst { workbookBase64, nombreArchivo, remitente, nitPrestador, nombrePrestador, asunto,\n        filasConError: erroresLocales, filasValidas,\n        totalValidas, totalConError } = datosValidacion;\n\n// Obtener errores de EPS si los hay\nlet erroresEPS = [];\ntry {\n  const epsData = $('Consolidar_Errores_EPS').first();\n  erroresEPS = epsData?.json?.filasConErrorEPS || [];\n} catch(e) { erroresEPS = []; }\n\n// Combinar todos los errores\nconst todasFilasConError = [...(erroresLocales || []), ...erroresEPS];\nconst totalErrores = todasFilasConError.length;\nconst totalProcesados = (filasValidas || []).length - erroresEPS.length;\n\nif (totalErrores === 0) {\n  // No hay errores, no generar Excel\n  return [{ json: {\n    hayErrores: false,\n    remitente, nitPrestador, nombrePrestador, asunto,\n    totalProcesados, totalErrores, nombreArchivo\n  }}];\n}\n\n// Reconstruir workbook original\nconst buffer = Buffer.from(workbookBase64, 'base64');\nconst wb = XLSX.read(buffer, { type: 'buffer' });\nconst sheetName = wb.SheetNames[0];\nconst ws = wb.Sheets[sheetName];\n\n// Agregar encabezado de columna de errores\nconst range = XLSX.utils.decode_range(ws['!ref']);\nconst colError = range.e.c + 1; // columna siguiente al final\nconst colLetra = XLSX.utils.encode_col(colError);\n\n// Header de la columna de errores\nws[`${colLetra}1`] = {\n  v: 'MOTIVO_ERROR',\n  t: 's',\n  s: {\n    font: { bold: true, color: { rgb: 'FFFFFF' } },\n    fill: { fgColor: { rgb: 'C0392B' } },\n    alignment: { horizontal: 'center' }\n  }\n};\n\n// Crear mapa de errores por número de fila\nconst errorPorFila = {};\ntodasFilasConError.forEach(fila => {\n  errorPorFila[fila.numero_fila] = fila.errores_validacion.filter(Boolean).join(' | ');\n});\n\n// Para filas válidas, marcar en verde\nconst filaValida_set = new Set((filasValidas || []).filter(f => !f.errorEPS).map(f => f.numero_fila));\n\n// Recorrer filas y agregar columna\nfor (let r = range.s.r + 1; r <= range.e.r; r++) {\n  const filaNum = r + 1; // +1 porque r es 0-indexed y fila 1 es header\n  const celda = `${colLetra}${r + 1}`;\n  \n  if (errorPorFila[filaNum]) {\n    ws[celda] = {\n      v: '❌ ' + errorPorFila[filaNum],\n      t: 's',\n      s: {\n        fill: { fgColor: { rgb: 'FADBD8' } },\n        font: { color: { rgb: 'C0392B' } }\n      }\n    };\n    // Colorear toda la fila en rojo claro\n    for (let c = range.s.c; c <= range.e.c; c++) {\n      const celdaFila = XLSX.utils.encode_cell({ r, c });\n      if (ws[celdaFila]) {\n        ws[celdaFila].s = ws[celdaFila].s || {};\n        ws[celdaFila].s.fill = { fgColor: { rgb: 'FADBD8' } };\n      }\n    }\n  } else if (filaValida_set.has(filaNum)) {\n    ws[celda] = {\n      v: '✅ Procesado correctamente',\n      t: 's',\n      s: { fill: { fgColor: { rgb: 'D5F5E3' } } }\n    };\n    for (let c = range.s.c; c <= range.e.c; c++) {\n      const celdaFila = XLSX.utils.encode_cell({ r, c });\n      if (ws[celdaFila]) {\n        ws[celdaFila].s = ws[celdaFila].s || {};\n        ws[celdaFila].s.fill = { fgColor: { rgb: 'D5F5E3' } };\n      }\n    }\n  }\n}\n\n// Actualizar rango del sheet\nrange.e.c = colError;\nws['!ref'] = XLSX.utils.encode_range(range);\n\n// Auto-width para columna de errores\nconst colsWidth = ws['!cols'] || [];\ncolsWidth[colError] = { wch: 60 };\nws['!cols'] = colsWidth;\n\n// Exportar a base64\nconst excelBuffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx', cellStyles: true });\nconst excelBase64Salida = Buffer.from(excelBuffer).toString('base64');\n\nreturn [{\n  json: {\n    hayErrores: true,\n    excelBase64Salida,\n    nombreArchivoErrores: `ERRORES_${nombreArchivo}`,\n    remitente,\n    nitPrestador,\n    nombrePrestador,\n    asunto,\n    totalProcesados,\n    totalErrores,\n    resumenErrores: todasFilasConError.map(f => ({\n      fila: f.numero_fila,\n      identificacion: f.documento || '(vacío)',\n      nombre: `${f.primer_nombre || ''} ${f.primer_apellido || ''}`.trim() || '(vacío)',\n      errores: f.errores_validacion.filter(Boolean).join(' | ')\n    }))\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -984,7 +984,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://graph.microsoft.com/v1.0/me/sendMail",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -1000,7 +1000,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"message\": {\n    \"subject\": \"⚠️ ERRORES EN REPORTE - {{ $json.asunto }}\",\n    \"body\": {\n      \"contentType\": \"HTML\",\n      \"content\": \"<div style='font-family:Arial;font-size:14px;'><p>Estimado prestador <strong>{{ $json.nombrePrestador }}</strong>,</p><p>Hemos recibido su reporte de <strong>Sospecha de Cáncer de Próstata</strong>. Al procesarlo encontramos <strong style='color:#C0392B;'>{{ $json.totalErrores }} fila(s) con errores</strong> que requieren corrección.</p><p><strong>{{ $json.totalProcesados }} registro(s)</strong> fueron procesados correctamente.</p><h3 style='color:#C0392B;'>Resumen de errores:</h3><table style='border-collapse:collapse;width:100%;'><tr style='background:#C0392B;color:white;'><th style='padding:8px;border:1px solid #ddd;'>Fila</th><th style='padding:8px;border:1px solid #ddd;'>Identificación</th><th style='padding:8px;border:1px solid #ddd;'>Nombre</th><th style='padding:8px;border:1px solid #ddd;'>Error(es)</th></tr>{{ $json.resumenErrores.map((e,i) => `<tr style='background:${i%2===0?'#FADBD8':'#FFFFFF'};'><td style='padding:8px;border:1px solid #ddd;text-align:center;'>${e.fila}</td><td style='padding:8px;border:1px solid #ddd;'>${e.identificacion}</td><td style='padding:8px;border:1px solid #ddd;'>${e.nombre}</td><td style='padding:8px;border:1px solid #ddd;color:#C0392B;'>${e.errores}</td></tr>`).join('') }}</table><p style='margin-top:20px;'>Se adjunta su archivo original con la columna <strong>MOTIVO_ERROR</strong> indicando el problema en cada fila.</p><p>Por favor corrija las filas marcadas y reenvíe el reporte.</p><br><p>Cordialmente,<br><strong>Sistema de Gestión - Sersocial</strong></p></div>\"\n    },\n    \"toRecipients\": [{\"emailAddress\": {\"address\": \"{{ $json.remitente }}\"}}],\n    \"attachments\": [{\n      \"@odata.type\": \"#microsoft.graph.fileAttachment\",\n      \"name\": \"{{ $json.nombreArchivoErrores }}\",\n      \"contentType\": \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n      \"contentBytes\": \"{{ $json.excelBase64Salida }}\"\n    }]\n  },\n  \"saveToSentItems\": true\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1011,12 +1011,12 @@
       ],
       "id": "a3cb7747-ede1-4c21-adcd-6b1861260b3d",
       "name": "Enviar_Correo_Errores_Prestador",
-      "notes": "Usar OAuth2 de Microsoft Graph. Reemplazar MS_GRAPH_TOKEN por credencial OAuth2 de n8n."
+      "notes": "***REDACTED***"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://graph.microsoft.com/v1.0/me/sendMail",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -1032,7 +1032,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"message\": {\n    \"subject\": \"✅ CARGUE EXITOSO - {{ $json.asunto }}\",\n    \"body\": {\n      \"contentType\": \"HTML\",\n      \"content\": \"<div style='font-family:Arial;font-size:14px;'><p>Estimado prestador <strong>{{ $json.nombrePrestador }}</strong>,</p><p>Su reporte de <strong>Sospecha de Cáncer de Próstata</strong> fue procesado correctamente.</p><p><strong style='color:#1E8449;'>{{ $json.totalProcesados }} registro(s)</strong> fueron consolidados exitosamente.</p><br><p>Cordialmente,<br><strong>Sistema de Gestión - Sersocial</strong></p></div>\"\n    },\n    \"toRecipients\": [{\"emailAddress\": {\"address\": \"{{ $json.remitente }}\"}}]\n  },\n  \"saveToSentItems\": true\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1047,7 +1047,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://graph.microsoft.com/v1.0/me/sendMail",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -1063,7 +1063,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"message\": {\n    \"subject\": \"❌ ERROR EN FORMATO DE ASUNTO - {{ $json.asunto }}\",\n    \"body\": {\n      \"contentType\": \"HTML\",\n      \"content\": \"<div style='font-family:Arial;font-size:14px;'><p>Cordial saludo.</p><p>El asunto del correo <strong>\\\"{{ $json.asunto }}\\\"</strong> no cumple con la estructura requerida.</p><p>Por favor reenvíe el correo con el siguiente formato en el asunto:</p><p style='background:#F8F9FA;padding:15px;border-left:4px solid #C0392B;font-family:monospace;'><strong>RESULTADOS PROSTATA - NOMBRE DE SU IPS - NIT</strong></p><p>Ejemplo: <em>RESULTADOS PROSTATA - CLINICA SAN JOSE - 900123456</em></p><br><p>Cordialmente,<br><strong>Sistema de Gestión - Sersocial</strong></p></div>\"\n    },\n    \"toRecipients\": [{\"emailAddress\": {\"address\": \"{{ $json.remitente }}\"}}]\n  },\n  \"saveToSentItems\": true\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1084,21 +1084,21 @@
         },
         "table": {
           "__rl": true,
-          "value": "auditoria_recepciones_cancer",
+          "value": "***REDACTED***",
           "mode": "list"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "remitente": "={{ $('Validar_Filas_Excel').first().json.remitente }}",
-            "asunto": "={{ $('Validar_Filas_Excel').first().json.asunto }}",
-            "nit_prestador": "={{ $('Validar_Filas_Excel').first().json.nitPrestador }}",
-            "nombre_prestador": "={{ $('Validar_Filas_Excel').first().json.nombrePrestador }}",
-            "nombre_archivo": "={{ $('Validar_Filas_Excel').first().json.nombreArchivo }}",
-            "total_filas": "={{ $('Validar_Filas_Excel').first().json.totalFilas }}",
-            "total_validas": "={{ $('Validar_Filas_Excel').first().json.totalValidas }}",
-            "total_errores": "={{ $('Generar_Excel_Errores').first().json.totalErrores }}",
-            "total_procesados": "={{ $('Generar_Excel_Errores').first().json.totalProcesados }}",
+            "remitente": "***REDACTED***",
+            "asunto": "***REDACTED***",
+            "nit_prestador": "***REDACTED***",
+            "nombre_prestador": "***REDACTED***",
+            "nombre_archivo": "***REDACTED***",
+            "total_filas": "***REDACTED***",
+            "total_validas": "***REDACTED***",
+            "total_errores": "***REDACTED***",
+            "total_procesados": "***REDACTED***",
             "fecha_recepcion": "={{ new Date().toISOString() }}",
             "estado": "PROCESADO"
           }
@@ -1424,7 +1424,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -1436,7 +1436,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1469,7 +1469,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
