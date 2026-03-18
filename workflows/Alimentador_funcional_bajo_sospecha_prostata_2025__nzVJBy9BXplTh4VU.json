@@ -2,8 +2,8 @@
   "updatedAt": "2026-02-04T14:13:35.650Z",
   "createdAt": "2026-01-27T14:02:04.707Z",
   "id": "nzVJBy9BXplTh4VU",
-  "name": "Alimentador funcional bajo sospecha prostata 2025",
-  "description": "Flujo 'Alimentador' se encarga de alimentar el procesador: Bajo sospecha colon",
+  "name": "***REDACTED***",
+  "description": "***REDACTED***",
   "active": false,
   "isArchived": false,
   "nodes": [
@@ -26,7 +26,7 @@
     },
     {
       "parameters": {
-        "content": "- Desencadenador ->\n- Se crea formulario html quien se encarga de recibir\n el excel con el formato y al subir ejecuta el flujo inicial",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 304,
         "color": 4
@@ -42,7 +42,7 @@
     },
     {
       "parameters": {
-        "content": "- Llamando al segundo flujo para que procese el archivo\n\nhttps://kaelyn-roughish-nonpacifically.ngrok-free.dev/workflow/2NmESVhUYoTc7JPj",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 288
       },
@@ -57,7 +57,7 @@
     },
     {
       "parameters": {
-        "content": "- Respuesta frente al flujo y validar que el archivo fue enviado",
+        "content": "***REDACTED***",
         "height": 320,
         "width": 272,
         "color": 6
@@ -73,7 +73,7 @@
     },
     {
       "parameters": {
-        "content": "## Instrucciones de uso - Flujo inicial BAJO SOSPECHA PROSTATA 2025\n1.  Activar el flujo\n2. Ejecutar\n3. Ir al html y proceder a subir el archivo (preguntar al Ing. Jean Carlos para obtener el html)\n\nNota: En caso de realizar una modificación, duplicar el proyecto y colocar 'Alimentador Test' o dejar hacerlo en este mismo, pero dejar una nota de la modificación hecha con su fecha ",
+        "content": "***REDACTED***",
         "height": 208,
         "width": 896,
         "color": 5
@@ -89,7 +89,7 @@
     },
     {
       "parameters": {
-        "content": "## Historico de cambios\n\n- Creación del flujo (Estado funcional ) 2025-01-2026 12:17pm\n",
+        "content": "***REDACTED***",
         "height": 544,
         "width": 448,
         "color": 7
@@ -107,7 +107,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "2NmESVhUYoTc7JPj",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultUrl": "/workflow/2NmESVhUYoTc7JPj",
           "cachedResultName": "PROCESADOR_BAJO_SOSPECHA_PROSTATA"
