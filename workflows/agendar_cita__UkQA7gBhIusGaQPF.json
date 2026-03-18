@@ -9,7 +9,7 @@
   "nodes": [
     {
       "parameters": {
-        "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -24,7 +24,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -52,7 +52,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "citas_medicas",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "citas_medicas"
         },
@@ -216,7 +216,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "{\n  \"status\": \"ok\",\n  \"mensaje\": \"Cita agendada correctamente\",\n  \"fecha\": \"{{$json.fecha_cita}}\",\n  \"hora\": \"{{$json.hora_cita}}\"\n}",
+        "responseBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -242,7 +242,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -262,7 +262,7 @@
         },
         "table": {
           "__rl": true,
-          "value": "citas_medicas",
+          "value": "***REDACTED***",
           "mode": "list",
           "cachedResultName": "citas_medicas"
         },
@@ -407,7 +407,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -432,13 +432,13 @@
             {
               "id": "r1",
               "name": "fecha",
-              "value": "={{$json.fecha_cita}}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "r2",
               "name": "hora",
-              "value": "={{$json.hora_cita}}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -627,7 +627,7 @@
     "nodes": [
       {
         "parameters": {
-          "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -642,7 +642,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -670,7 +670,7 @@
           },
           "table": {
             "__rl": true,
-            "value": "citas_medicas",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "citas_medicas"
           },
@@ -834,7 +834,7 @@
       {
         "parameters": {
           "respondWith": "json",
-          "responseBody": "{\n  \"status\": \"ok\",\n  \"mensaje\": \"Cita agendada correctamente\",\n  \"fecha\": \"{{$json.fecha_cita}}\",\n  \"hora\": \"{{$json.hora_cita}}\"\n}",
+          "responseBody": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
@@ -860,7 +860,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const hoy = new Date();\n\n// mañana\nhoy.setDate(hoy.getDate() + 1);\n\n// formatear YYYY-MM-DD\nconst fecha = hoy.toISOString().split('T')[0];\n\nreturn [{\n  json: {\n    ...items[0].json,\n    fecha_cita: fecha,\n    hora_cita: \"09:00\",\n    duracion: 30\n  }\n}];\n"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -880,7 +880,7 @@
           },
           "table": {
             "__rl": true,
-            "value": "citas_medicas",
+            "value": "***REDACTED***",
             "mode": "list",
             "cachedResultName": "citas_medicas"
           },
@@ -1025,7 +1025,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "UPDATE pacientes_sospecha_colon\nSET usuario_contactado = 'SI'\nWHERE documento = '{{$json.documento}}';\n",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1050,13 +1050,13 @@
               {
                 "id": "r1",
                 "name": "fecha",
-                "value": "={{$json.fecha_cita}}",
+                "value": "***REDACTED***",
                 "type": "string"
               },
               {
                 "id": "r2",
                 "name": "hora",
-                "value": "={{$json.hora_cita}}",
+                "value": "***REDACTED***",
                 "type": "string"
               }
             ]
