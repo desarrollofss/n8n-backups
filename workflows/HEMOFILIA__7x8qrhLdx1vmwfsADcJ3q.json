@@ -38,7 +38,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener datos del correo\nconst email = $input.first().json;\n\n// Convertir zona horaria a SA Pacific Standard Time (UTC-5)\nconst receivedDate = new Date(email.receivedDateTime);\nconst options = { timeZone: 'America/Bogota', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: true };\nconst formattedDate = new Intl.DateTimeFormat('es-CO', options).format(receivedDate);\n\n// Formatear timestamp para nombre de archivo\nconst now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' }));\nconst pad = (n) => String(n).padStart(2, '0');\nconst hour = now.getHours();\nconst ampm = hour >= 12 ? 'PM' : 'AM';\nconst hour12 = hour % 12 || 12;\nconst filePrefix = `${pad(now.getDate())}_${pad(now.getMonth()+1)}_${now.getFullYear()}_${pad(hour12)}_${pad(now.getMinutes())}_${ampm}`;\n\n// Variables principales\nconst ASUNTO = (email.subject || '').toUpperCase();\nconst ASUNTO_SIN_ESPACIOS = ASUNTO.replace(/ /g, '');\nconst BODY = email.bodyPreview || email.body?.content || '';\nconst BODY_UPPER = BODY.toUpperCase();\n\n// Retornar datos procesados para cada adjunto\nconst attachments = email.attachments || [];\n\nreturn attachments.map(attachment => ({\n  json: {\n    // Datos del correo\n    emailFrom: email.from?.emailAddress?.address || email.from,\n    emailSubject: email.subject,\n    emailBody: BODY,\n    emailBodyUpper: BODY_UPPER,\n    emailDate: formattedDate,\n    emailReceivedDateTime: email.receivedDateTime,\n    // Variables procesadas\n    ASUNTO,\n    ASUNTO_SIN_ESPACIOS,\n    BODY_UPPER,\n    filePrefix,\n    // Datos del adjunto\n    attachmentName: attachment.name,\n    attachmentContent: attachment.contentBytes,\n    attachmentContentType: attachment.contentType\n  }\n}));"
+        "jsCode": "***REDACTED***"
       },
       "id": "de39adb5-934c-4861-b713-70f474804477",
       "name": "🔧 Inicializar Variables",
@@ -92,7 +92,7 @@
     },
     {
       "parameters": {
-        "fileName": "={{ $json.filePrefix + '_' + $json.attachmentName }}",
+        "fileName": "***REDACTED***",
         "parentId": "/ALTO COSTO/HEMOFILIA/BORRADOR",
         "fileContent": "={{ $json.attachmentContent }}"
       },
@@ -148,7 +148,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const rows = $input.all();\nconst filtered = rows.filter(item => item.json['IDENTIFICACION'] && item.json['IDENTIFICACION'].toString().trim() !== '');\n\n// Pasar también los datos del correo hacia adelante\nreturn filtered.map(item => ({\n  json: {\n    ...item.json,\n    emailFrom: $('🔧 Inicializar Variables').item.json.emailFrom,\n    emailSubject: $('🔧 Inicializar Variables').item.json.emailSubject,\n    emailBody: $('🔧 Inicializar Variables').item.json.emailBody,\n    emailDate: $('🔧 Inicializar Variables').item.json.emailDate,\n    filePrefix: $('🔧 Inicializar Variables').item.json.filePrefix,\n    attachmentName: $('🔧 Inicializar Variables').item.json.attachmentName,\n    borradorFileName: $('📤 Subir a BORRADOR').item.json.name\n  }\n}));"
+        "jsCode": "***REDACTED***"
       },
       "id": "927425b7-88d6-40a3-b721-bf49e1bac4a4",
       "name": "🔍 Filtrar IDENTIFICACION vacía",
@@ -174,7 +174,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Obtener IDs del consolidado\nconst consolidadoItems = $('📊 Leer CONSOLIDADO actual').all();\nconst idUnicosConsolidado = consolidadoItems.map(i => i.json['IDUNICO']);\n\n// Verificar si el item actual es duplicado\nconst currentRow = $input.item.json;\nconst idEncontrado = idUnicosConsolidado.includes(currentRow['IDUNICO']);\n\nreturn [{\n  json: {\n    ...currentRow,\n    idEncontrado,\n    idUnicosConsolidado\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "id": "761d4f20-5671-4449-89bf-af716b7861d8",
       "name": "🔁 Verificar Duplicados",
@@ -289,9 +289,9 @@
     },
     {
       "parameters": {
-        "fileName": "={{ $('🔧 Inicializar Variables').item.json.filePrefix + '_' + $('🔧 Inicializar Variables').item.json.attachmentName }}",
-        "parentId": "/SOSPECHA_CANCER/PROSTATA/DOCUMENTOS DIARIOS",
-        "fileContent": "={{ $('🔧 Inicializar Variables').item.json.attachmentContent }}"
+        "fileName": "***REDACTED***",
+        "parentId": "***REDACTED***",
+        "fileContent": "***REDACTED***"
       },
       "id": "bd47c176-cfdf-4f78-bdf0-fdb9e8bf65ac",
       "name": "📤 Subir a DOCUMENTOS DIARIOS",
@@ -420,7 +420,7 @@
     {
       "parameters": {
         "operation": "download",
-        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJC4TOCKK5QWFHI2CRA7VT5NKRZ"
+        "fileId": "***REDACTED***"
       },
       "id": "474a70e5-ca69-4770-b089-80c73de67b10",
       "name": "📥 Obtener FORMATO_HEMOFILIA.xlsx",
@@ -434,7 +434,7 @@
     {
       "parameters": {
         "operation": "download",
-        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJUZC5XKRA2ARE3E7NUM6XBISB4"
+        "fileId": "***REDACTED***"
       },
       "id": "6a57f617-cf7e-42cb-b8b5-05e3f907e91b",
       "name": "📥 Obtener INSTRUCTIVO_HEMOFILIA.pdf",
@@ -501,10 +501,10 @@
     {
       "parameters": {
         "operation": "download",
-        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJC4TOCKK5QWFHI2CRA7VT5NKRZ"
+        "fileId": "***REDACTED***"
       },
       "id": "c21d86f5-a3f6-43f8-933d-3c4c029ad8d1",
-      "name": "📥 Obtener Formato Correcto (Error Tabla)",
+      "name": "***REDACTED***",
       "type": "n8n-nodes-base.microsoftOneDrive",
       "typeVersion": 1,
       "position": [
@@ -515,7 +515,7 @@
     {
       "parameters": {
         "operation": "download",
-        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUJUZC5XKRA2ARE3E7NUM6XBISB4"
+        "fileId": "***REDACTED***"
       },
       "id": "d6a289e4-ee1d-45bd-be68-4c085a44d2d4",
       "name": "📥 Obtener Instructivo (Error Tabla)",
@@ -531,7 +531,7 @@
         "operation": "sendEmail"
       },
       "id": "73688fc9-ae6c-4034-891d-1b8691e0b4ca",
-      "name": "✉️ Notificar Formato Incorrecto (Error Tabla)",
+      "name": "***REDACTED***",
       "type": "n8n-nodes-base.microsoftOutlook",
       "typeVersion": 2,
       "position": [
@@ -579,7 +579,7 @@
           "conditions": [
             {
               "id": "jpgCheck",
-              "leftValue": "={{ $json.attachmentName.toLowerCase() }}",
+              "leftValue": "***REDACTED***",
               "rightValue": ".jpg",
               "operator": {
                 "type": "string",
@@ -588,7 +588,7 @@
             },
             {
               "id": "pngCheck",
-              "leftValue": "={{ $json.attachmentName.toLowerCase() }}",
+              "leftValue": "***REDACTED***",
               "rightValue": ".png",
               "operator": {
                 "type": "string",
@@ -667,7 +667,7 @@
     },
     {
       "parameters": {
-        "fileName": "={{ $json.filePrefix + '_' + $json.attachmentName }}",
+        "fileName": "***REDACTED***",
         "parentId": "/ALTO COSTO/HEMOFILIA/BORRADOR",
         "fileContent": "={{ $json.attachmentContent }}"
       },
@@ -699,7 +699,7 @@
         "operation": "addRow"
       },
       "id": "508a213c-b714-4159-916f-a6da95c0bf61",
-      "name": "📝 Registrar Formato Incorrecto (Asunto Incorrecto)",
+      "name": "***REDACTED***",
       "type": "n8n-nodes-base.microsoftExcel",
       "typeVersion": 2,
       "position": [
@@ -735,7 +735,7 @@
         "options": {}
       },
       "id": "757d902b-732c-419f-954c-b0549d4374cf",
-      "name": "🔀 ¿N° REGISTRO = SI? (Asunto Incorrecto)",
+      "name": "***REDACTED***",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
@@ -745,9 +745,9 @@
     },
     {
       "parameters": {
-        "fileName": "={{ $('🔧 Inicializar Variables').item.json.filePrefix + '_' + $('🔧 Inicializar Variables').item.json.attachmentName }}",
-        "parentId": "/SOSPECHA_CANCER/PROSTATA/DOCUMENTOS DIARIOS",
-        "fileContent": "={{ $('🔧 Inicializar Variables').item.json.attachmentContent }}"
+        "fileName": "***REDACTED***",
+        "parentId": "***REDACTED***",
+        "fileContent": "***REDACTED***"
       },
       "id": "0a67d1df-daae-498d-8c3e-bfa1dca629c7",
       "name": "📤 Subir a DIARIOS (Asunto Incorrecto)",
@@ -806,7 +806,7 @@
         "options": {}
       },
       "id": "2facdd05-d0f8-43a9-8e0c-ae47afd0fac5",
-      "name": "🔀 ¿N° REGISTRO = NO? (Asunto Incorrecto)",
+      "name": "***REDACTED***",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
@@ -819,7 +819,7 @@
         "operation": "sendEmail"
       },
       "id": "92b38a0a-337b-4034-808c-4286e45bbeae",
-      "name": "✉️ Notificar Sin Registros (Advertencia Asunto)",
+      "name": "***REDACTED***",
       "type": "n8n-nodes-base.microsoftOutlook",
       "typeVersion": 2,
       "position": [
@@ -837,10 +837,10 @@
     {
       "parameters": {
         "operation": "download",
-        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUL6OGWCHWREOVFLYISYVXTPOT3R"
+        "fileId": "***REDACTED***"
       },
       "id": "763beec4-bef7-4699-a64f-bd0095387ffb",
-      "name": "📥 Obtener Formato Correcto (Asunto Incorrecto)",
+      "name": "***REDACTED***",
       "type": "n8n-nodes-base.microsoftOneDrive",
       "typeVersion": 1,
       "position": [
@@ -851,7 +851,7 @@
     {
       "parameters": {
         "operation": "download",
-        "fileId": "b!hCpKh8Pj402-xjljhuXjpEAR1Dy4TgpFlxot-pDnTury_d7SPn4NQLWj2z0pVPRK.01FL7YDUMMY47LD3AARZG3PV5JFJJ2AYO2"
+        "fileId": "***REDACTED***"
       },
       "id": "792906bc-62f5-47b5-addf-89b26ebe28ee",
       "name": "📥 Obtener PDF (Asunto Incorrecto)",
@@ -1132,7 +1132,7 @@
       "main": [
         [
           {
-            "node": "📥 Obtener Formato Correcto (Error Tabla)",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -1154,7 +1154,7 @@
       "main": [
         [
           {
-            "node": "✉️ Notificar Formato Incorrecto (Error Tabla)",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -1217,7 +1217,7 @@
       "main": [
         [
           {
-            "node": "📝 Registrar Formato Incorrecto (Asunto Incorrecto)",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -1228,7 +1228,7 @@
       "main": [
         [
           {
-            "node": "🔀 ¿N° REGISTRO = SI? (Asunto Incorrecto)",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -1246,7 +1246,7 @@
         ],
         [
           {
-            "node": "🔀 ¿N° REGISTRO = NO? (Asunto Incorrecto)",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -1268,14 +1268,14 @@
       "main": [
         [
           {
-            "node": "✉️ Notificar Sin Registros (Advertencia Asunto)",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "📥 Obtener Formato Correcto (Asunto Incorrecto)",
+            "node": "***REDACTED***",
             "type": "main",
             "index": 0
           }
@@ -1327,7 +1327,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -1339,7 +1339,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-17T12:58:40.566Z",
+              "updatedAt": "2026-03-18T12:43:19.027Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1372,7 +1372,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-17",
+              "lastActiveAt": "2026-03-18",
               "isPending": false
             }
           }
