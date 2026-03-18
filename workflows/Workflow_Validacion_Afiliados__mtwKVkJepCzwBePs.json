@@ -31,43 +31,43 @@
             {
               "id": "v1",
               "name": "user_message",
-              "value": "={{ $json.body.args.message || $json.body.message || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "v2",
               "name": "paciente_nombre",
-              "value": "={{ $json.body.args.nombre || $json.body.nombre || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "v3",
               "name": "paciente_email",
-              "value": "={{ $json.body.args.email || $json.body.email || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "v4",
               "name": "tipo_cita",
-              "value": "={{ $json.body.args.tipo || $json.body.tipo || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "v5",
               "name": "fecha_hora_deseada",
-              "value": "={{ $json.body.args.fecha || $json.body.fecha || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "v6",
               "name": "documento",
-              "value": "={{ $json.body.args.documento || $json.body.documento || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             },
             {
               "id": "v7",
               "name": "accion",
-              "value": "={{ $json.body.args.accion || $json.body.accion || '' }}",
+              "value": "***REDACTED***",
               "type": "string"
             }
           ]
@@ -162,7 +162,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const afiliado = $input.first().json;\n\nreturn {\n  json: {\n    validado: true,\n    documento: afiliado.Documento,\n    nombre: afiliado['Nombre Completo'],\n    email: afiliado['Correo Electrónico'],\n    mensaje: `Afiliado validado: ${afiliado['Nombre Completo']}`\n  }\n};"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -175,7 +175,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return {\n  json: {\n    validado: false,\n    documento: $('Set Variable (Datos Cita)').first().json.documento,\n    mensaje: \"El documento no está en nuestra base de datos. Verifica o contacta a soporte.\"\n  }\n};"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
