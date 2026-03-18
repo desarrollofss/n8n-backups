@@ -10,9 +10,9 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=RECIBO: {{ $json.mensaje }}\n\nFLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos\n",
+        "text": "***REDACTED***",
         "options": {
-          "systemMessage": "=FLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos"
+          "systemMessage": "***REDACTED***"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -29,7 +29,7 @@
         "model": {
           "__rl": true,
           "mode": "list",
-          "value": "gpt-4.1-mini"
+          "value": "***REDACTED***"
         },
         "builtInTools": {},
         "options": {}
@@ -52,7 +52,7 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.Identificacion }}",
+        "sessionKey": "***REDACTED***",
         "sessionTTL": 3600,
         "contextWindowLength": 20
       },
@@ -74,8 +74,8 @@
     },
     {
       "parameters": {
-        "toolDescription": "Vas a mostrar las disponibilidad de un medico en una determinada fecha. Quiero que me muestre las 3 primeras disponibilidades (Organizadas por fecha y hora)",
-        "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/GetProgramacionDisponible",
+        "toolDescription": "***REDACTED***",
+        "url": "***REDACTED***",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendQuery": true,
@@ -83,7 +83,7 @@
           "parameters": [
             {
               "name": "fecha",
-              "value": "={{ $now.plus('1','days').format('yyyy-MM-dd') }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "medico",
@@ -119,12 +119,12 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+        "url": "***REDACTED***",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "{\n  \"fecha\": \"2026/03/02\",\n  \"medico\": \"142\",\n  \"idSede\": 1,\n  \"idProgramacionMedicoDetalle\": \"40362431\",\n  \"paciente\": \"197211\",\n  \"hora\": \"07:00\",\n  \"meridiano\": \"am\",\n  \"asunto\": \"274\",\n  \"codEmpresa\": 57,\n  \"contrato\": \"172\",\n  \"email\": \"jrueda@sersocial.org\",\n  \"telefono\": \"3205943893\",\n  \"nivel\": \"string\"\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequestTool",
@@ -145,10 +145,10 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.NumeroIdentificacion }}",
+        "sessionKey": "***REDACTED***",
         "contextWindowLength": 10
       },
-      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
         -1248,
@@ -183,7 +183,7 @@
     },
     {
       "parameters": {
-        "url": "=https://zeussalud_test.sersocial.org:8022/api/SisDeta/GetDatosBasicosPaciente",
+        "url": "***REDACTED***",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpBearerAuth",
         "sendQuery": true,
@@ -191,11 +191,11 @@
           "parameters": [
             {
               "name": "NumeroIdentificacion",
-              "value": "={{ $json.NumeroIdentificacion }}"
+              "value": "***REDACTED***"
             },
             {
               "name": "TipoIdentificacion",
-              "value": "={{ $json.TipoIdentificacion }}"
+              "value": "***REDACTED***"
             }
           ]
         },
@@ -400,9 +400,9 @@
       {
         "parameters": {
           "promptType": "define",
-          "text": "=RECIBO: {{ $json.mensaje }}\n\nFLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos\n",
+          "text": "***REDACTED***",
           "options": {
-            "systemMessage": "=FLUJO OBLIGATORIO:\n\nPASO 1: Llamar SOLO a 'Obtener_datos_paciente' para obtener los datos del paciente.\n\ne imprimir los datos conseguidos"
+            "systemMessage": "***REDACTED***"
           }
         },
         "type": "@n8n/n8n-nodes-langchain.agent",
@@ -419,7 +419,7 @@
           "model": {
             "__rl": true,
             "mode": "list",
-            "value": "gpt-4.1-mini"
+            "value": "***REDACTED***"
           },
           "builtInTools": {},
           "options": {}
@@ -442,7 +442,7 @@
       {
         "parameters": {
           "sessionIdType": "customKey",
-          "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.Identificacion }}",
+          "sessionKey": "***REDACTED***",
           "sessionTTL": 3600,
           "contextWindowLength": 20
         },
@@ -464,8 +464,8 @@
       },
       {
         "parameters": {
-          "toolDescription": "Vas a mostrar las disponibilidad de un medico en una determinada fecha. Quiero que me muestre las 3 primeras disponibilidades (Organizadas por fecha y hora)",
-          "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/GetProgramacionDisponible",
+          "toolDescription": "***REDACTED***",
+          "url": "***REDACTED***",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpBearerAuth",
           "sendQuery": true,
@@ -473,7 +473,7 @@
             "parameters": [
               {
                 "name": "fecha",
-                "value": "={{ $now.plus('1','days').format('yyyy-MM-dd') }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "medico",
@@ -509,12 +509,12 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "=https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+          "url": "***REDACTED***",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpBearerAuth",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "{\n  \"fecha\": \"2026/03/02\",\n  \"medico\": \"142\",\n  \"idSede\": 1,\n  \"idProgramacionMedicoDetalle\": \"40362431\",\n  \"paciente\": \"197211\",\n  \"hora\": \"07:00\",\n  \"meridiano\": \"am\",\n  \"asunto\": \"274\",\n  \"codEmpresa\": 57,\n  \"contrato\": \"172\",\n  \"email\": \"jrueda@sersocial.org\",\n  \"telefono\": \"3205943893\",\n  \"nivel\": \"string\"\n}",
+          "jsonBody": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequestTool",
@@ -535,10 +535,10 @@
       {
         "parameters": {
           "sessionIdType": "customKey",
-          "sessionKey": "={{ $json.TipoIdentificacion }}_{{ $json.NumeroIdentificacion }}",
+          "sessionKey": "***REDACTED***",
           "contextWindowLength": 10
         },
-        "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+        "type": "***REDACTED***",
         "typeVersion": 1.3,
         "position": [
           -1248,
@@ -573,7 +573,7 @@
       },
       {
         "parameters": {
-          "url": "=https://zeussalud_test.sersocial.org:8022/api/SisDeta/GetDatosBasicosPaciente",
+          "url": "***REDACTED***",
           "authentication": "genericCredentialType",
           "genericAuthType": "httpBearerAuth",
           "sendQuery": true,
@@ -581,11 +581,11 @@
             "parameters": [
               {
                 "name": "NumeroIdentificacion",
-                "value": "={{ $json.NumeroIdentificacion }}"
+                "value": "***REDACTED***"
               },
               {
                 "name": "TipoIdentificacion",
-                "value": "={{ $json.TipoIdentificacion }}"
+                "value": "***REDACTED***"
               }
             ]
           },
