@@ -11,7 +11,7 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "8QAWBLL5xzNT3DoYH-AW6",
+          "value": "***REDACTED***",
           "mode": "id",
           "cachedResultUrl": "/n8n/workflow/8QAWBLL5xzNT3DoYH-AW6"
         },
@@ -77,7 +77,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_CONTESTO',\n  resultado_llamada = 'NO_CONTESTO'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -107,7 +107,7 @@
           "conditions": [
             {
               "id": "50828eea-843f-466c-8482-a6f56095273b",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_status }}",
+              "leftValue": "***REDACTED***",
               "rightValue": "not_connected",
               "operator": {
                 "type": "string",
@@ -131,7 +131,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'ACUDIENTE',\n  resultado_llamada = 'ACUDIENTE',\n  numero_brindado = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.numero_brindado }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -161,7 +161,7 @@
           "conditions": [
             {
               "id": "e3ec67d0-60a9-4f79-afb9-a82f1c5d8d2d",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.es_acudiente }}",
+              "leftValue": "***REDACTED***",
               "rightValue": true,
               "operator": {
                 "type": "boolean",
@@ -170,7 +170,7 @@
             },
             {
               "id": "27e47a94-95ad-4c49-885f-1989ac61e406",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.numero_brindado }}",
+              "leftValue": "***REDACTED***",
               "rightValue": "",
               "operator": {
                 "type": "string",
@@ -205,7 +205,7 @@
           "conditions": [
             {
               "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+              "leftValue": "***REDACTED***",
               "rightValue": "NUMERO_EQUIVOCADO",
               "operator": {
                 "type": "string",
@@ -215,7 +215,7 @@
             },
             {
               "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+              "leftValue": "***REDACTED***",
               "rightValue": "NO_ACEPTA_GRABACION",
               "operator": {
                 "type": "string",
@@ -288,7 +288,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_AGENDO',\n  resultado_llamada = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}',\n  motivo_no_asistencia = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.motivo_no_asistencia }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -309,7 +309,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "UPDATE pacientes_sospecha_colon SET usuario_contactado = 'AGENDADO', opcion_elegida = '{{ $('Preparar datos agendamiento').first().json.opcion_elegida }}', fecha_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.fecha }}', hora_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.hora }}', resultado_llamada = 'AGENDADO' WHERE id = {{ $('Preparar datos agendamiento').first().json.paciente_id }};",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -330,7 +330,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+        "url": "***REDACTED***",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -348,7 +348,7 @@
             {}
           ]
         },
-        "jsonBody": "={\n  \"fecha\": \"{{ $json.fecha }}\",\n  \"medico\": \"{{ $json.id_medico }}\",\n  \"idPuntoAtencion\": {{ $json.IdPuntoAtencionCita }},\n  \"idProgramacionMedicoDetalle\": {{ $json.id_programacion }},\n  \"paciente\": \"{{ $json.auto_id }}\",\n  \"hora\": \"{{ $json.hora }}\",\n  \"meridiano\": \"{{ $json.meridiano }}\",\n  \"asunto\": \"{{ $json.idAsunto }}\",\n  \"codEmpresa\": {{ $json.codEmpresa }},\n  \"contrato\": \"{{ $json.contrato }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"telefono\": \"{{ $json.telefono }}\"\n}",
+        "jsonBody": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -362,7 +362,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const webhook = $('Webhook Retell Post-Call').first().json.body.call;\nconst paciente = $('Buscar paciente por call_id').first().json;\nconst opcionElegida = webhook.call_analysis.custom_analysis_data.opcion_elegida;\n\nconsole.log('opcion_elegida:', opcionElegida);\nconsole.log('opcion_1_raw:', paciente.opcion_1_raw);\nconsole.log('opcion_2_raw:', paciente.opcion_2_raw);\nconsole.log('opcion_3_raw:', paciente.opcion_3_raw);\n\nlet opcionRaw;\nif (opcionElegida === 'opcion_1') opcionRaw = paciente.opcion_1_raw;\nelse if (opcionElegida === 'opcion_2') opcionRaw = paciente.opcion_2_raw;\nelse if (opcionElegida === 'opcion_3') opcionRaw = paciente.opcion_3_raw;\n\nconsole.log('opcionRaw resultante:', opcionRaw);\n\nif (!opcionRaw) {\n  throw new Error(`opcionRaw es undefined. opcion_elegida recibida: \"${opcionElegida}\"`);\n}\n\nconst hora = opcionRaw.hora;\nconst hNum = parseInt(hora.split(':')[0]);\nconst meridiano = hNum < 12 ? 'am' : 'pm';\n\nreturn [{\n  json: {\n    paciente_id: paciente.id,\n    documento: paciente.documento,\n    tipo_documento: paciente.tipo_documento,\n    id_programacion: opcionRaw.idProgramacion,\n    auto_id: paciente.auto_id,\n    email: paciente.email,\n    telefono: paciente.telefono_1,\n    contrato: paciente.contrato,\n    codEmpresa: paciente.codigo_empresa,\n    fecha: opcionRaw.fecha.replace(/-/g, '/'),\n    hora: opcionRaw.hora,\n    id_medico: opcionRaw.id_medico,\n    IdPuntoAtencionCita: opcionRaw.idPuntoAntencionCita,\n    idAsunto: opcionRaw.idAsunto,\n    meridiano: meridiano,\n    opcion_elegida: opcionElegida\n  }\n}];"
+        "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -385,7 +385,7 @@
           "conditions": [
             {
               "id": "check-confirmo",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.confirmo_asistencia }}",
+              "leftValue": "***REDACTED***",
               "rightValue": true,
               "operator": {
                 "type": "boolean",
@@ -394,7 +394,7 @@
             },
             {
               "id": "c3749e9c-ea7b-4b0a-8a4a-d09a826bcfa3",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.opcion_elegida }}",
+              "leftValue": "***REDACTED***",
               "rightValue": "ninguna",
               "operator": {
                 "type": "string",
@@ -403,7 +403,7 @@
             },
             {
               "id": "93d8267b-ce28-47cc-a34a-5bbc170581d5",
-              "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+              "leftValue": "***REDACTED***",
               "rightValue": "CONTESTO",
               "operator": {
                 "type": "string",
@@ -429,7 +429,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT p.*, p.opcion_1_raw, p.opcion_2_raw, p.opcion_3_raw FROM pacientes_sospecha_colon p WHERE p.call_id = '{{ $json.body.call.call_id }}' LIMIT 1;",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -467,7 +467,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}'\nAND id_programacion = '{{ $('Preparar datos agendamiento').first().json.id_programacion }}';",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -488,7 +488,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}';",
+        "query": "***REDACTED***",
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
@@ -508,8 +508,8 @@
     },
     {
       "parameters": {
-        "to": "=57{{ $('Buscar paciente por call_id').first().json.telefono_1 }}",
-        "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, desde Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
+        "to": "***REDACTED***",
+        "message": "***REDACTED***"
       },
       "type": "n8n-nodes-labsmobile.labsMobile",
       "typeVersion": 2,
@@ -768,7 +768,7 @@
         "updatedAt": "2026-01-22T19:31:50.741Z",
         "createdAt": "2026-01-22T19:04:54.342Z",
         "id": "gDmEkapyQQKYEXJy",
-        "name": "Desarrollo Tecnologico <desarrollotecnologico@sersocial.org>",
+        "name": "***REDACTED***",
         "type": "personal",
         "icon": null,
         "description": null,
@@ -845,7 +845,7 @@
         "parameters": {
           "workflowId": {
             "__rl": true,
-            "value": "8QAWBLL5xzNT3DoYH-AW6",
+            "value": "***REDACTED***",
             "mode": "id",
             "cachedResultUrl": "/n8n/workflow/8QAWBLL5xzNT3DoYH-AW6"
           },
@@ -911,7 +911,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_CONTESTO',\n  resultado_llamada = 'NO_CONTESTO'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -941,7 +941,7 @@
             "conditions": [
               {
                 "id": "50828eea-843f-466c-8482-a6f56095273b",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_status }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": "not_connected",
                 "operator": {
                   "type": "string",
@@ -965,7 +965,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'ACUDIENTE',\n  resultado_llamada = 'ACUDIENTE',\n  numero_brindado = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.numero_brindado }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -995,7 +995,7 @@
             "conditions": [
               {
                 "id": "e3ec67d0-60a9-4f79-afb9-a82f1c5d8d2d",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.es_acudiente }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": true,
                 "operator": {
                   "type": "boolean",
@@ -1004,7 +1004,7 @@
               },
               {
                 "id": "27e47a94-95ad-4c49-885f-1989ac61e406",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.numero_brindado }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": "",
                 "operator": {
                   "type": "string",
@@ -1039,7 +1039,7 @@
             "conditions": [
               {
                 "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": "NUMERO_EQUIVOCADO",
                 "operator": {
                   "type": "string",
@@ -1049,7 +1049,7 @@
               },
               {
                 "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": "NO_ACEPTA_GRABACION",
                 "operator": {
                   "type": "string",
@@ -1122,7 +1122,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "UPDATE pacientes_sospecha_colon SET \n  usuario_contactado = 'NO_AGENDO',\n  resultado_llamada = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}',\n  motivo_no_asistencia = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_analysis.custom_analysis_data.motivo_no_asistencia }}'\nWHERE call_id = '{{ $('Webhook Retell Post-Call').first().json.body.call.call_id }}';",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1143,7 +1143,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "UPDATE pacientes_sospecha_colon SET usuario_contactado = 'AGENDADO', opcion_elegida = '{{ $('Preparar datos agendamiento').first().json.opcion_elegida }}', fecha_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.fecha }}', hora_cita_agendada = '{{ $('Preparar datos agendamiento').first().json.hora }}', resultado_llamada = 'AGENDADO' WHERE id = {{ $('Preparar datos agendamiento').first().json.paciente_id }};",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1164,13 +1164,13 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://zeussalud_test.sersocial.org:8022/api/ZeusAppCitas/ScheduleAppointment",
+          "url": "***REDACTED***",
           "sendHeaders": true,
           "headerParameters": {
             "parameters": [
               {
                 "name": "Authorization",
-                "value": "={{ $('Call \\'OBTENER TOKEN ZEUS\\'').item.json.token }}"
+                "value": "***REDACTED***"
               }
             ]
           },
@@ -1182,7 +1182,7 @@
               {}
             ]
           },
-          "jsonBody": "={\n  \"fecha\": \"{{ $json.fecha }}\",\n  \"medico\": \"{{ $json.id_medico }}\",\n  \"idPuntoAtencion\": {{ $json.IdPuntoAtencionCita }},\n  \"idProgramacionMedicoDetalle\": {{ $json.id_programacion }},\n  \"paciente\": \"{{ $json.auto_id }}\",\n  \"hora\": \"{{ $json.hora }}\",\n  \"meridiano\": \"{{ $json.meridiano }}\",\n  \"asunto\": \"{{ $json.idAsunto }}\",\n  \"codEmpresa\": {{ $json.codEmpresa }},\n  \"contrato\": \"{{ $json.contrato }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"telefono\": \"{{ $json.telefono }}\"\n}",
+          "jsonBody": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -1196,7 +1196,7 @@
       },
       {
         "parameters": {
-          "jsCode": "const webhook = $('Webhook Retell Post-Call').first().json.body.call;\nconst paciente = $('Buscar paciente por call_id').first().json;\nconst opcionElegida = webhook.call_analysis.custom_analysis_data.opcion_elegida;\n\nconsole.log('opcion_elegida:', opcionElegida);\nconsole.log('opcion_1_raw:', paciente.opcion_1_raw);\nconsole.log('opcion_2_raw:', paciente.opcion_2_raw);\nconsole.log('opcion_3_raw:', paciente.opcion_3_raw);\n\nlet opcionRaw;\nif (opcionElegida === 'opcion_1') opcionRaw = paciente.opcion_1_raw;\nelse if (opcionElegida === 'opcion_2') opcionRaw = paciente.opcion_2_raw;\nelse if (opcionElegida === 'opcion_3') opcionRaw = paciente.opcion_3_raw;\n\nconsole.log('opcionRaw resultante:', opcionRaw);\n\nif (!opcionRaw) {\n  throw new Error(`opcionRaw es undefined. opcion_elegida recibida: \"${opcionElegida}\"`);\n}\n\nconst hora = opcionRaw.hora;\nconst hNum = parseInt(hora.split(':')[0]);\nconst meridiano = hNum < 12 ? 'am' : 'pm';\n\nreturn [{\n  json: {\n    paciente_id: paciente.id,\n    documento: paciente.documento,\n    tipo_documento: paciente.tipo_documento,\n    id_programacion: opcionRaw.idProgramacion,\n    auto_id: paciente.auto_id,\n    email: paciente.email,\n    telefono: paciente.telefono_1,\n    contrato: paciente.contrato,\n    codEmpresa: paciente.codigo_empresa,\n    fecha: opcionRaw.fecha.replace(/-/g, '/'),\n    hora: opcionRaw.hora,\n    id_medico: opcionRaw.id_medico,\n    IdPuntoAtencionCita: opcionRaw.idPuntoAntencionCita,\n    idAsunto: opcionRaw.idAsunto,\n    meridiano: meridiano,\n    opcion_elegida: opcionElegida\n  }\n}];"
+          "jsCode": "***REDACTED***"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1219,7 +1219,7 @@
             "conditions": [
               {
                 "id": "check-confirmo",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.confirmo_asistencia }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": true,
                 "operator": {
                   "type": "boolean",
@@ -1228,7 +1228,7 @@
               },
               {
                 "id": "c3749e9c-ea7b-4b0a-8a4a-d09a826bcfa3",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.opcion_elegida }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": "ninguna",
                 "operator": {
                   "type": "string",
@@ -1237,7 +1237,7 @@
               },
               {
                 "id": "93d8267b-ce28-47cc-a34a-5bbc170581d5",
-                "leftValue": "={{ $('Webhook Retell Post-Call').item.json.body.call.call_analysis.custom_analysis_data.resultado_llamada }}",
+                "leftValue": "***REDACTED***",
                 "rightValue": "CONTESTO",
                 "operator": {
                   "type": "string",
@@ -1263,7 +1263,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "SELECT p.*, p.opcion_1_raw, p.opcion_2_raw, p.opcion_3_raw FROM pacientes_sospecha_colon p WHERE p.call_id = '{{ $json.body.call.call_id }}' LIMIT 1;",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1301,7 +1301,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}'\nAND id_programacion = '{{ $('Preparar datos agendamiento').first().json.id_programacion }}';",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1322,7 +1322,7 @@
       {
         "parameters": {
           "operation": "executeQuery",
-          "query": "DELETE FROM slots_reservados \nWHERE call_id = '{{ $('Buscar paciente por call_id').first().json.documento }}';",
+          "query": "***REDACTED***",
           "options": {}
         },
         "type": "n8n-nodes-base.postgres",
@@ -1342,8 +1342,8 @@
       },
       {
         "parameters": {
-          "to": "=57{{ $('Buscar paciente por call_id').first().json.telefono_1 }}",
-          "message": "=Hola {{ $('Buscar paciente por call_id').first().json.nombre_completo }}, desde Fundación Sersocial IPS, Tu cita ha sido agendada para el {{ $('Preparar datos agendamiento').first().json.fecha }} a las {{ $('Preparar datos agendamiento').first().json.hora }}. Recuerde estar pendiente a su teléfono ese día. ¡Que tenga un excelente día!"
+          "to": "***REDACTED***",
+          "message": "***REDACTED***"
         },
         "type": "n8n-nodes-labsmobile.labsMobile",
         "typeVersion": 2,
