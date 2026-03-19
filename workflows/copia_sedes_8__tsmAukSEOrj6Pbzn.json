@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-01-20T20:13:00.621Z",
+  "updatedAt": "2026-03-19T15:11:47.790Z",
   "createdAt": "2026-01-20T20:13:00.621Z",
   "id": "tsmAukSEOrj6Pbzn",
   "name": "copia sedes 8",
   "description": null,
-  "active": true,
-  "isArchived": false,
+  "active": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -195,9 +195,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
-  "activeVersionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
-  "versionCounter": 25,
+  "versionId": "915f9d1f-0b37-4387-8ca8-34abbe3dad80",
+  "activeVersionId": null,
+  "versionCounter": 26,
   "triggerCount": 0,
   "shared": [
     {
@@ -254,223 +254,5 @@
     }
   ],
   "tags": [],
-  "activeVersion": {
-    "updatedAt": "2026-02-11T22:03:06.211Z",
-    "createdAt": "2026-02-10T18:47:41.353Z",
-    "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
-    "workflowId": "tsmAukSEOrj6Pbzn",
-    "nodes": [
-      {
-        "parameters": {
-          "workflowInputs": {
-            "values": [
-              {
-                "name": "mensaje"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.executeWorkflowTrigger",
-        "typeVersion": 1.1,
-        "position": [
-          0,
-          0
-        ],
-        "id": "8633394d-980e-4e08-9c8c-226dea603878",
-        "name": "When Executed by Another Workflow"
-      },
-      {
-        "parameters": {
-          "promptType": "define",
-          "text": "={{ $json.mensaje }}",
-          "hasOutputParser": true,
-          "options": {
-            "systemMessage": "***REDACTED***"
-          }
-        },
-        "type": "@n8n/n8n-nodes-langchain.agent",
-        "typeVersion": 3,
-        "position": [
-          352,
-          0
-        ],
-        "id": "2a421451-0a4e-4b1d-8910-58bf9dbdf52d",
-        "name": "AI Agent"
-      },
-      {
-        "parameters": {
-          "model": {
-            "__rl": true,
-            "mode": "list",
-            "value": "***REDACTED***"
-          },
-          "builtInTools": {},
-          "options": {}
-        },
-        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-        "typeVersion": 1.3,
-        "position": [
-          96,
-          224
-        ],
-        "id": "2958df2d-1816-4739-8144-950c01793040",
-        "name": "OpenAI Chat Model",
-        "credentials": {
-          "openAiApi": {
-            "id": "dNAey8tcxmUMRffx",
-            "name": "OpenAi account 2"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "sessionIdType": "customKey",
-          "sessionKey": "={{ $workflow.id }}"
-        },
-        "type": "***REDACTED***",
-        "typeVersion": 1.3,
-        "position": [
-          304,
-          224
-        ],
-        "id": "51ad1b09-cbf9-46ea-86c8-3868e475c7d7",
-        "name": "Simple Memory"
-      },
-      {
-        "parameters": {
-          "descriptionType": "manual",
-          "toolDescription": "***REDACTED***",
-          "documentId": {
-            "__rl": true,
-            "value": "***REDACTED***",
-            "mode": "list",
-            "cachedResultName": "SEDES SERSOCIAL",
-            "cachedResultUrl": "***REDACTED***"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "gid=0",
-            "mode": "list",
-            "cachedResultName": "Hoja1",
-            "cachedResultUrl": "***REDACTED***"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheetsTool",
-        "typeVersion": 4.7,
-        "position": [
-          480,
-          224
-        ],
-        "id": "773d76e0-0cfb-4a0a-bfd2-286dbe775c69",
-        "name": "Get row(s) in sheet in Google Sheets",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "aDaUg0dQ2hQRfilV",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsonSchemaExample": "***REDACTED***"
-        },
-        "type": "***REDACTED***",
-        "typeVersion": 1.3,
-        "position": [
-          688,
-          224
-        ],
-        "id": "bba95005-b7b0-4600-bb89-abe6af1ec062",
-        "name": "Structured Output Parser"
-      }
-    ],
-    "connections": {
-      "When Executed by Another Workflow": {
-        "main": [
-          [
-            {
-              "node": "AI Agent",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "OpenAI Chat Model": {
-        "ai_languageModel": [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_languageModel",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Simple Memory": {
-        "ai_memory": [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_memory",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Get row(s) in sheet in Google Sheets": {
-        "ai_tool": [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_tool",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Structured Output Parser": {
-        "ai_outputParser": [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_outputParser",
-              "index": 0
-            }
-          ]
-        ]
-      }
-    },
-    "authors": "system migration",
-    "name": "Version 498b56bd",
-    "description": "",
-    "autosaved": false,
-    "workflowPublishHistory": [
-      {
-        "createdAt": "2026-01-20T20:13:00.621Z",
-        "id": 4,
-        "workflowId": "tsmAukSEOrj6Pbzn",
-        "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
-        "event": "activated",
-        "userId": null
-      },
-      {
-        "createdAt": "2026-02-11T22:03:01.737Z",
-        "id": 31,
-        "workflowId": "tsmAukSEOrj6Pbzn",
-        "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
-        "event": "deactivated",
-        "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5"
-      },
-      {
-        "createdAt": "2026-02-11T22:03:06.209Z",
-        "id": 32,
-        "workflowId": "tsmAukSEOrj6Pbzn",
-        "versionId": "498b56bd-a4ab-4aa1-8bac-47d733729b30",
-        "event": "activated",
-        "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5"
-      }
-    ]
-  }
+  "activeVersion": null
 }
