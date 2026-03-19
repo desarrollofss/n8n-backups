@@ -1,0 +1,1915 @@
+{
+  "updatedAt": "2026-03-19T18:08:30.956Z",
+  "createdAt": "2026-03-19T18:08:30.956Z",
+  "id": "fVA9Laz3mKYwD7TK",
+  "name": "***REDACTED***",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "output": "raw",
+        "filters": {},
+        "options": {}
+      },
+      "id": "8218c3f1-d30b-4c77-a454-bdd938b6e6cf",
+      "name": "Outlook - Recibir Correo",
+      "type": "n8n-nodes-base.microsoftOutlookTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2288,
+        1728
+      ],
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "czvuJ0pPWCOnCKA4",
+          "name": "Microsoft Outlook account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.subject }}",
+              "rightValue": "COHORTE | SALUD_MENTAL",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              },
+              "id": "84c8745c-44ed-4581-9eba-5fee58ba87aa"
+            },
+            {
+              "id": "014a4ce1-02cc-4059-b344-baa30bfac097",
+              "leftValue": "={{ $json.isDraft.toString() }}",
+              "rightValue": "false",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "293a991a-94a3-4a02-8665-23eade5991f6",
+      "name": "Verificar Asunto",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -2016,
+        1728
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "deecc85b-4e72-48f2-9a6e-e4408f91e081",
+      "name": "Ignorar Correo",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -1728,
+        1984
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "***REDACTED***"
+      },
+      "id": "559b9cf7-1c5d-48ac-b079-91ded2cd8446",
+      "name": "Procesar Adjuntos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1456,
+        1760
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.tieneValidos }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              },
+              "id": "3e36f576-4dbf-403a-8510-fed5b5c10b80"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "4eb53446-7f8d-4621-b190-6d6997e1865b",
+      "name": "¿Tiene Válidos?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        1744
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "45f5f96d-6e88-46b5-b668-2e2811c571f9",
+      "name": "Preparar Registros PG",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        1616
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "validXlsx",
+        "options": {}
+      },
+      "id": "aed4ab86-4d2b-4bde-babc-9fcea2cbde49",
+      "name": "Subir Excel OneDrive",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        624,
+        1440
+      ],
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "f119ef44-e19f-4c8a-bf46-fbebee68e9d2",
+      "name": "Preparar PDFs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        624,
+        1184
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "21619adf-20e2-42da-aea9-b21069a5503a",
+      "name": "Generar Excel Válidos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        336,
+        1536
+      ]
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "name"
+        },
+        "table": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_de_reporte",
+              "displayName": "fecha_de_reporte",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nit_de_la_ips",
+              "displayName": "nit_de_la_ips",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "codigo_de_habilitacion",
+              "displayName": "codigo_de_habilitacion",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tipo_de_documento",
+              "displayName": "tipo_de_documento",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "numero_de_documento",
+              "displayName": "numero_de_documento",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "primer_nombre",
+              "displayName": "primer_nombre",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "segundo_nombre",
+              "displayName": "segundo_nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "primer_apellido",
+              "displayName": "primer_apellido",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "segundo_apellido",
+              "displayName": "segundo_apellido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "direccion_de_residencia",
+              "displayName": "direccion_de_residencia",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_celular_1",
+              "displayName": "telefono_celular_1",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "telefono_celular_2",
+              "displayName": "telefono_celular_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "escolaridad",
+              "displayName": "escolaridad",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ocupacion",
+              "displayName": "ocupacion",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "clasificacion_de_caso",
+              "displayName": "clasificacion_de_caso",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cie10_principal",
+              "displayName": "cie10_principal",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_de_diagnostico",
+              "displayName": "fecha_de_diagnostico",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "cie10_relacionado",
+              "displayName": "cie10_relacionado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_ingreso_al_programa",
+              "displayName": "fecha_ingreso_al_programa",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "clasificacion_clinica",
+              "displayName": "clasificacion_clinica",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "riesgo_patologico",
+              "displayName": "riesgo_patologico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "remitido_a",
+              "displayName": "remitido_a",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_psiquiatria",
+              "displayName": "atencion_1_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_psiquiatria",
+              "displayName": "atencion_2_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_psiquiatria",
+              "displayName": "atencion_3_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_psiquiatria",
+              "displayName": "atencion_4_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_psiquiatria",
+              "displayName": "atencion_5_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_6_psiquiatria",
+              "displayName": "atencion_6_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_7_psiquiatria",
+              "displayName": "atencion_7_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_8_psiquiatria",
+              "displayName": "atencion_8_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_psiquiatria",
+              "displayName": "obs_psiquiatria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_psiq_infantil",
+              "displayName": "atencion_1_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_psiq_infantil",
+              "displayName": "atencion_2_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_psiq_infantil",
+              "displayName": "atencion_3_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_psiq_infantil",
+              "displayName": "atencion_4_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_psiq_infantil",
+              "displayName": "atencion_5_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_6_psiq_infantil",
+              "displayName": "atencion_6_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_psiq_infantil",
+              "displayName": "obs_psiq_infantil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_trabajo_social",
+              "displayName": "atencion_1_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_trabajo_social",
+              "displayName": "atencion_2_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_trabajo_social",
+              "displayName": "atencion_3_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_trabajo_social",
+              "displayName": "atencion_4_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_trabajo_social",
+              "displayName": "atencion_5_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_trabajo_social",
+              "displayName": "obs_trabajo_social",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_med_experto",
+              "displayName": "atencion_1_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_med_experto",
+              "displayName": "atencion_2_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_med_experto",
+              "displayName": "atencion_3_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_4_med_experto",
+              "displayName": "atencion_4_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_5_med_experto",
+              "displayName": "atencion_5_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_med_experto",
+              "displayName": "obs_med_experto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_terap_ocupacional",
+              "displayName": "atencion_1_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_terap_ocupacional",
+              "displayName": "atencion_2_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_terap_ocupacional",
+              "displayName": "atencion_3_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_terap_ocupacional",
+              "displayName": "obs_terap_ocupacional",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_neuropsicologia",
+              "displayName": "atencion_1_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_neuropsicologia",
+              "displayName": "atencion_2_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_3_neuropsicologia",
+              "displayName": "atencion_3_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_neuropsicologia",
+              "displayName": "obs_neuropsicologia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_1_visita_domiciliaria",
+              "displayName": "atencion_1_visita_domiciliaria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "atencion_2_visita_domiciliaria",
+              "displayName": "atencion_2_visita_domiciliaria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_visita_domiciliaria",
+              "displayName": "obs_visita_domiciliaria",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_unidad_de_analisis_integral",
+              "displayName": "fecha_unidad_de_analisis_integral",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "obs_unidad_de_analisis",
+              "displayName": "obs_unidad_de_analisis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "correo_remitente",
+              "displayName": "correo_remitente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fecha_cargue",
+              "displayName": "fecha_cargue",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "archivo_origen",
+              "displayName": "archivo_origen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "archivo_validado",
+              "displayName": "archivo_validado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "fila_origen",
+              "displayName": "fila_origen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "skipOnConflict": false
+        }
+      },
+      "id": "93ae3f1f-1a7a-475e-b147-6a43223e83e2",
+      "name": "Insertar PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        864,
+        1616
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1728,
+        1760
+      ],
+      "id": "6accb1a6-bd37-435e-902a-f97c0bcd4029",
+      "name": "HTTP Request remitente",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "czvuJ0pPWCOnCKA4",
+          "name": "Microsoft Outlook account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1728,
+        1600
+      ],
+      "id": "14f16c7c-fd30-4200-a1fe-981adb179f64",
+      "name": "HTTP Request adjunto",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "czvuJ0pPWCOnCKA4",
+          "name": "Microsoft Outlook account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "5b86babe-631a-4373-ba1b-b14525491201",
+      "name": "Validar Token y Estructura",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        1760
+      ]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        864,
+        1184
+      ],
+      "id": "797fa652-d9a8-4c22-91fa-2fad7bf85f6c",
+      "name": "HTTP Request Subir PDFs",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        },
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "isRead",
+              "value": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1728,
+        1456
+      ],
+      "id": "5b91b5ba-3128-4898-afd8-e6886050152b",
+      "name": "Marcar como Leído",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "czvuJ0pPWCOnCKA4",
+          "name": "Microsoft Outlook account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "50c7e671-dbae-4c06-8283-cb957c707f6e",
+      "name": "Validar Registros",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -624,
+        1744
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -432,
+        1744
+      ],
+      "id": "0e4057a5-c281-4208-bfdd-2914d20dd0ff",
+      "name": "Creacion_excel_errores"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        864,
+        2096
+      ],
+      "id": "22ecd2a2-b859-4abe-89bd-0fb52f9b40ff",
+      "name": "Log - Sin Excel",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        864,
+        1904
+      ],
+      "id": "99c3a6e7-8b79-4c23-a8c6-f6a7d3c3a594",
+      "name": "Log - Formato Incorrecto",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1312,
+        1728
+      ],
+      "id": "eb4499c5-0b46-4e1b-935a-08bc3820f083",
+      "name": "htmlContent"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1728,
+        1728
+      ],
+      "id": "34a896bd-7ab4-4e81-8872-af755fee2bab",
+      "name": "Log - Inválidos",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1520,
+        1728
+      ],
+      "id": "74833348-9e01-482e-99c7-f185435cf3f0",
+      "name": "RESUMEN_CON_ERRORES",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1120,
+        1728
+      ],
+      "id": "fee1c38e-e50b-4a09-9994-71c35b7e9248",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        864,
+        1440
+      ],
+      "id": "70cd8c23-c5b7-4d2c-af33-c8e919a83ac4",
+      "name": "Log - Cargue Exitoso",
+      "credentials": {
+        "postgres": {
+          "id": "pxYcXS4TtrueoWal",
+          "name": "Cohortes - PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -640,
+        1920
+      ],
+      "id": "d6f27d33-e2ad-4183-929e-b7ee135c4b5c",
+      "name": "HTTP Request — Descargar XLSX",
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        },
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOneDriveOAuth2Api",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -240,
+        1920
+      ],
+      "id": "4729134a-4032-4b6e-8126-2f9b2bb60e14",
+      "name": "HTTP Request — Descargar PDF",
+      "credentials": {
+        "microsoftOneDriveOAuth2Api": {
+          "id": "6kKCKl73UBzntENo",
+          "name": "Microsoft Drive account"
+        },
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        1904
+      ],
+      "id": "9e0eec6f-2699-4896-87d3-cb8f93f14c45",
+      "name": "body_formato_errado"
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "destinationKey": "xlsxBase64",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -432,
+        1920
+      ],
+      "id": "9e6dfe03-022b-4a6c-b8f0-7cf236116ae4",
+      "name": "Base64 — XLSX"
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "destinationKey": "pdfBase64",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        -48,
+        1920
+      ],
+      "id": "d20e5c6d-c177-484a-b0d4-cf973ba6fc17",
+      "name": "Base64 — PDF"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        2096
+      ],
+      "id": "6e62fe1d-7213-4c8e-8dc4-9906ebb28bd2",
+      "name": "body_sin_excel"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        640,
+        2096
+      ],
+      "id": "313f7088-10f1-4c0c-9914-287aeb5840e6",
+      "name": "Rechazo - Sin Excel",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "TuAoJsXaUmvhXNhz",
+          "name": "Microsoft Outlook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.xlsxKey }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              },
+              "id": "59aa5725-e090-4644-88c0-e2e42455eb2c"
+            },
+            {
+              "id": "ab24695f-e912-4859-b1f4-03ced1e74a90",
+              "leftValue": "={{ $json.tokenValido }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f003c27a-0d46-4507-a1ba-2c24f1ba4ae8",
+      "name": "ARCHIVO_VALIDO",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1088,
+        1760
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "d1fd2218-d822-4eaf-b6ed-8945621e2980",
+              "leftValue": "***REDACTED***",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "63500e93-d8e4-47e7-829b-a56938ebf50f",
+      "name": "¿Archivo excel?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        160,
+        1920
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "microsoftOutlookOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.requestBody }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        640,
+        1904
+      ],
+      "id": "32c359fc-f157-4420-a2f8-f206e407cd92",
+      "name": "Notificacion_formato_errado",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "czvuJ0pPWCOnCKA4",
+          "name": "Microsoft Outlook account 2"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Outlook - Recibir Correo": {
+      "main": [
+        [
+          {
+            "node": "Verificar Asunto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Asunto": {
+      "main": [
+        [
+          {
+            "node": "Marcar como Leído",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ignorar Correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Adjuntos": {
+      "main": [
+        [
+          {
+            "node": "Validar Token y Estructura",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Tiene Válidos?": {
+      "main": [
+        [
+          {
+            "node": "Generar Excel Válidos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar PDFs",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Preparar Registros PG": {
+      "main": [
+        [
+          {
+            "node": "Insertar PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Subir Excel OneDrive": {
+      "main": [
+        [
+          {
+            "node": "Log - Cargue Exitoso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar PDFs": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request Subir PDFs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generar Excel Válidos": {
+      "main": [
+        [
+          {
+            "node": "Subir Excel OneDrive",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Preparar Registros PG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insertar PostgreSQL": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request remitente": {
+      "main": [
+        [
+          {
+            "node": "Procesar Adjuntos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request adjunto": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request remitente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Token y Estructura": {
+      "main": [
+        [
+          {
+            "node": "ARCHIVO_VALIDO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Marcar como Leído": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request adjunto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar Registros": {
+      "main": [
+        [
+          {
+            "node": "Creacion_excel_errores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Creacion_excel_errores": {
+      "main": [
+        [
+          {
+            "node": "¿Tiene Válidos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "htmlContent": {
+      "main": [
+        [
+          {
+            "node": "RESUMEN_CON_ERRORES",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RESUMEN_CON_ERRORES": {
+      "main": [
+        [
+          {
+            "node": "Log - Inválidos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "htmlContent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log - Cargue Exitoso": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request — Descargar XLSX": {
+      "main": [
+        [
+          {
+            "node": "Base64 — XLSX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request — Descargar PDF": {
+      "main": [
+        [
+          {
+            "node": "Base64 — PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body_formato_errado": {
+      "main": [
+        [
+          {
+            "node": "Notificacion_formato_errado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base64 — XLSX": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request — Descargar PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Base64 — PDF": {
+      "main": [
+        [
+          {
+            "node": "¿Archivo excel?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body_sin_excel": {
+      "main": [
+        [
+          {
+            "node": "Rechazo - Sin Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rechazo - Sin Excel": {
+      "main": [
+        [
+          {
+            "node": "Log - Sin Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ARCHIVO_VALIDO": {
+      "main": [
+        [
+          {
+            "node": "Validar Registros",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request — Descargar XLSX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Archivo excel?": {
+      "main": [
+        [
+          {
+            "node": "body_formato_errado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "body_sin_excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notificacion_formato_errado": {
+      "main": [
+        [
+          {
+            "node": "Log - Formato Incorrecto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "2d0339d3-8614-4544-b193-8eceeecb2223",
+  "activeVersionId": null,
+  "versionCounter": 1,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-19T18:08:30.956Z",
+      "createdAt": "2026-03-19T18:08:30.956Z",
+      "role": "workflow:owner",
+      "workflowId": "fVA9Laz3mKYwD7TK",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-03-19T12:00:16.112Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-03-19",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": null
+}
