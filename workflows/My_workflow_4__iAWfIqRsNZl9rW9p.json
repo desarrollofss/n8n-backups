@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-01-15T20:04:27.000Z",
+  "updatedAt": "2026-03-19T15:09:14.638Z",
   "createdAt": "2026-01-14T14:16:05.214Z",
   "id": "iAWfIqRsNZl9rW9p",
   "name": "My workflow 4",
   "description": null,
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -40,9 +40,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "1e4635f9-bfbd-442a-8a1b-38f53ab5063b",
+  "versionId": "6f3d12fe-692d-4053-9afa-b49091a9e28c",
   "activeVersionId": null,
-  "versionCounter": 22,
+  "versionCounter": 23,
   "triggerCount": 1,
   "shared": [
     {
