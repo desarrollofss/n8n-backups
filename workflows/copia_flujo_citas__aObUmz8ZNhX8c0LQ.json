@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-01-20T20:12:24.833Z",
+  "updatedAt": "2026-03-19T15:10:58.624Z",
   "createdAt": "2026-01-20T20:12:24.833Z",
   "id": "aObUmz8ZNhX8c0LQ",
   "name": "copia flujo citas",
@@ -71,8 +71,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        -240,
-        80
+        -208,
+        96
       ],
       "id": "1f300cf6-f4cb-4e1a-9a03-aad6763fdb44",
       "name": "consultar_paciente",
@@ -121,8 +121,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        -16,
-        96
+        -48,
+        80
       ],
       "id": "9808508c-286f-45e1-a8fa-2c65d8ebcebb",
       "name": "consultar_disponibilidad",
@@ -177,7 +177,7 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        240,
+        272,
         96
       ],
       "id": "0ecd0593-b422-4164-a4c8-5a190e5040f0",
@@ -499,9 +499,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "ef3c8a51-58b2-44ef-acde-149418ddcb23",
+  "versionId": "57290b4f-a30d-42d9-a905-d8f7c9197d2f",
   "activeVersionId": "ef3c8a51-58b2-44ef-acde-149418ddcb23",
-  "versionCounter": 22,
+  "versionCounter": 25,
   "triggerCount": 0,
   "shared": [
     {
@@ -526,7 +526,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-18T12:43:19.027Z",
+              "updatedAt": "2026-03-19T12:00:16.112Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -559,7 +559,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-18",
+              "lastActiveAt": "2026-03-19",
               "isPending": false
             }
           }
