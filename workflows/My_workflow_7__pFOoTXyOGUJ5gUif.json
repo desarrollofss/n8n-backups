@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-01-16T16:50:15.000Z",
+  "updatedAt": "2026-03-19T15:09:25.345Z",
   "createdAt": "2026-01-16T16:33:55.858Z",
   "id": "pFOoTXyOGUJ5gUif",
   "name": "My workflow 7",
   "description": null,
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -65,9 +65,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "e71867e6-0343-4916-9627-974ab35314e8",
+  "versionId": "7f7e5c5b-5daf-4011-b651-8f6227103589",
   "activeVersionId": null,
-  "versionCounter": 2,
+  "versionCounter": 3,
   "triggerCount": 0,
   "shared": [
     {
@@ -92,7 +92,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-18T12:43:19.027Z",
+              "updatedAt": "2026-03-19T12:00:16.112Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -125,7 +125,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-18",
+              "lastActiveAt": "2026-03-19",
               "isPending": false
             }
           }
