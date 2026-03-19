@@ -136,7 +136,7 @@
             "userId": "f81261e9-8d5d-4481-a139-5b373db033f6",
             "projectId": "IWVDjmP62tgsAGs0",
             "user": {
-              "updatedAt": "2026-03-18T13:19:22.480Z",
+              "updatedAt": "2026-03-19T13:11:29.632Z",
               "createdAt": "2026-03-17T15:03:38.452Z",
               "id": "f81261e9-8d5d-4481-a139-5b373db033f6",
               "email": "jpavag@sersocial.org",
@@ -152,7 +152,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-18",
+              "lastActiveAt": "2026-03-19",
               "isPending": false
             }
           }
