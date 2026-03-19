@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-01-20T05:08:32.000Z",
+  "updatedAt": "2026-03-19T15:10:38.548Z",
   "createdAt": "2026-01-20T04:35:04.331Z",
   "id": "mtwKVkJepCzwBePs",
   "name": "Workflow Validacion Afiliados",
   "description": null,
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -301,9 +301,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "cac7c786-605f-41fe-90ef-457a1af6b3d8",
+  "versionId": "ad8f6824-8c4f-458e-9cef-72db70331747",
   "activeVersionId": null,
-  "versionCounter": 4,
+  "versionCounter": 5,
   "triggerCount": 0,
   "shared": [
     {
