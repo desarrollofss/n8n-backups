@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-01-16T19:10:45.000Z",
+  "updatedAt": "2026-03-19T15:10:05.110Z",
   "createdAt": "2026-01-15T16:21:46.985Z",
   "id": "ljUmd488M3lzoETg",
   "name": "Ver Disponibilidad SERSOCIAL",
   "description": null,
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -872,9 +872,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "1b2ddcfc-af9d-416e-9dcb-684b655f9a11",
+  "versionId": "a11f43cb-4796-4f8b-a192-1ad624804eed",
   "activeVersionId": null,
-  "versionCounter": 44,
+  "versionCounter": 45,
   "triggerCount": 1,
   "shared": [
     {
