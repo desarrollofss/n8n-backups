@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-03-06T19:41:22.590Z",
+  "updatedAt": "2026-03-19T15:04:44.896Z",
   "createdAt": "2026-03-06T19:41:22.590Z",
   "id": "T8dcmp8W1KD1MeG1",
   "name": "SOSPECHA DE CANCER(PROSTATA)",
   "description": null,
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -1835,9 +1835,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "5fe9f794-46bc-4efa-a4f0-12a7f0fd9ad3",
+  "versionId": "612cd111-ce1f-484a-9b37-3a35e11508a4",
   "activeVersionId": null,
-  "versionCounter": 1,
+  "versionCounter": 2,
   "triggerCount": 0,
   "shared": [
     {
@@ -1862,7 +1862,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-18T12:43:19.027Z",
+              "updatedAt": "2026-03-19T12:00:16.112Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1895,7 +1895,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-18",
+              "lastActiveAt": "2026-03-19",
               "isPending": false
             }
           }
