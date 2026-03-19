@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-03-02T16:50:52.134Z",
+  "updatedAt": "2026-03-19T15:11:31.699Z",
   "createdAt": "2026-03-02T16:50:52.134Z",
   "id": "xEke6k4XAMUdYjeA",
   "name": "zeus_citas_BK",
   "description": null,
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -524,9 +524,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "62a6521c-cecc-40dd-93b0-e85b976ad3b7",
+  "versionId": "db271df2-2088-4e6b-9624-d1024acc6a7f",
   "activeVersionId": null,
-  "versionCounter": 1,
+  "versionCounter": 2,
   "triggerCount": 0,
   "shared": [
     {
@@ -551,7 +551,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-18T12:43:19.027Z",
+              "updatedAt": "2026-03-19T12:00:16.112Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -584,7 +584,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-18",
+              "lastActiveAt": "2026-03-19",
               "isPending": false
             }
           }
