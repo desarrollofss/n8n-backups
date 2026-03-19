@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-01-15T21:33:18.000Z",
+  "updatedAt": "2026-03-19T15:09:01.055Z",
   "createdAt": "2026-01-15T19:34:01.354Z",
   "id": "sqCRwy3qWPIjR5TC",
   "name": "Agendar Cita",
   "description": null,
   "active": false,
-  "isArchived": false,
+  "isArchived": true,
   "nodes": [
     {
       "parameters": {
@@ -179,9 +179,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "70ed4b02-a95b-4a4a-9b18-aa96311fa039",
+  "versionId": "f73dc56a-8637-49da-9ded-a6f02d476086",
   "activeVersionId": null,
-  "versionCounter": 7,
+  "versionCounter": 8,
   "triggerCount": 1,
   "shared": [
     {
@@ -206,7 +206,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-18T12:43:19.027Z",
+              "updatedAt": "2026-03-19T12:00:16.112Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -239,7 +239,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-18",
+              "lastActiveAt": "2026-03-19",
               "isPending": false
             }
           }
