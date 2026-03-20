@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-19T21:15:13.100Z",
+  "updatedAt": "2026-03-19T21:52:48.648Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
@@ -68,7 +68,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        224,
+        432,
         240
       ],
       "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
@@ -83,7 +83,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -544,
+        -336,
         720
       ],
       "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
@@ -122,8 +122,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1072,
-        16
+        -976,
+        -32
       ],
       "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
       "name": "¿Fue contestada?"
@@ -137,7 +137,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -352,
+        -144,
         -112
       ],
       "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
@@ -187,7 +187,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -624,
+        -416,
         96
       ],
       "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
@@ -231,7 +231,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -816,
+        -608,
         -80
       ],
       "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
@@ -246,7 +246,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        1792,
+        2000,
         496
       ],
       "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
@@ -261,7 +261,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -368,
+        -160,
         -304
       ],
       "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
@@ -282,7 +282,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        976,
+        1184,
         240
       ],
       "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
@@ -321,7 +321,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        768,
+        976,
         240
       ],
       "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
@@ -334,7 +334,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        512,
+        720,
         240
       ],
       "id": "71e76a8d-c34f-4905-836f-6420f778d714",
@@ -387,7 +387,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -352,
+        -144,
         112
       ],
       "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
@@ -440,7 +440,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1424,
+        1632,
         240
       ],
       "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
@@ -461,7 +461,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        304,
+        512,
         720
       ],
       "id": "44861220-f696-450a-9b21-a9b4386a6d87",
@@ -481,7 +481,7 @@
       "type": "n8n-nodes-labsmobile.labsMobile",
       "typeVersion": 2,
       "position": [
-        1184,
+        1392,
         240
       ],
       "id": "5460d015-8811-4f5a-93b4-3b4434698162",
@@ -502,7 +502,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -576,
+        -368,
         432
       ],
       "id": "7b52ca19-19bc-4a83-ac94-da8eb14f875a",
@@ -529,7 +529,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -368,
+        -160,
         432
       ],
       "id": "a41c73ab-1542-434f-85a7-545571630507",
@@ -550,7 +550,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -176,
+        32,
         432
       ],
       "id": "03d73f98-f087-42ba-9abd-b0b19e9a86ef",
@@ -617,8 +617,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        272,
-        -576
+        80,
+        -1200
       ],
       "id": "450f291b-364f-4c4f-a2fe-0ef986db10c6",
       "name": "Sticky Note"
@@ -651,8 +651,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1328,
-        336
+        -1184,
+        352
       ],
       "id": "894bc2b7-b796-42c8-ac1b-3015867443b1",
       "name": "¿Ya está AGENDADO?"
@@ -685,24 +685,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -848,
+        -640,
         464
       ],
       "id": "c1b381ec-b5fc-417c-a807-739517d48b8b",
       "name": "¿Debe rellamar?"
-    },
-    {
-      "parameters": {
-        "jsCode": "***REDACTED***"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -1328,
-        96
-      ],
-      "id": "cd39a4c3-d45d-4321-b5a1-b1f9c5da1119",
-      "name": "verificación call_id"
     }
   ],
   "connections": {
@@ -859,7 +846,7 @@
       "main": [
         [
           {
-            "node": "verificación call_id",
+            "node": "¿Ya está AGENDADO?",
             "type": "main",
             "index": 0
           }
@@ -1007,17 +994,6 @@
           }
         ]
       ]
-    },
-    "verificación call_id": {
-      "main": [
-        [
-          {
-            "node": "¿Ya está AGENDADO?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "settings": {
@@ -1029,9 +1005,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "1ab87757-5d01-4520-a749-288e1126f60b",
-  "activeVersionId": "1ab87757-5d01-4520-a749-288e1126f60b",
-  "versionCounter": 875,
+  "versionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
+  "activeVersionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
+  "versionCounter": 898,
   "triggerCount": 1,
   "shared": [
     {
@@ -1056,7 +1032,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-19T12:00:16.112Z",
+              "updatedAt": "2026-03-20T11:56:23.090Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1089,7 +1065,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-19",
+              "lastActiveAt": "2026-03-20",
               "isPending": false
             }
           }
@@ -1099,22 +1075,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T20:18:39.085Z",
-      "createdAt": "2026-02-04T20:18:39.085Z",
-      "id": "2EO9Ro2seknMiiVu",
-      "name": "DEL ADMIN ☺️"
-    },
-    {
       "updatedAt": "2026-02-04T21:57:31.305Z",
       "createdAt": "2026-02-04T21:57:31.305Z",
       "id": "Vt8x6W2rrtVBRg8l",
       "name": "Relación get_paciente 🟢"
+    },
+    {
+      "updatedAt": "2026-02-04T20:18:39.085Z",
+      "createdAt": "2026-02-04T20:18:39.085Z",
+      "id": "2EO9Ro2seknMiiVu",
+      "name": "DEL ADMIN ☺️"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-19T21:15:16.481Z",
-    "createdAt": "2026-03-19T21:15:13.101Z",
-    "versionId": "1ab87757-5d01-4520-a749-288e1126f60b",
+    "updatedAt": "2026-03-19T21:52:49.843Z",
+    "createdAt": "2026-03-19T21:52:48.649Z",
+    "versionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
     "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
     "nodes": [
       {
@@ -1178,7 +1154,7 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          224,
+          432,
           240
         ],
         "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
@@ -1193,7 +1169,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -544,
+          -336,
           720
         ],
         "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
@@ -1232,8 +1208,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -1072,
-          16
+          -976,
+          -32
         ],
         "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
         "name": "¿Fue contestada?"
@@ -1247,7 +1223,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -352,
+          -144,
           -112
         ],
         "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
@@ -1297,7 +1273,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -624,
+          -416,
           96
         ],
         "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
@@ -1341,7 +1317,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -816,
+          -608,
           -80
         ],
         "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
@@ -1356,7 +1332,7 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.4,
         "position": [
-          1792,
+          2000,
           496
         ],
         "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
@@ -1371,7 +1347,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -368,
+          -160,
           -304
         ],
         "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
@@ -1392,7 +1368,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          976,
+          1184,
           240
         ],
         "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
@@ -1431,7 +1407,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          768,
+          976,
           240
         ],
         "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
@@ -1444,7 +1420,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          512,
+          720,
           240
         ],
         "id": "71e76a8d-c34f-4905-836f-6420f778d714",
@@ -1497,7 +1473,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          -352,
+          -144,
           112
         ],
         "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
@@ -1550,7 +1526,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1424,
+          1632,
           240
         ],
         "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
@@ -1571,7 +1547,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          304,
+          512,
           720
         ],
         "id": "44861220-f696-450a-9b21-a9b4386a6d87",
@@ -1591,7 +1567,7 @@
         "type": "n8n-nodes-labsmobile.labsMobile",
         "typeVersion": 2,
         "position": [
-          1184,
+          1392,
           240
         ],
         "id": "5460d015-8811-4f5a-93b4-3b4434698162",
@@ -1612,7 +1588,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -576,
+          -368,
           432
         ],
         "id": "7b52ca19-19bc-4a83-ac94-da8eb14f875a",
@@ -1639,7 +1615,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          -368,
+          -160,
           432
         ],
         "id": "a41c73ab-1542-434f-85a7-545571630507",
@@ -1660,7 +1636,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -176,
+          32,
           432
         ],
         "id": "03d73f98-f087-42ba-9abd-b0b19e9a86ef",
@@ -1727,8 +1703,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          272,
-          -576
+          80,
+          -1200
         ],
         "id": "450f291b-364f-4c4f-a2fe-0ef986db10c6",
         "name": "Sticky Note"
@@ -1761,8 +1737,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -1328,
-          336
+          -1184,
+          352
         ],
         "id": "894bc2b7-b796-42c8-ac1b-3015867443b1",
         "name": "¿Ya está AGENDADO?"
@@ -1795,24 +1771,11 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -848,
+          -640,
           464
         ],
         "id": "c1b381ec-b5fc-417c-a807-739517d48b8b",
         "name": "¿Debe rellamar?"
-      },
-      {
-        "parameters": {
-          "jsCode": "***REDACTED***"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          -1328,
-          96
-        ],
-        "id": "cd39a4c3-d45d-4321-b5a1-b1f9c5da1119",
-        "name": "verificación call_id"
       }
     ],
     "connections": {
@@ -1969,7 +1932,7 @@
         "main": [
           [
             {
-              "node": "verificación call_id",
+              "node": "¿Ya está AGENDADO?",
               "type": "main",
               "index": 0
             }
@@ -2117,29 +2080,18 @@
             }
           ]
         ]
-      },
-      "verificación call_id": {
-        "main": [
-          [
-            {
-              "node": "¿Ya está AGENDADO?",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 1ab87757",
+    "name": "Version 84c72943",
     "description": "",
-    "autosaved": true,
+    "autosaved": false,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-19T21:15:16.479Z",
-        "id": 321,
+        "createdAt": "2026-03-19T21:52:49.841Z",
+        "id": 324,
         "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "1ab87757-5d01-4520-a749-288e1126f60b",
+        "versionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
