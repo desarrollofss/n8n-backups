@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-18T16:08:41.638Z",
+  "updatedAt": "2026-03-19T21:17:56.147Z",
   "createdAt": "2026-03-16T21:39:41.586Z",
   "id": "PxgfHZPzzD8B1VCsByqIP",
   "name": "***REDACTED***",
@@ -376,7 +376,7 @@
   "pinData": {},
   "versionId": "855a06d1-9d07-4405-9e70-e46f53768525",
   "activeVersionId": "855a06d1-9d07-4405-9e70-e46f53768525",
-  "versionCounter": 61,
+  "versionCounter": 62,
   "triggerCount": 1,
   "shared": [
     {
@@ -401,7 +401,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-19T12:00:16.112Z",
+              "updatedAt": "2026-03-20T11:56:23.090Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -434,7 +434,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-19",
+              "lastActiveAt": "2026-03-20",
               "isPending": false
             }
           }
@@ -444,10 +444,10 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T21:56:48.941Z",
-      "createdAt": "2026-02-04T21:56:48.941Z",
-      "id": "S7UevxOArIeglzP8",
-      "name": "🟢"
+      "updatedAt": "2026-03-19T21:17:43.633Z",
+      "createdAt": "2026-03-19T21:17:43.633Z",
+      "id": "sIftsmBhXzuvPCy3",
+      "name": "PRODUCTIVO 🟢"
     }
   ],
   "activeVersion": {
