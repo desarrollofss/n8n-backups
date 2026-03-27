@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-16T14:45:39.432Z",
+  "updatedAt": "2026-03-27T22:00:13.128Z",
   "createdAt": "2026-02-04T20:12:39.778Z",
   "id": "LTmtmcMGQaHqcOnO",
   "name": "zeus_citas",
@@ -615,13 +615,7 @@
     },
     "Agente_consultor": {
       "main": [
-        [
-          {
-            "node": "Parsear slots",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "AgendarCita": {
@@ -753,9 +747,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "cce7b88d-7ba4-4a39-9eb7-5cd24c29aa32",
+  "versionId": "38028491-ef7e-4c2b-8308-f0530fa1cba2",
   "activeVersionId": "cce7b88d-7ba4-4a39-9eb7-5cd24c29aa32",
-  "versionCounter": 419,
+  "versionCounter": 454,
   "triggerCount": 0,
   "shared": [
     {
@@ -780,7 +774,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-20T11:56:23.090Z",
+              "updatedAt": "2026-03-27T15:19:03.673Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -813,7 +807,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-20",
+              "lastActiveAt": "2026-03-27",
               "isPending": false
             }
           }
@@ -823,16 +817,16 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T20:18:39.085Z",
-      "createdAt": "2026-02-04T20:18:39.085Z",
-      "id": "2EO9Ro2seknMiiVu",
-      "name": "DEL ADMIN ☺️"
-    },
-    {
       "updatedAt": "2026-02-04T21:57:31.305Z",
       "createdAt": "2026-02-04T21:57:31.305Z",
       "id": "Vt8x6W2rrtVBRg8l",
       "name": "Relación get_paciente 🟢"
+    },
+    {
+      "updatedAt": "2026-02-04T20:18:39.085Z",
+      "createdAt": "2026-02-04T20:18:39.085Z",
+      "id": "2EO9Ro2seknMiiVu",
+      "name": "DEL ADMIN ☺️"
     }
   ],
   "activeVersion": {
