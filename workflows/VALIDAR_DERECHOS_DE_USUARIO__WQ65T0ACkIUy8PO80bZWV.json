@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-16T16:17:03.949Z",
+  "updatedAt": "2026-03-25T19:32:10.057Z",
   "createdAt": "2026-03-03T18:20:57.454Z",
   "id": "WQ65T0ACkIUy8PO80bZWV",
   "name": "VALIDAR DERECHOS DE USUARIO",
@@ -449,8 +449,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2816,
-        1168
+        2832,
+        1136
       ],
       "id": "69ffb13b-3381-448c-9c23-207d62b7f9ba",
       "name": "Code: token existente"
@@ -537,7 +537,7 @@
       "typeVersion": 3.2,
       "position": [
         3536,
-        1344
+        1184
       ],
       "id": "a3eb35fb-d876-4ae0-86f9-b572519c8f08",
       "name": "Merge token"
@@ -997,9 +997,9 @@
       }
     ]
   },
-  "versionId": "47d4b002-b43a-4272-bbd8-e10e6141c029",
-  "activeVersionId": "47d4b002-b43a-4272-bbd8-e10e6141c029",
-  "versionCounter": 660,
+  "versionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
+  "activeVersionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
+  "versionCounter": 665,
   "triggerCount": 0,
   "shared": [
     {
@@ -1024,7 +1024,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-20T11:56:23.090Z",
+              "updatedAt": "2026-03-27T15:19:03.673Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1057,7 +1057,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-20",
+              "lastActiveAt": "2026-03-27",
               "isPending": false
             }
           }
@@ -1067,9 +1067,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-03-16T16:28:07.751Z",
-    "createdAt": "2026-03-16T16:17:03.950Z",
-    "versionId": "47d4b002-b43a-4272-bbd8-e10e6141c029",
+    "updatedAt": "2026-03-25T20:03:22.360Z",
+    "createdAt": "2026-03-25T19:32:10.058Z",
+    "versionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
     "workflowId": "WQ65T0ACkIUy8PO80bZWV",
     "nodes": [
       {
@@ -1514,8 +1514,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          2816,
-          1168
+          2832,
+          1136
         ],
         "id": "69ffb13b-3381-448c-9c23-207d62b7f9ba",
         "name": "Code: token existente"
@@ -1602,7 +1602,7 @@
         "typeVersion": 3.2,
         "position": [
           3536,
-          1344
+          1184
         ],
         "id": "a3eb35fb-d876-4ae0-86f9-b572519c8f08",
         "name": "Merge token"
@@ -1970,15 +1970,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 47d4b002",
+    "name": "Version 24b73c24",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-16T16:28:07.749Z",
-        "id": 247,
+        "createdAt": "2026-03-25T20:03:22.358Z",
+        "id": 346,
         "workflowId": "WQ65T0ACkIUy8PO80bZWV",
-        "versionId": "47d4b002-b43a-4272-bbd8-e10e6141c029",
+        "versionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
