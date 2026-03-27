@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-20T19:25:52.787Z",
+  "updatedAt": "2026-03-26T22:29:54.388Z",
   "createdAt": "2026-02-18T14:44:38.955Z",
   "id": "_nSf8s_U2hqJ0u1brhr-n",
   "name": "COHORTE_SALUD_MENTAL_FLUJO_CAP_DATOS",
@@ -1358,9 +1358,8 @@
         "authentication": "predefinedCredentialType",
         "nodeCredentialType": "microsoftOutlookOAuth2Api",
         "sendBody": true,
-        "contentType": "raw",
-        "rawContentType": "application/json",
-        "body": "=={{ $json.requestBody }}",
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.requestBody }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -1843,9 +1842,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "26fc05ec-9f98-4303-8386-38105c9f055a",
-  "activeVersionId": "26fc05ec-9f98-4303-8386-38105c9f055a",
-  "versionCounter": 1171,
+  "versionId": "5a6a120e-4620-4264-aa28-f291389f3173",
+  "activeVersionId": "5a6a120e-4620-4264-aa28-f291389f3173",
+  "versionCounter": 1450,
   "triggerCount": 1,
   "shared": [
     {
@@ -1870,7 +1869,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-20T11:56:23.090Z",
+              "updatedAt": "2026-03-27T15:19:03.673Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1903,7 +1902,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-20",
+              "lastActiveAt": "2026-03-27",
               "isPending": false
             }
           }
@@ -1913,9 +1912,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-03-20T19:26:00.366Z",
-    "createdAt": "2026-03-20T19:25:52.789Z",
-    "versionId": "26fc05ec-9f98-4303-8386-38105c9f055a",
+    "updatedAt": "2026-03-26T22:29:57.062Z",
+    "createdAt": "2026-03-26T22:29:54.390Z",
+    "versionId": "5a6a120e-4620-4264-aa28-f291389f3173",
     "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
     "nodes": [
       {
@@ -3269,9 +3268,8 @@
           "authentication": "predefinedCredentialType",
           "nodeCredentialType": "microsoftOutlookOAuth2Api",
           "sendBody": true,
-          "contentType": "raw",
-          "rawContentType": "application/json",
-          "body": "=={{ $json.requestBody }}",
+          "specifyBody": "json",
+          "jsonBody": "={{ $json.requestBody }}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -3746,15 +3744,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 26fc05ec",
+    "name": "Version 5a6a120e",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-20T19:26:00.364Z",
-        "id": 337,
+        "createdAt": "2026-03-26T22:29:57.061Z",
+        "id": 400,
         "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
-        "versionId": "26fc05ec-9f98-4303-8386-38105c9f055a",
+        "versionId": "5a6a120e-4620-4264-aa28-f291389f3173",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
