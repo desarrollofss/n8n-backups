@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-19T21:52:48.648Z",
+  "updatedAt": "2026-03-26T15:22:41.681Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
@@ -195,50 +195,6 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
-              "leftValue": "***REDACTED***",
-              "rightValue": "NUMERO_EQUIVOCADO",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            },
-            {
-              "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
-              "leftValue": "***REDACTED***",
-              "rightValue": "NO_ACEPTA_GRABACION",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        -608,
-        -80
-      ],
-      "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
-      "name": "Número equivocado ?"
-    },
-    {
-      "parameters": {
         "respondWith": "json",
         "responseBody": "{\"ok\": true}",
         "options": {}
@@ -246,7 +202,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        2000,
+        2208,
         496
       ],
       "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
@@ -402,8 +358,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -1504,
-        96
+        -1488,
+        112
       ],
       "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
       "name": "Buscar paciente por call_id",
@@ -440,7 +396,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1632,
+        1840,
         240
       ],
       "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
@@ -481,7 +437,7 @@
       "type": "n8n-nodes-labsmobile.labsMobile",
       "typeVersion": 2,
       "position": [
-        1392,
+        1600,
         240
       ],
       "id": "5460d015-8811-4f5a-93b4-3b4434698162",
@@ -690,6 +646,192 @@
       ],
       "id": "c1b381ec-b5fc-417c-a807-739517d48b8b",
       "name": "¿Debe rellamar?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
+              "leftValue": "***REDACTED***",
+              "rightValue": "NUMERO_EQUIVOCADO",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
+              "leftValue": "***REDACTED***",
+              "rightValue": "NO_ACEPTA_GRABACION",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "90804114-0682-4f85-84ad-5ece1574c044",
+              "leftValue": "***REDACTED***",
+              "rightValue": "FALLECIDO",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "4a9f0577-2420-4336-9900-da9a1eebb286",
+              "leftValue": "***REDACTED***",
+              "rightValue": "HOSPITALIZADO",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -608,
+        -80
+      ],
+      "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
+      "name": "¿Número equivocado ?"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultUrl": "/n8n/workflow/ABfKIcvf0tTodbOiL-RJt",
+          "cachedResultName": "SAGIC"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "paciente_id": "***REDACTED***",
+            "documento": "***REDACTED***",
+            "tipo_documento": "***REDACTED***",
+            "id_cita": "***REDACTED***",
+            "email": "***REDACTED***",
+            "telefono": "***REDACTED***",
+            "fecha": "***REDACTED***",
+            "hora": "***REDACTED***",
+            "meridiano": "***REDACTED***"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "paciente_id",
+              "displayName": "paciente_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "documento",
+              "displayName": "documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "tipo_documento",
+              "displayName": "tipo_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "id_cita",
+              "displayName": "id_cita",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "hora",
+              "displayName": "hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "meridiano",
+              "displayName": "meridiano",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1392,
+        240
+      ],
+      "id": "2023c929-cb6c-4d22-8adb-fecc2daea038",
+      "name": "Call 'SAGIC'"
     }
   ],
   "connections": {
@@ -697,7 +839,7 @@
       "main": [
         [
           {
-            "node": "Número equivocado ?",
+            "node": "¿Número equivocado ?",
             "type": "main",
             "index": 0
           }
@@ -723,24 +865,6 @@
         [
           {
             "node": "¿Confirmó asistencia?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Número equivocado ?": {
-      "main": [
-        [
-          {
-            "node": "Marcar como NO_AGENDO",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "¿Acudiente con número?",
             "type": "main",
             "index": 0
           }
@@ -795,7 +919,7 @@
       "main": [
         [
           {
-            "node": "Send SMS",
+            "node": "Call 'SAGIC'",
             "type": "main",
             "index": 0
           }
@@ -994,6 +1118,35 @@
           }
         ]
       ]
+    },
+    "¿Número equivocado ?": {
+      "main": [
+        [
+          {
+            "node": "Marcar como NO_AGENDO",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Acudiente con número?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'SAGIC'": {
+      "main": [
+        [
+          {
+            "node": "Send SMS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -1004,10 +1157,3442 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "pinData": {},
-  "versionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
-  "activeVersionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
-  "versionCounter": 898,
+  "pinData": {
+    "Webhook Retell Post-Call": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "accept": "application/json, text/plain, */*",
+            "content-type": "application/json",
+            "x-retell-signature": "***REDACTED***",
+            "user-agent": "axios/1.13.2",
+            "accept-encoding": "gzip, compress, deflate, br",
+            "x-forwarded-for": "100.20.5.228",
+            "x-forwarded-host": "vdc.sersocial.org",
+            "x-forwarded-server": "vdc.sersocial.org",
+            "connection": "Keep-Alive",
+            "content-length": "51258"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "event": "call_analyzed",
+            "call": {
+              "call_id": "call_3b5dd672966b0ccb52d621e698f",
+              "call_type": "phone_call",
+              "agent_id": "agent_0db8bb0224bce6f6e0d4db7d98",
+              "agent_version": 27,
+              "agent_name": "SarAI - Fundación SerSocial IPS V1",
+              "retell_llm_dynamic_variables": {
+                "nombre_paciente": "jean carlos",
+                "opcion_1": "viernes 27 de marzo a las 7 de la mañana",
+                "opcion_2": "***REDACTED***",
+                "opcion_3": "viernes 27 de marzo a las 8 de la mañana",
+                "cedula_paciente": "72144449"
+              },
+              "collected_dynamic_variables": {
+                "previous_node": "03 · Confirmar opción 1",
+                "current_node": "End · Cita confirmada opción 1"
+              },
+              "custom_sip_headers": {
+                "X-RetellAI-Direction": "Outbound",
+                "X-RetellAI-CallId": "call_3b5dd672966b0ccb52d621e698f",
+                "X-RetellAI-SipTraceId": "call_3b5dd672966b0ccb52d621e698f",
+                "X-RetellAI-OrgId": "org_9M48lDymJQYqp6Fs",
+                "Route": "<sip:18.98.16.120;lr>"
+              },
+              "call_status": "ended",
+              "start_timestamp": 1774538239037,
+              "end_timestamp": 1774538374753,
+              "duration_ms": 135716,
+              "transcript": "***REDACTED***",
+              "transcript_object": [
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "¡Aalo, ",
+                      "start": 2.017333251953125,
+                      "end": 2.415428466796875
+                    },
+                    {
+                      "word": "buen ",
+                      "start": 2.415428466796875,
+                      "end": 2.603047607421875
+                    },
+                    {
+                      "word": "día! ",
+                      "start": 2.603047607421875,
+                      "end": 3.13352392578125
+                    },
+                    {
+                      "word": "¿Me ",
+                      "start": 3.18035107421875,
+                      "end": 3.29177978515625
+                    },
+                    {
+                      "word": "comunico ",
+                      "start": 3.29177978515625,
+                      "end": 3.623208251953125
+                    },
+                    {
+                      "word": "con ",
+                      "start": 3.623208251953125,
+                      "end": 3.745113037109375
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 3.745113037109375,
+                      "end": 3.910827392578125
+                    },
+                    {
+                      "word": "Carlos?",
+                      "start": 3.910827392578125,
+                      "end": 4.64035107421875
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 0
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Hola, buenos días, sí, con él habla. ",
+                  "words": [
+                    {
+                      "word": "Hola, ",
+                      "start": 5.914000000000001,
+                      "end": 6.394
+                    },
+                    {
+                      "word": "buenos ",
+                      "start": 6.394,
+                      "end": 6.554
+                    },
+                    {
+                      "word": "días, ",
+                      "start": 6.554,
+                      "end": 6.7939997000000005
+                    },
+                    {
+                      "word": "sí, ",
+                      "start": 6.7939997000000005,
+                      "end": 6.954000000000001
+                    },
+                    {
+                      "word": "con ",
+                      "start": 6.954000000000001,
+                      "end": 7.034
+                    },
+                    {
+                      "word": "él ",
+                      "start": 7.034,
+                      "end": 7.114
+                    },
+                    {
+                      "word": "habla. ",
+                      "start": 7.114,
+                      "end": 7.274
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Perfecto, ",
+                      "start": 10.068252197265625,
+                      "end": 10.6331171875
+                    },
+                    {
+                      "word": "gracias ",
+                      "start": 10.6331171875,
+                      "end": 10.936720703125
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 10.936720703125,
+                      "end": 11.0934775390625
+                    },
+                    {
+                      "word": "Carlos. ",
+                      "start": 11.0934775390625,
+                      "end": 11.606090087890625
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 11.655024658203125,
+                      "end": 11.80187158203125
+                    },
+                    {
+                      "word": "habla ",
+                      "start": 11.80187158203125,
+                      "end": 12.053222900390624
+                    },
+                    {
+                      "word": "Saraí, ",
+                      "start": 12.053222900390624,
+                      "end": 12.555024658203125
+                    },
+                    {
+                      "word": "llamo ",
+                      "start": 12.555024658203125,
+                      "end": 12.847817626953125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 12.847817626953125,
+                      "end": 12.94151123046875
+                    },
+                    {
+                      "word": "parte ",
+                      "start": 12.94151123046875,
+                      "end": 13.1820517578125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 13.1820517578125,
+                      "end": 13.25592578125
+                    },
+                    {
+                      "word": "la ",
+                      "start": 13.25592578125,
+                      "end": 13.349619384765624
+                    },
+                    {
+                      "word": "Fundación ",
+                      "start": 13.349619384765624,
+                      "end": 13.726196044921876
+                    },
+                    {
+                      "word": "SerSocial ",
+                      "start": 13.726196044921876,
+                      "end": 14.32259228515625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 14.32259228515625,
+                      "end": 14.542412109375
+                    },
+                    {
+                      "word": "P ",
+                      "start": 14.542412109375,
+                      "end": 14.835204833984376
+                    },
+                    {
+                      "word": "S ",
+                      "start": 14.835204833984376,
+                      "end": 15.127997802734376
+                    },
+                    {
+                      "word": "y ",
+                      "start": 15.127997802734376,
+                      "end": 15.2955654296875
+                    },
+                    {
+                      "word": "de ",
+                      "start": 15.2955654296875,
+                      "end": 15.40006982421875
+                    },
+                    {
+                      "word": "Mutual ",
+                      "start": 15.40006982421875,
+                      "end": 15.74511474609375
+                    },
+                    {
+                      "word": "Ser. ",
+                      "start": 15.74511474609375,
+                      "end": 16.2577275390625
+                    },
+                    {
+                      "word": "¿Cómo ",
+                      "start": 16.306274658203126,
+                      "end": 16.599968505859376
+                    },
+                    {
+                      "word": "se ",
+                      "start": 16.599968505859376,
+                      "end": 16.662130615234375
+                    },
+                    {
+                      "word": "encuentra ",
+                      "start": 16.662130615234375,
+                      "end": 17.038707275390625
+                    },
+                    {
+                      "word": "el ",
+                      "start": 17.038707275390625,
+                      "end": 17.143211669921875
+                    },
+                    {
+                      "word": "día ",
+                      "start": 17.143211669921875,
+                      "end": 17.383752197265625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 17.383752197265625,
+                      "end": 17.4468154296875
+                    },
+                    {
+                      "word": "hoy?",
+                      "start": 17.4468154296875,
+                      "end": 17.938707275390627
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 1
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Bien, bien, ¿está? ",
+                  "words": [
+                    {
+                      "word": "Bien, ",
+                      "start": 19.693998,
+                      "end": 20.093999999999998
+                    },
+                    {
+                      "word": "bien, ",
+                      "start": 20.093999999999998,
+                      "end": 20.334
+                    },
+                    {
+                      "word": "¿está? ",
+                      "start": 20.334,
+                      "end": 20.413999999999998
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Me ",
+                      "start": 23.096252197265624,
+                      "end": 23.2007568359375
+                    },
+                    {
+                      "word": "alegra ",
+                      "start": 23.2007568359375,
+                      "end": 23.46201806640625
+                    },
+                    {
+                      "word": "escuchar ",
+                      "start": 23.46201806640625,
+                      "end": 23.86021630859375
+                    },
+                    {
+                      "word": "eso. ",
+                      "start": 23.86021630859375,
+                      "end": 24.257513427734374
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 24.297024658203124,
+                      "end": 24.454682373046875
+                    },
+                    {
+                      "word": "llamo ",
+                      "start": 24.454682373046875,
+                      "end": 24.695222900390625
+                    },
+                    {
+                      "word": "para ",
+                      "start": 24.695222900390625,
+                      "end": 24.851979736328126
+                    },
+                    {
+                      "word": "agendarle ",
+                      "start": 24.851979736328126,
+                      "end": 25.342970703125
+                    },
+                    {
+                      "word": "una ",
+                      "start": 25.342970703125,
+                      "end": 25.510538330078123
+                    },
+                    {
+                      "word": "cita ",
+                      "start": 25.510538330078123,
+                      "end": 25.814141845703126
+                    },
+                    {
+                      "word": "médica ",
+                      "start": 25.814141845703126,
+                      "end": 26.20062841796875
+                    },
+                    {
+                      "word": "con ",
+                      "start": 26.20062841796875,
+                      "end": 26.3790068359375
+                    },
+                    {
+                      "word": "nosotros ",
+                      "start": 26.3790068359375,
+                      "end": 26.92315087890625
+                    },
+                    {
+                      "word": "en ",
+                      "start": 26.92315087890625,
+                      "end": 26.996123779296877
+                    },
+                    {
+                      "word": "la ",
+                      "start": 26.996123779296877,
+                      "end": 27.089817626953124
+                    },
+                    {
+                      "word": "Fundación ",
+                      "start": 27.089817626953124,
+                      "end": 27.56098876953125
+                    },
+                    {
+                      "word": "SerSocial ",
+                      "start": 27.56098876953125,
+                      "end": 28.17810595703125
+                    },
+                    {
+                      "word": "I ",
+                      "start": 28.17810595703125,
+                      "end": 28.3240517578125
+                    },
+                    {
+                      "word": "P ",
+                      "start": 28.3240517578125,
+                      "end": 28.56459228515625
+                    },
+                    {
+                      "word": "S, ",
+                      "start": 28.56459228515625,
+                      "end": 29.108736572265624
+                    },
+                    {
+                      "word": "¿le ",
+                      "start": 29.108736572265624,
+                      "end": 29.42225
+                    },
+                    {
+                      "word": "parece ",
+                      "start": 29.42225,
+                      "end": 29.736664306640623
+                    },
+                    {
+                      "word": "bien ",
+                      "start": 29.736664306640623,
+                      "end": 29.94567333984375
+                    },
+                    {
+                      "word": "si ",
+                      "start": 29.94567333984375,
+                      "end": 30.08170947265625
+                    },
+                    {
+                      "word": "le ",
+                      "start": 30.08170947265625,
+                      "end": 30.1862138671875
+                    },
+                    {
+                      "word": "comento ",
+                      "start": 30.1862138671875,
+                      "end": 30.56279052734375
+                    },
+                    {
+                      "word": "las ",
+                      "start": 30.56279052734375,
+                      "end": 30.71954736328125
+                    },
+                    {
+                      "word": "opciones ",
+                      "start": 30.71954736328125,
+                      "end": 31.1375654296875
+                    },
+                    {
+                      "word": "disponibles?",
+                      "start": 31.1375654296875,
+                      "end": 32.0790068359375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 2
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Aló, sí. ",
+                  "words": [
+                    {
+                      "word": "Aló, ",
+                      "start": 44.354000000000006,
+                      "end": 44.753998
+                    },
+                    {
+                      "word": "sí. ",
+                      "start": 44.753998,
+                      "end": 44.914
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "¿Aló? ¿Me escucha?",
+                  "words": [
+                    {
+                      "word": "¿Aló? ",
+                      "start": 44.094531494140625,
+                      "end": 44.77381079101563
+                    },
+                    {
+                      "word": "¿Me ",
+                      "start": 44.82339965820312,
+                      "end": 44.93871508789063
+                    },
+                    {
+                      "word": "escucha?",
+                      "start": 44.93871508789063,
+                      "end": 45.660336669921875
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 3
+                  }
+                },
+                {
+                  "role": "agent",
+                  "content": "Le ",
+                  "words": [
+                    {
+                      "word": "Le ",
+                      "start": 47.77563647460938,
+                      "end": 47.8910908203125
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 4
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Sí. ",
+                  "words": [
+                    {
+                      "word": "Sí. ",
+                      "start": 47.804,
+                      "end": 48.044000000000004
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Le ",
+                      "start": 50.822727294921876,
+                      "end": 50.9490908203125
+                    },
+                    {
+                      "word": "contactamos ",
+                      "start": 50.9490908203125,
+                      "end": 51.5190908203125
+                    },
+                    {
+                      "word": "hoy ",
+                      "start": 51.5190908203125,
+                      "end": 51.7090908203125
+                    },
+                    {
+                      "word": "porque, ",
+                      "start": 51.7090908203125,
+                      "end": 52.1209091796875
+                    },
+                    {
+                      "word": "a ",
+                      "start": 52.1209091796875,
+                      "end": 52.226363525390624
+                    },
+                    {
+                      "word": "través ",
+                      "start": 52.226363525390624,
+                      "end": 52.48
+                    },
+                    {
+                      "word": "de ",
+                      "start": 52.48,
+                      "end": 52.57454541015625
+                    },
+                    {
+                      "word": "su ",
+                      "start": 52.57454541015625,
+                      "end": 52.67
+                    },
+                    {
+                      "word": "componente ",
+                      "start": 52.67,
+                      "end": 53.387272705078125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 53.387272705078125,
+                      "end": 53.48272729492187
+                    },
+                    {
+                      "word": "Gestión ",
+                      "start": 53.48272729492187,
+                      "end": 53.75727270507812
+                    },
+                    {
+                      "word": "del ",
+                      "start": 53.75727270507812,
+                      "end": 53.883636474609375
+                    },
+                    {
+                      "word": "Riesgo ",
+                      "start": 53.883636474609375,
+                      "end": 54.11545458984375
+                    },
+                    {
+                      "word": "en ",
+                      "start": 54.11545458984375,
+                      "end": 54.2109091796875
+                    },
+                    {
+                      "word": "Salud, ",
+                      "start": 54.2109091796875,
+                      "end": 54.89727270507812
+                    },
+                    {
+                      "word": "usted ",
+                      "start": 54.89727270507812,
+                      "end": 55.19272729492187
+                    },
+                    {
+                      "word": "cuenta ",
+                      "start": 55.19272729492187,
+                      "end": 55.5090908203125
+                    },
+                    {
+                      "word": "con ",
+                      "start": 55.5090908203125,
+                      "end": 55.667272705078126
+                    },
+                    {
+                      "word": "una ",
+                      "start": 55.667272705078126,
+                      "end": 55.84636352539062
+                    },
+                    {
+                      "word": "Ruta ",
+                      "start": 55.84636352539062,
+                      "end": 56.226363525390624
+                    },
+                    {
+                      "word": "Pre-diagnóstica.\n",
+                      "start": 56.226363525390624,
+                      "end": 57.493636474609374
+                    },
+                    {
+                      "word": "\nHemos ",
+                      "start": 57.493636474609374,
+                      "end": 57.75727270507812
+                    },
+                    {
+                      "word": "recibido ",
+                      "start": 57.75727270507812,
+                      "end": 58.158181884765625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 58.158181884765625,
+                      "end": 58.24272729492188
+                    },
+                    {
+                      "word": "su ",
+                      "start": 58.24272729492188,
+                      "end": 58.28454541015625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 58.28454541015625,
+                      "end": 58.46363647460937
+                    },
+                    {
+                      "word": "P ",
+                      "start": 58.46363647460937,
+                      "end": 58.70636352539063
+                    },
+                    {
+                      "word": "S ",
+                      "start": 58.70636352539063,
+                      "end": 59.033636474609374
+                    },
+                    {
+                      "word": "de ",
+                      "start": 59.033636474609374,
+                      "end": 59.3609091796875
+                    },
+                    {
+                      "word": "atención ",
+                      "start": 59.3609091796875,
+                      "end": 59.47727270507813
+                    },
+                    {
+                      "word": "primaria ",
+                      "start": 59.47727270507813,
+                      "end": 59.82545458984375
+                    },
+                    {
+                      "word": "un ",
+                      "start": 59.82545458984375,
+                      "end": 60.4590908203125
+                    },
+                    {
+                      "word": "reporte… ",
+                      "start": 60.4590908203125,
+                      "end": 60.71181811523437
+                    },
+                    {
+                      "word": "pero ",
+                      "start": 60.71181811523437,
+                      "end": 61.69363647460938
+                    },
+                    {
+                      "word": "antes ",
+                      "start": 61.69363647460938,
+                      "end": 61.89454541015625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 61.89454541015625,
+                      "end": 62.137272705078125
+                    },
+                    {
+                      "word": "seguir, ",
+                      "start": 62.137272705078125,
+                      "end": 62.231818115234375
+                    },
+                    {
+                      "word": "le ",
+                      "start": 62.231818115234375,
+                      "end": 62.68545458984375
+                    },
+                    {
+                      "word": "comento ",
+                      "start": 62.68545458984375,
+                      "end": 62.822727294921876
+                    },
+                    {
+                      "word": "que ",
+                      "start": 62.822727294921876,
+                      "end": 63.15
+                    },
+                    {
+                      "word": "esta ",
+                      "start": 63.15,
+                      "end": 63.23454541015625
+                    },
+                    {
+                      "word": "llamada ",
+                      "start": 63.23454541015625,
+                      "end": 63.413636474609376
+                    },
+                    {
+                      "word": "está ",
+                      "start": 63.413636474609376,
+                      "end": 63.77272729492187
+                    },
+                    {
+                      "word": "siendo ",
+                      "start": 63.77272729492187,
+                      "end": 64.01545458984376
+                    },
+                    {
+                      "word": "grabada ",
+                      "start": 64.01545458984376,
+                      "end": 64.23727270507813
+                    },
+                    {
+                      "word": "con ",
+                      "start": 64.23727270507813,
+                      "end": 64.61727270507812
+                    },
+                    {
+                      "word": "fines ",
+                      "start": 64.61727270507812,
+                      "end": 64.77545458984375
+                    },
+                    {
+                      "word": "de ",
+                      "start": 64.77545458984375,
+                      "end": 65.0390908203125
+                    },
+                    {
+                      "word": "calidad ",
+                      "start": 65.0390908203125,
+                      "end": 65.13454541015625
+                    },
+                    {
+                      "word": "del ",
+                      "start": 65.13454541015625,
+                      "end": 65.47181811523437
+                    },
+                    {
+                      "word": "servicio. ",
+                      "start": 65.47181811523437,
+                      "end": 65.6409091796875
+                    },
+                    {
+                      "word": "¿Está ",
+                      "start": 66.3371591796875,
+                      "end": 66.65443188476563
+                    },
+                    {
+                      "word": "de ",
+                      "start": 66.65443188476563,
+                      "end": 66.7171591796875
+                    },
+                    {
+                      "word": "acuerdo?",
+                      "start": 66.7171591796875,
+                      "end": 67.37170458984374
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 5
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Sí. ",
+                  "words": [
+                    {
+                      "word": "Sí. ",
+                      "start": 69.39399999999999,
+                      "end": 69.714
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "¡Gracias, ",
+                      "start": 72.91747607421875,
+                      "end": 73.43747607421875
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 73.43747607421875,
+                      "end": 73.63652392578125
+                    },
+                    {
+                      "word": "Carlos! ",
+                      "start": 73.63652392578125,
+                      "end": 74.267
+                    },
+                    {
+                      "word": "Como ",
+                      "start": 74.29540478515625,
+                      "end": 74.561119140625
+                    },
+                    {
+                      "word": "le ",
+                      "start": 74.561119140625,
+                      "end": 74.6496904296875
+                    },
+                    {
+                      "word": "venía ",
+                      "start": 74.6496904296875,
+                      "end": 74.90397607421875
+                    },
+                    {
+                      "word": "contando… ",
+                      "start": 74.90397607421875,
+                      "end": 76.07540478515625
+                    },
+                    {
+                      "word": "le ",
+                      "start": 76.07540478515625,
+                      "end": 76.20873803710937
+                    },
+                    {
+                      "word": "contactamos ",
+                      "start": 76.20873803710937,
+                      "end": 76.77254760742187
+                    },
+                    {
+                      "word": "hoy ",
+                      "start": 76.77254760742187,
+                      "end": 77.0373095703125
+                    },
+                    {
+                      "word": "porque, ",
+                      "start": 77.0373095703125,
+                      "end": 77.48016674804687
+                    },
+                    {
+                      "word": "a ",
+                      "start": 77.48016674804687,
+                      "end": 77.56873803710937
+                    },
+                    {
+                      "word": "través ",
+                      "start": 77.56873803710937,
+                      "end": 77.84492846679687
+                    },
+                    {
+                      "word": "de ",
+                      "start": 77.84492846679687,
+                      "end": 77.9335
+                    },
+                    {
+                      "word": "su ",
+                      "start": 77.9335,
+                      "end": 78.04397607421875
+                    },
+                    {
+                      "word": "componente ",
+                      "start": 78.04397607421875,
+                      "end": 78.57445239257812
+                    },
+                    {
+                      "word": "de ",
+                      "start": 78.57445239257812,
+                      "end": 78.68492846679688
+                    },
+                    {
+                      "word": "Gestión ",
+                      "start": 78.68492846679688,
+                      "end": 79.061119140625
+                    },
+                    {
+                      "word": "del ",
+                      "start": 79.061119140625,
+                      "end": 79.22683325195312
+                    },
+                    {
+                      "word": "Riesgo ",
+                      "start": 79.22683325195312,
+                      "end": 79.54778564453125
+                    },
+                    {
+                      "word": "en ",
+                      "start": 79.54778564453125,
+                      "end": 79.63635717773437
+                    },
+                    {
+                      "word": "Salud, ",
+                      "start": 79.63635717773437,
+                      "end": 80.44302392578125
+                    },
+                    {
+                      "word": "usted ",
+                      "start": 80.44302392578125,
+                      "end": 80.74207153320313
+                    },
+                    {
+                      "word": "cuenta ",
+                      "start": 80.74207153320313,
+                      "end": 81.08492846679688
+                    },
+                    {
+                      "word": "con ",
+                      "start": 81.08492846679688,
+                      "end": 81.25064282226562
+                    },
+                    {
+                      "word": "una ",
+                      "start": 81.25064282226562,
+                      "end": 81.40492846679687
+                    },
+                    {
+                      "word": "Ruta ",
+                      "start": 81.40492846679687,
+                      "end": 81.67064282226562
+                    },
+                    {
+                      "word": "Pre-diagnóstica.\n",
+                      "start": 81.67064282226562,
+                      "end": 83.085880859375
+                    },
+                    {
+                      "word": "\nHemos ",
+                      "start": 83.085880859375,
+                      "end": 83.34016674804687
+                    },
+                    {
+                      "word": "recibido ",
+                      "start": 83.34016674804687,
+                      "end": 83.78302392578125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 83.78302392578125,
+                      "end": 83.87064282226562
+                    },
+                    {
+                      "word": "su ",
+                      "start": 83.87064282226562,
+                      "end": 84.15826196289062
+                    },
+                    {
+                      "word": "I ",
+                      "start": 84.15826196289062,
+                      "end": 84.46778564453125
+                    },
+                    {
+                      "word": "P ",
+                      "start": 84.46778564453125,
+                      "end": 84.7773095703125
+                    },
+                    {
+                      "word": "S ",
+                      "start": 84.7773095703125,
+                      "end": 85.12016674804687
+                    },
+                    {
+                      "word": "de ",
+                      "start": 85.12016674804687,
+                      "end": 85.24207153320313
+                    },
+                    {
+                      "word": "atención ",
+                      "start": 85.24207153320313,
+                      "end": 85.59635717773438
+                    },
+                    {
+                      "word": "primaria ",
+                      "start": 85.59635717773438,
+                      "end": 86.42492846679687
+                    },
+                    {
+                      "word": "un ",
+                      "start": 86.42492846679687,
+                      "end": 86.63540478515625
+                    },
+                    {
+                      "word": "reporte ",
+                      "start": 86.63540478515625,
+                      "end": 87.18778564453125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 87.18778564453125,
+                      "end": 87.221119140625
+                    },
+                    {
+                      "word": "laboratorio… ",
+                      "start": 87.221119140625,
+                      "end": 87.29826196289062
+                    },
+                    {
+                      "word": "en ",
+                      "start": 87.29826196289062,
+                      "end": 88.34873803710937
+                    },
+                    {
+                      "word": "donde ",
+                      "start": 88.34873803710937,
+                      "end": 88.54778564453125
+                    },
+                    {
+                      "word": "se ",
+                      "start": 88.54778564453125,
+                      "end": 88.8135
+                    },
+                    {
+                      "word": "sospecha ",
+                      "start": 88.8135,
+                      "end": 88.92397607421876
+                    },
+                    {
+                      "word": "de ",
+                      "start": 88.92397607421876,
+                      "end": 89.30016674804688
+                    },
+                    {
+                      "word": "un ",
+                      "start": 89.30016674804688,
+                      "end": 89.41064282226563
+                    },
+                    {
+                      "word": "hallazgo ",
+                      "start": 89.41064282226563,
+                      "end": 89.54302392578126
+                    },
+                    {
+                      "word": "en ",
+                      "start": 89.54302392578126,
+                      "end": 89.90778564453124
+                    },
+                    {
+                      "word": "la ",
+                      "start": 89.90778564453124,
+                      "end": 90.00778564453125
+                    },
+                    {
+                      "word": "próstata.",
+                      "start": 90.00778564453125,
+                      "end": 90.10683325195312
+                    },
+                    {
+                      "word": "\n\nY ",
+                      "start": 90.9558095703125,
+                      "end": 91.099619140625
+                    },
+                    {
+                      "word": "queremos ",
+                      "start": 91.099619140625,
+                      "end": 91.464380859375
+                    },
+                    {
+                      "word": "ofrecerle ",
+                      "start": 91.464380859375,
+                      "end": 91.852
+                    },
+                    {
+                      "word": "una ",
+                      "start": 91.852,
+                      "end": 92.02914282226563
+                    },
+                    {
+                      "word": "cita ",
+                      "start": 92.02914282226563,
+                      "end": 92.44914282226563
+                    },
+                    {
+                      "word": "de ",
+                      "start": 92.44914282226563,
+                      "end": 92.60342846679687
+                    },
+                    {
+                      "word": "telemedicina ",
+                      "start": 92.60342846679687,
+                      "end": 93.37771435546875
+                    },
+                    {
+                      "word": "con ",
+                      "start": 93.37771435546875,
+                      "end": 93.54342846679687
+                    },
+                    {
+                      "word": "un ",
+                      "start": 93.54342846679687,
+                      "end": 93.62057153320312
+                    },
+                    {
+                      "word": "profesional ",
+                      "start": 93.62057153320312,
+                      "end": 94.20723803710938
+                    },
+                    {
+                      "word": "de ",
+                      "start": 94.20723803710938,
+                      "end": 94.31771435546875
+                    },
+                    {
+                      "word": "la ",
+                      "start": 94.31771435546875,
+                      "end": 94.4281904296875
+                    },
+                    {
+                      "word": "salud, ",
+                      "start": 94.4281904296875,
+                      "end": 95.092
+                    },
+                    {
+                      "word": "quien ",
+                      "start": 95.092,
+                      "end": 95.33485717773438
+                    },
+                    {
+                      "word": "le ",
+                      "start": 95.33485717773438,
+                      "end": 95.43390478515624
+                    },
+                    {
+                      "word": "ordenará ",
+                      "start": 95.43390478515624,
+                      "end": 95.91009521484375
+                    },
+                    {
+                      "word": "los ",
+                      "start": 95.91009521484375,
+                      "end": 96.08628564453124
+                    },
+                    {
+                      "word": "exámenes ",
+                      "start": 96.08628564453124,
+                      "end": 96.71676196289063
+                    },
+                    {
+                      "word": "complementarios ",
+                      "start": 96.71676196289063,
+                      "end": 97.69009521484375
+                    },
+                    {
+                      "word": "que ",
+                      "start": 97.69009521484375,
+                      "end": 97.812
+                    },
+                    {
+                      "word": "necesita ",
+                      "start": 97.812,
+                      "end": 98.33104760742188
+                    },
+                    {
+                      "word": "realizarse.",
+                      "start": 98.33104760742188,
+                      "end": 99.18247607421876
+                    },
+                    {
+                      "word": "\n\n¿Comprende ",
+                      "start": 99.19305346679687,
+                      "end": 99.69019653320312
+                    },
+                    {
+                      "word": "la ",
+                      "start": 99.69019653320312,
+                      "end": 99.76733935546875
+                    },
+                    {
+                      "word": "información ",
+                      "start": 99.76733935546875,
+                      "end": 100.4978154296875
+                    },
+                    {
+                      "word": "que ",
+                      "start": 100.4978154296875,
+                      "end": 100.60829174804688
+                    },
+                    {
+                      "word": "le ",
+                      "start": 100.60829174804688,
+                      "end": 100.70733935546875
+                    },
+                    {
+                      "word": "brindé?",
+                      "start": 100.70733935546875,
+                      "end": 101.39305346679687
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 6
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Sí. ",
+                  "words": [
+                    {
+                      "word": "Sí. ",
+                      "start": 103.124,
+                      "end": 103.444
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Muy ",
+                      "start": 106.443052734375,
+                      "end": 106.663052734375
+                    },
+                    {
+                      "word": "bien, ",
+                      "start": 106.663052734375,
+                      "end": 106.89568432617187
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 106.89568432617187,
+                      "end": 107.09042114257812
+                    },
+                    {
+                      "word": "Carlos. ",
+                      "start": 107.09042114257812,
+                      "end": 107.702
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 107.71887719726563,
+                      "end": 107.90203515625
+                    },
+                    {
+                      "word": "voy ",
+                      "start": 107.90203515625,
+                      "end": 108.060982421875
+                    },
+                    {
+                      "word": "a ",
+                      "start": 108.060982421875,
+                      "end": 108.13466674804687
+                    },
+                    {
+                      "word": "compartir ",
+                      "start": 108.13466674804687,
+                      "end": 108.59887719726562
+                    },
+                    {
+                      "word": "las ",
+                      "start": 108.59887719726562,
+                      "end": 108.7704560546875
+                    },
+                    {
+                      "word": "fechas ",
+                      "start": 108.7704560546875,
+                      "end": 109.0515087890625
+                    },
+                    {
+                      "word": "disponibles… ",
+                      "start": 109.0515087890625,
+                      "end": 110.07782446289062
+                    },
+                    {
+                      "word": "todas ",
+                      "start": 110.07782446289062,
+                      "end": 110.45677197265626
+                    },
+                    {
+                      "word": "son ",
+                      "start": 110.45677197265626,
+                      "end": 110.6525615234375
+                    },
+                    {
+                      "word": "el ",
+                      "start": 110.6525615234375,
+                      "end": 110.77466674804687
+                    },
+                    {
+                      "word": "viernes… ",
+                      "start": 110.77466674804687,
+                      "end": 111.67887719726562
+                    },
+                    {
+                      "word": "veintisiete ",
+                      "start": 111.67887719726562,
+                      "end": 112.49782446289062
+                    },
+                    {
+                      "word": "de ",
+                      "start": 112.49782446289062,
+                      "end": 112.59571923828125
+                    },
+                    {
+                      "word": "marzo.",
+                      "start": 112.59571923828125,
+                      "end": 113.26729833984375
+                    },
+                    {
+                      "word": "\n\nLa ",
+                      "start": 113.30662939453126,
+                      "end": 113.45399780273438
+                    },
+                    {
+                      "word": "opción ",
+                      "start": 113.45399780273438,
+                      "end": 114.07715576171876
+                    },
+                    {
+                      "word": "uno… ",
+                      "start": 114.07715576171876,
+                      "end": 114.61505053710937
+                    },
+                    {
+                      "word": "a ",
+                      "start": 114.61505053710937,
+                      "end": 114.77399780273437
+                    },
+                    {
+                      "word": "las ",
+                      "start": 114.77399780273437,
+                      "end": 114.93294506835937
+                    },
+                    {
+                      "word": "siete ",
+                      "start": 114.93294506835937,
+                      "end": 115.27505053710938
+                    },
+                    {
+                      "word": "de ",
+                      "start": 115.27505053710938,
+                      "end": 115.37294506835937
+                    },
+                    {
+                      "word": "la ",
+                      "start": 115.37294506835937,
+                      "end": 115.50662939453125
+                    },
+                    {
+                      "word": "mañana.",
+                      "start": 115.50662939453125,
+                      "end": 116.19083984375
+                    },
+                    {
+                      "word": "\nLa ",
+                      "start": 116.19408984375,
+                      "end": 116.31619506835938
+                    },
+                    {
+                      "word": "opción ",
+                      "start": 116.31619506835938,
+                      "end": 116.68251098632813
+                    },
+                    {
+                      "word": "dos… ",
+                      "start": 116.68251098632813,
+                      "end": 117.5256689453125
+                    },
+                    {
+                      "word": "a ",
+                      "start": 117.5256689453125,
+                      "end": 117.66040576171875
+                    },
+                    {
+                      "word": "las ",
+                      "start": 117.66040576171875,
+                      "end": 117.83093212890626
+                    },
+                    {
+                      "word": "siete ",
+                      "start": 117.83093212890626,
+                      "end": 118.22251098632813
+                    },
+                    {
+                      "word": "y ",
+                      "start": 118.22251098632813,
+                      "end": 118.30777416992187
+                    },
+                    {
+                      "word": "treinta ",
+                      "start": 118.30777416992187,
+                      "end": 118.7235634765625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 118.7235634765625,
+                      "end": 118.79724780273438
+                    },
+                    {
+                      "word": "la ",
+                      "start": 118.79724780273438,
+                      "end": 118.91935302734375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 7
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "La opción uno. ",
+                  "words": [
+                    {
+                      "word": "La ",
+                      "start": 118.67399999999999,
+                      "end": 118.994
+                    },
+                    {
+                      "word": "opción ",
+                      "start": 118.994,
+                      "end": 119.234
+                    },
+                    {
+                      "word": "uno. ",
+                      "start": 119.234,
+                      "end": 119.47399999999999
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Perfecto, ",
+                      "start": 125.4413447265625,
+                      "end": 125.90168969726562
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 125.90168969726562,
+                      "end": 126.05168969726563
+                    },
+                    {
+                      "word": "Carlos. ",
+                      "start": 126.05168969726563,
+                      "end": 126.58186206054687
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 126.59855322265625,
+                      "end": 126.718380859375
+                    },
+                    {
+                      "word": "apartamos ",
+                      "start": 126.718380859375,
+                      "end": 127.08820825195312
+                    },
+                    {
+                      "word": "su ",
+                      "start": 127.08820825195312,
+                      "end": 127.1890703125
+                    },
+                    {
+                      "word": "cita ",
+                      "start": 127.1890703125,
+                      "end": 127.49941528320312
+                    },
+                    {
+                      "word": "para ",
+                      "start": 127.49941528320312,
+                      "end": 127.6787255859375
+                    },
+                    {
+                      "word": "el… ",
+                      "start": 127.6787255859375,
+                      "end": 128.32010498046876
+                    },
+                    {
+                      "word": "viernes… ",
+                      "start": 128.32010498046876,
+                      "end": 129.03044970703124
+                    },
+                    {
+                      "word": "veintisiete ",
+                      "start": 129.03044970703124,
+                      "end": 129.69079443359374
+                    },
+                    {
+                      "word": "de ",
+                      "start": 129.69079443359374,
+                      "end": 129.78131176757813
+                    },
+                    {
+                      "word": "marzo… ",
+                      "start": 129.78131176757813,
+                      "end": 130.41148413085938
+                    },
+                    {
+                      "word": "a ",
+                      "start": 130.41148413085938,
+                      "end": 130.5218291015625
+                    },
+                    {
+                      "word": "las ",
+                      "start": 130.5218291015625,
+                      "end": 130.66148413085938
+                    },
+                    {
+                      "word": "siete ",
+                      "start": 130.66148413085938,
+                      "end": 130.932173828125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 130.932173828125,
+                      "end": 131.01234619140624
+                    },
+                    {
+                      "word": "la ",
+                      "start": 131.01234619140624,
+                      "end": 131.11234619140626
+                    },
+                    {
+                      "word": "mañana.",
+                      "start": 131.11234619140626,
+                      "end": 131.67269116210937
+                    },
+                    {
+                      "word": "\n\nRecuerde ",
+                      "start": 131.6859697265625,
+                      "end": 132.00579736328126
+                    },
+                    {
+                      "word": "estar ",
+                      "start": 132.00579736328126,
+                      "end": 132.19631469726562
+                    },
+                    {
+                      "word": "pendiente ",
+                      "start": 132.19631469726562,
+                      "end": 132.57648706054687
+                    },
+                    {
+                      "word": "a ",
+                      "start": 132.57648706054687,
+                      "end": 132.61614233398439
+                    },
+                    {
+                      "word": "su ",
+                      "start": 132.61614233398439,
+                      "end": 132.73683178710937
+                    },
+                    {
+                      "word": "teléfono ",
+                      "start": 132.73683178710937,
+                      "end": 133.13683178710937
+                    },
+                    {
+                      "word": "ese ",
+                      "start": 133.13683178710937,
+                      "end": 133.2971767578125
+                    },
+                    {
+                      "word": "día. ",
+                      "start": 133.2971767578125,
+                      "end": 133.71700439453124
+                    },
+                    {
+                      "word": "¡Que ",
+                      "start": 133.749880859375,
+                      "end": 134.099880859375
+                    },
+                    {
+                      "word": "tenga ",
+                      "start": 134.099880859375,
+                      "end": 134.4205703125
+                    },
+                    {
+                      "word": "un ",
+                      "start": 134.4205703125,
+                      "end": 134.54039794921874
+                    },
+                    {
+                      "word": "excelente ",
+                      "start": 134.54039794921874,
+                      "end": 135.21108764648437
+                    },
+                    {
+                      "word": "día!",
+                      "start": 135.21108764648437,
+                      "end": 135.68177734375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 8
+                  }
+                }
+              ],
+              "transcript_with_tool_calls": [
+                {
+                  "role": "node_transition",
+                  "former_node_id": "begin",
+                  "former_node_name": "begin",
+                  "new_node_id": "node-01-saludo",
+                  "new_node_name": "01 · Verificación de identidad",
+                  "time_sec": 0,
+                  "global_transition": false
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "¡Aalo, ",
+                      "start": 2.017333251953125,
+                      "end": 2.415428466796875
+                    },
+                    {
+                      "word": "buen ",
+                      "start": 2.415428466796875,
+                      "end": 2.603047607421875
+                    },
+                    {
+                      "word": "día! ",
+                      "start": 2.603047607421875,
+                      "end": 3.13352392578125
+                    },
+                    {
+                      "word": "¿Me ",
+                      "start": 3.18035107421875,
+                      "end": 3.29177978515625
+                    },
+                    {
+                      "word": "comunico ",
+                      "start": 3.29177978515625,
+                      "end": 3.623208251953125
+                    },
+                    {
+                      "word": "con ",
+                      "start": 3.623208251953125,
+                      "end": 3.745113037109375
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 3.745113037109375,
+                      "end": 3.910827392578125
+                    },
+                    {
+                      "word": "Carlos?",
+                      "start": 3.910827392578125,
+                      "end": 4.64035107421875
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 0
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Hola, buenos días, sí, con él habla. ",
+                  "words": [
+                    {
+                      "word": "Hola, ",
+                      "start": 5.914000000000001,
+                      "end": 6.394
+                    },
+                    {
+                      "word": "buenos ",
+                      "start": 6.394,
+                      "end": 6.554
+                    },
+                    {
+                      "word": "días, ",
+                      "start": 6.554,
+                      "end": 6.7939997000000005
+                    },
+                    {
+                      "word": "sí, ",
+                      "start": 6.7939997000000005,
+                      "end": 6.954000000000001
+                    },
+                    {
+                      "word": "con ",
+                      "start": 6.954000000000001,
+                      "end": 7.034
+                    },
+                    {
+                      "word": "él ",
+                      "start": 7.034,
+                      "end": 7.114
+                    },
+                    {
+                      "word": "habla. ",
+                      "start": 7.114,
+                      "end": 7.274
+                    }
+                  ]
+                },
+                {
+                  "role": "node_transition",
+                  "former_node_id": "node-01-saludo",
+                  "former_node_name": "01 · Verificación de identidad",
+                  "new_node_id": "node-02-presentacion",
+                  "new_node_name": "02 · Presentación y empatía",
+                  "time_sec": 8.893,
+                  "global_transition": false
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Perfecto, ",
+                      "start": 10.068252197265625,
+                      "end": 10.6331171875
+                    },
+                    {
+                      "word": "gracias ",
+                      "start": 10.6331171875,
+                      "end": 10.936720703125
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 10.936720703125,
+                      "end": 11.0934775390625
+                    },
+                    {
+                      "word": "Carlos. ",
+                      "start": 11.0934775390625,
+                      "end": 11.606090087890625
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 11.655024658203125,
+                      "end": 11.80187158203125
+                    },
+                    {
+                      "word": "habla ",
+                      "start": 11.80187158203125,
+                      "end": 12.053222900390624
+                    },
+                    {
+                      "word": "Saraí, ",
+                      "start": 12.053222900390624,
+                      "end": 12.555024658203125
+                    },
+                    {
+                      "word": "llamo ",
+                      "start": 12.555024658203125,
+                      "end": 12.847817626953125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 12.847817626953125,
+                      "end": 12.94151123046875
+                    },
+                    {
+                      "word": "parte ",
+                      "start": 12.94151123046875,
+                      "end": 13.1820517578125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 13.1820517578125,
+                      "end": 13.25592578125
+                    },
+                    {
+                      "word": "la ",
+                      "start": 13.25592578125,
+                      "end": 13.349619384765624
+                    },
+                    {
+                      "word": "Fundación ",
+                      "start": 13.349619384765624,
+                      "end": 13.726196044921876
+                    },
+                    {
+                      "word": "SerSocial ",
+                      "start": 13.726196044921876,
+                      "end": 14.32259228515625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 14.32259228515625,
+                      "end": 14.542412109375
+                    },
+                    {
+                      "word": "P ",
+                      "start": 14.542412109375,
+                      "end": 14.835204833984376
+                    },
+                    {
+                      "word": "S ",
+                      "start": 14.835204833984376,
+                      "end": 15.127997802734376
+                    },
+                    {
+                      "word": "y ",
+                      "start": 15.127997802734376,
+                      "end": 15.2955654296875
+                    },
+                    {
+                      "word": "de ",
+                      "start": 15.2955654296875,
+                      "end": 15.40006982421875
+                    },
+                    {
+                      "word": "Mutual ",
+                      "start": 15.40006982421875,
+                      "end": 15.74511474609375
+                    },
+                    {
+                      "word": "Ser. ",
+                      "start": 15.74511474609375,
+                      "end": 16.2577275390625
+                    },
+                    {
+                      "word": "¿Cómo ",
+                      "start": 16.306274658203126,
+                      "end": 16.599968505859376
+                    },
+                    {
+                      "word": "se ",
+                      "start": 16.599968505859376,
+                      "end": 16.662130615234375
+                    },
+                    {
+                      "word": "encuentra ",
+                      "start": 16.662130615234375,
+                      "end": 17.038707275390625
+                    },
+                    {
+                      "word": "el ",
+                      "start": 17.038707275390625,
+                      "end": 17.143211669921875
+                    },
+                    {
+                      "word": "día ",
+                      "start": 17.143211669921875,
+                      "end": 17.383752197265625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 17.383752197265625,
+                      "end": 17.4468154296875
+                    },
+                    {
+                      "word": "hoy?",
+                      "start": 17.4468154296875,
+                      "end": 17.938707275390627
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 1
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Bien, bien, ¿está? ",
+                  "words": [
+                    {
+                      "word": "Bien, ",
+                      "start": 19.693998,
+                      "end": 20.093999999999998
+                    },
+                    {
+                      "word": "bien, ",
+                      "start": 20.093999999999998,
+                      "end": 20.334
+                    },
+                    {
+                      "word": "¿está? ",
+                      "start": 20.334,
+                      "end": 20.413999999999998
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Me ",
+                      "start": 23.096252197265624,
+                      "end": 23.2007568359375
+                    },
+                    {
+                      "word": "alegra ",
+                      "start": 23.2007568359375,
+                      "end": 23.46201806640625
+                    },
+                    {
+                      "word": "escuchar ",
+                      "start": 23.46201806640625,
+                      "end": 23.86021630859375
+                    },
+                    {
+                      "word": "eso. ",
+                      "start": 23.86021630859375,
+                      "end": 24.257513427734374
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 24.297024658203124,
+                      "end": 24.454682373046875
+                    },
+                    {
+                      "word": "llamo ",
+                      "start": 24.454682373046875,
+                      "end": 24.695222900390625
+                    },
+                    {
+                      "word": "para ",
+                      "start": 24.695222900390625,
+                      "end": 24.851979736328126
+                    },
+                    {
+                      "word": "agendarle ",
+                      "start": 24.851979736328126,
+                      "end": 25.342970703125
+                    },
+                    {
+                      "word": "una ",
+                      "start": 25.342970703125,
+                      "end": 25.510538330078123
+                    },
+                    {
+                      "word": "cita ",
+                      "start": 25.510538330078123,
+                      "end": 25.814141845703126
+                    },
+                    {
+                      "word": "médica ",
+                      "start": 25.814141845703126,
+                      "end": 26.20062841796875
+                    },
+                    {
+                      "word": "con ",
+                      "start": 26.20062841796875,
+                      "end": 26.3790068359375
+                    },
+                    {
+                      "word": "nosotros ",
+                      "start": 26.3790068359375,
+                      "end": 26.92315087890625
+                    },
+                    {
+                      "word": "en ",
+                      "start": 26.92315087890625,
+                      "end": 26.996123779296877
+                    },
+                    {
+                      "word": "la ",
+                      "start": 26.996123779296877,
+                      "end": 27.089817626953124
+                    },
+                    {
+                      "word": "Fundación ",
+                      "start": 27.089817626953124,
+                      "end": 27.56098876953125
+                    },
+                    {
+                      "word": "SerSocial ",
+                      "start": 27.56098876953125,
+                      "end": 28.17810595703125
+                    },
+                    {
+                      "word": "I ",
+                      "start": 28.17810595703125,
+                      "end": 28.3240517578125
+                    },
+                    {
+                      "word": "P ",
+                      "start": 28.3240517578125,
+                      "end": 28.56459228515625
+                    },
+                    {
+                      "word": "S, ",
+                      "start": 28.56459228515625,
+                      "end": 29.108736572265624
+                    },
+                    {
+                      "word": "¿le ",
+                      "start": 29.108736572265624,
+                      "end": 29.42225
+                    },
+                    {
+                      "word": "parece ",
+                      "start": 29.42225,
+                      "end": 29.736664306640623
+                    },
+                    {
+                      "word": "bien ",
+                      "start": 29.736664306640623,
+                      "end": 29.94567333984375
+                    },
+                    {
+                      "word": "si ",
+                      "start": 29.94567333984375,
+                      "end": 30.08170947265625
+                    },
+                    {
+                      "word": "le ",
+                      "start": 30.08170947265625,
+                      "end": 30.1862138671875
+                    },
+                    {
+                      "word": "comento ",
+                      "start": 30.1862138671875,
+                      "end": 30.56279052734375
+                    },
+                    {
+                      "word": "las ",
+                      "start": 30.56279052734375,
+                      "end": 30.71954736328125
+                    },
+                    {
+                      "word": "opciones ",
+                      "start": 30.71954736328125,
+                      "end": 31.1375654296875
+                    },
+                    {
+                      "word": "disponibles?",
+                      "start": 31.1375654296875,
+                      "end": 32.0790068359375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 2
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Aló, sí. ",
+                  "words": [
+                    {
+                      "word": "Aló, ",
+                      "start": 44.354000000000006,
+                      "end": 44.753998
+                    },
+                    {
+                      "word": "sí. ",
+                      "start": 44.753998,
+                      "end": 44.914
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "¿Aló? ¿Me escucha?",
+                  "words": [
+                    {
+                      "word": "¿Aló? ",
+                      "start": 44.094531494140625,
+                      "end": 44.77381079101563
+                    },
+                    {
+                      "word": "¿Me ",
+                      "start": 44.82339965820312,
+                      "end": 44.93871508789063
+                    },
+                    {
+                      "word": "escucha?",
+                      "start": 44.93871508789063,
+                      "end": 45.660336669921875
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 3
+                  }
+                },
+                {
+                  "role": "node_transition",
+                  "former_node_id": "node-02-presentacion",
+                  "former_node_name": "02 · Presentación y empatía",
+                  "new_node_id": "node-1772746300087",
+                  "new_node_name": "Introducción ",
+                  "time_sec": 46.707,
+                  "global_transition": false
+                },
+                {
+                  "role": "agent",
+                  "content": "Le ",
+                  "words": [
+                    {
+                      "word": "Le ",
+                      "start": 47.77563647460938,
+                      "end": 47.8910908203125
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 4
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Sí. ",
+                  "words": [
+                    {
+                      "word": "Sí. ",
+                      "start": 47.804,
+                      "end": 48.044000000000004
+                    }
+                  ]
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Le ",
+                      "start": 50.822727294921876,
+                      "end": 50.9490908203125
+                    },
+                    {
+                      "word": "contactamos ",
+                      "start": 50.9490908203125,
+                      "end": 51.5190908203125
+                    },
+                    {
+                      "word": "hoy ",
+                      "start": 51.5190908203125,
+                      "end": 51.7090908203125
+                    },
+                    {
+                      "word": "porque, ",
+                      "start": 51.7090908203125,
+                      "end": 52.1209091796875
+                    },
+                    {
+                      "word": "a ",
+                      "start": 52.1209091796875,
+                      "end": 52.226363525390624
+                    },
+                    {
+                      "word": "través ",
+                      "start": 52.226363525390624,
+                      "end": 52.48
+                    },
+                    {
+                      "word": "de ",
+                      "start": 52.48,
+                      "end": 52.57454541015625
+                    },
+                    {
+                      "word": "su ",
+                      "start": 52.57454541015625,
+                      "end": 52.67
+                    },
+                    {
+                      "word": "componente ",
+                      "start": 52.67,
+                      "end": 53.387272705078125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 53.387272705078125,
+                      "end": 53.48272729492187
+                    },
+                    {
+                      "word": "Gestión ",
+                      "start": 53.48272729492187,
+                      "end": 53.75727270507812
+                    },
+                    {
+                      "word": "del ",
+                      "start": 53.75727270507812,
+                      "end": 53.883636474609375
+                    },
+                    {
+                      "word": "Riesgo ",
+                      "start": 53.883636474609375,
+                      "end": 54.11545458984375
+                    },
+                    {
+                      "word": "en ",
+                      "start": 54.11545458984375,
+                      "end": 54.2109091796875
+                    },
+                    {
+                      "word": "Salud, ",
+                      "start": 54.2109091796875,
+                      "end": 54.89727270507812
+                    },
+                    {
+                      "word": "usted ",
+                      "start": 54.89727270507812,
+                      "end": 55.19272729492187
+                    },
+                    {
+                      "word": "cuenta ",
+                      "start": 55.19272729492187,
+                      "end": 55.5090908203125
+                    },
+                    {
+                      "word": "con ",
+                      "start": 55.5090908203125,
+                      "end": 55.667272705078126
+                    },
+                    {
+                      "word": "una ",
+                      "start": 55.667272705078126,
+                      "end": 55.84636352539062
+                    },
+                    {
+                      "word": "Ruta ",
+                      "start": 55.84636352539062,
+                      "end": 56.226363525390624
+                    },
+                    {
+                      "word": "Pre-diagnóstica.\n",
+                      "start": 56.226363525390624,
+                      "end": 57.493636474609374
+                    },
+                    {
+                      "word": "\nHemos ",
+                      "start": 57.493636474609374,
+                      "end": 57.75727270507812
+                    },
+                    {
+                      "word": "recibido ",
+                      "start": 57.75727270507812,
+                      "end": 58.158181884765625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 58.158181884765625,
+                      "end": 58.24272729492188
+                    },
+                    {
+                      "word": "su ",
+                      "start": 58.24272729492188,
+                      "end": 58.28454541015625
+                    },
+                    {
+                      "word": "I ",
+                      "start": 58.28454541015625,
+                      "end": 58.46363647460937
+                    },
+                    {
+                      "word": "P ",
+                      "start": 58.46363647460937,
+                      "end": 58.70636352539063
+                    },
+                    {
+                      "word": "S ",
+                      "start": 58.70636352539063,
+                      "end": 59.033636474609374
+                    },
+                    {
+                      "word": "de ",
+                      "start": 59.033636474609374,
+                      "end": 59.3609091796875
+                    },
+                    {
+                      "word": "atención ",
+                      "start": 59.3609091796875,
+                      "end": 59.47727270507813
+                    },
+                    {
+                      "word": "primaria ",
+                      "start": 59.47727270507813,
+                      "end": 59.82545458984375
+                    },
+                    {
+                      "word": "un ",
+                      "start": 59.82545458984375,
+                      "end": 60.4590908203125
+                    },
+                    {
+                      "word": "reporte… ",
+                      "start": 60.4590908203125,
+                      "end": 60.71181811523437
+                    },
+                    {
+                      "word": "pero ",
+                      "start": 60.71181811523437,
+                      "end": 61.69363647460938
+                    },
+                    {
+                      "word": "antes ",
+                      "start": 61.69363647460938,
+                      "end": 61.89454541015625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 61.89454541015625,
+                      "end": 62.137272705078125
+                    },
+                    {
+                      "word": "seguir, ",
+                      "start": 62.137272705078125,
+                      "end": 62.231818115234375
+                    },
+                    {
+                      "word": "le ",
+                      "start": 62.231818115234375,
+                      "end": 62.68545458984375
+                    },
+                    {
+                      "word": "comento ",
+                      "start": 62.68545458984375,
+                      "end": 62.822727294921876
+                    },
+                    {
+                      "word": "que ",
+                      "start": 62.822727294921876,
+                      "end": 63.15
+                    },
+                    {
+                      "word": "esta ",
+                      "start": 63.15,
+                      "end": 63.23454541015625
+                    },
+                    {
+                      "word": "llamada ",
+                      "start": 63.23454541015625,
+                      "end": 63.413636474609376
+                    },
+                    {
+                      "word": "está ",
+                      "start": 63.413636474609376,
+                      "end": 63.77272729492187
+                    },
+                    {
+                      "word": "siendo ",
+                      "start": 63.77272729492187,
+                      "end": 64.01545458984376
+                    },
+                    {
+                      "word": "grabada ",
+                      "start": 64.01545458984376,
+                      "end": 64.23727270507813
+                    },
+                    {
+                      "word": "con ",
+                      "start": 64.23727270507813,
+                      "end": 64.61727270507812
+                    },
+                    {
+                      "word": "fines ",
+                      "start": 64.61727270507812,
+                      "end": 64.77545458984375
+                    },
+                    {
+                      "word": "de ",
+                      "start": 64.77545458984375,
+                      "end": 65.0390908203125
+                    },
+                    {
+                      "word": "calidad ",
+                      "start": 65.0390908203125,
+                      "end": 65.13454541015625
+                    },
+                    {
+                      "word": "del ",
+                      "start": 65.13454541015625,
+                      "end": 65.47181811523437
+                    },
+                    {
+                      "word": "servicio. ",
+                      "start": 65.47181811523437,
+                      "end": 65.6409091796875
+                    },
+                    {
+                      "word": "¿Está ",
+                      "start": 66.3371591796875,
+                      "end": 66.65443188476563
+                    },
+                    {
+                      "word": "de ",
+                      "start": 66.65443188476563,
+                      "end": 66.7171591796875
+                    },
+                    {
+                      "word": "acuerdo?",
+                      "start": 66.7171591796875,
+                      "end": 67.37170458984374
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 5
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Sí. ",
+                  "words": [
+                    {
+                      "word": "Sí. ",
+                      "start": 69.39399999999999,
+                      "end": 69.714
+                    }
+                  ]
+                },
+                {
+                  "role": "node_transition",
+                  "former_node_id": "node-1772746300087",
+                  "former_node_name": "Introducción ",
+                  "new_node_id": "node-02b-motivo",
+                  "new_node_name": "02B · Motivo de la llamada",
+                  "time_sec": 70.329,
+                  "global_transition": false
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "¡Gracias, ",
+                      "start": 72.91747607421875,
+                      "end": 73.43747607421875
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 73.43747607421875,
+                      "end": 73.63652392578125
+                    },
+                    {
+                      "word": "Carlos! ",
+                      "start": 73.63652392578125,
+                      "end": 74.267
+                    },
+                    {
+                      "word": "Como ",
+                      "start": 74.29540478515625,
+                      "end": 74.561119140625
+                    },
+                    {
+                      "word": "le ",
+                      "start": 74.561119140625,
+                      "end": 74.6496904296875
+                    },
+                    {
+                      "word": "venía ",
+                      "start": 74.6496904296875,
+                      "end": 74.90397607421875
+                    },
+                    {
+                      "word": "contando… ",
+                      "start": 74.90397607421875,
+                      "end": 76.07540478515625
+                    },
+                    {
+                      "word": "le ",
+                      "start": 76.07540478515625,
+                      "end": 76.20873803710937
+                    },
+                    {
+                      "word": "contactamos ",
+                      "start": 76.20873803710937,
+                      "end": 76.77254760742187
+                    },
+                    {
+                      "word": "hoy ",
+                      "start": 76.77254760742187,
+                      "end": 77.0373095703125
+                    },
+                    {
+                      "word": "porque, ",
+                      "start": 77.0373095703125,
+                      "end": 77.48016674804687
+                    },
+                    {
+                      "word": "a ",
+                      "start": 77.48016674804687,
+                      "end": 77.56873803710937
+                    },
+                    {
+                      "word": "través ",
+                      "start": 77.56873803710937,
+                      "end": 77.84492846679687
+                    },
+                    {
+                      "word": "de ",
+                      "start": 77.84492846679687,
+                      "end": 77.9335
+                    },
+                    {
+                      "word": "su ",
+                      "start": 77.9335,
+                      "end": 78.04397607421875
+                    },
+                    {
+                      "word": "componente ",
+                      "start": 78.04397607421875,
+                      "end": 78.57445239257812
+                    },
+                    {
+                      "word": "de ",
+                      "start": 78.57445239257812,
+                      "end": 78.68492846679688
+                    },
+                    {
+                      "word": "Gestión ",
+                      "start": 78.68492846679688,
+                      "end": 79.061119140625
+                    },
+                    {
+                      "word": "del ",
+                      "start": 79.061119140625,
+                      "end": 79.22683325195312
+                    },
+                    {
+                      "word": "Riesgo ",
+                      "start": 79.22683325195312,
+                      "end": 79.54778564453125
+                    },
+                    {
+                      "word": "en ",
+                      "start": 79.54778564453125,
+                      "end": 79.63635717773437
+                    },
+                    {
+                      "word": "Salud, ",
+                      "start": 79.63635717773437,
+                      "end": 80.44302392578125
+                    },
+                    {
+                      "word": "usted ",
+                      "start": 80.44302392578125,
+                      "end": 80.74207153320313
+                    },
+                    {
+                      "word": "cuenta ",
+                      "start": 80.74207153320313,
+                      "end": 81.08492846679688
+                    },
+                    {
+                      "word": "con ",
+                      "start": 81.08492846679688,
+                      "end": 81.25064282226562
+                    },
+                    {
+                      "word": "una ",
+                      "start": 81.25064282226562,
+                      "end": 81.40492846679687
+                    },
+                    {
+                      "word": "Ruta ",
+                      "start": 81.40492846679687,
+                      "end": 81.67064282226562
+                    },
+                    {
+                      "word": "Pre-diagnóstica.\n",
+                      "start": 81.67064282226562,
+                      "end": 83.085880859375
+                    },
+                    {
+                      "word": "\nHemos ",
+                      "start": 83.085880859375,
+                      "end": 83.34016674804687
+                    },
+                    {
+                      "word": "recibido ",
+                      "start": 83.34016674804687,
+                      "end": 83.78302392578125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 83.78302392578125,
+                      "end": 83.87064282226562
+                    },
+                    {
+                      "word": "su ",
+                      "start": 83.87064282226562,
+                      "end": 84.15826196289062
+                    },
+                    {
+                      "word": "I ",
+                      "start": 84.15826196289062,
+                      "end": 84.46778564453125
+                    },
+                    {
+                      "word": "P ",
+                      "start": 84.46778564453125,
+                      "end": 84.7773095703125
+                    },
+                    {
+                      "word": "S ",
+                      "start": 84.7773095703125,
+                      "end": 85.12016674804687
+                    },
+                    {
+                      "word": "de ",
+                      "start": 85.12016674804687,
+                      "end": 85.24207153320313
+                    },
+                    {
+                      "word": "atención ",
+                      "start": 85.24207153320313,
+                      "end": 85.59635717773438
+                    },
+                    {
+                      "word": "primaria ",
+                      "start": 85.59635717773438,
+                      "end": 86.42492846679687
+                    },
+                    {
+                      "word": "un ",
+                      "start": 86.42492846679687,
+                      "end": 86.63540478515625
+                    },
+                    {
+                      "word": "reporte ",
+                      "start": 86.63540478515625,
+                      "end": 87.18778564453125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 87.18778564453125,
+                      "end": 87.221119140625
+                    },
+                    {
+                      "word": "laboratorio… ",
+                      "start": 87.221119140625,
+                      "end": 87.29826196289062
+                    },
+                    {
+                      "word": "en ",
+                      "start": 87.29826196289062,
+                      "end": 88.34873803710937
+                    },
+                    {
+                      "word": "donde ",
+                      "start": 88.34873803710937,
+                      "end": 88.54778564453125
+                    },
+                    {
+                      "word": "se ",
+                      "start": 88.54778564453125,
+                      "end": 88.8135
+                    },
+                    {
+                      "word": "sospecha ",
+                      "start": 88.8135,
+                      "end": 88.92397607421876
+                    },
+                    {
+                      "word": "de ",
+                      "start": 88.92397607421876,
+                      "end": 89.30016674804688
+                    },
+                    {
+                      "word": "un ",
+                      "start": 89.30016674804688,
+                      "end": 89.41064282226563
+                    },
+                    {
+                      "word": "hallazgo ",
+                      "start": 89.41064282226563,
+                      "end": 89.54302392578126
+                    },
+                    {
+                      "word": "en ",
+                      "start": 89.54302392578126,
+                      "end": 89.90778564453124
+                    },
+                    {
+                      "word": "la ",
+                      "start": 89.90778564453124,
+                      "end": 90.00778564453125
+                    },
+                    {
+                      "word": "próstata.",
+                      "start": 90.00778564453125,
+                      "end": 90.10683325195312
+                    },
+                    {
+                      "word": "\n\nY ",
+                      "start": 90.9558095703125,
+                      "end": 91.099619140625
+                    },
+                    {
+                      "word": "queremos ",
+                      "start": 91.099619140625,
+                      "end": 91.464380859375
+                    },
+                    {
+                      "word": "ofrecerle ",
+                      "start": 91.464380859375,
+                      "end": 91.852
+                    },
+                    {
+                      "word": "una ",
+                      "start": 91.852,
+                      "end": 92.02914282226563
+                    },
+                    {
+                      "word": "cita ",
+                      "start": 92.02914282226563,
+                      "end": 92.44914282226563
+                    },
+                    {
+                      "word": "de ",
+                      "start": 92.44914282226563,
+                      "end": 92.60342846679687
+                    },
+                    {
+                      "word": "telemedicina ",
+                      "start": 92.60342846679687,
+                      "end": 93.37771435546875
+                    },
+                    {
+                      "word": "con ",
+                      "start": 93.37771435546875,
+                      "end": 93.54342846679687
+                    },
+                    {
+                      "word": "un ",
+                      "start": 93.54342846679687,
+                      "end": 93.62057153320312
+                    },
+                    {
+                      "word": "profesional ",
+                      "start": 93.62057153320312,
+                      "end": 94.20723803710938
+                    },
+                    {
+                      "word": "de ",
+                      "start": 94.20723803710938,
+                      "end": 94.31771435546875
+                    },
+                    {
+                      "word": "la ",
+                      "start": 94.31771435546875,
+                      "end": 94.4281904296875
+                    },
+                    {
+                      "word": "salud, ",
+                      "start": 94.4281904296875,
+                      "end": 95.092
+                    },
+                    {
+                      "word": "quien ",
+                      "start": 95.092,
+                      "end": 95.33485717773438
+                    },
+                    {
+                      "word": "le ",
+                      "start": 95.33485717773438,
+                      "end": 95.43390478515624
+                    },
+                    {
+                      "word": "ordenará ",
+                      "start": 95.43390478515624,
+                      "end": 95.91009521484375
+                    },
+                    {
+                      "word": "los ",
+                      "start": 95.91009521484375,
+                      "end": 96.08628564453124
+                    },
+                    {
+                      "word": "exámenes ",
+                      "start": 96.08628564453124,
+                      "end": 96.71676196289063
+                    },
+                    {
+                      "word": "complementarios ",
+                      "start": 96.71676196289063,
+                      "end": 97.69009521484375
+                    },
+                    {
+                      "word": "que ",
+                      "start": 97.69009521484375,
+                      "end": 97.812
+                    },
+                    {
+                      "word": "necesita ",
+                      "start": 97.812,
+                      "end": 98.33104760742188
+                    },
+                    {
+                      "word": "realizarse.",
+                      "start": 98.33104760742188,
+                      "end": 99.18247607421876
+                    },
+                    {
+                      "word": "\n\n¿Comprende ",
+                      "start": 99.19305346679687,
+                      "end": 99.69019653320312
+                    },
+                    {
+                      "word": "la ",
+                      "start": 99.69019653320312,
+                      "end": 99.76733935546875
+                    },
+                    {
+                      "word": "información ",
+                      "start": 99.76733935546875,
+                      "end": 100.4978154296875
+                    },
+                    {
+                      "word": "que ",
+                      "start": 100.4978154296875,
+                      "end": 100.60829174804688
+                    },
+                    {
+                      "word": "le ",
+                      "start": 100.60829174804688,
+                      "end": 100.70733935546875
+                    },
+                    {
+                      "word": "brindé?",
+                      "start": 100.70733935546875,
+                      "end": 101.39305346679687
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 6
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "Sí. ",
+                  "words": [
+                    {
+                      "word": "Sí. ",
+                      "start": 103.124,
+                      "end": 103.444
+                    }
+                  ]
+                },
+                {
+                  "role": "node_transition",
+                  "former_node_id": "node-02b-motivo",
+                  "former_node_name": "02B · Motivo de la llamada",
+                  "new_node_id": "node-02c-fechas",
+                  "new_node_name": "02C · Fechas disponibles",
+                  "time_sec": 104.012,
+                  "global_transition": false
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Muy ",
+                      "start": 106.443052734375,
+                      "end": 106.663052734375
+                    },
+                    {
+                      "word": "bien, ",
+                      "start": 106.663052734375,
+                      "end": 106.89568432617187
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 106.89568432617187,
+                      "end": 107.09042114257812
+                    },
+                    {
+                      "word": "Carlos. ",
+                      "start": 107.09042114257812,
+                      "end": 107.702
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 107.71887719726563,
+                      "end": 107.90203515625
+                    },
+                    {
+                      "word": "voy ",
+                      "start": 107.90203515625,
+                      "end": 108.060982421875
+                    },
+                    {
+                      "word": "a ",
+                      "start": 108.060982421875,
+                      "end": 108.13466674804687
+                    },
+                    {
+                      "word": "compartir ",
+                      "start": 108.13466674804687,
+                      "end": 108.59887719726562
+                    },
+                    {
+                      "word": "las ",
+                      "start": 108.59887719726562,
+                      "end": 108.7704560546875
+                    },
+                    {
+                      "word": "fechas ",
+                      "start": 108.7704560546875,
+                      "end": 109.0515087890625
+                    },
+                    {
+                      "word": "disponibles… ",
+                      "start": 109.0515087890625,
+                      "end": 110.07782446289062
+                    },
+                    {
+                      "word": "todas ",
+                      "start": 110.07782446289062,
+                      "end": 110.45677197265626
+                    },
+                    {
+                      "word": "son ",
+                      "start": 110.45677197265626,
+                      "end": 110.6525615234375
+                    },
+                    {
+                      "word": "el ",
+                      "start": 110.6525615234375,
+                      "end": 110.77466674804687
+                    },
+                    {
+                      "word": "viernes… ",
+                      "start": 110.77466674804687,
+                      "end": 111.67887719726562
+                    },
+                    {
+                      "word": "veintisiete ",
+                      "start": 111.67887719726562,
+                      "end": 112.49782446289062
+                    },
+                    {
+                      "word": "de ",
+                      "start": 112.49782446289062,
+                      "end": 112.59571923828125
+                    },
+                    {
+                      "word": "marzo.",
+                      "start": 112.59571923828125,
+                      "end": 113.26729833984375
+                    },
+                    {
+                      "word": "\n\nLa ",
+                      "start": 113.30662939453126,
+                      "end": 113.45399780273438
+                    },
+                    {
+                      "word": "opción ",
+                      "start": 113.45399780273438,
+                      "end": 114.07715576171876
+                    },
+                    {
+                      "word": "uno… ",
+                      "start": 114.07715576171876,
+                      "end": 114.61505053710937
+                    },
+                    {
+                      "word": "a ",
+                      "start": 114.61505053710937,
+                      "end": 114.77399780273437
+                    },
+                    {
+                      "word": "las ",
+                      "start": 114.77399780273437,
+                      "end": 114.93294506835937
+                    },
+                    {
+                      "word": "siete ",
+                      "start": 114.93294506835937,
+                      "end": 115.27505053710938
+                    },
+                    {
+                      "word": "de ",
+                      "start": 115.27505053710938,
+                      "end": 115.37294506835937
+                    },
+                    {
+                      "word": "la ",
+                      "start": 115.37294506835937,
+                      "end": 115.50662939453125
+                    },
+                    {
+                      "word": "mañana.",
+                      "start": 115.50662939453125,
+                      "end": 116.19083984375
+                    },
+                    {
+                      "word": "\nLa ",
+                      "start": 116.19408984375,
+                      "end": 116.31619506835938
+                    },
+                    {
+                      "word": "opción ",
+                      "start": 116.31619506835938,
+                      "end": 116.68251098632813
+                    },
+                    {
+                      "word": "dos… ",
+                      "start": 116.68251098632813,
+                      "end": 117.5256689453125
+                    },
+                    {
+                      "word": "a ",
+                      "start": 117.5256689453125,
+                      "end": 117.66040576171875
+                    },
+                    {
+                      "word": "las ",
+                      "start": 117.66040576171875,
+                      "end": 117.83093212890626
+                    },
+                    {
+                      "word": "siete ",
+                      "start": 117.83093212890626,
+                      "end": 118.22251098632813
+                    },
+                    {
+                      "word": "y ",
+                      "start": 118.22251098632813,
+                      "end": 118.30777416992187
+                    },
+                    {
+                      "word": "treinta ",
+                      "start": 118.30777416992187,
+                      "end": 118.7235634765625
+                    },
+                    {
+                      "word": "de ",
+                      "start": 118.7235634765625,
+                      "end": 118.79724780273438
+                    },
+                    {
+                      "word": "la ",
+                      "start": 118.79724780273438,
+                      "end": 118.91935302734375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 7
+                  }
+                },
+                {
+                  "role": "user",
+                  "content": "La opción uno. ",
+                  "words": [
+                    {
+                      "word": "La ",
+                      "start": 118.67399999999999,
+                      "end": 118.994
+                    },
+                    {
+                      "word": "opción ",
+                      "start": 118.994,
+                      "end": 119.234
+                    },
+                    {
+                      "word": "uno. ",
+                      "start": 119.234,
+                      "end": 119.47399999999999
+                    }
+                  ]
+                },
+                {
+                  "role": "node_transition",
+                  "former_node_id": "node-02c-fechas",
+                  "former_node_name": "02C · Fechas disponibles",
+                  "new_node_id": "node-03-1-confirmar",
+                  "new_node_name": "03 · Confirmar opción 1",
+                  "time_sec": 122.79,
+                  "global_transition": false
+                },
+                {
+                  "role": "agent",
+                  "content": "***REDACTED***",
+                  "words": [
+                    {
+                      "word": "Perfecto, ",
+                      "start": 125.4413447265625,
+                      "end": 125.90168969726562
+                    },
+                    {
+                      "word": "Jean ",
+                      "start": 125.90168969726562,
+                      "end": 126.05168969726563
+                    },
+                    {
+                      "word": "Carlos. ",
+                      "start": 126.05168969726563,
+                      "end": 126.58186206054687
+                    },
+                    {
+                      "word": "Le ",
+                      "start": 126.59855322265625,
+                      "end": 126.718380859375
+                    },
+                    {
+                      "word": "apartamos ",
+                      "start": 126.718380859375,
+                      "end": 127.08820825195312
+                    },
+                    {
+                      "word": "su ",
+                      "start": 127.08820825195312,
+                      "end": 127.1890703125
+                    },
+                    {
+                      "word": "cita ",
+                      "start": 127.1890703125,
+                      "end": 127.49941528320312
+                    },
+                    {
+                      "word": "para ",
+                      "start": 127.49941528320312,
+                      "end": 127.6787255859375
+                    },
+                    {
+                      "word": "el… ",
+                      "start": 127.6787255859375,
+                      "end": 128.32010498046876
+                    },
+                    {
+                      "word": "viernes… ",
+                      "start": 128.32010498046876,
+                      "end": 129.03044970703124
+                    },
+                    {
+                      "word": "veintisiete ",
+                      "start": 129.03044970703124,
+                      "end": 129.69079443359374
+                    },
+                    {
+                      "word": "de ",
+                      "start": 129.69079443359374,
+                      "end": 129.78131176757813
+                    },
+                    {
+                      "word": "marzo… ",
+                      "start": 129.78131176757813,
+                      "end": 130.41148413085938
+                    },
+                    {
+                      "word": "a ",
+                      "start": 130.41148413085938,
+                      "end": 130.5218291015625
+                    },
+                    {
+                      "word": "las ",
+                      "start": 130.5218291015625,
+                      "end": 130.66148413085938
+                    },
+                    {
+                      "word": "siete ",
+                      "start": 130.66148413085938,
+                      "end": 130.932173828125
+                    },
+                    {
+                      "word": "de ",
+                      "start": 130.932173828125,
+                      "end": 131.01234619140624
+                    },
+                    {
+                      "word": "la ",
+                      "start": 131.01234619140624,
+                      "end": 131.11234619140626
+                    },
+                    {
+                      "word": "mañana.",
+                      "start": 131.11234619140626,
+                      "end": 131.67269116210937
+                    },
+                    {
+                      "word": "\n\nRecuerde ",
+                      "start": 131.6859697265625,
+                      "end": 132.00579736328126
+                    },
+                    {
+                      "word": "estar ",
+                      "start": 132.00579736328126,
+                      "end": 132.19631469726562
+                    },
+                    {
+                      "word": "pendiente ",
+                      "start": 132.19631469726562,
+                      "end": 132.57648706054687
+                    },
+                    {
+                      "word": "a ",
+                      "start": 132.57648706054687,
+                      "end": 132.61614233398439
+                    },
+                    {
+                      "word": "su ",
+                      "start": 132.61614233398439,
+                      "end": 132.73683178710937
+                    },
+                    {
+                      "word": "teléfono ",
+                      "start": 132.73683178710937,
+                      "end": 133.13683178710937
+                    },
+                    {
+                      "word": "ese ",
+                      "start": 133.13683178710937,
+                      "end": 133.2971767578125
+                    },
+                    {
+                      "word": "día. ",
+                      "start": 133.2971767578125,
+                      "end": 133.71700439453124
+                    },
+                    {
+                      "word": "¡Que ",
+                      "start": 133.749880859375,
+                      "end": 134.099880859375
+                    },
+                    {
+                      "word": "tenga ",
+                      "start": 134.099880859375,
+                      "end": 134.4205703125
+                    },
+                    {
+                      "word": "un ",
+                      "start": 134.4205703125,
+                      "end": 134.54039794921874
+                    },
+                    {
+                      "word": "excelente ",
+                      "start": 134.54039794921874,
+                      "end": 135.21108764648437
+                    },
+                    {
+                      "word": "día!",
+                      "start": 135.21108764648437,
+                      "end": 135.68177734375
+                    }
+                  ],
+                  "metadata": {
+                    "response_id": 8
+                  }
+                },
+                {
+                  "role": "node_transition",
+                  "former_node_id": "node-03-1-confirmar",
+                  "former_node_name": "03 · Confirmar opción 1",
+                  "new_node_id": "node-end-ok-1",
+                  "new_node_name": "End · Cita confirmada opción 1",
+                  "time_sec": 135.71,
+                  "global_transition": false
+                },
+                {
+                  "role": "tool_call_invocation",
+                  "tool_call_id": "end_call_233b44",
+                  "name": "end_call",
+                  "arguments": "{}",
+                  "time_sec": 135.71,
+                  "type": "end_call"
+                }
+              ],
+              "recording_url": "***REDACTED***",
+              "recording_multi_channel_url": "***REDACTED***",
+              "public_log_url": "***REDACTED***",
+              "disconnection_reason": "agent_hangup",
+              "latency": {
+                "llm": {
+                  "p50": 1990,
+                  "p90": 2597.3999999999996,
+                  "p95": 2936.2,
+                  "p99": 3207.24,
+                  "min": 1537,
+                  "max": 3275,
+                  "num": 9,
+                  "values": [
+                    1798,
+                    1858,
+                    2056,
+                    1537,
+                    1588,
+                    1990,
+                    2428,
+                    2252,
+                    3275
+                  ]
+                },
+                "e2e": {
+                  "p50": 2798,
+                  "p90": 4218.600000000001,
+                  "p95": 5062.799999999997,
+                  "p99": 5738.159999999998,
+                  "min": 2630,
+                  "max": 5907,
+                  "num": 7,
+                  "values": [
+                    2742,
+                    2630,
+                    2798,
+                    2726,
+                    3093,
+                    2938,
+                    5907
+                  ]
+                },
+                "tts": {
+                  "p50": 216,
+                  "p90": 298.3999999999999,
+                  "p95": 331.2,
+                  "p99": 357.44,
+                  "min": 182,
+                  "max": 364,
+                  "num": 9,
+                  "values": [
+                    184,
+                    282,
+                    216,
+                    182,
+                    266,
+                    364,
+                    203,
+                    214,
+                    264
+                  ]
+                },
+                "asr": {
+                  "p50": 29.99895000000106,
+                  "p90": 50.002680000002144,
+                  "p95": 53.50158000000155,
+                  "p99": 58.69887600000176,
+                  "min": 9.999500000001717,
+                  "max": 59.998200000001816,
+                  "num": 14,
+                  "values": [
+                    30.000299999999697,
+                    19.999899999999798,
+                    40.000200000000405,
+                    9.999500000001717,
+                    19.999999999996362,
+                    40.000999999996566,
+                    40,
+                    19.999000000003434,
+                    29.99760000000242,
+                    10,
+                    20.003999999986263,
+                    50.00100000000384,
+                    50.00340000000142,
+                    59.998200000001816
+                  ]
+                }
+              },
+              "call_cost": {
+                "product_costs": [
+                  {
+                    "product": "retell_voice_engine",
+                    "unit_price": 0.0916667,
+                    "cost": 12.4666667
+                  },
+                  {
+                    "product": "elevenlabs_tts_03_2026",
+                    "unit_price": 0.0666667,
+                    "cost": 9.0666667
+                  },
+                  {
+                    "product": "claude_4_6_sonnet",
+                    "unit_price": 0.1333333,
+                    "cost": 18.1333333
+                  }
+                ],
+                "total_duration_seconds": 136,
+                "total_duration_unit_price": 0.2916667,
+                "combined_cost": 39.6666667
+              },
+              "call_analysis": {
+                "call_summary": "***REDACTED***",
+                "in_voicemail": false,
+                "user_sentiment": "Positive",
+                "call_successful": true,
+                "custom_analysis_data": {
+                  "resultado_llamada": "CONTESTO",
+                  "opcion_elegida": "opcion_1",
+                  "confirmo_asistencia": "true",
+                  "es_acudiente": "false",
+                  "notas_especiales": "ninguna",
+                  "numero_brindado": ""
+                }
+              },
+              "data_storage_setting": "everything",
+              "opt_in_signed_url": false,
+              "llm_token_usage": {
+                "values": [
+                  2253,
+                  1729,
+                  1781,
+                  1594,
+                  1989,
+                  1998,
+                  3332,
+                  2691,
+                  2177
+                ],
+                "average": 2171.5555555555557,
+                "num_requests": 9
+              },
+              "tool_calls": [
+                {
+                  "tool_call_id": "end_call_233b44",
+                  "name": "end_call",
+                  "type": "end_call",
+                  "start_time_sec": 135.71
+                }
+              ],
+              "from_number": "+573102320148",
+              "to_number": "+573234373090",
+              "direction": "outbound"
+            },
+            "event_timestamp": 1774538377566
+          },
+          "webhookUrl": "***REDACTED***",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "versionId": "46df5a1a-9e6f-4e7c-95e3-042123c7afef",
+  "activeVersionId": "46df5a1a-9e6f-4e7c-95e3-042123c7afef",
+  "versionCounter": 1097,
   "triggerCount": 1,
   "shared": [
     {
@@ -1032,7 +4617,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-20T11:56:23.090Z",
+              "updatedAt": "2026-03-27T15:19:03.673Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1065,7 +4650,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-20",
+              "lastActiveAt": "2026-03-27",
               "isPending": false
             }
           }
@@ -1075,22 +4660,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T21:57:31.305Z",
-      "createdAt": "2026-02-04T21:57:31.305Z",
-      "id": "Vt8x6W2rrtVBRg8l",
-      "name": "Relación get_paciente 🟢"
-    },
-    {
       "updatedAt": "2026-02-04T20:18:39.085Z",
       "createdAt": "2026-02-04T20:18:39.085Z",
       "id": "2EO9Ro2seknMiiVu",
       "name": "DEL ADMIN ☺️"
+    },
+    {
+      "updatedAt": "2026-02-04T21:57:31.305Z",
+      "createdAt": "2026-02-04T21:57:31.305Z",
+      "id": "Vt8x6W2rrtVBRg8l",
+      "name": "Relación get_paciente 🟢"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-19T21:52:49.843Z",
-    "createdAt": "2026-03-19T21:52:48.649Z",
-    "versionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
+    "updatedAt": "2026-03-26T15:11:49.580Z",
+    "createdAt": "2026-03-26T15:11:26.441Z",
+    "versionId": "46df5a1a-9e6f-4e7c-95e3-042123c7afef",
     "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
     "nodes": [
       {
@@ -1281,50 +4866,6 @@
       },
       {
         "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
-                "leftValue": "***REDACTED***",
-                "rightValue": "NUMERO_EQUIVOCADO",
-                "operator": {
-                  "type": "string",
-                  "operation": "equals",
-                  "name": "filter.operator.equals"
-                }
-              },
-              {
-                "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
-                "leftValue": "***REDACTED***",
-                "rightValue": "NO_ACEPTA_GRABACION",
-                "operator": {
-                  "type": "string",
-                  "operation": "equals",
-                  "name": "filter.operator.equals"
-                }
-              }
-            ],
-            "combinator": "or"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          -608,
-          -80
-        ],
-        "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
-        "name": "Número equivocado ?"
-      },
-      {
-        "parameters": {
           "respondWith": "json",
           "responseBody": "{\"ok\": true}",
           "options": {}
@@ -1332,7 +4873,7 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.4,
         "position": [
-          2000,
+          2208,
           496
         ],
         "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
@@ -1488,8 +5029,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -1504,
-          96
+          -1488,
+          112
         ],
         "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
         "name": "Buscar paciente por call_id",
@@ -1526,7 +5067,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1632,
+          1840,
           240
         ],
         "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
@@ -1567,7 +5108,7 @@
         "type": "n8n-nodes-labsmobile.labsMobile",
         "typeVersion": 2,
         "position": [
-          1392,
+          1600,
           240
         ],
         "id": "5460d015-8811-4f5a-93b4-3b4434698162",
@@ -1776,6 +5317,192 @@
         ],
         "id": "c1b381ec-b5fc-417c-a807-739517d48b8b",
         "name": "¿Debe rellamar?"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "457babe0-c6b6-4edc-ae37-ac4ee3177e00",
+                "leftValue": "***REDACTED***",
+                "rightValue": "NUMERO_EQUIVOCADO",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "76a85966-ee0e-44ec-85ae-819d10095fb5",
+                "leftValue": "***REDACTED***",
+                "rightValue": "NO_ACEPTA_GRABACION",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "90804114-0682-4f85-84ad-5ece1574c044",
+                "leftValue": "***REDACTED***",
+                "rightValue": "FALLECIDO",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              },
+              {
+                "id": "4a9f0577-2420-4336-9900-da9a1eebb286",
+                "leftValue": "***REDACTED***",
+                "rightValue": "HOSPITALIZADO",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "or"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -608,
+          -80
+        ],
+        "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
+        "name": "¿Número equivocado ?"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "list",
+            "cachedResultUrl": "/n8n/workflow/ABfKIcvf0tTodbOiL-RJt",
+            "cachedResultName": "SAGIC"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "paciente_id": "***REDACTED***",
+              "documento": "***REDACTED***",
+              "tipo_documento": "***REDACTED***",
+              "id_cita": "***REDACTED***",
+              "email": "***REDACTED***",
+              "telefono": "***REDACTED***",
+              "fecha": "***REDACTED***",
+              "hora": "***REDACTED***",
+              "meridiano": "***REDACTED***"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "paciente_id",
+                "displayName": "paciente_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "number",
+                "removed": false
+              },
+              {
+                "id": "documento",
+                "displayName": "documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "tipo_documento",
+                "displayName": "tipo_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "id_cita",
+                "displayName": "id_cita",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "telefono",
+                "displayName": "telefono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "fecha",
+                "displayName": "fecha",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "hora",
+                "displayName": "hora",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              },
+              {
+                "id": "meridiano",
+                "displayName": "meridiano",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "canBeUsedToMatch": true,
+                "type": "string"
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "mode": "each",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          1392,
+          240
+        ],
+        "id": "2023c929-cb6c-4d22-8adb-fecc2daea038",
+        "name": "Call 'SAGIC'"
       }
     ],
     "connections": {
@@ -1783,7 +5510,7 @@
         "main": [
           [
             {
-              "node": "Número equivocado ?",
+              "node": "¿Número equivocado ?",
               "type": "main",
               "index": 0
             }
@@ -1809,24 +5536,6 @@
           [
             {
               "node": "¿Confirmó asistencia?",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Número equivocado ?": {
-        "main": [
-          [
-            {
-              "node": "Marcar como NO_AGENDO",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "¿Acudiente con número?",
               "type": "main",
               "index": 0
             }
@@ -1881,7 +5590,7 @@
         "main": [
           [
             {
-              "node": "Send SMS",
+              "node": "Call 'SAGIC'",
               "type": "main",
               "index": 0
             }
@@ -2080,18 +5789,47 @@
             }
           ]
         ]
+      },
+      "¿Número equivocado ?": {
+        "main": [
+          [
+            {
+              "node": "Marcar como NO_AGENDO",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "¿Acudiente con número?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'SAGIC'": {
+        "main": [
+          [
+            {
+              "node": "Send SMS",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 84c72943",
+    "name": "Version 46df5a1a",
     "description": "",
-    "autosaved": false,
+    "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-19T21:52:49.841Z",
-        "id": 324,
+        "createdAt": "2026-03-26T15:11:49.579Z",
+        "id": 357,
         "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "84c72943-f086-4ca1-837a-36c5d51529dc",
+        "versionId": "46df5a1a-9e6f-4e7c-95e3-042123c7afef",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
