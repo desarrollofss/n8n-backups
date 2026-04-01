@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-03T19:35:53.789Z",
+  "updatedAt": "2026-03-31T13:03:20.487Z",
   "createdAt": "2026-03-03T19:32:07.780Z",
   "id": "cJfEP-s0H3glzuJcpbO3T",
   "name": "GESTION CITAS",
@@ -71,8 +71,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        160,
-        304
+        -224,
+        928
       ],
       "id": "ae4b0f83-eaf0-482d-b9a7-e92e19701e33",
       "name": "consultar_paciente",
@@ -81,7 +81,8 @@
           "id": "cffLg1U8OTnicsUa",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -121,8 +122,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        352,
-        304
+        -32,
+        928
       ],
       "id": "c832b22b-c44c-48fb-9a56-5d2f9347efdd",
       "name": "consultar_disponibilidad",
@@ -131,7 +132,8 @@
           "id": "cffLg1U8OTnicsUa",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -152,8 +154,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        528,
-        304
+        144,
+        928
       ],
       "id": "1d87af0d-c211-4580-b546-e17f5535a11d",
       "name": "consultar_especialidades",
@@ -162,7 +164,8 @@
           "id": "cffLg1U8OTnicsUa",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -177,8 +180,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        640,
-        320
+        256,
+        944
       ],
       "id": "ac5ac4cc-901f-4827-bdc8-75ef5efbd414",
       "name": "crear_cita",
@@ -187,7 +190,8 @@
           "id": "cffLg1U8OTnicsUa",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -224,8 +228,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        816,
-        320
+        432,
+        944
       ],
       "id": "90b4466c-5018-4e9b-83d5-589d1f3ad80a",
       "name": "consultar_cita",
@@ -234,7 +238,8 @@
           "id": "cffLg1U8OTnicsUa",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -380,8 +385,8 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        976,
-        304
+        592,
+        928
       ],
       "id": "b9095ece-f3f6-456c-b55c-3c2260ece82b",
       "name": "cancelar_cita",
@@ -390,7 +395,42 @@
           "id": "cffLg1U8OTnicsUa",
           "name": "Postgres account"
         }
-      }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "***REDACTED***",
+        "url": "***REDACTED***",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "NumeroIdentificacion"
+            },
+            {
+              "name": "TipoIdentificacion"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        512,
+        320
+      ],
+      "id": "d35c7303-2094-4b10-8008-af7958371cfc",
+      "name": "Obtener datos del paciente"
     }
   ],
   "connections": {
@@ -407,13 +447,7 @@
     },
     "consultar_paciente": {
       "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "OpenAI Chat Model": {
@@ -429,35 +463,17 @@
     },
     "consultar_disponibilidad": {
       "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "consultar_especialidades": {
       "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "crear_cita": {
       "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Redis Chat Memory": {
@@ -473,16 +489,15 @@
     },
     "consultar_cita": {
       "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "cancelar_cita": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Obtener datos del paciente": {
       "ai_tool": [
         [
           {
@@ -501,9 +516,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "057053ba-fc83-4eab-be7c-da3b204073cd",
+  "versionId": "73602690-acfa-4cd8-bd76-312a1c43d0b5",
   "activeVersionId": "057053ba-fc83-4eab-be7c-da3b204073cd",
-  "versionCounter": 12,
+  "versionCounter": 51,
   "triggerCount": 0,
   "shared": [
     {
@@ -528,7 +543,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-27T15:19:03.673Z",
+              "updatedAt": "2026-04-01T11:49:08.193Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -561,7 +576,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-27",
+              "lastActiveAt": "2026-04-01",
               "isPending": false
             }
           }
