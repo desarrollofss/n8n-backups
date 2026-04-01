@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-26T22:29:54.388Z",
+  "updatedAt": "2026-04-01T14:35:07.262Z",
   "createdAt": "2026-02-18T14:44:38.955Z",
   "id": "_nSf8s_U2hqJ0u1brhr-n",
   "name": "COHORTE_SALUD_MENTAL_FLUJO_CAP_DATOS",
@@ -26,7 +26,7 @@
       "typeVersion": 1,
       "position": [
         -2288,
-        1728
+        1744
       ],
       "credentials": {
         "microsoftOutlookOAuth2Api": {
@@ -74,7 +74,7 @@
       "typeVersion": 2,
       "position": [
         -2016,
-        1728
+        1744
       ]
     },
     {
@@ -85,7 +85,7 @@
       "typeVersion": 1,
       "position": [
         -1728,
-        1984
+        2000
       ]
     },
     {
@@ -99,7 +99,7 @@
       "typeVersion": 2,
       "position": [
         -1456,
-        1760
+        1776
       ]
     },
     {
@@ -132,7 +132,7 @@
       "typeVersion": 2,
       "position": [
         -224,
-        1744
+        1760
       ]
     },
     {
@@ -145,7 +145,7 @@
       "typeVersion": 2,
       "position": [
         624,
-        1616
+        1632
       ]
     },
     {
@@ -174,7 +174,7 @@
       "typeVersion": 4.2,
       "position": [
         624,
-        1440
+        1456
       ],
       "credentials": {
         "microsoftOneDriveOAuth2Api": {
@@ -193,7 +193,7 @@
       "typeVersion": 2,
       "position": [
         624,
-        1184
+        1200
       ]
     },
     {
@@ -206,7 +206,7 @@
       "typeVersion": 2,
       "position": [
         336,
-        1536
+        1552
       ]
     },
     {
@@ -942,7 +942,7 @@
       "typeVersion": 2.5,
       "position": [
         864,
-        1616
+        1632
       ],
       "credentials": {
         "postgres": {
@@ -962,7 +962,7 @@
       "typeVersion": 4.3,
       "position": [
         -1728,
-        1760
+        1776
       ],
       "id": "3f2085e3-fc70-4541-8b29-3a847fc497d2",
       "name": "HTTP Request remitente",
@@ -984,7 +984,7 @@
       "typeVersion": 4.3,
       "position": [
         -1728,
-        1600
+        1616
       ],
       "id": "c251e1cb-0525-43a5-8b3c-853f371d382c",
       "name": "HTTP Request adjunto",
@@ -1005,7 +1005,7 @@
       "typeVersion": 2,
       "position": [
         -1280,
-        1760
+        1776
       ]
     },
     {
@@ -1023,7 +1023,7 @@
       "typeVersion": 4.3,
       "position": [
         864,
-        1184
+        1200
       ],
       "id": "50bc4338-3be1-4874-a69b-9f24e909da8b",
       "name": "HTTP Request Subir PDFs",
@@ -1059,7 +1059,7 @@
       "typeVersion": 4.3,
       "position": [
         -1728,
-        1456
+        1472
       ],
       "id": "f73f4f8d-f64b-44b6-8082-7c809f1e7095",
       "name": "Marcar como Leído",
@@ -1080,7 +1080,7 @@
       "typeVersion": 2,
       "position": [
         -624,
-        1744
+        1760
       ]
     },
     {
@@ -1091,7 +1091,7 @@
       "typeVersion": 2,
       "position": [
         -432,
-        1744
+        1760
       ],
       "id": "4df4c2c4-50df-425e-830c-397637ed3a59",
       "name": "Creacion_excel_errores"
@@ -1106,7 +1106,7 @@
       "typeVersion": 2.6,
       "position": [
         864,
-        2096
+        2112
       ],
       "id": "10813f8d-f968-4f6e-a888-9409b7e301a2",
       "name": "Log - Sin Excel",
@@ -1127,7 +1127,7 @@
       "typeVersion": 2.6,
       "position": [
         864,
-        1904
+        1920
       ],
       "id": "67fec702-f40f-4d6c-9f6e-bf92799ec9ac",
       "name": "Log - Formato Incorrecto",
@@ -1146,7 +1146,7 @@
       "typeVersion": 2,
       "position": [
         1312,
-        1728
+        1744
       ],
       "id": "edba320a-33e3-4cae-a140-449ca5cb32e1",
       "name": "htmlContent"
@@ -1161,7 +1161,7 @@
       "typeVersion": 2.6,
       "position": [
         1728,
-        1728
+        1744
       ],
       "id": "79f48961-d186-46dc-b0fe-406a0b88ab00",
       "name": "Log - Inválidos",
@@ -1188,7 +1188,7 @@
       "typeVersion": 4.3,
       "position": [
         1520,
-        1728
+        1744
       ],
       "id": "792d86e8-d63e-46da-b585-a700ef9256b4",
       "name": "RESUMEN_CON_ERRORES",
@@ -1205,7 +1205,7 @@
       "typeVersion": 3.2,
       "position": [
         1120,
-        1728
+        1744
       ],
       "id": "346e3f02-5080-47e4-a200-e59c23c41a81",
       "name": "Merge"
@@ -1220,7 +1220,7 @@
       "typeVersion": 2.6,
       "position": [
         864,
-        1440
+        1456
       ],
       "id": "d1704ebf-a6db-46f8-bc7a-c8cd1b8a77ff",
       "name": "Log - Cargue Exitoso",
@@ -1248,7 +1248,7 @@
       "typeVersion": 4.3,
       "position": [
         -640,
-        1920
+        1936
       ],
       "id": "aac09255-2ae3-4efe-9444-9f37f1650538",
       "name": "HTTP Request — Descargar XLSX",
@@ -1280,7 +1280,7 @@
       "typeVersion": 4.3,
       "position": [
         -240,
-        1920
+        1936
       ],
       "id": "7283ab84-9cb2-4043-a572-037eadd9ecdb",
       "name": "HTTP Request — Descargar PDF",
@@ -1303,7 +1303,7 @@
       "typeVersion": 2,
       "position": [
         448,
-        1904
+        1920
       ],
       "id": "c42781a5-c89a-449b-91b4-83cf05ca7154",
       "name": "body_formato_errado"
@@ -1318,7 +1318,7 @@
       "typeVersion": 1.1,
       "position": [
         -432,
-        1920
+        1936
       ],
       "id": "d2fd2b21-2f32-447f-8a02-3e2e9554ecea",
       "name": "Base64 — XLSX"
@@ -1333,7 +1333,7 @@
       "typeVersion": 1.1,
       "position": [
         -48,
-        1920
+        1936
       ],
       "id": "8eeb9221-c0e8-483d-8e1e-e4df8d462195",
       "name": "Base64 — PDF"
@@ -1346,7 +1346,7 @@
       "typeVersion": 2,
       "position": [
         448,
-        2096
+        2112
       ],
       "id": "26372d90-aa8f-4c68-a4ce-0c3fb0469aa0",
       "name": "body_sin_excel"
@@ -1366,7 +1366,7 @@
       "typeVersion": 4.3,
       "position": [
         640,
-        2096
+        2112
       ],
       "id": "3f266a2a-1fc8-4e10-bf33-3a28b35dada9",
       "name": "Rechazo - Sin Excel",
@@ -1416,7 +1416,7 @@
       "typeVersion": 2,
       "position": [
         -1088,
-        1760
+        1776
       ]
     },
     {
@@ -1450,7 +1450,7 @@
       "typeVersion": 2,
       "position": [
         160,
-        1920
+        1936
       ]
     },
     {
@@ -1468,7 +1468,7 @@
       "typeVersion": 4.3,
       "position": [
         640,
-        1904
+        1920
       ],
       "id": "737439c1-93e6-45c6-aae6-ff608075a9bc",
       "name": "Notificacion_formato_errado",
@@ -1842,9 +1842,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "5a6a120e-4620-4264-aa28-f291389f3173",
-  "activeVersionId": "5a6a120e-4620-4264-aa28-f291389f3173",
-  "versionCounter": 1450,
+  "versionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
+  "activeVersionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
+  "versionCounter": 1508,
   "triggerCount": 1,
   "shared": [
     {
@@ -1869,7 +1869,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-03-27T15:19:03.673Z",
+              "updatedAt": "2026-04-01T11:49:08.193Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1902,7 +1902,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-27",
+              "lastActiveAt": "2026-04-01",
               "isPending": false
             }
           }
@@ -1912,9 +1912,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-03-26T22:29:57.062Z",
-    "createdAt": "2026-03-26T22:29:54.390Z",
-    "versionId": "5a6a120e-4620-4264-aa28-f291389f3173",
+    "updatedAt": "2026-04-01T14:35:10.710Z",
+    "createdAt": "2026-04-01T14:35:07.263Z",
+    "versionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
     "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
     "nodes": [
       {
@@ -1936,7 +1936,7 @@
         "typeVersion": 1,
         "position": [
           -2288,
-          1728
+          1744
         ],
         "credentials": {
           "microsoftOutlookOAuth2Api": {
@@ -1984,7 +1984,7 @@
         "typeVersion": 2,
         "position": [
           -2016,
-          1728
+          1744
         ]
       },
       {
@@ -1995,7 +1995,7 @@
         "typeVersion": 1,
         "position": [
           -1728,
-          1984
+          2000
         ]
       },
       {
@@ -2009,7 +2009,7 @@
         "typeVersion": 2,
         "position": [
           -1456,
-          1760
+          1776
         ]
       },
       {
@@ -2042,7 +2042,7 @@
         "typeVersion": 2,
         "position": [
           -224,
-          1744
+          1760
         ]
       },
       {
@@ -2055,7 +2055,7 @@
         "typeVersion": 2,
         "position": [
           624,
-          1616
+          1632
         ]
       },
       {
@@ -2084,7 +2084,7 @@
         "typeVersion": 4.2,
         "position": [
           624,
-          1440
+          1456
         ],
         "credentials": {
           "microsoftOneDriveOAuth2Api": {
@@ -2103,7 +2103,7 @@
         "typeVersion": 2,
         "position": [
           624,
-          1184
+          1200
         ]
       },
       {
@@ -2116,7 +2116,7 @@
         "typeVersion": 2,
         "position": [
           336,
-          1536
+          1552
         ]
       },
       {
@@ -2852,7 +2852,7 @@
         "typeVersion": 2.5,
         "position": [
           864,
-          1616
+          1632
         ],
         "credentials": {
           "postgres": {
@@ -2872,7 +2872,7 @@
         "typeVersion": 4.3,
         "position": [
           -1728,
-          1760
+          1776
         ],
         "id": "3f2085e3-fc70-4541-8b29-3a847fc497d2",
         "name": "HTTP Request remitente",
@@ -2894,7 +2894,7 @@
         "typeVersion": 4.3,
         "position": [
           -1728,
-          1600
+          1616
         ],
         "id": "c251e1cb-0525-43a5-8b3c-853f371d382c",
         "name": "HTTP Request adjunto",
@@ -2915,7 +2915,7 @@
         "typeVersion": 2,
         "position": [
           -1280,
-          1760
+          1776
         ]
       },
       {
@@ -2933,7 +2933,7 @@
         "typeVersion": 4.3,
         "position": [
           864,
-          1184
+          1200
         ],
         "id": "50bc4338-3be1-4874-a69b-9f24e909da8b",
         "name": "HTTP Request Subir PDFs",
@@ -2969,7 +2969,7 @@
         "typeVersion": 4.3,
         "position": [
           -1728,
-          1456
+          1472
         ],
         "id": "f73f4f8d-f64b-44b6-8082-7c809f1e7095",
         "name": "Marcar como Leído",
@@ -2990,7 +2990,7 @@
         "typeVersion": 2,
         "position": [
           -624,
-          1744
+          1760
         ]
       },
       {
@@ -3001,7 +3001,7 @@
         "typeVersion": 2,
         "position": [
           -432,
-          1744
+          1760
         ],
         "id": "4df4c2c4-50df-425e-830c-397637ed3a59",
         "name": "Creacion_excel_errores"
@@ -3016,7 +3016,7 @@
         "typeVersion": 2.6,
         "position": [
           864,
-          2096
+          2112
         ],
         "id": "10813f8d-f968-4f6e-a888-9409b7e301a2",
         "name": "Log - Sin Excel",
@@ -3037,7 +3037,7 @@
         "typeVersion": 2.6,
         "position": [
           864,
-          1904
+          1920
         ],
         "id": "67fec702-f40f-4d6c-9f6e-bf92799ec9ac",
         "name": "Log - Formato Incorrecto",
@@ -3056,7 +3056,7 @@
         "typeVersion": 2,
         "position": [
           1312,
-          1728
+          1744
         ],
         "id": "edba320a-33e3-4cae-a140-449ca5cb32e1",
         "name": "htmlContent"
@@ -3071,7 +3071,7 @@
         "typeVersion": 2.6,
         "position": [
           1728,
-          1728
+          1744
         ],
         "id": "79f48961-d186-46dc-b0fe-406a0b88ab00",
         "name": "Log - Inválidos",
@@ -3098,7 +3098,7 @@
         "typeVersion": 4.3,
         "position": [
           1520,
-          1728
+          1744
         ],
         "id": "792d86e8-d63e-46da-b585-a700ef9256b4",
         "name": "RESUMEN_CON_ERRORES",
@@ -3115,7 +3115,7 @@
         "typeVersion": 3.2,
         "position": [
           1120,
-          1728
+          1744
         ],
         "id": "346e3f02-5080-47e4-a200-e59c23c41a81",
         "name": "Merge"
@@ -3130,7 +3130,7 @@
         "typeVersion": 2.6,
         "position": [
           864,
-          1440
+          1456
         ],
         "id": "d1704ebf-a6db-46f8-bc7a-c8cd1b8a77ff",
         "name": "Log - Cargue Exitoso",
@@ -3158,7 +3158,7 @@
         "typeVersion": 4.3,
         "position": [
           -640,
-          1920
+          1936
         ],
         "id": "aac09255-2ae3-4efe-9444-9f37f1650538",
         "name": "HTTP Request — Descargar XLSX",
@@ -3190,7 +3190,7 @@
         "typeVersion": 4.3,
         "position": [
           -240,
-          1920
+          1936
         ],
         "id": "7283ab84-9cb2-4043-a572-037eadd9ecdb",
         "name": "HTTP Request — Descargar PDF",
@@ -3213,7 +3213,7 @@
         "typeVersion": 2,
         "position": [
           448,
-          1904
+          1920
         ],
         "id": "c42781a5-c89a-449b-91b4-83cf05ca7154",
         "name": "body_formato_errado"
@@ -3228,7 +3228,7 @@
         "typeVersion": 1.1,
         "position": [
           -432,
-          1920
+          1936
         ],
         "id": "d2fd2b21-2f32-447f-8a02-3e2e9554ecea",
         "name": "Base64 — XLSX"
@@ -3243,7 +3243,7 @@
         "typeVersion": 1.1,
         "position": [
           -48,
-          1920
+          1936
         ],
         "id": "8eeb9221-c0e8-483d-8e1e-e4df8d462195",
         "name": "Base64 — PDF"
@@ -3256,7 +3256,7 @@
         "typeVersion": 2,
         "position": [
           448,
-          2096
+          2112
         ],
         "id": "26372d90-aa8f-4c68-a4ce-0c3fb0469aa0",
         "name": "body_sin_excel"
@@ -3276,7 +3276,7 @@
         "typeVersion": 4.3,
         "position": [
           640,
-          2096
+          2112
         ],
         "id": "3f266a2a-1fc8-4e10-bf33-3a28b35dada9",
         "name": "Rechazo - Sin Excel",
@@ -3326,7 +3326,7 @@
         "typeVersion": 2,
         "position": [
           -1088,
-          1760
+          1776
         ]
       },
       {
@@ -3360,7 +3360,7 @@
         "typeVersion": 2,
         "position": [
           160,
-          1920
+          1936
         ]
       },
       {
@@ -3378,7 +3378,7 @@
         "typeVersion": 4.3,
         "position": [
           640,
-          1904
+          1920
         ],
         "id": "737439c1-93e6-45c6-aae6-ff608075a9bc",
         "name": "Notificacion_formato_errado",
@@ -3744,15 +3744,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 5a6a120e",
+    "name": "Version ee40185a",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-26T22:29:57.061Z",
-        "id": 400,
+        "createdAt": "2026-04-01T14:35:10.708Z",
+        "id": 427,
         "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
-        "versionId": "5a6a120e-4620-4264-aa28-f291389f3173",
+        "versionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
