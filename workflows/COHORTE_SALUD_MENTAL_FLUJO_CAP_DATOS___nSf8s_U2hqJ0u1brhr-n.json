@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-01T14:35:07.262Z",
+  "updatedAt": "2026-04-01T15:40:23.153Z",
   "createdAt": "2026-02-18T14:44:38.955Z",
   "id": "_nSf8s_U2hqJ0u1brhr-n",
   "name": "COHORTE_SALUD_MENTAL_FLUJO_CAP_DATOS",
@@ -1842,9 +1842,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
+  "versionId": "170e87e8-d625-4e6b-9937-28f4175cb8a4",
   "activeVersionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
-  "versionCounter": 1508,
+  "versionCounter": 1511,
   "triggerCount": 1,
   "shared": [
     {
@@ -1869,7 +1869,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-01T11:49:08.193Z",
+              "updatedAt": "2026-04-03T12:14:01.168Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1902,7 +1902,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-01",
+              "lastActiveAt": "2026-04-03",
               "isPending": false
             }
           }
