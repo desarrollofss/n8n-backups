@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-25T19:32:10.057Z",
+  "updatedAt": "2026-04-03T19:00:07.866Z",
   "createdAt": "2026-03-03T18:20:57.454Z",
   "id": "WQ65T0ACkIUy8PO80bZWV",
   "name": "VALIDAR DERECHOS DE USUARIO",
@@ -537,7 +537,7 @@
       "typeVersion": 3.2,
       "position": [
         3536,
-        1184
+        1152
       ],
       "id": "a3eb35fb-d876-4ae0-86f9-b572519c8f08",
       "name": "Merge token"
@@ -600,7 +600,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4016,
+        4224,
         1328
       ],
       "id": "2611a84b-b1ad-4edb-b200-9949a140924b",
@@ -613,11 +613,73 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        3984,
-        1584
+        4144,
+        1680
       ],
       "id": "e7b31219-2517-454d-b226-561c4e0556c7",
       "name": "Error validar derechos de usuario1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f64e1820-7a36-4c59-b618-2df59b7fdb1a",
+              "leftValue": "={{ $json.error.status }}",
+              "rightValue": 400,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        3984,
+        1440
+      ],
+      "id": "3a223ab8-81a0-4628-9122-36502eccbc3f",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4240,
+        1488
+      ],
+      "id": "53ae9a22-ff3f-4c77-97fe-7f02eec07e6c",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "tipo_documento,documento",
+        "joinMode": "keepNonMatches",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4512,
+        1392
+      ],
+      "id": "b8a46574-1086-44a2-aa36-8f155ca221b1",
+      "name": "Merge4"
     }
   ],
   "connections": {
@@ -896,7 +958,52 @@
         ],
         [
           {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "Error validar derechos de usuario1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Merge4",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge4": {
+      "main": [
+        []
+      ]
+    },
+    "Limpiar datos Mutual1": {
+      "main": [
+        [
+          {
+            "node": "Merge4",
             "type": "main",
             "index": 0
           }
@@ -918,7 +1025,7 @@
         "json": {
           "datos_paciente": {
             "tipo_documento": "CC",
-            "documento": "72144449",
+            "documento": "1143331246",
             "id_registro": "Q0N8NzIxNDQ0NDl8UFNBfDIwMjUtMDYtMTA="
           }
         }
@@ -997,9 +1104,9 @@
       }
     ]
   },
-  "versionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
-  "activeVersionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
-  "versionCounter": 665,
+  "versionId": "1b6bf75c-8010-44e6-90b4-cee580d68e57",
+  "activeVersionId": "1b6bf75c-8010-44e6-90b4-cee580d68e57",
+  "versionCounter": 768,
   "triggerCount": 0,
   "shared": [
     {
@@ -1024,7 +1131,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-01T11:49:08.193Z",
+              "updatedAt": "2026-04-03T12:14:01.168Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1057,7 +1164,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-01",
+              "lastActiveAt": "2026-04-03",
               "isPending": false
             }
           }
@@ -1067,9 +1174,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-03-25T20:03:22.360Z",
-    "createdAt": "2026-03-25T19:32:10.058Z",
-    "versionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
+    "updatedAt": "2026-04-03T19:00:13.564Z",
+    "createdAt": "2026-04-03T19:00:07.868Z",
+    "versionId": "1b6bf75c-8010-44e6-90b4-cee580d68e57",
     "workflowId": "WQ65T0ACkIUy8PO80bZWV",
     "nodes": [
       {
@@ -1602,7 +1709,7 @@
         "typeVersion": 3.2,
         "position": [
           3536,
-          1184
+          1152
         ],
         "id": "a3eb35fb-d876-4ae0-86f9-b572519c8f08",
         "name": "Merge token"
@@ -1665,7 +1772,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          4016,
+          4224,
           1328
         ],
         "id": "2611a84b-b1ad-4edb-b200-9949a140924b",
@@ -1678,11 +1785,73 @@
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
         "position": [
-          3984,
-          1584
+          4144,
+          1680
         ],
         "id": "e7b31219-2517-454d-b226-561c4e0556c7",
         "name": "Error validar derechos de usuario1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "f64e1820-7a36-4c59-b618-2df59b7fdb1a",
+                "leftValue": "={{ $json.error.status }}",
+                "rightValue": 400,
+                "operator": {
+                  "type": "number",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          3984,
+          1440
+        ],
+        "id": "3a223ab8-81a0-4628-9122-36502eccbc3f",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          4240,
+          1488
+        ],
+        "id": "53ae9a22-ff3f-4c77-97fe-7f02eec07e6c",
+        "name": "Code in JavaScript2"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "fieldsToMatchString": "tipo_documento,documento",
+          "joinMode": "keepNonMatches",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          4512,
+          1392
+        ],
+        "id": "b8a46574-1086-44a2-aa36-8f155ca221b1",
+        "name": "Merge4"
       }
     ],
     "connections": {
@@ -1961,7 +2130,52 @@
           ],
           [
             {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
               "node": "Error validar derechos de usuario1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript2": {
+        "main": [
+          [
+            {
+              "node": "Merge4",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge4": {
+        "main": [
+          []
+        ]
+      },
+      "Limpiar datos Mutual1": {
+        "main": [
+          [
+            {
+              "node": "Merge4",
               "type": "main",
               "index": 0
             }
@@ -1970,15 +2184,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 24b73c24",
+    "name": "Version 1b6bf75c",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-25T20:03:22.358Z",
-        "id": 346,
+        "createdAt": "2026-04-03T19:00:13.563Z",
+        "id": 432,
         "workflowId": "WQ65T0ACkIUy8PO80bZWV",
-        "versionId": "24b73c24-f8e7-41f7-b29f-e66740425937",
+        "versionId": "1b6bf75c-8010-44e6-90b4-cee580d68e57",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
