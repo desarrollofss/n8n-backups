@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-31T20:23:33.000Z",
+  "updatedAt": "2026-04-07T15:11:18.568Z",
   "createdAt": "2026-02-04T20:12:39.778Z",
   "id": "LTmtmcMGQaHqcOnO",
   "name": "zeus_citas",
@@ -96,42 +96,6 @@
     },
     {
       "parameters": {
-        "url": "***REDACTED***",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "NumeroIdentificacion",
-              "value": "***REDACTED***"
-            },
-            {
-              "name": "TipoIdentificacion",
-              "value": "***REDACTED***"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        1248,
-        432
-      ],
-      "id": "6d440b8d-853a-4da5-a169-6ba8a80dc704",
-      "name": "Obtener_datos_paciente",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "5NF42pqAyUFzvVGh",
-          "name": "API ZEUS"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
         "promptType": "define",
         "text": "***REDACTED***",
         "options": {
@@ -146,172 +110,6 @@
       ],
       "id": "6c6f0bea-0968-4765-b47b-e78c4b3b945e",
       "name": "Agente_consultor"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "***REDACTED***",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "***REDACTED***",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        1120,
-        448
-      ],
-      "id": "04614830-295d-4808-822d-5851763a047c",
-      "name": "AgendarCita",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "5NF42pqAyUFzvVGh",
-          "name": "API ZEUS"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "***REDACTED***",
-        "options": {
-          "systemMessage": "***REDACTED***"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 3,
-      "position": [
-        -304,
-        864
-      ],
-      "id": "dd13f088-c298-43a2-835c-4acb443c1427",
-      "name": "Agente_agendar_automatico",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "***REDACTED***"
-        },
-        "builtInTools": {},
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.3,
-      "position": [
-        -480,
-        1072
-      ],
-      "id": "c71e9ef7-5c20-4e39-8896-37bb4cc6cdde",
-      "name": "OpenAI Chat Model2",
-      "credentials": {
-        "openAiApi": {
-          "id": "dNAey8tcxmUMRffx",
-          "name": "OpenAi account 2"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "toolDescription": "***REDACTED***",
-        "url": "***REDACTED***",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "fecha",
-              "value": "***REDACTED***"
-            },
-            {
-              "name": "medico",
-              "value": "142"
-            },
-            {
-              "name": "idSede",
-              "value": "1"
-            },
-            {
-              "name": "asunto",
-              "value": "274"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        -128,
-        1072
-      ],
-      "id": "3afa7730-186f-440c-97e2-c7d128112265",
-      "name": "Disponibilidad2",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "5NF42pqAyUFzvVGh",
-          "name": "API ZEUS"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "toolDescription": "***REDACTED***",
-        "method": "POST",
-        "url": "***REDACTED***",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "***REDACTED***",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        32,
-        1072
-      ],
-      "id": "26d058ae-511a-4465-b619-6ef6298014f8",
-      "name": "AgendarCita2",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "5NF42pqAyUFzvVGh",
-          "name": "API ZEUS"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "***REDACTED***",
-        "contextWindowLength": 10
-      },
-      "type": "***REDACTED***",
-      "typeVersion": 1.3,
-      "position": [
-        -272,
-        1072
-      ],
-      "id": "31c92a48-c5e2-4eaa-83f7-89537b943cf9",
-      "name": "Postgres Chat Memory2",
-      "credentials": {
-        "postgres": {
-          "id": "cffLg1U8OTnicsUa",
-          "name": "Postgres account"
-        }
-      },
-      "disabled": true
     },
     {
       "parameters": {
@@ -381,51 +179,6 @@
       ],
       "id": "13648c93-1492-435c-a5f9-be4bd28de834",
       "name": "Call 'My workflow 9'"
-    },
-    {
-      "parameters": {
-        "toolDescription": "***REDACTED***",
-        "url": "***REDACTED***",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpBearerAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "fecha",
-              "value": "***REDACTED***"
-            },
-            {
-              "name": "medico",
-              "value": "142"
-            },
-            {
-              "name": "idSede",
-              "value": "1"
-            },
-            {
-              "name": "asunto",
-              "value": "274"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.3,
-      "position": [
-        1504,
-        448
-      ],
-      "id": "ba7c8908-9f36-4ebf-af6f-88a23900b26e",
-      "name": "Disponibilidad3",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "5NF42pqAyUFzvVGh",
-          "name": "API ZEUS"
-        }
-      },
-      "disabled": true
     },
     {
       "parameters": {
@@ -608,66 +361,12 @@
         ]
       ]
     },
-    "Obtener_datos_paciente": {
-      "ai_tool": [
-        []
-      ]
-    },
     "Agente_consultor": {
       "main": [
         [
           {
             "node": "Parsear slots",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AgendarCita": {
-      "ai_tool": [
-        []
-      ]
-    },
-    "OpenAI Chat Model2": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Agente_agendar_automatico",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Disponibilidad2": {
-      "ai_tool": [
-        [
-          {
-            "node": "Agente_agendar_automatico",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AgendarCita2": {
-      "ai_tool": [
-        [
-          {
-            "node": "Agente_agendar_automatico",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Postgres Chat Memory2": {
-      "ai_memory": [
-        [
-          {
-            "node": "Agente_agendar_automatico",
-            "type": "ai_memory",
             "index": 0
           }
         ]
@@ -682,11 +381,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Disponibilidad3": {
-      "ai_tool": [
-        []
       ]
     },
     "Disponibilidad": {
@@ -753,9 +447,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "b0dcfa9e-d4d0-4280-8609-e3cc1449f405",
-  "activeVersionId": "b0dcfa9e-d4d0-4280-8609-e3cc1449f405",
-  "versionCounter": 461,
+  "versionId": "a03601e4-e94b-45f7-bef3-2d41816a3248",
+  "activeVersionId": "a03601e4-e94b-45f7-bef3-2d41816a3248",
+  "versionCounter": 465,
   "triggerCount": 0,
   "shared": [
     {
@@ -780,7 +474,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-03T12:14:01.168Z",
+              "updatedAt": "2026-04-10T11:44:41.129Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -813,7 +507,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-03",
+              "lastActiveAt": "2026-04-10",
               "isPending": false
             }
           }
@@ -823,22 +517,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T21:57:31.305Z",
-      "createdAt": "2026-02-04T21:57:31.305Z",
-      "id": "Vt8x6W2rrtVBRg8l",
-      "name": "Relación get_paciente 🟢"
-    },
-    {
       "updatedAt": "2026-02-04T20:18:39.085Z",
       "createdAt": "2026-02-04T20:18:39.085Z",
       "id": "2EO9Ro2seknMiiVu",
       "name": "DEL ADMIN ☺️"
+    },
+    {
+      "updatedAt": "2026-02-04T21:57:31.305Z",
+      "createdAt": "2026-02-04T21:57:31.305Z",
+      "id": "Vt8x6W2rrtVBRg8l",
+      "name": "Relación get_paciente 🟢"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-31T20:23:45.576Z",
-    "createdAt": "2026-03-31T20:23:33.001Z",
-    "versionId": "b0dcfa9e-d4d0-4280-8609-e3cc1449f405",
+    "updatedAt": "2026-04-07T15:11:24.082Z",
+    "createdAt": "2026-04-07T15:11:18.569Z",
+    "versionId": "a03601e4-e94b-45f7-bef3-2d41816a3248",
     "workflowId": "LTmtmcMGQaHqcOnO",
     "nodes": [
       {
@@ -930,42 +624,6 @@
       },
       {
         "parameters": {
-          "url": "***REDACTED***",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "httpBearerAuth",
-          "sendQuery": true,
-          "queryParameters": {
-            "parameters": [
-              {
-                "name": "NumeroIdentificacion",
-                "value": "***REDACTED***"
-              },
-              {
-                "name": "TipoIdentificacion",
-                "value": "***REDACTED***"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequestTool",
-        "typeVersion": 4.3,
-        "position": [
-          1248,
-          432
-        ],
-        "id": "6d440b8d-853a-4da5-a169-6ba8a80dc704",
-        "name": "Obtener_datos_paciente",
-        "credentials": {
-          "httpBearerAuth": {
-            "id": "5NF42pqAyUFzvVGh",
-            "name": "API ZEUS"
-          }
-        },
-        "disabled": true
-      },
-      {
-        "parameters": {
           "promptType": "define",
           "text": "***REDACTED***",
           "options": {
@@ -980,172 +638,6 @@
         ],
         "id": "6c6f0bea-0968-4765-b47b-e78c4b3b945e",
         "name": "Agente_consultor"
-      },
-      {
-        "parameters": {
-          "method": "POST",
-          "url": "***REDACTED***",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "httpBearerAuth",
-          "sendBody": true,
-          "specifyBody": "json",
-          "jsonBody": "***REDACTED***",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequestTool",
-        "typeVersion": 4.3,
-        "position": [
-          1120,
-          448
-        ],
-        "id": "04614830-295d-4808-822d-5851763a047c",
-        "name": "AgendarCita",
-        "credentials": {
-          "httpBearerAuth": {
-            "id": "5NF42pqAyUFzvVGh",
-            "name": "API ZEUS"
-          }
-        },
-        "disabled": true
-      },
-      {
-        "parameters": {
-          "promptType": "define",
-          "text": "***REDACTED***",
-          "options": {
-            "systemMessage": "***REDACTED***"
-          }
-        },
-        "type": "@n8n/n8n-nodes-langchain.agent",
-        "typeVersion": 3,
-        "position": [
-          -304,
-          864
-        ],
-        "id": "dd13f088-c298-43a2-835c-4acb443c1427",
-        "name": "Agente_agendar_automatico",
-        "disabled": true
-      },
-      {
-        "parameters": {
-          "model": {
-            "__rl": true,
-            "mode": "list",
-            "value": "***REDACTED***"
-          },
-          "builtInTools": {},
-          "options": {}
-        },
-        "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-        "typeVersion": 1.3,
-        "position": [
-          -480,
-          1072
-        ],
-        "id": "c71e9ef7-5c20-4e39-8896-37bb4cc6cdde",
-        "name": "OpenAI Chat Model2",
-        "credentials": {
-          "openAiApi": {
-            "id": "dNAey8tcxmUMRffx",
-            "name": "OpenAi account 2"
-          }
-        },
-        "disabled": true
-      },
-      {
-        "parameters": {
-          "toolDescription": "***REDACTED***",
-          "url": "***REDACTED***",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "httpBearerAuth",
-          "sendQuery": true,
-          "queryParameters": {
-            "parameters": [
-              {
-                "name": "fecha",
-                "value": "***REDACTED***"
-              },
-              {
-                "name": "medico",
-                "value": "142"
-              },
-              {
-                "name": "idSede",
-                "value": "1"
-              },
-              {
-                "name": "asunto",
-                "value": "274"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequestTool",
-        "typeVersion": 4.3,
-        "position": [
-          -128,
-          1072
-        ],
-        "id": "3afa7730-186f-440c-97e2-c7d128112265",
-        "name": "Disponibilidad2",
-        "credentials": {
-          "httpBearerAuth": {
-            "id": "5NF42pqAyUFzvVGh",
-            "name": "API ZEUS"
-          }
-        },
-        "disabled": true
-      },
-      {
-        "parameters": {
-          "toolDescription": "***REDACTED***",
-          "method": "POST",
-          "url": "***REDACTED***",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "httpBearerAuth",
-          "sendBody": true,
-          "specifyBody": "json",
-          "jsonBody": "***REDACTED***",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequestTool",
-        "typeVersion": 4.3,
-        "position": [
-          32,
-          1072
-        ],
-        "id": "26d058ae-511a-4465-b619-6ef6298014f8",
-        "name": "AgendarCita2",
-        "credentials": {
-          "httpBearerAuth": {
-            "id": "5NF42pqAyUFzvVGh",
-            "name": "API ZEUS"
-          }
-        },
-        "disabled": true
-      },
-      {
-        "parameters": {
-          "sessionIdType": "customKey",
-          "sessionKey": "***REDACTED***",
-          "contextWindowLength": 10
-        },
-        "type": "***REDACTED***",
-        "typeVersion": 1.3,
-        "position": [
-          -272,
-          1072
-        ],
-        "id": "31c92a48-c5e2-4eaa-83f7-89537b943cf9",
-        "name": "Postgres Chat Memory2",
-        "credentials": {
-          "postgres": {
-            "id": "cffLg1U8OTnicsUa",
-            "name": "Postgres account"
-          }
-        },
-        "disabled": true
       },
       {
         "parameters": {
@@ -1215,51 +707,6 @@
         ],
         "id": "13648c93-1492-435c-a5f9-be4bd28de834",
         "name": "Call 'My workflow 9'"
-      },
-      {
-        "parameters": {
-          "toolDescription": "***REDACTED***",
-          "url": "***REDACTED***",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "httpBearerAuth",
-          "sendQuery": true,
-          "queryParameters": {
-            "parameters": [
-              {
-                "name": "fecha",
-                "value": "***REDACTED***"
-              },
-              {
-                "name": "medico",
-                "value": "142"
-              },
-              {
-                "name": "idSede",
-                "value": "1"
-              },
-              {
-                "name": "asunto",
-                "value": "274"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequestTool",
-        "typeVersion": 4.3,
-        "position": [
-          1504,
-          448
-        ],
-        "id": "ba7c8908-9f36-4ebf-af6f-88a23900b26e",
-        "name": "Disponibilidad3",
-        "credentials": {
-          "httpBearerAuth": {
-            "id": "5NF42pqAyUFzvVGh",
-            "name": "API ZEUS"
-          }
-        },
-        "disabled": true
       },
       {
         "parameters": {
@@ -1442,66 +889,12 @@
           ]
         ]
       },
-      "Obtener_datos_paciente": {
-        "ai_tool": [
-          []
-        ]
-      },
       "Agente_consultor": {
         "main": [
           [
             {
               "node": "Parsear slots",
               "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "AgendarCita": {
-        "ai_tool": [
-          []
-        ]
-      },
-      "OpenAI Chat Model2": {
-        "ai_languageModel": [
-          [
-            {
-              "node": "Agente_agendar_automatico",
-              "type": "ai_languageModel",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Disponibilidad2": {
-        "ai_tool": [
-          [
-            {
-              "node": "Agente_agendar_automatico",
-              "type": "ai_tool",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "AgendarCita2": {
-        "ai_tool": [
-          [
-            {
-              "node": "Agente_agendar_automatico",
-              "type": "ai_tool",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Postgres Chat Memory2": {
-        "ai_memory": [
-          [
-            {
-              "node": "Agente_agendar_automatico",
-              "type": "ai_memory",
               "index": 0
             }
           ]
@@ -1516,11 +909,6 @@
               "index": 0
             }
           ]
-        ]
-      },
-      "Disponibilidad3": {
-        "ai_tool": [
-          []
         ]
       },
       "Disponibilidad": {
@@ -1580,15 +968,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version b0dcfa9e",
+    "name": "Version a03601e4",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-31T20:23:45.574Z",
-        "id": 420,
+        "createdAt": "2026-04-07T15:11:24.081Z",
+        "id": 436,
         "workflowId": "LTmtmcMGQaHqcOnO",
-        "versionId": "b0dcfa9e-d4d0-4280-8609-e3cc1449f405",
+        "versionId": "a03601e4-e94b-45f7-bef3-2d41816a3248",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
