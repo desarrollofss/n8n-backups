@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-31T20:31:25.569Z",
+  "updatedAt": "2026-04-07T18:58:18.996Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
@@ -563,21 +563,6 @@
       ],
       "id": "8b34bfa7-ccea-405b-a402-70b44a3b554b",
       "name": "DEBUG Retell (temporal)"
-    },
-    {
-      "parameters": {
-        "content": "***REDACTED***",
-        "height": 480,
-        "width": 512
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        80,
-        -1200
-      ],
-      "id": "450f291b-364f-4c4f-a2fe-0ef986db10c6",
-      "name": "Sticky Note"
     },
     {
       "parameters": {
@@ -1158,9 +1143,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "9eca4f20-1f0b-42db-8f8d-c385ad03a650",
-  "activeVersionId": "9eca4f20-1f0b-42db-8f8d-c385ad03a650",
-  "versionCounter": 1110,
+  "versionId": "c3bdca11-8124-410e-880b-e646e04cb087",
+  "activeVersionId": "c3bdca11-8124-410e-880b-e646e04cb087",
+  "versionCounter": 1118,
   "triggerCount": 1,
   "shared": [
     {
@@ -1185,7 +1170,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-03T12:14:01.168Z",
+              "updatedAt": "2026-04-10T11:44:41.129Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1218,7 +1203,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-03",
+              "lastActiveAt": "2026-04-10",
               "isPending": false
             }
           }
@@ -1228,22 +1213,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T21:57:31.305Z",
-      "createdAt": "2026-02-04T21:57:31.305Z",
-      "id": "Vt8x6W2rrtVBRg8l",
-      "name": "Relación get_paciente 🟢"
-    },
-    {
       "updatedAt": "2026-02-04T20:18:39.085Z",
       "createdAt": "2026-02-04T20:18:39.085Z",
       "id": "2EO9Ro2seknMiiVu",
       "name": "DEL ADMIN ☺️"
+    },
+    {
+      "updatedAt": "2026-02-04T21:57:31.305Z",
+      "createdAt": "2026-02-04T21:57:31.305Z",
+      "id": "Vt8x6W2rrtVBRg8l",
+      "name": "Relación get_paciente 🟢"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-31T20:31:28.678Z",
-    "createdAt": "2026-03-31T20:31:25.570Z",
-    "versionId": "9eca4f20-1f0b-42db-8f8d-c385ad03a650",
+    "updatedAt": "2026-04-07T18:58:43.592Z",
+    "createdAt": "2026-04-07T18:58:18.998Z",
+    "versionId": "c3bdca11-8124-410e-880b-e646e04cb087",
     "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
     "nodes": [
       {
@@ -1802,21 +1787,6 @@
         ],
         "id": "8b34bfa7-ccea-405b-a402-70b44a3b554b",
         "name": "DEBUG Retell (temporal)"
-      },
-      {
-        "parameters": {
-          "content": "***REDACTED***",
-          "height": 480,
-          "width": 512
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          80,
-          -1200
-        ],
-        "id": "450f291b-364f-4c4f-a2fe-0ef986db10c6",
-        "name": "Sticky Note"
       },
       {
         "parameters": {
@@ -2389,15 +2359,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 9eca4f20",
-    "description": "",
+    "name": "Version c3bdca11",
+    "description": "Calificación de agendamiento de citas",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-31T20:31:28.676Z",
-        "id": 421,
+        "createdAt": "2026-04-07T18:58:43.591Z",
+        "id": 441,
         "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "9eca4f20-1f0b-42db-8f8d-c385ad03a650",
+        "versionId": "c3bdca11-8124-410e-880b-e646e04cb087",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
