@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-01T15:40:23.153Z",
+  "updatedAt": "2026-04-10T14:03:22.501Z",
   "createdAt": "2026-02-18T14:44:38.955Z",
   "id": "_nSf8s_U2hqJ0u1brhr-n",
   "name": "COHORTE_SALUD_MENTAL_FLUJO_CAP_DATOS",
@@ -1090,7 +1090,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -432,
+        -400,
         1760
       ],
       "id": "4df4c2c4-50df-425e-830c-397637ed3a59",
@@ -1160,7 +1160,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1728,
+        1760,
         1744
       ],
       "id": "79f48961-d186-46dc-b0fe-406a0b88ab00",
@@ -1187,7 +1187,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1520,
+        1536,
         1744
       ],
       "id": "792d86e8-d63e-46da-b585-a700ef9256b4",
@@ -1478,6 +1478,52 @@
           "name": "Microsoft Outlook account 2"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "grant_type",
+              "value": "password"
+            },
+            {
+              "name": "client_id",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "username",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "password",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -880,
+        1680
+      ],
+      "id": "e71f2155-9693-4cc5-9783-86af793a103a",
+      "name": "Obtener Token Zeus"
     }
   ],
   "connections": {
@@ -1789,7 +1835,7 @@
       "main": [
         [
           {
-            "node": "Validar Registros",
+            "node": "Obtener Token Zeus",
             "type": "main",
             "index": 0
           }
@@ -1831,6 +1877,17 @@
           }
         ]
       ]
+    },
+    "Obtener Token Zeus": {
+      "main": [
+        [
+          {
+            "node": "Validar Registros",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -1841,10 +1898,69 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "pinData": {},
-  "versionId": "170e87e8-d625-4e6b-9937-28f4175cb8a4",
-  "activeVersionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
-  "versionCounter": 1511,
+  "pinData": {
+    "Outlook - Recibir Correo": [
+      {
+        "json": {
+          "@odata.etag": "***REDACTED***",
+          "id": "***REDACTED***",
+          "createdDateTime": "2026-04-09T17:29:53Z",
+          "lastModifiedDateTime": "2026-04-09T17:30:09Z",
+          "changeKey": "CQAAABYAAADzHuOTpCRfTLq6vT6B/O9TAAAVzGZy",
+          "categories": [],
+          "receivedDateTime": "2026-04-09T17:29:53Z",
+          "sentDateTime": "2026-04-09T17:29:45Z",
+          "hasAttachments": true,
+          "internetMessageId": "***REDACTED***",
+          "subject": "COHORTE | SALUD_MENTAL | Prueba",
+          "bodyPreview": "***REDACTED***",
+          "importance": "normal",
+          "parentFolderId": "***REDACTED***",
+          "conversationId": "***REDACTED***",
+          "conversationIndex": "AQHcyEZ1CjhfsNZj4UmO4eoURuZHqg==",
+          "isDeliveryReceiptRequested": null,
+          "isReadReceiptRequested": false,
+          "isRead": false,
+          "isDraft": false,
+          "webLink": "***REDACTED***",
+          "inferenceClassification": "focused",
+          "body": {
+            "contentType": "html",
+            "content": "***REDACTED***"
+          },
+          "sender": {
+            "emailAddress": {
+              "name": "Activamente",
+              "address": "activamente@mutualser.org"
+            }
+          },
+          "from": {
+            "emailAddress": {
+              "name": "Activamente",
+              "address": "activamente@mutualser.org"
+            }
+          },
+          "toRecipients": [
+            {
+              "emailAddress": {
+                "name": "reporte.saludmental",
+                "address": "reporte.saludmental@sersocial.org"
+              }
+            }
+          ],
+          "ccRecipients": [],
+          "bccRecipients": [],
+          "replyTo": [],
+          "flag": {
+            "flagStatus": "notFlagged"
+          }
+        }
+      }
+    ]
+  },
+  "versionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
+  "activeVersionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
+  "versionCounter": 1900,
   "triggerCount": 1,
   "shared": [
     {
@@ -1869,7 +1985,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-03T12:14:01.168Z",
+              "updatedAt": "2026-04-10T11:44:41.129Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1902,7 +2018,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-03",
+              "lastActiveAt": "2026-04-10",
               "isPending": false
             }
           }
@@ -1912,9 +2028,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-04-01T14:35:10.710Z",
-    "createdAt": "2026-04-01T14:35:07.263Z",
-    "versionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
+    "updatedAt": "2026-04-10T14:03:27.851Z",
+    "createdAt": "2026-04-10T14:03:22.502Z",
+    "versionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
     "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
     "nodes": [
       {
@@ -3000,7 +3116,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -432,
+          -400,
           1760
         ],
         "id": "4df4c2c4-50df-425e-830c-397637ed3a59",
@@ -3070,7 +3186,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1728,
+          1760,
           1744
         ],
         "id": "79f48961-d186-46dc-b0fe-406a0b88ab00",
@@ -3097,7 +3213,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1520,
+          1536,
           1744
         ],
         "id": "792d86e8-d63e-46da-b585-a700ef9256b4",
@@ -3388,6 +3504,52 @@
             "name": "Microsoft Outlook account 2"
           }
         }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "form-urlencoded",
+          "bodyParameters": {
+            "parameters": [
+              {
+                "name": "grant_type",
+                "value": "password"
+              },
+              {
+                "name": "client_id",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "username",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "password",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -880,
+          1680
+        ],
+        "id": "e71f2155-9693-4cc5-9783-86af793a103a",
+        "name": "Obtener Token Zeus"
       }
     ],
     "connections": {
@@ -3699,7 +3861,7 @@
         "main": [
           [
             {
-              "node": "Validar Registros",
+              "node": "Obtener Token Zeus",
               "type": "main",
               "index": 0
             }
@@ -3741,18 +3903,29 @@
             }
           ]
         ]
+      },
+      "Obtener Token Zeus": {
+        "main": [
+          [
+            {
+              "node": "Validar Registros",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version ee40185a",
+    "name": "Version 6b2ca134",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-01T14:35:10.708Z",
-        "id": 427,
+        "createdAt": "2026-04-10T14:03:27.849Z",
+        "id": 451,
         "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
-        "versionId": "ee40185a-f4cd-44d0-a819-5c9abb67f669",
+        "versionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
