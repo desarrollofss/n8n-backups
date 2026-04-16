@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-07T18:58:18.996Z",
+  "updatedAt": "2026-04-14T14:45:48.366Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
@@ -1143,9 +1143,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "c3bdca11-8124-410e-880b-e646e04cb087",
-  "activeVersionId": "c3bdca11-8124-410e-880b-e646e04cb087",
-  "versionCounter": 1118,
+  "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
+  "activeVersionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
+  "versionCounter": 1124,
   "triggerCount": 1,
   "shared": [
     {
@@ -1170,7 +1170,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-10T11:44:41.129Z",
+              "updatedAt": "2026-04-16T11:52:04.306Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1203,7 +1203,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-10",
+              "lastActiveAt": "2026-04-16",
               "isPending": false
             }
           }
@@ -1213,22 +1213,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T20:18:39.085Z",
-      "createdAt": "2026-02-04T20:18:39.085Z",
-      "id": "2EO9Ro2seknMiiVu",
-      "name": "DEL ADMIN ☺️"
-    },
-    {
       "updatedAt": "2026-02-04T21:57:31.305Z",
       "createdAt": "2026-02-04T21:57:31.305Z",
       "id": "Vt8x6W2rrtVBRg8l",
       "name": "Relación get_paciente 🟢"
+    },
+    {
+      "updatedAt": "2026-02-04T20:18:39.085Z",
+      "createdAt": "2026-02-04T20:18:39.085Z",
+      "id": "2EO9Ro2seknMiiVu",
+      "name": "DEL ADMIN ☺️"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-04-07T18:58:43.592Z",
-    "createdAt": "2026-04-07T18:58:18.998Z",
-    "versionId": "c3bdca11-8124-410e-880b-e646e04cb087",
+    "updatedAt": "2026-04-14T14:45:51.530Z",
+    "createdAt": "2026-04-14T14:45:48.367Z",
+    "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
     "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
     "nodes": [
       {
@@ -2359,15 +2359,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version c3bdca11",
-    "description": "Calificación de agendamiento de citas",
+    "name": "Version 774899e8",
+    "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-07T18:58:43.591Z",
-        "id": 441,
+        "createdAt": "2026-04-14T14:45:51.529Z",
+        "id": 461,
         "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "c3bdca11-8124-410e-880b-e646e04cb087",
+        "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
