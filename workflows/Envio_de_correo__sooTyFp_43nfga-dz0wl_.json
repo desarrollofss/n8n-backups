@@ -1,0 +1,586 @@
+{
+  "updatedAt": "2026-04-16T20:54:28.208Z",
+  "createdAt": "2026-04-16T19:34:35.568Z",
+  "id": "sooTyFp_43nfga-dz0wl_",
+  "name": "Envio de correo",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "rips-enviar-null",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -368,
+        0
+      ],
+      "id": "e5bab902-282f-420f-9858-c54a8a129ed8",
+      "name": "POST - Enviar NULL",
+      "webhookId": "rips-enviar-null"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fechaInicio",
+              "name": "fechaInicio",
+              "value": "***REDACTED***",
+              "type": "string"
+            },
+            {
+              "id": "fechaFin",
+              "name": "fechaFin",
+              "value": "***REDACTED***",
+              "type": "string"
+            },
+            {
+              "id": "anoPeriodo",
+              "name": "anoPeriodo",
+              "value": "***REDACTED***",
+              "type": "number"
+            },
+            {
+              "id": "mesPeriodo",
+              "name": "mesPeriodo",
+              "value": "***REDACTED***",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -160,
+        0
+      ],
+      "id": "1242e28b-5fe0-4f1e-a278-8da2bd0a97d5",
+      "name": "Extraer Params NULL"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        32,
+        0
+      ],
+      "id": "4efcfefd-7c7a-4b75-8166-9c9e8ea6bf95",
+      "name": "Consultar NULL",
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftSql": {
+          "id": "SpbirW9YrVhytWHL",
+          "name": "Microsoft SQL - SERAGIL .9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "fbc56a95-02fd-4590-bb10-9fc4625bb008",
+      "name": "PrepararCVS"
+    },
+    {
+      "parameters": {
+        "toRecipients": "jtoviol@sersocial.org",
+        "subject": "***REDACTED***",
+        "bodyContent": "***REDACTED***",
+        "additionalFields": {
+          "attachments": {
+            "attachments": [
+              {
+                "binaryPropertyName": "data"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        640,
+        0
+      ],
+      "id": "a5d7009c-0844-42e9-9e6e-bdc4ccca95f4",
+      "name": "Enviar Correo Outlook",
+      "webhookId": "221c2c03-fb29-4f6b-a3ce-313bc5e332b2",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "P338NsrBCCHUD7uO",
+          "name": "Microsoft Outlook account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "***REDACTED***",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        832,
+        0
+      ],
+      "id": "e87de70b-f329-4af0-afd9-f5d11b323319",
+      "name": "Mostrar Exito Correo"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "csvContent",
+        "options": {
+          "fileName": "***REDACTED***"
+        }
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "a1100806-cedf-43a4-9a68-f34e61cb720e",
+      "name": "Convertir a CSV"
+    }
+  ],
+  "connections": {
+    "POST - Enviar NULL": {
+      "main": [
+        [
+          {
+            "node": "Extraer Params NULL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Params NULL": {
+      "main": [
+        [
+          {
+            "node": "Consultar NULL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar NULL": {
+      "main": [
+        [
+          {
+            "node": "PrepararCVS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PrepararCVS": {
+      "main": [
+        [
+          {
+            "node": "Convertir a CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar Correo Outlook": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Exito Correo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convertir a CSV": {
+      "main": [
+        [
+          {
+            "node": "Enviar Correo Outlook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "124e11f1-1e8d-4b5f-b373-4e8727e70b0a",
+  "activeVersionId": "124e11f1-1e8d-4b5f-b373-4e8727e70b0a",
+  "versionCounter": 126,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-04-16T19:34:35.568Z",
+      "createdAt": "2026-04-16T19:34:35.568Z",
+      "role": "workflow:owner",
+      "workflowId": "sooTyFp_43nfga-dz0wl_",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-04-16T11:52:04.306Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-04-16",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-04-16T15:32:01.406Z",
+      "createdAt": "2026-04-16T15:32:01.406Z",
+      "id": "UwYoY9gtworpQ7kU",
+      "name": "Facturación Seragil 💵"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-04-16T20:54:32.097Z",
+    "createdAt": "2026-04-16T20:54:28.209Z",
+    "versionId": "124e11f1-1e8d-4b5f-b373-4e8727e70b0a",
+    "workflowId": "sooTyFp_43nfga-dz0wl_",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "rips-enviar-null",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -368,
+          0
+        ],
+        "id": "e5bab902-282f-420f-9858-c54a8a129ed8",
+        "name": "POST - Enviar NULL",
+        "webhookId": "rips-enviar-null"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fechaInicio",
+                "name": "fechaInicio",
+                "value": "***REDACTED***",
+                "type": "string"
+              },
+              {
+                "id": "fechaFin",
+                "name": "fechaFin",
+                "value": "***REDACTED***",
+                "type": "string"
+              },
+              {
+                "id": "anoPeriodo",
+                "name": "anoPeriodo",
+                "value": "***REDACTED***",
+                "type": "number"
+              },
+              {
+                "id": "mesPeriodo",
+                "name": "mesPeriodo",
+                "value": "***REDACTED***",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {
+            "ignoreConversionErrors": true
+          }
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -160,
+          0
+        ],
+        "id": "1242e28b-5fe0-4f1e-a278-8da2bd0a97d5",
+        "name": "Extraer Params NULL"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          32,
+          0
+        ],
+        "id": "4efcfefd-7c7a-4b75-8166-9c9e8ea6bf95",
+        "name": "Consultar NULL",
+        "alwaysOutputData": true,
+        "credentials": {
+          "microsoftSql": {
+            "id": "SpbirW9YrVhytWHL",
+            "name": "Microsoft SQL - SERAGIL .9"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          240,
+          0
+        ],
+        "id": "fbc56a95-02fd-4590-bb10-9fc4625bb008",
+        "name": "PrepararCVS"
+      },
+      {
+        "parameters": {
+          "toRecipients": "jtoviol@sersocial.org",
+          "subject": "***REDACTED***",
+          "bodyContent": "***REDACTED***",
+          "additionalFields": {
+            "attachments": {
+              "attachments": [
+                {
+                  "binaryPropertyName": "data"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "typeVersion": 2,
+        "position": [
+          640,
+          0
+        ],
+        "id": "a5d7009c-0844-42e9-9e6e-bdc4ccca95f4",
+        "name": "Enviar Correo Outlook",
+        "webhookId": "221c2c03-fb29-4f6b-a3ce-313bc5e332b2",
+        "credentials": {
+          "microsoftOutlookOAuth2Api": {
+            "id": "P338NsrBCCHUD7uO",
+            "name": "Microsoft Outlook account 3"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "***REDACTED***",
+          "options": {
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          832,
+          0
+        ],
+        "id": "e87de70b-f329-4af0-afd9-f5d11b323319",
+        "name": "Mostrar Exito Correo"
+      },
+      {
+        "parameters": {
+          "operation": "toText",
+          "sourceProperty": "csvContent",
+          "options": {
+            "fileName": "***REDACTED***"
+          }
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          416,
+          0
+        ],
+        "id": "a1100806-cedf-43a4-9a68-f34e61cb720e",
+        "name": "Convertir a CSV"
+      }
+    ],
+    "connections": {
+      "POST - Enviar NULL": {
+        "main": [
+          [
+            {
+              "node": "Extraer Params NULL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extraer Params NULL": {
+        "main": [
+          [
+            {
+              "node": "Consultar NULL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Consultar NULL": {
+        "main": [
+          [
+            {
+              "node": "PrepararCVS",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "PrepararCVS": {
+        "main": [
+          [
+            {
+              "node": "Convertir a CSV",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Enviar Correo Outlook": {
+        "main": [
+          [
+            {
+              "node": "Mostrar Exito Correo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convertir a CSV": {
+        "main": [
+          [
+            {
+              "node": "Enviar Correo Outlook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version 124e11f1",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-04-16T20:54:32.096Z",
+        "id": 523,
+        "workflowId": "sooTyFp_43nfga-dz0wl_",
+        "versionId": "124e11f1-1e8d-4b5f-b373-4e8727e70b0a",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
