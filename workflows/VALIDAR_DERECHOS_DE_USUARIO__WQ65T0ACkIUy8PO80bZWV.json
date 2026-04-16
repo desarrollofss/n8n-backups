@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-07T19:42:17.598Z",
+  "updatedAt": "2026-04-12T20:33:41.333Z",
   "createdAt": "2026-03-03T18:20:57.454Z",
   "id": "WQ65T0ACkIUy8PO80bZWV",
   "name": "VALIDAR DERECHOS DE USUARIO",
@@ -1028,7 +1028,7 @@
         "json": {
           "datos_paciente": {
             "tipo_documento": "CC",
-            "documento": " 1143331246 ",
+            "documento": " 1002489364",
             "id_registro": "Q0N8NzIxNDQ0NDl8UFNBfDIwMjUtMDYtMTA="
           }
         }
@@ -1107,9 +1107,9 @@
       }
     ]
   },
-  "versionId": "91db89bd-ba60-4d71-93f8-c15f7bebc518",
-  "activeVersionId": "91db89bd-ba60-4d71-93f8-c15f7bebc518",
-  "versionCounter": 793,
+  "versionId": "73a4879b-5010-41f4-8293-2f2e6492a241",
+  "activeVersionId": "73a4879b-5010-41f4-8293-2f2e6492a241",
+  "versionCounter": 807,
   "triggerCount": 0,
   "shared": [
     {
@@ -1134,7 +1134,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-10T11:44:41.129Z",
+              "updatedAt": "2026-04-16T11:52:04.306Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1167,7 +1167,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-10",
+              "lastActiveAt": "2026-04-16",
               "isPending": false
             }
           }
@@ -1177,9 +1177,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-04-06T20:29:50.828Z",
-    "createdAt": "2026-04-06T20:29:07.510Z",
-    "versionId": "91db89bd-ba60-4d71-93f8-c15f7bebc518",
+    "updatedAt": "2026-04-12T20:34:31.982Z",
+    "createdAt": "2026-04-12T20:29:38.804Z",
+    "versionId": "73a4879b-5010-41f4-8293-2f2e6492a241",
     "workflowId": "WQ65T0ACkIUy8PO80bZWV",
     "nodes": [
       {
@@ -2187,23 +2187,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 91db89bd",
+    "name": "Version 73a4879b",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-07T19:42:17.681Z",
-        "id": 443,
+        "createdAt": "2026-04-12T20:34:31.979Z",
+        "id": 452,
         "workflowId": "WQ65T0ACkIUy8PO80bZWV",
-        "versionId": "91db89bd-ba60-4d71-93f8-c15f7bebc518",
-        "event": "activated",
-        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
-      },
-      {
-        "createdAt": "2026-04-06T20:29:50.827Z",
-        "id": 433,
-        "workflowId": "WQ65T0ACkIUy8PO80bZWV",
-        "versionId": "91db89bd-ba60-4d71-93f8-c15f7bebc518",
+        "versionId": "73a4879b-5010-41f4-8293-2f2e6492a241",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
