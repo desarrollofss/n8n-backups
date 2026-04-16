@@ -1,0 +1,396 @@
+{
+  "updatedAt": "2026-04-16T19:06:06.452Z",
+  "createdAt": "2026-04-16T18:53:04.697Z",
+  "id": "oqytOX0IhkrvlKrJ2tX5l",
+  "name": "Confirmar zona afiliado",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "rips-confirmar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -304,
+        32
+      ],
+      "id": "4e875d41-680b-41cc-ac98-73651ec83f90",
+      "name": "POST - Confirmar1",
+      "webhookId": "rips-confirmar"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fechaInicio",
+              "name": "fechaInicio",
+              "value": "***REDACTED***",
+              "type": "string"
+            },
+            {
+              "id": "fechaFin",
+              "name": "fechaFin",
+              "value": "***REDACTED***",
+              "type": "string"
+            },
+            {
+              "id": "anoPeriodo",
+              "name": "anoPeriodo",
+              "value": "***REDACTED***",
+              "type": "number"
+            },
+            {
+              "id": "mesPeriodo",
+              "name": "mesPeriodo",
+              "value": "***REDACTED***",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -96,
+        32
+      ],
+      "id": "f4008537-3bd1-492b-b467-9855cdf7ff96",
+      "name": "Extraer Params1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.microsoftSql",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        32
+      ],
+      "id": "6dd55f9a-5104-44aa-aab9-72793e9717e5",
+      "name": "Contar a actualizar1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "microsoftSql": {
+          "id": "SpbirW9YrVhytWHL",
+          "name": "Microsoft SQL - SERAGIL .9"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "***REDACTED***",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        304,
+        32
+      ],
+      "id": "d95688b5-3da4-4bd7-af66-28693f3d2727",
+      "name": "Mostrar Confirmacion1"
+    }
+  ],
+  "connections": {
+    "POST - Confirmar1": {
+      "main": [
+        [
+          {
+            "node": "Extraer Params1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Params1": {
+      "main": [
+        [
+          {
+            "node": "Contar a actualizar1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Contar a actualizar1": {
+      "main": [
+        [
+          {
+            "node": "Mostrar Confirmacion1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "ef587941-9523-422d-9435-d65c37bf486b",
+  "activeVersionId": "ef587941-9523-422d-9435-d65c37bf486b",
+  "versionCounter": 13,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-04-16T18:53:04.697Z",
+      "createdAt": "2026-04-16T18:53:04.697Z",
+      "role": "workflow:owner",
+      "workflowId": "oqytOX0IhkrvlKrJ2tX5l",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-04-16T11:52:04.306Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-04-16",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-04-16T15:32:01.406Z",
+      "createdAt": "2026-04-16T15:32:01.406Z",
+      "id": "UwYoY9gtworpQ7kU",
+      "name": "Facturación Seragil 💵"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-04-16T19:06:10.524Z",
+    "createdAt": "2026-04-16T19:06:06.453Z",
+    "versionId": "ef587941-9523-422d-9435-d65c37bf486b",
+    "workflowId": "oqytOX0IhkrvlKrJ2tX5l",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "rips-confirmar",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -304,
+          32
+        ],
+        "id": "4e875d41-680b-41cc-ac98-73651ec83f90",
+        "name": "POST - Confirmar1",
+        "webhookId": "rips-confirmar"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fechaInicio",
+                "name": "fechaInicio",
+                "value": "***REDACTED***",
+                "type": "string"
+              },
+              {
+                "id": "fechaFin",
+                "name": "fechaFin",
+                "value": "***REDACTED***",
+                "type": "string"
+              },
+              {
+                "id": "anoPeriodo",
+                "name": "anoPeriodo",
+                "value": "***REDACTED***",
+                "type": "number"
+              },
+              {
+                "id": "mesPeriodo",
+                "name": "mesPeriodo",
+                "value": "***REDACTED***",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {
+            "ignoreConversionErrors": true
+          }
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -96,
+          32
+        ],
+        "id": "f4008537-3bd1-492b-b467-9855cdf7ff96",
+        "name": "Extraer Params1"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.microsoftSql",
+        "typeVersion": 1.1,
+        "position": [
+          96,
+          32
+        ],
+        "id": "6dd55f9a-5104-44aa-aab9-72793e9717e5",
+        "name": "Contar a actualizar1",
+        "alwaysOutputData": true,
+        "credentials": {
+          "microsoftSql": {
+            "id": "SpbirW9YrVhytWHL",
+            "name": "Microsoft SQL - SERAGIL .9"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "***REDACTED***",
+          "options": {
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          304,
+          32
+        ],
+        "id": "d95688b5-3da4-4bd7-af66-28693f3d2727",
+        "name": "Mostrar Confirmacion1"
+      }
+    ],
+    "connections": {
+      "POST - Confirmar1": {
+        "main": [
+          [
+            {
+              "node": "Extraer Params1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extraer Params1": {
+        "main": [
+          [
+            {
+              "node": "Contar a actualizar1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Contar a actualizar1": {
+        "main": [
+          [
+            {
+              "node": "Mostrar Confirmacion1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version ef587941",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-04-16T19:06:10.522Z",
+        "id": 501,
+        "workflowId": "oqytOX0IhkrvlKrJ2tX5l",
+        "versionId": "ef587941-9523-422d-9435-d65c37bf486b",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
