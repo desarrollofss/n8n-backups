@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-10T14:03:22.501Z",
+  "updatedAt": "2026-04-15T19:08:00.817Z",
   "createdAt": "2026-02-18T14:44:38.955Z",
   "id": "_nSf8s_U2hqJ0u1brhr-n",
   "name": "COHORTE_SALUD_MENTAL_FLUJO_CAP_DATOS",
@@ -33,7 +33,8 @@
           "id": "czvuJ0pPWCOnCKA4",
           "name": "Microsoft Outlook account 2"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1958,9 +1959,9 @@
       }
     ]
   },
-  "versionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
-  "activeVersionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
-  "versionCounter": 1900,
+  "versionId": "2aa00e77-f9f6-478e-a0d4-e4c5adb50bf6",
+  "activeVersionId": "2d0b5f3f-55fd-47de-9ba6-5b10fed53b37",
+  "versionCounter": 1908,
   "triggerCount": 1,
   "shared": [
     {
@@ -1985,7 +1986,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-10T11:44:41.129Z",
+              "updatedAt": "2026-04-16T11:52:04.306Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -2018,7 +2019,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-10",
+              "lastActiveAt": "2026-04-16",
               "isPending": false
             }
           }
@@ -2028,9 +2029,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-04-10T14:03:27.851Z",
-    "createdAt": "2026-04-10T14:03:22.502Z",
-    "versionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
+    "updatedAt": "2026-04-13T20:45:15.879Z",
+    "createdAt": "2026-04-13T20:45:11.059Z",
+    "versionId": "2d0b5f3f-55fd-47de-9ba6-5b10fed53b37",
     "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
     "nodes": [
       {
@@ -3917,15 +3918,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 6b2ca134",
+    "name": "Version 2d0b5f3f",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-10T14:03:27.849Z",
-        "id": 451,
+        "createdAt": "2026-04-13T20:45:15.878Z",
+        "id": 455,
         "workflowId": "_nSf8s_U2hqJ0u1brhr-n",
-        "versionId": "6b2ca134-77e7-4c3f-a27a-8fbc3e0db2c9",
+        "versionId": "2d0b5f3f-55fd-47de-9ba6-5b10fed53b37",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
