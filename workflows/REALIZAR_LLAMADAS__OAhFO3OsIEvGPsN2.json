@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-09T21:28:15.106Z",
+  "updatedAt": "2026-04-15T20:20:08.294Z",
   "createdAt": "2026-02-04T20:19:26.832Z",
   "id": "OAhFO3OsIEvGPsN2",
   "name": "REALIZAR_LLAMADAS",
@@ -179,7 +179,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -2576,
+        -2528,
         976
       ],
       "id": "2c0fcfb4-74b0-43ae-99db-9f3ff5cfa10e",
@@ -195,7 +195,9 @@
         "contentType": "raw",
         "rawContentType": "application/json",
         "body": "***REDACTED***",
-        "options": {}
+        "options": {
+          "timeout": 10000
+        }
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
@@ -349,9 +351,9 @@
   },
   "meta": null,
   "pinData": {},
-  "versionId": "3d1617bf-6e58-4f36-8059-b61dfabd4a03",
+  "versionId": "4104f084-e08e-4c1f-86ea-2fbfe7398efb",
   "activeVersionId": null,
-  "versionCounter": 792,
+  "versionCounter": 810,
   "triggerCount": 1,
   "shared": [
     {
@@ -376,7 +378,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-10T11:44:41.129Z",
+              "updatedAt": "2026-04-16T11:52:04.306Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -409,7 +411,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-10",
+              "lastActiveAt": "2026-04-16",
               "isPending": false
             }
           }
