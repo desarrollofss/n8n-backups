@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-05T15:40:32.768Z",
+  "updatedAt": "2026-04-13T20:29:24.906Z",
   "createdAt": "2026-03-04T06:20:23.216Z",
   "id": "w9WxH5ehHNebFaQtfQwJN",
   "name": "TEST_CHATBOT_WHATSAPP",
@@ -805,7 +805,7 @@
       "typeVersion": 3.3,
       "position": [
         11536,
-        -128
+        -224
       ],
       "id": "6e1a2f02-4ddc-4f07-889d-5853825050a8",
       "name": "Switch"
@@ -1185,9 +1185,9 @@
             {
               "conditions": {
                 "options": {
-                  "caseSensitive": false,
+                  "caseSensitive": true,
                   "leftValue": "",
-                  "typeValidation": "loose",
+                  "typeValidation": "strict",
                   "version": 2
                 },
                 "conditions": [
@@ -1209,9 +1209,9 @@
             {
               "conditions": {
                 "options": {
-                  "caseSensitive": false,
+                  "caseSensitive": true,
                   "leftValue": "",
-                  "typeValidation": "loose",
+                  "typeValidation": "strict",
                   "version": 2
                 },
                 "conditions": [
@@ -1233,9 +1233,9 @@
             {
               "conditions": {
                 "options": {
-                  "caseSensitive": false,
+                  "caseSensitive": true,
                   "leftValue": "",
-                  "typeValidation": "loose",
+                  "typeValidation": "strict",
                   "version": 2
                 },
                 "conditions": [
@@ -1257,9 +1257,9 @@
             {
               "conditions": {
                 "options": {
-                  "caseSensitive": false,
+                  "caseSensitive": true,
                   "leftValue": "",
-                  "typeValidation": "loose",
+                  "typeValidation": "strict",
                   "version": 2
                 },
                 "conditions": [
@@ -2056,9 +2056,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "a94b5348-3d51-4100-b3db-b39c5dc2be27",
+  "versionId": "47aec5cb-05f8-404f-84bf-9fdebb21fbe3",
   "activeVersionId": null,
-  "versionCounter": 42,
+  "versionCounter": 44,
   "triggerCount": 0,
   "shared": [
     {
@@ -2083,7 +2083,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-10T11:44:41.129Z",
+              "updatedAt": "2026-04-16T11:52:04.306Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -2116,7 +2116,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-10",
+              "lastActiveAt": "2026-04-16",
               "isPending": false
             }
           }
@@ -2126,16 +2126,16 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-01-13T21:22:04.748Z",
-      "createdAt": "2026-01-13T21:22:04.748Z",
-      "id": "fikbPaiMxfrzFfMz",
-      "name": "test"
-    },
-    {
       "updatedAt": "2026-03-03T19:34:15.068Z",
       "createdAt": "2026-03-03T19:34:15.068Z",
       "id": "M63Xu3JDOVoP0xRM",
       "name": "flujo whatsapp"
+    },
+    {
+      "updatedAt": "2026-01-13T21:22:04.748Z",
+      "createdAt": "2026-01-13T21:22:04.748Z",
+      "id": "fikbPaiMxfrzFfMz",
+      "name": "test"
     }
   ],
   "activeVersion": null
