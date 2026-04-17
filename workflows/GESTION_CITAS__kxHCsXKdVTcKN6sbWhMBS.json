@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-16T21:04:29.202Z",
+  "updatedAt": "2026-04-17T21:02:08.732Z",
   "createdAt": "2026-04-13T19:37:57.076Z",
   "id": "kxHCsXKdVTcKN6sbWhMBS",
   "name": "GESTION_CITAS",
@@ -246,6 +246,31 @@
               },
               "renameOutput": true,
               "outputKey": "esperando_datos_registro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4f36047e-d8eb-4ee0-93fc-88183fb39edd",
+                    "leftValue": "={{ $json.accion }}",
+                    "rightValue": "recibir_asunto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "recibir_asunto"
             }
           ]
         },
@@ -402,8 +427,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        992,
-        512
+        976,
+        272
       ],
       "id": "dd7d0db7-7e7a-4807-8ba8-04057dbf577b",
       "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -474,8 +499,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1424,
-        272
+        2064,
+        256
       ],
       "id": "d59cc4ae-d2ae-4998-bf91-9a601649e807",
       "name": "ESPECIALIDAD",
@@ -532,7 +557,7 @@
       "typeVersion": 1.1,
       "position": [
         368,
-        48
+        64
       ],
       "id": "8218be4c-35d0-42fa-b9f2-06e80d7b4640",
       "name": "PEDIR_NUM_DOC1",
@@ -574,8 +599,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1216,
-        512
+        1200,
+        272
       ],
       "id": "3974ea7a-ddc0-4a42-9c37-ad601280e714",
       "name": "Consultar usuario en Zeus"
@@ -591,8 +616,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1040,
-        272
+        1648,
+        256
       ],
       "id": "a07f8062-ef03-47e6-8f8d-c6bd440c2de6",
       "name": "guardar estado2",
@@ -631,8 +656,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1616,
-        352
+        2096,
+        432
       ],
       "id": "4959798e-cdc2-4ef0-b494-1d99d807690a",
       "name": "If3"
@@ -649,39 +674,6 @@
       ],
       "id": "7322b513-f9d3-4d5a-b417-c93979947fb2",
       "name": "VALIDAR CONTRATOS"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "71b3b2c7-5d0a-4028-b6c7-6aade8103318",
-              "leftValue": "***REDACTED***",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        752,
-        528
-      ],
-      "id": "58fbb2e5-c2be-4366-bfa1-2ef0ba2775b6",
-      "name": "If4"
     },
     {
       "parameters": {
@@ -729,7 +721,7 @@
       "typeVersion": 1,
       "position": [
         -1056,
-        480
+        496
       ],
       "id": "882baf49-caba-423f-a621-70c78c000a11",
       "name": "Leer Estado Paciente",
@@ -748,7 +740,7 @@
       "typeVersion": 2,
       "position": [
         -672,
-        480
+        496
       ],
       "id": "64ff9cbc-7510-446f-9621-29f933f44aee",
       "name": "Verificar Identificación"
@@ -761,7 +753,7 @@
       "typeVersion": 2,
       "position": [
         -880,
-        480
+        496
       ],
       "id": "68f121d5-07ea-4c20-95fb-03555e0f17c2",
       "name": "Preparar Contexto"
@@ -792,7 +784,7 @@
       "typeVersion": 1.1,
       "position": [
         -1248,
-        480
+        496
       ],
       "id": "91a5c676-6c8c-429a-b361-1833bd880ba4",
       "name": "When Executed by Another Workflow"
@@ -806,7 +798,7 @@
       "typeVersion": 1,
       "position": [
         560,
-        48
+        64
       ],
       "id": "41d777fb-c618-406d-857c-b69c181d9ad2",
       "name": "Redis",
@@ -828,8 +820,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        1776,
-        256
+        2288,
+        368
       ],
       "id": "a1517f6c-f8de-4042-a38b-7fd2dbc0b59a",
       "name": "Send message",
@@ -852,8 +844,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1936,
-        256
+        2464,
+        208
       ],
       "id": "ee08aa8b-75a5-465e-a505-64b12062e41f",
       "name": "guardar estado3",
@@ -884,8 +876,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1248,
-        272
+        1872,
+        256
       ],
       "id": "aa61a01d-f25e-4387-81f1-e100c1952631",
       "name": "Code in JavaScript3"
@@ -912,8 +904,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -32,
-        496
+        736,
+        640
       ],
       "id": "a4f5513a-7778-4927-9d03-295bf225926f",
       "name": "Consultar asuntos",
@@ -933,7 +925,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        832,
+        784,
         272
       ],
       "id": "b3b59d70-e210-4fe5-ae7e-cbc26d3e6604",
@@ -947,6 +939,19 @@
     },
     {
       "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        928,
+        640
+      ],
+      "id": "830e8295-1455-4540-9a12-7106172d468b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
         "method": "POST",
         "url": "***REDACTED***",
         "authentication": "predefinedCredentialType",
@@ -954,17 +959,17 @@
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={{ $input.item.json }}",
+        "body": "={{ $input.first().json }}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        288,
-        560
+        1120,
+        640
       ],
       "id": "50205249-64eb-4332-b4ac-4ed2f2cf1493",
-      "name": "ESPECIALIDAD1",
+      "name": "ASUNTOS",
       "credentials": {
         "whatsAppApi": {
           "id": "Tt1jdP4FqS0LhYTX",
@@ -974,16 +979,116 @@
     },
     {
       "parameters": {
+        "url": "***REDACTED***",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "idPuntoAtencion",
+              "value": "30"
+            },
+            {
+              "name": "Asunto",
+              "value": "972"
+            },
+            {
+              "name": "fecha",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        80,
+        640
+      ],
+      "id": "2b838e96-b2d5-4e28-a0b5-eb03ac5d1338",
+      "name": "HTTP Request",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
         "jsCode": "***REDACTED***"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        176,
-        544
+        -144,
+        640
       ],
-      "id": "830e8295-1455-4540-9a12-7106172d468b",
-      "name": "Code in JavaScript"
+      "id": "e800b515-e44d-4a53-af67-6570159898fb",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        640
+      ],
+      "id": "0717b285-4442-4295-8114-afe36dd42db3",
+      "name": "Code in JavaScript5"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        640
+      ],
+      "id": "266d39ba-c725-4088-be6d-78dcae59fe08",
+      "name": "Code in JavaScript6"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "c43d2f75-f4ae-41e5-833c-3642155f946b",
+              "leftValue": "={{ $json.Datos.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1408,
+        272
+      ],
+      "id": "b4f0e024-7bb6-4dde-8cda-6b20d0097427",
+      "name": "If"
     }
   ],
   "connections": {
@@ -1048,14 +1153,16 @@
             "index": 0
           }
         ],
+        [],
+        [],
+        [],
         [
           {
-            "node": "Consultar asuntos",
+            "node": "Code in JavaScript4",
             "type": "main",
             "index": 0
           }
-        ],
-        []
+        ]
       ]
     },
     "PEDIR_TIPO_DOC": {
@@ -1140,7 +1247,13 @@
     },
     "Consultar usuario en Zeus": {
       "main": [
-        []
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "guardar estado2": {
@@ -1171,17 +1284,6 @@
         [
           {
             "node": "Code in JavaScript2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If4": {
-      "main": [
-        [
-          {
-            "node": "Call 'OBTENER TOKEN ZEUS'",
             "type": "main",
             "index": 0
           }
@@ -1296,7 +1398,7 @@
       "main": [
         [
           {
-            "node": "guardar estado2",
+            "node": "Call 'OBTENER TOKEN ZEUS'",
             "type": "main",
             "index": 0
           }
@@ -1305,7 +1407,68 @@
     },
     "Consultar asuntos": {
       "main": [
-        []
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "ASUNTOS",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript5": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "guardar estado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -1318,70 +1481,6 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {
-    "Call 'VALIDAR DERECHOS DE USUARIO'": [
-      {
-        "json": {
-          "tipo_documento": "CC",
-          "numero_documento": "1002489364",
-          "id_registro": "",
-          "status": "Afiliado validado",
-          "estado_afiliado": "ACTIVO",
-          "esta_activo": true,
-          "esta_fallecido": false,
-          "nombre_completo": "ANY LUZ TOVAR MERIÑO",
-          "primer_nombre": "ANY",
-          "segundo_nombre": "LUZ",
-          "primer_apellido": "TOVAR",
-          "segundo_apellido": "MERIÑO",
-          "fecha_nacimiento": "1996-09-11",
-          "genero": "female",
-          "edad": 29,
-          "telefono_fijo": "",
-          "telefono_movil": "3024643983",
-          "email": "ANIITHATOVAR6@GMAIL.COM",
-          "direccion_texto": "CL 1 SUR # 4 SUR - 4 CS TALON",
-          "ciudad": "code=13836|display=TURBACO",
-          "departamento": "code=13|display=BOLIVAR",
-          "zona": "Urbana - Cabecera Municipal",
-          "ubicacion": "TALON",
-          "regimen": "CONTRIBUTIVO",
-          "regimen_codigo": "C",
-          "tipo_afiliado": "Cotizante",
-          "codigo_afiliado": "C",
-          "tipo_usuario": "CONTRIBUTIVO PLENO",
-          "codigo_empresa": "EPS048",
-          "fecha_afiliacion": "2022-04-01",
-          "nombre_departamento": "BOLIVAR",
-          "codigo_departamento": "13",
-          "nombre_municipio": "TURBACO",
-          "codigo_municipio": "836",
-          "nombre_ips_primaria": "FUNDACION SERSOCIAL",
-          "tiene_contrato_sersocial": true,
-          "contratos_sersocial": [
-            {
-              "contrato_id": "C-21952",
-              "contrato_codigo": "CP",
-              "contrato_descripcion": "CAPITADO RPMS Y RMP"
-            },
-            {
-              "contrato_id": "C-22342",
-              "contrato_codigo": "GR",
-              "contrato_descripcion": "CONJ.INTE.ATE.GES.RIESGO"
-            },
-            {
-              "contrato_id": "C-22336",
-              "contrato_codigo": "CP",
-              "contrato_descripcion": "CAPITADO RPMS Y RMP"
-            }
-          ],
-          "contratos_sersocial_ids": [
-            "C-21952",
-            "C-22342",
-            "C-22336"
-          ]
-        }
-      }
-    ],
     "VALIDAR CONTRATOS": [
       {
         "json": {
@@ -1457,16 +1556,16 @@
       {
         "json": {
           "mensaje": "1002489364",
-          "intent": "esperando_especialidad",
+          "intent": "agendar",
           "telefono": "573205943893",
-          "phone_numbre_id": "1018630624675876"
+          "phone_number_id": "1018630624675876"
         }
       }
     ]
   },
-  "versionId": "66997b93-6832-46b9-a7a0-f0449153f6d2",
-  "activeVersionId": "c6d7f6b8-e33d-4a15-a369-aba8381c7d3f",
-  "versionCounter": 449,
+  "versionId": "1475f38d-d4b7-4f51-aea7-d1e9d7a10382",
+  "activeVersionId": "bdc10e02-8967-45ef-929a-9588aa03b74f",
+  "versionCounter": 698,
   "triggerCount": 0,
   "shared": [
     {
@@ -1491,7 +1590,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-16T11:52:04.306Z",
+              "updatedAt": "2026-04-17T11:59:07.238Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1524,7 +1623,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-16",
+              "lastActiveAt": "2026-04-17",
               "isPending": false
             }
           }
@@ -1541,9 +1640,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-04-16T20:52:21.742Z",
-    "createdAt": "2026-04-16T20:50:32.150Z",
-    "versionId": "c6d7f6b8-e33d-4a15-a369-aba8381c7d3f",
+    "updatedAt": "2026-04-17T16:54:23.603Z",
+    "createdAt": "2026-04-17T16:54:17.026Z",
+    "versionId": "bdc10e02-8967-45ef-929a-9588aa03b74f",
     "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
     "nodes": [
       {
@@ -1735,7 +1834,7 @@
                   "combinator": "and"
                 },
                 "renameOutput": true,
-                "outputKey": "esperando_especialidad"
+                "outputKey": "recibir_especialidad"
               },
               {
                 "conditions": {
@@ -1785,6 +1884,31 @@
                 },
                 "renameOutput": true,
                 "outputKey": "esperando_datos_registro"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "4f36047e-d8eb-4ee0-93fc-88183fb39edd",
+                      "leftValue": "={{ $json.accion }}",
+                      "rightValue": "recibir_asunto",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "esperando_asunto"
               }
             ]
           },
@@ -1941,8 +2065,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          992,
-          512
+          976,
+          272
         ],
         "id": "dd7d0db7-7e7a-4807-8ba8-04057dbf577b",
         "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -2013,8 +2137,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1424,
-          272
+          1856,
+          240
         ],
         "id": "d59cc4ae-d2ae-4998-bf91-9a601649e807",
         "name": "ESPECIALIDAD",
@@ -2071,7 +2195,7 @@
         "typeVersion": 1.1,
         "position": [
           368,
-          48
+          64
         ],
         "id": "8218be4c-35d0-42fa-b9f2-06e80d7b4640",
         "name": "PEDIR_NUM_DOC1",
@@ -2113,8 +2237,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1216,
-          512
+          1200,
+          272
         ],
         "id": "3974ea7a-ddc0-4a42-9c37-ad601280e714",
         "name": "Consultar usuario en Zeus"
@@ -2130,8 +2254,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          1040,
-          272
+          1504,
+          240
         ],
         "id": "a07f8062-ef03-47e6-8f8d-c6bd440c2de6",
         "name": "guardar estado2",
@@ -2170,8 +2294,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          1616,
-          352
+          1888,
+          432
         ],
         "id": "4959798e-cdc2-4ef0-b494-1d99d807690a",
         "name": "If3"
@@ -2188,39 +2312,6 @@
         ],
         "id": "7322b513-f9d3-4d5a-b417-c93979947fb2",
         "name": "VALIDAR CONTRATOS"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "71b3b2c7-5d0a-4028-b6c7-6aade8103318",
-                "leftValue": "***REDACTED***",
-                "rightValue": true,
-                "operator": {
-                  "type": "boolean",
-                  "operation": "equals"
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          752,
-          528
-        ],
-        "id": "58fbb2e5-c2be-4366-bfa1-2ef0ba2775b6",
-        "name": "If4"
       },
       {
         "parameters": {
@@ -2268,7 +2359,7 @@
         "typeVersion": 1,
         "position": [
           -1056,
-          480
+          496
         ],
         "id": "882baf49-caba-423f-a621-70c78c000a11",
         "name": "Leer Estado Paciente",
@@ -2287,7 +2378,7 @@
         "typeVersion": 2,
         "position": [
           -672,
-          480
+          496
         ],
         "id": "64ff9cbc-7510-446f-9621-29f933f44aee",
         "name": "Verificar Identificación"
@@ -2300,7 +2391,7 @@
         "typeVersion": 2,
         "position": [
           -880,
-          480
+          496
         ],
         "id": "68f121d5-07ea-4c20-95fb-03555e0f17c2",
         "name": "Preparar Contexto"
@@ -2331,7 +2422,7 @@
         "typeVersion": 1.1,
         "position": [
           -1248,
-          480
+          496
         ],
         "id": "91a5c676-6c8c-429a-b361-1833bd880ba4",
         "name": "When Executed by Another Workflow"
@@ -2345,7 +2436,7 @@
         "typeVersion": 1,
         "position": [
           560,
-          48
+          64
         ],
         "id": "41d777fb-c618-406d-857c-b69c181d9ad2",
         "name": "Redis",
@@ -2367,8 +2458,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          1776,
-          256
+          2080,
+          368
         ],
         "id": "a1517f6c-f8de-4042-a38b-7fd2dbc0b59a",
         "name": "Send message",
@@ -2391,8 +2482,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          1936,
-          256
+          2256,
+          208
         ],
         "id": "ee08aa8b-75a5-465e-a505-64b12062e41f",
         "name": "guardar estado3",
@@ -2400,27 +2491,6 @@
           "redis": {
             "id": "3XA5T4Gby6gagH8B",
             "name": "Redis account 2"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "executeQuery",
-          "query": "***REDACTED***",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.postgres",
-        "typeVersion": 2.6,
-        "position": [
-          832,
-          272
-        ],
-        "id": "b3b59d70-e210-4fe5-ae7e-cbc26d3e6604",
-        "name": "Execute a SQL query",
-        "credentials": {
-          "postgres": {
-            "id": "Xz5MvwxTeniqXXjz",
-            "name": "Postgres account 3"
           }
         }
       },
@@ -2444,8 +2514,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1248,
-          272
+          1680,
+          240
         ],
         "id": "aa61a01d-f25e-4387-81f1-e100c1952631",
         "name": "Code in JavaScript3"
@@ -2462,6 +2532,168 @@
         ],
         "id": "dbc4088f-b8c9-4bd4-9f22-ec8a6e0a2d91",
         "name": "Validar telefono"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          592,
+          496
+        ],
+        "id": "a4f5513a-7778-4927-9d03-295bf225926f",
+        "name": "Consultar asuntos",
+        "credentials": {
+          "postgres": {
+            "id": "Xz5MvwxTeniqXXjz",
+            "name": "Postgres account 3"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          784,
+          272
+        ],
+        "id": "b3b59d70-e210-4fe5-ae7e-cbc26d3e6604",
+        "name": "consultar especialidad",
+        "credentials": {
+          "postgres": {
+            "id": "Xz5MvwxTeniqXXjz",
+            "name": "Postgres account 3"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          784,
+          496
+        ],
+        "id": "830e8295-1455-4540-9a12-7106172d468b",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "whatsAppApi",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "={{ $input.first().json }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          976,
+          496
+        ],
+        "id": "50205249-64eb-4332-b4ac-4ed2f2cf1493",
+        "name": "ASUNTOS",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "Tt1jdP4FqS0LhYTX",
+            "name": "WhatsApp account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "url": "***REDACTED***",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "idPuntoAtencion",
+                "value": "30"
+              },
+              {
+                "name": "Asunto",
+                "value": "972"
+              },
+              {
+                "name": "fecha",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          80,
+          640
+        ],
+        "id": "2b838e96-b2d5-4e28-a0b5-eb03ac5d1338",
+        "name": "HTTP Request",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -144,
+          640
+        ],
+        "id": "e800b515-e44d-4a53-af67-6570159898fb",
+        "name": "Code in JavaScript4"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          240,
+          640
+        ],
+        "id": "0717b285-4442-4295-8114-afe36dd42db3",
+        "name": "Code in JavaScript5"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          448,
+          640
+        ],
+        "id": "266d39ba-c725-4088-be6d-78dcae59fe08",
+        "name": "Code in JavaScript6"
       }
     ],
     "connections": {
@@ -2527,7 +2759,15 @@
             }
           ],
           [],
-          []
+          [],
+          [],
+          [
+            {
+              "node": "Code in JavaScript4",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "PEDIR_TIPO_DOC": {
@@ -2649,17 +2889,6 @@
           ]
         ]
       },
-      "If4": {
-        "main": [
-          [
-            {
-              "node": "Call 'OBTENER TOKEN ZEUS'",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Leer Estado Paciente": {
         "main": [
           [
@@ -2746,18 +2975,7 @@
         "main": [
           [
             {
-              "node": "Execute a SQL query",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Execute a SQL query": {
-        "main": [
-          [
-            {
-              "node": "guardar estado2",
+              "node": "consultar especialidad",
               "type": "main",
               "index": 0
             }
@@ -2774,18 +2992,84 @@
             }
           ]
         ]
+      },
+      "consultar especialidad": {
+        "main": [
+          [
+            {
+              "node": "Call 'OBTENER TOKEN ZEUS'",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Consultar asuntos": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "ASUNTOS",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript4": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript5": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version c6d7f6b8",
+    "name": "Version bdc10e02",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-16T20:52:21.741Z",
-        "id": 521,
+        "createdAt": "2026-04-17T16:54:23.601Z",
+        "id": 528,
         "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
-        "versionId": "c6d7f6b8-e33d-4a15-a369-aba8381c7d3f",
+        "versionId": "bdc10e02-8967-45ef-929a-9588aa03b74f",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
