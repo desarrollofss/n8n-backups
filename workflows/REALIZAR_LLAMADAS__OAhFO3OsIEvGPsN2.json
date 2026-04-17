@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-15T20:20:08.294Z",
+  "updatedAt": "2026-04-16T21:09:21.223Z",
   "createdAt": "2026-02-04T20:19:26.832Z",
   "id": "OAhFO3OsIEvGPsN2",
   "name": "REALIZAR_LLAMADAS",
@@ -353,7 +353,7 @@
   "pinData": {},
   "versionId": "4104f084-e08e-4c1f-86ea-2fbfe7398efb",
   "activeVersionId": null,
-  "versionCounter": 810,
+  "versionCounter": 811,
   "triggerCount": 1,
   "shared": [
     {
@@ -378,7 +378,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-16T11:52:04.306Z",
+              "updatedAt": "2026-04-17T11:59:07.238Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -411,7 +411,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-16",
+              "lastActiveAt": "2026-04-17",
               "isPending": false
             }
           }
@@ -427,10 +427,10 @@
       "name": "🟢"
     },
     {
-      "updatedAt": "2026-02-04T20:18:39.085Z",
-      "createdAt": "2026-02-04T20:18:39.085Z",
-      "id": "2EO9Ro2seknMiiVu",
-      "name": "DEL ADMIN ☺️"
+      "updatedAt": "2026-04-16T21:08:33.019Z",
+      "createdAt": "2026-04-16T21:08:33.019Z",
+      "id": "oAU4h6efQRYRWcQU",
+      "name": "Sarai 📲"
     }
   ],
   "activeVersion": null
