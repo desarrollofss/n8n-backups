@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-04-16T21:09:21.223Z",
+  "updatedAt": "2026-04-20T17:16:40.298Z",
   "createdAt": "2026-02-04T20:19:26.832Z",
   "id": "OAhFO3OsIEvGPsN2",
   "name": "REALIZAR_LLAMADAS",
-  "description": "",
-  "active": false,
+  "description": "***REDACTED***",
+  "active": true,
   "isArchived": false,
   "nodes": [
     {
@@ -179,7 +179,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -2528,
+        -2544,
         976
       ],
       "id": "2c0fcfb4-74b0-43ae-99db-9f3ff5cfa10e",
@@ -213,6 +213,25 @@
           "name": "APIKEYSARAI"
         }
       }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 16
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -2464,
+        720
+      ],
+      "id": "474f2439-4100-45f9-8663-4381c28ef8d1",
+      "name": "Schedule Trigger"
     }
   ],
   "connections": {
@@ -339,7 +358,7 @@
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
     "callerPolicy": "workflowsFromSameOwner",
-    "availableInMCP": false
+    "availableInMCP": true
   },
   "staticData": {
     "node:Schedule Trigger": {
@@ -351,9 +370,9 @@
   },
   "meta": null,
   "pinData": {},
-  "versionId": "4104f084-e08e-4c1f-86ea-2fbfe7398efb",
-  "activeVersionId": null,
-  "versionCounter": 811,
+  "versionId": "fea88abe-40f8-4f24-ab60-1073c44f04ba",
+  "activeVersionId": "fea88abe-40f8-4f24-ab60-1073c44f04ba",
+  "versionCounter": 829,
   "triggerCount": 1,
   "shared": [
     {
@@ -378,7 +397,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-17T11:59:07.238Z",
+              "updatedAt": "2026-04-20T11:48:01.604Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -411,7 +430,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-17",
+              "lastActiveAt": "2026-04-20",
               "isPending": false
             }
           }
@@ -421,17 +440,392 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T21:56:48.941Z",
-      "createdAt": "2026-02-04T21:56:48.941Z",
-      "id": "S7UevxOArIeglzP8",
-      "name": "🟢"
-    },
-    {
       "updatedAt": "2026-04-16T21:08:33.019Z",
       "createdAt": "2026-04-16T21:08:33.019Z",
       "id": "oAU4h6efQRYRWcQU",
       "name": "Sarai 📲"
+    },
+    {
+      "updatedAt": "2026-02-04T21:56:48.941Z",
+      "createdAt": "2026-02-04T21:56:48.941Z",
+      "id": "S7UevxOArIeglzP8",
+      "name": "🟢"
     }
   ],
-  "activeVersion": null
+  "activeVersion": {
+    "updatedAt": "2026-04-20T17:05:00.950Z",
+    "createdAt": "2026-04-20T17:04:59.458Z",
+    "versionId": "fea88abe-40f8-4f24-ab60-1073c44f04ba",
+    "workflowId": "OAhFO3OsIEvGPsN2",
+    "nodes": [
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -2336,
+          976
+        ],
+        "id": "f426eef0-09ed-44e1-bab9-12e2770c0078",
+        "name": "obtener_paciente_pendiente2",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "check-paciente",
+                "leftValue": "***REDACTED***",
+                "rightValue": 0,
+                "operator": {
+                  "type": "number",
+                  "operation": "gt"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -2080,
+          976
+        ],
+        "id": "b6320bcc-d2c3-46a9-9a96-67a439203e92",
+        "name": "¿Paciente encontrado?"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -2080,
+          1456
+        ],
+        "id": "c41d0187-9f8e-4e5d-93e5-2d0382cfcfeb",
+        "name": "Sin pacientes pendientes"
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "id"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.1,
+        "position": [
+          -1552,
+          976
+        ],
+        "id": "4cd693f0-1219-47d1-b0de-d3091c2a8ace",
+        "name": "Consultar_disponibilidades"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -1200,
+          976
+        ],
+        "id": "fc144294-194f-47d9-83a5-87712a6eb53d",
+        "name": "Guardar opciones raw",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -832,
+          976
+        ],
+        "id": "09ee150e-e2bb-43f3-bfa9-8fd14551d507",
+        "name": "Guardar call_id",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "Postgres account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          -1808,
+          960
+        ],
+        "id": "ffcb056f-9c16-478d-bd76-76a0cb5a1ef8",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {
+          "amount": 2
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          -1296,
+          1424
+        ],
+        "id": "f0f2d930-fd3d-43e7-bdae-43d0c30b6d71",
+        "name": "Wait2",
+        "webhookId": "3f2927fa-d8d5-4fa1-93d6-41d42dae68d9"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1360,
+          976
+        ],
+        "id": "448d64fa-425c-4c2e-9462-34a8f4beb255",
+        "name": "formatearRespuesta"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -2544,
+          976
+        ],
+        "id": "2c0fcfb4-74b0-43ae-99db-9f3ff5cfa10e",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "***REDACTED***",
+          "options": {
+            "timeout": 10000
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -1008,
+          976
+        ],
+        "id": "6ce717dd-7cf0-456f-9aaf-5b6d9136568b",
+        "name": "Crear llamada en Retell",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "DIdSQ2VED0gyDQyv",
+            "name": "APIKEYSARAI"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 16
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -2464,
+          720
+        ],
+        "id": "474f2439-4100-45f9-8663-4381c28ef8d1",
+        "name": "Schedule Trigger"
+      }
+    ],
+    "connections": {
+      "obtener_paciente_pendiente2": {
+        "main": [
+          [
+            {
+              "node": "¿Paciente encontrado?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Paciente encontrado?": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Sin pacientes pendientes",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Consultar_disponibilidades": {
+        "main": [
+          [
+            {
+              "node": "formatearRespuesta",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guardar opciones raw": {
+        "main": [
+          [
+            {
+              "node": "Crear llamada en Retell",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Consultar_disponibilidades",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guardar call_id": {
+        "main": [
+          [
+            {
+              "node": "Wait2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait2": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "formatearRespuesta": {
+        "main": [
+          [
+            {
+              "node": "Guardar opciones raw",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "obtener_paciente_pendiente2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear llamada en Retell": {
+        "main": [
+          [
+            {
+              "node": "Guardar call_id",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version fea88abe",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-04-20T17:05:00.948Z",
+        "id": 533,
+        "workflowId": "OAhFO3OsIEvGPsN2",
+        "versionId": "fea88abe-40f8-4f24-ab60-1073c44f04ba",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      },
+      {
+        "createdAt": "2026-04-20T17:05:17.358Z",
+        "id": 534,
+        "workflowId": "OAhFO3OsIEvGPsN2",
+        "versionId": "fea88abe-40f8-4f24-ab60-1073c44f04ba",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
 }
