@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-17T21:02:08.732Z",
+  "updatedAt": "2026-04-20T20:39:32.639Z",
   "createdAt": "2026-04-13T19:37:57.076Z",
   "id": "kxHCsXKdVTcKN6sbWhMBS",
   "name": "GESTION_CITAS",
@@ -27,7 +27,8 @@
           "id": "3XA5T4Gby6gagH8B",
           "name": "Redis account 2"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -40,7 +41,8 @@
       "position": [
         -1024,
         -48
-      ]
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -80,7 +82,7 @@
       "typeVersion": 1.3,
       "position": [
         0,
-        112
+        -80
       ],
       "id": "fc5c2fd1-52fb-401d-98bd-36333af5f769",
       "name": "Call 'VALIDAR DERECHOS DE USUARIO'"
@@ -92,8 +94,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -16,
-        -176
+        0,
+        -336
       ],
       "id": "edb0e6d4-a5d3-4b03-9b96-85893cefe085",
       "name": "Code in JavaScript1"
@@ -271,6 +273,31 @@
               },
               "renameOutput": true,
               "outputKey": "recibir_asunto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "884e001f-031f-4e51-bf8f-99d036c8c3f9",
+                    "leftValue": "={{ $json.accion }}",
+                    "rightValue": "recibir_programacion",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "recibir_programacion"
             }
           ]
         },
@@ -302,15 +329,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        128,
-        -416
+        144,
+        -560
       ],
       "id": "09ec0c3d-9d24-49b0-8eac-ab8ca590a225",
       "name": "PEDIR_TIPO_DOC",
       "credentials": {
         "whatsAppApi": {
-          "id": "Tt1jdP4FqS0LhYTX",
-          "name": "WhatsApp account 2"
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
         }
       }
     },
@@ -325,8 +352,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -16,
-        -416
+        0,
+        -560
       ],
       "id": "fdc0697e-8258-4fa9-beea-b4c9d16e0c82",
       "name": "guardar estado",
@@ -348,8 +375,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        368,
-        -272
+        384,
+        -432
       ],
       "id": "b21dcdfb-0fb8-40e4-8521-ced90c356cb7",
       "name": "guardar estado1",
@@ -388,8 +415,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        176,
-        -176
+        192,
+        -336
       ],
       "id": "a948d642-5423-4c45-a5f5-c9e9f99052db",
       "name": "If1"
@@ -399,8 +426,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        272,
-        -416
+        288,
+        -560
       ],
       "id": "fc05b97a-205e-4b0d-9300-b350541b2bce",
       "name": "No Operation, do nothing1"
@@ -427,8 +454,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        976,
-        272
+        1216,
+        64
       ],
       "id": "dd7d0db7-7e7a-4807-8ba8-04057dbf577b",
       "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -444,16 +471,16 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        512,
-        -272
+        528,
+        -432
       ],
       "id": "36d0892c-218b-4879-848d-8edc6d88ee3d",
       "name": "PEDIR_NUM_DOC",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
         "whatsAppApi": {
-          "id": "Tt1jdP4FqS0LhYTX",
-          "name": "WhatsApp account 2"
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
         }
       }
     },
@@ -472,15 +499,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        368,
-        -128
+        384,
+        -288
       ],
       "id": "6924aa07-db81-4af5-84d7-119b212509bd",
       "name": "PEDIR_NUEVAMENTE_TIPO_DOC",
       "credentials": {
         "whatsAppApi": {
-          "id": "Tt1jdP4FqS0LhYTX",
-          "name": "WhatsApp account 2"
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
         }
       }
     },
@@ -499,15 +526,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2064,
-        256
+        2256,
+        48
       ],
       "id": "d59cc4ae-d2ae-4998-bf91-9a601649e807",
       "name": "ESPECIALIDAD",
       "credentials": {
         "whatsAppApi": {
-          "id": "Tt1jdP4FqS0LhYTX",
-          "name": "WhatsApp account 2"
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
         }
       }
     },
@@ -540,7 +567,7 @@
       "typeVersion": 2.3,
       "position": [
         176,
-        112
+        -80
       ],
       "id": "b98cc8ea-dd16-4816-8e4b-1cce95673f44",
       "name": "If2"
@@ -557,15 +584,15 @@
       "typeVersion": 1.1,
       "position": [
         368,
-        64
+        -128
       ],
       "id": "8218be4c-35d0-42fa-b9f2-06e80d7b4640",
       "name": "PEDIR_NUM_DOC1",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
         "whatsAppApi": {
-          "id": "Tt1jdP4FqS0LhYTX",
-          "name": "WhatsApp account 2"
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
         }
       }
     },
@@ -599,8 +626,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1200,
-        272
+        1424,
+        64
       ],
       "id": "3974ea7a-ddc0-4a42-9c37-ad601280e714",
       "name": "Consultar usuario en Zeus"
@@ -616,8 +643,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1648,
-        256
+        1872,
+        48
       ],
       "id": "a07f8062-ef03-47e6-8f8d-c6bd440c2de6",
       "name": "guardar estado2",
@@ -656,7 +683,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2096,
+        2512,
         432
       ],
       "id": "4959798e-cdc2-4ef0-b494-1d99d807690a",
@@ -669,8 +696,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        384,
-        272
+        368,
+        64
       ],
       "id": "7322b513-f9d3-4d5a-b417-c93979947fb2",
       "name": "VALIDAR CONTRATOS"
@@ -708,7 +735,8 @@
         192
       ],
       "id": "bbab7e33-b3ed-40fe-8b77-276936a38988",
-      "name": "Disponibilidad Zeus"
+      "name": "Disponibilidad Zeus",
+      "disabled": true
     },
     {
       "parameters": {
@@ -721,7 +749,7 @@
       "typeVersion": 1,
       "position": [
         -1056,
-        496
+        512
       ],
       "id": "882baf49-caba-423f-a621-70c78c000a11",
       "name": "Leer Estado Paciente",
@@ -740,7 +768,7 @@
       "typeVersion": 2,
       "position": [
         -672,
-        496
+        512
       ],
       "id": "64ff9cbc-7510-446f-9621-29f933f44aee",
       "name": "Verificar Identificación"
@@ -753,7 +781,7 @@
       "typeVersion": 2,
       "position": [
         -880,
-        496
+        512
       ],
       "id": "68f121d5-07ea-4c20-95fb-03555e0f17c2",
       "name": "Preparar Contexto"
@@ -784,7 +812,7 @@
       "typeVersion": 1.1,
       "position": [
         -1248,
-        496
+        512
       ],
       "id": "91a5c676-6c8c-429a-b361-1833bd880ba4",
       "name": "When Executed by Another Workflow"
@@ -798,7 +826,7 @@
       "typeVersion": 1,
       "position": [
         560,
-        64
+        -128
       ],
       "id": "41d777fb-c618-406d-857c-b69c181d9ad2",
       "name": "Redis",
@@ -820,7 +848,7 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        2288,
+        2704,
         368
       ],
       "id": "a1517f6c-f8de-4042-a38b-7fd2dbc0b59a",
@@ -844,8 +872,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2464,
-        208
+        2880,
+        16
       ],
       "id": "ee08aa8b-75a5-465e-a505-64b12062e41f",
       "name": "guardar estado3",
@@ -863,8 +891,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        592,
-        272
+        576,
+        64
       ],
       "id": "468105a8-42ac-4792-a970-d987256a358e",
       "name": "Code in JavaScript2"
@@ -876,8 +904,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1872,
-        256
+        2064,
+        48
       ],
       "id": "aa61a01d-f25e-4387-81f1-e100c1952631",
       "name": "Code in JavaScript3"
@@ -893,7 +921,8 @@
         192
       ],
       "id": "dbc4088f-b8c9-4bd4-9f22-ec8a6e0a2d91",
-      "name": "Validar telefono"
+      "name": "Validar telefono",
+      "disabled": true
     },
     {
       "parameters": {
@@ -904,8 +933,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        736,
-        640
+        160,
+        304
       ],
       "id": "a4f5513a-7778-4927-9d03-295bf225926f",
       "name": "Consultar asuntos",
@@ -925,8 +954,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        784,
-        272
+        768,
+        64
       ],
       "id": "b3b59d70-e210-4fe5-ae7e-cbc26d3e6604",
       "name": "consultar especialidad",
@@ -944,8 +973,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        928,
-        640
+        352,
+        304
       ],
       "id": "830e8295-1455-4540-9a12-7106172d468b",
       "name": "Code in JavaScript"
@@ -965,15 +994,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1120,
-        640
+        528,
+        304
       ],
       "id": "50205249-64eb-4332-b4ac-4ed2f2cf1493",
       "name": "ASUNTOS",
       "credentials": {
         "whatsAppApi": {
-          "id": "Tt1jdP4FqS0LhYTX",
-          "name": "WhatsApp account 2"
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
         }
       }
     },
@@ -1011,12 +1040,12 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        80,
-        640
+        176,
+        528
       ],
       "id": "2b838e96-b2d5-4e28-a0b5-eb03ac5d1338",
       "name": "HTTP Request",
-      "executeOnce": true
+      "executeOnce": false
     },
     {
       "parameters": {
@@ -1025,8 +1054,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -144,
-        640
+        -32,
+        528
       ],
       "id": "e800b515-e44d-4a53-af67-6570159898fb",
       "name": "Code in JavaScript4"
@@ -1038,8 +1067,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        240,
-        640
+        352,
+        528
       ],
       "id": "0717b285-4442-4295-8114-afe36dd42db3",
       "name": "Code in JavaScript5"
@@ -1051,8 +1080,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        448,
-        640
+        528,
+        528
       ],
       "id": "266d39ba-c725-4088-be6d-78dcae59fe08",
       "name": "Code in JavaScript6"
@@ -1084,11 +1113,294 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1408,
-        272
+        1600,
+        64
       ],
       "id": "b4f0e024-7bb6-4dde-8cda-6b20d0097427",
       "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "***REDACTED***",
+        "value": "***REDACTED***",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        304
+      ],
+      "id": "2e95720e-eff8-4c08-bbd6-80df0535be39",
+      "name": "guardar estado4",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "***REDACTED***",
+        "value": "***REDACTED***",
+        "expire": true,
+        "ttl": 1800
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        784,
+        528
+      ],
+      "id": "ffbc8ffa-26e6-4615-8f54-6dcfe0ba45c5",
+      "name": "guardar estado5",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "1018630624675876",
+        "recipientPhoneNumber": "***REDACTED***",
+        "textBody": "***REDACTED***",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        992,
+        528
+      ],
+      "id": "aad1f585-eeef-46a1-b263-2cf4bbfd743e",
+      "name": "Send message1",
+      "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        816
+      ],
+      "id": "6c684c54-0f17-4b7b-a2c0-0e66a46b6b31",
+      "name": "Code in JavaScript7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "=json",
+        "specifyBody": "json",
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "jsonBody": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        816
+      ],
+      "id": "b5b7ec4e-0f28-4cfe-b50e-8392ce124708",
+      "name": "Agendar en Zeus"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        816
+      ],
+      "id": "994c94b7-7c8b-438e-bb9c-f8c781ce2f57",
+      "name": "Preparar datos agendamiento"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list",
+          "cachedResultName": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "empresas",
+          "mode": "list",
+          "cachedResultName": "empresas"
+        },
+        "limit": 1,
+        "where": {
+          "values": [
+            {
+              "column": "codigo",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        976,
+        64
+      ],
+      "id": "4c55e3e2-88fd-4665-8a4f-e1969540daaa",
+      "name": "Select rows from a table",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "Xz5MvwxTeniqXXjz",
+          "name": "Postgres account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "ce8110f0-7fcf-4b5a-8a4c-0df868a40ccd",
+              "leftValue": "={{ $json.Datos }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        688,
+        816
+      ],
+      "id": "a82c8c05-058b-4ceb-a2f3-bc858dc3affd",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "1018630624675876",
+        "recipientPhoneNumber": "***REDACTED***",
+        "textBody": "***REDACTED***",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        928,
+        752
+      ],
+      "id": "649e1a94-81df-445e-8da3-05f6703d4096",
+      "name": "Send message2",
+      "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "81ff375a-d0d8-4137-a46f-3919591bc1d1",
+              "leftValue": "***REDACTED***",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        912,
+        976
+      ],
+      "id": "971fac84-381b-4102-9433-3fe0d7bedda3",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        752
+      ],
+      "id": "951e2607-c21c-4d02-9674-e5e0b848e5b0",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
     }
   ],
   "connections": {
@@ -1153,12 +1465,25 @@
             "index": 0
           }
         ],
-        [],
+        [
+          {
+            "node": "guardar estado4",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [],
         [],
         [
           {
             "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript7",
             "type": "main",
             "index": 0
           }
@@ -1398,7 +1723,7 @@
       "main": [
         [
           {
-            "node": "Call 'OBTENER TOKEN ZEUS'",
+            "node": "Select rows from a table",
             "type": "main",
             "index": 0
           }
@@ -1465,6 +1790,112 @@
         [
           {
             "node": "guardar estado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "guardar estado4": {
+      "main": [
+        [
+          {
+            "node": "Consultar asuntos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript6": {
+      "main": [
+        [
+          {
+            "node": "guardar estado5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "guardar estado5": {
+      "main": [
+        [
+          {
+            "node": "Send message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript7": {
+      "main": [
+        [
+          {
+            "node": "Preparar datos agendamiento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "Call 'OBTENER TOKEN ZEUS'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar datos agendamiento": {
+      "main": [
+        [
+          {
+            "node": "Agendar en Zeus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agendar en Zeus": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Send message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message2": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
             "type": "main",
             "index": 0
           }
@@ -1555,7 +1986,7 @@
     "When Executed by Another Workflow": [
       {
         "json": {
-          "mensaje": "1002489364",
+          "mensaje": "971",
           "intent": "agendar",
           "telefono": "573205943893",
           "phone_number_id": "1018630624675876"
@@ -1563,9 +1994,9 @@
       }
     ]
   },
-  "versionId": "1475f38d-d4b7-4f51-aea7-d1e9d7a10382",
-  "activeVersionId": "bdc10e02-8967-45ef-929a-9588aa03b74f",
-  "versionCounter": 698,
+  "versionId": "e2deff83-a668-4668-948d-dad8ebabfe99",
+  "activeVersionId": "46ae42dd-a9c5-4ea8-bc77-6333d6bb8c04",
+  "versionCounter": 1385,
   "triggerCount": 0,
   "shared": [
     {
@@ -1590,7 +2021,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-17T11:59:07.238Z",
+              "updatedAt": "2026-04-20T11:48:01.604Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1623,7 +2054,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-17",
+              "lastActiveAt": "2026-04-20",
               "isPending": false
             }
           }
@@ -1640,9 +2071,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-04-17T16:54:23.603Z",
-    "createdAt": "2026-04-17T16:54:17.026Z",
-    "versionId": "bdc10e02-8967-45ef-929a-9588aa03b74f",
+    "updatedAt": "2026-04-20T11:57:10.156Z",
+    "createdAt": "2026-04-20T11:56:53.115Z",
+    "versionId": "46ae42dd-a9c5-4ea8-bc77-6333d6bb8c04",
     "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
     "nodes": [
       {
@@ -1908,7 +2339,7 @@
                   "combinator": "and"
                 },
                 "renameOutput": true,
-                "outputKey": "esperando_asunto"
+                "outputKey": "recibir_asunto"
               }
             ]
           },
@@ -2137,8 +2568,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1856,
-          240
+          2064,
+          256
         ],
         "id": "d59cc4ae-d2ae-4998-bf91-9a601649e807",
         "name": "ESPECIALIDAD",
@@ -2254,8 +2685,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          1504,
-          240
+          1648,
+          256
         ],
         "id": "a07f8062-ef03-47e6-8f8d-c6bd440c2de6",
         "name": "guardar estado2",
@@ -2294,7 +2725,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          1888,
+          2096,
           432
         ],
         "id": "4959798e-cdc2-4ef0-b494-1d99d807690a",
@@ -2458,7 +2889,7 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          2080,
+          2288,
           368
         ],
         "id": "a1517f6c-f8de-4042-a38b-7fd2dbc0b59a",
@@ -2482,7 +2913,7 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          2256,
+          2464,
           208
         ],
         "id": "ee08aa8b-75a5-465e-a505-64b12062e41f",
@@ -2514,8 +2945,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1680,
-          240
+          1872,
+          256
         ],
         "id": "aa61a01d-f25e-4387-81f1-e100c1952631",
         "name": "Code in JavaScript3"
@@ -2542,8 +2973,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          592,
-          496
+          736,
+          640
         ],
         "id": "a4f5513a-7778-4927-9d03-295bf225926f",
         "name": "Consultar asuntos",
@@ -2582,8 +3013,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          784,
-          496
+          928,
+          640
         ],
         "id": "830e8295-1455-4540-9a12-7106172d468b",
         "name": "Code in JavaScript"
@@ -2603,8 +3034,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          976,
-          496
+          1120,
+          640
         ],
         "id": "50205249-64eb-4332-b4ac-4ed2f2cf1493",
         "name": "ASUNTOS",
@@ -2694,6 +3125,39 @@
         ],
         "id": "266d39ba-c725-4088-be6d-78dcae59fe08",
         "name": "Code in JavaScript6"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "c43d2f75-f4ae-41e5-833c-3642155f946b",
+                "leftValue": "={{ $json.Datos.length }}",
+                "rightValue": 0,
+                "operator": {
+                  "type": "number",
+                  "operation": "gt"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1408,
+          272
+        ],
+        "id": "b4f0e024-7bb6-4dde-8cda-6b20d0097427",
+        "name": "If"
       }
     ],
     "connections": {
@@ -2852,7 +3316,13 @@
       },
       "Consultar usuario en Zeus": {
         "main": [
-          []
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "guardar estado2": {
@@ -3058,18 +3528,29 @@
             }
           ]
         ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "guardar estado2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version bdc10e02",
+    "name": "Version 46ae42dd",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-17T16:54:23.601Z",
-        "id": 528,
+        "createdAt": "2026-04-20T11:57:10.154Z",
+        "id": 529,
         "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
-        "versionId": "bdc10e02-8967-45ef-929a-9588aa03b74f",
+        "versionId": "46ae42dd-a9c5-4ea8-bc77-6333d6bb8c04",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
