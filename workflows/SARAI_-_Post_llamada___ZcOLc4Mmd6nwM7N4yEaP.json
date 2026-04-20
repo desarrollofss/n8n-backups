@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-16T21:10:17.195Z",
+  "updatedAt": "2026-04-20T17:17:02.180Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
-  "description": null,
+  "description": "***REDACTED***",
   "active": true,
   "isArchived": false,
   "nodes": [
@@ -1136,7 +1136,7 @@
   },
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": true
   },
   "staticData": null,
   "meta": {
@@ -1145,7 +1145,7 @@
   "pinData": {},
   "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
   "activeVersionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
-  "versionCounter": 1127,
+  "versionCounter": 1131,
   "triggerCount": 1,
   "shared": [
     {
@@ -1170,7 +1170,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-17T11:59:07.238Z",
+              "updatedAt": "2026-04-20T11:48:01.604Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1203,7 +1203,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-17",
+              "lastActiveAt": "2026-04-20",
               "isPending": false
             }
           }
@@ -2363,6 +2363,14 @@
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
+      {
+        "createdAt": "2026-04-20T16:24:57.185Z",
+        "id": 531,
+        "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
+        "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      },
       {
         "createdAt": "2026-04-14T14:45:51.529Z",
         "id": 461,
