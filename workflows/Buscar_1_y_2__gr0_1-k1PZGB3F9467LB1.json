@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-04-16T20:00:38.390Z",
+  "updatedAt": "2026-04-20T16:25:34.306Z",
   "createdAt": "2026-04-16T15:32:06.962Z",
   "id": "gr0_1-k1PZGB3F9467LB1",
   "name": "Buscar 1 y 2",
-  "description": null,
+  "description": "hola",
   "active": true,
   "isArchived": false,
   "nodes": [
@@ -159,7 +159,7 @@
   "pinData": {},
   "versionId": "b8a88ec8-fada-4340-af1a-cca1ea46bdb4",
   "activeVersionId": "b8a88ec8-fada-4340-af1a-cca1ea46bdb4",
-  "versionCounter": 208,
+  "versionCounter": 215,
   "triggerCount": 1,
   "shared": [
     {
@@ -184,7 +184,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-17T11:59:07.238Z",
+              "updatedAt": "2026-04-20T11:48:01.604Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -217,7 +217,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-17",
+              "lastActiveAt": "2026-04-20",
               "isPending": false
             }
           }
@@ -385,6 +385,22 @@
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
+      {
+        "createdAt": "2026-04-20T15:37:17.536Z",
+        "id": 530,
+        "workflowId": "gr0_1-k1PZGB3F9467LB1",
+        "versionId": "b8a88ec8-fada-4340-af1a-cca1ea46bdb4",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      },
+      {
+        "createdAt": "2026-04-20T16:25:34.360Z",
+        "id": 532,
+        "workflowId": "gr0_1-k1PZGB3F9467LB1",
+        "versionId": "b8a88ec8-fada-4340-af1a-cca1ea46bdb4",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      },
       {
         "createdAt": "2026-04-16T20:00:43.571Z",
         "id": 507,
