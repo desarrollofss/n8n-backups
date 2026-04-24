@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-19T21:17:56.147Z",
+  "updatedAt": "2026-04-20T20:53:15.416Z",
   "createdAt": "2026-03-16T21:39:41.586Z",
   "id": "PxgfHZPzzD8B1VCsByqIP",
   "name": "***REDACTED***",
@@ -367,7 +367,10 @@
   },
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "3Vu-CTnntajBc_pVDnku_"
   },
   "staticData": null,
   "meta": {
@@ -376,7 +379,7 @@
   "pinData": {},
   "versionId": "855a06d1-9d07-4405-9e70-e46f53768525",
   "activeVersionId": "855a06d1-9d07-4405-9e70-e46f53768525",
-  "versionCounter": 63,
+  "versionCounter": 69,
   "triggerCount": 1,
   "shared": [
     {
@@ -401,7 +404,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-20T11:48:01.604Z",
+              "updatedAt": "2026-04-24T11:50:49.296Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -434,7 +437,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-20",
+              "lastActiveAt": "2026-04-24",
               "isPending": false
             }
           }
@@ -819,6 +822,22 @@
     "description": "ahora omite si no hay cambio en flujos ",
     "autosaved": true,
     "workflowPublishHistory": [
+      {
+        "createdAt": "2026-04-20T20:52:59.662Z",
+        "id": 535,
+        "workflowId": "PxgfHZPzzD8B1VCsByqIP",
+        "versionId": "855a06d1-9d07-4405-9e70-e46f53768525",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      },
+      {
+        "createdAt": "2026-04-20T20:53:15.460Z",
+        "id": 536,
+        "workflowId": "PxgfHZPzzD8B1VCsByqIP",
+        "versionId": "855a06d1-9d07-4405-9e70-e46f53768525",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      },
       {
         "createdAt": "2026-03-18T16:08:58.795Z",
         "id": 291,
