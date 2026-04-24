@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-20T17:17:02.180Z",
+  "updatedAt": "2026-04-22T20:03:11.152Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
@@ -68,8 +68,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        432,
-        240
+        656,
+        96
       ],
       "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
       "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -91,7 +91,7 @@
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -145,7 +145,7 @@
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -202,8 +202,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        2208,
-        496
+        2224,
+        352
       ],
       "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
       "name": "Responder OK a Retell"
@@ -225,7 +225,7 @@
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -238,15 +238,15 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1184,
-        240
+        1216,
+        96
       ],
       "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
       "name": "Marcar como AGENDADO",
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -278,7 +278,7 @@
       "typeVersion": 4.2,
       "position": [
         976,
-        240
+        96
       ],
       "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
       "name": "Agendar en Zeus"
@@ -290,8 +290,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        720,
-        240
+        816,
+        96
       ],
       "id": "71e76a8d-c34f-4905-836f-6420f778d714",
       "name": "Preparar datos agendamiento"
@@ -358,15 +358,15 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -1488,
-        112
+        -1232,
+        0
       ],
       "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
       "name": "Buscar paciente por call_id",
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -381,7 +381,7 @@
       "typeVersion": 2.1,
       "position": [
         -1984,
-        240
+        272
       ],
       "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
       "name": "Webhook Retell Post-Call",
@@ -397,14 +397,14 @@
       "typeVersion": 2.6,
       "position": [
         1840,
-        240
+        96
       ],
       "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
       "name": "DELETE slot elegido",
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -417,7 +417,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        512,
+        496,
         720
       ],
       "id": "44861220-f696-450a-9b21-a9b4386a6d87",
@@ -425,7 +425,7 @@
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -437,8 +437,8 @@
       "type": "n8n-nodes-labsmobile.labsMobile",
       "typeVersion": 2,
       "position": [
-        1600,
-        240
+        1632,
+        96
       ],
       "id": "5460d015-8811-4f5a-93b4-3b4434698162",
       "name": "Send SMS",
@@ -466,7 +466,7 @@
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -493,7 +493,7 @@
       "credentials": {
         "httpHeaderAuth": {
           "id": "DIdSQ2VED0gyDQyv",
-          "name": "APIKEYSARAI"
+          "name": "APIKEYSARAIFSS2"
         }
       }
     },
@@ -514,7 +514,7 @@
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -812,11 +812,80 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        1392,
-        240
+        1424,
+        96
       ],
       "id": "2023c929-cb6c-4d22-8adb-fecc2daea038",
       "name": "Call 'SAGIC'"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        272,
+        -112
+      ],
+      "id": "0fe5cedf-ddb8-4f8b-a76e-7fbd29281939",
+      "name": "Llamar a número brindado",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "DIdSQ2VED0gyDQyv",
+          "name": "APIKEYSARAIFSS2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        480,
+        -112
+      ],
+      "id": "ed46afb0-d26f-4d92-a1a9-358f146be5a1",
+      "name": "Guardar call_id número brindado",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1568,
+        0
+      ],
+      "id": "a88e9fb7-e9a9-45f9-bf82-5a0efb49150b",
+      "name": "Guardar call data",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      }
     }
   ],
   "connections": {
@@ -882,7 +951,7 @@
       "main": [
         [
           {
-            "node": "Liberar slots",
+            "node": "Llamar a número brindado",
             "type": "main",
             "index": 0
           }
@@ -1043,7 +1112,7 @@
       "main": [
         [
           {
-            "node": "Buscar paciente por call_id",
+            "node": "Guardar call data",
             "type": "main",
             "index": 0
           }
@@ -1132,6 +1201,39 @@
           }
         ]
       ]
+    },
+    "Llamar a número brindado": {
+      "main": [
+        [
+          {
+            "node": "Guardar call_id número brindado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar call_id número brindado": {
+      "main": [
+        [
+          {
+            "node": "Liberar slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar call data": {
+      "main": [
+        [
+          {
+            "node": "Buscar paciente por call_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -1143,9 +1245,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
-  "activeVersionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
-  "versionCounter": 1131,
+  "versionId": "fff7f17e-1b37-4220-8191-6fd7ad3b200d",
+  "activeVersionId": "fff7f17e-1b37-4220-8191-6fd7ad3b200d",
+  "versionCounter": 1204,
   "triggerCount": 1,
   "shared": [
     {
@@ -1170,7 +1272,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-20T11:48:01.604Z",
+              "updatedAt": "2026-04-24T11:50:49.296Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1203,7 +1305,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-20",
+              "lastActiveAt": "2026-04-24",
               "isPending": false
             }
           }
@@ -1213,22 +1315,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-04-16T21:08:33.019Z",
-      "createdAt": "2026-04-16T21:08:33.019Z",
-      "id": "oAU4h6efQRYRWcQU",
-      "name": "Sarai 📲"
-    },
-    {
       "updatedAt": "2026-02-04T21:56:48.941Z",
       "createdAt": "2026-02-04T21:56:48.941Z",
       "id": "S7UevxOArIeglzP8",
       "name": "🟢"
+    },
+    {
+      "updatedAt": "2026-04-16T21:08:33.019Z",
+      "createdAt": "2026-04-16T21:08:33.019Z",
+      "id": "oAU4h6efQRYRWcQU",
+      "name": "Sarai 📲"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-04-14T14:45:51.530Z",
-    "createdAt": "2026-04-14T14:45:48.367Z",
-    "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
+    "updatedAt": "2026-04-22T20:03:12.381Z",
+    "createdAt": "2026-04-22T20:03:11.157Z",
+    "versionId": "fff7f17e-1b37-4220-8191-6fd7ad3b200d",
     "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
     "nodes": [
       {
@@ -1292,8 +1394,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          432,
-          240
+          656,
+          96
         ],
         "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
         "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -1315,7 +1417,7 @@
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1369,7 +1471,7 @@
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1426,8 +1528,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.4,
         "position": [
-          2208,
-          496
+          2224,
+          352
         ],
         "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
         "name": "Responder OK a Retell"
@@ -1449,7 +1551,7 @@
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1462,15 +1564,15 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1184,
-          240
+          1216,
+          96
         ],
         "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
         "name": "Marcar como AGENDADO",
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1502,7 +1604,7 @@
         "typeVersion": 4.2,
         "position": [
           976,
-          240
+          96
         ],
         "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
         "name": "Agendar en Zeus"
@@ -1514,8 +1616,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          720,
-          240
+          816,
+          96
         ],
         "id": "71e76a8d-c34f-4905-836f-6420f778d714",
         "name": "Preparar datos agendamiento"
@@ -1582,15 +1684,15 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -1488,
-          112
+          -1232,
+          0
         ],
         "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
         "name": "Buscar paciente por call_id",
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1605,7 +1707,7 @@
         "typeVersion": 2.1,
         "position": [
           -1984,
-          240
+          272
         ],
         "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
         "name": "Webhook Retell Post-Call",
@@ -1621,14 +1723,14 @@
         "typeVersion": 2.6,
         "position": [
           1840,
-          240
+          96
         ],
         "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
         "name": "DELETE slot elegido",
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1641,7 +1743,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          512,
+          496,
           720
         ],
         "id": "44861220-f696-450a-9b21-a9b4386a6d87",
@@ -1649,7 +1751,7 @@
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1661,8 +1763,8 @@
         "type": "n8n-nodes-labsmobile.labsMobile",
         "typeVersion": 2,
         "position": [
-          1600,
-          240
+          1632,
+          96
         ],
         "id": "5460d015-8811-4f5a-93b4-3b4434698162",
         "name": "Send SMS",
@@ -1690,7 +1792,7 @@
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1717,7 +1819,7 @@
         "credentials": {
           "httpHeaderAuth": {
             "id": "DIdSQ2VED0gyDQyv",
-            "name": "APIKEYSARAI"
+            "name": "APIKEYSARAIFSS2"
           }
         }
       },
@@ -1738,7 +1840,7 @@
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -2036,11 +2138,80 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          1392,
-          240
+          1424,
+          96
         ],
         "id": "2023c929-cb6c-4d22-8adb-fecc2daea038",
         "name": "Call 'SAGIC'"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          272,
+          -112
+        ],
+        "id": "0fe5cedf-ddb8-4f8b-a76e-7fbd29281939",
+        "name": "Llamar a número brindado",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "DIdSQ2VED0gyDQyv",
+            "name": "APIKEYSARAIFSS2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          480,
+          -112
+        ],
+        "id": "ed46afb0-d26f-4d92-a1a9-358f146be5a1",
+        "name": "Guardar call_id número brindado",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -1568,
+          0
+        ],
+        "id": "a88e9fb7-e9a9-45f9-bf82-5a0efb49150b",
+        "name": "Guardar call data",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        }
       }
     ],
     "connections": {
@@ -2106,7 +2277,7 @@
         "main": [
           [
             {
-              "node": "Liberar slots",
+              "node": "Llamar a número brindado",
               "type": "main",
               "index": 0
             }
@@ -2267,7 +2438,7 @@
         "main": [
           [
             {
-              "node": "Buscar paciente por call_id",
+              "node": "Guardar call data",
               "type": "main",
               "index": 0
             }
@@ -2356,26 +2527,51 @@
             }
           ]
         ]
+      },
+      "Llamar a número brindado": {
+        "main": [
+          [
+            {
+              "node": "Guardar call_id número brindado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guardar call_id número brindado": {
+        "main": [
+          [
+            {
+              "node": "Liberar slots",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guardar call data": {
+        "main": [
+          [
+            {
+              "node": "Buscar paciente por call_id",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 774899e8",
+    "name": "Version fff7f17e",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-20T16:24:57.185Z",
-        "id": 531,
+        "createdAt": "2026-04-22T20:03:12.379Z",
+        "id": 555,
         "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
-        "event": "activated",
-        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
-      },
-      {
-        "createdAt": "2026-04-14T14:45:51.529Z",
-        "id": 461,
-        "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "774899e8-f8d7-4ab0-aa5e-5d2d8c2d4ea6",
+        "versionId": "fff7f17e-1b37-4220-8191-6fd7ad3b200d",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
