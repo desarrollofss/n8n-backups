@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-27T19:53:45.552Z",
+  "updatedAt": "2026-04-24T21:15:11.002Z",
   "createdAt": "2026-03-25T13:58:10.714Z",
   "id": "ABfKIcvf0tTodbOiL-RJt",
   "name": "SAGIC",
@@ -56,7 +56,7 @@
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
-          "name": "Postgres account 2"
+          "name": "conexión sarai"
         }
       }
     },
@@ -495,9 +495,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "1450747f-75aa-46e6-81ae-7d06dd1cdc86",
-  "activeVersionId": "1450747f-75aa-46e6-81ae-7d06dd1cdc86",
-  "versionCounter": 517,
+  "versionId": "d30db25b-32ed-442c-8bf2-0bfef72fa82d",
+  "activeVersionId": "d30db25b-32ed-442c-8bf2-0bfef72fa82d",
+  "versionCounter": 522,
   "triggerCount": 0,
   "shared": [
     {
@@ -522,7 +522,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-20T11:48:01.604Z",
+              "updatedAt": "2026-04-24T11:50:49.296Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -555,7 +555,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-20",
+              "lastActiveAt": "2026-04-24",
               "isPending": false
             }
           }
@@ -565,9 +565,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-03-27T20:00:59.571Z",
-    "createdAt": "2026-03-27T19:53:45.554Z",
-    "versionId": "1450747f-75aa-46e6-81ae-7d06dd1cdc86",
+    "updatedAt": "2026-04-24T21:15:18.379Z",
+    "createdAt": "2026-04-24T21:15:11.006Z",
+    "versionId": "d30db25b-32ed-442c-8bf2-0bfef72fa82d",
     "workflowId": "ABfKIcvf0tTodbOiL-RJt",
     "nodes": [
       {
@@ -619,7 +619,7 @@
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
-            "name": "Postgres account 2"
+            "name": "conexión sarai"
           }
         }
       },
@@ -1050,15 +1050,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 1450747f",
-    "description": "***REDACTED***",
+    "name": "Version d30db25b",
+    "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-27T20:00:59.570Z",
-        "id": 401,
+        "createdAt": "2026-04-24T21:15:18.378Z",
+        "id": 583,
         "workflowId": "ABfKIcvf0tTodbOiL-RJt",
-        "versionId": "1450747f-75aa-46e6-81ae-7d06dd1cdc86",
+        "versionId": "d30db25b-32ed-442c-8bf2-0bfef72fa82d",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
