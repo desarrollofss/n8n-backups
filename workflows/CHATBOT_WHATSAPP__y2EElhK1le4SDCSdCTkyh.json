@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-14T14:10:03.020Z",
+  "updatedAt": "2026-04-22T19:49:53.759Z",
   "createdAt": "2026-03-03T19:30:36.628Z",
   "id": "y2EElhK1le4SDCSdCTkyh",
   "name": "CHATBOT WHATSAPP",
@@ -25,8 +25,8 @@
       "webhookId": "daaa9d41-9c99-4bb9-9cad-d1a272fae914",
       "credentials": {
         "whatsAppTriggerApi": {
-          "id": "yccDYm5IQmgRwVoE",
-          "name": "WhatsApp OAuth account 2"
+          "id": "r9c1ZPgeTSfeYQXv",
+          "name": "WhatsApp OAuth account 3"
         }
       }
     },
@@ -1522,8 +1522,8 @@
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
         "whatsAppApi": {
-          "id": "Tt1jdP4FqS0LhYTX",
-          "name": "WhatsApp account 2"
+          "id": "WgpWe0OcC2eioeBx",
+          "name": "WhatsApp account 3"
         }
       }
     },
@@ -2925,9 +2925,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "b04341b0-3e56-4a45-b593-2a51b8e0955b",
-  "activeVersionId": "b04341b0-3e56-4a45-b593-2a51b8e0955b",
-  "versionCounter": 1636,
+  "versionId": "890e7377-a53f-43db-b6d5-aaf4591911e6",
+  "activeVersionId": "e02a7a1e-55d3-45d9-8718-1966d805d9fd",
+  "versionCounter": 1644,
   "triggerCount": 1,
   "shared": [
     {
@@ -2952,7 +2952,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-04-20T11:48:01.604Z",
+              "updatedAt": "2026-04-24T11:50:49.296Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -2985,7 +2985,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-04-20",
+              "lastActiveAt": "2026-04-24",
               "isPending": false
             }
           }
@@ -3002,9 +3002,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-04-16T20:52:16.984Z",
-    "createdAt": "2026-04-14T14:10:03.021Z",
-    "versionId": "b04341b0-3e56-4a45-b593-2a51b8e0955b",
+    "updatedAt": "2026-04-22T19:35:22.891Z",
+    "createdAt": "2026-04-22T19:34:24.484Z",
+    "versionId": "e02a7a1e-55d3-45d9-8718-1966d805d9fd",
     "workflowId": "y2EElhK1le4SDCSdCTkyh",
     "nodes": [
       {
@@ -3025,8 +3025,8 @@
         "webhookId": "daaa9d41-9c99-4bb9-9cad-d1a272fae914",
         "credentials": {
           "whatsAppTriggerApi": {
-            "id": "yccDYm5IQmgRwVoE",
-            "name": "WhatsApp OAuth account 2"
+            "id": "r9c1ZPgeTSfeYQXv",
+            "name": "WhatsApp OAuth account 3"
           }
         }
       },
@@ -5917,15 +5917,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version b04341b0",
+    "name": "Version e02a7a1e",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-04-16T20:52:16.983Z",
-        "id": 520,
+        "createdAt": "2026-04-22T19:35:22.889Z",
+        "id": 554,
         "workflowId": "y2EElhK1le4SDCSdCTkyh",
-        "versionId": "b04341b0-3e56-4a45-b593-2a51b8e0955b",
+        "versionId": "e02a7a1e-55d3-45d9-8718-1966d805d9fd",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
