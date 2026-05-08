@@ -240,7 +240,7 @@
             "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
             "projectId": "EBZGwgHNf54my5Ji",
             "user": {
-              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "updatedAt": "2026-05-05T19:06:11.338Z",
               "createdAt": "2026-01-22T19:42:30.105Z",
               "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
               "email": "npolov@sersocial.org",
@@ -263,7 +263,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-05",
+              "lastActiveAt": "2026-05-05",
               "isPending": false
             }
           }
