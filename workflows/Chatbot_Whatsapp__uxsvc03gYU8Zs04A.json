@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-11T22:00:48.297Z",
+  "updatedAt": "2026-05-05T19:01:55.914Z",
   "createdAt": "2026-01-08T13:49:42.168Z",
   "id": "uxsvc03gYU8Zs04A",
   "name": "Chatbot Whatsapp",
@@ -28,7 +28,8 @@
           "id": "yccDYm5IQmgRwVoE",
           "name": "WhatsApp OAuth account 2"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1447,9 +1448,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "a61a63d7-dd6f-48c1-b956-16e1dc64afa9",
+  "versionId": "20096732-753c-4e1c-bec1-7bb59a7f96c2",
   "activeVersionId": null,
-  "versionCounter": 588,
+  "versionCounter": 589,
   "triggerCount": 1,
   "shared": [
     {
@@ -1474,7 +1475,7 @@
             "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
             "projectId": "EBZGwgHNf54my5Ji",
             "user": {
-              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "updatedAt": "2026-05-05T19:06:11.338Z",
               "createdAt": "2026-01-22T19:42:30.105Z",
               "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
               "email": "npolov@sersocial.org",
@@ -1497,7 +1498,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-05",
+              "lastActiveAt": "2026-05-05",
               "isPending": false
             }
           }
