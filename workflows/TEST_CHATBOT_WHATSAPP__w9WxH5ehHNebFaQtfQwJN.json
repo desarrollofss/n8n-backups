@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-13T20:29:24.906Z",
+  "updatedAt": "2026-05-05T18:59:29.637Z",
   "createdAt": "2026-03-04T06:20:23.216Z",
   "id": "w9WxH5ehHNebFaQtfQwJN",
   "name": "TEST_CHATBOT_WHATSAPP",
@@ -28,7 +28,8 @@
           "id": "yccDYm5IQmgRwVoE",
           "name": "WhatsApp OAuth account 2"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -2056,9 +2057,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "47aec5cb-05f8-404f-84bf-9fdebb21fbe3",
+  "versionId": "448a2317-eb5a-4dec-b511-2293536baab2",
   "activeVersionId": null,
-  "versionCounter": 44,
+  "versionCounter": 45,
   "triggerCount": 0,
   "shared": [
     {
@@ -2083,7 +2084,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-01T23:00:50.123Z",
+              "updatedAt": "2026-05-08T11:54:27.855Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -2116,7 +2117,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-01",
+              "lastActiveAt": "2026-05-08",
               "isPending": false
             }
           }
@@ -2126,16 +2127,16 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-03-03T19:34:15.068Z",
-      "createdAt": "2026-03-03T19:34:15.068Z",
-      "id": "M63Xu3JDOVoP0xRM",
-      "name": "flujo whatsapp"
-    },
-    {
       "updatedAt": "2026-01-13T21:22:04.748Z",
       "createdAt": "2026-01-13T21:22:04.748Z",
       "id": "fikbPaiMxfrzFfMz",
       "name": "test"
+    },
+    {
+      "updatedAt": "2026-03-03T19:34:15.068Z",
+      "createdAt": "2026-03-03T19:34:15.068Z",
+      "id": "M63Xu3JDOVoP0xRM",
+      "name": "flujo whatsapp"
     }
   ],
   "activeVersion": null
