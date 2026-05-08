@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-01-21T13:22:45.000Z",
+  "updatedAt": "2026-05-05T19:06:50.481Z",
   "createdAt": "2026-01-20T20:11:32.049Z",
   "id": "HJZMmngSuieLiOVO",
   "name": "copia principal",
@@ -28,7 +28,8 @@
           "id": "7JhPt9ZBkG9oy2Wq",
           "name": "WhatsApp OAuth account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1126,9 +1127,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "203425fc-b0a8-4594-ac9c-c4476a112d41",
+  "versionId": "6924b0c0-d68f-42d1-9f99-6f503125f4ca",
   "activeVersionId": null,
-  "versionCounter": 2,
+  "versionCounter": 3,
   "triggerCount": 0,
   "shared": [
     {
@@ -1153,7 +1154,7 @@
             "userId": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
             "projectId": "EBZGwgHNf54my5Ji",
             "user": {
-              "updatedAt": "2026-03-05T05:18:56.188Z",
+              "updatedAt": "2026-05-05T19:06:11.338Z",
               "createdAt": "2026-01-22T19:42:30.105Z",
               "id": "2dbaefe0-4051-4bdc-a630-2ebab7cc33e5",
               "email": "npolov@sersocial.org",
@@ -1176,7 +1177,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-03-05",
+              "lastActiveAt": "2026-05-05",
               "isPending": false
             }
           }
