@@ -215,7 +215,7 @@
   "pinData": {},
   "versionId": "1beecdd8-68e0-4bdf-a9f4-a5dcaec16b7e",
   "activeVersionId": "a401d0ec-c034-4e55-a392-f794aa948f65",
-  "versionCounter": 63,
+  "versionCounter": 64,
   "triggerCount": 0,
   "shared": [
     {
@@ -273,10 +273,10 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-03-03T19:34:15.068Z",
+      "updatedAt": "2026-05-15T14:38:37.293Z",
       "createdAt": "2026-03-03T19:34:15.068Z",
       "id": "M63Xu3JDOVoP0xRM",
-      "name": "flujo whatsapp"
+      "name": "flujo whatsapp 🟢💬"
     }
   ],
   "activeVersion": {
