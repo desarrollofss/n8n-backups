@@ -1,0 +1,332 @@
+{
+  "updatedAt": "2026-05-12T20:54:15.203Z",
+  "createdAt": "2026-05-11T19:26:00.118Z",
+  "id": "eiAdWNHn9rIH0wNpN07ft",
+  "name": "SARAI - Reporte Diario 6PM",
+  "description": "***REDACTED***",
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "toRecipients": "jtoviol@sersocial.org",
+        "subject": "***REDACTED***",
+        "bodyContent": "***REDACTED***",
+        "additionalFields": {
+          "attachments": {
+            "attachments": [
+              {
+                "binaryPropertyName": "data"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        2480,
+        336
+      ],
+      "id": "d67370f6-7213-42ad-b920-8427a1825220",
+      "name": "✉️ Enviar Correo Outlook1",
+      "webhookId": "221c2c03-fb29-4f6b-a3ce-313bc5e332b2",
+      "credentials": {
+        "microsoftOutlookOAuth2Api": {
+          "id": "P338NsrBCCHUD7uO",
+          "name": "Microsoft Outlook account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1936,
+        336
+      ],
+      "id": "3afe3f6f-cbc6-4481-8cb4-ba1a1f9eb5c8",
+      "name": "📋 Pacientes contactados hoy",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2208,
+        336
+      ],
+      "id": "dfab7261-907a-426c-8956-736d0139a227",
+      "name": "📄 Generar Excel"
+    }
+  ],
+  "connections": {
+    "📋 Pacientes contactados hoy": {
+      "main": [
+        [
+          {
+            "node": "📄 Generar Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "📄 Generar Excel": {
+      "main": [
+        [
+          {
+            "node": "✉️ Enviar Correo Outlook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "0c8e126f-c262-443a-a70a-604a579c4af4",
+  "activeVersionId": "55104cce-d019-44c3-bba0-9f0bc4840351",
+  "versionCounter": 126,
+  "triggerCount": 1,
+  "shared": [
+    {
+      "updatedAt": "2026-05-11T19:26:00.118Z",
+      "createdAt": "2026-05-11T19:26:00.118Z",
+      "role": "workflow:owner",
+      "workflowId": "eiAdWNHn9rIH0wNpN07ft",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-05-15T08:32:07.961Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-05-15",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-02-04T21:56:48.941Z",
+      "createdAt": "2026-02-04T21:56:48.941Z",
+      "id": "S7UevxOArIeglzP8",
+      "name": "🟢"
+    },
+    {
+      "updatedAt": "2026-04-16T21:08:33.019Z",
+      "createdAt": "2026-04-16T21:08:33.019Z",
+      "id": "oAU4h6efQRYRWcQU",
+      "name": "Sarai 📲"
+    }
+  ],
+  "activeVersion": {
+    "updatedAt": "2026-05-12T20:54:05.815Z",
+    "createdAt": "2026-05-12T20:54:04.667Z",
+    "versionId": "55104cce-d019-44c3-bba0-9f0bc4840351",
+    "workflowId": "eiAdWNHn9rIH0wNpN07ft",
+    "nodes": [
+      {
+        "parameters": {
+          "toRecipients": "jtoviol@sersocial.org",
+          "subject": "***REDACTED***",
+          "bodyContent": "***REDACTED***",
+          "additionalFields": {
+            "attachments": {
+              "attachments": [
+                {
+                  "binaryPropertyName": "data"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.microsoftOutlook",
+        "typeVersion": 2,
+        "position": [
+          2480,
+          336
+        ],
+        "id": "d67370f6-7213-42ad-b920-8427a1825220",
+        "name": "✉️ Enviar Correo Outlook1",
+        "webhookId": "221c2c03-fb29-4f6b-a3ce-313bc5e332b2",
+        "credentials": {
+          "microsoftOutlookOAuth2Api": {
+            "id": "P338NsrBCCHUD7uO",
+            "name": "Microsoft Outlook account 3"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "hours"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          1664,
+          336
+        ],
+        "id": "f9c0af75-a670-4c4d-97d3-48fbbdc1e557",
+        "name": "⏰ Trigger 6PM"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1936,
+          336
+        ],
+        "id": "3afe3f6f-cbc6-4481-8cb4-ba1a1f9eb5c8",
+        "name": "📋 Pacientes contactados hoy",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2208,
+          336
+        ],
+        "id": "dfab7261-907a-426c-8956-736d0139a227",
+        "name": "📄 Generar Excel"
+      }
+    ],
+    "connections": {
+      "⏰ Trigger 6PM": {
+        "main": [
+          [
+            {
+              "node": "📋 Pacientes contactados hoy",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "📋 Pacientes contactados hoy": {
+        "main": [
+          [
+            {
+              "node": "📄 Generar Excel",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "📄 Generar Excel": {
+        "main": [
+          [
+            {
+              "node": "✉️ Enviar Correo Outlook1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version 55104cce",
+    "description": "",
+    "autosaved": false,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-05-12T20:54:05.813Z",
+        "id": 702,
+        "workflowId": "eiAdWNHn9rIH0wNpN07ft",
+        "versionId": "55104cce-d019-44c3-bba0-9f0bc4840351",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
