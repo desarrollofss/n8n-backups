@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-03T19:38:10.279Z",
+  "updatedAt": "2026-05-14T14:38:15.725Z",
   "createdAt": "2026-03-03T19:38:00.158Z",
   "id": "NDgPUqxm4BJZJ6LfOj19K",
   "name": "INFORMACIÓN SEDES",
@@ -74,41 +74,6 @@
     },
     {
       "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "***REDACTED***",
-        "documentId": {
-          "__rl": true,
-          "value": "***REDACTED***",
-          "mode": "list",
-          "cachedResultName": "SEDES SERSOCIAL",
-          "cachedResultUrl": "***REDACTED***"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Hoja1",
-          "cachedResultUrl": "***REDACTED***"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheetsTool",
-      "typeVersion": 4.7,
-      "position": [
-        128,
-        96
-      ],
-      "id": "9d680cb1-6b79-47e7-82c1-bc2e501ece1e",
-      "name": "Get row(s) in sheet in Google Sheets",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "aDaUg0dQ2hQRfilV",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "jsonSchemaExample": "***REDACTED***"
       },
       "type": "***REDACTED***",
@@ -141,6 +106,65 @@
           "name": "Redis account 2"
         }
       }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "***REDACTED***",
+        "documentId": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultName": "SEDES SERSOCIAL",
+          "cachedResultUrl": "***REDACTED***"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja1",
+          "cachedResultUrl": "***REDACTED***"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -848,
+        288
+      ],
+      "id": "9d680cb1-6b79-47e7-82c1-bc2e501ece1e",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "aDaUg0dQ2hQRfilV",
+          "name": "Google Sheets account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "***REDACTED***",
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        128,
+        160
+      ],
+      "id": "cabdedf5-08e7-4406-8bbc-c04681dfa96e",
+      "name": "consultar_info_sedes",
+      "credentials": {
+        "postgres": {
+          "id": "Xz5MvwxTeniqXXjz",
+          "name": "Postgres account 3"
+        }
+      }
     }
   ],
   "connections": {
@@ -161,17 +185,6 @@
           {
             "node": "AI Agent",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get row(s) in sheet in Google Sheets": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -198,6 +211,22 @@
           }
         ]
       ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "consultar_info_sedes": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -205,11 +234,22 @@
     "availableInMCP": false
   },
   "staticData": null,
-  "meta": null,
-  "pinData": {},
-  "versionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
-  "activeVersionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
-  "versionCounter": 12,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "mensaje": "Turbaco",
+          "telefono": "573205943893"
+        }
+      }
+    ]
+  },
+  "versionId": "8726db97-19ed-413a-8937-ef61a4ae2fda",
+  "activeVersionId": "8726db97-19ed-413a-8937-ef61a4ae2fda",
+  "versionCounter": 72,
   "triggerCount": 0,
   "shared": [
     {
@@ -234,7 +274,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-08T11:54:27.855Z",
+              "updatedAt": "2026-05-15T08:32:07.961Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -267,7 +307,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-08",
+              "lastActiveAt": "2026-05-15",
               "isPending": false
             }
           }
@@ -277,16 +317,16 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-03-03T19:34:15.068Z",
+      "updatedAt": "2026-05-15T14:38:37.293Z",
       "createdAt": "2026-03-03T19:34:15.068Z",
       "id": "M63Xu3JDOVoP0xRM",
-      "name": "flujo whatsapp"
+      "name": "flujo whatsapp 🟢💬"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-03-03T20:27:42.217Z",
-    "createdAt": "2026-03-03T19:38:00.158Z",
-    "versionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
+    "updatedAt": "2026-05-14T14:38:18.877Z",
+    "createdAt": "2026-05-14T14:38:15.726Z",
+    "versionId": "8726db97-19ed-413a-8937-ef61a4ae2fda",
     "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
     "nodes": [
       {
@@ -356,41 +396,6 @@
       },
       {
         "parameters": {
-          "descriptionType": "manual",
-          "toolDescription": "***REDACTED***",
-          "documentId": {
-            "__rl": true,
-            "value": "***REDACTED***",
-            "mode": "list",
-            "cachedResultName": "SEDES SERSOCIAL",
-            "cachedResultUrl": "***REDACTED***"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "gid=0",
-            "mode": "list",
-            "cachedResultName": "Hoja1",
-            "cachedResultUrl": "***REDACTED***"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheetsTool",
-        "typeVersion": 4.7,
-        "position": [
-          128,
-          96
-        ],
-        "id": "9d680cb1-6b79-47e7-82c1-bc2e501ece1e",
-        "name": "Get row(s) in sheet in Google Sheets",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "aDaUg0dQ2hQRfilV",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
           "jsonSchemaExample": "***REDACTED***"
         },
         "type": "***REDACTED***",
@@ -423,6 +428,65 @@
             "name": "Redis account 2"
           }
         }
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "***REDACTED***",
+          "documentId": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "list",
+            "cachedResultName": "SEDES SERSOCIAL",
+            "cachedResultUrl": "***REDACTED***"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja1",
+            "cachedResultUrl": "***REDACTED***"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheetsTool",
+        "typeVersion": 4.7,
+        "position": [
+          -848,
+          288
+        ],
+        "id": "9d680cb1-6b79-47e7-82c1-bc2e501ece1e",
+        "name": "Get row(s) in sheet in Google Sheets",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "aDaUg0dQ2hQRfilV",
+            "name": "Google Sheets account"
+          }
+        },
+        "disabled": true
+      },
+      {
+        "parameters": {
+          "descriptionType": "manual",
+          "toolDescription": "***REDACTED***",
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgresTool",
+        "typeVersion": 2.6,
+        "position": [
+          128,
+          160
+        ],
+        "id": "cabdedf5-08e7-4406-8bbc-c04681dfa96e",
+        "name": "consultar_info_sedes",
+        "credentials": {
+          "postgres": {
+            "id": "Xz5MvwxTeniqXXjz",
+            "name": "Postgres account 3"
+          }
+        }
       }
     ],
     "connections": {
@@ -443,17 +507,6 @@
             {
               "node": "AI Agent",
               "type": "ai_languageModel",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Get row(s) in sheet in Google Sheets": {
-        "ai_tool": [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_tool",
               "index": 0
             }
           ]
@@ -480,18 +533,34 @@
             }
           ]
         ]
+      },
+      "Get row(s) in sheet in Google Sheets": {
+        "ai_tool": [
+          []
+        ]
+      },
+      "consultar_info_sedes": {
+        "ai_tool": [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version c6af292e",
+    "name": "Version 8726db97",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-03-03T20:27:42.213Z",
-        "id": 140,
+        "createdAt": "2026-05-14T14:38:18.876Z",
+        "id": 711,
         "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
-        "versionId": "c6af292e-2fcd-4db0-9be4-893a78c27da5",
+        "versionId": "8726db97-19ed-413a-8937-ef61a4ae2fda",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
