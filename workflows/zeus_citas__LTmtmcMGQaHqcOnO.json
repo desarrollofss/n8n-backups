@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-24T15:17:47.508Z",
+  "updatedAt": "2026-05-21T15:41:35.881Z",
   "createdAt": "2026-02-04T20:12:39.778Z",
   "id": "LTmtmcMGQaHqcOnO",
   "name": "zeus_citas",
@@ -78,7 +78,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -384,
+        -448,
         736
       ],
       "id": "5e3f0cf2-8446-471f-ae60-373431b694e5",
@@ -343,7 +343,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        112,
+        64,
         736
       ],
       "id": "5357c10e-fde4-4864-9812-8155c400d8a8",
@@ -417,7 +417,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -208,
+        -288,
         736
       ],
       "id": "1d3dd7c5-cdf1-4aba-8629-49e80b0887c0",
@@ -438,7 +438,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -48,
+        -112,
         736
       ],
       "id": "54fae297-b10e-4bba-a559-bad863554e4c",
@@ -491,7 +491,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        912,
+        960,
         736
       ],
       "id": "51a1ae96-40ee-463d-88ea-7270470b0a20",
@@ -706,9 +706,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "c146772d-215c-4d77-bdb8-315b79f2a82d",
+  "versionId": "91eea7b2-0903-4d71-bdce-9d44d7a485d8",
   "activeVersionId": "c146772d-215c-4d77-bdb8-315b79f2a82d",
-  "versionCounter": 514,
+  "versionCounter": 515,
   "triggerCount": 0,
   "shared": [
     {
@@ -733,7 +733,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-15T08:32:07.961Z",
+              "updatedAt": "2026-05-22T05:02:36.429Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -766,7 +766,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-15",
+              "lastActiveAt": "2026-05-22",
               "isPending": false
             }
           }
@@ -776,16 +776,16 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-04-16T21:08:33.019Z",
-      "createdAt": "2026-04-16T21:08:33.019Z",
-      "id": "oAU4h6efQRYRWcQU",
-      "name": "Sarai 📲"
-    },
-    {
       "updatedAt": "2026-02-04T21:56:48.941Z",
       "createdAt": "2026-02-04T21:56:48.941Z",
       "id": "S7UevxOArIeglzP8",
       "name": "🟢"
+    },
+    {
+      "updatedAt": "2026-04-16T21:08:33.019Z",
+      "createdAt": "2026-04-16T21:08:33.019Z",
+      "id": "oAU4h6efQRYRWcQU",
+      "name": "Sarai 📲"
     }
   ],
   "activeVersion": {
