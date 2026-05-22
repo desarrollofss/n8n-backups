@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-04T13:49:15.291Z",
+  "updatedAt": "2026-05-20T21:54:03.280Z",
   "createdAt": "2026-02-04T20:19:26.832Z",
   "id": "OAhFO3OsIEvGPsN2",
   "name": "SARAI - LLAMADAS",
@@ -456,9 +456,9 @@
   },
   "meta": null,
   "pinData": {},
-  "versionId": "bbf5c9a9-1978-4131-820a-a5edbdc18f4c",
-  "activeVersionId": "bbf5c9a9-1978-4131-820a-a5edbdc18f4c",
-  "versionCounter": 926,
+  "versionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
+  "activeVersionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
+  "versionCounter": 933,
   "triggerCount": 1,
   "shared": [
     {
@@ -483,7 +483,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-15T08:32:07.961Z",
+              "updatedAt": "2026-05-22T05:02:36.429Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -516,7 +516,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-15",
+              "lastActiveAt": "2026-05-22",
               "isPending": false
             }
           }
@@ -539,9 +539,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-11T18:20:04.866Z",
-    "createdAt": "2026-05-04T13:49:15.292Z",
-    "versionId": "bbf5c9a9-1978-4131-820a-a5edbdc18f4c",
+    "updatedAt": "2026-05-20T21:54:07.206Z",
+    "createdAt": "2026-05-20T21:54:03.282Z",
+    "versionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
     "workflowId": "OAhFO3OsIEvGPsN2",
     "nodes": [
       {
@@ -978,15 +978,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version bbf5c9a9",
+    "name": "Version b9dffa98",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-11T18:20:04.845Z",
-        "id": 667,
+        "createdAt": "2026-05-20T21:54:07.204Z",
+        "id": 827,
         "workflowId": "OAhFO3OsIEvGPsN2",
-        "versionId": "bbf5c9a9-1978-4131-820a-a5edbdc18f4c",
+        "versionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
