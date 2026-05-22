@@ -1,0 +1,596 @@
+{
+  "updatedAt": "2026-05-20T21:46:42.888Z",
+  "createdAt": "2026-03-03T19:32:07.780Z",
+  "id": "cJfEP-s0H3glzuJcpbO3T",
+  "name": "GESTION CITAS - borrar",
+  "description": null,
+  "active": false,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "mensaje"
+            },
+            {
+              "name": "telefono"
+            },
+            {
+              "name": "paciente_id",
+              "type": "number"
+            },
+            {
+              "name": "profesional_id",
+              "type": "number"
+            },
+            {
+              "name": "fecha"
+            },
+            {
+              "name": "hora"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -320,
+        80
+      ],
+      "id": "dd4a4a18-44a6-4042-8a98-c72ec16d713c",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.mensaje }}",
+        "options": {
+          "systemMessage": "***REDACTED***"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        336,
+        80
+      ],
+      "id": "91c72008-478f-4cb5-9b1a-739589bb720f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {
+          "queryReplacement": "***REDACTED***"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        -224,
+        928
+      ],
+      "id": "ae4b0f83-eaf0-482d-b9a7-e92e19701e33",
+      "name": "consultar_paciente",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "***REDACTED***"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -224,
+        304
+      ],
+      "id": "2e97b662-f628-48de-a411-ae1cb935065c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "dNAey8tcxmUMRffx",
+          "name": "OpenAi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "***REDACTED***",
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {
+          "queryReplacement": "***REDACTED***"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        -32,
+        928
+      ],
+      "id": "c832b22b-c44c-48fb-9a56-5d2f9347efdd",
+      "name": "consultar_disponibilidad",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultName": "especialidades"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        144,
+        928
+      ],
+      "id": "1d87af0d-c211-4580-b546-e17f5535a11d",
+      "name": "consultar_especialidades",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "***REDACTED***",
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {
+          "queryReplacement": "***REDACTED***"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        256,
+        944
+      ],
+      "id": "ac5ac4cc-901f-4827-bdc8-75ef5efbd414",
+      "name": "crear_cita",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.telefono }}",
+        "sessionTTL": 3600,
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        304
+      ],
+      "id": "37485aab-4c40-4e77-b8e5-a330331eeed4",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "***REDACTED***",
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {
+          "queryReplacement": "***REDACTED***"
+        }
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        432,
+        944
+      ],
+      "id": "90b4466c-5018-4e9b-83d5-589d1f3ad80a",
+      "name": "consultar_cita",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "***REDACTED***",
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "citas",
+          "mode": "list",
+          "cachedResultName": "citas"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "estado": "={{'CANCELADA'}}",
+            "id": "***REDACTED***",
+            "observaciones": "***REDACTED***"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "paciente_id",
+              "displayName": "paciente_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "profesional_id",
+              "displayName": "profesional_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "sede_id",
+              "displayName": "sede_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "servicio_o_motivo",
+              "displayName": "servicio_o_motivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "fecha_cita",
+              "displayName": "fecha_cita",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "hora_inicio",
+              "displayName": "hora_inicio",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "hora_fin",
+              "displayName": "hora_fin",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "time",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "estado",
+              "displayName": "estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "observaciones",
+              "displayName": "observaciones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha_creacion",
+              "displayName": "fecha_creacion",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgresTool",
+      "typeVersion": 2.6,
+      "position": [
+        592,
+        928
+      ],
+      "id": "b9095ece-f3f6-456c-b55c-3c2260ece82b",
+      "name": "cancelar_cita",
+      "credentials": {
+        "postgres": {
+          "id": "cffLg1U8OTnicsUa",
+          "name": "Postgres account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "toolDescription": "***REDACTED***",
+        "url": "***REDACTED***",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "NumeroIdentificacion"
+            },
+            {
+              "name": "TipoIdentificacion"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        512,
+        320
+      ],
+      "id": "d35c7303-2094-4b10-8008-af7958371cfc",
+      "name": "Obtener datos del paciente"
+    }
+  ],
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_paciente": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_disponibilidad": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "consultar_especialidades": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "crear_cita": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_cita": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "cancelar_cita": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Obtener datos del paciente": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "73602690-acfa-4cd8-bd76-312a1c43d0b5",
+  "activeVersionId": null,
+  "versionCounter": 54,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-03-03T19:32:07.780Z",
+      "createdAt": "2026-03-03T19:32:07.780Z",
+      "role": "workflow:owner",
+      "workflowId": "cJfEP-s0H3glzuJcpbO3T",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-05-22T05:02:36.429Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-05-22",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [
+    {
+      "updatedAt": "2026-05-15T14:38:37.293Z",
+      "createdAt": "2026-03-03T19:34:15.068Z",
+      "id": "M63Xu3JDOVoP0xRM",
+      "name": "flujo whatsapp 🟢💬"
+    }
+  ],
+  "activeVersion": null
+}
