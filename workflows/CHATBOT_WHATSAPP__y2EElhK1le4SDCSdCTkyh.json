@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-15T20:55:58.933Z",
+  "updatedAt": "2026-05-20T21:27:52.211Z",
   "createdAt": "2026-03-03T19:30:36.628Z",
   "id": "y2EElhK1le4SDCSdCTkyh",
   "name": "CHATBOT WHATSAPP",
@@ -7,32 +7,6 @@
   "active": true,
   "isArchived": false,
   "nodes": [
-    {
-      "parameters": {
-        "jsonSchemaExample": "***REDACTED***"
-      },
-      "type": "***REDACTED***",
-      "typeVersion": 1.3,
-      "position": [
-        39072,
-        32048
-      ],
-      "id": "944d6051-0e30-4cf7-92e4-63b9aebf2502",
-      "name": "Structured Output Parser"
-    },
-    {
-      "parameters": {
-        "jsonSchemaExample": "***REDACTED***"
-      },
-      "type": "***REDACTED***",
-      "typeVersion": 1.3,
-      "position": [
-        36448,
-        33376
-      ],
-      "id": "1122cd85-03ae-440d-8498-2f99aa677432",
-      "name": "Structured Output Parser1"
-    },
     {
       "parameters": {
         "updates": [
@@ -43,10 +17,10 @@
       "type": "n8n-nodes-base.whatsAppTrigger",
       "typeVersion": 1,
       "position": [
-        23536,
-        32464
+        31056,
+        39584
       ],
-      "id": "685f77ba-877d-46fc-8374-da62f55d628c",
+      "id": "483ea7dc-25d0-406a-9f95-766ca6dba0fb",
       "name": "WhatsApp Trigger",
       "webhookId": "daaa9d41-9c99-4bb9-9cad-d1a272fae914",
       "credentials": {
@@ -192,10 +166,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        23904,
-        33008
+        31424,
+        40128
       ],
-      "id": "39edd0fc-82cf-4c7c-afda-201eedb2f3f3",
+      "id": "da98d3c4-d63a-4ce6-8811-7fdd51c07446",
       "name": "Switch2"
     },
     {
@@ -269,10 +243,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        24416,
-        32848
+        31936,
+        39968
       ],
-      "id": "806095a3-124c-4e6e-ba27-29d49c3feeee",
+      "id": "971cdcdf-cb0d-4b19-a2f2-f95797be259c",
       "name": "Edit Fields1"
     },
     {
@@ -285,10 +259,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        24528,
-        32608
+        32048,
+        39728
       ],
-      "id": "73db1180-c4c9-4a76-83ac-9568660d13e9",
+      "id": "212f0124-d20b-4755-81d2-14805094e67e",
       "name": "Redis",
       "credentials": {
         "redis": {
@@ -307,10 +281,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        24688,
-        32608
+        32208,
+        39728
       ],
-      "id": "b2cddeca-3505-4c33-93ad-79f41e6ef544",
+      "id": "ba91d602-f2bf-4746-bcb7-3576e5312c7c",
       "name": "Redis1",
       "credentials": {
         "redis": {
@@ -381,10 +355,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        24848,
-        32592
+        32368,
+        39712
       ],
-      "id": "bc1103c6-6931-4282-8185-173614c6b41f",
+      "id": "df5352d5-5312-45fc-a784-9a8bf66a9422",
       "name": "Switch1"
     },
     {
@@ -392,10 +366,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        25072,
-        32368
+        32592,
+        39488
       ],
-      "id": "c738b594-c8cc-4dd5-8966-82a18ab1bfda",
+      "id": "773e625c-7f1c-475c-bae5-998200c91044",
       "name": "No Operation, do nothing"
     },
     {
@@ -406,10 +380,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        25056,
-        32608
+        32576,
+        39728
       ],
-      "id": "0b627054-63d5-42de-a513-20b0062dd3fe",
+      "id": "3a63cffc-d3db-4cf0-a84a-1799d448c8df",
       "name": "Redis2",
       "credentials": {
         "redis": {
@@ -423,10 +397,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        25120,
-        32752
+        32640,
+        39872
       ],
-      "id": "5df4c5cb-5849-47ed-b21c-8cd11a7359a7",
+      "id": "3bd8217b-f53b-493f-b34e-0e16bac30d11",
       "name": "Wait",
       "webhookId": "42e25b68-a449-4a55-914f-c414045ffc0b"
     },
@@ -447,10 +421,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        25216,
-        32608
+        32736,
+        39728
       ],
-      "id": "8224e672-9613-4c1e-b0f4-9e29fb9996cb",
+      "id": "09c87d87-4a08-4891-aae1-954e31923ae4",
       "name": "Edit Fields"
     },
     {
@@ -462,10 +436,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        24368,
-        33152
+        31888,
+        40272
       ],
-      "id": "90a23ed7-c6a2-44c3-b764-de83e734e8d9",
+      "id": "a614fd01-08ae-4303-a60a-a9e2fdc71d7a",
       "name": "Obtener audio",
       "webhookId": "3847188a-68b1-4c1d-a237-0a3d45f75b31",
       "credentials": {
@@ -485,10 +459,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        24560,
-        33152
+        32080,
+        40272
       ],
-      "id": "49be78d3-128c-4a09-92ca-950f1e2e2223",
+      "id": "c727e378-be35-4d47-88da-df4237ecd022",
       "name": "HTTP Request",
       "credentials": {
         "httpHeaderAuth": {
@@ -510,10 +484,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 2,
       "position": [
-        24736,
-        33152
+        32256,
+        40272
       ],
-      "id": "cd76630d-5b18-49f7-8221-4b31b44cb0a5",
+      "id": "f790dac5-f864-422b-ac25-9fc0f3e40176",
       "name": "Transcribe a recording",
       "credentials": {
         "openAiApi": {
@@ -531,10 +505,10 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        24896,
-        33152
+        32416,
+        40272
       ],
-      "id": "2e089b5c-a6db-4fc3-9fa9-ae5863e83fac",
+      "id": "2093f83e-25d8-41e0-a32a-35b8a81c8e00",
       "name": "Basic LLM Chain1"
     },
     {
@@ -554,10 +528,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        25184,
-        33152
+        32704,
+        40272
       ],
-      "id": "88424a6c-786c-4d38-ad15-1d090e8660b0",
+      "id": "a3501800-bcd5-41c4-bf55-a0b6f0f91198",
       "name": "Edit Fields3"
     },
     {
@@ -577,23 +551,23 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        25472,
-        32896
+        32992,
+        40016
       ],
-      "id": "49cc047e-6cc7-437f-b2a3-9935032e8929",
+      "id": "72fb2a1c-e220-44da-b334-61a84b2eaabb",
       "name": "Edit Fields4"
     },
     {
       "parameters": {
         "jsCode": "***REDACTED***"
       },
-      "id": "5bf2b59a-6ae4-4288-ba49-f246b777efe7",
+      "id": "e8404f84-90da-45bb-8ac4-c32e58e0c6f4",
       "name": "Sanitizar Entrada",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        25632,
-        32896
+        33152,
+        40016
       ]
     },
     {
@@ -607,10 +581,10 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        26464,
-        33168
+        33984,
+        40288
       ],
-      "id": "5c659baa-67ef-4876-82df-ac5b1ba3c704",
+      "id": "79b8ae62-1f8d-4215-81dc-2e6c88f8d62e",
       "name": "Basic LLM Chain",
       "onError": "continueErrorOutput"
     },
@@ -621,10 +595,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        26960,
-        33152
+        34480,
+        40272
       ],
-      "id": "149ae873-92ff-4f88-8262-e07cf3a0ac68",
+      "id": "148e4d71-746d-4a04-8a94-b3017c52a97b",
       "name": "Code in JavaScript"
     },
     {
@@ -650,10 +624,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        27168,
-        33152
+        34688,
+        40272
       ],
-      "id": "8c952607-74ef-4dc6-815b-e810b3482add",
+      "id": "c1372ba7-8bf4-4822-b62d-269eca719504",
       "name": "Edit Fields2"
     },
     {
@@ -663,13 +637,13 @@
         "key": "***REDACTED***",
         "options": {}
       },
-      "id": "9fb40261-a37d-42cb-bf0c-eb0b5bf3d806",
+      "id": "417a1cd5-964b-4de0-b814-ca8957c1fac2",
       "name": "Leer Config Sesión",
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        27344,
-        33152
+        34864,
+        40272
       ],
       "credentials": {
         "redis": {
@@ -683,13 +657,13 @@
       "parameters": {
         "jsCode": "***REDACTED***"
       },
-      "id": "65683472-79fd-43b8-8d52-2e040b0ce25d",
+      "id": "2994e274-d6ae-408c-ac28-eebc4b8ca79e",
       "name": "Gestionar Idioma",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        27680,
-        33152
+        35200,
+        40272
       ]
     },
     {
@@ -700,13 +674,13 @@
         "expire": true,
         "ttl": 3600
       },
-      "id": "ee3e72e5-b183-4b62-a042-bcf402948b96",
+      "id": "26171cc2-be95-4550-8791-c0cd163a29cc",
       "name": "Guardar Config Sesión",
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        27872,
-        33152
+        35392,
+        40272
       ],
       "credentials": {
         "redis": {
@@ -875,10 +849,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        28128,
-        33728
+        35648,
+        40848
       ],
-      "id": "a880e518-27f2-42d1-9d79-f13f906ec815",
+      "id": "1d7ad617-421f-47ae-b073-9ebf46e29649",
       "name": "Switch"
     },
     {
@@ -926,10 +900,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        28688,
-        33520
+        36208,
+        40640
       ],
-      "id": "ebfdb71d-82a2-4735-a756-1978c1185e14",
+      "id": "bfaece4d-15b2-4504-8e1e-98e5e4e1f19c",
       "name": "INFORMACION DE SEDES"
     },
     {
@@ -943,10 +917,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        28608,
-        33856
+        36128,
+        40976
       ],
-      "id": "15caa696-adba-47d9-a7ae-aec048e7f14f",
+      "id": "3b59df9f-ba03-4ba8-94f4-83c6532fb1a0",
       "name": "AI Agent"
     },
     {
@@ -954,10 +928,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        29408,
-        33680
+        36928,
+        40800
       ],
-      "id": "71a550cf-6bc1-418b-a961-416465815c2d",
+      "id": "f52e5d27-9cc5-46f7-901d-93ca3e0404c0",
       "name": "Merge"
     },
     {
@@ -973,10 +947,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        29616,
-        33680
+        37136,
+        40800
       ],
-      "id": "8303770a-f5a7-4eac-9b2f-e0429af04f57",
+      "id": "accffd7d-6867-4060-98a5-b88613113383",
       "name": "Respuesta",
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
@@ -1014,10 +988,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        29792,
-        33680
+        37312,
+        40800
       ],
-      "id": "67dba12e-84dd-47ad-806c-0199749255b4",
+      "id": "acf5f55a-9836-4002-9d88-048b0389201c",
       "name": "If"
     },
     {
@@ -1033,10 +1007,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        30032,
-        33664
+        37552,
+        40784
       ],
-      "id": "521a2286-a995-4d05-b8b9-8385ac78a1ae",
+      "id": "583f22e3-2eb8-44d5-8bc6-a5cc32aa64a2",
       "name": "Respuesta1",
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
@@ -1059,10 +1033,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        28480,
-        34160
+        36000,
+        41280
       ],
-      "id": "5b21e78e-e018-4baf-b389-b4c467de7a76",
+      "id": "a3624c8a-a17f-486e-9300-fd699d962c0a",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -1084,10 +1058,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        26000,
-        33264
+        33520,
+        40384
       ],
-      "id": "3b099b23-87b5-45dd-81f9-c6347c4ab515",
+      "id": "7f884282-5c52-439e-8d3e-d62e2db666cf",
       "name": "OpenAI Chat Model1",
       "credentials": {
         "openAiApi": {
@@ -1106,10 +1080,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
       "typeVersion": 1.5,
       "position": [
-        28704,
-        34160
+        36224,
+        41280
       ],
-      "id": "66d1f059-694e-4aa8-8213-3bcedb2e97f4",
+      "id": "378b95cf-4a30-4937-9fc2-0351f1322eb1",
       "name": "Redis Chat Memory",
       "credentials": {
         "redis": {
@@ -1126,13 +1100,13 @@
         "textBody": "***REDACTED***",
         "additionalFields": {}
       },
-      "id": "22d8a50b-4b3b-4cd7-8a67-465dd60a6b6f",
+      "id": "ba16779b-9faa-4e07-b300-a5e375a88468",
       "name": "Respuesta Imagen",
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        24368,
-        33360
+        31888,
+        40480
       ],
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
@@ -1146,13 +1120,13 @@
       "parameters": {
         "jsCode": "***REDACTED***"
       },
-      "id": "45129e9e-06b3-48a4-b9ec-57841ed87627",
+      "id": "11860a6f-3326-4b30-89c0-c679be8acf9c",
       "name": "Manejar Flow Response",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        24384,
-        33792
+        31904,
+        40912
       ]
     },
     {
@@ -1163,11 +1137,11 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        24336,
-        33024
+        31856,
+        40144
       ],
       "typeVersion": 1,
-      "id": "6cc56e68-6138-425d-ae4c-39669e0de7a9",
+      "id": "8115b6a9-10a3-4dc5-9b9d-94b1a9db521b",
       "name": "Sticky Note"
     },
     {
@@ -1180,10 +1154,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        24336,
-        32416
+        31856,
+        39536
       ],
-      "id": "95e00d58-d11d-4346-953c-9831404bdbee",
+      "id": "93937f8c-1674-4c39-bce5-d903906d86cf",
       "name": "Sticky Note1"
     },
     {
@@ -1215,10 +1189,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        27504,
-        33152
+        35024,
+        40272
       ],
-      "id": "ff1bf76c-9a16-4a0e-93ad-3a213171b342",
+      "id": "4f3338a4-1014-4a99-b25c-dd6857a5c216",
       "name": "Edit Fields5"
     },
     {
@@ -1228,10 +1202,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        24304,
-        34064
+        31824,
+        41184
       ],
-      "id": "86a5854f-1467-4885-9028-c4a7297b9fc8",
+      "id": "56db66d0-c6df-4107-bf18-f39810a50889",
       "name": "Extraer list_reply"
     },
     {
@@ -1251,10 +1225,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        24016,
-        34064
+        31536,
+        41184
       ],
-      "id": "51ad41af-d069-4178-a7c0-473bea24780d",
+      "id": "ed166d04-b245-4e5f-8e5d-5a591ad6844c",
       "name": "Edit Fields7"
     },
     {
@@ -1267,10 +1241,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        25808,
-        32896
+        33328,
+        40016
       ],
-      "id": "a817991d-34d2-4113-a9ba-8693350b185d",
+      "id": "4461ecea-f884-4fdb-9c12-57481c789e76",
       "name": "Leer Estado Paciente1",
       "credentials": {
         "redis": {
@@ -1332,10 +1306,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        25968,
-        32896
+        33488,
+        40016
       ],
-      "id": "e0d99672-a705-4007-a7bc-6c34d33fc5ce",
+      "id": "9325733d-aa97-45ab-9f32-2e075a83984d",
       "name": "Edit Fields9"
     },
     {
@@ -1345,10 +1319,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        26160,
-        32896
+        33680,
+        40016
       ],
-      "id": "bc63543c-5845-4d0d-bcc4-586fc71b6bf3",
+      "id": "5efb5fb2-5211-4393-8cef-2dfe6e98ada6",
       "name": "Decidir Ruta"
     },
     {
@@ -1389,10 +1363,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        26496,
-        32880
+        34016,
+        40000
       ],
-      "id": "fefe928a-f54a-4483-9404-e79521f9b33d",
+      "id": "15e2fcdd-5b62-47d1-a5a6-a309c1b3e9b0",
       "name": "Decidir Ruta 2"
     },
     {
@@ -1418,10 +1392,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        28480,
-        33120
+        36000,
+        40240
       ],
-      "id": "46b81ef2-6d81-411b-bc42-9c223a3afbc7",
+      "id": "19c2b3ae-942b-4c9c-bb8f-2fab3b282459",
       "name": "Prep Intent"
     },
     {
@@ -1503,10 +1477,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        26800,
-        32864
+        34320,
+        39984
       ],
-      "id": "bfe8a35c-2fe6-4d45-935d-393fd33dc532",
+      "id": "b407020f-455c-4dcb-a71c-dd754b1d29e6",
       "name": "Call 'GESTION_CITAS'"
     },
     {
@@ -1519,10 +1493,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        24512,
-        34064
+        32032,
+        41184
       ],
-      "id": "692413f0-d055-4b8f-9af9-0c51181f5844",
+      "id": "adb7cb61-2f1f-4e95-86f1-f89702c02b80",
       "name": "Redis3",
       "credentials": {
         "redis": {
@@ -1572,10 +1546,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        24720,
-        34064
+        32240,
+        41184
       ],
-      "id": "931bcf69-45f7-4b19-8b5d-88adee7c7936",
+      "id": "42ed85f7-e2da-40af-b51d-c6aa798774a3",
       "name": "Prep list_reply"
     },
     {
@@ -1652,10 +1626,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        24928,
-        34064
+        32448,
+        41184
       ],
-      "id": "2fda8aec-1a36-4594-96b0-1c8e9a1e3a03",
+      "id": "cee16da0-740b-4162-a91c-725350622058",
       "name": "Gestion Citas(list_replay)"
     },
     {
@@ -1737,10 +1711,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        29040,
-        33120
+        36560,
+        40240
       ],
-      "id": "60b35827-f487-4c0b-b9c1-aaa091fdb41f",
+      "id": "747b17be-0b13-4dcf-b72c-bae7e5acfb55",
       "name": "Call 'GESTION_CITAS'1"
     },
     {
@@ -1821,6 +1795,30 @@
               },
               "renameOutput": true,
               "outputKey": "EMPTY"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "cmd-offtopic-1",
+                    "leftValue": "***REDACTED***",
+                    "rightValue": "other",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "OFF_TOPIC"
             }
           ]
         },
@@ -1832,10 +1830,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        26448,
-        32224
+        33968,
+        39344
       ],
-      "id": "7eb60926-36a0-4597-933f-2abf34ba78f9",
+      "id": "00b3f51c-9def-4485-8426-4e8ce201dfb4",
       "name": "Manejar Comando Especial"
     },
     {
@@ -1846,10 +1844,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        26816,
-        31904
+        34336,
+        39024
       ],
-      "id": "f9d3579b-8f2f-470c-a173-4ec6e8384b1e",
+      "id": "6ebf546e-7b93-4369-9fbe-ef66002f0b6f",
       "name": "Limpiar Estado Cancelar",
       "credentials": {
         "redis": {
@@ -1870,10 +1868,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        27200,
-        31904
+        34720,
+        39024
       ],
-      "id": "f7fc3838-26ec-4ea1-bf4d-cdee57289ea8",
+      "id": "488ee487-383c-4582-b34f-ba6d48d8ad73",
       "name": "Respuesta Cancelar",
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
@@ -1894,10 +1892,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        26832,
-        32240
+        34352,
+        39360
       ],
-      "id": "70d7c3c0-2396-4cc0-9e68-ac5f60a8cb41",
+      "id": "69a94af0-6653-418d-85fb-331bb785e446",
       "name": "Respuesta Injection",
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
@@ -1918,10 +1916,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        26816,
-        32464
+        34336,
+        39584
       ],
-      "id": "af7d4f26-3133-4206-964f-4e7dc79f8396",
+      "id": "0889151f-8723-406e-9e71-96af953d22a1",
       "name": "Respuesta Empty",
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
@@ -1941,10 +1939,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        23824,
-        32464
+        31344,
+        39584
       ],
-      "id": "a7d66e75-69e0-4bd6-9920-84ef6b38cb54",
+      "id": "aff6a6a1-60c6-41e5-95c5-167b55ed74af",
       "name": "Dedup Get",
       "credentials": {
         "redis": {
@@ -1982,10 +1980,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        24352,
-        32464
+        31872,
+        39584
       ],
-      "id": "7e1ff535-46ec-4df5-a0e6-ac703dd0ef2d",
+      "id": "679291ec-6e85-4b30-b4e7-6a4895675b42",
       "name": "Dedup If"
     },
     {
@@ -1999,10 +1997,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        23872,
-        32736
+        31392,
+        39856
       ],
-      "id": "cf684d32-17ce-4e7a-a50e-9794a3a2f421",
+      "id": "01b0f0ee-4583-474b-8b00-3dc673712a59",
       "name": "Dedup Set",
       "credentials": {
         "redis": {
@@ -2016,10 +2014,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        24672,
-        32480
+        32192,
+        39600
       ],
-      "id": "5942c60d-e5ed-46c8-93cd-611e38732e90",
+      "id": "15d1838a-bfa9-4366-9c2e-a93789dbc5dc",
       "name": "Dedup Skip"
     },
     {
@@ -2029,10 +2027,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        29392,
-        34112
+        36912,
+        41232
       ],
-      "id": "ec63ae25-ad73-49e2-97a2-c4ffa8f79a3b",
+      "id": "8d8535f2-0198-4f4c-8fcc-e5ea393fd29e",
       "name": "Normalizar AI Output1",
       "disabled": true
     },
@@ -2043,10 +2041,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        29104,
-        33840
+        36624,
+        40960
       ],
-      "id": "c7d9aa7a-5914-4bc8-b221-1b4a08185975",
+      "id": "cf9ce6ac-390e-461b-bcf9-4425d8c3b22e",
       "name": "Normalizar AI Output"
     },
     {
@@ -2064,10 +2062,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        28048,
-        34160
+        35568,
+        41280
       ],
-      "id": "e563ad5c-adfe-4e70-b8c0-935ffb7e7c81",
+      "id": "2ea7b174-5dd1-4fd6-8175-f7243c597aaf",
       "name": "Preguntar Menu Fallback",
       "credentials": {
         "whatsAppApi": {
@@ -2086,10 +2084,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        24864,
-        33552
+        32384,
+        40672
       ],
-      "id": "f68df862-796c-4583-97f1-5b50614b6545",
+      "id": "b44ff533-2374-49e3-94b6-30a08da8588f",
       "name": "Leer Estado Paciente",
       "credentials": {
         "redis": {
@@ -2133,10 +2131,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        25136,
-        33552
+        32656,
+        40672
       ],
-      "id": "a5b802db-7901-4136-8e93-de64325dcfef",
+      "id": "fee4e44d-50fb-4c98-ad9f-e7720715b0d0",
       "name": "Edit Fields10"
     },
     {
@@ -2146,10 +2144,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        25408,
-        33552
+        32928,
+        40672
       ],
-      "id": "eda3157e-2512-47d9-b468-b305b8abf1cf",
+      "id": "813f6177-62a6-4711-a924-134f32bb1d39",
       "name": "Decidir Ruta1"
     },
     {
@@ -2179,10 +2177,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        24160,
-        33632
+        31680,
+        40752
       ],
-      "id": "d664d79a-b48a-4027-829c-22a830b3572e",
+      "id": "50c4e6c0-8c84-4a9e-8c8b-b7982ba0d35e",
       "name": "If1"
     },
     {
@@ -2192,10 +2190,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        24624,
-        33552
+        32144,
+        40672
       ],
-      "id": "80853469-932b-4347-b2cd-5c532efab59a",
+      "id": "badce90a-5693-4cc4-85af-2b7be0e77968",
       "name": "Code in JavaScript1"
     },
     {
@@ -2215,10 +2213,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        24400,
-        33552
+        31920,
+        40672
       ],
-      "id": "62b62809-7c22-4074-80ae-e8b2054eba12",
+      "id": "7cef2d1a-bc7c-4f29-a122-44083c2ee2f6",
       "name": "Edit Fields6"
     },
     {
@@ -2300,10 +2298,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        25680,
-        33552
+        33200,
+        40672
       ],
-      "id": "46de830f-d8d5-47e7-ac80-65f5a45ebe4f",
+      "id": "c54933c8-b5c4-459c-9c2d-0dd330d4fea7",
       "name": "Call 'GESTION_CITAS' (flow)"
     },
     {
@@ -2351,50 +2349,11 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        29120,
-        34112
+        36640,
+        41232
       ],
-      "id": "42919cac-e684-4528-965f-754197907a2a",
+      "id": "8593246b-5d6a-42cb-9c51-d96095f6c736",
       "name": "Call 'INFORMACIÓN SEDES'"
-    },
-    {
-      "parameters": {
-        "descriptionType": "manual",
-        "toolDescription": "***REDACTED***",
-        "authentication": "oAuth2",
-        "resource": "file",
-        "operation": "get",
-        "owner": {
-          "__rl": true,
-          "value": "***REDACTED***",
-          "mode": "url"
-        },
-        "repository": {
-          "__rl": true,
-          "value": "***REDACTED***",
-          "mode": "list",
-          "cachedResultName": "chatbot_info",
-          "cachedResultUrl": "***REDACTED***"
-        },
-        "filePath": "info.json",
-        "asBinaryProperty": "=false",
-        "additionalParameters": {}
-      },
-      "type": "n8n-nodes-base.githubTool",
-      "typeVersion": 1.1,
-      "position": [
-        29008,
-        34416
-      ],
-      "id": "3bd42dc5-8764-47f1-aabe-56e100a179c9",
-      "name": "Informacion general Sersocial2",
-      "webhookId": "f9044c0a-0463-4ac4-8320-ccf954621fef",
-      "credentials": {
-        "githubOAuth2Api": {
-          "id": "tzjUTnmog5gorp8f",
-          "name": "GitHub account"
-        }
-      }
     },
     {
       "parameters": {
@@ -2414,24 +2373,141 @@
       "type": "n8n-nodes-base.httpRequestTool",
       "typeVersion": 4.3,
       "position": [
-        28896,
-        34144
+        36416,
+        41264
       ],
-      "id": "eb0ec289-718c-42b9-9372-98262c5b5176",
+      "id": "44a3e235-528d-4244-923c-1d7979dc965b",
       "name": "Informacion general Sersocial"
     },
     {
       "parameters": {
-        "jsonSchemaExample": "***REDACTED***"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "63f6052d-04f3-4b78-8ee3-065e41e12635",
+              "leftValue": "***REDACTED***",
+              "rightValue": "sent",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
       },
-      "type": "***REDACTED***",
-      "typeVersion": 1.3,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
       "position": [
-        32016,
-        34416
+        31552,
+        39584
       ],
-      "id": "825a2536-0a01-4ae0-b686-697a187a5e74",
-      "name": "Structured Output Parser2"
+      "id": "b60aaa2c-1358-4aa8-9f33-b20595981989",
+      "name": "If2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        31680,
+        39344
+      ],
+      "id": "71ee2fe6-c9c8-4966-ba12-4381de54d0cc",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "***REDACTED***",
+        "recipientPhoneNumber": "***REDACTED***",
+        "textBody": "***REDACTED***",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        34352,
+        39488
+      ],
+      "id": "c96c20d6-46b7-48f8-8c81-904f915dafee",
+      "name": "Respuesta Off-Topic",
+      "webhookId": "133eb2d7-3089-4cde-9f72-20d817c4c48f",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "aTnctNBGMIYI6D7P",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "req026-entidad-cond",
+              "leftValue": "={{ $json.aliado_pendiente_lookup }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        32128,
+        40912
+      ],
+      "id": "96dff30e-935a-4be9-95d9-597cd3936bba",
+      "name": "Es Entidad Desconocida",
+      "notesInFlow": true,
+      "notes": "***REDACTED***"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "***REDACTED***",
+        "recipientPhoneNumber": "***REDACTED***",
+        "textBody": "***REDACTED***",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        32320,
+        41072
+      ],
+      "id": "93604195-7df2-48f1-907f-97347c37cdde",
+      "name": "Respuesta Provisional Cross-Lookup",
+      "webhookId": "da2a344f-fe2e-4f19-96df-7841b20dbc03",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "aTnctNBGMIYI6D7P",
+          "name": "WhatsApp account"
+        }
+      },
+      "notes": "***REDACTED***"
     }
   ],
   "connections": {
@@ -2450,7 +2526,7 @@
       "main": [
         [
           {
-            "node": "Dedup If",
+            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -2899,7 +2975,7 @@
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "Es Entidad Desconocida",
             "type": "main",
             "index": 0
           }
@@ -3002,6 +3078,13 @@
         [
           {
             "node": "Respuesta Empty",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Off-Topic",
             "type": "main",
             "index": 0
           }
@@ -3182,6 +3265,42 @@
           }
         ]
       ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dedup If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Es Entidad Desconocida": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Provisional Cross-Lookup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -3192,10 +3311,44 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "pinData": {},
-  "versionId": "49b3e1fd-eabd-4d55-86e7-40a04263f1b9",
-  "activeVersionId": "49b3e1fd-eabd-4d55-86e7-40a04263f1b9",
-  "versionCounter": 2296,
+  "pinData": {
+    "WhatsApp Trigger": [
+      {
+        "json": {
+          "messaging_product": "whatsapp",
+          "metadata": {
+            "display_phone_number": "573123243089",
+            "phone_number_id": "1162040110315070"
+          },
+          "contacts": [
+            {
+              "profile": {
+                "name": "Marly Jerez Arias"
+              },
+              "wa_id": "573205415098",
+              "user_id": "CO.1792821305302422"
+            }
+          ],
+          "messages": [
+            {
+              "from": "573205415098",
+              "from_user_id": "CO.1792821305302422",
+              "id": "***REDACTED***",
+              "timestamp": "1779206645",
+              "text": {
+                "body": "Buenos días. Quiero poner una queja"
+              },
+              "type": "text"
+            }
+          ],
+          "field": "messages"
+        }
+      }
+    ]
+  },
+  "versionId": "a94a4700-d10d-4338-a094-65fdfa0ebda5",
+  "activeVersionId": "a94a4700-d10d-4338-a094-65fdfa0ebda5",
+  "versionCounter": 2381,
   "triggerCount": 1,
   "shared": [
     {
@@ -3220,7 +3373,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-15T08:32:07.961Z",
+              "updatedAt": "2026-05-22T05:02:36.429Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -3253,7 +3406,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-15",
+              "lastActiveAt": "2026-05-22",
               "isPending": false
             }
           }
@@ -3263,50 +3416,24 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-05-15T14:38:37.293Z",
-      "createdAt": "2026-03-03T19:34:15.068Z",
-      "id": "M63Xu3JDOVoP0xRM",
-      "name": "flujo whatsapp 🟢💬"
-    },
-    {
       "updatedAt": "2026-04-16T15:32:01.406Z",
       "createdAt": "2026-04-16T15:32:01.406Z",
       "id": "UwYoY9gtworpQ7kU",
       "name": "Facturación Seragil 💵"
+    },
+    {
+      "updatedAt": "2026-05-15T14:38:37.293Z",
+      "createdAt": "2026-03-03T19:34:15.068Z",
+      "id": "M63Xu3JDOVoP0xRM",
+      "name": "flujo whatsapp 🟢💬"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-15T20:56:20.548Z",
-    "createdAt": "2026-05-15T20:55:58.935Z",
-    "versionId": "49b3e1fd-eabd-4d55-86e7-40a04263f1b9",
+    "updatedAt": "2026-05-20T21:28:00.514Z",
+    "createdAt": "2026-05-20T21:27:52.212Z",
+    "versionId": "a94a4700-d10d-4338-a094-65fdfa0ebda5",
     "workflowId": "y2EElhK1le4SDCSdCTkyh",
     "nodes": [
-      {
-        "parameters": {
-          "jsonSchemaExample": "***REDACTED***"
-        },
-        "type": "***REDACTED***",
-        "typeVersion": 1.3,
-        "position": [
-          39072,
-          32048
-        ],
-        "id": "944d6051-0e30-4cf7-92e4-63b9aebf2502",
-        "name": "Structured Output Parser"
-      },
-      {
-        "parameters": {
-          "jsonSchemaExample": "***REDACTED***"
-        },
-        "type": "***REDACTED***",
-        "typeVersion": 1.3,
-        "position": [
-          36448,
-          33376
-        ],
-        "id": "1122cd85-03ae-440d-8498-2f99aa677432",
-        "name": "Structured Output Parser1"
-      },
       {
         "parameters": {
           "updates": [
@@ -3317,10 +3444,10 @@
         "type": "n8n-nodes-base.whatsAppTrigger",
         "typeVersion": 1,
         "position": [
-          23536,
-          32464
+          31056,
+          39584
         ],
-        "id": "685f77ba-877d-46fc-8374-da62f55d628c",
+        "id": "483ea7dc-25d0-406a-9f95-766ca6dba0fb",
         "name": "WhatsApp Trigger",
         "webhookId": "daaa9d41-9c99-4bb9-9cad-d1a272fae914",
         "credentials": {
@@ -3466,10 +3593,10 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.3,
         "position": [
-          23904,
-          33008
+          31424,
+          40128
         ],
-        "id": "39edd0fc-82cf-4c7c-afda-201eedb2f3f3",
+        "id": "da98d3c4-d63a-4ce6-8811-7fdd51c07446",
         "name": "Switch2"
       },
       {
@@ -3543,10 +3670,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          24416,
-          32848
+          31936,
+          39968
         ],
-        "id": "806095a3-124c-4e6e-ba27-29d49c3feeee",
+        "id": "971cdcdf-cb0d-4b19-a2f2-f95797be259c",
         "name": "Edit Fields1"
       },
       {
@@ -3559,10 +3686,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          24528,
-          32608
+          32048,
+          39728
         ],
-        "id": "73db1180-c4c9-4a76-83ac-9568660d13e9",
+        "id": "212f0124-d20b-4755-81d2-14805094e67e",
         "name": "Redis",
         "credentials": {
           "redis": {
@@ -3581,10 +3708,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          24688,
-          32608
+          32208,
+          39728
         ],
-        "id": "b2cddeca-3505-4c33-93ad-79f41e6ef544",
+        "id": "ba91d602-f2bf-4746-bcb7-3576e5312c7c",
         "name": "Redis1",
         "credentials": {
           "redis": {
@@ -3655,10 +3782,10 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.3,
         "position": [
-          24848,
-          32592
+          32368,
+          39712
         ],
-        "id": "bc1103c6-6931-4282-8185-173614c6b41f",
+        "id": "df5352d5-5312-45fc-a784-9a8bf66a9422",
         "name": "Switch1"
       },
       {
@@ -3666,10 +3793,10 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          25072,
-          32368
+          32592,
+          39488
         ],
-        "id": "c738b594-c8cc-4dd5-8966-82a18ab1bfda",
+        "id": "773e625c-7f1c-475c-bae5-998200c91044",
         "name": "No Operation, do nothing"
       },
       {
@@ -3680,10 +3807,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          25056,
-          32608
+          32576,
+          39728
         ],
-        "id": "0b627054-63d5-42de-a513-20b0062dd3fe",
+        "id": "3a63cffc-d3db-4cf0-a84a-1799d448c8df",
         "name": "Redis2",
         "credentials": {
           "redis": {
@@ -3697,10 +3824,10 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          25120,
-          32752
+          32640,
+          39872
         ],
-        "id": "5df4c5cb-5849-47ed-b21c-8cd11a7359a7",
+        "id": "3bd8217b-f53b-493f-b34e-0e16bac30d11",
         "name": "Wait",
         "webhookId": "42e25b68-a449-4a55-914f-c414045ffc0b"
       },
@@ -3721,10 +3848,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          25216,
-          32608
+          32736,
+          39728
         ],
-        "id": "8224e672-9613-4c1e-b0f4-9e29fb9996cb",
+        "id": "09c87d87-4a08-4891-aae1-954e31923ae4",
         "name": "Edit Fields"
       },
       {
@@ -3736,10 +3863,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          24368,
-          33152
+          31888,
+          40272
         ],
-        "id": "90a23ed7-c6a2-44c3-b764-de83e734e8d9",
+        "id": "a614fd01-08ae-4303-a60a-a9e2fdc71d7a",
         "name": "Obtener audio",
         "webhookId": "3847188a-68b1-4c1d-a237-0a3d45f75b31",
         "credentials": {
@@ -3759,10 +3886,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          24560,
-          33152
+          32080,
+          40272
         ],
-        "id": "49be78d3-128c-4a09-92ca-950f1e2e2223",
+        "id": "c727e378-be35-4d47-88da-df4237ecd022",
         "name": "HTTP Request",
         "credentials": {
           "httpHeaderAuth": {
@@ -3784,10 +3911,10 @@
         "type": "@n8n/n8n-nodes-langchain.openAi",
         "typeVersion": 2,
         "position": [
-          24736,
-          33152
+          32256,
+          40272
         ],
-        "id": "cd76630d-5b18-49f7-8221-4b31b44cb0a5",
+        "id": "f790dac5-f864-422b-ac25-9fc0f3e40176",
         "name": "Transcribe a recording",
         "credentials": {
           "openAiApi": {
@@ -3805,10 +3932,10 @@
         "type": "@n8n/n8n-nodes-langchain.chainLlm",
         "typeVersion": 1.7,
         "position": [
-          24896,
-          33152
+          32416,
+          40272
         ],
-        "id": "2e089b5c-a6db-4fc3-9fa9-ae5863e83fac",
+        "id": "2093f83e-25d8-41e0-a32a-35b8a81c8e00",
         "name": "Basic LLM Chain1"
       },
       {
@@ -3828,10 +3955,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          25184,
-          33152
+          32704,
+          40272
         ],
-        "id": "88424a6c-786c-4d38-ad15-1d090e8660b0",
+        "id": "a3501800-bcd5-41c4-bf55-a0b6f0f91198",
         "name": "Edit Fields3"
       },
       {
@@ -3851,23 +3978,23 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          25472,
-          32896
+          32992,
+          40016
         ],
-        "id": "49cc047e-6cc7-437f-b2a3-9935032e8929",
+        "id": "72fb2a1c-e220-44da-b334-61a84b2eaabb",
         "name": "Edit Fields4"
       },
       {
         "parameters": {
           "jsCode": "***REDACTED***"
         },
-        "id": "5bf2b59a-6ae4-4288-ba49-f246b777efe7",
+        "id": "e8404f84-90da-45bb-8ac4-c32e58e0c6f4",
         "name": "Sanitizar Entrada",
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          25632,
-          32896
+          33152,
+          40016
         ]
       },
       {
@@ -3881,10 +4008,10 @@
         "type": "@n8n/n8n-nodes-langchain.chainLlm",
         "typeVersion": 1.7,
         "position": [
-          26464,
-          33168
+          33984,
+          40288
         ],
-        "id": "5c659baa-67ef-4876-82df-ac5b1ba3c704",
+        "id": "79b8ae62-1f8d-4215-81dc-2e6c88f8d62e",
         "name": "Basic LLM Chain",
         "onError": "continueErrorOutput"
       },
@@ -3895,10 +4022,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          26960,
-          33152
+          34480,
+          40272
         ],
-        "id": "149ae873-92ff-4f88-8262-e07cf3a0ac68",
+        "id": "148e4d71-746d-4a04-8a94-b3017c52a97b",
         "name": "Code in JavaScript"
       },
       {
@@ -3924,10 +4051,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          27168,
-          33152
+          34688,
+          40272
         ],
-        "id": "8c952607-74ef-4dc6-815b-e810b3482add",
+        "id": "c1372ba7-8bf4-4822-b62d-269eca719504",
         "name": "Edit Fields2"
       },
       {
@@ -3937,13 +4064,13 @@
           "key": "***REDACTED***",
           "options": {}
         },
-        "id": "9fb40261-a37d-42cb-bf0c-eb0b5bf3d806",
+        "id": "417a1cd5-964b-4de0-b814-ca8957c1fac2",
         "name": "Leer Config Sesión",
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          27344,
-          33152
+          34864,
+          40272
         ],
         "credentials": {
           "redis": {
@@ -3957,13 +4084,13 @@
         "parameters": {
           "jsCode": "***REDACTED***"
         },
-        "id": "65683472-79fd-43b8-8d52-2e040b0ce25d",
+        "id": "2994e274-d6ae-408c-ac28-eebc4b8ca79e",
         "name": "Gestionar Idioma",
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          27680,
-          33152
+          35200,
+          40272
         ]
       },
       {
@@ -3974,13 +4101,13 @@
           "expire": true,
           "ttl": 3600
         },
-        "id": "ee3e72e5-b183-4b62-a042-bcf402948b96",
+        "id": "26171cc2-be95-4550-8791-c0cd163a29cc",
         "name": "Guardar Config Sesión",
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          27872,
-          33152
+          35392,
+          40272
         ],
         "credentials": {
           "redis": {
@@ -4149,10 +4276,10 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.3,
         "position": [
-          28128,
-          33728
+          35648,
+          40848
         ],
-        "id": "a880e518-27f2-42d1-9d79-f13f906ec815",
+        "id": "1d7ad617-421f-47ae-b073-9ebf46e29649",
         "name": "Switch"
       },
       {
@@ -4200,10 +4327,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          28688,
-          33520
+          36208,
+          40640
         ],
-        "id": "ebfdb71d-82a2-4735-a756-1978c1185e14",
+        "id": "bfaece4d-15b2-4504-8e1e-98e5e4e1f19c",
         "name": "INFORMACION DE SEDES"
       },
       {
@@ -4217,10 +4344,10 @@
         "type": "@n8n/n8n-nodes-langchain.agent",
         "typeVersion": 3,
         "position": [
-          28608,
-          33856
+          36128,
+          40976
         ],
-        "id": "15caa696-adba-47d9-a7ae-aec048e7f14f",
+        "id": "3b59df9f-ba03-4ba8-94f4-83c6532fb1a0",
         "name": "AI Agent"
       },
       {
@@ -4228,10 +4355,10 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          29408,
-          33680
+          36928,
+          40800
         ],
-        "id": "71a550cf-6bc1-418b-a961-416465815c2d",
+        "id": "f52e5d27-9cc5-46f7-901d-93ca3e0404c0",
         "name": "Merge"
       },
       {
@@ -4247,10 +4374,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          29616,
-          33680
+          37136,
+          40800
         ],
-        "id": "8303770a-f5a7-4eac-9b2f-e0429af04f57",
+        "id": "accffd7d-6867-4060-98a5-b88613113383",
         "name": "Respuesta",
         "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
         "credentials": {
@@ -4288,10 +4415,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          29792,
-          33680
+          37312,
+          40800
         ],
-        "id": "67dba12e-84dd-47ad-806c-0199749255b4",
+        "id": "acf5f55a-9836-4002-9d88-048b0389201c",
         "name": "If"
       },
       {
@@ -4307,10 +4434,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          30032,
-          33664
+          37552,
+          40784
         ],
-        "id": "521a2286-a995-4d05-b8b9-8385ac78a1ae",
+        "id": "583f22e3-2eb8-44d5-8bc6-a5cc32aa64a2",
         "name": "Respuesta1",
         "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
         "credentials": {
@@ -4333,10 +4460,10 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.3,
         "position": [
-          28480,
-          34160
+          36000,
+          41280
         ],
-        "id": "5b21e78e-e018-4baf-b389-b4c467de7a76",
+        "id": "a3624c8a-a17f-486e-9300-fd699d962c0a",
         "name": "OpenAI Chat Model",
         "credentials": {
           "openAiApi": {
@@ -4358,10 +4485,10 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.3,
         "position": [
-          26000,
-          33264
+          33520,
+          40384
         ],
-        "id": "3b099b23-87b5-45dd-81f9-c6347c4ab515",
+        "id": "7f884282-5c52-439e-8d3e-d62e2db666cf",
         "name": "OpenAI Chat Model1",
         "credentials": {
           "openAiApi": {
@@ -4380,10 +4507,10 @@
         "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
         "typeVersion": 1.5,
         "position": [
-          28704,
-          34160
+          36224,
+          41280
         ],
-        "id": "66d1f059-694e-4aa8-8213-3bcedb2e97f4",
+        "id": "378b95cf-4a30-4937-9fc2-0351f1322eb1",
         "name": "Redis Chat Memory",
         "credentials": {
           "redis": {
@@ -4400,13 +4527,13 @@
           "textBody": "***REDACTED***",
           "additionalFields": {}
         },
-        "id": "22d8a50b-4b3b-4cd7-8a67-465dd60a6b6f",
+        "id": "ba16779b-9faa-4e07-b300-a5e375a88468",
         "name": "Respuesta Imagen",
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          24368,
-          33360
+          31888,
+          40480
         ],
         "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
         "credentials": {
@@ -4420,13 +4547,13 @@
         "parameters": {
           "jsCode": "***REDACTED***"
         },
-        "id": "45129e9e-06b3-48a4-b9ec-57841ed87627",
+        "id": "11860a6f-3326-4b30-89c0-c679be8acf9c",
         "name": "Manejar Flow Response",
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          24384,
-          33792
+          31904,
+          40912
         ]
       },
       {
@@ -4437,11 +4564,11 @@
         },
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          24336,
-          33024
+          31856,
+          40144
         ],
         "typeVersion": 1,
-        "id": "6cc56e68-6138-425d-ae4c-39669e0de7a9",
+        "id": "8115b6a9-10a3-4dc5-9b9d-94b1a9db521b",
         "name": "Sticky Note"
       },
       {
@@ -4454,10 +4581,10 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          24336,
-          32416
+          31856,
+          39536
         ],
-        "id": "95e00d58-d11d-4346-953c-9831404bdbee",
+        "id": "93937f8c-1674-4c39-bce5-d903906d86cf",
         "name": "Sticky Note1"
       },
       {
@@ -4489,10 +4616,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          27504,
-          33152
+          35024,
+          40272
         ],
-        "id": "ff1bf76c-9a16-4a0e-93ad-3a213171b342",
+        "id": "4f3338a4-1014-4a99-b25c-dd6857a5c216",
         "name": "Edit Fields5"
       },
       {
@@ -4502,10 +4629,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          24304,
-          34064
+          31824,
+          41184
         ],
-        "id": "86a5854f-1467-4885-9028-c4a7297b9fc8",
+        "id": "56db66d0-c6df-4107-bf18-f39810a50889",
         "name": "Extraer list_reply"
       },
       {
@@ -4525,10 +4652,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          24016,
-          34064
+          31536,
+          41184
         ],
-        "id": "51ad41af-d069-4178-a7c0-473bea24780d",
+        "id": "ed166d04-b245-4e5f-8e5d-5a591ad6844c",
         "name": "Edit Fields7"
       },
       {
@@ -4541,10 +4668,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          25808,
-          32896
+          33328,
+          40016
         ],
-        "id": "a817991d-34d2-4113-a9ba-8693350b185d",
+        "id": "4461ecea-f884-4fdb-9c12-57481c789e76",
         "name": "Leer Estado Paciente1",
         "credentials": {
           "redis": {
@@ -4606,10 +4733,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          25968,
-          32896
+          33488,
+          40016
         ],
-        "id": "e0d99672-a705-4007-a7bc-6c34d33fc5ce",
+        "id": "9325733d-aa97-45ab-9f32-2e075a83984d",
         "name": "Edit Fields9"
       },
       {
@@ -4619,10 +4746,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          26160,
-          32896
+          33680,
+          40016
         ],
-        "id": "bc63543c-5845-4d0d-bcc4-586fc71b6bf3",
+        "id": "5efb5fb2-5211-4393-8cef-2dfe6e98ada6",
         "name": "Decidir Ruta"
       },
       {
@@ -4663,10 +4790,10 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          26496,
-          32880
+          34016,
+          40000
         ],
-        "id": "fefe928a-f54a-4483-9404-e79521f9b33d",
+        "id": "15e2fcdd-5b62-47d1-a5a6-a309c1b3e9b0",
         "name": "Decidir Ruta 2"
       },
       {
@@ -4692,10 +4819,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          28480,
-          33120
+          36000,
+          40240
         ],
-        "id": "46b81ef2-6d81-411b-bc42-9c223a3afbc7",
+        "id": "19c2b3ae-942b-4c9c-bb8f-2fab3b282459",
         "name": "Prep Intent"
       },
       {
@@ -4777,10 +4904,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          26800,
-          32864
+          34320,
+          39984
         ],
-        "id": "bfe8a35c-2fe6-4d45-935d-393fd33dc532",
+        "id": "b407020f-455c-4dcb-a71c-dd754b1d29e6",
         "name": "Call 'GESTION_CITAS'"
       },
       {
@@ -4793,10 +4920,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          24512,
-          34064
+          32032,
+          41184
         ],
-        "id": "692413f0-d055-4b8f-9af9-0c51181f5844",
+        "id": "adb7cb61-2f1f-4e95-86f1-f89702c02b80",
         "name": "Redis3",
         "credentials": {
           "redis": {
@@ -4846,10 +4973,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          24720,
-          34064
+          32240,
+          41184
         ],
-        "id": "931bcf69-45f7-4b19-8b5d-88adee7c7936",
+        "id": "42ed85f7-e2da-40af-b51d-c6aa798774a3",
         "name": "Prep list_reply"
       },
       {
@@ -4926,10 +5053,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          24928,
-          34064
+          32448,
+          41184
         ],
-        "id": "2fda8aec-1a36-4594-96b0-1c8e9a1e3a03",
+        "id": "cee16da0-740b-4162-a91c-725350622058",
         "name": "Gestion Citas(list_replay)"
       },
       {
@@ -5011,10 +5138,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          29040,
-          33120
+          36560,
+          40240
         ],
-        "id": "60b35827-f487-4c0b-b9c1-aaa091fdb41f",
+        "id": "747b17be-0b13-4dcf-b72c-bae7e5acfb55",
         "name": "Call 'GESTION_CITAS'1"
       },
       {
@@ -5095,6 +5222,30 @@
                 },
                 "renameOutput": true,
                 "outputKey": "EMPTY"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "cmd-offtopic-1",
+                      "leftValue": "***REDACTED***",
+                      "rightValue": "other",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "OFF_TOPIC"
               }
             ]
           },
@@ -5106,10 +5257,10 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          26448,
-          32224
+          33968,
+          39344
         ],
-        "id": "7eb60926-36a0-4597-933f-2abf34ba78f9",
+        "id": "00b3f51c-9def-4485-8426-4e8ce201dfb4",
         "name": "Manejar Comando Especial"
       },
       {
@@ -5120,10 +5271,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          26816,
-          31904
+          34336,
+          39024
         ],
-        "id": "f9d3579b-8f2f-470c-a173-4ec6e8384b1e",
+        "id": "6ebf546e-7b93-4369-9fbe-ef66002f0b6f",
         "name": "Limpiar Estado Cancelar",
         "credentials": {
           "redis": {
@@ -5144,10 +5295,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          27200,
-          31904
+          34720,
+          39024
         ],
-        "id": "f7fc3838-26ec-4ea1-bf4d-cdee57289ea8",
+        "id": "488ee487-383c-4582-b34f-ba6d48d8ad73",
         "name": "Respuesta Cancelar",
         "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
         "credentials": {
@@ -5168,10 +5319,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          26832,
-          32240
+          34352,
+          39360
         ],
-        "id": "70d7c3c0-2396-4cc0-9e68-ac5f60a8cb41",
+        "id": "69a94af0-6653-418d-85fb-331bb785e446",
         "name": "Respuesta Injection",
         "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
         "credentials": {
@@ -5192,10 +5343,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          26816,
-          32464
+          34336,
+          39584
         ],
-        "id": "af7d4f26-3133-4206-964f-4e7dc79f8396",
+        "id": "0889151f-8723-406e-9e71-96af953d22a1",
         "name": "Respuesta Empty",
         "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
         "credentials": {
@@ -5215,10 +5366,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          23824,
-          32464
+          31344,
+          39584
         ],
-        "id": "a7d66e75-69e0-4bd6-9920-84ef6b38cb54",
+        "id": "aff6a6a1-60c6-41e5-95c5-167b55ed74af",
         "name": "Dedup Get",
         "credentials": {
           "redis": {
@@ -5256,10 +5407,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          24352,
-          32464
+          31872,
+          39584
         ],
-        "id": "7e1ff535-46ec-4df5-a0e6-ac703dd0ef2d",
+        "id": "679291ec-6e85-4b30-b4e7-6a4895675b42",
         "name": "Dedup If"
       },
       {
@@ -5273,10 +5424,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          23872,
-          32736
+          31392,
+          39856
         ],
-        "id": "cf684d32-17ce-4e7a-a50e-9794a3a2f421",
+        "id": "01b0f0ee-4583-474b-8b00-3dc673712a59",
         "name": "Dedup Set",
         "credentials": {
           "redis": {
@@ -5290,10 +5441,10 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          24672,
-          32480
+          32192,
+          39600
         ],
-        "id": "5942c60d-e5ed-46c8-93cd-611e38732e90",
+        "id": "15d1838a-bfa9-4366-9c2e-a93789dbc5dc",
         "name": "Dedup Skip"
       },
       {
@@ -5303,10 +5454,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          29392,
-          34112
+          36912,
+          41232
         ],
-        "id": "ec63ae25-ad73-49e2-97a2-c4ffa8f79a3b",
+        "id": "8d8535f2-0198-4f4c-8fcc-e5ea393fd29e",
         "name": "Normalizar AI Output1",
         "disabled": true
       },
@@ -5317,10 +5468,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          29104,
-          33840
+          36624,
+          40960
         ],
-        "id": "c7d9aa7a-5914-4bc8-b221-1b4a08185975",
+        "id": "cf9ce6ac-390e-461b-bcf9-4425d8c3b22e",
         "name": "Normalizar AI Output"
       },
       {
@@ -5338,10 +5489,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          28048,
-          34160
+          35568,
+          41280
         ],
-        "id": "e563ad5c-adfe-4e70-b8c0-935ffb7e7c81",
+        "id": "2ea7b174-5dd1-4fd6-8175-f7243c597aaf",
         "name": "Preguntar Menu Fallback",
         "credentials": {
           "whatsAppApi": {
@@ -5360,10 +5511,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          24864,
-          33552
+          32384,
+          40672
         ],
-        "id": "f68df862-796c-4583-97f1-5b50614b6545",
+        "id": "b44ff533-2374-49e3-94b6-30a08da8588f",
         "name": "Leer Estado Paciente",
         "credentials": {
           "redis": {
@@ -5407,10 +5558,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          25136,
-          33552
+          32656,
+          40672
         ],
-        "id": "a5b802db-7901-4136-8e93-de64325dcfef",
+        "id": "fee4e44d-50fb-4c98-ad9f-e7720715b0d0",
         "name": "Edit Fields10"
       },
       {
@@ -5420,10 +5571,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          25408,
-          33552
+          32928,
+          40672
         ],
-        "id": "eda3157e-2512-47d9-b468-b305b8abf1cf",
+        "id": "813f6177-62a6-4711-a924-134f32bb1d39",
         "name": "Decidir Ruta1"
       },
       {
@@ -5453,10 +5604,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          24160,
-          33632
+          31680,
+          40752
         ],
-        "id": "d664d79a-b48a-4027-829c-22a830b3572e",
+        "id": "50c4e6c0-8c84-4a9e-8c8b-b7982ba0d35e",
         "name": "If1"
       },
       {
@@ -5466,10 +5617,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          24624,
-          33552
+          32144,
+          40672
         ],
-        "id": "80853469-932b-4347-b2cd-5c532efab59a",
+        "id": "badce90a-5693-4cc4-85af-2b7be0e77968",
         "name": "Code in JavaScript1"
       },
       {
@@ -5489,10 +5640,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          24400,
-          33552
+          31920,
+          40672
         ],
-        "id": "62b62809-7c22-4074-80ae-e8b2054eba12",
+        "id": "7cef2d1a-bc7c-4f29-a122-44083c2ee2f6",
         "name": "Edit Fields6"
       },
       {
@@ -5574,10 +5725,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          25680,
-          33552
+          33200,
+          40672
         ],
-        "id": "46de830f-d8d5-47e7-ac80-65f5a45ebe4f",
+        "id": "c54933c8-b5c4-459c-9c2d-0dd330d4fea7",
         "name": "Call 'GESTION_CITAS' (flow)"
       },
       {
@@ -5625,50 +5776,11 @@
         "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
         "typeVersion": 2.2,
         "position": [
-          29120,
-          34112
+          36640,
+          41232
         ],
-        "id": "42919cac-e684-4528-965f-754197907a2a",
+        "id": "8593246b-5d6a-42cb-9c51-d96095f6c736",
         "name": "Call 'INFORMACIÓN SEDES'"
-      },
-      {
-        "parameters": {
-          "descriptionType": "manual",
-          "toolDescription": "***REDACTED***",
-          "authentication": "oAuth2",
-          "resource": "file",
-          "operation": "get",
-          "owner": {
-            "__rl": true,
-            "value": "***REDACTED***",
-            "mode": "url"
-          },
-          "repository": {
-            "__rl": true,
-            "value": "***REDACTED***",
-            "mode": "list",
-            "cachedResultName": "chatbot_info",
-            "cachedResultUrl": "***REDACTED***"
-          },
-          "filePath": "info.json",
-          "asBinaryProperty": "=false",
-          "additionalParameters": {}
-        },
-        "type": "n8n-nodes-base.githubTool",
-        "typeVersion": 1.1,
-        "position": [
-          29008,
-          34416
-        ],
-        "id": "3bd42dc5-8764-47f1-aabe-56e100a179c9",
-        "name": "Informacion general Sersocial2",
-        "webhookId": "f9044c0a-0463-4ac4-8320-ccf954621fef",
-        "credentials": {
-          "githubOAuth2Api": {
-            "id": "tzjUTnmog5gorp8f",
-            "name": "GitHub account"
-          }
-        }
       },
       {
         "parameters": {
@@ -5688,24 +5800,141 @@
         "type": "n8n-nodes-base.httpRequestTool",
         "typeVersion": 4.3,
         "position": [
-          28896,
-          34144
+          36416,
+          41264
         ],
-        "id": "eb0ec289-718c-42b9-9372-98262c5b5176",
+        "id": "44a3e235-528d-4244-923c-1d7979dc965b",
         "name": "Informacion general Sersocial"
       },
       {
         "parameters": {
-          "jsonSchemaExample": "***REDACTED***"
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "63f6052d-04f3-4b78-8ee3-065e41e12635",
+                "leftValue": "***REDACTED***",
+                "rightValue": "sent",
+                "operator": {
+                  "type": "object",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
         },
-        "type": "***REDACTED***",
-        "typeVersion": 1.3,
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
         "position": [
-          32016,
-          34416
+          31552,
+          39584
         ],
-        "id": "825a2536-0a01-4ae0-b686-697a187a5e74",
-        "name": "Structured Output Parser2"
+        "id": "b60aaa2c-1358-4aa8-9f33-b20595981989",
+        "name": "If2"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          31680,
+          39344
+        ],
+        "id": "71ee2fe6-c9c8-4966-ba12-4381de54d0cc",
+        "name": "No Operation, do nothing1"
+      },
+      {
+        "parameters": {
+          "operation": "send",
+          "phoneNumberId": "***REDACTED***",
+          "recipientPhoneNumber": "***REDACTED***",
+          "textBody": "***REDACTED***",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.whatsApp",
+        "typeVersion": 1.1,
+        "position": [
+          34352,
+          39488
+        ],
+        "id": "c96c20d6-46b7-48f8-8c81-904f915dafee",
+        "name": "Respuesta Off-Topic",
+        "webhookId": "133eb2d7-3089-4cde-9f72-20d817c4c48f",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "aTnctNBGMIYI6D7P",
+            "name": "WhatsApp account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "req026-entidad-cond",
+                "leftValue": "={{ $json.aliado_pendiente_lookup }}",
+                "rightValue": true,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          32128,
+          40912
+        ],
+        "id": "96dff30e-935a-4be9-95d9-597cd3936bba",
+        "name": "Es Entidad Desconocida",
+        "notesInFlow": true,
+        "notes": "***REDACTED***"
+      },
+      {
+        "parameters": {
+          "operation": "send",
+          "phoneNumberId": "***REDACTED***",
+          "recipientPhoneNumber": "***REDACTED***",
+          "textBody": "***REDACTED***",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.whatsApp",
+        "typeVersion": 1.1,
+        "position": [
+          32320,
+          41072
+        ],
+        "id": "93604195-7df2-48f1-907f-97347c37cdde",
+        "name": "Respuesta Provisional Cross-Lookup",
+        "webhookId": "da2a344f-fe2e-4f19-96df-7841b20dbc03",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "aTnctNBGMIYI6D7P",
+            "name": "WhatsApp account"
+          }
+        },
+        "notes": "***REDACTED***"
       }
     ],
     "connections": {
@@ -5724,7 +5953,7 @@
         "main": [
           [
             {
-              "node": "Dedup If",
+              "node": "If2",
               "type": "main",
               "index": 0
             }
@@ -6173,7 +6402,7 @@
         "main": [
           [
             {
-              "node": "Switch",
+              "node": "Es Entidad Desconocida",
               "type": "main",
               "index": 0
             }
@@ -6276,6 +6505,13 @@
           [
             {
               "node": "Respuesta Empty",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta Off-Topic",
               "type": "main",
               "index": 0
             }
@@ -6456,18 +6692,54 @@
             }
           ]
         ]
+      },
+      "If2": {
+        "main": [
+          [
+            {
+              "node": "No Operation, do nothing1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Dedup If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Es Entidad Desconocida": {
+        "main": [
+          [
+            {
+              "node": "Respuesta Provisional Cross-Lookup",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 49b3e1fd",
+    "name": "Version a94a4700",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-15T20:56:20.547Z",
-        "id": 747,
+        "createdAt": "2026-05-20T21:28:00.512Z",
+        "id": 825,
         "workflowId": "y2EElhK1le4SDCSdCTkyh",
-        "versionId": "49b3e1fd-eabd-4d55-86e7-40a04263f1b9",
+        "versionId": "a94a4700-d10d-4338-a094-65fdfa0ebda5",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
