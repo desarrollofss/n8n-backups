@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-15T22:59:27.164Z",
+  "updatedAt": "2026-05-20T22:03:57.604Z",
   "createdAt": "2026-04-13T19:37:57.076Z",
   "id": "kxHCsXKdVTcKN6sbWhMBS",
   "name": "GESTION_CITAS",
@@ -32,10 +32,10 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        16224,
-        4864
+        28128,
+        13568
       ],
-      "id": "8fe93ee4-704a-4cb2-8ef8-6166e035afc6",
+      "id": "f9d9ad6e-3e57-4d64-b586-d00352f7eff6",
       "name": "When Executed by Another Workflow"
     },
     {
@@ -75,10 +75,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        18576,
-        3328
+        30480,
+        12032
       ],
-      "id": "2b94090b-5eab-4808-9d74-356e387834fc",
+      "id": "d2a654e8-c4d6-4ff4-9756-b8fbe9bb0c05",
       "name": "Call 'VALIDAR DERECHOS DE USUARIO'",
       "onError": "continueErrorOutput"
     },
@@ -441,38 +441,11 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        17168,
-        4672
+        29072,
+        13376
       ],
-      "id": "2bdbe888-0bc5-44b9-9b60-1700a156a6b0",
+      "id": "3fd7c5ab-a13c-4ea2-9dd8-41bab178d874",
       "name": "Qué hacer"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "***REDACTED***",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "whatsAppApi",
-        "sendBody": true,
-        "contentType": "raw",
-        "rawContentType": "application/json",
-        "body": "={{ JSON.stringify($json.payload) }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        17968,
-        2768
-      ],
-      "id": "6a0065bc-74c1-426c-a7a2-4c9c3b18dea2",
-      "name": "PEDIR_TIPO_DOC",
-      "credentials": {
-        "whatsAppApi": {
-          "id": "aTnctNBGMIYI6D7P",
-          "name": "WhatsApp account"
-        }
-      }
     },
     {
       "parameters": {
@@ -485,10 +458,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        17504,
-        2768
+        29408,
+        11472
       ],
-      "id": "2bf4986f-0eac-43c7-bd12-0748f5b80736",
+      "id": "a6d32d93-6271-4ec5-942b-2a65739a7221",
       "name": "guardar estado",
       "credentials": {
         "redis": {
@@ -519,10 +492,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        20704,
-        3664
+        32608,
+        12368
       ],
-      "id": "ea584fc7-3d99-4382-a4e5-c41ad0092467",
+      "id": "0b6a3d63-8453-408d-a51b-571ecf51891b",
       "name": "Call 'OBTENER TOKEN ZEUS'",
       "executeOnce": true
     },
@@ -541,10 +514,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        21856,
-        5296
+        33760,
+        14000
       ],
-      "id": "bf9302b5-2089-4d06-86fc-93ddf13fa991",
+      "id": "1e36868a-0ecb-4c7f-8093-76e2c7cb7266",
       "name": "ESPECIALIDAD",
       "credentials": {
         "whatsAppApi": {
@@ -581,10 +554,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        18848,
-        3312
+        30752,
+        12016
       ],
-      "id": "ff1c1c06-641c-40cf-97e9-53f4b179ca83",
+      "id": "600da7a5-9982-449d-a232-b02f4a8f13b5",
       "name": "If2"
     },
     {
@@ -617,10 +590,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        21152,
-        3664
+        33264,
+        12368
       ],
-      "id": "ab9cf8d6-2d83-49b5-864b-8b38aa46c0b0",
+      "id": "0d4c8a68-f6d9-4f3d-83ee-bc019ef27f06",
       "name": "Consultar usuario en Zeus"
     },
     {
@@ -634,10 +607,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        21152,
-        6800
+        33056,
+        15504
       ],
-      "id": "ad98842b-11b2-4082-93ac-1e4e4b26d998",
+      "id": "298b0ba3-e74b-40b1-8c48-7934d5ee47b0",
       "name": "guardar estado2",
       "credentials": {
         "redis": {
@@ -653,10 +626,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        19088,
-        3504
+        30992,
+        12208
       ],
-      "id": "40ccfeaf-7670-49c1-84fe-9e9454411880",
+      "id": "1d4617e0-9553-4c19-8f2d-40aa7abf390d",
       "name": "VALIDAR CONTRATOS"
     },
     {
@@ -669,10 +642,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        16464,
-        4864
+        28368,
+        13568
       ],
-      "id": "38081ad0-5003-4d5a-bbb5-985bfab5e06f",
+      "id": "47b4bd38-2fe4-4b20-805e-92e2c9f4c689",
       "name": "Leer Estado Paciente",
       "credentials": {
         "redis": {
@@ -688,10 +661,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        16928,
-        4864
+        28832,
+        13568
       ],
-      "id": "80555a6b-acf0-44de-8beb-953a7b13688b",
+      "id": "31c543c2-7a35-4bbb-91ee-0ec60404193a",
       "name": "Verificar Identificación"
     },
     {
@@ -701,10 +674,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        17808,
-        6128
+        29712,
+        14832
       ],
-      "id": "154f3420-84c6-4098-8005-b84b800f2757",
+      "id": "5da18264-07ea-4d25-8a85-d5d164d8d6dc",
       "name": "Preparar Flow ID"
     },
     {
@@ -714,10 +687,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        16688,
-        4864
+        28592,
+        13568
       ],
-      "id": "5cd18888-1943-44a3-8f85-88cf0168a9ef",
+      "id": "a514fe5b-4621-4031-bf12-19e1254988b6",
       "name": "Preparar Contexto"
     },
     {
@@ -727,10 +700,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        19280,
-        3504
+        31184,
+        12208
       ],
-      "id": "28a27532-da61-4341-ab14-d9f134bf0f92",
+      "id": "67ede6d9-7468-4d6d-a127-adc4d2d758ab",
       "name": "Code in JavaScript2"
     },
     {
@@ -740,10 +713,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        21184,
-        5168
+        33088,
+        13872
       ],
-      "id": "7a82ab27-f853-420e-bd49-a6000ecb3d0e",
+      "id": "f2de88d8-9bd8-4573-8b32-0a550bd2b540",
       "name": "Code in JavaScript3"
     },
     {
@@ -757,10 +730,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        18336,
-        3856
+        30240,
+        12560
       ],
-      "id": "725e2ea5-cbd4-4964-8d62-7ffbe129590f",
+      "id": "aa97f2e4-15c1-4b45-b6e8-b62ecb7ed3d7",
       "name": "Consultar asuntos",
       "credentials": {
         "postgres": {
@@ -778,10 +751,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        19472,
-        3504
+        31376,
+        12208
       ],
-      "id": "5741e62f-fb7e-4b36-83f6-7b56f33ec22d",
+      "id": "33105603-1979-40f0-a3bc-0a1d90094083",
       "name": "consultar especialidad",
       "alwaysOutputData": true,
       "credentials": {
@@ -798,10 +771,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18528,
-        3856
+        30432,
+        12560
       ],
-      "id": "33b3eeae-3bba-4aa5-825e-d4e935261da5",
+      "id": "3fcec0a4-eedf-4112-8ffe-cb93919719c4",
       "name": "Code in JavaScript"
     },
     {
@@ -819,10 +792,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        18784,
-        3856
+        30688,
+        12560
       ],
-      "id": "b1469ce4-2edc-4ee6-914e-12a0af23239c",
+      "id": "c57521c8-a6d0-4e94-82f0-257c8d24ecf4",
       "name": "ASUNTOS",
       "credentials": {
         "whatsAppApi": {
@@ -865,10 +838,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        18544,
-        4944
+        30448,
+        13648
       ],
-      "id": "069e4223-64b9-4dea-a04e-1862015a7f8b",
+      "id": "1da8a7a9-b3bb-48b4-a8c4-e1e23c67b787",
       "name": "HTTP Request",
       "executeOnce": false,
       "continueOnFail": true
@@ -880,10 +853,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18144,
-        4944
+        30048,
+        13648
       ],
-      "id": "0a376888-8a79-4284-9deb-e1a8177a589c",
+      "id": "1c241122-8385-4508-b9a6-250e735ebabf",
       "name": "Code in JavaScript4"
     },
     {
@@ -893,10 +866,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18832,
-        4944
+        30736,
+        13648
       ],
-      "id": "c83d8910-56a7-4234-9ce5-9f0c50ddf8b0",
+      "id": "59a9067b-125a-45ac-a33b-d3c680e9d549",
       "name": "Code in JavaScript5"
     },
     {
@@ -906,10 +879,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        19120,
-        4944
+        31024,
+        13648
       ],
-      "id": "0c0ae4a6-0f9e-4733-8109-8f234e7caaf1",
+      "id": "ebf9ebbe-34fd-495c-b366-42ff74649df4",
       "name": "Code in JavaScript6"
     },
     {
@@ -923,10 +896,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        19312,
-        4944
+        31216,
+        13648
       ],
-      "id": "0523a611-d9b3-47e4-b930-d235a1962bd4",
+      "id": "bc94f23e-6d0c-4cf3-ac9f-cb65887afc87",
       "name": "Lookup nombre punto atencion",
       "alwaysOutputData": true,
       "credentials": {
@@ -963,10 +936,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        21648,
-        3664
+        33760,
+        12368
       ],
-      "id": "ed49a6a3-a6e4-4639-a195-b0b4e8981106",
+      "id": "ce67a0ee-6e0e-4002-bad3-2bbf44eee435",
       "name": "If"
     },
     {
@@ -980,10 +953,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        17840,
-        3856
+        29744,
+        12560
       ],
-      "id": "90b2bc1c-76ac-41ea-b04c-80b2d6e6c7e2",
+      "id": "113873dc-2b34-4f67-af08-bde6b1f5bef2",
       "name": "guardar estado4",
       "credentials": {
         "redis": {
@@ -1003,10 +976,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        19504,
-        4944
+        31408,
+        13648
       ],
-      "id": "6da94871-68f5-40a4-929c-8eb59e57ad58",
+      "id": "372ccc63-72d6-49c1-9be6-562849950055",
       "name": "guardar estado5",
       "credentials": {
         "redis": {
@@ -1026,10 +999,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        20016,
-        4736
+        31920,
+        13440
       ],
-      "id": "14813aae-f983-418a-b7f5-088461a5d5e1",
+      "id": "5430a907-f2a5-4aab-9d9a-5bf4898a56a2",
       "name": "Send message1",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -1048,10 +1021,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        20224,
-        3664
+        32128,
+        12368
       ],
-      "id": "ac44d5a1-702e-4a8b-b741-b01524ae8bea",
+      "id": "6db8ed1f-9904-4a2d-b531-db8c9e9f76ff",
       "name": "Consultar Punto de atencion",
       "executeOnce": true,
       "alwaysOutputData": true,
@@ -1091,10 +1064,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        20048,
-        3664
+        31952,
+        12368
       ],
-      "id": "b51f549a-d063-40ac-8076-b65a1690c24d",
+      "id": "20f594da-10fe-470f-97aa-f124294bb4ef",
       "name": "Contrato Empresa",
       "executeOnce": true,
       "credentials": {
@@ -1113,10 +1086,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        18256,
-        4384
+        30160,
+        13088
       ],
-      "id": "2bafd047-93c6-47ad-87d3-557320a95954",
+      "id": "7a7f6efa-0593-4f19-9f95-b8bf56acad29",
       "name": "Execute a SQL query",
       "credentials": {
         "postgres": {
@@ -1132,10 +1105,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18080,
-        4384
+        29984,
+        13088
       ],
-      "id": "7cd6acc4-5671-4029-94bd-b437f334ea02",
+      "id": "831e18cb-2c1e-4030-9156-11cdb3233bcd",
       "name": "Code in JavaScript9"
     },
     {
@@ -1145,10 +1118,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18448,
-        4384
+        30352,
+        13088
       ],
-      "id": "9c2c8f17-f822-40a9-912f-002aed700d1c",
+      "id": "dd3e3522-27f3-4213-a518-1bec105715e1",
       "name": "Code in JavaScript10"
     },
     {
@@ -1166,10 +1139,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        18672,
-        4384
+        30576,
+        13088
       ],
-      "id": "d0b20d3b-1aa5-4c30-8293-47bb64a1cbe9",
+      "id": "d065c878-e2ba-463f-aca4-d60ff4215f39",
       "name": "Puntos de atencion",
       "credentials": {
         "whatsAppApi": {
@@ -1189,10 +1162,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        17856,
-        4384
+        29760,
+        13088
       ],
-      "id": "9560d7d8-0101-46f5-ae11-2ba6979c7379",
+      "id": "3fa4de5b-034a-4694-b54e-c10b28011957",
       "name": "guardar estado6",
       "credentials": {
         "redis": {
@@ -1212,10 +1185,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        21984,
-        3776
+        34096,
+        12480
       ],
-      "id": "c4b00e00-4a26-4f7a-baf2-ce5802fecfcd",
+      "id": "bb6e097d-e216-42d8-9a89-ac749e3988b0",
       "name": "guardar estado pedir telefono",
       "credentials": {
         "redis": {
@@ -1231,10 +1204,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        17952,
-        5184
+        29856,
+        13888
       ],
-      "id": "f8522790-3c32-4411-a035-0637e3c20cc9",
+      "id": "69b91943-bcf8-4702-82a5-5f793e7a002d",
       "name": "Preparar Datos Flow Registro"
     },
     {
@@ -1244,10 +1217,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18176,
-        5184
+        30080,
+        13888
       ],
-      "id": "c2531ed9-c133-4c3f-8645-983748770f3a",
+      "id": "c7c7237b-b9cd-4ab7-aa88-e76d79faef27",
       "name": "Preparar datos registro"
     },
     {
@@ -1272,10 +1245,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        18400,
-        5184
+        30304,
+        13888
       ],
-      "id": "9cfb2ee4-93de-4e9e-ab60-5ccd14b0beb3",
+      "id": "e9ee1f20-adc0-4c60-9c48-d7b0b0cddd21",
       "name": "Call 'OBTENER TOKEN ZEUS' for Registro",
       "executeOnce": true
     },
@@ -1358,10 +1331,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        18656,
-        5184
+        30560,
+        13888
       ],
-      "id": "5b0b0f56-6a56-431c-a306-2829a63a5ef4",
+      "id": "c973cfb2-791c-4b07-934e-b2c5e83c5a43",
       "name": "Registrar en Zeus"
     },
     {
@@ -1392,10 +1365,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        18944,
-        5184
+        30848,
+        13888
       ],
-      "id": "72c63985-ac61-46dc-b1c8-8cd4e1145ef3",
+      "id": "2ff7d4b8-00bf-45e0-bca7-5cabf21e3584",
       "name": "If Registro exitoso"
     },
     {
@@ -1405,10 +1378,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        19312,
-        5168
+        31216,
+        13872
       ],
-      "id": "f16ac85f-c783-4047-88f1-b50322409dd5",
+      "id": "2d7c6180-fde8-4fff-b137-df20835dc48e",
       "name": "Continuar tras registro"
     },
     {
@@ -1422,10 +1395,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        19312,
-        5344
+        31216,
+        14048
       ],
-      "id": "7615d794-39d8-490d-8438-0bc6025447c6",
+      "id": "678efc4a-999a-4976-ae80-6cb53f0e7084",
       "name": "Error registro Zeus",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
@@ -1457,10 +1430,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        17936,
-        4944
+        29840,
+        13648
       ],
-      "id": "5667a5b1-e07e-40fd-b110-65602d15c8f5",
+      "id": "3c41fca4-8f27-4746-99e9-42a1028b5723",
       "name": "Call 'OBTENER TOKEN ZEUS' for Agenda1",
       "executeOnce": true
     },
@@ -1492,10 +1465,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        18112,
-        4608
+        30016,
+        13312
       ],
-      "id": "91e908a5-8ddc-466e-a5a4-1645d5382a54",
+      "id": "e5437251-7c3d-450a-beef-c421a64d098d",
       "name": "If Programacion Valida"
     },
     {
@@ -1509,10 +1482,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        18416,
-        4752
+        30320,
+        13456
       ],
-      "id": "c73bfd93-aa87-462d-8d33-caea342e2b09",
+      "id": "127d19b5-d5f2-43db-8cd2-2f1a0bff0292",
       "name": "Mensaje Rango Invalido",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -1527,10 +1500,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        17856,
-        4032
+        29760,
+        12736
       ],
-      "id": "cfae4247-1c3b-45cf-ab7c-757c39b7e3ee",
+      "id": "6448dcdb-c38e-486d-8c5d-e710c2e999aa",
       "name": "continuar_sin_id_fin1"
     },
     {
@@ -1538,10 +1511,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        17856,
-        4208
+        29760,
+        12912
       ],
-      "id": "3937e2b7-91b0-4f47-9178-e6fe10da85b4",
+      "id": "35c5f378-3876-4d58-a965-8892a89d4840",
       "name": "esperando_datos_registro_fin1"
     },
     {
@@ -1551,10 +1524,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18112,
-        3856
+        30016,
+        12560
       ],
-      "id": "41202da7-e25f-46bc-a3d8-6441727c0d4f",
+      "id": "caae0813-601f-4bc4-999d-93931d162aa5",
       "name": "Validar ID Servicio1"
     },
     {
@@ -1568,10 +1541,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        19552,
-        5168
+        31456,
+        13872
       ],
-      "id": "dc3bae28-49db-47d0-9bcc-4fec378fe8db",
+      "id": "627e65dd-f9e5-4670-8e04-ed20cd28e3c5",
       "name": "guardar estado12",
       "credentials": {
         "redis": {
@@ -1607,10 +1580,10 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        20448,
-        3664
+        32352,
+        12368
       ],
-      "id": "5e5314b9-859b-4230-86d7-4336baf44fb9",
+      "id": "e23933f3-20d0-4b2d-afc0-2e81b6e310a2",
       "name": "Consultar regimen",
       "executeOnce": true,
       "credentials": {
@@ -1628,10 +1601,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        19600,
-        5344
+        31504,
+        14048
       ],
-      "id": "33d576a7-00d9-4581-ada7-04d859eaec6c",
+      "id": "bca47607-50f0-41fa-8cbf-e3f36fb8aee1",
       "name": "Redis",
       "credentials": {
         "redis": {
@@ -1668,10 +1641,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        19696,
-        3504
+        31600,
+        12208
       ],
-      "id": "6eca769b-8d71-4e9c-8f40-12721602499a",
+      "id": "d70aa142-1205-4158-8f0b-548f1ece06af",
       "name": "If3"
     },
     {
@@ -1685,10 +1658,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        19920,
-        3376
+        31824,
+        12080
       ],
-      "id": "12212546-ad71-43ab-9991-30ffd292b6d0",
+      "id": "5bfeb55b-5ce7-48e6-9a25-3fda64ab17e1",
       "name": "Sin servicios habilitados",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
@@ -1706,10 +1679,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        20128,
-        3376
+        32032,
+        12080
       ],
-      "id": "baf4fc93-e4fb-4ed4-9ced-c6b380ebff4c",
+      "id": "eccb319f-a300-4d91-8520-cf27c466e39c",
       "name": "Redis4",
       "credentials": {
         "redis": {
@@ -1725,10 +1698,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        17856,
-        4608
+        29760,
+        13312
       ],
-      "id": "ac27ffc1-ab58-4ad5-b6c2-491fb809c60c",
+      "id": "d5832d47-8606-48d0-abcd-e87a454dfa7f",
       "name": "Code in JavaScript7"
     },
     {
@@ -1738,10 +1711,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        20928,
-        3664
+        32832,
+        12368
       ],
-      "id": "5d60c629-53c0-4c71-8c5c-6693a0f22853",
+      "id": "6ca838c3-5d86-4ef4-b1e8-03ba5e99cbf5",
       "name": "Code in JavaScript21"
     },
     {
@@ -1755,10 +1728,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        17552,
-        6608
+        29456,
+        15312
       ],
-      "id": "c0254f95-aa31-499e-b2f4-8504f16fb506",
+      "id": "a00b130b-0404-478b-9ec0-9e8894ad1741",
       "name": "Mensaje Fallback Que Hacer",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
@@ -1776,10 +1749,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        18928,
-        3664
+        30832,
+        12368
       ],
-      "id": "339e60c7-b1bd-4de4-9529-d88caabfb390",
+      "id": "2c1a0834-ab40-4f19-90f5-79d798b26a1a",
       "name": "Redis5",
       "credentials": {
         "redis": {
@@ -1796,10 +1769,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        19264,
-        3264
+        31168,
+        11968
       ],
-      "id": "976f86c0-fd8a-46c2-b249-f75ce46bc7c5",
+      "id": "3384af09-78bf-4d68-9c7f-d49aa278bbfd",
       "name": "Redis6",
       "credentials": {
         "redis": {
@@ -1845,10 +1818,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        18272,
-        3216
+        30176,
+        11920
       ],
-      "id": "3cc28634-d9a5-4caf-95c0-d1a408001754",
+      "id": "455b4ed7-5f70-4b4b-a3cf-51652b7fe246",
       "name": "If Es Consulta"
     },
     {
@@ -1873,10 +1846,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        18576,
-        3056
+        30480,
+        11760
       ],
-      "id": "d7dc2046-c04f-4d19-83e1-a59a55f55955",
+      "id": "f28877eb-bb64-40b3-bfc1-f47d3299074c",
       "name": "Call 'OBTENER TOKEN ZEUS' for Consulta",
       "executeOnce": true
     },
@@ -1910,10 +1883,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        18832,
-        3056
+        30736,
+        11760
       ],
-      "id": "9a90ac0f-f04c-4360-b813-9af558d76d66",
+      "id": "bee31d4d-1304-408c-b847-54b75bf8feef",
       "name": "Consultar usuario Zeus Consulta"
     },
     {
@@ -1943,10 +1916,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        19168,
-        2688
+        31072,
+        11392
       ],
-      "id": "e489778b-b313-40dd-b847-781ed4dc9345",
+      "id": "be4d2ec5-017a-455d-8ba4-08c4881ef549",
       "name": "If Paciente Existe Consulta"
     },
     {
@@ -1975,10 +1948,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        19392,
-        2512
+        31296,
+        11216
       ],
-      "id": "78644667-a854-4f28-963e-eb7dfb51ef12",
+      "id": "784e7d16-364d-4557-b2a1-bf9ff0d2135c",
       "name": "GET Citas Paciente"
     },
     {
@@ -1988,10 +1961,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        19616,
-        2512
+        31520,
+        11216
       ],
-      "id": "afa31bea-f4ce-4abb-aaa8-39444300c426",
+      "id": "5fece4ac-dd21-4563-937d-78328680f8b3",
       "name": "Procesar Respuesta Citas"
     },
     {
@@ -2022,10 +1995,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        19840,
-        2512
+        31744,
+        11216
       ],
-      "id": "c148396a-cf84-4315-892e-599cd69c4f5e",
+      "id": "1bf43399-d356-472d-a27f-b91c78acb1fa",
       "name": "If Tiene Citas"
     },
     {
@@ -2035,10 +2008,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        20576,
-        2448
+        32480,
+        11152
       ],
-      "id": "097e204d-c52a-45dd-8b9a-5e16ea87c53e",
+      "id": "a94b6b78-5eb2-4a13-bd0b-7655143cb9cb",
       "name": "Formatear Lista Citas"
     },
     {
@@ -2052,10 +2025,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        21104,
-        2160
+        33008,
+        10864
       ],
-      "id": "caeab4bf-d5d5-43e1-a794-4e131dc1aa90",
+      "id": "4764753f-6691-4f60-a04a-b04745f8353f",
       "name": "Guardar_Identificado_DetallesCita",
       "credentials": {
         "redis": {
@@ -2075,10 +2048,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        20192,
-        2656
+        32096,
+        11360
       ],
-      "id": "050126ee-83a8-4fed-963f-5ab3a40c2a25",
+      "id": "d489b295-fbe4-4d3b-96d3-91c7a82ad48e",
       "name": "Mensaje Sin Citas",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
@@ -2099,10 +2072,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        20400,
-        2656
+        32304,
+        11360
       ],
-      "id": "fe4fa6c3-1ef3-4f7d-aab7-1aaf0050cb7e",
+      "id": "e0d49851-a97b-4eae-a390-63125f78d53a",
       "name": "Guardar_Identificado_SinCitas",
       "credentials": {
         "redis": {
@@ -2122,10 +2095,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        19408,
-        2800
+        31312,
+        11504
       ],
-      "id": "de8c8ebe-9347-4622-aa7a-bd13019b899f",
+      "id": "ef24baf0-e3d8-4b0b-a15b-71470920e843",
       "name": "Mensaje No Registrado Consulta",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
@@ -2143,10 +2116,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        19632,
-        2800
+        31536,
+        11504
       ],
-      "id": "4741012f-e68c-4da8-9e97-ffea412bb296",
+      "id": "a1663470-97d0-43eb-81c6-648fe32e9a29",
       "name": "Redis Fin No Registrado",
       "credentials": {
         "redis": {
@@ -2183,10 +2156,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        20192,
-        2320
+        32096,
+        11024
       ],
-      "id": "728735c6-fee4-47c8-8e76-562c5b256ffe",
+      "id": "28032a04-c1e4-4d48-8c3b-c69e9ef7f694",
       "name": "If6"
     },
     {
@@ -2200,10 +2173,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        21344,
-        2448
+        33248,
+        11152
       ],
-      "id": "d597c34a-3171-4416-8328-8379f4f2db00",
+      "id": "491ce95c-402d-44b6-862b-167f0a4ffab1",
       "name": "guardar estado7",
       "credentials": {
         "redis": {
@@ -2233,10 +2206,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        18992,
-        5696
+        30896,
+        14400
       ],
-      "id": "c4807a7b-8a36-41d1-bc46-cba594ac4aaa",
+      "id": "6c6e256a-38e7-414f-a221-758ca47902b5",
       "name": "HTTP Request1"
     },
     {
@@ -2261,10 +2234,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        17968,
-        5376
+        29872,
+        14080
       ],
-      "id": "2740ae48-cb51-48c3-893d-58428a2fda5f",
+      "id": "62b82f49-da19-4824-a91f-c5d8d87b72ff",
       "name": "Call 'OBTENER TOKEN ZEUS' for Agenda",
       "executeOnce": true
     },
@@ -2275,10 +2248,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        20832,
-        2448
+        32736,
+        11152
       ],
-      "id": "13ecd7fd-effd-4807-b6b1-9400ac1b66a5",
+      "id": "6ea295f4-9d6b-4b48-9599-c02ed34e43a2",
       "name": "Code in JavaScript8"
     },
     {
@@ -2288,10 +2261,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18384,
-        5504
+        30288,
+        14208
       ],
-      "id": "db3f6a04-77bd-4254-9f0c-1ef64d037d36",
+      "id": "7d03658a-efbc-49cb-9e7d-50aab4f1ff76",
       "name": "Filtrar cita seleccionada"
     },
     {
@@ -2322,10 +2295,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        18736,
-        5504
+        30640,
+        14208
       ],
-      "id": "22a26f99-9583-4009-a505-ac6e0177aa5c",
+      "id": "c41e1d75-56f2-48f9-83bc-efd5593e6a55",
       "name": "If7"
     },
     {
@@ -2339,10 +2312,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        19040,
-        5488
+        30944,
+        14192
       ],
-      "id": "08f9dff0-0b25-4853-a142-9255f63f300c",
+      "id": "6d8d696f-f3eb-48ec-9da3-578977e893b7",
       "name": "Mensaje error cita",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -2363,10 +2336,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        19760,
-        5696
+        31664,
+        14400
       ],
-      "id": "727ab223-f85b-4ad6-a286-3d1ef9bdbbce",
+      "id": "ec1848d5-e0db-4fee-a0a3-184e2028c9c5",
       "name": "Guardar_Identificado_CancelaCita",
       "credentials": {
         "redis": {
@@ -2386,10 +2359,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        19280,
-        5696
+        31184,
+        14400
       ],
-      "id": "3c262fc8-96e2-4e5e-a851-eabf4323a4c1",
+      "id": "5bce1572-a4e0-47fd-a1ff-d9f8bb52fa31",
       "name": "Mensaje confirmación cita",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -2406,10 +2379,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18416,
-        4592
+        30320,
+        13296
       ],
-      "id": "ae09ccc3-c3cb-48aa-a012-24b8f6b0044b",
+      "id": "8f742641-c4a7-4cdf-bfe6-8b4e060a1b46",
       "name": "Preparar_Confirmacion"
     },
     {
@@ -2423,10 +2396,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        18688,
-        4592
+        30592,
+        13296
       ],
-      "id": "fbc68a43-d3e2-49c7-af2d-5d4188b37023",
+      "id": "a4fac40b-65b7-4c4b-9eab-f503174a7036",
       "name": "guardar_estado_confirmacion",
       "credentials": {
         "redis": {
@@ -2446,10 +2419,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        19952,
-        4384
+        31856,
+        13088
       ],
-      "id": "61b3a08c-9874-4776-827c-7e3b8a5b4701",
+      "id": "acff6ade-8fe3-4011-8a6c-04c30a4dd2c5",
       "name": "Mensaje_Pedir_Confirmacion",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -2467,10 +2440,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18112,
-        5968
+        30016,
+        14672
       ],
-      "id": "2ad2a329-a127-49ab-b29c-9360ccea5601",
+      "id": "09d48efd-06b8-46f3-b142-0c030fe5451b",
       "name": "Verificar_Si_Confirmado"
     },
     {
@@ -2501,10 +2474,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        18448,
-        5968
+        30352,
+        14672
       ],
-      "id": "3d204e95-283d-41a7-a28a-9e941867f8c5",
+      "id": "cc4b5537-a6e1-49b2-b180-1b188aa8acef",
       "name": "If_Confirmado"
     },
     {
@@ -2529,10 +2502,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        18672,
-        5872
+        30576,
+        14576
       ],
-      "id": "b00f5ce4-8aef-448a-b8d6-c465476d626a",
+      "id": "e113d80b-76c3-4b45-b62e-e687ec6355da",
       "name": "Call_Token_Confirmacion",
       "executeOnce": true
     },
@@ -2543,10 +2516,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        19008,
-        5872
+        30912,
+        14576
       ],
-      "id": "6e3d7275-8508-4700-8363-c1ebc98ec5eb",
+      "id": "7b03f825-7154-421d-80d3-07a10ab60bc0",
       "name": "Preparar_datos_desde_confirmacion"
     },
     {
@@ -2576,10 +2549,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        19280,
-        5872
+        31184,
+        14576
       ],
-      "id": "82c23827-f55c-499a-bad8-951960b9e08a",
+      "id": "082b1534-3479-466a-8ac7-17dd27418ed6",
       "name": "Agendar_en_Zeus_Confirmacion"
     },
     {
@@ -2610,10 +2583,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        19776,
-        5872
+        31680,
+        14576
       ],
-      "id": "9e829c0d-7650-483e-b960-c80609de6ab5",
+      "id": "a72bb72b-fb53-4759-a8a1-36bc2a6e15c2",
       "name": "If_Exito_Confirmacion"
     },
     {
@@ -2627,10 +2600,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        20192,
-        5824
+        32096,
+        14528
       ],
-      "id": "090e2fb2-85f5-41c7-ba5b-0933c349c8b6",
+      "id": "228fdd1f-ba60-48d9-bfb2-d81c0b4c6e9f",
       "name": "Enviar_Exito_Confirmacion",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -2651,10 +2624,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        20432,
-        5824
+        32336,
+        14528
       ],
-      "id": "fdc6514f-2388-4483-9f72-1c7bac82cdcc",
+      "id": "e890371a-1dfd-4d8e-b08d-82ed51fa996b",
       "name": "Guardar_Identificado_Confirmacion",
       "credentials": {
         "redis": {
@@ -2674,10 +2647,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        20112,
-        6048
+        32016,
+        14752
       ],
-      "id": "69fd31a2-df40-4d03-be47-3669cf60618a",
+      "id": "86aa7838-6b48-40bc-b33a-be07225d45a1",
       "name": "Enviar_Error_Confirmacion",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -2698,10 +2671,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        18688,
-        6144
+        30592,
+        14848
       ],
-      "id": "b91d5abb-61bd-4c7c-9e6b-74356629cc91",
+      "id": "7077006a-5408-4b3d-9a5b-609291067b06",
       "name": "Msg_Cita_Rechazada",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -2722,10 +2695,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        18944,
-        6144
+        30848,
+        14848
       ],
-      "id": "2e1b8d8e-7daa-44f6-b94b-db07e5d0b80c",
+      "id": "fdbd6d1e-4e83-4237-bc62-8f24dec5b16e",
       "name": "Guardar_Identificado_Rechazo",
       "credentials": {
         "redis": {
@@ -2745,10 +2718,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        17648,
-        6368
+        29552,
+        15072
       ],
-      "id": "c556ed74-385c-4cdb-b6dc-6b13b7865025",
+      "id": "407c31d6-f436-43d7-b8b5-bcffd4a05df3",
       "name": "Guardar_Identificado_Cancel",
       "credentials": {
         "redis": {
@@ -2768,10 +2741,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        17920,
-        6512
+        29824,
+        15216
       ],
-      "id": "69721615-d18b-47b3-8e3f-ec6fa56dc9bd",
+      "id": "f0460cdf-6e9f-438a-bf93-45c300a03ad8",
       "name": "Mensaje_Cancelacion",
       "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
       "credentials": {
@@ -2792,10 +2765,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        21984,
-        3520
+        34096,
+        12224
       ],
-      "id": "54cb0fa6-b988-43cd-931d-8aec0f2f689d",
+      "id": "0a90bc7f-12c7-493e-99a0-6d578590c050",
       "name": "guardar estado confirmacion identidad",
       "credentials": {
         "redis": {
@@ -2819,10 +2792,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        22192,
-        3520
+        34304,
+        12224
       ],
-      "id": "c34a8554-14c8-47ba-a1ad-da870b4a9b50",
+      "id": "d4c1b6b5-706f-42c8-baad-1077be05487f",
       "name": "Preguntar confirmacion identidad",
       "credentials": {
         "whatsAppApi": {
@@ -2858,10 +2831,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        17408,
-        6864
+        29312,
+        15568
       ],
-      "id": "4cb0fa0a-1ee2-471d-a553-d950f2fad8ca",
+      "id": "291b010b-d9ce-4443-9d15-f06457b2607c",
       "name": "If Confirmacion Identidad"
     },
     {
@@ -2871,10 +2844,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        21392,
-        3664
+        33504,
+        12368
       ],
-      "id": "d165b17c-6fdf-4a73-bb24-791850a78930",
+      "id": "fca2e0b8-cf01-4727-b1f8-491cb1a3722c",
       "name": "Listar puntos atencion"
     },
     {
@@ -2884,10 +2857,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        19840,
-        3664
+        31744,
+        12368
       ],
-      "id": "28ee2171-3229-4e3c-acbf-464830724e2e",
+      "id": "f0963414-33e7-422c-8923-522e08bbb39e",
       "name": "Listar especialidades"
     },
     {
@@ -2897,10 +2870,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        17712,
-        2768
+        29712,
+        11472
       ],
-      "id": "29bc058d-f0b0-401c-b2c3-40fee3254847",
+      "id": "7a5cc530-df75-4c9e-965b-83b82d5171a3",
       "name": "Code in JavaScript11"
     },
     {
@@ -2910,10 +2883,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        22192,
-        3776
+        34304,
+        12480
       ],
-      "id": "c868c891-3825-4044-8d05-3167eaa01353",
+      "id": "946d8021-c549-4833-85ec-c7d1604a803b",
       "name": "Code in JavaScript12"
     },
     {
@@ -2931,10 +2904,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        22480,
-        3776
+        34592,
+        12480
       ],
-      "id": "2ab24b13-6ad3-4943-9d96-038bff6e4421",
+      "id": "b46e3d98-a94b-4dad-a000-834753e44c54",
       "name": "Datos registro",
       "credentials": {
         "whatsAppApi": {
@@ -2971,10 +2944,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        21472,
-        5168
+        33376,
+        13872
       ],
-      "id": "92bbc760-4755-48e5-bddc-1e28e872419b",
+      "id": "59bd8af2-1f8e-4961-913c-908b13f8c835",
       "name": "If1"
     },
     {
@@ -2988,10 +2961,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        21680,
-        5072
+        33584,
+        13776
       ],
-      "id": "ab79d962-15e1-4bfc-b7d3-85cf35c06552",
+      "id": "ef49a57c-100c-46ab-9dfc-1b5c6985da2c",
       "name": "Send message",
       "webhookId": "3c4cd9da-5851-4a53-a123-b498b52fc995",
       "credentials": {
@@ -3009,10 +2982,10 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        21856,
-        5040
+        33760,
+        13744
       ],
-      "id": "11d264cd-0c87-41b8-9166-d461f0b571e8",
+      "id": "23085903-2fcf-4a11-a5c7-1a60d7ca8c5a",
       "name": "Redis1",
       "credentials": {
         "redis": {
@@ -3036,10 +3009,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        19776,
-        4944
+        31680,
+        13648
       ],
-      "id": "da4f4387-2e75-4e2a-92a9-61d371836c35",
+      "id": "d18884b8-af64-4180-95e9-e47192fdbe81",
       "name": "agendas",
       "credentials": {
         "whatsAppApi": {
@@ -3055,10 +3028,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        18928,
-        4592
+        30832,
+        13296
       ],
-      "id": "0cde928e-f6c7-4cc5-a779-c9fd180c71a6",
+      "id": "cf576444-d5cc-4f01-b0f7-d35c84e4ef19",
       "name": "Preparar_Confirmacion1"
     },
     {
@@ -3076,10 +3049,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        19168,
-        4592
+        31072,
+        13296
       ],
-      "id": "ced1189d-42b6-4745-ab19-2f459ba29a5d",
+      "id": "420a1ca6-f34e-43db-be39-6cccb248321a",
       "name": "Confirmacion_Cita",
       "credentials": {
         "whatsAppApi": {
@@ -3099,10 +3072,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        19072,
-        3264
+        30976,
+        11968
       ],
-      "id": "e599270c-0e00-47de-9a18-42c00bfa9605",
+      "id": "bdf74d65-a3b8-4687-964c-9552545d5f55",
       "name": "Error validador de derechos",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
@@ -3145,10 +3118,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        19488,
-        5872
+        31392,
+        14576
       ],
-      "id": "b58317dc-1439-4a4e-bf86-89e4429a4179",
+      "id": "0eff93e2-f3bc-4995-a1e5-78e5f563fd3b",
       "name": "Switch"
     },
     {
@@ -3162,10 +3135,10 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        18720,
-        3664
+        30624,
+        12368
       ],
-      "id": "30d7054c-9409-47a9-8fa9-15a2d2e13893",
+      "id": "f5fe2577-d7c2-41a4-9c6c-e86fdd01b0e7",
       "name": "Error Validacion datos",
       "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
       "credentials": {
@@ -3190,10 +3163,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        20832,
-        2160
+        32736,
+        10864
       ],
-      "id": "de1f73ac-c7e1-4b91-80f9-725d763fd8fb",
+      "id": "0e097f3e-99e9-4026-b140-2f16d6e57e82",
       "name": "Lista de citas agendadas",
       "credentials": {
         "whatsAppApi": {
@@ -3217,10 +3190,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        21072,
-        2448
+        32976,
+        11152
       ],
-      "id": "e626443c-6159-4f2c-8949-9857b705864a",
+      "id": "8e88cca6-134b-4d0f-857f-0de42881f407",
       "name": "Lista de citas agendadas1",
       "credentials": {
         "whatsAppApi": {
@@ -3236,10 +3209,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        20560,
-        2160
+        32464,
+        10864
       ],
-      "id": "e06d0dbe-4b42-4fb7-a6de-8bcb13fe8759",
+      "id": "d33bbd7c-bb4e-4800-8776-585bc83c83aa",
       "name": "Formatear Lista Citas1"
     },
     {
@@ -3249,11 +3222,51 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        17520,
-        6032
+        29424,
+        14736
       ],
-      "id": "5ccbddfd-a885-4b0b-bc5c-aac96af79953",
+      "id": "386bf356-784b-4b51-bac8-50ed1440eda9",
       "name": "Preparar Accion Ya ID"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.payload) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        30000,
+        11472
+      ],
+      "id": "1b7e4976-3103-49c6-8e7b-d5984bddf5c8",
+      "name": "PEDIR_IDENTIFICACION",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "aTnctNBGMIYI6D7P",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        33040,
+        12368
+      ],
+      "id": "2a92f474-a6a3-44d4-a229-8a8444ed7827",
+      "name": "Code in JavaScript1"
     }
   ],
   "connections": {
@@ -3947,7 +3960,7 @@
       "main": [
         [
           {
-            "node": "Consultar usuario en Zeus",
+            "node": "Code in JavaScript1",
             "type": "main",
             "index": 0
           }
@@ -4348,7 +4361,7 @@
       "main": [
         [
           {
-            "node": "PEDIR_TIPO_DOC",
+            "node": "PEDIR_IDENTIFICACION",
             "type": "main",
             "index": 0
           }
@@ -4482,6 +4495,17 @@
           }
         ]
       ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Consultar usuario en Zeus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -4496,7 +4520,7 @@
     "When Executed by Another Workflow": [
       {
         "json": {
-          "mensaje": "  Agendar otra cita ",
+          "mensaje": "  quiero agendar otra cita ",
           "intent": "agendar",
           "telefono": "573205943893",
           "raw": "***REDACTED***",
@@ -4512,9 +4536,9 @@
       }
     ]
   },
-  "versionId": "dd0a08d0-543b-4112-993d-0eb59803d98c",
-  "activeVersionId": "dd0a08d0-543b-4112-993d-0eb59803d98c",
-  "versionCounter": 5112,
+  "versionId": "940a910c-d2c2-462c-af4b-dcf19c917af4",
+  "activeVersionId": "940a910c-d2c2-462c-af4b-dcf19c917af4",
+  "versionCounter": 5412,
   "triggerCount": 0,
   "shared": [
     {
@@ -4539,7 +4563,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-15T08:32:07.961Z",
+              "updatedAt": "2026-05-22T05:02:36.429Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -4572,7 +4596,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-15",
+              "lastActiveAt": "2026-05-22",
               "isPending": false
             }
           }
@@ -4595,9 +4619,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-15T22:59:36.349Z",
-    "createdAt": "2026-05-15T22:59:27.166Z",
-    "versionId": "dd0a08d0-543b-4112-993d-0eb59803d98c",
+    "updatedAt": "2026-05-20T22:04:01.054Z",
+    "createdAt": "2026-05-20T22:03:57.606Z",
+    "versionId": "940a910c-d2c2-462c-af4b-dcf19c917af4",
     "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
     "nodes": [
       {
@@ -4625,10 +4649,10 @@
         "type": "n8n-nodes-base.executeWorkflowTrigger",
         "typeVersion": 1.1,
         "position": [
-          16224,
-          4864
+          28128,
+          13568
         ],
-        "id": "8fe93ee4-704a-4cb2-8ef8-6166e035afc6",
+        "id": "f9d9ad6e-3e57-4d64-b586-d00352f7eff6",
         "name": "When Executed by Another Workflow"
       },
       {
@@ -4668,10 +4692,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          18576,
-          3328
+          30480,
+          12032
         ],
-        "id": "2b94090b-5eab-4808-9d74-356e387834fc",
+        "id": "d2a654e8-c4d6-4ff4-9756-b8fbe9bb0c05",
         "name": "Call 'VALIDAR DERECHOS DE USUARIO'",
         "onError": "continueErrorOutput"
       },
@@ -5034,38 +5058,11 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          17168,
-          4672
+          29072,
+          13376
         ],
-        "id": "2bdbe888-0bc5-44b9-9b60-1700a156a6b0",
+        "id": "3fd7c5ab-a13c-4ea2-9dd8-41bab178d874",
         "name": "Qué hacer"
-      },
-      {
-        "parameters": {
-          "method": "POST",
-          "url": "***REDACTED***",
-          "authentication": "predefinedCredentialType",
-          "nodeCredentialType": "whatsAppApi",
-          "sendBody": true,
-          "contentType": "raw",
-          "rawContentType": "application/json",
-          "body": "={{ JSON.stringify($json.payload) }}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.3,
-        "position": [
-          17968,
-          2768
-        ],
-        "id": "6a0065bc-74c1-426c-a7a2-4c9c3b18dea2",
-        "name": "PEDIR_TIPO_DOC",
-        "credentials": {
-          "whatsAppApi": {
-            "id": "aTnctNBGMIYI6D7P",
-            "name": "WhatsApp account"
-          }
-        }
       },
       {
         "parameters": {
@@ -5078,10 +5075,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          17504,
-          2768
+          29408,
+          11472
         ],
-        "id": "2bf4986f-0eac-43c7-bd12-0748f5b80736",
+        "id": "a6d32d93-6271-4ec5-942b-2a65739a7221",
         "name": "guardar estado",
         "credentials": {
           "redis": {
@@ -5112,10 +5109,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          20704,
-          3664
+          32608,
+          12368
         ],
-        "id": "ea584fc7-3d99-4382-a4e5-c41ad0092467",
+        "id": "0b6a3d63-8453-408d-a51b-571ecf51891b",
         "name": "Call 'OBTENER TOKEN ZEUS'",
         "executeOnce": true
       },
@@ -5134,10 +5131,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          21856,
-          5296
+          33760,
+          14000
         ],
-        "id": "bf9302b5-2089-4d06-86fc-93ddf13fa991",
+        "id": "1e36868a-0ecb-4c7f-8093-76e2c7cb7266",
         "name": "ESPECIALIDAD",
         "credentials": {
           "whatsAppApi": {
@@ -5174,10 +5171,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          18848,
-          3312
+          30752,
+          12016
         ],
-        "id": "ff1c1c06-641c-40cf-97e9-53f4b179ca83",
+        "id": "600da7a5-9982-449d-a232-b02f4a8f13b5",
         "name": "If2"
       },
       {
@@ -5210,10 +5207,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          21152,
-          3664
+          33264,
+          12368
         ],
-        "id": "ab9cf8d6-2d83-49b5-864b-8b38aa46c0b0",
+        "id": "0d4c8a68-f6d9-4f3d-83ee-bc019ef27f06",
         "name": "Consultar usuario en Zeus"
       },
       {
@@ -5227,10 +5224,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          21152,
-          6800
+          33056,
+          15504
         ],
-        "id": "ad98842b-11b2-4082-93ac-1e4e4b26d998",
+        "id": "298b0ba3-e74b-40b1-8c48-7934d5ee47b0",
         "name": "guardar estado2",
         "credentials": {
           "redis": {
@@ -5246,10 +5243,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          19088,
-          3504
+          30992,
+          12208
         ],
-        "id": "40ccfeaf-7670-49c1-84fe-9e9454411880",
+        "id": "1d4617e0-9553-4c19-8f2d-40aa7abf390d",
         "name": "VALIDAR CONTRATOS"
       },
       {
@@ -5262,10 +5259,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          16464,
-          4864
+          28368,
+          13568
         ],
-        "id": "38081ad0-5003-4d5a-bbb5-985bfab5e06f",
+        "id": "47b4bd38-2fe4-4b20-805e-92e2c9f4c689",
         "name": "Leer Estado Paciente",
         "credentials": {
           "redis": {
@@ -5281,10 +5278,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          16928,
-          4864
+          28832,
+          13568
         ],
-        "id": "80555a6b-acf0-44de-8beb-953a7b13688b",
+        "id": "31c543c2-7a35-4bbb-91ee-0ec60404193a",
         "name": "Verificar Identificación"
       },
       {
@@ -5294,10 +5291,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          17808,
-          6128
+          29712,
+          14832
         ],
-        "id": "154f3420-84c6-4098-8005-b84b800f2757",
+        "id": "5da18264-07ea-4d25-8a85-d5d164d8d6dc",
         "name": "Preparar Flow ID"
       },
       {
@@ -5307,10 +5304,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          16688,
-          4864
+          28592,
+          13568
         ],
-        "id": "5cd18888-1943-44a3-8f85-88cf0168a9ef",
+        "id": "a514fe5b-4621-4031-bf12-19e1254988b6",
         "name": "Preparar Contexto"
       },
       {
@@ -5320,10 +5317,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          19280,
-          3504
+          31184,
+          12208
         ],
-        "id": "28a27532-da61-4341-ab14-d9f134bf0f92",
+        "id": "67ede6d9-7468-4d6d-a127-adc4d2d758ab",
         "name": "Code in JavaScript2"
       },
       {
@@ -5333,10 +5330,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          21184,
-          5168
+          33088,
+          13872
         ],
-        "id": "7a82ab27-f853-420e-bd49-a6000ecb3d0e",
+        "id": "f2de88d8-9bd8-4573-8b32-0a550bd2b540",
         "name": "Code in JavaScript3"
       },
       {
@@ -5350,10 +5347,10 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          18336,
-          3856
+          30240,
+          12560
         ],
-        "id": "725e2ea5-cbd4-4964-8d62-7ffbe129590f",
+        "id": "aa97f2e4-15c1-4b45-b6e8-b62ecb7ed3d7",
         "name": "Consultar asuntos",
         "credentials": {
           "postgres": {
@@ -5371,10 +5368,10 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          19472,
-          3504
+          31376,
+          12208
         ],
-        "id": "5741e62f-fb7e-4b36-83f6-7b56f33ec22d",
+        "id": "33105603-1979-40f0-a3bc-0a1d90094083",
         "name": "consultar especialidad",
         "alwaysOutputData": true,
         "credentials": {
@@ -5391,10 +5388,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18528,
-          3856
+          30432,
+          12560
         ],
-        "id": "33b3eeae-3bba-4aa5-825e-d4e935261da5",
+        "id": "3fcec0a4-eedf-4112-8ffe-cb93919719c4",
         "name": "Code in JavaScript"
       },
       {
@@ -5412,10 +5409,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          18784,
-          3856
+          30688,
+          12560
         ],
-        "id": "b1469ce4-2edc-4ee6-914e-12a0af23239c",
+        "id": "c57521c8-a6d0-4e94-82f0-257c8d24ecf4",
         "name": "ASUNTOS",
         "credentials": {
           "whatsAppApi": {
@@ -5458,10 +5455,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          18544,
-          4944
+          30448,
+          13648
         ],
-        "id": "069e4223-64b9-4dea-a04e-1862015a7f8b",
+        "id": "1da8a7a9-b3bb-48b4-a8c4-e1e23c67b787",
         "name": "HTTP Request",
         "executeOnce": false,
         "continueOnFail": true
@@ -5473,10 +5470,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18144,
-          4944
+          30048,
+          13648
         ],
-        "id": "0a376888-8a79-4284-9deb-e1a8177a589c",
+        "id": "1c241122-8385-4508-b9a6-250e735ebabf",
         "name": "Code in JavaScript4"
       },
       {
@@ -5486,10 +5483,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18832,
-          4944
+          30736,
+          13648
         ],
-        "id": "c83d8910-56a7-4234-9ce5-9f0c50ddf8b0",
+        "id": "59a9067b-125a-45ac-a33b-d3c680e9d549",
         "name": "Code in JavaScript5"
       },
       {
@@ -5499,10 +5496,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          19120,
-          4944
+          31024,
+          13648
         ],
-        "id": "0c0ae4a6-0f9e-4733-8109-8f234e7caaf1",
+        "id": "ebf9ebbe-34fd-495c-b366-42ff74649df4",
         "name": "Code in JavaScript6"
       },
       {
@@ -5516,10 +5513,10 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          19312,
-          4944
+          31216,
+          13648
         ],
-        "id": "0523a611-d9b3-47e4-b930-d235a1962bd4",
+        "id": "bc94f23e-6d0c-4cf3-ac9f-cb65887afc87",
         "name": "Lookup nombre punto atencion",
         "alwaysOutputData": true,
         "credentials": {
@@ -5556,10 +5553,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          21648,
-          3664
+          33760,
+          12368
         ],
-        "id": "ed49a6a3-a6e4-4639-a195-b0b4e8981106",
+        "id": "ce67a0ee-6e0e-4002-bad3-2bbf44eee435",
         "name": "If"
       },
       {
@@ -5573,10 +5570,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          17840,
-          3856
+          29744,
+          12560
         ],
-        "id": "90b2bc1c-76ac-41ea-b04c-80b2d6e6c7e2",
+        "id": "113873dc-2b34-4f67-af08-bde6b1f5bef2",
         "name": "guardar estado4",
         "credentials": {
           "redis": {
@@ -5596,10 +5593,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          19504,
-          4944
+          31408,
+          13648
         ],
-        "id": "6da94871-68f5-40a4-929c-8eb59e57ad58",
+        "id": "372ccc63-72d6-49c1-9be6-562849950055",
         "name": "guardar estado5",
         "credentials": {
           "redis": {
@@ -5619,10 +5616,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          20016,
-          4736
+          31920,
+          13440
         ],
-        "id": "14813aae-f983-418a-b7f5-088461a5d5e1",
+        "id": "5430a907-f2a5-4aab-9d9a-5bf4898a56a2",
         "name": "Send message1",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -5641,10 +5638,10 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          20224,
-          3664
+          32128,
+          12368
         ],
-        "id": "ac44d5a1-702e-4a8b-b741-b01524ae8bea",
+        "id": "6db8ed1f-9904-4a2d-b531-db8c9e9f76ff",
         "name": "Consultar Punto de atencion",
         "executeOnce": true,
         "alwaysOutputData": true,
@@ -5684,10 +5681,10 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          20048,
-          3664
+          31952,
+          12368
         ],
-        "id": "b51f549a-d063-40ac-8076-b65a1690c24d",
+        "id": "20f594da-10fe-470f-97aa-f124294bb4ef",
         "name": "Contrato Empresa",
         "executeOnce": true,
         "credentials": {
@@ -5706,10 +5703,10 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          18256,
-          4384
+          30160,
+          13088
         ],
-        "id": "2bafd047-93c6-47ad-87d3-557320a95954",
+        "id": "7a7f6efa-0593-4f19-9f95-b8bf56acad29",
         "name": "Execute a SQL query",
         "credentials": {
           "postgres": {
@@ -5725,10 +5722,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18080,
-          4384
+          29984,
+          13088
         ],
-        "id": "7cd6acc4-5671-4029-94bd-b437f334ea02",
+        "id": "831e18cb-2c1e-4030-9156-11cdb3233bcd",
         "name": "Code in JavaScript9"
       },
       {
@@ -5738,10 +5735,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18448,
-          4384
+          30352,
+          13088
         ],
-        "id": "9c2c8f17-f822-40a9-912f-002aed700d1c",
+        "id": "dd3e3522-27f3-4213-a518-1bec105715e1",
         "name": "Code in JavaScript10"
       },
       {
@@ -5759,10 +5756,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          18672,
-          4384
+          30576,
+          13088
         ],
-        "id": "d0b20d3b-1aa5-4c30-8293-47bb64a1cbe9",
+        "id": "d065c878-e2ba-463f-aca4-d60ff4215f39",
         "name": "Puntos de atencion",
         "credentials": {
           "whatsAppApi": {
@@ -5782,10 +5779,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          17856,
-          4384
+          29760,
+          13088
         ],
-        "id": "9560d7d8-0101-46f5-ae11-2ba6979c7379",
+        "id": "3fa4de5b-034a-4694-b54e-c10b28011957",
         "name": "guardar estado6",
         "credentials": {
           "redis": {
@@ -5805,10 +5802,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          21984,
-          3776
+          34096,
+          12480
         ],
-        "id": "c4b00e00-4a26-4f7a-baf2-ce5802fecfcd",
+        "id": "bb6e097d-e216-42d8-9a89-ac749e3988b0",
         "name": "guardar estado pedir telefono",
         "credentials": {
           "redis": {
@@ -5824,10 +5821,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          17952,
-          5184
+          29856,
+          13888
         ],
-        "id": "f8522790-3c32-4411-a035-0637e3c20cc9",
+        "id": "69b91943-bcf8-4702-82a5-5f793e7a002d",
         "name": "Preparar Datos Flow Registro"
       },
       {
@@ -5837,10 +5834,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18176,
-          5184
+          30080,
+          13888
         ],
-        "id": "c2531ed9-c133-4c3f-8645-983748770f3a",
+        "id": "c7c7237b-b9cd-4ab7-aa88-e76d79faef27",
         "name": "Preparar datos registro"
       },
       {
@@ -5865,10 +5862,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          18400,
-          5184
+          30304,
+          13888
         ],
-        "id": "9cfb2ee4-93de-4e9e-ab60-5ccd14b0beb3",
+        "id": "e9ee1f20-adc0-4c60-9c48-d7b0b0cddd21",
         "name": "Call 'OBTENER TOKEN ZEUS' for Registro",
         "executeOnce": true
       },
@@ -5951,10 +5948,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          18656,
-          5184
+          30560,
+          13888
         ],
-        "id": "5b0b0f56-6a56-431c-a306-2829a63a5ef4",
+        "id": "c973cfb2-791c-4b07-934e-b2c5e83c5a43",
         "name": "Registrar en Zeus"
       },
       {
@@ -5985,10 +5982,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          18944,
-          5184
+          30848,
+          13888
         ],
-        "id": "72c63985-ac61-46dc-b1c8-8cd4e1145ef3",
+        "id": "2ff7d4b8-00bf-45e0-bca7-5cabf21e3584",
         "name": "If Registro exitoso"
       },
       {
@@ -5998,10 +5995,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          19312,
-          5168
+          31216,
+          13872
         ],
-        "id": "f16ac85f-c783-4047-88f1-b50322409dd5",
+        "id": "2d7c6180-fde8-4fff-b137-df20835dc48e",
         "name": "Continuar tras registro"
       },
       {
@@ -6015,10 +6012,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          19312,
-          5344
+          31216,
+          14048
         ],
-        "id": "7615d794-39d8-490d-8438-0bc6025447c6",
+        "id": "678efc4a-999a-4976-ae80-6cb53f0e7084",
         "name": "Error registro Zeus",
         "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
         "credentials": {
@@ -6050,10 +6047,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          17936,
-          4944
+          29840,
+          13648
         ],
-        "id": "5667a5b1-e07e-40fd-b110-65602d15c8f5",
+        "id": "3c41fca4-8f27-4746-99e9-42a1028b5723",
         "name": "Call 'OBTENER TOKEN ZEUS' for Agenda1",
         "executeOnce": true
       },
@@ -6085,10 +6082,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          18112,
-          4608
+          30016,
+          13312
         ],
-        "id": "91e908a5-8ddc-466e-a5a4-1645d5382a54",
+        "id": "e5437251-7c3d-450a-beef-c421a64d098d",
         "name": "If Programacion Valida"
       },
       {
@@ -6102,10 +6099,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          18416,
-          4752
+          30320,
+          13456
         ],
-        "id": "c73bfd93-aa87-462d-8d33-caea342e2b09",
+        "id": "127d19b5-d5f2-43db-8cd2-2f1a0bff0292",
         "name": "Mensaje Rango Invalido",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -6120,10 +6117,10 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          17856,
-          4032
+          29760,
+          12736
         ],
-        "id": "cfae4247-1c3b-45cf-ab7c-757c39b7e3ee",
+        "id": "6448dcdb-c38e-486d-8c5d-e710c2e999aa",
         "name": "continuar_sin_id_fin1"
       },
       {
@@ -6131,10 +6128,10 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          17856,
-          4208
+          29760,
+          12912
         ],
-        "id": "3937e2b7-91b0-4f47-9178-e6fe10da85b4",
+        "id": "35c5f378-3876-4d58-a965-8892a89d4840",
         "name": "esperando_datos_registro_fin1"
       },
       {
@@ -6144,10 +6141,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18112,
-          3856
+          30016,
+          12560
         ],
-        "id": "41202da7-e25f-46bc-a3d8-6441727c0d4f",
+        "id": "caae0813-601f-4bc4-999d-93931d162aa5",
         "name": "Validar ID Servicio1"
       },
       {
@@ -6161,10 +6158,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          19552,
-          5168
+          31456,
+          13872
         ],
-        "id": "dc3bae28-49db-47d0-9bcc-4fec378fe8db",
+        "id": "627e65dd-f9e5-4670-8e04-ed20cd28e3c5",
         "name": "guardar estado12",
         "credentials": {
           "redis": {
@@ -6200,10 +6197,10 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          20448,
-          3664
+          32352,
+          12368
         ],
-        "id": "5e5314b9-859b-4230-86d7-4336baf44fb9",
+        "id": "e23933f3-20d0-4b2d-afc0-2e81b6e310a2",
         "name": "Consultar regimen",
         "executeOnce": true,
         "credentials": {
@@ -6221,10 +6218,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          19600,
-          5344
+          31504,
+          14048
         ],
-        "id": "33d576a7-00d9-4581-ada7-04d859eaec6c",
+        "id": "bca47607-50f0-41fa-8cbf-e3f36fb8aee1",
         "name": "Redis",
         "credentials": {
           "redis": {
@@ -6261,10 +6258,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          19696,
-          3504
+          31600,
+          12208
         ],
-        "id": "6eca769b-8d71-4e9c-8f40-12721602499a",
+        "id": "d70aa142-1205-4158-8f0b-548f1ece06af",
         "name": "If3"
       },
       {
@@ -6278,10 +6275,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          19920,
-          3376
+          31824,
+          12080
         ],
-        "id": "12212546-ad71-43ab-9991-30ffd292b6d0",
+        "id": "5bfeb55b-5ce7-48e6-9a25-3fda64ab17e1",
         "name": "Sin servicios habilitados",
         "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
         "credentials": {
@@ -6299,10 +6296,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          20128,
-          3376
+          32032,
+          12080
         ],
-        "id": "baf4fc93-e4fb-4ed4-9ced-c6b380ebff4c",
+        "id": "eccb319f-a300-4d91-8520-cf27c466e39c",
         "name": "Redis4",
         "credentials": {
           "redis": {
@@ -6318,10 +6315,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          17856,
-          4608
+          29760,
+          13312
         ],
-        "id": "ac27ffc1-ab58-4ad5-b6c2-491fb809c60c",
+        "id": "d5832d47-8606-48d0-abcd-e87a454dfa7f",
         "name": "Code in JavaScript7"
       },
       {
@@ -6331,10 +6328,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          20928,
-          3664
+          32832,
+          12368
         ],
-        "id": "5d60c629-53c0-4c71-8c5c-6693a0f22853",
+        "id": "6ca838c3-5d86-4ef4-b1e8-03ba5e99cbf5",
         "name": "Code in JavaScript21"
       },
       {
@@ -6348,10 +6345,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          17552,
-          6608
+          29456,
+          15312
         ],
-        "id": "c0254f95-aa31-499e-b2f4-8504f16fb506",
+        "id": "a00b130b-0404-478b-9ec0-9e8894ad1741",
         "name": "Mensaje Fallback Que Hacer",
         "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
         "credentials": {
@@ -6369,10 +6366,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          18928,
-          3664
+          30832,
+          12368
         ],
-        "id": "339e60c7-b1bd-4de4-9529-d88caabfb390",
+        "id": "2c1a0834-ab40-4f19-90f5-79d798b26a1a",
         "name": "Redis5",
         "credentials": {
           "redis": {
@@ -6389,10 +6386,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          19264,
-          3264
+          31168,
+          11968
         ],
-        "id": "976f86c0-fd8a-46c2-b249-f75ce46bc7c5",
+        "id": "3384af09-78bf-4d68-9c7f-d49aa278bbfd",
         "name": "Redis6",
         "credentials": {
           "redis": {
@@ -6438,10 +6435,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          18272,
-          3216
+          30176,
+          11920
         ],
-        "id": "3cc28634-d9a5-4caf-95c0-d1a408001754",
+        "id": "455b4ed7-5f70-4b4b-a3cf-51652b7fe246",
         "name": "If Es Consulta"
       },
       {
@@ -6466,10 +6463,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          18576,
-          3056
+          30480,
+          11760
         ],
-        "id": "d7dc2046-c04f-4d19-83e1-a59a55f55955",
+        "id": "f28877eb-bb64-40b3-bfc1-f47d3299074c",
         "name": "Call 'OBTENER TOKEN ZEUS' for Consulta",
         "executeOnce": true
       },
@@ -6503,10 +6500,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          18832,
-          3056
+          30736,
+          11760
         ],
-        "id": "9a90ac0f-f04c-4360-b813-9af558d76d66",
+        "id": "bee31d4d-1304-408c-b847-54b75bf8feef",
         "name": "Consultar usuario Zeus Consulta"
       },
       {
@@ -6536,10 +6533,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          19168,
-          2688
+          31072,
+          11392
         ],
-        "id": "e489778b-b313-40dd-b847-781ed4dc9345",
+        "id": "be4d2ec5-017a-455d-8ba4-08c4881ef549",
         "name": "If Paciente Existe Consulta"
       },
       {
@@ -6568,10 +6565,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          19392,
-          2512
+          31296,
+          11216
         ],
-        "id": "78644667-a854-4f28-963e-eb7dfb51ef12",
+        "id": "784e7d16-364d-4557-b2a1-bf9ff0d2135c",
         "name": "GET Citas Paciente"
       },
       {
@@ -6581,10 +6578,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          19616,
-          2512
+          31520,
+          11216
         ],
-        "id": "afa31bea-f4ce-4abb-aaa8-39444300c426",
+        "id": "5fece4ac-dd21-4563-937d-78328680f8b3",
         "name": "Procesar Respuesta Citas"
       },
       {
@@ -6615,10 +6612,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          19840,
-          2512
+          31744,
+          11216
         ],
-        "id": "c148396a-cf84-4315-892e-599cd69c4f5e",
+        "id": "1bf43399-d356-472d-a27f-b91c78acb1fa",
         "name": "If Tiene Citas"
       },
       {
@@ -6628,10 +6625,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          20576,
-          2448
+          32480,
+          11152
         ],
-        "id": "097e204d-c52a-45dd-8b9a-5e16ea87c53e",
+        "id": "a94b6b78-5eb2-4a13-bd0b-7655143cb9cb",
         "name": "Formatear Lista Citas"
       },
       {
@@ -6645,10 +6642,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          21104,
-          2160
+          33008,
+          10864
         ],
-        "id": "caeab4bf-d5d5-43e1-a794-4e131dc1aa90",
+        "id": "4764753f-6691-4f60-a04a-b04745f8353f",
         "name": "Guardar_Identificado_DetallesCita",
         "credentials": {
           "redis": {
@@ -6668,10 +6665,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          20192,
-          2656
+          32096,
+          11360
         ],
-        "id": "050126ee-83a8-4fed-963f-5ab3a40c2a25",
+        "id": "d489b295-fbe4-4d3b-96d3-91c7a82ad48e",
         "name": "Mensaje Sin Citas",
         "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
         "credentials": {
@@ -6692,10 +6689,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          20400,
-          2656
+          32304,
+          11360
         ],
-        "id": "fe4fa6c3-1ef3-4f7d-aab7-1aaf0050cb7e",
+        "id": "e0d49851-a97b-4eae-a390-63125f78d53a",
         "name": "Guardar_Identificado_SinCitas",
         "credentials": {
           "redis": {
@@ -6715,10 +6712,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          19408,
-          2800
+          31312,
+          11504
         ],
-        "id": "de8c8ebe-9347-4622-aa7a-bd13019b899f",
+        "id": "ef24baf0-e3d8-4b0b-a15b-71470920e843",
         "name": "Mensaje No Registrado Consulta",
         "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
         "credentials": {
@@ -6736,10 +6733,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          19632,
-          2800
+          31536,
+          11504
         ],
-        "id": "4741012f-e68c-4da8-9e97-ffea412bb296",
+        "id": "a1663470-97d0-43eb-81c6-648fe32e9a29",
         "name": "Redis Fin No Registrado",
         "credentials": {
           "redis": {
@@ -6776,10 +6773,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          20192,
-          2320
+          32096,
+          11024
         ],
-        "id": "728735c6-fee4-47c8-8e76-562c5b256ffe",
+        "id": "28032a04-c1e4-4d48-8c3b-c69e9ef7f694",
         "name": "If6"
       },
       {
@@ -6793,10 +6790,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          21344,
-          2448
+          33248,
+          11152
         ],
-        "id": "d597c34a-3171-4416-8328-8379f4f2db00",
+        "id": "491ce95c-402d-44b6-862b-167f0a4ffab1",
         "name": "guardar estado7",
         "credentials": {
           "redis": {
@@ -6826,10 +6823,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          18992,
-          5696
+          30896,
+          14400
         ],
-        "id": "c4807a7b-8a36-41d1-bc46-cba594ac4aaa",
+        "id": "6c6e256a-38e7-414f-a221-758ca47902b5",
         "name": "HTTP Request1"
       },
       {
@@ -6854,10 +6851,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          17968,
-          5376
+          29872,
+          14080
         ],
-        "id": "2740ae48-cb51-48c3-893d-58428a2fda5f",
+        "id": "62b82f49-da19-4824-a91f-c5d8d87b72ff",
         "name": "Call 'OBTENER TOKEN ZEUS' for Agenda",
         "executeOnce": true
       },
@@ -6868,10 +6865,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          20832,
-          2448
+          32736,
+          11152
         ],
-        "id": "13ecd7fd-effd-4807-b6b1-9400ac1b66a5",
+        "id": "6ea295f4-9d6b-4b48-9599-c02ed34e43a2",
         "name": "Code in JavaScript8"
       },
       {
@@ -6881,10 +6878,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18384,
-          5504
+          30288,
+          14208
         ],
-        "id": "db3f6a04-77bd-4254-9f0c-1ef64d037d36",
+        "id": "7d03658a-efbc-49cb-9e7d-50aab4f1ff76",
         "name": "Filtrar cita seleccionada"
       },
       {
@@ -6915,10 +6912,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          18736,
-          5504
+          30640,
+          14208
         ],
-        "id": "22a26f99-9583-4009-a505-ac6e0177aa5c",
+        "id": "c41e1d75-56f2-48f9-83bc-efd5593e6a55",
         "name": "If7"
       },
       {
@@ -6932,10 +6929,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          19040,
-          5488
+          30944,
+          14192
         ],
-        "id": "08f9dff0-0b25-4853-a142-9255f63f300c",
+        "id": "6d8d696f-f3eb-48ec-9da3-578977e893b7",
         "name": "Mensaje error cita",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -6956,10 +6953,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          19760,
-          5696
+          31664,
+          14400
         ],
-        "id": "727ab223-f85b-4ad6-a286-3d1ef9bdbbce",
+        "id": "ec1848d5-e0db-4fee-a0a3-184e2028c9c5",
         "name": "Guardar_Identificado_CancelaCita",
         "credentials": {
           "redis": {
@@ -6979,10 +6976,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          19280,
-          5696
+          31184,
+          14400
         ],
-        "id": "3c262fc8-96e2-4e5e-a851-eabf4323a4c1",
+        "id": "5bce1572-a4e0-47fd-a1ff-d9f8bb52fa31",
         "name": "Mensaje confirmación cita",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -6999,10 +6996,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18416,
-          4592
+          30320,
+          13296
         ],
-        "id": "ae09ccc3-c3cb-48aa-a012-24b8f6b0044b",
+        "id": "8f742641-c4a7-4cdf-bfe6-8b4e060a1b46",
         "name": "Preparar_Confirmacion"
       },
       {
@@ -7016,10 +7013,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          18688,
-          4592
+          30592,
+          13296
         ],
-        "id": "fbc68a43-d3e2-49c7-af2d-5d4188b37023",
+        "id": "a4fac40b-65b7-4c4b-9eab-f503174a7036",
         "name": "guardar_estado_confirmacion",
         "credentials": {
           "redis": {
@@ -7039,10 +7036,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          19952,
-          4384
+          31856,
+          13088
         ],
-        "id": "61b3a08c-9874-4776-827c-7e3b8a5b4701",
+        "id": "acff6ade-8fe3-4011-8a6c-04c30a4dd2c5",
         "name": "Mensaje_Pedir_Confirmacion",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -7060,10 +7057,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18112,
-          5968
+          30016,
+          14672
         ],
-        "id": "2ad2a329-a127-49ab-b29c-9360ccea5601",
+        "id": "09d48efd-06b8-46f3-b142-0c030fe5451b",
         "name": "Verificar_Si_Confirmado"
       },
       {
@@ -7094,10 +7091,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          18448,
-          5968
+          30352,
+          14672
         ],
-        "id": "3d204e95-283d-41a7-a28a-9e941867f8c5",
+        "id": "cc4b5537-a6e1-49b2-b180-1b188aa8acef",
         "name": "If_Confirmado"
       },
       {
@@ -7122,10 +7119,10 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          18672,
-          5872
+          30576,
+          14576
         ],
-        "id": "b00f5ce4-8aef-448a-b8d6-c465476d626a",
+        "id": "e113d80b-76c3-4b45-b62e-e687ec6355da",
         "name": "Call_Token_Confirmacion",
         "executeOnce": true
       },
@@ -7136,10 +7133,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          19008,
-          5872
+          30912,
+          14576
         ],
-        "id": "6e3d7275-8508-4700-8363-c1ebc98ec5eb",
+        "id": "7b03f825-7154-421d-80d3-07a10ab60bc0",
         "name": "Preparar_datos_desde_confirmacion"
       },
       {
@@ -7169,10 +7166,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          19280,
-          5872
+          31184,
+          14576
         ],
-        "id": "82c23827-f55c-499a-bad8-951960b9e08a",
+        "id": "082b1534-3479-466a-8ac7-17dd27418ed6",
         "name": "Agendar_en_Zeus_Confirmacion"
       },
       {
@@ -7203,10 +7200,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          19776,
-          5872
+          31680,
+          14576
         ],
-        "id": "9e829c0d-7650-483e-b960-c80609de6ab5",
+        "id": "a72bb72b-fb53-4759-a8a1-36bc2a6e15c2",
         "name": "If_Exito_Confirmacion"
       },
       {
@@ -7220,10 +7217,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          20192,
-          5824
+          32096,
+          14528
         ],
-        "id": "090e2fb2-85f5-41c7-ba5b-0933c349c8b6",
+        "id": "228fdd1f-ba60-48d9-bfb2-d81c0b4c6e9f",
         "name": "Enviar_Exito_Confirmacion",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -7244,10 +7241,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          20432,
-          5824
+          32336,
+          14528
         ],
-        "id": "fdc6514f-2388-4483-9f72-1c7bac82cdcc",
+        "id": "e890371a-1dfd-4d8e-b08d-82ed51fa996b",
         "name": "Guardar_Identificado_Confirmacion",
         "credentials": {
           "redis": {
@@ -7267,10 +7264,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          20112,
-          6048
+          32016,
+          14752
         ],
-        "id": "69fd31a2-df40-4d03-be47-3669cf60618a",
+        "id": "86aa7838-6b48-40bc-b33a-be07225d45a1",
         "name": "Enviar_Error_Confirmacion",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -7291,10 +7288,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          18688,
-          6144
+          30592,
+          14848
         ],
-        "id": "b91d5abb-61bd-4c7c-9e6b-74356629cc91",
+        "id": "7077006a-5408-4b3d-9a5b-609291067b06",
         "name": "Msg_Cita_Rechazada",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -7315,10 +7312,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          18944,
-          6144
+          30848,
+          14848
         ],
-        "id": "2e1b8d8e-7daa-44f6-b94b-db07e5d0b80c",
+        "id": "fdbd6d1e-4e83-4237-bc62-8f24dec5b16e",
         "name": "Guardar_Identificado_Rechazo",
         "credentials": {
           "redis": {
@@ -7338,10 +7335,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          17648,
-          6368
+          29552,
+          15072
         ],
-        "id": "c556ed74-385c-4cdb-b6dc-6b13b7865025",
+        "id": "407c31d6-f436-43d7-b8b5-bcffd4a05df3",
         "name": "Guardar_Identificado_Cancel",
         "credentials": {
           "redis": {
@@ -7361,10 +7358,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          17920,
-          6512
+          29824,
+          15216
         ],
-        "id": "69721615-d18b-47b3-8e3f-ec6fa56dc9bd",
+        "id": "f0460cdf-6e9f-438a-bf93-45c300a03ad8",
         "name": "Mensaje_Cancelacion",
         "webhookId": "ea18bda9-590d-441f-8f29-6a1caabdb7af",
         "credentials": {
@@ -7385,10 +7382,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          21984,
-          3520
+          34096,
+          12224
         ],
-        "id": "54cb0fa6-b988-43cd-931d-8aec0f2f689d",
+        "id": "0a90bc7f-12c7-493e-99a0-6d578590c050",
         "name": "guardar estado confirmacion identidad",
         "credentials": {
           "redis": {
@@ -7412,10 +7409,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          22192,
-          3520
+          34304,
+          12224
         ],
-        "id": "c34a8554-14c8-47ba-a1ad-da870b4a9b50",
+        "id": "d4c1b6b5-706f-42c8-baad-1077be05487f",
         "name": "Preguntar confirmacion identidad",
         "credentials": {
           "whatsAppApi": {
@@ -7451,10 +7448,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          17408,
-          6864
+          29312,
+          15568
         ],
-        "id": "4cb0fa0a-1ee2-471d-a553-d950f2fad8ca",
+        "id": "291b010b-d9ce-4443-9d15-f06457b2607c",
         "name": "If Confirmacion Identidad"
       },
       {
@@ -7464,10 +7461,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          21392,
-          3664
+          33504,
+          12368
         ],
-        "id": "d165b17c-6fdf-4a73-bb24-791850a78930",
+        "id": "fca2e0b8-cf01-4727-b1f8-491cb1a3722c",
         "name": "Listar puntos atencion"
       },
       {
@@ -7477,10 +7474,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          19840,
-          3664
+          31744,
+          12368
         ],
-        "id": "28ee2171-3229-4e3c-acbf-464830724e2e",
+        "id": "f0963414-33e7-422c-8923-522e08bbb39e",
         "name": "Listar especialidades"
       },
       {
@@ -7490,10 +7487,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          17712,
-          2768
+          29712,
+          11472
         ],
-        "id": "29bc058d-f0b0-401c-b2c3-40fee3254847",
+        "id": "7a5cc530-df75-4c9e-965b-83b82d5171a3",
         "name": "Code in JavaScript11"
       },
       {
@@ -7503,10 +7500,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          22192,
-          3776
+          34304,
+          12480
         ],
-        "id": "c868c891-3825-4044-8d05-3167eaa01353",
+        "id": "946d8021-c549-4833-85ec-c7d1604a803b",
         "name": "Code in JavaScript12"
       },
       {
@@ -7524,10 +7521,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          22480,
-          3776
+          34592,
+          12480
         ],
-        "id": "2ab24b13-6ad3-4943-9d96-038bff6e4421",
+        "id": "b46e3d98-a94b-4dad-a000-834753e44c54",
         "name": "Datos registro",
         "credentials": {
           "whatsAppApi": {
@@ -7564,10 +7561,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          21472,
-          5168
+          33376,
+          13872
         ],
-        "id": "92bbc760-4755-48e5-bddc-1e28e872419b",
+        "id": "59bd8af2-1f8e-4961-913c-908b13f8c835",
         "name": "If1"
       },
       {
@@ -7581,10 +7578,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          21680,
-          5072
+          33584,
+          13776
         ],
-        "id": "ab79d962-15e1-4bfc-b7d3-85cf35c06552",
+        "id": "ef49a57c-100c-46ab-9dfc-1b5c6985da2c",
         "name": "Send message",
         "webhookId": "3c4cd9da-5851-4a53-a123-b498b52fc995",
         "credentials": {
@@ -7602,10 +7599,10 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          21856,
-          5040
+          33760,
+          13744
         ],
-        "id": "11d264cd-0c87-41b8-9166-d461f0b571e8",
+        "id": "23085903-2fcf-4a11-a5c7-1a60d7ca8c5a",
         "name": "Redis1",
         "credentials": {
           "redis": {
@@ -7629,10 +7626,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          19776,
-          4944
+          31680,
+          13648
         ],
-        "id": "da4f4387-2e75-4e2a-92a9-61d371836c35",
+        "id": "d18884b8-af64-4180-95e9-e47192fdbe81",
         "name": "agendas",
         "credentials": {
           "whatsAppApi": {
@@ -7648,10 +7645,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          18928,
-          4592
+          30832,
+          13296
         ],
-        "id": "0cde928e-f6c7-4cc5-a779-c9fd180c71a6",
+        "id": "cf576444-d5cc-4f01-b0f7-d35c84e4ef19",
         "name": "Preparar_Confirmacion1"
       },
       {
@@ -7669,10 +7666,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          19168,
-          4592
+          31072,
+          13296
         ],
-        "id": "ced1189d-42b6-4745-ab19-2f459ba29a5d",
+        "id": "420a1ca6-f34e-43db-be39-6cccb248321a",
         "name": "Confirmacion_Cita",
         "credentials": {
           "whatsAppApi": {
@@ -7692,10 +7689,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          19072,
-          3264
+          30976,
+          11968
         ],
-        "id": "e599270c-0e00-47de-9a18-42c00bfa9605",
+        "id": "bdf74d65-a3b8-4687-964c-9552545d5f55",
         "name": "Error validador de derechos",
         "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
         "credentials": {
@@ -7738,10 +7735,10 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          19488,
-          5872
+          31392,
+          14576
         ],
-        "id": "b58317dc-1439-4a4e-bf86-89e4429a4179",
+        "id": "0eff93e2-f3bc-4995-a1e5-78e5f563fd3b",
         "name": "Switch"
       },
       {
@@ -7755,10 +7752,10 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          18720,
-          3664
+          30624,
+          12368
         ],
-        "id": "30d7054c-9409-47a9-8fa9-15a2d2e13893",
+        "id": "f5fe2577-d7c2-41a4-9c6c-e86fdd01b0e7",
         "name": "Error Validacion datos",
         "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
         "credentials": {
@@ -7783,10 +7780,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          20832,
-          2160
+          32736,
+          10864
         ],
-        "id": "de1f73ac-c7e1-4b91-80f9-725d763fd8fb",
+        "id": "0e097f3e-99e9-4026-b140-2f16d6e57e82",
         "name": "Lista de citas agendadas",
         "credentials": {
           "whatsAppApi": {
@@ -7810,10 +7807,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          21072,
-          2448
+          32976,
+          11152
         ],
-        "id": "e626443c-6159-4f2c-8949-9857b705864a",
+        "id": "8e88cca6-134b-4d0f-857f-0de42881f407",
         "name": "Lista de citas agendadas1",
         "credentials": {
           "whatsAppApi": {
@@ -7829,10 +7826,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          20560,
-          2160
+          32464,
+          10864
         ],
-        "id": "e06d0dbe-4b42-4fb7-a6de-8bcb13fe8759",
+        "id": "d33bbd7c-bb4e-4800-8776-585bc83c83aa",
         "name": "Formatear Lista Citas1"
       },
       {
@@ -7842,11 +7839,51 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          17520,
-          6032
+          29424,
+          14736
         ],
-        "id": "5ccbddfd-a885-4b0b-bc5c-aac96af79953",
+        "id": "386bf356-784b-4b51-bac8-50ed1440eda9",
         "name": "Preparar Accion Ya ID"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "whatsAppApi",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "={{ JSON.stringify($json.payload) }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          30000,
+          11472
+        ],
+        "id": "1b7e4976-3103-49c6-8e7b-d5984bddf5c8",
+        "name": "PEDIR_IDENTIFICACION",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "aTnctNBGMIYI6D7P",
+            "name": "WhatsApp account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          33040,
+          12368
+        ],
+        "id": "2a92f474-a6a3-44d4-a229-8a8444ed7827",
+        "name": "Code in JavaScript1"
       }
     ],
     "connections": {
@@ -8540,7 +8577,7 @@
         "main": [
           [
             {
-              "node": "Consultar usuario en Zeus",
+              "node": "Code in JavaScript1",
               "type": "main",
               "index": 0
             }
@@ -8941,7 +8978,7 @@
         "main": [
           [
             {
-              "node": "PEDIR_TIPO_DOC",
+              "node": "PEDIR_IDENTIFICACION",
               "type": "main",
               "index": 0
             }
@@ -9075,18 +9112,29 @@
             }
           ]
         ]
+      },
+      "Code in JavaScript1": {
+        "main": [
+          [
+            {
+              "node": "Consultar usuario en Zeus",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version dd0a08d0",
+    "name": "Version 940a910c",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-15T22:59:36.338Z",
-        "id": 755,
+        "createdAt": "2026-05-20T22:04:01.053Z",
+        "id": 829,
         "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
-        "versionId": "dd0a08d0-543b-4112-993d-0eb59803d98c",
+        "versionId": "940a910c-d2c2-462c-af4b-dcf19c917af4",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
