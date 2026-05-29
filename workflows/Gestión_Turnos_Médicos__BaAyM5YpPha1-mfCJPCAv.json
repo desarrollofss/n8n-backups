@@ -1,0 +1,1864 @@
+{
+  "updatedAt": "2026-05-29T19:34:30.770Z",
+  "createdAt": "2026-05-25T14:08:10.202Z",
+  "id": "BaAyM5YpPha1-mfCJPCAv",
+  "name": "Gestión Turnos Médicos",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "turnos-medicos",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        -192
+      ],
+      "id": "6c08f993-b65b-494a-86bf-6751ee969dc4",
+      "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "name": "Validar payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        -192
+      ],
+      "id": "853ab44e-46c3-49b0-a05d-795b5e01ec66"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.code }}",
+              "operation": "equal",
+              "value2": 200
+            }
+          ]
+        }
+      },
+      "name": "¿Payload OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        -192
+      ],
+      "id": "f424b96e-4244-40c9-8d2b-9d665ea96b19"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "name": "Armar respuesta OK",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        464,
+        -368
+      ],
+      "id": "74f7655e-049a-44bd-884b-389000d39778"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        784,
+        -368
+      ],
+      "id": "8add8963-522a-4b15-ac08-3c1a5745f481"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.code || 400 }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta Error",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        -64
+      ],
+      "id": "36063853-9602-40fd-b457-2e9988937051"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "name": "GET Médicos",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        -704,
+        144
+      ],
+      "id": "f2195e9b-9025-4ff4-98fc-55ebeedc1054",
+      "executeOnce": false,
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      },
+      "notes": "***REDACTED***"
+    },
+    {
+      "parameters": {
+        "path": "turnos-medicos-lista",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook GET médicos",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        144
+      ],
+      "id": "2a677cd9-25a0-4353-bf82-89b8a3efc5f7",
+      "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "***REDACTED***",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta médicos",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        144
+      ],
+      "id": "99b7dad3-5e00-41cd-a218-5fe6a3718c00",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "***REDACTED***",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta médicos1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        384
+      ],
+      "id": "14fb0c2e-af26-4647-b9a6-fbc753e04243",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "name": "GET Turnos",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        -704,
+        384
+      ],
+      "id": "d94d38e1-6c15-4cbb-90d9-dc0bf960ea64",
+      "executeOnce": false,
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      },
+      "notes": "***REDACTED***"
+    },
+    {
+      "parameters": {
+        "path": "turnos",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook GET turnos",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        384
+      ],
+      "id": "3f9e8173-89c4-40af-8862-6f9c70823ee3",
+      "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "turnos",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        -288
+      ],
+      "id": "ac61f779-f75b-4037-bb22-a02c5f1880cf",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "***REDACTED***",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta médicos2",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        608
+      ],
+      "id": "0cf54586-2a0c-4901-88d2-371db27b0c0d",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "path": "turnos_asignados",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "Webhook GET turnos asignados",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -944,
+        608
+      ],
+      "id": "08924e2e-2865-4743-8b60-d610cbec8904",
+      "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "name": "Turnos Medicos",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        608
+      ],
+      "id": "9b973674-f3b7-420a-9b2f-bb88cf8432cd",
+      "executeOnce": false,
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      },
+      "notes": "***REDACTED***"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "***REDACTED***",
+                    "rightValue": "insert",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "f76616a3-c706-4800-bdbc-ef061188afb0"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "INSERT"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "af2d9d47-2787-410d-bd32-b764bb21f16e",
+                    "leftValue": "***REDACTED***",
+                    "rightValue": "update",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "UPDATE"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "538bee2b-a88b-4768-9060-b38d88bc0b87",
+                    "leftValue": "***REDACTED***",
+                    "rightValue": "delete",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "DELETE"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -80,
+        -304
+      ],
+      "id": "5022ac26-9d10-4635-84f3-1a67cc941c37",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultName": "turno_medico"
+        },
+        "dataMode": "defineBelow",
+        "columnToMatchOn": "id",
+        "valueToMatchOn": "={{ $json.id_turno_medico }}",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "id_medico_fk",
+              "value": "***REDACTED***"
+            },
+            {
+              "column": "fecha",
+              "value": "***REDACTED***"
+            },
+            {
+              "column": "id_turno",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "UPDATE",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        144,
+        -288
+      ],
+      "id": "51058d30-d405-41cc-afb4-bb2b325fe7b6",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultName": "turno_medico"
+        },
+        "dataMode": "defineBelow",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "id_medico_fk",
+              "value": "***REDACTED***"
+            },
+            {
+              "column": "fecha",
+              "value": "***REDACTED***"
+            },
+            {
+              "column": "id_turno",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "INSERT",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        144,
+        -480
+      ],
+      "id": "b342d889-1291-4352-a2cb-d172ff8ae1ca",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultName": "turno_medico"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "id",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        176,
+        -96
+      ],
+      "id": "b87f75ae-13b8-4a9e-8a44-59e14c0c53ac",
+      "name": "DELETE",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta OK1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        464,
+        -96
+      ],
+      "id": "3a836902-2b28-43f2-b170-e83deaaf8c5f"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.code || 400 }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta Error1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        640,
+        -208
+      ],
+      "id": "c94bfdad-ac9e-45b9-a845-7f71fae4b7cf"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validar payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar payload": {
+      "main": [
+        [
+          {
+            "node": "¿Payload OK?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Payload OK?": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar respuesta OK": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook GET médicos": {
+      "main": [
+        [
+          {
+            "node": "GET Médicos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Médicos": {
+      "main": [
+        [
+          {
+            "node": "Respuesta médicos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET Turnos": {
+      "main": [
+        [
+          {
+            "node": "Respuesta médicos1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook GET turnos": {
+      "main": [
+        [
+          {
+            "node": "GET Turnos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook GET turnos asignados": {
+      "main": [
+        [
+          {
+            "node": "Turnos Medicos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Turnos Medicos": {
+      "main": [
+        [
+          {
+            "node": "Respuesta médicos2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "INSERT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "UPDATE",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "DELETE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "INSERT": {
+      "main": [
+        [
+          {
+            "node": "Armar respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UPDATE": {
+      "main": [
+        [
+          {
+            "node": "Armar respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DELETE": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "content-type": "application/json",
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "accept-language": "es-419,es;q=0.9",
+            "authorization": "Basic TW1lcmxhbm86alg0aEBHYjUzLg==",
+            "max-forwards": "9",
+            "referer": "http://10.244.21.21:9091/",
+            "user-agent": "***REDACTED***",
+            "origin": "http://10.244.21.21:9091",
+            "x-api-key": "***REDACTED***",
+            "x-original-url": "/api/turnos-medicos",
+            "x-forwarded-for": "192.168.23.5:52636, 131.0.170.96",
+            "x-arr-log-id": "47a7bbd3-06f4-4fdb-82fa-001354149f85",
+            "x-forwarded-host": "vdc.sersocial.org",
+            "x-forwarded-server": "vdc.sersocial.org",
+            "connection": "Keep-Alive",
+            "content-length": "321"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "turnos": [
+              {
+                "id_medico": 2,
+                "fecha": "2026-05-31",
+                "id_turno": 8,
+                "id_turno_medico": null,
+                "accion": "insert"
+              },
+              {
+                "id_medico": 10,
+                "fecha": "2026-05-31",
+                "id_turno": 1,
+                "id_turno_medico": null,
+                "accion": "insert"
+              },
+              {
+                "id_medico": 11,
+                "fecha": "2026-05-31",
+                "id_turno": 6,
+                "id_turno_medico": null,
+                "accion": "insert"
+              }
+            ],
+            "usuario": "admin",
+            "mes": "2026-05"
+          },
+          "webhookUrl": "***REDACTED***",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "Webhook GET turnos asignados": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "user-agent": "PostmanRuntime/7.54.0",
+            "accept": "*/*",
+            "postman-token": "de59af44-0903-4906-ac41-d0f3b7119852",
+            "accept-encoding": "gzip, deflate, br",
+            "x-forwarded-for": "181.118.145.113",
+            "x-forwarded-host": "vdc.sersocial.org",
+            "x-forwarded-server": "vdc.sersocial.org",
+            "connection": "Keep-Alive"
+          },
+          "params": {},
+          "query": {
+            "mes": "2026-05"
+          },
+          "webhookUrl": "***REDACTED***",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "versionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
+  "activeVersionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
+  "versionCounter": 490,
+  "triggerCount": 4,
+  "shared": [
+    {
+      "updatedAt": "2026-05-25T14:08:10.202Z",
+      "createdAt": "2026-05-25T14:08:10.202Z",
+      "role": "workflow:owner",
+      "workflowId": "BaAyM5YpPha1-mfCJPCAv",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-05-29",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-05-29T19:34:33.445Z",
+    "createdAt": "2026-05-29T19:34:30.771Z",
+    "versionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
+    "workflowId": "BaAyM5YpPha1-mfCJPCAv",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "turnos-medicos",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -928,
+          -192
+        ],
+        "id": "6c08f993-b65b-494a-86bf-6751ee969dc4",
+        "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "name": "Validar payload",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -720,
+          -192
+        ],
+        "id": "853ab44e-46c3-49b0-a05d-795b5e01ec66"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "number": [
+              {
+                "value1": "={{ $json.code }}",
+                "operation": "equal",
+                "value2": 200
+              }
+            ]
+          }
+        },
+        "name": "¿Payload OK?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -496,
+          -192
+        ],
+        "id": "f424b96e-4244-40c9-8d2b-9d665ea96b19"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "name": "Armar respuesta OK",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          464,
+          -368
+        ],
+        "id": "74f7655e-049a-44bd-884b-389000d39778"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": 200,
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta OK",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          784,
+          -368
+        ],
+        "id": "8add8963-522a-4b15-ac08-3c1a5745f481"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": "={{ $json.code || 400 }}",
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta Error",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -272,
+          -64
+        ],
+        "id": "36063853-9602-40fd-b457-2e9988937051"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "name": "GET Médicos",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2,
+        "position": [
+          -704,
+          144
+        ],
+        "id": "f2195e9b-9025-4ff4-98fc-55ebeedc1054",
+        "executeOnce": false,
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        },
+        "notes": "***REDACTED***"
+      },
+      {
+        "parameters": {
+          "path": "turnos-medicos-lista",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "name": "Webhook GET médicos",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -928,
+          144
+        ],
+        "id": "2a677cd9-25a0-4353-bf82-89b8a3efc5f7",
+        "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "***REDACTED***",
+          "options": {
+            "responseCode": 200,
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta médicos",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          144
+        ],
+        "id": "99b7dad3-5e00-41cd-a218-5fe6a3718c00",
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "***REDACTED***",
+          "options": {
+            "responseCode": 200,
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta médicos1",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -496,
+          384
+        ],
+        "id": "14fb0c2e-af26-4647-b9a6-fbc753e04243",
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "name": "GET Turnos",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2,
+        "position": [
+          -704,
+          384
+        ],
+        "id": "d94d38e1-6c15-4cbb-90d9-dc0bf960ea64",
+        "executeOnce": false,
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        },
+        "notes": "***REDACTED***"
+      },
+      {
+        "parameters": {
+          "path": "turnos",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "name": "Webhook GET turnos",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -928,
+          384
+        ],
+        "id": "3f9e8173-89c4-40af-8862-6f9c70823ee3",
+        "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "turnos",
+          "include": "allOtherFields",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -288,
+          -288
+        ],
+        "id": "ac61f779-f75b-4037-bb22-a02c5f1880cf",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "***REDACTED***",
+          "options": {
+            "responseCode": 200,
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta médicos2",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -496,
+          608
+        ],
+        "id": "0cf54586-2a0c-4901-88d2-371db27b0c0d",
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "path": "turnos_asignados",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "name": "Webhook GET turnos asignados",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -944,
+          608
+        ],
+        "id": "08924e2e-2865-4743-8b60-d610cbec8904",
+        "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "name": "Turnos Medicos",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2,
+        "position": [
+          -720,
+          608
+        ],
+        "id": "9b973674-f3b7-420a-9b2f-bb88cf8432cd",
+        "executeOnce": false,
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        },
+        "notes": "***REDACTED***"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "***REDACTED***",
+                      "rightValue": "insert",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "f76616a3-c706-4800-bdbc-ef061188afb0"
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "INSERT"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "af2d9d47-2787-410d-bd32-b764bb21f16e",
+                      "leftValue": "***REDACTED***",
+                      "rightValue": "update",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "UPDATE"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "538bee2b-a88b-4768-9060-b38d88bc0b87",
+                      "leftValue": "***REDACTED***",
+                      "rightValue": "delete",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "DELETE"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -80,
+          -304
+        ],
+        "id": "5022ac26-9d10-4635-84f3-1a67cc941c37",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "list",
+            "cachedResultName": "turno_medico"
+          },
+          "dataMode": "defineBelow",
+          "columnToMatchOn": "id",
+          "valueToMatchOn": "={{ $json.id_turno_medico }}",
+          "valuesToSend": {
+            "values": [
+              {
+                "column": "id_medico_fk",
+                "value": "***REDACTED***"
+              },
+              {
+                "column": "fecha",
+                "value": "***REDACTED***"
+              },
+              {
+                "column": "id_turno",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "UPDATE",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2,
+        "position": [
+          144,
+          -288
+        ],
+        "id": "51058d30-d405-41cc-afb4-bb2b325fe7b6",
+        "alwaysOutputData": false,
+        "executeOnce": false,
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "list",
+            "cachedResultName": "turno_medico"
+          },
+          "dataMode": "defineBelow",
+          "valuesToSend": {
+            "values": [
+              {
+                "column": "id_medico_fk",
+                "value": "***REDACTED***"
+              },
+              {
+                "column": "fecha",
+                "value": "***REDACTED***"
+              },
+              {
+                "column": "id_turno",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "INSERT",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2,
+        "position": [
+          144,
+          -480
+        ],
+        "id": "b342d889-1291-4352-a2cb-d172ff8ae1ca",
+        "alwaysOutputData": false,
+        "executeOnce": false,
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "operation": "deleteTable",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "list",
+            "cachedResultName": "turno_medico"
+          },
+          "deleteCommand": "delete",
+          "where": {
+            "values": [
+              {
+                "column": "id",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          176,
+          -96
+        ],
+        "id": "b87f75ae-13b8-4a9e-8a44-59e14c0c53ac",
+        "name": "DELETE",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": 200,
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta OK1",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          464,
+          -96
+        ],
+        "id": "3a836902-2b28-43f2-b170-e83deaaf8c5f"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": "={{ $json.code || 400 }}",
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta Error1",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          640,
+          -208
+        ],
+        "id": "c94bfdad-ac9e-45b9-a845-7f71fae4b7cf"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Validar payload",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Validar payload": {
+        "main": [
+          [
+            {
+              "node": "¿Payload OK?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Payload OK?": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta Error",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Armar respuesta OK": {
+        "main": [
+          [
+            {
+              "node": "Respuesta OK",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook GET médicos": {
+        "main": [
+          [
+            {
+              "node": "GET Médicos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET Médicos": {
+        "main": [
+          [
+            {
+              "node": "Respuesta médicos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GET Turnos": {
+        "main": [
+          [
+            {
+              "node": "Respuesta médicos1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook GET turnos": {
+        "main": [
+          [
+            {
+              "node": "GET Turnos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook GET turnos asignados": {
+        "main": [
+          [
+            {
+              "node": "Turnos Medicos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Turnos Medicos": {
+        "main": [
+          [
+            {
+              "node": "Respuesta médicos2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "INSERT",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "UPDATE",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "DELETE",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "INSERT": {
+        "main": [
+          [
+            {
+              "node": "Armar respuesta OK",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta Error1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "UPDATE": {
+        "main": [
+          [
+            {
+              "node": "Armar respuesta OK",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta Error1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DELETE": {
+        "main": [
+          [
+            {
+              "node": "Respuesta OK1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version 8e7ce47e",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-05-29T19:34:33.443Z",
+        "id": 1007,
+        "workflowId": "BaAyM5YpPha1-mfCJPCAv",
+        "versionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
