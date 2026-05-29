@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-12T21:44:27.865Z",
+  "updatedAt": "2026-05-25T18:17:49.904Z",
   "createdAt": "2026-02-23T16:58:21.617Z",
   "id": "_ZcOLc4Mmd6nwM7N4yEaP",
   "name": "SARAI - Post llamada",
@@ -68,8 +68,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        656,
-        96
+        368,
+        -400
       ],
       "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
       "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -83,8 +83,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -336,
-        720
+        64,
+        768
       ],
       "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
       "name": "Marcar NO_CONTESTO",
@@ -122,8 +122,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -976,
-        -32
+        -576,
+        -48
       ],
       "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
       "name": "¿Fue contestada?"
@@ -137,8 +137,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -144,
-        -112
+        32,
+        -672
       ],
       "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
       "name": "Guardar número acudiente",
@@ -187,8 +187,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -416,
-        96
+        -208,
+        -384
       ],
       "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
       "name": "¿Acudiente con número?"
@@ -202,8 +202,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        2224,
-        352
+        2144,
+        0
       ],
       "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
       "name": "Responder OK a Retell"
@@ -217,8 +217,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -160,
-        -304
+        368,
+        -80
       ],
       "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
       "name": "Marcar como NO_AGENDO",
@@ -238,8 +238,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1216,
-        96
+        1296,
+        -400
       ],
       "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
       "name": "Marcar como AGENDADO",
@@ -277,8 +277,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        976,
-        96
+        1088,
+        -400
       ],
       "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
       "name": "Agendar en Zeus"
@@ -290,8 +290,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        816,
-        96
+        640,
+        -400
       ],
       "id": "71e76a8d-c34f-4905-836f-6420f778d714",
       "name": "Preparar datos agendamiento"
@@ -343,32 +343,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -144,
-        112
+        48,
+        -80
       ],
       "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
       "name": "¿Confirmó asistencia?"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "***REDACTED***",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        -1232,
-        0
-      ],
-      "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
-      "name": "Buscar paciente por call_id",
-      "credentials": {
-        "postgres": {
-          "id": "G8jOYC5TFqNr9NA3",
-          "name": "conexión sarai"
-        }
-      }
     },
     {
       "parameters": {
@@ -380,8 +359,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1984,
-        272
+        -2112,
+        80
       ],
       "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
       "name": "Webhook Retell Post-Call",
@@ -396,8 +375,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1840,
-        96
+        1904,
+        -400
       ],
       "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
       "name": "DELETE slot elegido",
@@ -417,8 +396,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        496,
-        720
+        1424,
+        432
       ],
       "id": "44861220-f696-450a-9b21-a9b4386a6d87",
       "name": "Liberar slots",
@@ -437,8 +416,8 @@
       "type": "n8n-nodes-labsmobile.labsMobile",
       "typeVersion": 2,
       "position": [
-        1632,
-        96
+        1696,
+        -400
       ],
       "id": "5460d015-8811-4f5a-93b4-3b4434698162",
       "name": "Send SMS",
@@ -458,8 +437,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -368,
-        432
+        64,
+        224
       ],
       "id": "7b52ca19-19bc-4a83-ac94-da8eb14f875a",
       "name": "Incrementar intento",
@@ -472,33 +451,6 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "***REDACTED***",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "contentType": "raw",
-        "rawContentType": "application/json",
-        "body": "***REDACTED***",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -160,
-        432
-      ],
-      "id": "a41c73ab-1542-434f-85a7-545571630507",
-      "name": "Rellamar en Retell",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "DIdSQ2VED0gyDQyv",
-          "name": "APIKEYSARAIFSS2"
-        }
-      }
-    },
-    {
-      "parameters": {
         "operation": "executeQuery",
         "query": "***REDACTED***",
         "options": {}
@@ -506,8 +458,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        32,
-        432
+        528,
+        384
       ],
       "id": "03d73f98-f087-42ba-9abd-b0b19e9a86ef",
       "name": "Guardar nuevo call_id",
@@ -545,8 +497,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -1680,
-        240
+        -1664,
+        80
       ],
       "id": "b4b9f397-ff5a-47fd-b77c-aa1ccb123ca4",
       "name": "¿Es call_analyzed o call_ended?"
@@ -558,8 +510,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1840,
-        432
+        -1888,
+        80
       ],
       "id": "8b34bfa7-ccea-405b-a402-70b44a3b554b",
       "name": "DEBUG Retell (temporal)"
@@ -592,8 +544,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1184,
-        352
+        -864,
+        -240
       ],
       "id": "894bc2b7-b796-42c8-ac1b-3015867443b1",
       "name": "¿Ya está AGENDADO?"
@@ -626,8 +578,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -640,
-        464
+        -368,
+        512
       ],
       "id": "c1b381ec-b5fc-417c-a807-739517d48b8b",
       "name": "¿Debe rellamar?"
@@ -690,8 +642,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -608,
-        -80
+        -368,
+        -736
       ],
       "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
       "name": "¿Número equivocado ?"
@@ -812,8 +764,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        1424,
-        96
+        1488,
+        -400
       ],
       "id": "2023c929-cb6c-4d22-8adb-fecc2daea038",
       "name": "Call 'SAGIC'"
@@ -833,8 +785,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        272,
-        -112
+        336,
+        -672
       ],
       "id": "0fe5cedf-ddb8-4f8b-a76e-7fbd29281939",
       "name": "Llamar a número brindado",
@@ -854,11 +806,11 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        480,
-        -112
+        -1424,
+        -80
       ],
-      "id": "ed46afb0-d26f-4d92-a1a9-358f146be5a1",
-      "name": "Guardar call_id número brindado",
+      "id": "a88e9fb7-e9a9-45f9-bf82-5a0efb49150b",
+      "name": "Guardar call data",
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
@@ -875,17 +827,161 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -1568,
-        0
+        -1216,
+        -80
       ],
-      "id": "a88e9fb7-e9a9-45f9-bf82-5a0efb49150b",
-      "name": "Guardar call data",
+      "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
+      "name": "Buscar paciente por id",
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
           "name": "conexión sarai"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        624,
+        -672
+      ],
+      "id": "ed46afb0-d26f-4d92-a1a9-358f146be5a1",
+      "name": "Guardar id número brindado",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6bf846aa-1450-428f-ba9f-b27499f480a6",
+              "leftValue": "***REDACTED***",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -192,
+        656
+      ],
+      "id": "10a43249-db4e-456e-8fd6-1c02ee0472f0",
+      "name": "¿Tiene telefono_2?"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        64,
+        512
+      ],
+      "id": "ff0078a5-41b0-4400-8373-b3555c2329e2",
+      "name": "Resetear intentos telefono_2",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        288,
+        512
+      ],
+      "id": "1e51652c-9261-4ed1-8739-07adef128cde",
+      "name": "Rellamar en Retell (telefono_2)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "DIdSQ2VED0gyDQyv",
+          "name": "APIKEYSARAIFSS2"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        288,
+        224
+      ],
+      "id": "a41c73ab-1542-434f-85a7-545571630507",
+      "name": "Rellamar en Retell (telefono_1)",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "DIdSQ2VED0gyDQyv",
+          "name": "APIKEYSARAIFSS2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1024,
+        -80
+      ],
+      "id": "7637903b-d6ab-400c-acd4-abaa56092c10",
+      "name": "Formatear opciones paciente"
     }
   ],
   "connections": {
@@ -1020,17 +1116,6 @@
         ]
       ]
     },
-    "Buscar paciente por call_id": {
-      "main": [
-        [
-          {
-            "node": "¿Ya está AGENDADO?",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Webhook Retell Post-Call": {
       "main": [
         [
@@ -1079,18 +1164,7 @@
       "main": [
         [
           {
-            "node": "Rellamar en Retell",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Rellamar en Retell": {
-      "main": [
-        [
-          {
-            "node": "Guardar nuevo call_id",
+            "node": "Rellamar en Retell (telefono_1)",
             "type": "main",
             "index": 0
           }
@@ -1166,7 +1240,7 @@
         ],
         [
           {
-            "node": "Marcar NO_CONTESTO",
+            "node": "¿Tiene telefono_2?",
             "type": "main",
             "index": 0
           }
@@ -1206,18 +1280,7 @@
       "main": [
         [
           {
-            "node": "Guardar call_id número brindado",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Guardar call_id número brindado": {
-      "main": [
-        [
-          {
-            "node": "Liberar slots",
+            "node": "Guardar id número brindado",
             "type": "main",
             "index": 0
           }
@@ -1228,7 +1291,98 @@
       "main": [
         [
           {
-            "node": "Buscar paciente por call_id",
+            "node": "Buscar paciente por id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar paciente por id": {
+      "main": [
+        [
+          {
+            "node": "Formatear opciones paciente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar id número brindado": {
+      "main": [
+        [
+          {
+            "node": "Liberar slots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Tiene telefono_2?": {
+      "main": [
+        [
+          {
+            "node": "Resetear intentos telefono_2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marcar NO_CONTESTO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resetear intentos telefono_2": {
+      "main": [
+        [
+          {
+            "node": "Rellamar en Retell (telefono_2)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rellamar en Retell (telefono_2)": {
+      "main": [
+        [
+          {
+            "node": "Guardar nuevo call_id",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marcar NO_CONTESTO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rellamar en Retell (telefono_1)": {
+      "main": [
+        [
+          {
+            "node": "Guardar nuevo call_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear opciones paciente": {
+      "main": [
+        [
+          {
+            "node": "¿Ya está AGENDADO?",
             "type": "main",
             "index": 0
           }
@@ -1245,9 +1399,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "2a12018b-2fd6-49f3-9af8-5d9575460ad6",
-  "activeVersionId": "2a12018b-2fd6-49f3-9af8-5d9575460ad6",
-  "versionCounter": 1210,
+  "versionId": "1b5081ab-7868-41e4-b894-5a990da928a7",
+  "activeVersionId": "1b5081ab-7868-41e4-b894-5a990da928a7",
+  "versionCounter": 1546,
   "triggerCount": 1,
   "shared": [
     {
@@ -1272,7 +1426,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-22T05:02:36.429Z",
+              "updatedAt": "2026-05-29T11:33:30.889Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1305,7 +1459,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-22",
+              "lastActiveAt": "2026-05-29",
               "isPending": false
             }
           }
@@ -1315,22 +1469,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-04-16T21:08:33.019Z",
-      "createdAt": "2026-04-16T21:08:33.019Z",
-      "id": "oAU4h6efQRYRWcQU",
-      "name": "Sarai 📲"
-    },
-    {
       "updatedAt": "2026-02-04T21:56:48.941Z",
       "createdAt": "2026-02-04T21:56:48.941Z",
       "id": "S7UevxOArIeglzP8",
       "name": "🟢"
+    },
+    {
+      "updatedAt": "2026-04-16T21:08:33.019Z",
+      "createdAt": "2026-04-16T21:08:33.019Z",
+      "id": "oAU4h6efQRYRWcQU",
+      "name": "Sarai 📲"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-12T21:44:58.824Z",
-    "createdAt": "2026-05-12T21:44:27.866Z",
-    "versionId": "2a12018b-2fd6-49f3-9af8-5d9575460ad6",
+    "updatedAt": "2026-05-25T18:18:02.176Z",
+    "createdAt": "2026-05-25T18:17:49.905Z",
+    "versionId": "1b5081ab-7868-41e4-b894-5a990da928a7",
     "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
     "nodes": [
       {
@@ -1394,8 +1548,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          656,
-          96
+          368,
+          -400
         ],
         "id": "2710ffc2-e59c-4178-8108-ae04b461ad00",
         "name": "Call 'OBTENER TOKEN ZEUS'"
@@ -1409,8 +1563,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -336,
-          720
+          64,
+          768
         ],
         "id": "be6193b0-3193-4fd8-a2f4-e885a933055a",
         "name": "Marcar NO_CONTESTO",
@@ -1448,8 +1602,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -976,
-          -32
+          -576,
+          -48
         ],
         "id": "3424ac30-a551-4253-8233-b8e79e65b36f",
         "name": "¿Fue contestada?"
@@ -1463,8 +1617,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -144,
-          -112
+          32,
+          -672
         ],
         "id": "62f4e1ce-f957-4571-80a6-3124818b46d0",
         "name": "Guardar número acudiente",
@@ -1513,8 +1667,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -416,
-          96
+          -208,
+          -384
         ],
         "id": "48daf988-8dda-482a-a5f4-e7d34fe62561",
         "name": "¿Acudiente con número?"
@@ -1528,8 +1682,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.4,
         "position": [
-          2224,
-          352
+          2144,
+          0
         ],
         "id": "42095032-c975-40ff-86d2-c63aaf3b6387",
         "name": "Responder OK a Retell"
@@ -1543,8 +1697,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -160,
-          -304
+          368,
+          -80
         ],
         "id": "1923d071-152f-4cd0-8204-5410a27c9ce5",
         "name": "Marcar como NO_AGENDO",
@@ -1564,8 +1718,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1216,
-          96
+          1296,
+          -400
         ],
         "id": "b0739a8a-438b-49d8-bae6-c83a78abc1e7",
         "name": "Marcar como AGENDADO",
@@ -1603,8 +1757,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          976,
-          96
+          1088,
+          -400
         ],
         "id": "eeca1182-d8dc-40b7-9847-561dff7f31fa",
         "name": "Agendar en Zeus"
@@ -1616,8 +1770,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          816,
-          96
+          640,
+          -400
         ],
         "id": "71e76a8d-c34f-4905-836f-6420f778d714",
         "name": "Preparar datos agendamiento"
@@ -1669,32 +1823,11 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          -144,
-          112
+          48,
+          -80
         ],
         "id": "3b353947-435b-4d66-a168-e07a43e3ea88",
         "name": "¿Confirmó asistencia?"
-      },
-      {
-        "parameters": {
-          "operation": "executeQuery",
-          "query": "***REDACTED***",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.postgres",
-        "typeVersion": 2.6,
-        "position": [
-          -1232,
-          0
-        ],
-        "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
-        "name": "Buscar paciente por call_id",
-        "credentials": {
-          "postgres": {
-            "id": "G8jOYC5TFqNr9NA3",
-            "name": "conexión sarai"
-          }
-        }
       },
       {
         "parameters": {
@@ -1706,8 +1839,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1984,
-          272
+          -2112,
+          80
         ],
         "id": "12d7d7d5-9d9b-400d-bdd5-6ae1dfee519c",
         "name": "Webhook Retell Post-Call",
@@ -1722,8 +1855,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1840,
-          96
+          1904,
+          -400
         ],
         "id": "1bb6d166-28c7-4d54-b227-f9eec5d0c365",
         "name": "DELETE slot elegido",
@@ -1743,8 +1876,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          496,
-          720
+          1424,
+          432
         ],
         "id": "44861220-f696-450a-9b21-a9b4386a6d87",
         "name": "Liberar slots",
@@ -1763,8 +1896,8 @@
         "type": "n8n-nodes-labsmobile.labsMobile",
         "typeVersion": 2,
         "position": [
-          1632,
-          96
+          1696,
+          -400
         ],
         "id": "5460d015-8811-4f5a-93b4-3b4434698162",
         "name": "Send SMS",
@@ -1784,8 +1917,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -368,
-          432
+          64,
+          224
         ],
         "id": "7b52ca19-19bc-4a83-ac94-da8eb14f875a",
         "name": "Incrementar intento",
@@ -1798,33 +1931,6 @@
       },
       {
         "parameters": {
-          "method": "POST",
-          "url": "***REDACTED***",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "httpHeaderAuth",
-          "sendBody": true,
-          "contentType": "raw",
-          "rawContentType": "application/json",
-          "body": "***REDACTED***",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.2,
-        "position": [
-          -160,
-          432
-        ],
-        "id": "a41c73ab-1542-434f-85a7-545571630507",
-        "name": "Rellamar en Retell",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "DIdSQ2VED0gyDQyv",
-            "name": "APIKEYSARAIFSS2"
-          }
-        }
-      },
-      {
-        "parameters": {
           "operation": "executeQuery",
           "query": "***REDACTED***",
           "options": {}
@@ -1832,8 +1938,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          32,
-          432
+          528,
+          384
         ],
         "id": "03d73f98-f087-42ba-9abd-b0b19e9a86ef",
         "name": "Guardar nuevo call_id",
@@ -1871,8 +1977,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          -1680,
-          240
+          -1664,
+          80
         ],
         "id": "b4b9f397-ff5a-47fd-b77c-aa1ccb123ca4",
         "name": "¿Es call_analyzed o call_ended?"
@@ -1884,8 +1990,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -1840,
-          432
+          -1888,
+          80
         ],
         "id": "8b34bfa7-ccea-405b-a402-70b44a3b554b",
         "name": "DEBUG Retell (temporal)"
@@ -1918,8 +2024,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -1184,
-          352
+          -864,
+          -240
         ],
         "id": "894bc2b7-b796-42c8-ac1b-3015867443b1",
         "name": "¿Ya está AGENDADO?"
@@ -1952,8 +2058,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -640,
-          464
+          -368,
+          512
         ],
         "id": "c1b381ec-b5fc-417c-a807-739517d48b8b",
         "name": "¿Debe rellamar?"
@@ -2016,8 +2122,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -608,
-          -80
+          -368,
+          -736
         ],
         "id": "07f85a20-baa5-4b72-b2fb-57b81dab8718",
         "name": "¿Número equivocado ?"
@@ -2138,8 +2244,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          1424,
-          96
+          1488,
+          -400
         ],
         "id": "2023c929-cb6c-4d22-8adb-fecc2daea038",
         "name": "Call 'SAGIC'"
@@ -2159,8 +2265,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          272,
-          -112
+          336,
+          -672
         ],
         "id": "0fe5cedf-ddb8-4f8b-a76e-7fbd29281939",
         "name": "Llamar a número brindado",
@@ -2180,11 +2286,11 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          480,
-          -112
+          -1424,
+          -80
         ],
-        "id": "ed46afb0-d26f-4d92-a1a9-358f146be5a1",
-        "name": "Guardar call_id número brindado",
+        "id": "a88e9fb7-e9a9-45f9-bf82-5a0efb49150b",
+        "name": "Guardar call data",
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
@@ -2201,17 +2307,161 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -1568,
-          0
+          -1216,
+          -80
         ],
-        "id": "a88e9fb7-e9a9-45f9-bf82-5a0efb49150b",
-        "name": "Guardar call data",
+        "id": "ece83cfb-0d34-4538-b858-6ec7db73d896",
+        "name": "Buscar paciente por id",
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
             "name": "conexión sarai"
           }
         }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          624,
+          -672
+        ],
+        "id": "ed46afb0-d26f-4d92-a1a9-358f146be5a1",
+        "name": "Guardar id número brindado",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "6bf846aa-1450-428f-ba9f-b27499f480a6",
+                "leftValue": "***REDACTED***",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -192,
+          656
+        ],
+        "id": "10a43249-db4e-456e-8fd6-1c02ee0472f0",
+        "name": "¿Tiene telefono_2?"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          64,
+          512
+        ],
+        "id": "ff0078a5-41b0-4400-8373-b3555c2329e2",
+        "name": "Resetear intentos telefono_2",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          288,
+          512
+        ],
+        "id": "1e51652c-9261-4ed1-8739-07adef128cde",
+        "name": "Rellamar en Retell (telefono_2)",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "DIdSQ2VED0gyDQyv",
+            "name": "APIKEYSARAIFSS2"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          288,
+          224
+        ],
+        "id": "a41c73ab-1542-434f-85a7-545571630507",
+        "name": "Rellamar en Retell (telefono_1)",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "DIdSQ2VED0gyDQyv",
+            "name": "APIKEYSARAIFSS2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1024,
+          -80
+        ],
+        "id": "7637903b-d6ab-400c-acd4-abaa56092c10",
+        "name": "Formatear opciones paciente"
       }
     ],
     "connections": {
@@ -2346,17 +2596,6 @@
           ]
         ]
       },
-      "Buscar paciente por call_id": {
-        "main": [
-          [
-            {
-              "node": "¿Ya está AGENDADO?",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Webhook Retell Post-Call": {
         "main": [
           [
@@ -2405,18 +2644,7 @@
         "main": [
           [
             {
-              "node": "Rellamar en Retell",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Rellamar en Retell": {
-        "main": [
-          [
-            {
-              "node": "Guardar nuevo call_id",
+              "node": "Rellamar en Retell (telefono_1)",
               "type": "main",
               "index": 0
             }
@@ -2492,7 +2720,7 @@
           ],
           [
             {
-              "node": "Marcar NO_CONTESTO",
+              "node": "¿Tiene telefono_2?",
               "type": "main",
               "index": 0
             }
@@ -2532,18 +2760,7 @@
         "main": [
           [
             {
-              "node": "Guardar call_id número brindado",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Guardar call_id número brindado": {
-        "main": [
-          [
-            {
-              "node": "Liberar slots",
+              "node": "Guardar id número brindado",
               "type": "main",
               "index": 0
             }
@@ -2554,7 +2771,98 @@
         "main": [
           [
             {
-              "node": "Buscar paciente por call_id",
+              "node": "Buscar paciente por id",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar paciente por id": {
+        "main": [
+          [
+            {
+              "node": "Formatear opciones paciente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Guardar id número brindado": {
+        "main": [
+          [
+            {
+              "node": "Liberar slots",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Tiene telefono_2?": {
+        "main": [
+          [
+            {
+              "node": "Resetear intentos telefono_2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Marcar NO_CONTESTO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Resetear intentos telefono_2": {
+        "main": [
+          [
+            {
+              "node": "Rellamar en Retell (telefono_2)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Rellamar en Retell (telefono_2)": {
+        "main": [
+          [
+            {
+              "node": "Guardar nuevo call_id",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Marcar NO_CONTESTO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Rellamar en Retell (telefono_1)": {
+        "main": [
+          [
+            {
+              "node": "Guardar nuevo call_id",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Formatear opciones paciente": {
+        "main": [
+          [
+            {
+              "node": "¿Ya está AGENDADO?",
               "type": "main",
               "index": 0
             }
@@ -2563,15 +2871,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 2a12018b",
+    "name": "Version 1b5081ab",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-12T21:44:58.822Z",
-        "id": 704,
+        "createdAt": "2026-05-25T18:18:02.174Z",
+        "id": 880,
         "workflowId": "_ZcOLc4Mmd6nwM7N4yEaP",
-        "versionId": "2a12018b-2fd6-49f3-9af8-5d9575460ad6",
+        "versionId": "1b5081ab-7868-41e4-b894-5a990da928a7",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
