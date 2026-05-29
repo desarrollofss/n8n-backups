@@ -1,0 +1,1543 @@
+{
+  "updatedAt": "2026-05-27T04:28:27.828Z",
+  "createdAt": "2026-05-26T04:46:04.602Z",
+  "id": "9I7-9Llh9YGz-P1Bm0gNr",
+  "name": "WF_REGISTRO",
+  "description": null,
+  "active": true,
+  "isArchived": false,
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        59536,
+        28208
+      ],
+      "id": "cf3f1e8c-2f0a-4d00-ab89-efa9f331758e",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        57968,
+        28304
+      ],
+      "id": "26c2246d-2390-4e1c-b7ff-ea1df214d82b",
+      "name": "Preparar Datos Flow Registro"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "NumeroIdentificacion",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "TipoIdentificacion",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Primernom",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Primerape",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Segundoape",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Fechanaci",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Sexo",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Tipousuario",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "CodDep",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "CodMuni",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "Telefono",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "email",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "direccion",
+              "value": "***REDACTED***"
+            },
+            {
+              "name": "segundonom",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        58640,
+        28304
+      ],
+      "id": "9dbc5b01-3493-4bc8-aafe-37deba5d9c02",
+      "name": "Registrar en Zeus"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "***REDACTED***",
+        "recipientPhoneNumber": "***REDACTED***",
+        "textBody": "***REDACTED***",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        59088,
+        28400
+      ],
+      "id": "41ba3eba-7145-433b-b505-93cccc13527f",
+      "name": "Error registro Zeus",
+      "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "aTnctNBGMIYI6D7P",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e8defe13-ed27-4a12-9331-5c33c854dd01",
+              "leftValue": "={{ $json.error }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        59760,
+        28208
+      ],
+      "id": "c6183974-1d0d-4db1-8c78-e8bfbf97d830",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "ra1b2c3d4-e5f6-7890-abcd-ef1234567810",
+              "leftValue": "={{ $json?.TieneErrores }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        58864,
+        28304
+      ],
+      "id": "2ba060b7-ba9e-4d36-8c70-a68ca0bd0418",
+      "name": "If Registro exitoso"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "1162040110315070",
+        "recipientPhoneNumber": "***REDACTED***",
+        "textBody": "***REDACTED***",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        59984,
+        28112
+      ],
+      "id": "0e896b1e-8c6a-45a6-a98e-2275ef6d7c13",
+      "name": "Send message",
+      "webhookId": "3c4cd9da-5851-4a53-a123-b498b52fc995",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "aTnctNBGMIYI6D7P",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        57968,
+        28112
+      ],
+      "id": "dfbf156d-9a86-40aa-bfae-57cd33700d9a",
+      "name": "esperando_datos_registro_fin1"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        59312,
+        28400
+      ],
+      "id": "c0ba1483-8761-4d99-8640-4c725c7361f8",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultUrl": "/n8n/workflow/8QAWBLL5xzNT3DoYH-AW6",
+          "cachedResultName": "OBTENER TOKEN ZEUS"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        58416,
+        28304
+      ],
+      "id": "4bd83560-dd32-4634-8f76-b93221ff2b7f",
+      "name": "Call 'OBTENER TOKEN ZEUS' for Registro",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "***REDACTED***",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "whatsAppApi",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        59984,
+        28304
+      ],
+      "id": "4b1f1917-0e98-4401-bceb-5835087ac8f1",
+      "name": "ESPECIALIDAD",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "aTnctNBGMIYI6D7P",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        60208,
+        28112
+      ],
+      "id": "611e22ba-2676-475f-872f-93e3fab6cc21",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "***REDACTED***",
+        "value": "***REDACTED***",
+        "expire": true,
+        "ttl": 3600
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        59312,
+        28208
+      ],
+      "id": "0a3087c5-cde4-41e4-bcb5-97bb1eed1827",
+      "name": "guardar estado12",
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { ...$json } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        58192,
+        28304
+      ],
+      "id": "757bb20d-4b2c-40a6-95ff-16ccd65764ef",
+      "name": "Preparar datos registro"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        59088,
+        28208
+      ],
+      "id": "1a860a88-3e1e-4014-8342-60679313ac88",
+      "name": "Continuar tras registro"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "mensaje"
+            },
+            {
+              "name": "intent"
+            },
+            {
+              "name": "telefono"
+            },
+            {
+              "name": "raw"
+            },
+            {
+              "name": "phone_number_id"
+            },
+            {
+              "name": "accion"
+            },
+            {
+              "name": "estado"
+            },
+            {
+              "name": "tipo_documento"
+            },
+            {
+              "name": "numero_documento"
+            },
+            {
+              "name": "datos_usuario"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        57072,
+        28208
+      ],
+      "id": "814e375f-0bf4-45ab-8302-1ac66c212059",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "estado_raw",
+        "key": "***REDACTED***",
+        "options": {}
+      },
+      "id": "8663b96c-f723-4e03-bfba-b03c7485ecaf",
+      "name": "Leer Estado Sub",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        57296,
+        28208
+      ],
+      "credentials": {
+        "redis": {
+          "id": "3XA5T4Gby6gagH8B",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "id": "8afee197-520a-463e-b9c0-28ab93bd18a9",
+      "name": "Ctx Estado",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        57520,
+        28208
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "70dfd907-0cdd-453a-903f-28f32940fcab",
+                    "leftValue": "***REDACTED***",
+                    "rightValue": "esperando_datos_registro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "esperando_datos_registro"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "ac551d30-97e6-41bd-a2bb-9e247fa57c75",
+                    "leftValue": "***REDACTED***",
+                    "rightValue": "recibir_flow_registro",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "recibir_flow_registro"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "050d27b4-439b-48a4-816f-a5658ab4c025",
+      "name": "Ruta REGISTRO",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        57744,
+        28208
+      ]
+    }
+  ],
+  "connections": {
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Datos Flow Registro": {
+      "main": [
+        [
+          {
+            "node": "Preparar datos registro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar datos registro": {
+      "main": [
+        [
+          {
+            "node": "Call 'OBTENER TOKEN ZEUS' for Registro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'OBTENER TOKEN ZEUS' for Registro": {
+      "main": [
+        [
+          {
+            "node": "Registrar en Zeus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar en Zeus": {
+      "main": [
+        [
+          {
+            "node": "If Registro exitoso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Registro exitoso": {
+      "main": [
+        [
+          {
+            "node": "Continuar tras registro",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error registro Zeus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Continuar tras registro": {
+      "main": [
+        [
+          {
+            "node": "guardar estado12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "guardar estado12": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error registro Zeus": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "ESPECIALIDAD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Leer Estado Sub",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Estado Sub": {
+      "main": [
+        [
+          {
+            "node": "Ctx Estado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ctx Estado": {
+      "main": [
+        [
+          {
+            "node": "Ruta REGISTRO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ruta REGISTRO": {
+      "main": [
+        [
+          {
+            "node": "esperando_datos_registro_fin1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Preparar Datos Flow Registro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": null,
+  "pinData": {},
+  "versionId": "b9794e23-e06b-4717-9a75-3c405e026da2",
+  "activeVersionId": "b9794e23-e06b-4717-9a75-3c405e026da2",
+  "versionCounter": 64,
+  "triggerCount": 0,
+  "shared": [
+    {
+      "updatedAt": "2026-05-26T04:46:04.602Z",
+      "createdAt": "2026-05-26T04:46:04.602Z",
+      "role": "workflow:owner",
+      "workflowId": "9I7-9Llh9YGz-P1Bm0gNr",
+      "projectId": "gDmEkapyQQKYEXJy",
+      "project": {
+        "updatedAt": "2026-01-22T19:31:50.741Z",
+        "createdAt": "2026-01-22T19:04:54.342Z",
+        "id": "gDmEkapyQQKYEXJy",
+        "name": "***REDACTED***",
+        "type": "personal",
+        "icon": null,
+        "description": null,
+        "creatorId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+        "projectRelations": [
+          {
+            "updatedAt": "2026-01-22T19:04:54.342Z",
+            "createdAt": "2026-01-22T19:04:54.342Z",
+            "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+            "projectId": "gDmEkapyQQKYEXJy",
+            "user": {
+              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "createdAt": "2026-01-22T19:04:52.782Z",
+              "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
+              "email": "desarrollotecnologico@sersocial.org",
+              "firstName": "Desarrollo",
+              "lastName": "Tecnologico",
+              "personalizationAnswers": {
+                "version": "v4",
+                "personalization_survey_submitted_at": "2026-01-22T19:34:24.549Z",
+                "personalization_survey_n8n_version": "1.121.2",
+                "automationGoalDevops": [
+                  "other"
+                ],
+                "companyIndustryExtended": [
+                  "healthcare"
+                ],
+                "companySize": "100-499",
+                "companyType": "other",
+                "role": "engineering",
+                "reportedSource": "youtube"
+              },
+              "settings": {
+                "userActivated": true,
+                "easyAIWorkflowOnboarded": true,
+                "firstSuccessfulWorkflowId": "OAhFO3OsIEvGPsN2",
+                "userActivatedAt": 1770741540067,
+                "npsSurvey": {
+                  "responded": true,
+                  "lastShownAt": 1771950922428
+                }
+              },
+              "disabled": false,
+              "mfaEnabled": false,
+              "lastActiveAt": "2026-05-29",
+              "isPending": false
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "tags": [],
+  "activeVersion": {
+    "updatedAt": "2026-05-27T04:28:29.255Z",
+    "createdAt": "2026-05-27T04:28:27.829Z",
+    "versionId": "b9794e23-e06b-4717-9a75-3c405e026da2",
+    "workflowId": "9I7-9Llh9YGz-P1Bm0gNr",
+    "nodes": [
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          59536,
+          28208
+        ],
+        "id": "cf3f1e8c-2f0a-4d00-ab89-efa9f331758e",
+        "name": "Code in JavaScript3"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          57968,
+          28304
+        ],
+        "id": "26c2246d-2390-4e1c-b7ff-ea1df214d82b",
+        "name": "Preparar Datos Flow Registro"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "NumeroIdentificacion",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "TipoIdentificacion",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Primernom",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Primerape",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Segundoape",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Fechanaci",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Sexo",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Tipousuario",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "CodDep",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "CodMuni",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Telefono",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "email",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "direccion",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "segundonom",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          58640,
+          28304
+        ],
+        "id": "9dbc5b01-3493-4bc8-aafe-37deba5d9c02",
+        "name": "Registrar en Zeus"
+      },
+      {
+        "parameters": {
+          "operation": "send",
+          "phoneNumberId": "***REDACTED***",
+          "recipientPhoneNumber": "***REDACTED***",
+          "textBody": "***REDACTED***",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.whatsApp",
+        "typeVersion": 1.1,
+        "position": [
+          59088,
+          28400
+        ],
+        "id": "41ba3eba-7145-433b-b505-93cccc13527f",
+        "name": "Error registro Zeus",
+        "webhookId": "c630469c-165a-459b-9ce3-47b8f0fe93bf",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "aTnctNBGMIYI6D7P",
+            "name": "WhatsApp account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "e8defe13-ed27-4a12-9331-5c33c854dd01",
+                "leftValue": "={{ $json.error }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          59760,
+          28208
+        ],
+        "id": "c6183974-1d0d-4db1-8c78-e8bfbf97d830",
+        "name": "If1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "ra1b2c3d4-e5f6-7890-abcd-ef1234567810",
+                "leftValue": "={{ $json?.TieneErrores }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "false",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          58864,
+          28304
+        ],
+        "id": "2ba060b7-ba9e-4d36-8c70-a68ca0bd0418",
+        "name": "If Registro exitoso"
+      },
+      {
+        "parameters": {
+          "operation": "send",
+          "phoneNumberId": "1162040110315070",
+          "recipientPhoneNumber": "***REDACTED***",
+          "textBody": "***REDACTED***",
+          "additionalFields": {}
+        },
+        "type": "n8n-nodes-base.whatsApp",
+        "typeVersion": 1.1,
+        "position": [
+          59984,
+          28112
+        ],
+        "id": "0e896b1e-8c6a-45a6-a98e-2275ef6d7c13",
+        "name": "Send message",
+        "webhookId": "3c4cd9da-5851-4a53-a123-b498b52fc995",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "aTnctNBGMIYI6D7P",
+            "name": "WhatsApp account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          57968,
+          28112
+        ],
+        "id": "dfbf156d-9a86-40aa-bfae-57cd33700d9a",
+        "name": "esperando_datos_registro_fin1"
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "key": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          59312,
+          28400
+        ],
+        "id": "c0ba1483-8761-4d99-8640-4c725c7361f8",
+        "name": "Redis",
+        "credentials": {
+          "redis": {
+            "id": "3XA5T4Gby6gagH8B",
+            "name": "Redis account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "workflowId": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "list",
+            "cachedResultUrl": "/n8n/workflow/8QAWBLL5xzNT3DoYH-AW6",
+            "cachedResultName": "OBTENER TOKEN ZEUS"
+          },
+          "workflowInputs": {
+            "mappingMode": "defineBelow",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": true
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.executeWorkflow",
+        "typeVersion": 1.3,
+        "position": [
+          58416,
+          28304
+        ],
+        "id": "4bd83560-dd32-4634-8f76-b93221ff2b7f",
+        "name": "Call 'OBTENER TOKEN ZEUS' for Registro",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "***REDACTED***",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "whatsAppApi",
+          "sendBody": true,
+          "contentType": "raw",
+          "rawContentType": "application/json",
+          "body": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          59984,
+          28304
+        ],
+        "id": "4b1f1917-0e98-4401-bceb-5835087ac8f1",
+        "name": "ESPECIALIDAD",
+        "credentials": {
+          "whatsAppApi": {
+            "id": "aTnctNBGMIYI6D7P",
+            "name": "WhatsApp account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "delete",
+          "key": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          60208,
+          28112
+        ],
+        "id": "611e22ba-2676-475f-872f-93e3fab6cc21",
+        "name": "Redis1",
+        "credentials": {
+          "redis": {
+            "id": "3XA5T4Gby6gagH8B",
+            "name": "Redis account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "set",
+          "key": "***REDACTED***",
+          "value": "***REDACTED***",
+          "expire": true,
+          "ttl": 3600
+        },
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          59312,
+          28208
+        ],
+        "id": "0a3087c5-cde4-41e4-bcb5-97bb1eed1827",
+        "name": "guardar estado12",
+        "credentials": {
+          "redis": {
+            "id": "3XA5T4Gby6gagH8B",
+            "name": "Redis account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "return [{ json: { ...$json } }];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          58192,
+          28304
+        ],
+        "id": "757bb20d-4b2c-40a6-95ff-16ccd65764ef",
+        "name": "Preparar datos registro"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          59088,
+          28208
+        ],
+        "id": "1a860a88-3e1e-4014-8342-60679313ac88",
+        "name": "Continuar tras registro"
+      },
+      {
+        "parameters": {
+          "workflowInputs": {
+            "values": [
+              {
+                "name": "mensaje"
+              },
+              {
+                "name": "intent"
+              },
+              {
+                "name": "telefono"
+              },
+              {
+                "name": "raw"
+              },
+              {
+                "name": "phone_number_id"
+              },
+              {
+                "name": "accion"
+              },
+              {
+                "name": "estado"
+              },
+              {
+                "name": "tipo_documento"
+              },
+              {
+                "name": "numero_documento"
+              },
+              {
+                "name": "datos_usuario"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1.1,
+        "position": [
+          57072,
+          28208
+        ],
+        "id": "814e375f-0bf4-45ab-8302-1ac66c212059",
+        "name": "When Executed by Another Workflow"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "propertyName": "estado_raw",
+          "key": "***REDACTED***",
+          "options": {}
+        },
+        "id": "8663b96c-f723-4e03-bfba-b03c7485ecaf",
+        "name": "Leer Estado Sub",
+        "type": "n8n-nodes-base.redis",
+        "typeVersion": 1,
+        "position": [
+          57296,
+          28208
+        ],
+        "credentials": {
+          "redis": {
+            "id": "3XA5T4Gby6gagH8B",
+            "name": "Redis account 2"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "id": "8afee197-520a-463e-b9c0-28ab93bd18a9",
+        "name": "Ctx Estado",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          57520,
+          28208
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "70dfd907-0cdd-453a-903f-28f32940fcab",
+                      "leftValue": "***REDACTED***",
+                      "rightValue": "esperando_datos_registro",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "esperando_datos_registro"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": false,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "ac551d30-97e6-41bd-a2bb-9e247fa57c75",
+                      "leftValue": "***REDACTED***",
+                      "rightValue": "recibir_flow_registro",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "recibir_flow_registro"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "050d27b4-439b-48a4-816f-a5658ab4c025",
+        "name": "Ruta REGISTRO",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.2,
+        "position": [
+          57744,
+          28208
+        ]
+      }
+    ],
+    "connections": {
+      "Code in JavaScript3": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar Datos Flow Registro": {
+        "main": [
+          [
+            {
+              "node": "Preparar datos registro",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar datos registro": {
+        "main": [
+          [
+            {
+              "node": "Call 'OBTENER TOKEN ZEUS' for Registro",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Call 'OBTENER TOKEN ZEUS' for Registro": {
+        "main": [
+          [
+            {
+              "node": "Registrar en Zeus",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Registrar en Zeus": {
+        "main": [
+          [
+            {
+              "node": "If Registro exitoso",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If Registro exitoso": {
+        "main": [
+          [
+            {
+              "node": "Continuar tras registro",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Error registro Zeus",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Continuar tras registro": {
+        "main": [
+          [
+            {
+              "node": "guardar estado12",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "guardar estado12": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Error registro Zeus": {
+        "main": [
+          [
+            {
+              "node": "Redis",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "Send message",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "ESPECIALIDAD",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send message": {
+        "main": [
+          [
+            {
+              "node": "Redis1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "When Executed by Another Workflow": {
+        "main": [
+          [
+            {
+              "node": "Leer Estado Sub",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Leer Estado Sub": {
+        "main": [
+          [
+            {
+              "node": "Ctx Estado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ctx Estado": {
+        "main": [
+          [
+            {
+              "node": "Ruta REGISTRO",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ruta REGISTRO": {
+        "main": [
+          [
+            {
+              "node": "esperando_datos_registro_fin1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Preparar Datos Flow Registro",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Desarrollo Tecnologico",
+    "name": "Version b9794e23",
+    "description": "",
+    "autosaved": true,
+    "workflowPublishHistory": [
+      {
+        "createdAt": "2026-05-27T04:28:29.253Z",
+        "id": 972,
+        "workflowId": "9I7-9Llh9YGz-P1Bm0gNr",
+        "versionId": "b9794e23-e06b-4717-9a75-3c405e026da2",
+        "event": "activated",
+        "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
+      }
+    ]
+  }
+}
