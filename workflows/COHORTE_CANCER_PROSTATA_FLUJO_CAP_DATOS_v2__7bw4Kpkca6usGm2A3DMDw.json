@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-22T21:30:25.202Z",
+  "updatedAt": "2026-05-29T12:30:57.101Z",
   "createdAt": "2026-04-13T14:40:29.194Z",
   "id": "7bw4Kpkca6usGm2A3DMDw",
   "name": "***REDACTED***",
@@ -30,8 +30,8 @@
       ],
       "credentials": {
         "microsoftOutlookOAuth2Api": {
-          "id": "czvuJ0pPWCOnCKA4",
-          "name": "Microsoft Outlook account 2"
+          "id": "mHruiIAxqNHnSqZJ",
+          "name": "CORREO_NAUTOTI"
         }
       }
     },
@@ -84,7 +84,7 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -7056,
+        -7072,
         5552
       ]
     },
@@ -101,40 +101,6 @@
         -6784,
         5328
       ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 1
-          },
-          "conditions": [
-            {
-              "leftValue": "={{ $json.tieneValidos }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              },
-              "id": "3e36f576-4dbf-403a-8510-fed5b5c10b80"
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "d19d909f-9679-46eb-a8b0-714ad74e0a8b",
-      "name": "¿Tiene Válidos?",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2,
-      "position": [
-        -6224,
-        4768
-      ],
-      "disabled": true
     },
     {
       "parameters": {
@@ -179,8 +145,8 @@
       ],
       "credentials": {
         "microsoftOneDriveOAuth2Api": {
-          "id": "6kKCKl73UBzntENo",
-          "name": "Microsoft Drive account"
+          "id": "gddLYDacWkaS5LVi",
+          "name": "Drive_NAutoti"
         }
       }
     },
@@ -932,8 +898,8 @@
       "name": "HTTP Request remitente",
       "credentials": {
         "microsoftOutlookOAuth2Api": {
-          "id": "czvuJ0pPWCOnCKA4",
-          "name": "Microsoft Outlook account 2"
+          "id": "mHruiIAxqNHnSqZJ",
+          "name": "CORREO_NAUTOTI"
         }
       }
     },
@@ -954,8 +920,8 @@
       "name": "HTTP Request adjunto",
       "credentials": {
         "microsoftOutlookOAuth2Api": {
-          "id": "czvuJ0pPWCOnCKA4",
-          "name": "Microsoft Outlook account 2"
+          "id": "mHruiIAxqNHnSqZJ",
+          "name": "CORREO_NAUTOTI"
         }
       }
     },
@@ -997,8 +963,8 @@
           "name": "Microsoft Outlook account"
         },
         "microsoftOneDriveOAuth2Api": {
-          "id": "6kKCKl73UBzntENo",
-          "name": "Microsoft Drive account"
+          "id": "gddLYDacWkaS5LVi",
+          "name": "Drive_NAutoti"
         }
       }
     },
@@ -1029,8 +995,8 @@
       "name": "Marcar como Leído",
       "credentials": {
         "microsoftOutlookOAuth2Api": {
-          "id": "czvuJ0pPWCOnCKA4",
-          "name": "Microsoft Outlook account 2"
+          "id": "mHruiIAxqNHnSqZJ",
+          "name": "CORREO_NAUTOTI"
         }
       }
     },
@@ -1158,22 +1124,10 @@
       "name": "RESUMEN_CON_ERRORES",
       "credentials": {
         "microsoftOutlookOAuth2Api": {
-          "id": "czvuJ0pPWCOnCKA4",
-          "name": "Microsoft Outlook account 2"
+          "id": "mHruiIAxqNHnSqZJ",
+          "name": "CORREO_NAUTOTI"
         }
       }
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        -5952,
-        4768
-      ],
-      "id": "bd90cfdd-6034-4128-9f54-a03066cf7363",
-      "name": "Merge",
-      "disabled": true
     },
     {
       "parameters": {
@@ -1212,15 +1166,15 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -6192,
+        -6176,
         5488
       ],
       "id": "1439f303-b03c-4fe5-ae42-715a229ee708",
       "name": "HTTP Request — Descargar XLSX",
       "credentials": {
         "microsoftOneDriveOAuth2Api": {
-          "id": "6kKCKl73UBzntENo",
-          "name": "Microsoft Drive account"
+          "id": "gddLYDacWkaS5LVi",
+          "name": "Drive_NAutoti"
         },
         "microsoftOutlookOAuth2Api": {
           "id": "TuAoJsXaUmvhXNhz",
@@ -1251,8 +1205,8 @@
       "name": "HTTP Request — Descargar PDF",
       "credentials": {
         "microsoftOneDriveOAuth2Api": {
-          "id": "6kKCKl73UBzntENo",
-          "name": "Microsoft Drive account"
+          "id": "gddLYDacWkaS5LVi",
+          "name": "Drive_NAutoti"
         },
         "microsoftOutlookOAuth2Api": {
           "id": "TuAoJsXaUmvhXNhz",
@@ -1337,8 +1291,8 @@
       "name": "Rechazo - Sin Excel",
       "credentials": {
         "microsoftOutlookOAuth2Api": {
-          "id": "czvuJ0pPWCOnCKA4",
-          "name": "Microsoft Outlook account 2"
+          "id": "mHruiIAxqNHnSqZJ",
+          "name": "CORREO_NAUTOTI"
         }
       }
     },
@@ -1439,8 +1393,8 @@
       "name": "Notificacion_formato_errado",
       "credentials": {
         "microsoftOutlookOAuth2Api": {
-          "id": "czvuJ0pPWCOnCKA4",
-          "name": "Microsoft Outlook account 2"
+          "id": "mHruiIAxqNHnSqZJ",
+          "name": "CORREO_NAUTOTI"
         }
       }
     },
@@ -3837,12 +3791,6 @@
         ]
       ]
     },
-    "¿Tiene Válidos?": {
-      "main": [
-        [],
-        []
-      ]
-    },
     "Preparar Registros PG": {
       "main": [
         [
@@ -3994,11 +3942,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Merge": {
-      "main": [
-        []
       ]
     },
     "HTTP Request — Descargar XLSX": {
@@ -4405,12 +4348,12 @@
         "json": {
           "@odata.etag": "***REDACTED***",
           "id": "***REDACTED***",
-          "createdDateTime": "2026-05-22T05:41:29Z",
-          "lastModifiedDateTime": "2026-05-22T05:41:46Z",
-          "changeKey": "CQAAABYAAACS86cs/GBwRqlWaTn/Xv0kAAOSxgtr",
+          "createdDateTime": "2026-05-27T21:01:07Z",
+          "lastModifiedDateTime": "2026-05-27T21:01:23Z",
+          "changeKey": "CQAAABYAAACS86cs/GBwRqlWaTn/Xv0kAAOaDVnQ",
           "categories": [],
-          "receivedDateTime": "2026-05-22T05:41:29Z",
-          "sentDateTime": "2026-05-22T05:41:24Z",
+          "receivedDateTime": "2026-05-27T21:01:07Z",
+          "sentDateTime": "2026-05-27T21:01:04Z",
           "hasAttachments": true,
           "internetMessageId": "***REDACTED***",
           "subject": "SOSPECHA_PSA-900422754",
@@ -4418,7 +4361,7 @@
           "importance": "normal",
           "parentFolderId": "***REDACTED***",
           "conversationId": "***REDACTED***",
-          "conversationIndex": "AQHc6aydcgS+mN/f2EquP5U/U7xmBg==",
+          "conversationIndex": "AQHc7hvupkXOYss4DkGiCu8zi4Y/5w==",
           "isDeliveryReceiptRequested": false,
           "isReadReceiptRequested": false,
           "isRead": false,
@@ -4431,14 +4374,14 @@
           },
           "sender": {
             "emailAddress": {
-              "name": "Neyla Del Carmen Polo Villanueva",
-              "address": "npolov@sersocial.org"
+              "name": "Automatizaciones Notificaciones TI",
+              "address": "n_autoti@sersocial.org"
             }
           },
           "from": {
             "emailAddress": {
-              "name": "Neyla Del Carmen Polo Villanueva",
-              "address": "npolov@sersocial.org"
+              "name": "Automatizaciones Notificaciones TI",
+              "address": "n_autoti@sersocial.org"
             }
           },
           "toRecipients": [
@@ -4459,9 +4402,9 @@
       }
     ]
   },
-  "versionId": "763530f0-9746-4c54-8fd0-f1b24090801e",
-  "activeVersionId": "d8932157-ad67-4314-98c6-13c891527bfd",
-  "versionCounter": 1001,
+  "versionId": "5e416612-e383-4f92-8d46-df690ffb57ad",
+  "activeVersionId": "5e416612-e383-4f92-8d46-df690ffb57ad",
+  "versionCounter": 1148,
   "triggerCount": 1,
   "shared": [
     {
@@ -4486,7 +4429,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-22T05:02:36.429Z",
+              "updatedAt": "2026-05-29T11:33:30.889Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -4519,7 +4462,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-22",
+              "lastActiveAt": "2026-05-29",
               "isPending": false
             }
           }
@@ -4529,9 +4472,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-05-22T19:48:42.632Z",
-    "createdAt": "2026-05-22T19:48:38.108Z",
-    "versionId": "d8932157-ad67-4314-98c6-13c891527bfd",
+    "updatedAt": "2026-05-29T12:31:04.488Z",
+    "createdAt": "2026-05-29T12:30:57.103Z",
+    "versionId": "5e416612-e383-4f92-8d46-df690ffb57ad",
     "workflowId": "7bw4Kpkca6usGm2A3DMDw",
     "nodes": [
       {
@@ -4557,8 +4500,8 @@
         ],
         "credentials": {
           "microsoftOutlookOAuth2Api": {
-            "id": "czvuJ0pPWCOnCKA4",
-            "name": "Microsoft Outlook account 2"
+            "id": "mHruiIAxqNHnSqZJ",
+            "name": "CORREO_NAUTOTI"
           }
         }
       },
@@ -4611,7 +4554,7 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          -7056,
+          -7072,
           5552
         ]
       },
@@ -4628,40 +4571,6 @@
           -6784,
           5328
         ]
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 1
-            },
-            "conditions": [
-              {
-                "leftValue": "={{ $json.tieneValidos }}",
-                "rightValue": true,
-                "operator": {
-                  "type": "boolean",
-                  "operation": "equals"
-                },
-                "id": "3e36f576-4dbf-403a-8510-fed5b5c10b80"
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "id": "d19d909f-9679-46eb-a8b0-714ad74e0a8b",
-        "name": "¿Tiene Válidos?",
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2,
-        "position": [
-          -6224,
-          4768
-        ],
-        "disabled": true
       },
       {
         "parameters": {
@@ -4706,8 +4615,8 @@
         ],
         "credentials": {
           "microsoftOneDriveOAuth2Api": {
-            "id": "6kKCKl73UBzntENo",
-            "name": "Microsoft Drive account"
+            "id": "gddLYDacWkaS5LVi",
+            "name": "Drive_NAutoti"
           }
         }
       },
@@ -5459,8 +5368,8 @@
         "name": "HTTP Request remitente",
         "credentials": {
           "microsoftOutlookOAuth2Api": {
-            "id": "czvuJ0pPWCOnCKA4",
-            "name": "Microsoft Outlook account 2"
+            "id": "mHruiIAxqNHnSqZJ",
+            "name": "CORREO_NAUTOTI"
           }
         }
       },
@@ -5481,8 +5390,8 @@
         "name": "HTTP Request adjunto",
         "credentials": {
           "microsoftOutlookOAuth2Api": {
-            "id": "czvuJ0pPWCOnCKA4",
-            "name": "Microsoft Outlook account 2"
+            "id": "mHruiIAxqNHnSqZJ",
+            "name": "CORREO_NAUTOTI"
           }
         }
       },
@@ -5524,8 +5433,8 @@
             "name": "Microsoft Outlook account"
           },
           "microsoftOneDriveOAuth2Api": {
-            "id": "6kKCKl73UBzntENo",
-            "name": "Microsoft Drive account"
+            "id": "gddLYDacWkaS5LVi",
+            "name": "Drive_NAutoti"
           }
         }
       },
@@ -5556,8 +5465,8 @@
         "name": "Marcar como Leído",
         "credentials": {
           "microsoftOutlookOAuth2Api": {
-            "id": "czvuJ0pPWCOnCKA4",
-            "name": "Microsoft Outlook account 2"
+            "id": "mHruiIAxqNHnSqZJ",
+            "name": "CORREO_NAUTOTI"
           }
         }
       },
@@ -5685,22 +5594,10 @@
         "name": "RESUMEN_CON_ERRORES",
         "credentials": {
           "microsoftOutlookOAuth2Api": {
-            "id": "czvuJ0pPWCOnCKA4",
-            "name": "Microsoft Outlook account 2"
+            "id": "mHruiIAxqNHnSqZJ",
+            "name": "CORREO_NAUTOTI"
           }
         }
-      },
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.merge",
-        "typeVersion": 3.2,
-        "position": [
-          -5952,
-          4768
-        ],
-        "id": "bd90cfdd-6034-4128-9f54-a03066cf7363",
-        "name": "Merge",
-        "disabled": true
       },
       {
         "parameters": {
@@ -5739,15 +5636,15 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -6192,
+          -6176,
           5488
         ],
         "id": "1439f303-b03c-4fe5-ae42-715a229ee708",
         "name": "HTTP Request — Descargar XLSX",
         "credentials": {
           "microsoftOneDriveOAuth2Api": {
-            "id": "6kKCKl73UBzntENo",
-            "name": "Microsoft Drive account"
+            "id": "gddLYDacWkaS5LVi",
+            "name": "Drive_NAutoti"
           },
           "microsoftOutlookOAuth2Api": {
             "id": "TuAoJsXaUmvhXNhz",
@@ -5778,8 +5675,8 @@
         "name": "HTTP Request — Descargar PDF",
         "credentials": {
           "microsoftOneDriveOAuth2Api": {
-            "id": "6kKCKl73UBzntENo",
-            "name": "Microsoft Drive account"
+            "id": "gddLYDacWkaS5LVi",
+            "name": "Drive_NAutoti"
           },
           "microsoftOutlookOAuth2Api": {
             "id": "TuAoJsXaUmvhXNhz",
@@ -5864,8 +5761,8 @@
         "name": "Rechazo - Sin Excel",
         "credentials": {
           "microsoftOutlookOAuth2Api": {
-            "id": "czvuJ0pPWCOnCKA4",
-            "name": "Microsoft Outlook account 2"
+            "id": "mHruiIAxqNHnSqZJ",
+            "name": "CORREO_NAUTOTI"
           }
         }
       },
@@ -5966,8 +5863,8 @@
         "name": "Notificacion_formato_errado",
         "credentials": {
           "microsoftOutlookOAuth2Api": {
-            "id": "czvuJ0pPWCOnCKA4",
-            "name": "Microsoft Outlook account 2"
+            "id": "mHruiIAxqNHnSqZJ",
+            "name": "CORREO_NAUTOTI"
           }
         }
       },
@@ -8364,12 +8261,6 @@
           ]
         ]
       },
-      "¿Tiene Válidos?": {
-        "main": [
-          [],
-          []
-        ]
-      },
       "Preparar Registros PG": {
         "main": [
           [
@@ -8521,11 +8412,6 @@
               "index": 0
             }
           ]
-        ]
-      },
-      "Merge": {
-        "main": [
-          []
         ]
       },
       "HTTP Request — Descargar XLSX": {
@@ -8921,15 +8807,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version d8932157",
+    "name": "Version 5e416612",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-22T19:48:42.630Z",
-        "id": 844,
+        "createdAt": "2026-05-29T12:31:04.487Z",
+        "id": 994,
         "workflowId": "7bw4Kpkca6usGm2A3DMDw",
-        "versionId": "d8932157-ad67-4314-98c6-13c891527bfd",
+        "versionId": "5e416612-e383-4f92-8d46-df690ffb57ad",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
