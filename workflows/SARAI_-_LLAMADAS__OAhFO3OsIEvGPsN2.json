@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-20T21:54:03.280Z",
+  "updatedAt": "2026-05-25T20:11:01.517Z",
   "createdAt": "2026-02-04T20:19:26.832Z",
   "id": "OAhFO3OsIEvGPsN2",
   "name": "SARAI - LLAMADAS",
@@ -69,7 +69,7 @@
       "typeVersion": 2,
       "position": [
         -2080,
-        1456
+        1216
       ],
       "id": "c41d0187-9f8e-4e5d-93e5-2d0382cfcfeb",
       "name": "Sin pacientes pendientes"
@@ -104,8 +104,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -576,
-        976
+        -512,
+        960
       ],
       "id": "09ee150e-e2bb-43f3-bfa9-8fd14551d507",
       "name": "Guardar call_id",
@@ -131,13 +131,13 @@
     },
     {
       "parameters": {
-        "amount": 15
+        "amount": 60
       },
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -1088,
-        1424
+        -496,
+        1216
       ],
       "id": "f0f2d930-fd3d-43e7-bdae-43d0c30b6d71",
       "name": "Wait2",
@@ -155,18 +155,6 @@
       ],
       "id": "448d64fa-425c-4c2e-9462-34a8f4beb255",
       "name": "formatearRespuesta"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -2656,
-        752
-      ],
-      "id": "2c0fcfb4-74b0-43ae-99db-9f3ff5cfa10e",
-      "name": "When clicking ‘Execute workflow’",
-      "disabled": true
     },
     {
       "parameters": {
@@ -190,12 +178,14 @@
       ],
       "id": "6ce717dd-7cf0-456f-9aaf-5b6d9136568b",
       "name": "Crear llamada en Retell",
+      "notesInFlow": false,
       "credentials": {
         "httpHeaderAuth": {
           "id": "DIdSQ2VED0gyDQyv",
           "name": "APIKEYSARAIFSS2"
         }
-      }
+      },
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -233,8 +223,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -384,
-        768
+        -784,
+        592
       ],
       "id": "00bc74a3-9c5e-467a-89c0-99f4fdfce15d",
       "name": "Edit Fields",
@@ -308,6 +298,27 @@
       ],
       "id": "723e9b53-79b6-49f1-b005-a21928ce15b3",
       "name": "Consultar_disponibilidades"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "***REDACTED***",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -768,
+        1216
+      ],
+      "id": "b203cc60-0c5f-42f6-9d91-ea0037f684d4",
+      "name": "Marcar error Retell",
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      }
     }
   ],
   "connections": {
@@ -396,16 +407,18 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        []
-      ]
-    },
     "Crear llamada en Retell": {
       "main": [
         [
           {
             "node": "Guardar call_id",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Marcar error Retell",
             "type": "main",
             "index": 0
           }
@@ -438,6 +451,17 @@
           }
         ]
       ]
+    },
+    "Marcar error Retell": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -454,11 +478,13 @@
       "recurrenceRules": []
     }
   },
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "pinData": {},
-  "versionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
-  "activeVersionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
-  "versionCounter": 933,
+  "versionId": "daade80d-eeb7-4b93-b4c5-3fd48f401b1b",
+  "activeVersionId": "daade80d-eeb7-4b93-b4c5-3fd48f401b1b",
+  "versionCounter": 999,
   "triggerCount": 1,
   "shared": [
     {
@@ -483,7 +509,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-22T05:02:36.429Z",
+              "updatedAt": "2026-05-29T11:33:30.889Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -516,7 +542,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-22",
+              "lastActiveAt": "2026-05-29",
               "isPending": false
             }
           }
@@ -539,9 +565,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-20T21:54:07.206Z",
-    "createdAt": "2026-05-20T21:54:03.282Z",
-    "versionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
+    "updatedAt": "2026-05-25T20:21:04.708Z",
+    "createdAt": "2026-05-25T20:11:01.518Z",
+    "versionId": "daade80d-eeb7-4b93-b4c5-3fd48f401b1b",
     "workflowId": "OAhFO3OsIEvGPsN2",
     "nodes": [
       {
@@ -606,7 +632,7 @@
         "typeVersion": 2,
         "position": [
           -2080,
-          1456
+          1216
         ],
         "id": "c41d0187-9f8e-4e5d-93e5-2d0382cfcfeb",
         "name": "Sin pacientes pendientes"
@@ -641,8 +667,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -576,
-          976
+          -512,
+          960
         ],
         "id": "09ee150e-e2bb-43f3-bfa9-8fd14551d507",
         "name": "Guardar call_id",
@@ -668,13 +694,13 @@
       },
       {
         "parameters": {
-          "amount": 15
+          "amount": 60
         },
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -1088,
-          1424
+          -496,
+          1216
         ],
         "id": "f0f2d930-fd3d-43e7-bdae-43d0c30b6d71",
         "name": "Wait2",
@@ -692,18 +718,6 @@
         ],
         "id": "448d64fa-425c-4c2e-9462-34a8f4beb255",
         "name": "formatearRespuesta"
-      },
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.manualTrigger",
-        "typeVersion": 1,
-        "position": [
-          -2656,
-          752
-        ],
-        "id": "2c0fcfb4-74b0-43ae-99db-9f3ff5cfa10e",
-        "name": "When clicking ‘Execute workflow’",
-        "disabled": true
       },
       {
         "parameters": {
@@ -727,12 +741,14 @@
         ],
         "id": "6ce717dd-7cf0-456f-9aaf-5b6d9136568b",
         "name": "Crear llamada en Retell",
+        "notesInFlow": false,
         "credentials": {
           "httpHeaderAuth": {
             "id": "DIdSQ2VED0gyDQyv",
             "name": "APIKEYSARAIFSS2"
           }
-        }
+        },
+        "onError": "continueErrorOutput"
       },
       {
         "parameters": {
@@ -770,8 +786,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -384,
-          768
+          -784,
+          592
         ],
         "id": "00bc74a3-9c5e-467a-89c0-99f4fdfce15d",
         "name": "Edit Fields",
@@ -845,6 +861,27 @@
         ],
         "id": "723e9b53-79b6-49f1-b005-a21928ce15b3",
         "name": "Consultar_disponibilidades"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "***REDACTED***",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -768,
+          1216
+        ],
+        "id": "b203cc60-0c5f-42f6-9d91-ea0037f684d4",
+        "name": "Marcar error Retell",
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        }
       }
     ],
     "connections": {
@@ -933,16 +970,18 @@
           ]
         ]
       },
-      "When clicking ‘Execute workflow’": {
-        "main": [
-          []
-        ]
-      },
       "Crear llamada en Retell": {
         "main": [
           [
             {
               "node": "Guardar call_id",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Marcar error Retell",
               "type": "main",
               "index": 0
             }
@@ -975,18 +1014,29 @@
             }
           ]
         ]
+      },
+      "Marcar error Retell": {
+        "main": [
+          [
+            {
+              "node": "Wait2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version b9dffa98",
+    "name": "Version daade80d",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-20T21:54:07.204Z",
-        "id": 827,
+        "createdAt": "2026-05-25T20:21:04.706Z",
+        "id": 889,
         "workflowId": "OAhFO3OsIEvGPsN2",
-        "versionId": "b9dffa98-4e25-4cdf-a24e-9ebaa0f40cb1",
+        "versionId": "daade80d-eeb7-4b93-b4c5-3fd48f401b1b",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
