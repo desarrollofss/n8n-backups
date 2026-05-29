@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-20T19:39:32.891Z",
+  "updatedAt": "2026-05-27T05:15:53.193Z",
   "createdAt": "2026-03-03T19:38:00.158Z",
   "id": "NDgPUqxm4BJZJ6LfOj19K",
   "name": "INFORMACIÓN SEDES",
@@ -23,10 +23,10 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        64,
-        -80
+        80,
+        144
       ],
-      "id": "c5a5d508-c38e-4cdb-a5fe-4289ee95d595",
+      "id": "8f98e7d7-dcb2-4f67-b36a-d4345c9cdda4",
       "name": "When Executed by Another Workflow"
     },
     {
@@ -41,10 +41,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        416,
-        -80
+        432,
+        144
       ],
-      "id": "5091ae49-4021-41e6-a132-5f4e35370ba6",
+      "id": "e91e49e9-0044-40c9-9e11-48d1f4c22e88",
       "name": "AI Agent"
     },
     {
@@ -60,10 +60,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        160,
-        176
+        240,
+        368
       ],
-      "id": "8f990329-6177-4b5d-ab90-117619c2e011",
+      "id": "09f7b7a1-f97c-4f36-b05a-a4bfc6ada6e2",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -79,10 +79,10 @@
       "type": "***REDACTED***",
       "typeVersion": 1.3,
       "position": [
-        736,
-        176
+        832,
+        368
       ],
-      "id": "dd69a0fb-69ee-44da-94e4-2fb2232e0eb0",
+      "id": "925aa988-817e-4a1d-867c-8ac98917fb03",
       "name": "Structured Output Parser"
     },
     {
@@ -95,10 +95,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
       "typeVersion": 1.5,
       "position": [
-        352,
-        176
+        432,
+        368
       ],
-      "id": "84c11502-0fe2-40a4-b34e-12867d7c2736",
+      "id": "fecf9adf-5c2e-490b-92b1-4a9e1ce6eaa4",
       "name": "Redis Chat Memory",
       "credentials": {
         "redis": {
@@ -118,10 +118,10 @@
       "type": "n8n-nodes-base.postgresTool",
       "typeVersion": 2.6,
       "position": [
-        560,
-        224
+        640,
+        368
       ],
-      "id": "8469e509-fb5c-43de-9cfa-75e0a7f7e166",
+      "id": "9c70f6b4-cf78-43d2-8b67-4cf08e22c962",
       "name": "consultar_info_sedes",
       "credentials": {
         "postgres": {
@@ -206,9 +206,9 @@
       }
     ]
   },
-  "versionId": "54b743df-81db-4ea4-80e3-26e71f410f1b",
-  "activeVersionId": "54b743df-81db-4ea4-80e3-26e71f410f1b",
-  "versionCounter": 77,
+  "versionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
+  "activeVersionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
+  "versionCounter": 91,
   "triggerCount": 0,
   "shared": [
     {
@@ -233,7 +233,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-22T05:02:36.429Z",
+              "updatedAt": "2026-05-29T11:33:30.889Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -266,7 +266,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-22",
+              "lastActiveAt": "2026-05-29",
               "isPending": false
             }
           }
@@ -283,9 +283,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-20T19:39:34.561Z",
-    "createdAt": "2026-05-20T19:39:32.892Z",
-    "versionId": "54b743df-81db-4ea4-80e3-26e71f410f1b",
+    "updatedAt": "2026-05-27T05:15:54.213Z",
+    "createdAt": "2026-05-27T05:15:53.194Z",
+    "versionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
     "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
     "nodes": [
       {
@@ -304,10 +304,10 @@
         "type": "n8n-nodes-base.executeWorkflowTrigger",
         "typeVersion": 1.1,
         "position": [
-          64,
-          -80
+          80,
+          144
         ],
-        "id": "c5a5d508-c38e-4cdb-a5fe-4289ee95d595",
+        "id": "8f98e7d7-dcb2-4f67-b36a-d4345c9cdda4",
         "name": "When Executed by Another Workflow"
       },
       {
@@ -322,10 +322,10 @@
         "type": "@n8n/n8n-nodes-langchain.agent",
         "typeVersion": 3,
         "position": [
-          416,
-          -80
+          432,
+          144
         ],
-        "id": "5091ae49-4021-41e6-a132-5f4e35370ba6",
+        "id": "e91e49e9-0044-40c9-9e11-48d1f4c22e88",
         "name": "AI Agent"
       },
       {
@@ -341,10 +341,10 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.3,
         "position": [
-          160,
-          176
+          240,
+          368
         ],
-        "id": "8f990329-6177-4b5d-ab90-117619c2e011",
+        "id": "09f7b7a1-f97c-4f36-b05a-a4bfc6ada6e2",
         "name": "OpenAI Chat Model",
         "credentials": {
           "openAiApi": {
@@ -360,10 +360,10 @@
         "type": "***REDACTED***",
         "typeVersion": 1.3,
         "position": [
-          736,
-          176
+          832,
+          368
         ],
-        "id": "dd69a0fb-69ee-44da-94e4-2fb2232e0eb0",
+        "id": "925aa988-817e-4a1d-867c-8ac98917fb03",
         "name": "Structured Output Parser"
       },
       {
@@ -376,10 +376,10 @@
         "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
         "typeVersion": 1.5,
         "position": [
-          352,
-          176
+          432,
+          368
         ],
-        "id": "84c11502-0fe2-40a4-b34e-12867d7c2736",
+        "id": "fecf9adf-5c2e-490b-92b1-4a9e1ce6eaa4",
         "name": "Redis Chat Memory",
         "credentials": {
           "redis": {
@@ -399,10 +399,10 @@
         "type": "n8n-nodes-base.postgresTool",
         "typeVersion": 2.6,
         "position": [
-          560,
-          224
+          640,
+          368
         ],
-        "id": "8469e509-fb5c-43de-9cfa-75e0a7f7e166",
+        "id": "9c70f6b4-cf78-43d2-8b67-4cf08e22c962",
         "name": "consultar_info_sedes",
         "credentials": {
           "postgres": {
@@ -470,15 +470,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 54b743df",
+    "name": "Version bd7906b7",
     "description": "",
-    "autosaved": true,
+    "autosaved": false,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-20T19:39:34.559Z",
-        "id": 820,
+        "createdAt": "2026-05-27T05:15:54.212Z",
+        "id": 977,
         "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
-        "versionId": "54b743df-81db-4ea4-80e3-26e71f410f1b",
+        "versionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
