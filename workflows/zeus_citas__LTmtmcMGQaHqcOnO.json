@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-26T14:44:05.794Z",
+  "updatedAt": "2026-06-01T14:26:00.940Z",
   "createdAt": "2026-02-04T20:12:39.778Z",
   "id": "LTmtmcMGQaHqcOnO",
   "name": "zeus_citas",
@@ -740,9 +740,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "9f46d430-10da-43af-bbe1-8ae8376158de",
-  "activeVersionId": "9f46d430-10da-43af-bbe1-8ae8376158de",
-  "versionCounter": 611,
+  "versionId": "42c6f4aa-2053-4ba8-b078-f2d1984bc9f5",
+  "activeVersionId": "42c6f4aa-2053-4ba8-b078-f2d1984bc9f5",
+  "versionCounter": 630,
   "triggerCount": 0,
   "shared": [
     {
@@ -767,7 +767,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -800,7 +800,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
@@ -810,22 +810,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-02-04T21:56:48.941Z",
-      "createdAt": "2026-02-04T21:56:48.941Z",
-      "id": "S7UevxOArIeglzP8",
-      "name": "🟢"
-    },
-    {
       "updatedAt": "2026-04-16T21:08:33.019Z",
       "createdAt": "2026-04-16T21:08:33.019Z",
       "id": "oAU4h6efQRYRWcQU",
       "name": "Sarai 📲"
+    },
+    {
+      "updatedAt": "2026-02-04T21:56:48.941Z",
+      "createdAt": "2026-02-04T21:56:48.941Z",
+      "id": "S7UevxOArIeglzP8",
+      "name": "🟢"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-26T14:44:07.120Z",
-    "createdAt": "2026-05-26T14:44:05.795Z",
-    "versionId": "9f46d430-10da-43af-bbe1-8ae8376158de",
+    "updatedAt": "2026-06-01T14:26:03.181Z",
+    "createdAt": "2026-06-01T14:26:00.941Z",
+    "versionId": "42c6f4aa-2053-4ba8-b078-f2d1984bc9f5",
     "workflowId": "LTmtmcMGQaHqcOnO",
     "nodes": [
       {
@@ -1554,15 +1554,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 9f46d430",
+    "name": "Version 42c6f4aa",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-26T14:44:07.119Z",
-        "id": 924,
+        "createdAt": "2026-06-01T14:26:03.176Z",
+        "id": 1014,
         "workflowId": "LTmtmcMGQaHqcOnO",
-        "versionId": "9f46d430-10da-43af-bbe1-8ae8376158de",
+        "versionId": "42c6f4aa-2053-4ba8-b078-f2d1984bc9f5",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
