@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-29T19:34:30.770Z",
+  "updatedAt": "2026-06-03T14:18:02.564Z",
   "createdAt": "2026-05-25T14:08:10.202Z",
   "id": "BaAyM5YpPha1-mfCJPCAv",
   "name": "Gestión Turnos Médicos",
@@ -7,23 +7,6 @@
   "active": true,
   "isArchived": false,
   "nodes": [
-    {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "turnos-medicos",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "name": "Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 1,
-      "position": [
-        -928,
-        -192
-      ],
-      "id": "6c08f993-b65b-494a-86bf-6751ee969dc4",
-      "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
-    },
     {
       "parameters": {
         "jsCode": "***REDACTED***"
@@ -66,8 +49,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        464,
-        -368
+        640,
+        -512
       ],
       "id": "74f7655e-049a-44bd-884b-389000d39778"
     },
@@ -95,8 +78,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        784,
-        -368
+        944,
+        -512
       ],
       "id": "8add8963-522a-4b15-ac08-3c1a5745f481"
     },
@@ -139,8 +122,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2,
       "position": [
-        -704,
-        144
+        -768,
+        1552
       ],
       "id": "f2195e9b-9025-4ff4-98fc-55ebeedc1054",
       "executeOnce": false,
@@ -162,8 +145,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -928,
-        144
+        -992,
+        1552
       ],
       "id": "2a677cd9-25a0-4353-bf82-89b8a3efc5f7",
       "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
@@ -192,8 +175,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        -480,
-        144
+        -544,
+        1552
       ],
       "id": "99b7dad3-5e00-41cd-a218-5fe6a3718c00",
       "executeOnce": false
@@ -222,8 +205,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        -496,
-        384
+        -560,
+        1808
       ],
       "id": "14fb0c2e-af26-4647-b9a6-fbc753e04243",
       "executeOnce": false
@@ -238,8 +221,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2,
       "position": [
-        -704,
-        384
+        -768,
+        1808
       ],
       "id": "d94d38e1-6c15-4cbb-90d9-dc0bf960ea64",
       "executeOnce": false,
@@ -261,8 +244,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -928,
-        384
+        -992,
+        1808
       ],
       "id": "3f9e8173-89c4-40af-8862-6f9c70823ee3",
       "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
@@ -276,7 +259,7 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        -288,
+        -272,
         -288
       ],
       "id": "ac61f779-f75b-4037-bb22-a02c5f1880cf",
@@ -306,8 +289,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
-        -496,
-        608
+        -560,
+        2032
       ],
       "id": "0cf54586-2a0c-4901-88d2-371db27b0c0d",
       "executeOnce": false
@@ -322,8 +305,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -944,
-        608
+        -1008,
+        2032
       ],
       "id": "08924e2e-2865-4743-8b60-d610cbec8904",
       "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
@@ -338,8 +321,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2,
       "position": [
-        -720,
-        608
+        -784,
+        2032
       ],
       "id": "9b973674-f3b7-420a-9b2f-bb88cf8432cd",
       "executeOnce": false,
@@ -350,148 +333,6 @@
         }
       },
       "notes": "***REDACTED***"
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "leftValue": "***REDACTED***",
-                    "rightValue": "insert",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    },
-                    "id": "f76616a3-c706-4800-bdbc-ef061188afb0"
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "INSERT"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "af2d9d47-2787-410d-bd32-b764bb21f16e",
-                    "leftValue": "***REDACTED***",
-                    "rightValue": "update",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "UPDATE"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "538bee2b-a88b-4768-9060-b38d88bc0b87",
-                    "leftValue": "***REDACTED***",
-                    "rightValue": "delete",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "DELETE"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.4,
-      "position": [
-        -80,
-        -304
-      ],
-      "id": "5022ac26-9d10-4635-84f3-1a67cc941c37",
-      "name": "Switch"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "schema": {
-          "__rl": true,
-          "mode": "list",
-          "value": "public"
-        },
-        "table": {
-          "__rl": true,
-          "value": "***REDACTED***",
-          "mode": "list",
-          "cachedResultName": "turno_medico"
-        },
-        "dataMode": "defineBelow",
-        "columnToMatchOn": "id",
-        "valueToMatchOn": "={{ $json.id_turno_medico }}",
-        "valuesToSend": {
-          "values": [
-            {
-              "column": "id_medico_fk",
-              "value": "***REDACTED***"
-            },
-            {
-              "column": "fecha",
-              "value": "***REDACTED***"
-            },
-            {
-              "column": "id_turno",
-              "value": "***REDACTED***"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "name": "UPDATE",
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2,
-      "position": [
-        144,
-        -288
-      ],
-      "id": "51058d30-d405-41cc-afb4-bb2b325fe7b6",
-      "alwaysOutputData": false,
-      "executeOnce": false,
-      "credentials": {
-        "postgres": {
-          "id": "G8jOYC5TFqNr9NA3",
-          "name": "conexión sarai"
-        }
-      },
-      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -529,8 +370,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2,
       "position": [
-        144,
-        -480
+        272,
+        -496
       ],
       "id": "b342d889-1291-4352-a2cb-d172ff8ae1ca",
       "alwaysOutputData": false,
@@ -542,6 +383,349 @@
         }
       },
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.code || 400 }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta Error1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        640,
+        -272
+      ],
+      "id": "c94bfdad-ac9e-45b9-a845-7f71fae4b7cf"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "name": "Validar payload1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -816,
+        512
+      ],
+      "id": "d731489a-f027-47a3-b68d-11c68425fb7d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.code }}",
+              "operation": "equal",
+              "value2": 200
+            }
+          ]
+        }
+      },
+      "name": "¿Payload OK?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        512
+      ],
+      "id": "69374051-98f5-4d3e-ba9e-15fe413d756a"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "name": "Armar respuesta OK1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        512,
+        304
+      ],
+      "id": "0e248c3a-5a52-4514-ae4d-fa467db43621"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta OK2",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        752,
+        304
+      ],
+      "id": "f1cb4380-06bd-4764-b1f6-9ea1a6dbff66"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.code || 400 }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta Error2",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        640
+      ],
+      "id": "85044dea-d6fd-46df-ad69-6d46771576c6"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "turnos",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        416
+      ],
+      "id": "2ea0bc7a-c457-47d9-86ed-8fa342fa0249",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "***REDACTED***",
+          "mode": "list",
+          "cachedResultName": "turno_medico"
+        },
+        "dataMode": "defineBelow",
+        "columnToMatchOn": "id",
+        "valueToMatchOn": "***REDACTED***",
+        "valuesToSend": {
+          "values": [
+            {
+              "column": "id_medico_fk",
+              "value": "***REDACTED***"
+            },
+            {
+              "column": "fecha",
+              "value": "***REDACTED***"
+            },
+            {
+              "column": "id_turno",
+              "value": "***REDACTED***"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "UPDATE1",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        176,
+        400
+      ],
+      "id": "3cb07717-6fd5-4d8b-adf8-86de179cbf14",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "credentials": {
+        "postgres": {
+          "id": "G8jOYC5TFqNr9NA3",
+          "name": "conexión sarai"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.code || 400 }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta Error3",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        528,
+        496
+      ],
+      "id": "c27a1168-6dec-4205-befe-2cc4f642948e"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "58883157-4130-410b-aa89-bbc058bdc6bf",
+              "leftValue": "***REDACTED***",
+              "rightValue": "update",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -160,
+        416
+      ],
+      "id": "edabbb40-6f0d-4433-9b0d-8736f2537d8b",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsCode": "***REDACTED***"
+      },
+      "name": "Validar payload2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -880,
+        1120
+      ],
+      "id": "8a6aee52-d5aa-497e-8183-313acff156ca"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.code }}",
+              "operation": "equal",
+              "value2": 200
+            }
+          ]
+        }
+      },
+      "name": "¿Payload OK?2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        1120
+      ],
+      "id": "3d043daa-df31-4a2b-ace5-897845e7d790"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.code || 400 }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "***REDACTED***"
+              },
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "name": "Respuesta Error4",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        1248
+      ],
+      "id": "2a8765c9-62cf-4c18-a260-aac58658104b"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "turnos",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        1024
+      ],
+      "id": "77ca848f-7453-4b47-aca7-16c046f87232",
+      "name": "Split Out2"
     },
     {
       "parameters": {
@@ -571,11 +755,11 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        176,
-        -96
+        112,
+        1008
       ],
-      "id": "b87f75ae-13b8-4a9e-8a44-59e14c0c53ac",
-      "name": "DELETE",
+      "id": "ccdfeb88-ad00-4246-9980-b013b54f96fc",
+      "name": "DELETE1",
       "credentials": {
         "postgres": {
           "id": "G8jOYC5TFqNr9NA3",
@@ -603,57 +787,136 @@
           }
         }
       },
-      "name": "Respuesta OK1",
+      "name": "Respuesta OK4",
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1,
       "position": [
         464,
-        -96
+        1008
       ],
-      "id": "3a836902-2b28-43f2-b170-e83deaaf8c5f"
+      "id": "8c425007-4e99-4f5a-8368-c4b71c1dfcc2"
     },
     {
       "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ $json }}",
-        "options": {
-          "responseCode": "={{ $json.code || 400 }}",
-          "responseHeaders": {
-            "entries": [
-              {
-                "name": "Content-Type",
-                "value": "***REDACTED***"
-              },
-              {
-                "name": "Access-Control-Allow-Origin",
-                "value": "*"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0d2a1329-a969-4192-b745-5e2ffe880c4a",
+              "leftValue": "***REDACTED***",
+              "rightValue": "delete",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
               }
-            ]
-          }
-        }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
       },
-      "name": "Respuesta Error1",
-      "type": "n8n-nodes-base.respondToWebhook",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -224,
+        1024
+      ],
+      "id": "d408ea86-1f9d-484a-a965-a5e89df0ec39",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "758bd578-1ea4-4868-b9a2-56ad5ccc5483",
+              "leftValue": "***REDACTED***",
+              "rightValue": "insert",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -64,
+        -288
+      ],
+      "id": "8cccadd7-4eac-45cb-81fd-7da5370cf834",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "httpMethod": "PUT",
+        "path": "turnos-medicos",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "UPDATE TURNOS",
+      "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        640,
-        -208
+        -1024,
+        512
       ],
-      "id": "c94bfdad-ac9e-45b9-a845-7f71fae4b7cf"
+      "id": "40094a55-7aa7-41d1-96c1-235ae85c59f1",
+      "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "turnos-medicos",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "INSERT TURNOS",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        -192
+      ],
+      "id": "6c08f993-b65b-494a-86bf-6751ee969dc4",
+      "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
+    },
+    {
+      "parameters": {
+        "httpMethod": "DELETE",
+        "path": "turnos-medicos",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "name": "DELETE TURNOS",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1088,
+        1120
+      ],
+      "id": "aa2d19e6-ca4f-4f47-a4ab-fa36993edbfe",
+      "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
     }
   ],
   "connections": {
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Validar payload",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Validar payload": {
       "main": [
         [
@@ -742,7 +1005,7 @@
       "main": [
         [
           {
-            "node": "Switch",
+            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -771,31 +1034,6 @@
         ]
       ]
     },
-    "Switch": {
-      "main": [
-        [
-          {
-            "node": "INSERT",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "UPDATE",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "DELETE",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "INSERT": {
       "main": [
         [
@@ -814,29 +1052,186 @@
         ]
       ]
     },
-    "UPDATE": {
+    "Validar payload1": {
       "main": [
         [
           {
-            "node": "Armar respuesta OK",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Respuesta Error1",
+            "node": "¿Payload OK?1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "DELETE": {
+    "¿Payload OK?1": {
       "main": [
         [
           {
-            "node": "Respuesta OK1",
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar respuesta OK1": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UPDATE1": {
+      "main": [
+        [
+          {
+            "node": "Armar respuesta OK1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "UPDATE1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar payload2": {
+      "main": [
+        [
+          {
+            "node": "¿Payload OK?2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Payload OK?2": {
+      "main": [
+        [
+          {
+            "node": "Split Out2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respuesta Error4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out2": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DELETE1": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "DELETE1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "INSERT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "UPDATE TURNOS": {
+      "main": [
+        [
+          {
+            "node": "Validar payload1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "INSERT TURNOS": {
+      "main": [
+        [
+          {
+            "node": "Validar payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DELETE TURNOS": {
+      "main": [
+        [
+          {
+            "node": "Validar payload2",
             "type": "main",
             "index": 0
           }
@@ -853,63 +1248,6 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "host": "localhost:5678",
-            "content-type": "application/json",
-            "accept": "application/json",
-            "accept-encoding": "gzip, deflate",
-            "accept-language": "es-419,es;q=0.9",
-            "authorization": "Basic TW1lcmxhbm86alg0aEBHYjUzLg==",
-            "max-forwards": "9",
-            "referer": "http://10.244.21.21:9091/",
-            "user-agent": "***REDACTED***",
-            "origin": "http://10.244.21.21:9091",
-            "x-api-key": "***REDACTED***",
-            "x-original-url": "/api/turnos-medicos",
-            "x-forwarded-for": "192.168.23.5:52636, 131.0.170.96",
-            "x-arr-log-id": "47a7bbd3-06f4-4fdb-82fa-001354149f85",
-            "x-forwarded-host": "vdc.sersocial.org",
-            "x-forwarded-server": "vdc.sersocial.org",
-            "connection": "Keep-Alive",
-            "content-length": "321"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "turnos": [
-              {
-                "id_medico": 2,
-                "fecha": "2026-05-31",
-                "id_turno": 8,
-                "id_turno_medico": null,
-                "accion": "insert"
-              },
-              {
-                "id_medico": 10,
-                "fecha": "2026-05-31",
-                "id_turno": 1,
-                "id_turno_medico": null,
-                "accion": "insert"
-              },
-              {
-                "id_medico": 11,
-                "fecha": "2026-05-31",
-                "id_turno": 6,
-                "id_turno_medico": null,
-                "accion": "insert"
-              }
-            ],
-            "usuario": "admin",
-            "mes": "2026-05"
-          },
-          "webhookUrl": "***REDACTED***",
-          "executionMode": "production"
-        }
-      }
-    ],
     "Webhook GET turnos asignados": [
       {
         "json": {
@@ -932,12 +1270,141 @@
           "executionMode": "production"
         }
       }
+    ],
+    "UPDATE TURNOS": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "content-type": "application/json",
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "accept-language": "es-419,es;q=0.9,en;q=0.8",
+            "authorization": "Basic TW1lcmxhbm86alg0aEBHYjUzLg==",
+            "max-forwards": "9",
+            "referer": "http://10.244.21.21:9091/",
+            "user-agent": "***REDACTED***",
+            "origin": "http://10.244.21.21:9091",
+            "x-api-key": "***REDACTED***",
+            "x-original-url": "/api/turnos-medicos",
+            "x-forwarded-for": "192.168.23.5:52550, 131.0.170.96",
+            "x-arr-log-id": "df460913-2f9f-4175-949d-69036cbf3e34",
+            "x-forwarded-host": "vdc.sersocial.org",
+            "x-forwarded-server": "vdc.sersocial.org",
+            "connection": "Keep-Alive",
+            "content-length": "135"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "turnos": [
+              {
+                "id_medico": 2,
+                "fecha": "2026-06-02",
+                "id_turno": 9,
+                "id_turno_medico": 73,
+                "accion": "update"
+              }
+            ],
+            "usuario": "admin",
+            "mes": "2026-06"
+          },
+          "webhookUrl": "***REDACTED***",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "INSERT TURNOS": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "content-type": "application/json",
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "accept-language": "es-419,es;q=0.9,en;q=0.8",
+            "authorization": "Basic TW1lcmxhbm86alg0aEBHYjUzLg==",
+            "max-forwards": "9",
+            "referer": "http://10.244.21.21:9091/",
+            "user-agent": "***REDACTED***",
+            "origin": "http://10.244.21.21:9091",
+            "x-api-key": "***REDACTED***",
+            "x-original-url": "/api/turnos-medicos",
+            "x-forwarded-for": "192.168.23.5:52550, 131.0.170.96",
+            "x-arr-log-id": "df460913-2f9f-4175-949d-69036cbf3e34",
+            "x-forwarded-host": "vdc.sersocial.org",
+            "x-forwarded-server": "vdc.sersocial.org",
+            "connection": "Keep-Alive",
+            "content-length": "135"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "turnos": [
+              {
+                "id_medico": 2,
+                "fecha": "2026-06-02",
+                "id_turno": 9,
+                "id_turno_medico": 73,
+                "accion": "update"
+              }
+            ],
+            "usuario": "admin",
+            "mes": "2026-06"
+          },
+          "webhookUrl": "***REDACTED***",
+          "executionMode": "production"
+        }
+      }
+    ],
+    "DELETE TURNOS": [
+      {
+        "json": {
+          "headers": {
+            "host": "localhost:5678",
+            "content-type": "application/json",
+            "accept": "application/json",
+            "accept-encoding": "gzip, deflate",
+            "accept-language": "es-419,es;q=0.9,en;q=0.8",
+            "authorization": "Basic TW1lcmxhbm86alg0aEBHYjUzLg==",
+            "max-forwards": "9",
+            "referer": "http://10.244.21.21:9091/",
+            "user-agent": "***REDACTED***",
+            "origin": "http://10.244.21.21:9091",
+            "x-api-key": "***REDACTED***",
+            "x-original-url": "/api/turnos-medicos",
+            "x-forwarded-for": "192.168.23.5:52550, 131.0.170.96",
+            "x-arr-log-id": "df460913-2f9f-4175-949d-69036cbf3e34",
+            "x-forwarded-host": "vdc.sersocial.org",
+            "x-forwarded-server": "vdc.sersocial.org",
+            "connection": "Keep-Alive",
+            "content-length": "135"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "turnos": [
+              {
+                "id_medico": 2,
+                "fecha": "2026-06-02",
+                "id_turno": 9,
+                "id_turno_medico": 73,
+                "accion": "update"
+              }
+            ],
+            "usuario": "admin",
+            "mes": "2026-06"
+          },
+          "webhookUrl": "***REDACTED***",
+          "executionMode": "production"
+        }
+      }
     ]
   },
-  "versionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
-  "activeVersionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
-  "versionCounter": 490,
-  "triggerCount": 4,
+  "versionId": "34c056cb-5e62-4ddb-b406-2fe9aad54a99",
+  "activeVersionId": "34c056cb-5e62-4ddb-b406-2fe9aad54a99",
+  "versionCounter": 623,
+  "triggerCount": 6,
   "shared": [
     {
       "updatedAt": "2026-05-25T14:08:10.202Z",
@@ -961,7 +1428,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -994,7 +1461,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
@@ -1004,28 +1471,11 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-05-29T19:34:33.445Z",
-    "createdAt": "2026-05-29T19:34:30.771Z",
-    "versionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
+    "updatedAt": "2026-06-03T14:18:04.465Z",
+    "createdAt": "2026-06-03T14:18:02.565Z",
+    "versionId": "34c056cb-5e62-4ddb-b406-2fe9aad54a99",
     "workflowId": "BaAyM5YpPha1-mfCJPCAv",
     "nodes": [
-      {
-        "parameters": {
-          "httpMethod": "POST",
-          "path": "turnos-medicos",
-          "responseMode": "responseNode",
-          "options": {}
-        },
-        "name": "Webhook",
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 1,
-        "position": [
-          -928,
-          -192
-        ],
-        "id": "6c08f993-b65b-494a-86bf-6751ee969dc4",
-        "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
-      },
       {
         "parameters": {
           "jsCode": "***REDACTED***"
@@ -1068,8 +1518,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          464,
-          -368
+          640,
+          -512
         ],
         "id": "74f7655e-049a-44bd-884b-389000d39778"
       },
@@ -1097,8 +1547,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1,
         "position": [
-          784,
-          -368
+          944,
+          -512
         ],
         "id": "8add8963-522a-4b15-ac08-3c1a5745f481"
       },
@@ -1141,8 +1591,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2,
         "position": [
-          -704,
-          144
+          -768,
+          1552
         ],
         "id": "f2195e9b-9025-4ff4-98fc-55ebeedc1054",
         "executeOnce": false,
@@ -1164,8 +1614,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 1,
         "position": [
-          -928,
-          144
+          -992,
+          1552
         ],
         "id": "2a677cd9-25a0-4353-bf82-89b8a3efc5f7",
         "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
@@ -1194,8 +1644,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1,
         "position": [
-          -480,
-          144
+          -544,
+          1552
         ],
         "id": "99b7dad3-5e00-41cd-a218-5fe6a3718c00",
         "executeOnce": false
@@ -1224,8 +1674,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1,
         "position": [
-          -496,
-          384
+          -560,
+          1808
         ],
         "id": "14fb0c2e-af26-4647-b9a6-fbc753e04243",
         "executeOnce": false
@@ -1240,8 +1690,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2,
         "position": [
-          -704,
-          384
+          -768,
+          1808
         ],
         "id": "d94d38e1-6c15-4cbb-90d9-dc0bf960ea64",
         "executeOnce": false,
@@ -1263,8 +1713,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 1,
         "position": [
-          -928,
-          384
+          -992,
+          1808
         ],
         "id": "3f9e8173-89c4-40af-8862-6f9c70823ee3",
         "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
@@ -1278,7 +1728,7 @@
         "type": "n8n-nodes-base.splitOut",
         "typeVersion": 1,
         "position": [
-          -288,
+          -272,
           -288
         ],
         "id": "ac61f779-f75b-4037-bb22-a02c5f1880cf",
@@ -1308,8 +1758,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1,
         "position": [
-          -496,
-          608
+          -560,
+          2032
         ],
         "id": "0cf54586-2a0c-4901-88d2-371db27b0c0d",
         "executeOnce": false
@@ -1324,8 +1774,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 1,
         "position": [
-          -944,
-          608
+          -1008,
+          2032
         ],
         "id": "08924e2e-2865-4743-8b60-d610cbec8904",
         "webhookId": "1decac38-1fa3-4316-a89a-f9ba2e50029f"
@@ -1340,8 +1790,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2,
         "position": [
-          -720,
-          608
+          -784,
+          2032
         ],
         "id": "9b973674-f3b7-420a-9b2f-bb88cf8432cd",
         "executeOnce": false,
@@ -1352,148 +1802,6 @@
           }
         },
         "notes": "***REDACTED***"
-      },
-      {
-        "parameters": {
-          "rules": {
-            "values": [
-              {
-                "conditions": {
-                  "options": {
-                    "caseSensitive": true,
-                    "leftValue": "",
-                    "typeValidation": "strict",
-                    "version": 3
-                  },
-                  "conditions": [
-                    {
-                      "leftValue": "***REDACTED***",
-                      "rightValue": "insert",
-                      "operator": {
-                        "type": "string",
-                        "operation": "equals"
-                      },
-                      "id": "f76616a3-c706-4800-bdbc-ef061188afb0"
-                    }
-                  ],
-                  "combinator": "and"
-                },
-                "renameOutput": true,
-                "outputKey": "INSERT"
-              },
-              {
-                "conditions": {
-                  "options": {
-                    "caseSensitive": true,
-                    "leftValue": "",
-                    "typeValidation": "strict",
-                    "version": 3
-                  },
-                  "conditions": [
-                    {
-                      "id": "af2d9d47-2787-410d-bd32-b764bb21f16e",
-                      "leftValue": "***REDACTED***",
-                      "rightValue": "update",
-                      "operator": {
-                        "type": "string",
-                        "operation": "equals"
-                      }
-                    }
-                  ],
-                  "combinator": "and"
-                },
-                "renameOutput": true,
-                "outputKey": "UPDATE"
-              },
-              {
-                "conditions": {
-                  "options": {
-                    "caseSensitive": true,
-                    "leftValue": "",
-                    "typeValidation": "strict",
-                    "version": 3
-                  },
-                  "conditions": [
-                    {
-                      "id": "538bee2b-a88b-4768-9060-b38d88bc0b87",
-                      "leftValue": "***REDACTED***",
-                      "rightValue": "delete",
-                      "operator": {
-                        "type": "string",
-                        "operation": "equals"
-                      }
-                    }
-                  ],
-                  "combinator": "and"
-                },
-                "renameOutput": true,
-                "outputKey": "DELETE"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.switch",
-        "typeVersion": 3.4,
-        "position": [
-          -80,
-          -304
-        ],
-        "id": "5022ac26-9d10-4635-84f3-1a67cc941c37",
-        "name": "Switch"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "schema": {
-            "__rl": true,
-            "mode": "list",
-            "value": "public"
-          },
-          "table": {
-            "__rl": true,
-            "value": "***REDACTED***",
-            "mode": "list",
-            "cachedResultName": "turno_medico"
-          },
-          "dataMode": "defineBelow",
-          "columnToMatchOn": "id",
-          "valueToMatchOn": "={{ $json.id_turno_medico }}",
-          "valuesToSend": {
-            "values": [
-              {
-                "column": "id_medico_fk",
-                "value": "***REDACTED***"
-              },
-              {
-                "column": "fecha",
-                "value": "***REDACTED***"
-              },
-              {
-                "column": "id_turno",
-                "value": "***REDACTED***"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "name": "UPDATE",
-        "type": "n8n-nodes-base.postgres",
-        "typeVersion": 2,
-        "position": [
-          144,
-          -288
-        ],
-        "id": "51058d30-d405-41cc-afb4-bb2b325fe7b6",
-        "alwaysOutputData": false,
-        "executeOnce": false,
-        "credentials": {
-          "postgres": {
-            "id": "G8jOYC5TFqNr9NA3",
-            "name": "conexión sarai"
-          }
-        },
-        "onError": "continueErrorOutput"
       },
       {
         "parameters": {
@@ -1531,8 +1839,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2,
         "position": [
-          144,
-          -480
+          272,
+          -496
         ],
         "id": "b342d889-1291-4352-a2cb-d172ff8ae1ca",
         "alwaysOutputData": false,
@@ -1544,6 +1852,349 @@
           }
         },
         "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": "={{ $json.code || 400 }}",
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta Error1",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          640,
+          -272
+        ],
+        "id": "c94bfdad-ac9e-45b9-a845-7f71fae4b7cf"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "name": "Validar payload1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -816,
+          512
+        ],
+        "id": "d731489a-f027-47a3-b68d-11c68425fb7d"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "number": [
+              {
+                "value1": "={{ $json.code }}",
+                "operation": "equal",
+                "value2": 200
+              }
+            ]
+          }
+        },
+        "name": "¿Payload OK?1",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -592,
+          512
+        ],
+        "id": "69374051-98f5-4d3e-ba9e-15fe413d756a"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "name": "Armar respuesta OK1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          512,
+          304
+        ],
+        "id": "0e248c3a-5a52-4514-ae4d-fa467db43621"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": 200,
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta OK2",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          752,
+          304
+        ],
+        "id": "f1cb4380-06bd-4764-b1f6-9ea1a6dbff66"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": "={{ $json.code || 400 }}",
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta Error2",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -368,
+          640
+        ],
+        "id": "85044dea-d6fd-46df-ad69-6d46771576c6"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "turnos",
+          "include": "allOtherFields",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -368,
+          416
+        ],
+        "id": "2ea0bc7a-c457-47d9-86ed-8fa342fa0249",
+        "name": "Split Out1"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "***REDACTED***",
+            "mode": "list",
+            "cachedResultName": "turno_medico"
+          },
+          "dataMode": "defineBelow",
+          "columnToMatchOn": "id",
+          "valueToMatchOn": "***REDACTED***",
+          "valuesToSend": {
+            "values": [
+              {
+                "column": "id_medico_fk",
+                "value": "***REDACTED***"
+              },
+              {
+                "column": "fecha",
+                "value": "***REDACTED***"
+              },
+              {
+                "column": "id_turno",
+                "value": "***REDACTED***"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "UPDATE1",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2,
+        "position": [
+          176,
+          400
+        ],
+        "id": "3cb07717-6fd5-4d8b-adf8-86de179cbf14",
+        "alwaysOutputData": false,
+        "executeOnce": false,
+        "credentials": {
+          "postgres": {
+            "id": "G8jOYC5TFqNr9NA3",
+            "name": "conexión sarai"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": "={{ $json.code || 400 }}",
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta Error3",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          528,
+          496
+        ],
+        "id": "c27a1168-6dec-4205-befe-2cc4f642948e"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "58883157-4130-410b-aa89-bbc058bdc6bf",
+                "leftValue": "***REDACTED***",
+                "rightValue": "update",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -160,
+          416
+        ],
+        "id": "edabbb40-6f0d-4433-9b0d-8736f2537d8b",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "jsCode": "***REDACTED***"
+        },
+        "name": "Validar payload2",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -880,
+          1120
+        ],
+        "id": "8a6aee52-d5aa-497e-8183-313acff156ca"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "number": [
+              {
+                "value1": "={{ $json.code }}",
+                "operation": "equal",
+                "value2": 200
+              }
+            ]
+          }
+        },
+        "name": "¿Payload OK?2",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 1,
+        "position": [
+          -656,
+          1120
+        ],
+        "id": "3d043daa-df31-4a2b-ace5-897845e7d790"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ $json }}",
+          "options": {
+            "responseCode": "={{ $json.code || 400 }}",
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "***REDACTED***"
+                },
+                {
+                  "name": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }
+              ]
+            }
+          }
+        },
+        "name": "Respuesta Error4",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -432,
+          1248
+        ],
+        "id": "2a8765c9-62cf-4c18-a260-aac58658104b"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "turnos",
+          "include": "allOtherFields",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -432,
+          1024
+        ],
+        "id": "77ca848f-7453-4b47-aca7-16c046f87232",
+        "name": "Split Out2"
       },
       {
         "parameters": {
@@ -1573,11 +2224,11 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          176,
-          -96
+          112,
+          1008
         ],
-        "id": "b87f75ae-13b8-4a9e-8a44-59e14c0c53ac",
-        "name": "DELETE",
+        "id": "ccdfeb88-ad00-4246-9980-b013b54f96fc",
+        "name": "DELETE1",
         "credentials": {
           "postgres": {
             "id": "G8jOYC5TFqNr9NA3",
@@ -1605,57 +2256,136 @@
             }
           }
         },
-        "name": "Respuesta OK1",
+        "name": "Respuesta OK4",
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1,
         "position": [
           464,
-          -96
+          1008
         ],
-        "id": "3a836902-2b28-43f2-b170-e83deaaf8c5f"
+        "id": "8c425007-4e99-4f5a-8368-c4b71c1dfcc2"
       },
       {
         "parameters": {
-          "respondWith": "json",
-          "responseBody": "={{ $json }}",
-          "options": {
-            "responseCode": "={{ $json.code || 400 }}",
-            "responseHeaders": {
-              "entries": [
-                {
-                  "name": "Content-Type",
-                  "value": "***REDACTED***"
-                },
-                {
-                  "name": "Access-Control-Allow-Origin",
-                  "value": "*"
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "0d2a1329-a969-4192-b745-5e2ffe880c4a",
+                "leftValue": "***REDACTED***",
+                "rightValue": "delete",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
                 }
-              ]
-            }
-          }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
         },
-        "name": "Respuesta Error1",
-        "type": "n8n-nodes-base.respondToWebhook",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -224,
+          1024
+        ],
+        "id": "d408ea86-1f9d-484a-a965-a5e89df0ec39",
+        "name": "If1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "758bd578-1ea4-4868-b9a2-56ad5ccc5483",
+                "leftValue": "***REDACTED***",
+                "rightValue": "insert",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -64,
+          -288
+        ],
+        "id": "8cccadd7-4eac-45cb-81fd-7da5370cf834",
+        "name": "If2"
+      },
+      {
+        "parameters": {
+          "httpMethod": "PUT",
+          "path": "turnos-medicos",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "name": "UPDATE TURNOS",
+        "type": "n8n-nodes-base.webhook",
         "typeVersion": 1,
         "position": [
-          640,
-          -208
+          -1024,
+          512
         ],
-        "id": "c94bfdad-ac9e-45b9-a845-7f71fae4b7cf"
+        "id": "40094a55-7aa7-41d1-96c1-235ae85c59f1",
+        "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "turnos-medicos",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "name": "INSERT TURNOS",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -928,
+          -192
+        ],
+        "id": "6c08f993-b65b-494a-86bf-6751ee969dc4",
+        "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
+      },
+      {
+        "parameters": {
+          "httpMethod": "DELETE",
+          "path": "turnos-medicos",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "name": "DELETE TURNOS",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -1088,
+          1120
+        ],
+        "id": "aa2d19e6-ca4f-4f47-a4ab-fa36993edbfe",
+        "webhookId": "3ece1352-41f4-421c-a10a-1bab7ebb3747"
       }
     ],
     "connections": {
-      "Webhook": {
-        "main": [
-          [
-            {
-              "node": "Validar payload",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Validar payload": {
         "main": [
           [
@@ -1744,7 +2474,7 @@
         "main": [
           [
             {
-              "node": "Switch",
+              "node": "If2",
               "type": "main",
               "index": 0
             }
@@ -1773,31 +2503,6 @@
           ]
         ]
       },
-      "Switch": {
-        "main": [
-          [
-            {
-              "node": "INSERT",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "UPDATE",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "DELETE",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "INSERT": {
         "main": [
           [
@@ -1816,29 +2521,186 @@
           ]
         ]
       },
-      "UPDATE": {
+      "Validar payload1": {
         "main": [
           [
             {
-              "node": "Armar respuesta OK",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "Respuesta Error1",
+              "node": "¿Payload OK?1",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "DELETE": {
+      "¿Payload OK?1": {
         "main": [
           [
             {
-              "node": "Respuesta OK1",
+              "node": "Split Out1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta Error2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Armar respuesta OK1": {
+        "main": [
+          [
+            {
+              "node": "Respuesta OK2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out1": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "UPDATE1": {
+        "main": [
+          [
+            {
+              "node": "Armar respuesta OK1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta Error3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "UPDATE1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Validar payload2": {
+        "main": [
+          [
+            {
+              "node": "¿Payload OK?2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Payload OK?2": {
+        "main": [
+          [
+            {
+              "node": "Split Out2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respuesta Error4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out2": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DELETE1": {
+        "main": [
+          [
+            {
+              "node": "Respuesta OK4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "DELETE1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If2": {
+        "main": [
+          [
+            {
+              "node": "INSERT",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "UPDATE TURNOS": {
+        "main": [
+          [
+            {
+              "node": "Validar payload1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "INSERT TURNOS": {
+        "main": [
+          [
+            {
+              "node": "Validar payload",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "DELETE TURNOS": {
+        "main": [
+          [
+            {
+              "node": "Validar payload2",
               "type": "main",
               "index": 0
             }
@@ -1847,15 +2709,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 8e7ce47e",
+    "name": "Version 34c056cb",
     "description": "",
-    "autosaved": true,
+    "autosaved": false,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-29T19:34:33.443Z",
-        "id": 1007,
+        "createdAt": "2026-06-03T14:18:04.464Z",
+        "id": 1023,
         "workflowId": "BaAyM5YpPha1-mfCJPCAv",
-        "versionId": "8e7ce47e-fe21-48d8-9173-0d46ab3564c5",
+        "versionId": "34c056cb-5e62-4ddb-b406-2fe9aad54a99",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
