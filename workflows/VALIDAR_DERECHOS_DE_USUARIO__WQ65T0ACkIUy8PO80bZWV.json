@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-12T19:24:34.981Z",
+  "updatedAt": "2026-06-04T17:29:47.674Z",
   "createdAt": "2026-03-03T18:20:57.454Z",
   "id": "WQ65T0ACkIUy8PO80bZWV",
   "name": "VALIDAR DERECHOS DE USUARIO",
@@ -15,7 +15,7 @@
       "typeVersion": 2,
       "position": [
         -464,
-        816
+        720
       ],
       "id": "c03aa9fd-3f39-4ac3-96a4-203faa22d023",
       "name": "Verificar token MUTUAL",
@@ -28,8 +28,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        112,
-        1120
+        208,
+        720
       ],
       "id": "48b85851-4a99-4212-a4ad-1c625f67fca2",
       "name": "Guardar Token MUTUAL",
@@ -43,8 +43,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -880,
-        -384
+        -1466,
+        -464
       ],
       "typeVersion": 1,
       "id": "3208c854-8474-4616-9778-18ad3a1cc9a9",
@@ -78,8 +78,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -224,
-        784
+        -240,
+        720
       ],
       "id": "d3928d9b-9e9d-4f74-acbe-61052465b0fe",
       "name": "Token válido",
@@ -92,7 +92,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
+        208,
         -112
       ],
       "id": "e1df5b57-384c-4638-a1b1-83c502c8033d",
@@ -104,8 +104,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        544,
-        928
+        656,
+        624
       ],
       "id": "a3da46fa-c0ab-4c9c-bc45-58e98980f506",
       "name": "Merge1",
@@ -142,8 +142,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -112,
-        1136
+        -16,
+        816
       ],
       "id": "ca1a22d2-8da1-4a34-a6b8-dea4e842e0ce",
       "name": "Login para obtener token MUTUAL",
@@ -181,8 +181,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        16,
-        96
+        -16,
+        -16
       ],
       "id": "d7142554-0499-4abd-b3b8-2495555c44c8",
       "name": "Validar derechos de usuario",
@@ -208,8 +208,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        320,
-        768
+        432,
+        528
       ],
       "id": "9a8573dc-af62-48d2-bb23-498de4518bd5",
       "name": "Edit Fields2",
@@ -232,8 +232,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        320,
-        1120
+        432,
+        720
       ],
       "id": "ce397af1-8560-4bca-a9de-d9f34231c416",
       "name": "Edit Fields3",
@@ -247,8 +247,8 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        1808,
-        1344
+        -464,
+        1648
       ],
       "id": "10eb13d8-d971-45dc-b22c-f5a7923fcedd",
       "name": "When Executed by Another Workflow"
@@ -262,8 +262,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        720,
-        1040
+        880,
+        624
       ],
       "id": "adacce89-a8f3-4e42-8a46-8ef48717ac91",
       "name": "Merge",
@@ -276,8 +276,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1152,
-        1168
+        -464,
+        1136
       ],
       "id": "5c1ef3ae-a0fd-4fb2-81d2-f0ce4a2a51e2",
       "name": "Code in JavaScript1",
@@ -290,8 +290,8 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        512,
-        1520
+        208,
+        912
       ],
       "id": "07f6983d-aaed-4127-83a4-4d976f7dfd73",
       "name": "Error loguin",
@@ -304,8 +304,8 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        384,
-        176
+        208,
+        80
       ],
       "id": "888814a5-bb7f-423d-9436-501cf044ea3e",
       "name": "Error validar derechos de usuario",
@@ -318,8 +318,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        656,
-        1536
+        400,
+        1952
       ],
       "typeVersion": 1,
       "id": "844abd6c-f9db-4d96-b3cf-4afc278a1da9",
@@ -333,8 +333,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -416,
-        -112
+        -464,
+        -16
       ],
       "id": "4d91bbb7-7664-46e0-80ee-5ac117f49f73",
       "name": "Code in JavaScript",
@@ -350,8 +350,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -224,
-        512
+        -464,
+        304
       ],
       "id": "4d341c16-6b90-42f7-838e-fa2e6525ff58",
       "name": "Merge2",
@@ -366,8 +366,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -192,
-        48
+        -240,
+        -16
       ],
       "id": "6d1b2a65-aa48-4714-aa33-a1ee62ff19af",
       "name": "Merge3",
@@ -383,8 +383,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        2096,
-        1344
+        -240,
+        1648
       ],
       "id": "5276c8b7-47de-4663-9b01-1ade8287d58d",
       "name": "Redis GET mutual_token",
@@ -402,8 +402,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2336,
-        1344
+        -16,
+        1648
       ],
       "id": "23f1b541-07e9-41dd-a49c-c1d5a9840532",
       "name": "Code: evaluar token"
@@ -436,8 +436,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2576,
-        1344
+        208,
+        1648
       ],
       "id": "0b8776b3-7195-4b6d-b46e-2d0016c9d47e",
       "name": "IF: ¿token válido?"
@@ -449,8 +449,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2832,
-        1136
+        880,
+        1456
       ],
       "id": "69ffb13b-3381-448c-9c23-207d62b7f9ba",
       "name": "Code: token existente"
@@ -486,8 +486,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2816,
-        1520
+        432,
+        1744
       ],
       "id": "3a553864-d9db-4841-9c59-54fb1a795995",
       "name": "HTTP: Login Mutual",
@@ -507,8 +507,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        3040,
-        1472
+        656,
+        1648
       ],
       "id": "d51ba666-d660-4959-9c1e-6c6951756820",
       "name": "Redis SET mutual_token",
@@ -526,8 +526,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        3280,
-        1472
+        880,
+        1648
       ],
       "id": "caee07d7-4890-476f-bcae-becac748f7cb",
       "name": "Code: nuevo token"
@@ -537,8 +537,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        3536,
-        1152
+        1104,
+        1552
       ],
       "id": "a3eb35fb-d876-4ae0-86f9-b572519c8f08",
       "name": "Merge token"
@@ -550,8 +550,8 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        3056,
-        1680
+        656,
+        1840
       ],
       "id": "9221fbd5-144d-47d6-9694-775c341e90d9",
       "name": "Error login Mutual"
@@ -585,8 +585,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3776,
-        1344
+        1328,
+        1552
       ],
       "id": "ad4c9ca0-0b53-49f4-8733-d8449205d582",
       "name": "Validar derechos de usuario1",
@@ -601,8 +601,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4224,
-        1328
+        2000,
+        1360
       ],
       "id": "2611a84b-b1ad-4edb-b200-9949a140924b",
       "name": "Limpiar datos Mutual1"
@@ -614,8 +614,8 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        4144,
-        1680
+        2000,
+        1744
       ],
       "id": "e7b31219-2517-454d-b226-561c4e0556c7",
       "name": "Error validar derechos de usuario1"
@@ -647,8 +647,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        3984,
-        1440
+        1776,
+        1648
       ],
       "id": "3a223ab8-81a0-4628-9122-36502eccbc3f",
       "name": "If"
@@ -660,8 +660,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4240,
-        1488
+        2000,
+        1552
       ],
       "id": "53ae9a22-ff3f-4c77-97fe-7f02eec07e6c",
       "name": "Code in JavaScript2"
@@ -676,11 +676,45 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        4512,
-        1392
+        2224,
+        1456
       ],
       "id": "b8a46574-1086-44a2-aa36-8f155ca221b1",
       "name": "Merge4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "217ae477-49be-457e-8b1b-dd2718b2cd43",
+              "leftValue": "={{ $json.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1568,
+        1536
+      ],
+      "id": "9af649a5-d3cc-4721-be39-4119102186ca",
+      "name": "If1"
     }
   ],
   "connections": {
@@ -952,7 +986,7 @@
       "main": [
         [
           {
-            "node": "Limpiar datos Mutual1",
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -1010,6 +1044,24 @@
           }
         ]
       ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Limpiar datos Mutual1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -1029,88 +1081,16 @@
         "json": {
           "datos_paciente": {
             "tipo_documento": "CC",
-            "documento": " 1047456627",
-            "id_registro": "Q0N8NzIxNDQ0NDl8UFNBfDIwMjUtMDYtMTA="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": " 72164899 ",
-            "id_registro": "Q0N8NzIxNjQ4OTl8UFNBfDIwMjUtMDYtMTQ="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": "7479127",
-            "id_registro": "Q0N8NzQ3OTEyN3xQU0F8MjAyNS0wNi0wNQ=="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": "8748121",
-            "id_registro": "Q0N8ODc0ODEyMXxQU0F8MjAyNS0wMy0wNA=="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": "1007710896",
-            "id_registro": "Q0N8NzIxMzgwODR8UFNBfDIwMjUtMDYtMTA="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": "12796328",
-            "id_registro": "Q0N8MTI3OTYzMjh8UFNBfDIwMjUtMDYtMTI="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": "9061848",
-            "id_registro": "Q0N8OTA2MTg0OHxQU0F8MjAyNS0wNi0yNg=="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": "7476434",
-            "id_registro": "Q0N8NzQ3NjQzNHxQU0F8MjAyNS0wNi0yMQ=="
-          }
-        }
-      },
-      {
-        "json": {
-          "datos_paciente": {
-            "tipo_documento": "CC",
-            "documento": "8735595",
-            "id_registro": "Q0N8ODczNTU5NXxQU0F8MjAyNS0wNi0xMQ=="
+            "documento": "45688167",
+            "id_registro": ""
           }
         }
       }
     ]
   },
-  "versionId": "dccdee09-aaa2-4b98-86f4-ad3eb8a4e305",
-  "activeVersionId": "dccdee09-aaa2-4b98-86f4-ad3eb8a4e305",
-  "versionCounter": 853,
+  "versionId": "d75bb3d1-9a52-498e-927b-9c5fd90ed2b9",
+  "activeVersionId": "d75bb3d1-9a52-498e-927b-9c5fd90ed2b9",
+  "versionCounter": 896,
   "triggerCount": 0,
   "shared": [
     {
@@ -1135,7 +1115,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1168,7 +1148,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
@@ -1178,9 +1158,9 @@
   ],
   "tags": [],
   "activeVersion": {
-    "updatedAt": "2026-05-12T21:04:40.066Z",
-    "createdAt": "2026-05-12T19:18:49.468Z",
-    "versionId": "dccdee09-aaa2-4b98-86f4-ad3eb8a4e305",
+    "updatedAt": "2026-06-04T17:29:48.973Z",
+    "createdAt": "2026-06-04T17:29:47.676Z",
+    "versionId": "d75bb3d1-9a52-498e-927b-9c5fd90ed2b9",
     "workflowId": "WQ65T0ACkIUy8PO80bZWV",
     "nodes": [
       {
@@ -1191,7 +1171,7 @@
         "typeVersion": 2,
         "position": [
           -464,
-          816
+          720
         ],
         "id": "c03aa9fd-3f39-4ac3-96a4-203faa22d023",
         "name": "Verificar token MUTUAL",
@@ -1204,8 +1184,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          112,
-          1120
+          208,
+          720
         ],
         "id": "48b85851-4a99-4212-a4ad-1c625f67fca2",
         "name": "Guardar Token MUTUAL",
@@ -1219,8 +1199,8 @@
         },
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          -880,
-          -384
+          -1466,
+          -464
         ],
         "typeVersion": 1,
         "id": "3208c854-8474-4616-9778-18ad3a1cc9a9",
@@ -1254,8 +1234,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -224,
-          784
+          -240,
+          720
         ],
         "id": "d3928d9b-9e9d-4f74-acbe-61052465b0fe",
         "name": "Token válido",
@@ -1268,7 +1248,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          368,
+          208,
           -112
         ],
         "id": "e1df5b57-384c-4638-a1b1-83c502c8033d",
@@ -1280,8 +1260,8 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          544,
-          928
+          656,
+          624
         ],
         "id": "a3da46fa-c0ab-4c9c-bc45-58e98980f506",
         "name": "Merge1",
@@ -1318,8 +1298,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -112,
-          1136
+          -16,
+          816
         ],
         "id": "ca1a22d2-8da1-4a34-a6b8-dea4e842e0ce",
         "name": "Login para obtener token MUTUAL",
@@ -1357,8 +1337,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          16,
-          96
+          -16,
+          -16
         ],
         "id": "d7142554-0499-4abd-b3b8-2495555c44c8",
         "name": "Validar derechos de usuario",
@@ -1384,8 +1364,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          320,
-          768
+          432,
+          528
         ],
         "id": "9a8573dc-af62-48d2-bb23-498de4518bd5",
         "name": "Edit Fields2",
@@ -1408,8 +1388,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          320,
-          1120
+          432,
+          720
         ],
         "id": "ce397af1-8560-4bca-a9de-d9f34231c416",
         "name": "Edit Fields3",
@@ -1423,8 +1403,8 @@
         "type": "n8n-nodes-base.executeWorkflowTrigger",
         "typeVersion": 1.1,
         "position": [
-          1808,
-          1344
+          -464,
+          1648
         ],
         "id": "10eb13d8-d971-45dc-b22c-f5a7923fcedd",
         "name": "When Executed by Another Workflow"
@@ -1438,8 +1418,8 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          720,
-          1040
+          880,
+          624
         ],
         "id": "adacce89-a8f3-4e42-8a46-8ef48717ac91",
         "name": "Merge",
@@ -1452,8 +1432,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1152,
-          1168
+          -464,
+          1136
         ],
         "id": "5c1ef3ae-a0fd-4fb2-81d2-f0ce4a2a51e2",
         "name": "Code in JavaScript1",
@@ -1466,8 +1446,8 @@
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
         "position": [
-          512,
-          1520
+          208,
+          912
         ],
         "id": "07f6983d-aaed-4127-83a4-4d976f7dfd73",
         "name": "Error loguin",
@@ -1480,8 +1460,8 @@
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
         "position": [
-          384,
-          176
+          208,
+          80
         ],
         "id": "888814a5-bb7f-423d-9436-501cf044ea3e",
         "name": "Error validar derechos de usuario",
@@ -1494,8 +1474,8 @@
         },
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          656,
-          1536
+          400,
+          1952
         ],
         "typeVersion": 1,
         "id": "844abd6c-f9db-4d96-b3cf-4afc278a1da9",
@@ -1509,8 +1489,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -416,
-          -112
+          -464,
+          -16
         ],
         "id": "4d91bbb7-7664-46e0-80ee-5ac117f49f73",
         "name": "Code in JavaScript",
@@ -1526,8 +1506,8 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          -224,
-          512
+          -464,
+          304
         ],
         "id": "4d341c16-6b90-42f7-838e-fa2e6525ff58",
         "name": "Merge2",
@@ -1542,8 +1522,8 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          -192,
-          48
+          -240,
+          -16
         ],
         "id": "6d1b2a65-aa48-4714-aa33-a1ee62ff19af",
         "name": "Merge3",
@@ -1559,8 +1539,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          2096,
-          1344
+          -240,
+          1648
         ],
         "id": "5276c8b7-47de-4663-9b01-1ade8287d58d",
         "name": "Redis GET mutual_token",
@@ -1578,8 +1558,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          2336,
-          1344
+          -16,
+          1648
         ],
         "id": "23f1b541-07e9-41dd-a49c-c1d5a9840532",
         "name": "Code: evaluar token"
@@ -1612,8 +1592,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          2576,
-          1344
+          208,
+          1648
         ],
         "id": "0b8776b3-7195-4b6d-b46e-2d0016c9d47e",
         "name": "IF: ¿token válido?"
@@ -1625,8 +1605,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          2832,
-          1136
+          880,
+          1456
         ],
         "id": "69ffb13b-3381-448c-9c23-207d62b7f9ba",
         "name": "Code: token existente"
@@ -1662,8 +1642,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2816,
-          1520
+          432,
+          1744
         ],
         "id": "3a553864-d9db-4841-9c59-54fb1a795995",
         "name": "HTTP: Login Mutual",
@@ -1683,8 +1663,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          3040,
-          1472
+          656,
+          1648
         ],
         "id": "d51ba666-d660-4959-9c1e-6c6951756820",
         "name": "Redis SET mutual_token",
@@ -1702,8 +1682,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          3280,
-          1472
+          880,
+          1648
         ],
         "id": "caee07d7-4890-476f-bcae-becac748f7cb",
         "name": "Code: nuevo token"
@@ -1713,8 +1693,8 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          3536,
-          1152
+          1104,
+          1552
         ],
         "id": "a3eb35fb-d876-4ae0-86f9-b572519c8f08",
         "name": "Merge token"
@@ -1726,8 +1706,8 @@
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
         "position": [
-          3056,
-          1680
+          656,
+          1840
         ],
         "id": "9221fbd5-144d-47d6-9694-775c341e90d9",
         "name": "Error login Mutual"
@@ -1761,8 +1741,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3776,
-          1344
+          1328,
+          1552
         ],
         "id": "ad4c9ca0-0b53-49f4-8733-d8449205d582",
         "name": "Validar derechos de usuario1",
@@ -1777,8 +1757,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          4224,
-          1328
+          2000,
+          1360
         ],
         "id": "2611a84b-b1ad-4edb-b200-9949a140924b",
         "name": "Limpiar datos Mutual1"
@@ -1790,8 +1770,8 @@
         "type": "n8n-nodes-base.stopAndError",
         "typeVersion": 1,
         "position": [
-          4144,
-          1680
+          2000,
+          1744
         ],
         "id": "e7b31219-2517-454d-b226-561c4e0556c7",
         "name": "Error validar derechos de usuario1"
@@ -1823,8 +1803,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          3984,
-          1440
+          1776,
+          1648
         ],
         "id": "3a223ab8-81a0-4628-9122-36502eccbc3f",
         "name": "If"
@@ -1836,8 +1816,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          4240,
-          1488
+          2000,
+          1552
         ],
         "id": "53ae9a22-ff3f-4c77-97fe-7f02eec07e6c",
         "name": "Code in JavaScript2"
@@ -1852,11 +1832,45 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          4512,
-          1392
+          2224,
+          1456
         ],
         "id": "b8a46574-1086-44a2-aa36-8f155ca221b1",
         "name": "Merge4"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "217ae477-49be-457e-8b1b-dd2718b2cd43",
+                "leftValue": "={{ $json.data }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1568,
+          1536
+        ],
+        "id": "9af649a5-d3cc-4721-be39-4119102186ca",
+        "name": "If1"
       }
     ],
     "connections": {
@@ -2128,7 +2142,7 @@
         "main": [
           [
             {
-              "node": "Limpiar datos Mutual1",
+              "node": "If1",
               "type": "main",
               "index": 0
             }
@@ -2186,18 +2200,36 @@
             }
           ]
         ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "Limpiar datos Mutual1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version dccdee09",
+    "name": "Version d75bb3d1",
     "description": "",
-    "autosaved": true,
+    "autosaved": false,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-12T21:04:40.064Z",
-        "id": 703,
+        "createdAt": "2026-06-04T17:29:48.971Z",
+        "id": 1036,
         "workflowId": "WQ65T0ACkIUy8PO80bZWV",
-        "versionId": "dccdee09-aaa2-4b98-86f4-ad3eb8a4e305",
+        "versionId": "d75bb3d1-9a52-498e-927b-9c5fd90ed2b9",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
