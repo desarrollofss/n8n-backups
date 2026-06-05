@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T04:27:54.623Z",
+  "updatedAt": "2026-06-03T20:56:04.474Z",
   "createdAt": "2026-04-13T19:37:57.076Z",
   "id": "kxHCsXKdVTcKN6sbWhMBS",
   "name": "GESTION_CITAS",
@@ -585,8 +585,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        47360,
-        10976
+        47424,
+        10992
       ]
     },
     {
@@ -723,7 +723,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        47360,
+        47424,
         11168
       ]
     },
@@ -861,8 +861,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        47360,
-        11360
+        47424,
+        11344
       ]
     }
   ],
@@ -1023,9 +1023,9 @@
     "templateCredsSetupCompleted": true
   },
   "pinData": {},
-  "versionId": "671a571d-a8e1-4d7f-94ed-44a648c6bc8f",
-  "activeVersionId": "671a571d-a8e1-4d7f-94ed-44a648c6bc8f",
-  "versionCounter": 5513,
+  "versionId": "b4805f59-6007-45f3-85a4-07cceeb57029",
+  "activeVersionId": "b4805f59-6007-45f3-85a4-07cceeb57029",
+  "versionCounter": 5522,
   "triggerCount": 0,
   "shared": [
     {
@@ -1050,7 +1050,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1083,7 +1083,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
@@ -1093,22 +1093,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-04-13T19:37:55.447Z",
-      "createdAt": "2026-04-13T19:37:55.447Z",
-      "id": "GeXMdnk5M7m34Z3t",
-      "name": "chatbot-whatsapp"
-    },
-    {
       "updatedAt": "2026-05-15T14:38:37.293Z",
       "createdAt": "2026-03-03T19:34:15.068Z",
       "id": "M63Xu3JDOVoP0xRM",
       "name": "flujo whatsapp 🟢💬"
+    },
+    {
+      "updatedAt": "2026-04-13T19:37:55.447Z",
+      "createdAt": "2026-04-13T19:37:55.447Z",
+      "id": "GeXMdnk5M7m34Z3t",
+      "name": "chatbot-whatsapp"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-27T04:27:56.989Z",
-    "createdAt": "2026-05-27T04:27:54.624Z",
-    "versionId": "671a571d-a8e1-4d7f-94ed-44a648c6bc8f",
+    "updatedAt": "2026-06-04T12:09:42.149Z",
+    "createdAt": "2026-06-03T20:56:04.475Z",
+    "versionId": "b4805f59-6007-45f3-85a4-07cceeb57029",
     "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
     "nodes": [
       {
@@ -1689,8 +1689,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          47360,
-          10976
+          47424,
+          10992
         ]
       },
       {
@@ -1827,7 +1827,7 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          47360,
+          47424,
           11168
         ]
       },
@@ -1965,8 +1965,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          47360,
-          11360
+          47424,
+          11344
         ]
       }
     ],
@@ -2119,15 +2119,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 671a571d",
+    "name": "Version b4805f59",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-27T04:27:56.987Z",
-        "id": 970,
+        "createdAt": "2026-06-04T12:09:42.147Z",
+        "id": 1027,
         "workflowId": "kxHCsXKdVTcKN6sbWhMBS",
-        "versionId": "671a571d-a8e1-4d7f-94ed-44a648c6bc8f",
+        "versionId": "b4805f59-6007-45f3-85a4-07cceeb57029",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
