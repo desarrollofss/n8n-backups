@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T05:15:53.193Z",
+  "updatedAt": "2026-06-05T20:22:17.272Z",
   "createdAt": "2026-03-03T19:38:00.158Z",
   "id": "NDgPUqxm4BJZJ6LfOj19K",
   "name": "INFORMACIÓN SEDES",
@@ -206,9 +206,9 @@
       }
     ]
   },
-  "versionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
-  "activeVersionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
-  "versionCounter": 91,
+  "versionId": "bebc517e-38c3-48da-a8d5-09621d815c05",
+  "activeVersionId": "bebc517e-38c3-48da-a8d5-09621d815c05",
+  "versionCounter": 98,
   "triggerCount": 0,
   "shared": [
     {
@@ -233,7 +233,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -266,7 +266,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
@@ -283,9 +283,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-27T05:15:54.213Z",
-    "createdAt": "2026-05-27T05:15:53.194Z",
-    "versionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
+    "updatedAt": "2026-06-05T20:22:34.485Z",
+    "createdAt": "2026-06-05T20:22:17.273Z",
+    "versionId": "bebc517e-38c3-48da-a8d5-09621d815c05",
     "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
     "nodes": [
       {
@@ -470,15 +470,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version bd7906b7",
+    "name": "Version bebc517e",
     "description": "",
-    "autosaved": false,
+    "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-27T05:15:54.212Z",
-        "id": 977,
+        "createdAt": "2026-06-05T20:22:34.483Z",
+        "id": 1041,
         "workflowId": "NDgPUqxm4BJZJ6LfOj19K",
-        "versionId": "bd7906b7-40a9-4e9e-a357-3c93c0c1fefc",
+        "versionId": "bebc517e-38c3-48da-a8d5-09621d815c05",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
