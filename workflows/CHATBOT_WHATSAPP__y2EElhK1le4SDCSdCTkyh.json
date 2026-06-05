@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T19:00:33.662Z",
+  "updatedAt": "2026-06-05T15:47:00.772Z",
   "createdAt": "2026-03-03T19:30:36.628Z",
   "id": "y2EElhK1le4SDCSdCTkyh",
   "name": "CHATBOT WHATSAPP",
@@ -17,8 +17,8 @@
       "type": "n8n-nodes-base.whatsAppTrigger",
       "typeVersion": 1,
       "position": [
-        -39424,
-        -30976
+        -39376,
+        -30672
       ],
       "id": "de45004e-46f8-455b-86d0-664b45179cc4",
       "name": "WhatsApp Trigger",
@@ -166,8 +166,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -38304,
-        -30848
+        -38288,
+        -30496
       ],
       "id": "c60e26d0-2e4f-4ae3-8271-4475845b0a41",
       "name": "Switch2"
@@ -243,8 +243,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -38080,
-        -33088
+        -38064,
+        -31744
       ],
       "id": "5980dcba-305e-4012-b056-1eb2792ce557",
       "name": "Edit Fields1"
@@ -259,8 +259,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -37856,
-        -33088
+        -37840,
+        -31744
       ],
       "id": "77f46ad1-caf2-4591-9bb4-3824e4141854",
       "name": "Redis",
@@ -281,8 +281,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -37632,
-        -33088
+        -37616,
+        -31744
       ],
       "id": "94cfb671-a9bc-4bfe-b5f7-805f9030770f",
       "name": "Redis1",
@@ -355,8 +355,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -37408,
-        -33184
+        -37392,
+        -31840
       ],
       "id": "0bce4bd4-fb09-400e-a41f-d1b79b17c4d8",
       "name": "Switch1"
@@ -366,8 +366,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -37120,
-        -33264
+        -37104,
+        -31920
       ],
       "id": "6d6dfb88-763e-4d32-8730-71c15b7b4e6b",
       "name": "No Operation, do nothing"
@@ -380,8 +380,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -37120,
-        -33072
+        -37104,
+        -31728
       ],
       "id": "0822a0e4-70c6-404e-8890-3a0572497b4a",
       "name": "Redis2",
@@ -397,8 +397,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -37120,
-        -31280
+        -37072,
+        -30976
       ],
       "id": "0a1d193e-a2b1-49c5-867a-bdbf89e21582",
       "name": "Wait",
@@ -421,8 +421,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -36832,
-        -33072
+        -36816,
+        -31728
       ],
       "id": "a4dc4eee-1f25-4fbb-bbf4-c8b1329dd61f",
       "name": "Edit Fields"
@@ -436,8 +436,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -38080,
-        -31064
+        -38032,
+        -30768
       ],
       "id": "43559a4f-c0c7-40ce-90f3-ad987cff3b2f",
       "name": "Obtener audio",
@@ -459,8 +459,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -37632,
-        -30968
+        -37584,
+        -30672
       ],
       "id": "2ace8dbb-81a1-4e85-b278-a36e3eb8eafe",
       "name": "HTTP Request",
@@ -484,8 +484,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 2,
       "position": [
-        -37408,
-        -30968
+        -37360,
+        -30672
       ],
       "id": "f2aa738d-3640-4764-8431-360f77c0b10e",
       "name": "Transcribe a recording",
@@ -505,8 +505,8 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        -37184,
-        -30968
+        -37136,
+        -30672
       ],
       "id": "47c5a57b-7c11-4919-a904-a82304601364",
       "name": "Basic LLM Chain1"
@@ -528,8 +528,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -36832,
-        -30968
+        -36784,
+        -30672
       ],
       "id": "1f7c20a8-adfc-4401-8645-3d215c786774",
       "name": "Edit Fields3"
@@ -551,8 +551,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -36608,
-        -32896
+        -36560,
+        -31728
       ],
       "id": "45ba4f29-085c-4fa0-9430-ac65d27df166",
       "name": "Edit Fields4"
@@ -566,8 +566,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -36384,
-        -32896
+        -36480,
+        -32848
       ]
     },
     {
@@ -581,8 +581,8 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        -35040,
-        -31360
+        -35360,
+        -31264
       ],
       "id": "72386d74-3242-4131-acd3-b64a258c095e",
       "name": "Basic LLM Chain",
@@ -595,8 +595,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -34688,
-        -31360
+        -35024,
+        -31280
       ],
       "id": "0525596c-8b13-4d85-9be7-b51a570a057f",
       "name": "Code in JavaScript"
@@ -624,8 +624,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -34464,
-        -31360
+        -34800,
+        -31280
       ],
       "id": "9d8aa737-9a0a-4621-ae72-b13f8afcf9fd",
       "name": "Edit Fields2"
@@ -642,8 +642,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -34240,
-        -31360
+        -34576,
+        -31280
       ],
       "credentials": {
         "redis": {
@@ -662,8 +662,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -33664,
-        -31360
+        -34000,
+        -31280
       ]
     },
     {
@@ -679,8 +679,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -33440,
-        -31360
+        -33776,
+        -31280
       ],
       "credentials": {
         "redis": {
@@ -921,8 +921,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.3,
       "position": [
-        -33216,
-        -31488
+        -33488,
+        -31408
       ],
       "id": "b64d32ac-1764-4e1c-b117-b6e36047855c",
       "name": "Switch"
@@ -989,8 +989,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3,
       "position": [
-        -32872,
-        -31328
+        -32896,
+        -31280
       ],
       "id": "b4a68388-75d4-4ec0-8edc-dfc228960ecf",
       "name": "AI Agent"
@@ -1001,7 +1001,7 @@
       "typeVersion": 3.2,
       "position": [
         -32176,
-        -31348
+        -31344
       ],
       "id": "3953297b-e137-4fcd-8eb7-0d2419b9d313",
       "name": "Merge"
@@ -1020,7 +1020,7 @@
       "typeVersion": 1.1,
       "position": [
         -31952,
-        -31348
+        -31344
       ],
       "id": "5fef1e77-de00-4f7f-ba09-1823530fe279",
       "name": "Respuesta",
@@ -1061,7 +1061,7 @@
       "typeVersion": 2.2,
       "position": [
         -31728,
-        -31348
+        -31344
       ],
       "id": "ea54d39a-2a1c-4fc4-bfd5-a3a268c242f0",
       "name": "If"
@@ -1080,7 +1080,7 @@
       "typeVersion": 1.1,
       "position": [
         -31504,
-        -31348
+        -31360
       ],
       "id": "1106f6f4-3d2d-487a-8126-5656478c3286",
       "name": "Respuesta1",
@@ -1105,8 +1105,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -32992,
-        -31104
+        -33056,
+        -31040
       ],
       "id": "7d63862a-dd4c-4ec2-a1f1-dcec726fe966",
       "name": "OpenAI Chat Model",
@@ -1130,7 +1130,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.3,
       "position": [
-        -34968,
+        -34976,
         -32640
       ],
       "id": "7ffb3a93-1c84-4cfb-aa0c-30a1d6933980",
@@ -1152,8 +1152,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
       "typeVersion": 1.5,
       "position": [
-        -32864,
-        -31104
+        -32880,
+        -31040
       ],
       "id": "0112b210-9d28-4262-8ad2-3ed233b29c6b",
       "name": "Redis Chat Memory",
@@ -1177,8 +1177,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -38080,
-        -30784
+        -38032,
+        -30480
       ],
       "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
       "credentials": {
@@ -1197,20 +1197,20 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -33664,
-        -30544
+        -34032,
+        -30336
       ]
     },
     {
       "parameters": {
         "content": "## VOZ",
-        "height": 256,
-        "width": 992
+        "height": 80,
+        "width": 336
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -37904,
-        -31064
+        -38048,
+        -30864
       ],
       "typeVersion": 1,
       "id": "e1ca75c3-cc90-446a-9507-8903032c12af",
@@ -1219,15 +1219,15 @@
     {
       "parameters": {
         "content": "## TEXTO",
-        "height": 608,
-        "width": 992,
+        "height": 96,
+        "width": 480,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -38240,
-        -31328
+        -38128,
+        -31888
       ],
       "id": "079571d5-696d-404a-898f-356444c46c55",
       "name": "Sticky Note1"
@@ -1261,8 +1261,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -33952,
-        -31360
+        -34288,
+        -31280
       ],
       "id": "66fa0adb-e99c-4e2c-aa1f-805fd80f2d07",
       "name": "Edit Fields5"
@@ -1274,8 +1274,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -37856,
-        -30496
+        -37808,
+        -30192
       ],
       "id": "e4fda8b4-da67-47c9-bd4b-f05f0cdb5f7a",
       "name": "Extraer list_reply"
@@ -1297,8 +1297,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -38080,
-        -30496
+        -38000,
+        -30192
       ],
       "id": "2d635cb2-2de5-4a2a-ba07-46fd9180ef68",
       "name": "Edit Fields7"
@@ -1313,8 +1313,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -36160,
-        -32896
+        -36256,
+        -32848
       ],
       "id": "9b42f580-0b89-4add-953b-9e622d1f97bb",
       "name": "Leer Estado Paciente1",
@@ -1378,8 +1378,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -35936,
-        -32896
+        -36032,
+        -32848
       ],
       "id": "1f0ace3c-c3d8-4a2f-9a83-f8987c373fdf",
       "name": "Edit Fields9"
@@ -1391,8 +1391,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -35712,
-        -32896
+        -35808,
+        -32848
       ],
       "id": "a9ff8d27-0ada-44f7-baf2-ad8b83db15de",
       "name": "Decidir Ruta"
@@ -1485,8 +1485,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -35264,
-        -32256
+        -35536,
+        -32512
       ],
       "id": "73f8fcc4-0702-4781-9d39-6f77b4ce627c",
       "name": "Decidir Ruta 2"
@@ -1514,7 +1514,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -32808,
+        -32832,
         -31664
       ],
       "id": "d02159c1-07d2-430e-8466-40576a2c7dca",
@@ -1599,8 +1599,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -34240,
-        -32600
+        -34416,
+        -32608
       ],
       "id": "5690413e-9bcb-4edd-a738-b1cc39a54ef8",
       "name": "Call 'GESTION_CITAS'"
@@ -1615,8 +1615,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -37632,
-        -30496
+        -37584,
+        -30192
       ],
       "id": "4b5300c2-ee14-475e-af05-2200a659e4b0",
       "name": "Redis3",
@@ -1668,8 +1668,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -37408,
-        -30496
+        -37360,
+        -30192
       ],
       "id": "9a93a3ed-62ec-464c-9939-e54e720385da",
       "name": "Prep list_reply"
@@ -1748,8 +1748,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -37120,
-        -30496
+        -37072,
+        -30192
       ],
       "id": "3b19069c-0e35-471b-ba24-c7a0be23cc6d",
       "name": "Gestion Citas(list_replay)"
@@ -1833,7 +1833,7 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -32400,
+        -32576,
         -31664
       ],
       "id": "b852f9a8-2788-496d-ab78-bef4bf69027b",
@@ -1977,8 +1977,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -35488,
-        -32960
+        -35568,
+        -32912
       ],
       "id": "5e712355-7393-43e8-a203-e251325143db",
       "name": "Manejar Comando Especial"
@@ -1991,8 +1991,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -33952,
-        -33584
+        -33968,
+        -33712
       ],
       "id": "6d011e87-9dc3-4fa5-8cf0-bfe66417dce0",
       "name": "Limpiar Estado Cancelar",
@@ -2040,7 +2040,7 @@
       "typeVersion": 1.1,
       "position": [
         -35264,
-        -33384
+        -33392
       ],
       "id": "92d2ed6d-42f9-42d6-8419-4bbcb164b3aa",
       "name": "Respuesta Injection",
@@ -2063,8 +2063,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -35264,
-        -32800
+        -35248,
+        -33232
       ],
       "id": "381f32f6-24d1-4ca4-9bf8-f9265304de26",
       "name": "Respuesta Empty",
@@ -2086,8 +2086,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -39200,
-        -30976
+        -39152,
+        -30672
       ],
       "id": "822589e4-df17-455d-9a82-aaea28d2c150",
       "name": "Dedup Get",
@@ -2127,8 +2127,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -38752,
-        -30880
+        -38704,
+        -30576
       ],
       "id": "02876fdb-3d40-4155-b708-17c4d0d3727c",
       "name": "Dedup If"
@@ -2144,8 +2144,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -38528,
-        -30784
+        -38480,
+        -30480
       ],
       "id": "25bc2dec-c74a-4b9c-8c1e-afada7bab78d",
       "name": "Dedup Set",
@@ -2161,8 +2161,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -38528,
-        -30976
+        -38592,
+        -30304
       ],
       "id": "1689c762-9054-4a15-8186-13999518cfc9",
       "name": "Dedup Skip"
@@ -2175,7 +2175,7 @@
       "typeVersion": 2,
       "position": [
         -32400,
-        -31224
+        -31232
       ],
       "id": "820e63b4-4bfe-4a23-afc8-b0fc5f508364",
       "name": "Normalizar AI Output"
@@ -2195,8 +2195,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -32808,
-        -30928
+        -33424,
+        -30784
       ],
       "id": "0ec411fd-4ca4-4f59-bc0a-a0d8b1878e3b",
       "name": "Preguntar Menu Fallback",
@@ -2217,8 +2217,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -33216,
-        -30736
+        -33584,
+        -30528
       ],
       "id": "28a173ec-1e30-409a-a6fa-84a4351adccd",
       "name": "Leer Estado Paciente",
@@ -2264,8 +2264,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -32808,
-        -30736
+        -33056,
+        -30528
       ],
       "id": "e31d560c-c55d-42a7-9912-5911e2937914",
       "name": "Edit Fields10"
@@ -2277,8 +2277,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -32400,
-        -30736
+        -32720,
+        -30528
       ],
       "id": "a3bbc830-9ae7-45e2-a1e4-b590a39ab4e0",
       "name": "Decidir Ruta1"
@@ -2310,8 +2310,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -33952,
-        -30640
+        -34320,
+        -30432
       ],
       "id": "d050f10d-7c56-4024-a3e5-a02e9f8d998f",
       "name": "If1"
@@ -2323,8 +2323,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -33440,
-        -30736
+        -33808,
+        -30528
       ],
       "id": "de892e62-d868-4646-94c2-9092d146a629",
       "name": "Code in JavaScript1"
@@ -2346,8 +2346,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -33664,
-        -30736
+        -34032,
+        -30528
       ],
       "id": "caa8cbed-efca-4cb9-b2a9-873d3ef02a0b",
       "name": "Edit Fields6"
@@ -2431,8 +2431,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -32176,
-        -30736
+        -32448,
+        -30528
       ],
       "id": "c31e39ec-3bee-4179-8261-0a5129124063",
       "name": "Call 'GESTION_CITAS' (flow)"
@@ -2482,8 +2482,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        -32736,
-        -31104
+        -32704,
+        -31040
       ],
       "id": "83401f71-8535-4af2-bac7-3196a0ffd28d",
       "name": "Call 'INFORMACIÓN SEDES'"
@@ -2506,8 +2506,8 @@
       "type": "n8n-nodes-base.httpRequestTool",
       "typeVersion": 4.3,
       "position": [
-        -32608,
-        -31104
+        -32512,
+        -31056
       ],
       "id": "b4543b7f-4dd1-4252-a394-e3a3ce4c856e",
       "name": "Informacion general Sersocial"
@@ -2540,8 +2540,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -38976,
-        -30976
+        -38928,
+        -30672
       ],
       "id": "f93a326e-4345-4cfd-976d-08af1b1839b3",
       "name": "If2"
@@ -2551,8 +2551,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        -38752,
-        -31072
+        -38704,
+        -30768
       ],
       "id": "a44611c1-9a3a-4bba-a258-747c992d4bad",
       "name": "No Operation, do nothing1"
@@ -2568,8 +2568,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -35264,
-        -33192
+        -35216,
+        -33104
       ],
       "id": "3b120957-2878-4932-82f9-0864e7068e0d",
       "name": "Respuesta Off-Topic",
@@ -2609,8 +2609,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -33440,
-        -30544
+        -33808,
+        -30336
       ],
       "id": "095bb85c-db8f-4742-a20f-7447e370b994",
       "name": "Es Entidad Desconocida",
@@ -2628,8 +2628,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -33216,
-        -30496
+        -33520,
+        -30352
       ],
       "id": "cbe15977-de3a-4fe4-86cc-feb962980f29",
       "name": "Respuesta Provisional Cross-Lookup",
@@ -2655,8 +2655,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1,
       "position": [
-        -35264,
-        -32608
+        -35280,
+        -32800
       ],
       "webhookId": "b2127e18-77aa-43aa-89eb-e421ff1dab6e",
       "credentials": {
@@ -2695,8 +2695,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -37856,
-        -31064
+        -37808,
+        -30768
       ]
     },
     {
@@ -2712,8 +2712,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -37632,
-        -31160
+        -37584,
+        -30864
       ],
       "webhookId": "570f73a1-c040-485b-af08-f9c6c34dc4ef",
       "credentials": {
@@ -2734,8 +2734,8 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        -35040,
-        -32864
+        -35024,
+        -32032
       ]
     },
     {
@@ -2747,8 +2747,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -34688,
-        -32864
+        -34784,
+        -32976
       ]
     },
     {
@@ -2910,8 +2910,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -34464,
-        -32944
+        -34528,
+        -33056
       ]
     },
     {
@@ -2927,7 +2927,7 @@
       "typeVersion": 1,
       "position": [
         -34240,
-        -33512
+        -33520
       ],
       "credentials": {
         "redis": {
@@ -2948,8 +2948,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -34240,
-        -33320
+        -34176,
+        -33280
       ],
       "credentials": {
         "redis": {
@@ -2972,7 +2972,7 @@
       "typeVersion": 1,
       "position": [
         -33952,
-        -33320
+        -33328
       ],
       "credentials": {
         "redis": {
@@ -2995,7 +2995,7 @@
       "typeVersion": 1.1,
       "position": [
         -33664,
-        -33320
+        -33328
       ],
       "webhookId": "f0a1f706-1a06-4954-8a63-910bb8a9a7aa",
       "credentials": {
@@ -3014,8 +3014,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -32400,
-        -33128
+        -32560,
+        -33088
       ]
     },
     {
@@ -3031,8 +3031,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -32176,
-        -33128
+        -32192,
+        -33088
       ],
       "credentials": {
         "redis": {
@@ -3072,7 +3072,7 @@
       "typeVersion": 2,
       "position": [
         -31952,
-        -33128
+        -33136
       ]
     },
     {
@@ -3088,7 +3088,7 @@
       "typeVersion": 1,
       "position": [
         -31728,
-        -33320
+        -33328
       ],
       "credentials": {
         "redis": {
@@ -3115,7 +3115,7 @@
       "typeVersion": 4.2,
       "position": [
         -31504,
-        -33320
+        -33328
       ],
       "credentials": {
         "whatsAppApi": {
@@ -3155,7 +3155,7 @@
       "typeVersion": 2,
       "position": [
         -31728,
-        -32768
+        -32976
       ]
     },
     {
@@ -3175,8 +3175,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -31504,
-        -32672
+        -31424,
+        -33120
       ],
       "credentials": {
         "whatsAppApi": {
@@ -3264,8 +3264,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -31504,
-        -32864
+        -31440,
+        -32848
       ]
     },
     {
@@ -3277,8 +3277,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -34240,
-        -32984
+        -34208,
+        -32944
       ]
     },
     {
@@ -3292,8 +3292,8 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        -34016,
-        -32984
+        -33968,
+        -32944
       ]
     },
     {
@@ -3306,7 +3306,7 @@
       "typeVersion": 2,
       "position": [
         -33664,
-        -32984
+        -32944
       ]
     },
     {
@@ -3324,8 +3324,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -33440,
-        -32984
+        -33456,
+        -32944
       ],
       "webhookId": "2213809d-898c-456d-83dc-dc0dd5016b3d",
       "credentials": {
@@ -3365,8 +3365,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -33216,
-        -32984
+        -33248,
+        -32944
       ]
     },
     {
@@ -3384,8 +3384,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -32808,
-        -32600
+        -32864,
+        -33280
       ],
       "webhookId": "702e4674-c5a5-4986-97cf-7b6c01649bf7",
       "credentials": {
@@ -3404,7 +3404,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -32808,
+        -32592,
         -32384
       ]
     },
@@ -3725,8 +3725,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -32808,
-        -32192
+        -33136,
+        -30896
       ],
       "webhookId": "f55e84ba-f900-4a90-b416-be619fbd0725",
       "credentials": {
@@ -3751,8 +3751,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -32808,
-        -32000
+        -33120,
+        -30736
       ],
       "webhookId": "479e9f41-72f4-46ab-b3da-4d6d8274123f",
       "credentials": {
@@ -3771,8 +3771,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -34240,
-        -32792
+        -34224,
+        -32752
       ]
     },
     {
@@ -3788,8 +3788,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -33952,
-        -32792
+        -33968,
+        -32752
       ],
       "credentials": {
         "redis": {
@@ -3811,8 +3811,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -33664,
-        -32792
+        -33728,
+        -32752
       ],
       "webhookId": "78a5baab-17c5-4838-9b57-bd7c44632477",
       "credentials": {
@@ -3831,8 +3831,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -34976,
-        -32200
+        -35008,
+        -32432
       ]
     },
     {
@@ -3865,8 +3865,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        -34688,
-        -32200
+        -34704,
+        -32256
       ]
     },
     {
@@ -3900,7 +3900,7 @@
       "typeVersion": 2,
       "position": [
         -34464,
-        -32104
+        -32112
       ]
     },
     {
@@ -3929,7 +3929,7 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -34240,
+        -34128,
         -32368
       ],
       "credentials": {
@@ -3950,7 +3950,7 @@
       "type": "@n8n/n8n-nodes-langchain.chainLlm",
       "typeVersion": 1.7,
       "position": [
-        -34016,
+        -33936,
         -32368
       ]
     },
@@ -4081,7 +4081,7 @@
       "typeVersion": 1.3,
       "position": [
         -33216,
-        -32600
+        -32608
       ]
     },
     {
@@ -4097,8 +4097,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -33216,
-        -32048
+        -33184,
+        -32208
       ],
       "webhookId": "3efb29c9-63dd-4baa-80d8-df3c12f478a7",
       "credentials": {
@@ -4117,8 +4117,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -34240,
-        -32176
+        -34144,
+        -32096
       ]
     },
     {
@@ -4135,7 +4135,7 @@
       "typeVersion": 1,
       "position": [
         -33952,
-        -32176
+        -32096
       ],
       "credentials": {
         "redis": {
@@ -4157,8 +4157,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -33664,
-        -32176
+        -33712,
+        -32096
       ],
       "webhookId": "be393bcf-05ed-4927-90a3-7f640b525ad6",
       "credentials": {
@@ -4258,8 +4258,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -34464,
-        -31864
+        -34080,
+        -31872
       ]
     },
     {
@@ -4275,8 +4275,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -34240,
-        -31864
+        -33856,
+        -31872
       ],
       "credentials": {
         "redis": {
@@ -4364,8 +4364,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -33952,
-        -31864
+        -33568,
+        -31872
       ]
     },
     {
@@ -4378,7 +4378,7 @@
       "typeVersion": 2,
       "position": [
         -34240,
-        -31672
+        -31568
       ]
     },
     {
@@ -4394,8 +4394,8 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        -33952,
-        -31672
+        -33968,
+        -31568
       ],
       "credentials": {
         "redis": {
@@ -4417,8 +4417,8 @@
       "type": "n8n-nodes-base.whatsApp",
       "typeVersion": 1.1,
       "position": [
-        -33664,
-        -31672
+        -33712,
+        -31568
       ],
       "webhookId": "138286a0-dae7-402d-ba65-02353a5e6cc4",
       "credentials": {
@@ -5907,9 +5907,9 @@
       }
     ]
   },
-  "versionId": "e534c4aa-47d2-4a35-b074-87409eb698eb",
-  "activeVersionId": "e534c4aa-47d2-4a35-b074-87409eb698eb",
-  "versionCounter": 2672,
+  "versionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
+  "activeVersionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
+  "versionCounter": 2810,
   "triggerCount": 1,
   "shared": [
     {
@@ -5934,7 +5934,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -5967,7 +5967,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
@@ -5990,9 +5990,9 @@
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-05-27T19:00:42.063Z",
-    "createdAt": "2026-05-27T19:00:33.664Z",
-    "versionId": "e534c4aa-47d2-4a35-b074-87409eb698eb",
+    "updatedAt": "2026-06-05T17:13:57.108Z",
+    "createdAt": "2026-06-05T15:47:00.774Z",
+    "versionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
     "workflowId": "y2EElhK1le4SDCSdCTkyh",
     "nodes": [
       {
@@ -6005,8 +6005,8 @@
         "type": "n8n-nodes-base.whatsAppTrigger",
         "typeVersion": 1,
         "position": [
-          -39424,
-          -30976
+          -39376,
+          -30672
         ],
         "id": "de45004e-46f8-455b-86d0-664b45179cc4",
         "name": "WhatsApp Trigger",
@@ -6154,8 +6154,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.3,
         "position": [
-          -38304,
-          -30848
+          -38288,
+          -30496
         ],
         "id": "c60e26d0-2e4f-4ae3-8271-4475845b0a41",
         "name": "Switch2"
@@ -6231,8 +6231,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -38080,
-          -33088
+          -38064,
+          -31744
         ],
         "id": "5980dcba-305e-4012-b056-1eb2792ce557",
         "name": "Edit Fields1"
@@ -6247,8 +6247,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -37856,
-          -33088
+          -37840,
+          -31744
         ],
         "id": "77f46ad1-caf2-4591-9bb4-3824e4141854",
         "name": "Redis",
@@ -6269,8 +6269,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -37632,
-          -33088
+          -37616,
+          -31744
         ],
         "id": "94cfb671-a9bc-4bfe-b5f7-805f9030770f",
         "name": "Redis1",
@@ -6343,8 +6343,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.3,
         "position": [
-          -37408,
-          -33184
+          -37392,
+          -31840
         ],
         "id": "0bce4bd4-fb09-400e-a41f-d1b79b17c4d8",
         "name": "Switch1"
@@ -6354,8 +6354,8 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          -37120,
-          -33264
+          -37104,
+          -31920
         ],
         "id": "6d6dfb88-763e-4d32-8730-71c15b7b4e6b",
         "name": "No Operation, do nothing"
@@ -6368,8 +6368,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -37120,
-          -33072
+          -37104,
+          -31728
         ],
         "id": "0822a0e4-70c6-404e-8890-3a0572497b4a",
         "name": "Redis2",
@@ -6385,8 +6385,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -37120,
-          -31280
+          -37072,
+          -30976
         ],
         "id": "0a1d193e-a2b1-49c5-867a-bdbf89e21582",
         "name": "Wait",
@@ -6409,8 +6409,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -36832,
-          -33072
+          -36816,
+          -31728
         ],
         "id": "a4dc4eee-1f25-4fbb-bbf4-c8b1329dd61f",
         "name": "Edit Fields"
@@ -6424,8 +6424,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -38080,
-          -31064
+          -38032,
+          -30768
         ],
         "id": "43559a4f-c0c7-40ce-90f3-ad987cff3b2f",
         "name": "Obtener audio",
@@ -6447,8 +6447,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -37632,
-          -30968
+          -37584,
+          -30672
         ],
         "id": "2ace8dbb-81a1-4e85-b278-a36e3eb8eafe",
         "name": "HTTP Request",
@@ -6472,8 +6472,8 @@
         "type": "@n8n/n8n-nodes-langchain.openAi",
         "typeVersion": 2,
         "position": [
-          -37408,
-          -30968
+          -37360,
+          -30672
         ],
         "id": "f2aa738d-3640-4764-8431-360f77c0b10e",
         "name": "Transcribe a recording",
@@ -6493,8 +6493,8 @@
         "type": "@n8n/n8n-nodes-langchain.chainLlm",
         "typeVersion": 1.7,
         "position": [
-          -37184,
-          -30968
+          -37136,
+          -30672
         ],
         "id": "47c5a57b-7c11-4919-a904-a82304601364",
         "name": "Basic LLM Chain1"
@@ -6516,8 +6516,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -36832,
-          -30968
+          -36784,
+          -30672
         ],
         "id": "1f7c20a8-adfc-4401-8645-3d215c786774",
         "name": "Edit Fields3"
@@ -6539,8 +6539,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -36608,
-          -32896
+          -36560,
+          -31728
         ],
         "id": "45ba4f29-085c-4fa0-9430-ac65d27df166",
         "name": "Edit Fields4"
@@ -6554,8 +6554,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -36384,
-          -32896
+          -36480,
+          -32848
         ]
       },
       {
@@ -6569,8 +6569,8 @@
         "type": "@n8n/n8n-nodes-langchain.chainLlm",
         "typeVersion": 1.7,
         "position": [
-          -35040,
-          -31360
+          -35360,
+          -31264
         ],
         "id": "72386d74-3242-4131-acd3-b64a258c095e",
         "name": "Basic LLM Chain",
@@ -6583,8 +6583,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -34688,
-          -31360
+          -35024,
+          -31280
         ],
         "id": "0525596c-8b13-4d85-9be7-b51a570a057f",
         "name": "Code in JavaScript"
@@ -6612,8 +6612,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -34464,
-          -31360
+          -34800,
+          -31280
         ],
         "id": "9d8aa737-9a0a-4621-ae72-b13f8afcf9fd",
         "name": "Edit Fields2"
@@ -6630,8 +6630,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -34240,
-          -31360
+          -34576,
+          -31280
         ],
         "credentials": {
           "redis": {
@@ -6650,8 +6650,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -33664,
-          -31360
+          -34000,
+          -31280
         ]
       },
       {
@@ -6667,8 +6667,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -33440,
-          -31360
+          -33776,
+          -31280
         ],
         "credentials": {
           "redis": {
@@ -6909,8 +6909,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.3,
         "position": [
-          -33216,
-          -31488
+          -33488,
+          -31408
         ],
         "id": "b64d32ac-1764-4e1c-b117-b6e36047855c",
         "name": "Switch"
@@ -6977,8 +6977,8 @@
         "type": "@n8n/n8n-nodes-langchain.agent",
         "typeVersion": 3,
         "position": [
-          -32872,
-          -31328
+          -32896,
+          -31280
         ],
         "id": "b4a68388-75d4-4ec0-8edc-dfc228960ecf",
         "name": "AI Agent"
@@ -6989,7 +6989,7 @@
         "typeVersion": 3.2,
         "position": [
           -32176,
-          -31348
+          -31344
         ],
         "id": "3953297b-e137-4fcd-8eb7-0d2419b9d313",
         "name": "Merge"
@@ -7008,7 +7008,7 @@
         "typeVersion": 1.1,
         "position": [
           -31952,
-          -31348
+          -31344
         ],
         "id": "5fef1e77-de00-4f7f-ba09-1823530fe279",
         "name": "Respuesta",
@@ -7049,7 +7049,7 @@
         "typeVersion": 2.2,
         "position": [
           -31728,
-          -31348
+          -31344
         ],
         "id": "ea54d39a-2a1c-4fc4-bfd5-a3a268c242f0",
         "name": "If"
@@ -7068,7 +7068,7 @@
         "typeVersion": 1.1,
         "position": [
           -31504,
-          -31348
+          -31360
         ],
         "id": "1106f6f4-3d2d-487a-8126-5656478c3286",
         "name": "Respuesta1",
@@ -7093,8 +7093,8 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.3,
         "position": [
-          -32992,
-          -31104
+          -33056,
+          -31040
         ],
         "id": "7d63862a-dd4c-4ec2-a1f1-dcec726fe966",
         "name": "OpenAI Chat Model",
@@ -7118,7 +7118,7 @@
         "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
         "typeVersion": 1.3,
         "position": [
-          -34968,
+          -34976,
           -32640
         ],
         "id": "7ffb3a93-1c84-4cfb-aa0c-30a1d6933980",
@@ -7140,8 +7140,8 @@
         "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
         "typeVersion": 1.5,
         "position": [
-          -32864,
-          -31104
+          -32880,
+          -31040
         ],
         "id": "0112b210-9d28-4262-8ad2-3ed233b29c6b",
         "name": "Redis Chat Memory",
@@ -7165,8 +7165,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -38080,
-          -30784
+          -38032,
+          -30480
         ],
         "webhookId": "ffcd17ac-8396-43d3-85cc-1f0b2610e76b",
         "credentials": {
@@ -7185,20 +7185,20 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -33664,
-          -30544
+          -34032,
+          -30336
         ]
       },
       {
         "parameters": {
           "content": "## VOZ",
-          "height": 256,
-          "width": 992
+          "height": 80,
+          "width": 336
         },
         "type": "n8n-nodes-base.stickyNote",
         "position": [
-          -37904,
-          -31064
+          -38048,
+          -30864
         ],
         "typeVersion": 1,
         "id": "e1ca75c3-cc90-446a-9507-8903032c12af",
@@ -7207,15 +7207,15 @@
       {
         "parameters": {
           "content": "## TEXTO",
-          "height": 608,
-          "width": 992,
+          "height": 96,
+          "width": 480,
           "color": 4
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -38240,
-          -31328
+          -38128,
+          -31888
         ],
         "id": "079571d5-696d-404a-898f-356444c46c55",
         "name": "Sticky Note1"
@@ -7249,8 +7249,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -33952,
-          -31360
+          -34288,
+          -31280
         ],
         "id": "66fa0adb-e99c-4e2c-aa1f-805fd80f2d07",
         "name": "Edit Fields5"
@@ -7262,8 +7262,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -37856,
-          -30496
+          -37808,
+          -30192
         ],
         "id": "e4fda8b4-da67-47c9-bd4b-f05f0cdb5f7a",
         "name": "Extraer list_reply"
@@ -7285,8 +7285,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -38080,
-          -30496
+          -38000,
+          -30192
         ],
         "id": "2d635cb2-2de5-4a2a-ba07-46fd9180ef68",
         "name": "Edit Fields7"
@@ -7301,8 +7301,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -36160,
-          -32896
+          -36256,
+          -32848
         ],
         "id": "9b42f580-0b89-4add-953b-9e622d1f97bb",
         "name": "Leer Estado Paciente1",
@@ -7366,8 +7366,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -35936,
-          -32896
+          -36032,
+          -32848
         ],
         "id": "1f0ace3c-c3d8-4a2f-9a83-f8987c373fdf",
         "name": "Edit Fields9"
@@ -7379,8 +7379,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -35712,
-          -32896
+          -35808,
+          -32848
         ],
         "id": "a9ff8d27-0ada-44f7-baf2-ad8b83db15de",
         "name": "Decidir Ruta"
@@ -7473,8 +7473,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          -35264,
-          -32256
+          -35536,
+          -32512
         ],
         "id": "73f8fcc4-0702-4781-9d39-6f77b4ce627c",
         "name": "Decidir Ruta 2"
@@ -7502,7 +7502,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -32808,
+          -32832,
           -31664
         ],
         "id": "d02159c1-07d2-430e-8466-40576a2c7dca",
@@ -7587,8 +7587,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          -34240,
-          -32600
+          -34416,
+          -32608
         ],
         "id": "5690413e-9bcb-4edd-a738-b1cc39a54ef8",
         "name": "Call 'GESTION_CITAS'"
@@ -7603,8 +7603,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -37632,
-          -30496
+          -37584,
+          -30192
         ],
         "id": "4b5300c2-ee14-475e-af05-2200a659e4b0",
         "name": "Redis3",
@@ -7656,8 +7656,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -37408,
-          -30496
+          -37360,
+          -30192
         ],
         "id": "9a93a3ed-62ec-464c-9939-e54e720385da",
         "name": "Prep list_reply"
@@ -7736,8 +7736,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          -37120,
-          -30496
+          -37072,
+          -30192
         ],
         "id": "3b19069c-0e35-471b-ba24-c7a0be23cc6d",
         "name": "Gestion Citas(list_replay)"
@@ -7821,7 +7821,7 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          -32400,
+          -32576,
           -31664
         ],
         "id": "b852f9a8-2788-496d-ab78-bef4bf69027b",
@@ -7965,8 +7965,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          -35488,
-          -32960
+          -35568,
+          -32912
         ],
         "id": "5e712355-7393-43e8-a203-e251325143db",
         "name": "Manejar Comando Especial"
@@ -7979,8 +7979,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -33952,
-          -33584
+          -33968,
+          -33712
         ],
         "id": "6d011e87-9dc3-4fa5-8cf0-bfe66417dce0",
         "name": "Limpiar Estado Cancelar",
@@ -8028,7 +8028,7 @@
         "typeVersion": 1.1,
         "position": [
           -35264,
-          -33384
+          -33392
         ],
         "id": "92d2ed6d-42f9-42d6-8419-4bbcb164b3aa",
         "name": "Respuesta Injection",
@@ -8051,8 +8051,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -35264,
-          -32800
+          -35248,
+          -33232
         ],
         "id": "381f32f6-24d1-4ca4-9bf8-f9265304de26",
         "name": "Respuesta Empty",
@@ -8074,8 +8074,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -39200,
-          -30976
+          -39152,
+          -30672
         ],
         "id": "822589e4-df17-455d-9a82-aaea28d2c150",
         "name": "Dedup Get",
@@ -8115,8 +8115,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -38752,
-          -30880
+          -38704,
+          -30576
         ],
         "id": "02876fdb-3d40-4155-b708-17c4d0d3727c",
         "name": "Dedup If"
@@ -8132,8 +8132,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -38528,
-          -30784
+          -38480,
+          -30480
         ],
         "id": "25bc2dec-c74a-4b9c-8c1e-afada7bab78d",
         "name": "Dedup Set",
@@ -8149,8 +8149,8 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          -38528,
-          -30976
+          -38592,
+          -30304
         ],
         "id": "1689c762-9054-4a15-8186-13999518cfc9",
         "name": "Dedup Skip"
@@ -8163,7 +8163,7 @@
         "typeVersion": 2,
         "position": [
           -32400,
-          -31224
+          -31232
         ],
         "id": "820e63b4-4bfe-4a23-afc8-b0fc5f508364",
         "name": "Normalizar AI Output"
@@ -8183,8 +8183,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -32808,
-          -30928
+          -33424,
+          -30784
         ],
         "id": "0ec411fd-4ca4-4f59-bc0a-a0d8b1878e3b",
         "name": "Preguntar Menu Fallback",
@@ -8205,8 +8205,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -33216,
-          -30736
+          -33584,
+          -30528
         ],
         "id": "28a173ec-1e30-409a-a6fa-84a4351adccd",
         "name": "Leer Estado Paciente",
@@ -8252,8 +8252,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -32808,
-          -30736
+          -33056,
+          -30528
         ],
         "id": "e31d560c-c55d-42a7-9912-5911e2937914",
         "name": "Edit Fields10"
@@ -8265,8 +8265,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -32400,
-          -30736
+          -32720,
+          -30528
         ],
         "id": "a3bbc830-9ae7-45e2-a1e4-b590a39ab4e0",
         "name": "Decidir Ruta1"
@@ -8298,8 +8298,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -33952,
-          -30640
+          -34320,
+          -30432
         ],
         "id": "d050f10d-7c56-4024-a3e5-a02e9f8d998f",
         "name": "If1"
@@ -8311,8 +8311,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -33440,
-          -30736
+          -33808,
+          -30528
         ],
         "id": "de892e62-d868-4646-94c2-9092d146a629",
         "name": "Code in JavaScript1"
@@ -8334,8 +8334,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -33664,
-          -30736
+          -34032,
+          -30528
         ],
         "id": "caa8cbed-efca-4cb9-b2a9-873d3ef02a0b",
         "name": "Edit Fields6"
@@ -8419,8 +8419,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          -32176,
-          -30736
+          -32448,
+          -30528
         ],
         "id": "c31e39ec-3bee-4179-8261-0a5129124063",
         "name": "Call 'GESTION_CITAS' (flow)"
@@ -8470,8 +8470,8 @@
         "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
         "typeVersion": 2.2,
         "position": [
-          -32736,
-          -31104
+          -32704,
+          -31040
         ],
         "id": "83401f71-8535-4af2-bac7-3196a0ffd28d",
         "name": "Call 'INFORMACIÓN SEDES'"
@@ -8494,8 +8494,8 @@
         "type": "n8n-nodes-base.httpRequestTool",
         "typeVersion": 4.3,
         "position": [
-          -32608,
-          -31104
+          -32512,
+          -31056
         ],
         "id": "b4543b7f-4dd1-4252-a394-e3a3ce4c856e",
         "name": "Informacion general Sersocial"
@@ -8528,8 +8528,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -38976,
-          -30976
+          -38928,
+          -30672
         ],
         "id": "f93a326e-4345-4cfd-976d-08af1b1839b3",
         "name": "If2"
@@ -8539,8 +8539,8 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          -38752,
-          -31072
+          -38704,
+          -30768
         ],
         "id": "a44611c1-9a3a-4bba-a258-747c992d4bad",
         "name": "No Operation, do nothing1"
@@ -8556,8 +8556,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -35264,
-          -33192
+          -35216,
+          -33104
         ],
         "id": "3b120957-2878-4932-82f9-0864e7068e0d",
         "name": "Respuesta Off-Topic",
@@ -8597,8 +8597,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          -33440,
-          -30544
+          -33808,
+          -30336
         ],
         "id": "095bb85c-db8f-4742-a20f-7447e370b994",
         "name": "Es Entidad Desconocida",
@@ -8616,8 +8616,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -33216,
-          -30496
+          -33520,
+          -30352
         ],
         "id": "cbe15977-de3a-4fe4-86cc-feb962980f29",
         "name": "Respuesta Provisional Cross-Lookup",
@@ -8643,8 +8643,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1,
         "position": [
-          -35264,
-          -32608
+          -35280,
+          -32800
         ],
         "webhookId": "b2127e18-77aa-43aa-89eb-e421ff1dab6e",
         "credentials": {
@@ -8683,8 +8683,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2,
         "position": [
-          -37856,
-          -31064
+          -37808,
+          -30768
         ]
       },
       {
@@ -8700,8 +8700,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -37632,
-          -31160
+          -37584,
+          -30864
         ],
         "webhookId": "570f73a1-c040-485b-af08-f9c6c34dc4ef",
         "credentials": {
@@ -8722,8 +8722,8 @@
         "type": "@n8n/n8n-nodes-langchain.chainLlm",
         "typeVersion": 1.7,
         "position": [
-          -35040,
-          -32864
+          -35024,
+          -32032
         ]
       },
       {
@@ -8735,8 +8735,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -34688,
-          -32864
+          -34784,
+          -32976
         ]
       },
       {
@@ -8898,8 +8898,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.2,
         "position": [
-          -34464,
-          -32944
+          -34528,
+          -33056
         ]
       },
       {
@@ -8915,7 +8915,7 @@
         "typeVersion": 1,
         "position": [
           -34240,
-          -33512
+          -33520
         ],
         "credentials": {
           "redis": {
@@ -8936,8 +8936,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -34240,
-          -33320
+          -34176,
+          -33280
         ],
         "credentials": {
           "redis": {
@@ -8960,7 +8960,7 @@
         "typeVersion": 1,
         "position": [
           -33952,
-          -33320
+          -33328
         ],
         "credentials": {
           "redis": {
@@ -8983,7 +8983,7 @@
         "typeVersion": 1.1,
         "position": [
           -33664,
-          -33320
+          -33328
         ],
         "webhookId": "f0a1f706-1a06-4954-8a63-910bb8a9a7aa",
         "credentials": {
@@ -9002,8 +9002,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -32400,
-          -33128
+          -32560,
+          -33088
         ]
       },
       {
@@ -9019,8 +9019,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -32176,
-          -33128
+          -32192,
+          -33088
         ],
         "credentials": {
           "redis": {
@@ -9060,7 +9060,7 @@
         "typeVersion": 2,
         "position": [
           -31952,
-          -33128
+          -33136
         ]
       },
       {
@@ -9076,7 +9076,7 @@
         "typeVersion": 1,
         "position": [
           -31728,
-          -33320
+          -33328
         ],
         "credentials": {
           "redis": {
@@ -9103,7 +9103,7 @@
         "typeVersion": 4.2,
         "position": [
           -31504,
-          -33320
+          -33328
         ],
         "credentials": {
           "whatsAppApi": {
@@ -9143,7 +9143,7 @@
         "typeVersion": 2,
         "position": [
           -31728,
-          -32768
+          -32976
         ]
       },
       {
@@ -9163,8 +9163,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.2,
         "position": [
-          -31504,
-          -32672
+          -31424,
+          -33120
         ],
         "credentials": {
           "whatsAppApi": {
@@ -9252,8 +9252,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          -31504,
-          -32864
+          -31440,
+          -32848
         ]
       },
       {
@@ -9265,8 +9265,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -34240,
-          -32984
+          -34208,
+          -32944
         ]
       },
       {
@@ -9280,8 +9280,8 @@
         "type": "@n8n/n8n-nodes-langchain.chainLlm",
         "typeVersion": 1.7,
         "position": [
-          -34016,
-          -32984
+          -33968,
+          -32944
         ]
       },
       {
@@ -9294,7 +9294,7 @@
         "typeVersion": 2,
         "position": [
           -33664,
-          -32984
+          -32944
         ]
       },
       {
@@ -9312,8 +9312,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -33440,
-          -32984
+          -33456,
+          -32944
         ],
         "webhookId": "2213809d-898c-456d-83dc-dc0dd5016b3d",
         "credentials": {
@@ -9353,8 +9353,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2,
         "position": [
-          -33216,
-          -32984
+          -33248,
+          -32944
         ]
       },
       {
@@ -9372,8 +9372,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -32808,
-          -32600
+          -32864,
+          -33280
         ],
         "webhookId": "702e4674-c5a5-4986-97cf-7b6c01649bf7",
         "credentials": {
@@ -9392,7 +9392,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -32808,
+          -32592,
           -32384
         ]
       },
@@ -9713,8 +9713,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -32808,
-          -32192
+          -33136,
+          -30896
         ],
         "webhookId": "f55e84ba-f900-4a90-b416-be619fbd0725",
         "credentials": {
@@ -9739,8 +9739,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -32808,
-          -32000
+          -33120,
+          -30736
         ],
         "webhookId": "479e9f41-72f4-46ab-b3da-4d6d8274123f",
         "credentials": {
@@ -9759,8 +9759,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -34240,
-          -32792
+          -34224,
+          -32752
         ]
       },
       {
@@ -9776,8 +9776,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -33952,
-          -32792
+          -33968,
+          -32752
         ],
         "credentials": {
           "redis": {
@@ -9799,8 +9799,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -33664,
-          -32792
+          -33728,
+          -32752
         ],
         "webhookId": "78a5baab-17c5-4838-9b57-bd7c44632477",
         "credentials": {
@@ -9819,8 +9819,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -34976,
-          -32200
+          -35008,
+          -32432
         ]
       },
       {
@@ -9853,8 +9853,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2,
         "position": [
-          -34688,
-          -32200
+          -34704,
+          -32256
         ]
       },
       {
@@ -9888,7 +9888,7 @@
         "typeVersion": 2,
         "position": [
           -34464,
-          -32104
+          -32112
         ]
       },
       {
@@ -9917,7 +9917,7 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -34240,
+          -34128,
           -32368
         ],
         "credentials": {
@@ -9938,7 +9938,7 @@
         "type": "@n8n/n8n-nodes-langchain.chainLlm",
         "typeVersion": 1.7,
         "position": [
-          -34016,
+          -33936,
           -32368
         ]
       },
@@ -10069,7 +10069,7 @@
         "typeVersion": 1.3,
         "position": [
           -33216,
-          -32600
+          -32608
         ]
       },
       {
@@ -10085,8 +10085,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -33216,
-          -32048
+          -33184,
+          -32208
         ],
         "webhookId": "3efb29c9-63dd-4baa-80d8-df3c12f478a7",
         "credentials": {
@@ -10105,8 +10105,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -34240,
-          -32176
+          -34144,
+          -32096
         ]
       },
       {
@@ -10123,7 +10123,7 @@
         "typeVersion": 1,
         "position": [
           -33952,
-          -32176
+          -32096
         ],
         "credentials": {
           "redis": {
@@ -10145,8 +10145,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -33664,
-          -32176
+          -33712,
+          -32096
         ],
         "webhookId": "be393bcf-05ed-4927-90a3-7f640b525ad6",
         "credentials": {
@@ -10246,8 +10246,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -34464,
-          -31864
+          -34080,
+          -31872
         ]
       },
       {
@@ -10263,8 +10263,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -34240,
-          -31864
+          -33856,
+          -31872
         ],
         "credentials": {
           "redis": {
@@ -10352,8 +10352,8 @@
         "type": "n8n-nodes-base.executeWorkflow",
         "typeVersion": 1.3,
         "position": [
-          -33952,
-          -31864
+          -33568,
+          -31872
         ]
       },
       {
@@ -10366,7 +10366,7 @@
         "typeVersion": 2,
         "position": [
           -34240,
-          -31672
+          -31568
         ]
       },
       {
@@ -10382,8 +10382,8 @@
         "type": "n8n-nodes-base.redis",
         "typeVersion": 1,
         "position": [
-          -33952,
-          -31672
+          -33968,
+          -31568
         ],
         "credentials": {
           "redis": {
@@ -10405,8 +10405,8 @@
         "type": "n8n-nodes-base.whatsApp",
         "typeVersion": 1.1,
         "position": [
-          -33664,
-          -31672
+          -33712,
+          -31568
         ],
         "webhookId": "138286a0-dae7-402d-ba65-02353a5e6cc4",
         "credentials": {
@@ -11853,15 +11853,15 @@
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version e534c4aa",
+    "name": "Version 8402457c",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-05-27T19:00:42.061Z",
-        "id": 979,
+        "createdAt": "2026-06-05T17:13:57.107Z",
+        "id": 1040,
         "workflowId": "y2EElhK1le4SDCSdCTkyh",
-        "versionId": "e534c4aa-47d2-4a35-b074-87409eb698eb",
+        "versionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
