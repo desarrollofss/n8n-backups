@@ -1401,7 +1401,7 @@
   "pinData": {},
   "versionId": "1b5081ab-7868-41e4-b894-5a990da928a7",
   "activeVersionId": "1b5081ab-7868-41e4-b894-5a990da928a7",
-  "versionCounter": 1546,
+  "versionCounter": 1547,
   "triggerCount": 1,
   "shared": [
     {
@@ -1426,7 +1426,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -1459,7 +1459,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
