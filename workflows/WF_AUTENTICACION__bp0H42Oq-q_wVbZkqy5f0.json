@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-27T19:01:22.109Z",
+  "updatedAt": "2026-06-05T13:51:47.289Z",
   "createdAt": "2026-05-26T04:46:56.210Z",
   "id": "bp0H42Oq-q_wVbZkqy5f0",
   "name": "WF_AUTENTICACION",
@@ -148,7 +148,7 @@
       "typeVersion": 2,
       "position": [
         306864,
-        50848
+        50896
       ],
       "id": "9e88d1cd-bae2-4df1-b6ae-0c5635b56139",
       "name": "Preparar Accion Ya ID"
@@ -241,8 +241,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        307088,
-        51232
+        307104,
+        51200
       ],
       "id": "6899c117-3a32-4146-970e-846682d722e2",
       "name": "Preparar Flow ID"
@@ -580,8 +580,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        306864,
-        50656
+        306880,
+        50720
       ],
       "id": "3938cddd-b758-49e8-92bc-d7aeab35f5ba",
       "name": "continuar_sin_id_fin1"
@@ -683,7 +683,7 @@
       "typeVersion": 4.3,
       "position": [
         308656,
-        50584
+        50592
       ],
       "id": "b3222ff6-1c41-4e09-b9c9-aaf13014ae00",
       "name": "PEDIR_IDENTIFICACION",
@@ -808,7 +808,7 @@
       "typeVersion": 2,
       "position": [
         308432,
-        50584
+        50592
       ],
       "id": "88de578e-bd4b-45df-b7f4-142e7927ce78",
       "name": "Code in JavaScript11"
@@ -1446,7 +1446,7 @@
       "typeVersion": 1.1,
       "position": [
         305968,
-        50680
+        50688
       ],
       "id": "9ba31ca3-e80e-4dd9-a615-b45a7931bf0e",
       "name": "When Executed by Another Workflow"
@@ -1464,7 +1464,7 @@
       "typeVersion": 1,
       "position": [
         306192,
-        50680
+        50688
       ],
       "credentials": {
         "redis": {
@@ -1483,7 +1483,7 @@
       "typeVersion": 2,
       "position": [
         306416,
-        50680
+        50688
       ]
     },
     {
@@ -1620,7 +1620,7 @@
       "typeVersion": 3.2,
       "position": [
         306640,
-        50632
+        50640
       ]
     },
     {
@@ -2373,9 +2373,9 @@
   "staticData": null,
   "meta": null,
   "pinData": {},
-  "versionId": "d1cc4760-6302-4e5c-a562-d7fcd6d3a25b",
+  "versionId": "761e32f5-5a6b-405d-b591-d8fc92a49d8a",
   "activeVersionId": "d1cc4760-6302-4e5c-a562-d7fcd6d3a25b",
-  "versionCounter": 179,
+  "versionCounter": 184,
   "triggerCount": 0,
   "shared": [
     {
@@ -2400,7 +2400,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-05-29T11:33:30.889Z",
+              "updatedAt": "2026-06-05T11:39:46.568Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -2433,7 +2433,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-05-29",
+              "lastActiveAt": "2026-06-05",
               "isPending": false
             }
           }
