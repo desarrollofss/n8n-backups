@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-05T15:47:00.772Z",
+  "updatedAt": "2026-06-10T20:57:17.766Z",
   "createdAt": "2026-03-03T19:30:36.628Z",
   "id": "y2EElhK1le4SDCSdCTkyh",
   "name": "CHATBOT WHATSAPP",
@@ -17,7 +17,7 @@
       "type": "n8n-nodes-base.whatsAppTrigger",
       "typeVersion": 1,
       "position": [
-        -39376,
+        -39568,
         -30672
       ],
       "id": "de45004e-46f8-455b-86d0-664b45179cc4",
@@ -2087,7 +2087,7 @@
       "typeVersion": 1,
       "position": [
         -39152,
-        -30672
+        -30688
       ],
       "id": "822589e4-df17-455d-9a82-aaea28d2c150",
       "name": "Dedup Get",
@@ -4427,6 +4427,39 @@
           "name": "WhatsApp account"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "dbb37d80-fe9f-4183-aad4-46b32a4124fb",
+              "leftValue": "={{ $json.metadata.phone_number_id }}",
+              "rightValue": "1162040110315070",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -39392,
+        -30672
+      ],
+      "id": "ef0378a5-3494-4dfc-8333-3b01564a6518",
+      "name": "Numero_whatsapp_meta"
     }
   ],
   "connections": {
@@ -4434,7 +4467,7 @@
       "main": [
         [
           {
-            "node": "Dedup Get",
+            "node": "Numero_whatsapp_meta",
             "type": "main",
             "index": 0
           }
@@ -5862,6 +5895,17 @@
           }
         ]
       ]
+    },
+    "Numero_whatsapp_meta": {
+      "main": [
+        [
+          {
+            "node": "Dedup Get",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "settings": {
@@ -5907,9 +5951,9 @@
       }
     ]
   },
-  "versionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
-  "activeVersionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
-  "versionCounter": 2810,
+  "versionId": "52a8fbde-e630-4933-a041-7f9126cdfb28",
+  "activeVersionId": "4a1e32d4-7b24-4bac-91b2-36c8f81fbadc",
+  "versionCounter": 2822,
   "triggerCount": 1,
   "shared": [
     {
@@ -5934,7 +5978,7 @@
             "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
             "projectId": "gDmEkapyQQKYEXJy",
             "user": {
-              "updatedAt": "2026-06-05T11:39:46.568Z",
+              "updatedAt": "2026-06-12T23:00:22.334Z",
               "createdAt": "2026-01-22T19:04:52.782Z",
               "id": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3",
               "email": "desarrollotecnologico@sersocial.org",
@@ -5967,7 +6011,7 @@
               },
               "disabled": false,
               "mfaEnabled": false,
-              "lastActiveAt": "2026-06-05",
+              "lastActiveAt": "2026-06-12",
               "isPending": false
             }
           }
@@ -5977,22 +6021,22 @@
   ],
   "tags": [
     {
-      "updatedAt": "2026-05-15T14:38:37.293Z",
-      "createdAt": "2026-03-03T19:34:15.068Z",
-      "id": "M63Xu3JDOVoP0xRM",
-      "name": "flujo whatsapp 🟢💬"
-    },
-    {
       "updatedAt": "2026-04-16T15:32:01.406Z",
       "createdAt": "2026-04-16T15:32:01.406Z",
       "id": "UwYoY9gtworpQ7kU",
       "name": "Facturación Seragil 💵"
+    },
+    {
+      "updatedAt": "2026-05-15T14:38:37.293Z",
+      "createdAt": "2026-03-03T19:34:15.068Z",
+      "id": "M63Xu3JDOVoP0xRM",
+      "name": "flujo whatsapp 🟢💬"
     }
   ],
   "activeVersion": {
-    "updatedAt": "2026-06-05T17:13:57.108Z",
-    "createdAt": "2026-06-05T15:47:00.774Z",
-    "versionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
+    "updatedAt": "2026-06-10T20:55:52.459Z",
+    "createdAt": "2026-06-10T20:55:24.456Z",
+    "versionId": "4a1e32d4-7b24-4bac-91b2-36c8f81fbadc",
     "workflowId": "y2EElhK1le4SDCSdCTkyh",
     "nodes": [
       {
@@ -6005,7 +6049,7 @@
         "type": "n8n-nodes-base.whatsAppTrigger",
         "typeVersion": 1,
         "position": [
-          -39376,
+          -39568,
           -30672
         ],
         "id": "de45004e-46f8-455b-86d0-664b45179cc4",
@@ -8075,7 +8119,7 @@
         "typeVersion": 1,
         "position": [
           -39152,
-          -30672
+          -30688
         ],
         "id": "822589e4-df17-455d-9a82-aaea28d2c150",
         "name": "Dedup Get",
@@ -10415,6 +10459,39 @@
             "name": "WhatsApp account"
           }
         }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "dbb37d80-fe9f-4183-aad4-46b32a4124fb",
+                "leftValue": "={{ $json.metadata.phone_number_id }}",
+                "rightValue": "1162040110315070",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -39424,
+          -30672
+        ],
+        "id": "ef0378a5-3494-4dfc-8333-3b01564a6518",
+        "name": "If3"
       }
     ],
     "connections": {
@@ -10422,7 +10499,7 @@
         "main": [
           [
             {
-              "node": "Dedup Get",
+              "node": "If3",
               "type": "main",
               "index": 0
             }
@@ -11850,18 +11927,29 @@
             }
           ]
         ]
+      },
+      "If3": {
+        "main": [
+          [
+            {
+              "node": "Dedup Get",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Desarrollo Tecnologico",
-    "name": "Version 8402457c",
+    "name": "Version 4a1e32d4",
     "description": "",
     "autosaved": true,
     "workflowPublishHistory": [
       {
-        "createdAt": "2026-06-05T17:13:57.107Z",
-        "id": 1040,
+        "createdAt": "2026-06-10T20:55:52.455Z",
+        "id": 1043,
         "workflowId": "y2EElhK1le4SDCSdCTkyh",
-        "versionId": "8402457c-21f6-48fc-b25c-a705d47420cf",
+        "versionId": "4a1e32d4-7b24-4bac-91b2-36c8f81fbadc",
         "event": "activated",
         "userId": "a68bd61a-2c83-4f7b-8438-901dbf22e5a3"
       }
